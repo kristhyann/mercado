@@ -5,3 +5,8 @@ node_modules/
 .claude/skills/short-editing/assets/music/*.mp3
 .claude/skills/short-editing/assets/icons/*.png
 .claude/skills/short-editing/assets/icons/glyph/
+
+# working files (downloads, transcripts, raw takes)
+video-agent/.tmp/
+video-agent/sources/
+video-agent/takes/
