@@ -10,3 +10,9 @@ node_modules/
 video-agent/.tmp/
 video-agent/sources/
 video-agent/takes/
+
+# vídeos 3D: quadros e áudios intermediários (regeráveis)
+videos/*/quadros/
+videos/*/teste/
+videos/*/*.wav
+videos/_kit/t.html
