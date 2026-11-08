@@ -1,7 +1,7 @@
 import sys, numpy as np, soundfile as sf, json
 from kokoro_onnx import Kokoro
 d=sys.argv[1]; speed=float(sys.argv[2]) if len(sys.argv)>2 else 1.0
-k=Kokoro('/tmp/kokoro/kokoro.onnx','/tmp/kokoro/voices.bin')
+k=Kokoro('/tmp/claude-0/kok/kokoro.onnx','/tmp/claude-0/kok/voices.bin')
 lines=[l for l in open(d+'/roteiro_voz.txt').read().split('\n') if l.strip()]
 out=[];sr=24000;segs=[];t=0.15
 out.append(np.zeros(int(sr*.15),dtype=np.float32))
