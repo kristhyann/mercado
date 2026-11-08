@@ -1,8 +1,8 @@
 # A história de Fernando: do zero ao Day Trade consciente
 
-Duração estimada: ~20 min (2.882 palavras, ritmo de ~142 palavras/min).
+Duração estimada: ~19 min (2.708 palavras, ritmo de ~142 palavras/min). Os tempos da tabela são aproximados.
 
-Para gerar a voz, use **roteiro_voz.txt** (só o texto falado).
+Para gerar a voz, use **parte1.txt a parte4.txt** (até 5 min cada; ~19 min no total). O texto completo está em roteiro_voz.txt.
 
 | Tempo | Capítulo | Começa com |
 |---|---|---|

@@ -8,9 +8,7 @@ Pra entender essa história, a gente precisa voltar um pouco.
 Fernando trabalhava numa loja de roupas no centro da cidade desde os vinte anos.
 Era vendedor.
 Chegava às nove da manhã, dobrava camisetas, arrumava vitrine, atendia cliente, batia meta quando dava.
-Não era o emprego dos sonhos, mas pagava as contas.
 Ele ajudava em casa, pagava a parcela do celular e ainda conseguia guardar um pouquinho no fim do mês.
-Era uma vida simples, previsível.
 E por três anos, essa previsibilidade foi o que deixou o Fernando tranquilo.
 Até que a loja começou a mudar.
 
@@ -19,9 +17,6 @@ Nos sábados, que antes eram cheios, dava pra contar os clientes nos dedos.
 Depois, o dono parou de repor o estoque.
 Prateleiras vazias, araras com metade das peças, promoção atrás de promoção.
 Os colegas começaram a cochichar no estoque.
-Um dizia que a loja ia fechar.
-Outro dizia que era só uma fase ruim.
-Fernando preferia acreditar na segunda opção.
 Mas numa segunda-feira de manhã, o gerente chamou ele na salinha dos fundos.
 Fernando já sabia o que ia ouvir antes mesmo de sentar.
 A loja estava fechando as portas.
@@ -54,7 +49,6 @@ Fernando ficou impressionado.
 Abriu uma conta numa corretora, colocou oitocentos reais e começou a operar.
 Sem estudar nada.
 Sem saber o que era gerenciamento de risco.
-Sem saber nem direito o que estava comprando.
 Ele clicava em comprar quando o gráfico subia e em vender quando o coração apertava.
 Em duas semanas, os oitocentos reais viraram cento e poucos.
 Fernando ficou com vergonha, apagou o aplicativo e prometeu nunca mais mexer com isso.
@@ -169,21 +163,18 @@ E comportamento, ele pensou, dá pra treinar.
 Mas pra isso, ele precisava de mais do que dez aulas soltas.
 
 Fernando voltou ao canal de educação financeira e foi ver o curso completo.
-Ali tinha aulas gravadas do básico ao avançado.
+Tinha aulas gravadas do básico ao avançado.
 Tinha um grupo de suporte, com outros alunos tirando dúvidas.
 E tinha encontros ao vivo com o professor, onde dava pra perguntar e ver a análise sendo feita na hora.
-Ele pensou bastante antes de comprar.
-Era dinheiro saindo de uma conta que já estava diminuindo.
 Mas ele colocou na balança: já tinha perdido mais do que isso duas vezes, por não saber o que estava fazendo.
 Decidiu que ia investir em aprender antes de investir em operar.
 E fez uma promessa pra si mesmo: nenhum centavo de dinheiro real na corretora até terminar o treino.
 
-Logo na primeira aula ao vivo, o professor disse uma frase que o Fernando anotou em letras grandes no caderno.
+Na primeira aula ao vivo, o professor disse uma frase que o Fernando anotou no caderno.
 Quem entra no mercado pra ficar rico rápido, geralmente sai mais pobre rápido.
 O professor também mostrou um dado que deixou o Fernando calado.
 Um estudo brasileiro acompanhou pessoas que fizeram day trade por muito tempo em minicontratos na bolsa.
 A imensa maioria dos que insistiram por mais de trezentos dias perdeu dinheiro.
-O professor não mostrou isso pra assustar.
 Mostrou pra deixar claro que day trade não é renda garantida.
 É uma atividade de altíssimo risco, que exige preparo, disciplina e a aceitação de que você pode perder.
 
@@ -191,21 +182,17 @@ Então começou o treino.
 Durante dez dias, o Fernando operou só em conta demo.
 Conta demo é uma conta de simulação.
 O mercado é real, os preços são reais, mas o dinheiro é de mentirinha.
-Muita gente acha que conta demo é perda de tempo.
-Pro Fernando, foi o laboratório onde ele descobriu quem ele era como trader.
+Para o Fernando, ela foi o laboratório onde ele descobriu quem ele era como trader.
 
 No primeiro dia, ele aprendeu sobre gerenciamento de banca.
 A regra era simples, mas mudou tudo.
 Em cada operação, ele nunca podia arriscar mais do que um por cento da banca.
 Se a banca fosse de cem dólares, o máximo que ele podia perder numa única operação era um dólar.
-Parece pouco.
-E é exatamente por isso que funciona.
 Com um por cento por operação, ele precisaria errar muitas vezes seguidas pra quebrar.
 Na noite em que perdeu tudo, ele tinha arriscado quase a banca inteira numa operação só.
 
 No segundo e no terceiro dia, ele estudou o stop loss.
 Stop loss é uma ordem que fecha a operação automaticamente quando o preço chega num limite de perda que você definiu antes.
-Antes de entrar, você já sabe onde vai sair se estiver errado.
 O Fernando entendeu que o stop não é sinal de fraqueza.
 É o cinto de segurança do trader.
 Se ele tivesse usado um stop naquela quinta-feira, teria perdido um ou dois dólares.
@@ -214,7 +201,6 @@ Não a banca inteira.
 No quarto dia, ele aprendeu sobre metas e limites diários.
 Ele definiu um stop diário: se perdesse três por cento da banca no dia, fechava a corretora e ia fazer outra coisa.
 E definiu também uma meta: se ganhasse dois por cento, parava também.
-Isso parecia estranho no começo.
 Por que parar quando está ganhando?
 O professor explicou: porque é justamente quando você está ganhando que a empolgação te faz arriscar demais.
 E o Fernando sabia muito bem como era isso.
@@ -223,28 +209,22 @@ A partir do quinto dia, ele passou a registrar cada operação numa planilha.
 Data, horário, moeda, motivo da entrada, onde estava o stop, onde estava o alvo, resultado.
 E uma coluna que o professor chamou de a mais importante de todas: como eu estava me sentindo.
 Calmo. Ansioso. Com raiva. Com pressa.
-Depois de alguns dias, os números mostraram uma coisa curiosa.
+E os números mostraram uma coisa curiosa.
 Quase todas as operações ruins dele tinham a mesma emoção anotada do lado: pressa.
 Pressa de recuperar uma perda.
-Pressa de não perder uma oportunidade.
 Pressa de ganhar logo.
 
 Do sexto ao décimo dia, ele treinou o controle emocional.
 Operar menos, e não mais.
 Ficar fora do mercado quando não havia uma oportunidade clara.
 Aceitar uma perda pequena sem tentar se vingar do gráfico.
-Num desses encontros, o Fernando criou coragem e fez uma pergunta pelo chat.
+Num encontro, o Fernando perguntou pelo chat:
 Professor, como eu sei se estou pronto pra voltar pro dinheiro real?
 O professor respondeu que não existe um dia mágico.
 Que o sinal mais importante não é ganhar na conta demo.
 É conseguir seguir o próprio plano várias vezes seguidas, mesmo quando dá vontade de quebrar as regras.
 E completou: se você não respeita o stop com dinheiro de mentira, não vai respeitar com dinheiro de verdade.
-Nos encontros ao vivo, ele percebeu que não era o único.
-Outros alunos contavam as mesmas histórias.
-O que ganhou rápido e perdeu tudo.
-O que não aceitava sair no stop.
-O que operava escondido da família.
-E ouvir aquilo fez o Fernando se sentir menos sozinho e mais responsável.
+Nos encontros ao vivo, ele percebeu que não era o único a passar por isso.
 
 No fim dos dez dias, o resultado na conta demo foi pequeno.
 Pouco acima de zero.
@@ -280,7 +260,6 @@ No fim da segunda semana, veio o teste contrário.
 Logo cedo, ele fez uma operação que deu muito certo.
 Em vinte minutos, bateu a meta de dois por cento do dia.
 O mercado continuava subindo, e a cabeça dele gritava: continua, hoje é o seu dia.
-Era a mesma voz que tinha aparecido nas duas primeiras semanas, antes da queda.
 Dessa vez, ele reconheceu a voz.
 Anotou na planilha, na coluna das emoções: euforia.
 E fechou a corretora.
@@ -291,8 +270,7 @@ Serviam também pra proteger dele mesmo nos dias bons.
 
 Na terceira semana, o mercado ficou parado, andando de lado, sem direção.
 Em vários dias, o Fernando simplesmente não operou.
-Antes, ficar sem operar parecia perder tempo.
-Agora, ele entendia que não fazer nada também é uma decisão.
+Ele entendeu que não fazer nada também é uma decisão.
 Na quarta semana, vieram algumas boas oportunidades.
 Ele entrou, respeitou o stop, respeitou o alvo e saiu.
 Sem querer mais do que o plano permitia.
@@ -319,8 +297,6 @@ Que não existe lucro garantido.
 E que quem promete ganho certo está te vendendo um sonho, não uma estratégia.
 Entendeu que disciplina, conhecimento e controle de risco não são detalhes.
 São a base de tudo.
-E que o mercado não paga quem tem mais vontade.
-No máximo, ele dá mais tempo pra quem protege o próprio dinheiro.
 
 A maior conquista dele não foi ficar rico.
 Foi parar de operar por impulso.
