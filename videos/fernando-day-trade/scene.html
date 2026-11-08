@@ -1,0 +1,655 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:P;font-weight:600;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#000;font-family:P,sans-serif}
+canvas#gl{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;opacity:0;transform-origin:50% 50%}
+#cap{left:160px;width:1600px;top:930px;text-align:center;font-weight:800;font-size:50px;line-height:1.15;color:#fff;-webkit-text-stroke:10px #111;paint-order:stroke fill;text-shadow:0 5px 0 rgba(0,0,0,.35)}
+#chip{left:44px;top:40px;transform-origin:0 50%}
+#chip span{display:inline-flex;align-items:center;gap:14px;background:#111;color:#fff;font-weight:800;font-size:30px;padding:10px 26px 10px 12px;border-radius:999px;border:4px solid #fff}
+#chip i{font-style:normal;background:#FF8A1F;color:#111;width:46px;height:46px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:900}
+#panel{left:1150px;top:150px;width:700px;transform-origin:50% 50%}
+.card{background:#fff;border:7px solid #111;border-radius:30px;box-shadow:0 12px 0 #111;padding:30px 36px;color:#111}
+.card h3{margin:0 0 14px;font-weight:900;font-size:38px;line-height:1.1}
+.card .big{font-weight:900;font-size:104px;line-height:1;letter-spacing:-2px}
+.card .sub{font-weight:600;font-size:30px;line-height:1.25;color:#333}
+.card ul{list-style:none;margin:0;padding:0}
+.card li{font-weight:800;font-size:34px;line-height:1.2;padding:10px 0 10px 54px;position:relative;border-top:3px dashed #ddd;transition:none}
+.card li:first-child{border-top:0}
+.card li b{position:absolute;left:0;top:8px;width:40px;height:40px;border-radius:12px;background:#FF8A1F;color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px}
+.g{color:#16A34A}.r{color:#E11D48}.y{color:#F59E0B}.o2{color:#FF8A1F}
+.quote{font-weight:900;font-size:46px;line-height:1.18}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:7px;margin-top:10px}
+.grid div{aspect-ratio:1;border-radius:6px;background:#22C55E}
+.grid div.red{background:#E11D48;outline:4px solid #111}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:9px;margin-top:8px}
+.cal div{height:66px;border-radius:12px;border:4px solid #111;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:26px;color:#fff}
+.sheet{width:100%;border-collapse:collapse;font-size:24px;font-weight:800}
+.sheet td,.sheet th{border:3px solid #111;padding:7px 8px;text-align:center}
+.sheet th{background:#111;color:#fff;font-size:22px}
+.note{background:#FFE45C;border:6px solid #111;padding:26px 30px;transform:rotate(-2deg);box-shadow:0 12px 0 #111;border-radius:6px}
+.note h3{margin:0 0 10px;font-weight:900;font-size:40px}
+.note li{font-weight:800;font-size:31px;padding:6px 0 6px 46px;position:relative;line-height:1.2;border:0}
+.note li b{position:absolute;left:0;top:6px;width:34px;height:34px;border-radius:50%;background:#111;color:#FFE45C;display:flex;align-items:center;justify-content:center;font-size:22px}
+.bubble{background:#fff;border:6px solid #111;border-radius:26px;padding:20px 26px;font-weight:800;font-size:32px;line-height:1.25;margin-bottom:22px;box-shadow:0 8px 0 #111}
+.bubble.me{background:#DCFCE7;margin-left:60px}
+.bubble small{display:block;font-size:22px;color:#666;margin-bottom:4px}
+#title{left:0;top:0;width:1920px;height:1080px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#title .t1{font-weight:900;font-size:120px;color:#fff;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 10px 0 rgba(0,0,0,.35);line-height:1}
+#title .t2{margin-top:24px;font-weight:900;font-size:52px;color:#111;background:#FF8A1F;padding:8px 34px;border-radius:18px;border:6px solid #111}
+#fade{left:0;top:0;width:1920px;height:1080px;background:#000}
+#vign{left:0;top:0;width:1920px;height:1080px;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 55%,rgba(0,0,0,.45) 100%);opacity:1}
+</style></head><body>
+<div id="vign" class="o"></div>
+<div id="panel" class="o"></div>
+<div id="chip" class="o"><span><i>1</i><em style="font-style:normal">X</em></span></div>
+<div id="title" class="o"><div class="t1">A HISTÓRIA DE FERNANDO</div><div class="t2">do impulso à disciplina</div></div>
+<div id="cap" class="o"></div>
+<div id="fade" class="o"></div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, rr, M, mesh } from '/_kit/kit.js';
+import { buildPerson, PP, mixP, poseP, face } from '/_kit/pessoas.js';
+
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; window.DURATION = TP.duration;
+const IDX = {}; SN.forEach((s, i) => IDX[s.p + '.' + s.k] = i);
+const L = (p, k = 0) => { const i = IDX[p + '.' + k]; return i === undefined ? null : SN[i].start; };
+const LE = (p, k) => SN[IDX[p + '.' + k]].end;
+const W = 1920, H = 1080;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.domElement.id = 'gl';
+renderer.setPixelRatio(window.devicePixelRatio || 1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene();
+const cam = new THREE.PerspectiveCamera(42, W / H, .05, 600);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+
+// ---------------- luz ----------------
+const sun = new THREE.DirectionalLight(0xFFF0D8, 2.4); sun.castShadow = true; sun.shadow.mapSize.set(1536, 1536);
+Object.assign(sun.shadow.camera, { left: -14, right: 14, top: 14, bottom: -14, far: 80 }); sun.shadow.bias = -.0006; sun.shadow.radius = 3;
+scene.add(sun, sun.target);
+const hemi = new THREE.HemisphereLight(0xCFE8FF, 0x8a7a60, 1.1); scene.add(hemi);
+const lampL = new THREE.PointLight(0xFFC27A, 0, 6, 1.6); scene.add(lampL);
+const screenL = new THREE.PointLight(0x7FB6FF, 0, 3.2, 1.5); scene.add(screenL);
+const skyU = { top: { value: new THREE.Color(0x3E9BE8) }, bot: { value: new THREE.Color(0xDDF3FF) } };
+const sky = new THREE.Mesh(new THREE.SphereGeometry(300, 24, 16), new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: false, fog: false, uniforms: skyU,
+  vertexShader: 'varying vec3 vp; void main(){ vp = normalize(position); gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }',
+  fragmentShader: 'uniform vec3 top; uniform vec3 bot; varying vec3 vp; void main(){ float h = clamp(vp.y*1.6+.15,0.,1.); gl_FragColor = vec4(mix(bot,top,h),1.); }' }));
+scene.add(sky);
+const LIGHTS = {
+  day: { sun: [0xFFF0D8, 2.4], hemi: [0xCFE8FF, 0x8a7a60, 1.15], top: 0x3E9BE8, bot: 0xDDF3FF, win: 0xBFE6FF, lamp: 0, scr: .4, exp: 1.05, sunDir: [6, 12, 8] },
+  morning: { sun: [0xFFE2B8, 2.6], hemi: [0xFFF0DA, 0x8a7a60, 1.2], top: 0x7EC0F0, bot: 0xFFE9C8, win: 0xFFF1D6, lamp: 0, scr: .3, exp: 1.08, sunDir: [9, 7, 6] },
+  night: { sun: [0x6A7EAE, .6], hemi: [0x5A6B9A, 0x2a2a3a, .9], top: 0x0B1330, bot: 0x22305A, win: 0x1B2A55, lamp: 3.2, scr: 2.6, exp: 1.15, sunDir: [-5, 10, 4] },
+  dark: { sun: [0x5A6B9A, .55], hemi: [0x5A6BA8, 0x22223a, .95], top: 0x070B1C, bot: 0x111a33, win: 0x24386e, lamp: 0, scr: 3.0, exp: 1.1, sunDir: [-5, 10, 4] },
+  sunset: { sun: [0xFFA15C, 2.3], hemi: [0xFFC9A0, 0x6a4a50, .95], top: 0x4A5BA8, bot: 0xFFB07A, win: 0xFFC58A, lamp: .8, scr: .5, exp: 1.05, sunDir: [-10, 4, -12] },
+};
+const _c1 = new THREE.Color(), _c2 = new THREE.Color();
+let curLight = 'day', prevLight = 'day', lightT0 = -10;
+function applyLight(t, origin) {
+  const k = ease((t - lightT0) / .8); const A = LIGHTS[prevLight], B = LIGHTS[curLight];
+  const mix = (a, b) => _c1.set(a).lerp(_c2.set(b), k).clone();
+  sun.color.copy(mix(A.sun[0], B.sun[0])); sun.intensity = lerp(A.sun[1], B.sun[1], k);
+  hemi.color.copy(mix(A.hemi[0], B.hemi[0])); hemi.groundColor.copy(mix(A.hemi[1], B.hemi[1])); hemi.intensity = lerp(A.hemi[2], B.hemi[2], k);
+  skyU.top.value.copy(mix(A.top, B.top)); skyU.bot.value.copy(mix(A.bot, B.bot)); winM.color.copy(mix(A.win, B.win));
+  lampL.intensity = lerp(A.lamp, B.lamp, k); screenL.intensity = lerp(A.scr, B.scr, k);
+  renderer.toneMappingExposure = lerp(A.exp, B.exp, k);
+  const d = [0, 1, 2].map(i => lerp(A.sunDir[i], B.sunDir[i], k));
+  sun.position.set(origin.x + d[0] * 2, d[1] * 2, origin.z + d[2] * 2); sun.target.position.copy(origin);
+  sky.position.copy(cam.position);
+}
+const winM = new THREE.MeshBasicMaterial({ color: 0xBFE6FF });
+
+// ---------------- utilidades de cenário ----------------
+const box = (w, h, d, col, x, y, z, par, o = {}) => mesh(new THREE.BoxGeometry(w, h, d), typeof col === 'number' ? M(col, o) : col, x, y, z, par);
+function canvasTex(w, h, draw) { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; return t; }
+function signTex(text, bg, fg, w = 1024, h = 256, size = 120) { return canvasTex(w, h, (g) => { g.fillStyle = bg; g.fillRect(0, 0, w, h); g.fillStyle = fg; g.font = `900 ${size}px P, sans-serif`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(text, w / 2, h / 2 + 6); }); }
+function plane(w, h, tex, x, y, z, par, basic = false) { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), basic ? new THREE.MeshBasicMaterial({ map: tex, toneMapped: false }) : new THREE.MeshStandardMaterial({ map: tex, roughness: .9 })); m.position.set(x, y, z); par.add(m); return m; }
+function chair(par, x, z, ry, col = 0x6B4A2F) { const g = new THREE.Group(); g.position.set(x, 0, z); g.rotation.y = ry; par.add(g); box(.46, .05, .46, col, 0, .47, 0, g); box(.46, .5, .05, col, 0, .74, -.21, g); for (const [a, b] of [[-.2, -.2], [.2, -.2], [-.2, .2], [.2, .2]]) box(.04, .46, .04, col, a, .23, b, g); return g; }
+function room(par, w, d, h, floorCol, wallCol, wall2Col) {
+  box(w, .06, d, floorCol, 0, -.03, 0, par).receiveShadow = true;
+  box(w, h, .1, wallCol, 0, h / 2, -d / 2, par); box(.1, h, d, wall2Col ?? wallCol, -w / 2, h / 2, 0, par);
+  box(w, .12, .04, 0xffffff, 0, .06, -d / 2 + .07, par);
+}
+const shirtCols = [0xE63946, 0x457B9D, 0xF4A261, 0x2A9D8F, 0xE9C46A, 0x8E5BB5, 0xffffff, 0x264653, 0xF28482, 0x84A59D];
+
+// ======== LOJA ========
+const STORE = V(0, 0, 0); const store = new THREE.Group(); store.position.copy(STORE); scene.add(store);
+room(store, 11, 8, 3.4, 0xD9CBB5, 0xF2E8DA, 0xE7DCCB);
+box(.1, 3.4, 8, 0xE7DCCB, 5.5, 1.7, 0, store);
+plane(4.2, 1.05, signTex('MODA CENTRO', '#1D3557', '#FFD166'), 0, 2.85, -3.93, store);
+const stockItems = [];
+for (let row = 0; row < 3; row++) { box(9, .06, .5, 0x8B6B4A, 0, .7 + row * .65, -3.7, store); for (let i = 0; i < 16; i++) { const st = box(.42, .22, .38, shirtCols[(i + row * 3) % 10], -4.1 + i * .55, .84 + row * .65, -3.68, store); st.userData.k = rnd01(i * 7 + row); stockItems.push(st); } }
+function rnd01(n) { const x = Math.sin(n * 91.7) * 43758.5; return x - Math.floor(x); }
+const racks = [];
+for (const [rx, rz] of [[-3, -.6], [-3, 1.6], [-.4, -.6]]) {
+  const r = new THREE.Group(); r.position.set(rx, 0, rz); store.add(r);
+  box(1.9, .04, .04, 0xBBBBBB, 0, 1.55, 0, r, { metalness: .6, roughness: .3 }); box(.04, 1.55, .04, 0xBBBBBB, -.93, .78, 0, r); box(.04, 1.55, .04, 0xBBBBBB, .93, .78, 0, r);
+  box(.5, .04, .5, 0x999999, -.93, .02, 0, r); box(.5, .04, .5, 0x999999, .93, .02, 0, r);
+  for (let i = 0; i < 9; i++) { const s = box(.07, .62, .46, shirtCols[(i * 3 + rx * 7 + 50) % 10 | 0], -.8 + i * .2, 1.18, 0, r); s.userData.k = rnd01(i * 13 + rx * 5 + rz); stockItems.push(s); }
+  racks.push(r);
+}
+// balcão
+box(2.4, 1.0, .7, 0x5A3E2B, 2.8, .5, .4, store); box(2.5, .06, .8, 0xEADBC8, 2.8, 1.02, .4, store);
+box(.45, .3, .35, 0x333333, 3.6, 1.2, .35, store); box(.3, .2, .03, 0x7FD4FF, 3.6, 1.42, .24, store);
+const foldShirt = box(.5, .04, .4, 0xE63946, 2.5, 1.07, .45, store);
+const foldStack = []; for (let i = 0; i < 4; i++) foldStack.push(box(.42, .08, .36, shirtCols[i * 2], 1.95, 1.09 + i * .085, .45, store));
+// cartazes de liquidação
+const saleTex = [signTex('LIQUIDAÇÃO', '#E63946', '#fff', 1024, 512, 150), signTex('-50%', '#FFD166', '#E63946', 512, 512, 220), signTex('-70%', '#FFD166', '#E63946', 512, 512, 220), signTex('TUDO TEM QUE SAIR', '#111', '#FFD166', 1024, 256, 96)];
+const sales = [plane(2.2, 1.1, saleTex[0], -2.8, 2.1, -3.93, store), plane(.9, .9, saleTex[1], 5.44, 2.0, -1.5, store), plane(.9, .9, saleTex[2], -5.44, 2.0, .5, store), plane(2.6, .65, saleTex[3], 2.4, 2.35, -3.93, store)];
+sales[1].rotation.y = -Math.PI / 2; sales[2].rotation.y = Math.PI / 2;
+// porta de vidro / vitrine
+const glassM = new THREE.MeshStandardMaterial({ color: 0xBFE6FF, transparent: true, opacity: .25, roughness: .1 });
+box(.1, 2.6, 3, glassM, -5.45, 1.3, 2.3, store);
+// sala do gerente
+const OFFICE = V(18, 0, 0); const office = new THREE.Group(); office.position.copy(OFFICE); scene.add(office);
+room(office, 4.5, 4.5, 3, 0x9C8B76, 0xDCE3E8, 0xCCD5DB);
+box(1.6, .06, .8, 0x6B4A2F, 0, .76, -.7, office); box(1.5, .7, .05, 0x5A3E2B, 0, .4, -1.05, office);
+chair(office, 0, -1.45, 0, 0x333333); chair(office, 0, .2, Math.PI, 0x6B4A2F);
+box(.6, 1.3, .5, 0x8A9AA6, -1.7, .65, -1.9, office); box(.3, .02, .4, 0xffffff, .3, .8, -.6, office); box(.3, .02, .4, 0xF5F5F5, .35, .815, -.62, office);
+const clock = mesh(new THREE.CylinderGeometry(.25, .25, .04, 20), M(0xffffff), -.8, 2.2, -2.2, office); clock.rotation.x = Math.PI / 2;
+plane(1.0, .7, canvasTex(512, 360, (g, w, h) => { g.fillStyle = '#fff'; g.fillRect(0, 0, w, h); g.strokeStyle = '#E63946'; g.lineWidth = 12; g.beginPath(); g.moveTo(30, 60); [80, 120, 110, 200, 240, 300].forEach((y, i) => g.lineTo(60 + i * 80, y)); g.stroke(); g.fillStyle = '#111'; g.font = '900 40px P'; g.fillText('VENDAS', 30, 340); }), 1.2, 1.8, -2.19, office);
+
+// ======== QUARTO ========
+const ROOM = V(40, 0, 0); const rm = new THREE.Group(); rm.position.copy(ROOM); scene.add(rm);
+room(rm, 7, 5.4, 2.9, 0xB98B5E, 0xE9E1D3, 0xD9CDB8);
+const winF = new THREE.Group(); winF.position.set(-1.0, 1.55, -2.64); rm.add(winF);
+mesh(new THREE.PlaneGeometry(1.4, 1.05), winM, 0, 0, .02, winF); box(1.55, .08, .08, 0xffffff, 0, .56, .03, winF); box(1.55, .08, .08, 0xffffff, 0, -.56, .03, winF); box(.08, 1.2, .08, 0xffffff, -.74, 0, .03, winF); box(.08, 1.2, .08, 0xffffff, .74, 0, .03, winF); box(.05, 1.1, .05, 0xffffff, 0, 0, .03, winF);
+// mesa
+box(1.6, .05, .72, 0x7A5638, 1.3, .74, -2.15, rm); for (const [a, b] of [[.55, -2.45], [2.05, -2.45], [.55, -1.85], [2.05, -1.85]]) box(.05, .74, .05, 0x5A3E2B, a, .37, b, rm);
+const deskChair = chair(rm, 1.3, -1.35, Math.PI, 0x2F3E46);
+// notebook
+const SCR = document.createElement('canvas'); SCR.width = 1024; SCR.height = 640; const sg = SCR.getContext('2d');
+const scrTex = new THREE.CanvasTexture(SCR); scrTex.colorSpace = THREE.SRGBColorSpace; scrTex.anisotropy = 8;
+const laptop = new THREE.Group(); laptop.position.set(1.3, .77, -2.05); rm.add(laptop);
+box(.52, .02, .34, 0x9AA3AE, 0, 0, 0, laptop, { metalness: .4, roughness: .4 }); box(.44, .003, .14, 0x333a44, 0, .012, -.03, laptop);
+const lid = new THREE.Group(); lid.position.set(0, .01, -.17); lid.rotation.x = -.22; laptop.add(lid);
+box(.52, .34, .015, 0x9AA3AE, 0, .17, -.008, lid, { metalness: .4, roughness: .4 });
+const screen = new THREE.Mesh(new THREE.PlaneGeometry(.48, .3), new THREE.MeshBasicMaterial({ map: scrTex, toneMapped: false })); screen.position.set(0, .17, .001); lid.add(screen);
+lampL.position.set(ROOM.x + 2.0, 1.3, -2.1); screenL.position.set(ROOM.x + 1.3, 1.0, -1.7);
+// luminária
+box(.16, .03, .16, 0x333333, 1.95, .78, -2.3, rm); box(.03, .45, .03, 0x333333, 1.95, 1.0, -2.3, rm); const shade = mesh(new THREE.ConeGeometry(.14, .16, 10, 1, true), M(0xFFD166, { side: THREE.DoubleSide, emissive: 0x553300 }), 1.95, 1.25, -2.3, rm);
+// caderno e caneca
+const notebookB = box(.24, .02, .32, 0xFF8A1F, .78, .775, -2.0, rm); const mug = mesh(new THREE.CylinderGeometry(.045, .04, .1, 10), M(0xffffff), 1.8, .82, -1.95, rm);
+// post-it de regras
+const rulesTex = canvasTex(256, 256, (g, w, h) => { g.fillStyle = '#FFE45C'; g.fillRect(0, 0, w, h); g.fillStyle = '#111'; g.font = '900 30px P'; g.fillText('MINHAS REGRAS', 14, 40); g.font = '800 22px P'; ['1% por operação', 'sempre STOP', '-3% = paro', '+2% = paro', 'sem alavancagem', 'anotar tudo', 'pressa = sair'].forEach((s, i) => g.fillText('• ' + s, 14, 80 + i * 26)); });
+const postit = plane(.2, .2, rulesTex, 1.62, .98, -2.21, rm); postit.rotation.z = .05;
+// cama
+box(1.15, .32, 2.05, 0x7A5638, -2.3, .16, -1.4, rm); box(1.05, .18, 1.95, 0xF5F5F5, -2.3, .41, -1.4, rm);
+box(.75, .1, .38, 0xffffff, -2.3, .52, -2.15, rm); const blanket = box(1.1, .08, 1.3, 0x3A6EA5, -2.3, .76, -.95, rm);
+box(1.15, .9, .08, 0x7A5638, -2.3, .45, -2.42, rm);
+// estante, quadro e tapete
+box(.3, 1.6, 1.0, 0x8B6B4A, -3.3, .8, .4, rm); for (let i = 0; i < 9; i++) box(.2, .26, .07, shirtCols[i], -3.25, .25 + Math.floor(i / 3) * .5, .05 + (i % 3) * .3, rm);
+plane(.9, .65, canvasTex(512, 370, (g, w, h) => { const gr = g.createLinearGradient(0, 0, w, h); gr.addColorStop(0, '#264653'); gr.addColorStop(1, '#2A9D8F'); g.fillStyle = gr; g.fillRect(0, 0, w, h); g.fillStyle = '#E9C46A'; g.beginPath(); g.arc(380, 110, 60, 0, 7); g.fill(); g.fillStyle = '#1d3a44'; g.beginPath(); g.moveTo(0, h); g.lineTo(160, 160); g.lineTo(300, h); g.fill(); g.beginPath(); g.moveTo(200, h); g.lineTo(360, 200); g.lineTo(w, h); g.fill(); }), .3, 1.7, -2.64, rm);
+const rug = mesh(new THREE.CylinderGeometry(1.1, 1.1, .015, 20), M(0xC9A27A), .2, .01, -.4, rm); rug.scale.z = .7;
+
+// ======== COZINHA ========
+const KIT = V(40, 0, 16); const kit = new THREE.Group(); kit.position.copy(KIT); scene.add(kit);
+const tileTex = canvasTex(256, 256, (g) => { for (let i = 0; i < 8; i++) for (let j = 0; j < 8; j++) { g.fillStyle = (i + j) % 2 ? '#E8E2D6' : '#C9BFAE'; g.fillRect(i * 32, j * 32, 32, 32); } }); tileTex.wrapS = tileTex.wrapT = THREE.RepeatWrapping; tileTex.repeat.set(4, 4);
+const kfloor = new THREE.Mesh(new THREE.PlaneGeometry(7, 5.4), new THREE.MeshStandardMaterial({ map: tileTex })); kfloor.rotation.x = -Math.PI / 2; kfloor.receiveShadow = true; kit.add(kfloor);
+box(7, 2.9, .1, 0xF4E3C1, 0, 1.45, -2.7, kit); box(.1, 2.9, 5.4, 0xEAD7B0, -3.5, 1.45, 0, kit);
+const kwin = new THREE.Group(); kwin.position.set(-1.4, 1.65, -2.64); kit.add(kwin); mesh(new THREE.PlaneGeometry(1.3, .95), winM, 0, 0, .02, kwin); box(1.4, .07, .07, 0xffffff, 0, .5, .03, kwin); box(1.4, .07, .07, 0xffffff, 0, -.5, .03, kwin); box(.07, 1.05, .07, 0xffffff, -.68, 0, .03, kwin); box(.07, 1.05, .07, 0xffffff, .68, 0, .03, kwin);
+box(3.2, .9, .6, 0xFFFFFF, .9, .45, -2.35, kit); box(3.3, .05, .65, 0x6B6B6B, .9, .92, -2.35, kit); box(.7, 1.9, .65, 0xDDE3E8, 2.9, .95, -2.3, kit, { metalness: .3 });
+mesh(new THREE.CylinderGeometry(.75, .75, .05, 16), M(0x8B5E3C), 0, .74, -.6, kit); mesh(new THREE.CylinderGeometry(.08, .12, .72, 8), M(0x5A3E2B), 0, .37, -.6, kit);
+chair(kit, -.95, -.6, Math.PI / 2, 0x8B5E3C); chair(kit, .95, -.6, -Math.PI / 2, 0x8B5E3C);
+const cupF = mesh(new THREE.CylinderGeometry(.05, .045, .1, 10), M(0xffffff), -.42, .82, -.55, kit); const cupM = mesh(new THREE.CylinderGeometry(.05, .045, .1, 10), M(0xE63946), .42, .82, -.65, kit);
+mesh(new THREE.CylinderGeometry(.09, .1, .22, 10), M(0x333333, { metalness: .5 }), .05, .88, -.9, kit); mesh(new THREE.CylinderGeometry(.16, .14, .04, 12), M(0xffffff), -.05, .78, -.3, kit);
+for (let i = 0; i < 3; i++) mesh(new THREE.IcosahedronGeometry(.05, 0), M(0xD9A55B), -.08 + i * .06, .82, -.3, kit);
+
+// ======== RUA / ENCRUZILHADA ========
+const OUT = V(100, 0, 0); const out = new THREE.Group(); out.position.copy(OUT); scene.add(out);
+const grass = new THREE.Mesh(new THREE.PlaneGeometry(220, 220, 40, 40), M(0x8CC152)); grass.rotation.x = -Math.PI / 2; grass.receiveShadow = true; out.add(grass);
+const roadM = M(0x5B6168);
+const road = (x1, z1, x2, z2, w = 2.4) => { const len = Math.hypot(x2 - x1, z2 - z1); const r = box(w, .03, len, roadM, (x1 + x2) / 2, .015, (z1 + z2) / 2, out); r.rotation.y = Math.atan2(x2 - x1, z2 - z1); r.receiveShadow = true; for (let i = 0; i < len / 1.5 - 1; i++) { const d = box(.12, .035, .6, 0xFFFFFF, 0, .016, 0, out); const u = (i + .5) * 1.5 / len; d.position.set(lerp(x1, x2, u), .02, lerp(z1, z2, u)); d.rotation.y = r.rotation.y; } return r; };
+road(0, 14, 0, -4); road(0, -4, -9, -20); road(0, -4, 9, -20);
+box(1.2, .06, 18, 0xCFC6B8, 2.1, .03, 5, out);
+const post = (x, z, tex, ry) => { const g = new THREE.Group(); g.position.set(x, 0, z); g.rotation.y = ry; out.add(g); box(.1, 2.4, .1, 0x6E4B30, 0, 1.2, 0, g); const p = plane(1.8, .55, tex, 0, 2.2, .06, g); return g; };
+post(-1.6, -5.6, signTex('← CONSERTO DE CELULAR', '#2A9D8F', '#fff', 1024, 300, 80), .35); post(1.6, -5.6, signTex('DAY TRADE →', '#E63946', '#fff', 1024, 300, 110), -.35);
+// celular gigante
+const bigPhone = new THREE.Group(); bigPhone.position.set(-7.5, 0, -16); bigPhone.rotation.y = .5; out.add(bigPhone);
+box(2.0, 3.8, .3, 0x222831, 0, 1.95, 0, bigPhone); plane(1.75, 3.3, canvasTex(350, 660, (g, w, h) => { const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, '#2A9D8F'); gr.addColorStop(1, '#264653'); g.fillStyle = gr; g.fillRect(0, 0, w, h); g.fillStyle = '#fff'; g.font = '900 150px P'; g.textAlign = 'center'; g.fillText('🔧', w / 2, 330); g.font = '900 44px P'; g.fillText('CONSERTO', w / 2, 460); g.fillText('DE CELULAR', w / 2, 510); }), 0, 1.95, .16, bigPhone, true);
+const driver = new THREE.Group(); driver.position.set(-5.6, 0, -15); driver.rotation.z = .6; out.add(driver); mesh(new THREE.CylinderGeometry(.18, .18, 1.2, 8), M(0xFF8A1F), 0, 1.4, 0, driver); mesh(new THREE.CylinderGeometry(.06, .06, 1.6, 6), M(0xBBBBBB, { metalness: .6 }), 0, 0, 0, driver);
+// gráfico gigante
+const candles = new THREE.Group(); candles.position.set(7.5, 0, -16); candles.rotation.y = -.5; out.add(candles);
+[[1.2, 1], [1.8, 1], [1.4, 0], [2.4, 1], [2.0, 0], [3.2, 1], [2.6, 0], [3.8, 1]].forEach(([h, up], i) => { const b = box(.4, h * .6, .4, up ? 0x22C55E : 0xE11D48, -1.6 + i * .46, .6 + h * .5, 0, candles); box(.06, h * .6 + .6, .06, 0x333333, -1.6 + i * .46, .6 + h * .5, 0, candles); });
+// árvores, prédios, banco
+const treeM = [M(0x4F9A3A), M(0x6AB04C), M(0x3E8E3A)]; const barkM = M(0x6E4B30);
+for (let i = 0; i < 46; i++) { const a = i * 2.4, d = 7 + (i % 7) * 3.2; const x = Math.cos(a) * d, z = Math.sin(a) * d + 2; if (Math.abs(x) < 3.5 && z > -6) continue; if (Math.abs(x - z * -.55) < 2.5 && z < -4) continue; const t = new THREE.Group(); t.position.set(x, 0, z); out.add(t); box(.25, 1.4, .25, barkM, 0, .7, 0, t); const c = mesh(new THREE.IcosahedronGeometry(1.0 + (i % 3) * .25, 0), treeM[i % 3], 0, 2.0, 0, t); }
+const bcols = [0xA8DADC, 0xF1FAEE, 0xE9C46A, 0x9AA3AE, 0xF4A261, 0xCDB4DB];
+for (let i = 0; i < 26; i++) { const h = 5 + (i * 37 % 13); box(3 + (i % 3), h, 3, bcols[i % 6], -40 + i * 3.4, h / 2, -42 - (i % 4) * 3, out); }
+const bench = new THREE.Group(); bench.position.set(-3.2, 0, 3.4); out.add(bench); box(1.6, .06, .45, 0x8B5E3C, 0, .45, 0, bench); box(1.6, .4, .06, 0x8B5E3C, 0, .72, .22, bench); box(.06, .45, .4, 0x333333, -.7, .22, 0, bench); box(.06, .45, .4, 0x333333, .7, .22, 0, bench);
+
+const SETS = [[STORE, store], [OFFICE, office], [ROOM, rm], [KIT, kit], [OUT, out]];
+// ======== PERSONAGENS ========
+const fer = buildPerson({ skin: 0xD9A27A, shirt: 0xE63946, pants: 0x2F4A7A, hair: 0x23150C, tag: true }); scene.add(fer.root);
+const mom = buildPerson({ skin: 0xD9A27A, shirt: 0x8E5BB5, pants: 0x4A3B5C, hair: 0x9A9A9A, hairStyle: 'bun' }); scene.add(mom.root);
+const mgr = buildPerson({ skin: 0xE8C1A0, shirt: 0xF5F5F5, pants: 0x555555, hair: 0x6B6B6B, hairStyle: 'bald', glasses: true, tie: 0xB91C1C }); scene.add(mgr.root);
+const npcs = [0x457B9D, 0xF4A261, 0x84A59D].map((c, i) => { const n = buildPerson({ shirt: c, pants: [0x333333, 0x7A5638, 0x2F4A7A][i], skin: [0xF1C9A5, 0x8D5A3B, 0xC68B5E][i], hair: [0x5A3A1A, 0x111111, 0xC9A050][i], hairStyle: i === 2 ? 'bun' : 'short' }); scene.add(n.root); return n; });
+const phoneHand = box(.08, .15, .012, 0x111111, 0, 0, 0, null); scene.add(phoneHand);
+const OUTFIT = { store: [0xE63946, 0x2F4A7A], home: [0x2A9D8F, 0x3B4A5A], hoodie: [0x4B5563, 0x2F3E46] };
+function outfit(n) { const [s, p] = OUTFIT[n]; fer.mats.mShirt.color.set(s); fer.mats.mPants.color.set(p); }
+
+// ======== TELA DO NOTEBOOK ========
+function series(scen, n) {
+  const out = []; let p = 100; let seed = { up: 3, pump: 5, side: 7, meta: 11, demo: 13, flash: 17, crash3: 19, mixed: 23 }[scen] || 1;
+  const r = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647 - .5; };
+  for (let i = 0; i < n; i++) {
+    let drift = 0; const u = i / n;
+    if (scen === 'up' || scen === 'flash') drift = .55; if (scen === 'side') drift = 0;
+    if (scen === 'pump') drift = u < .45 ? 1.1 : -2.6; if (scen === 'meta') drift = u < .5 ? 1.0 : u < .65 ? .3 : -2.4;
+    if (scen === 'crash3') drift = -1.1; if (scen === 'demo' || scen === 'mixed') drift = Math.sin(i * .25) * .9;
+    const o = p; p = Math.max(5, p + drift + r() * 2.6 * (scen === 'side' ? .7 : 1)); const hi = Math.max(o, p) + Math.abs(r()) * 1.6, lo = Math.min(o, p) - Math.abs(r()) * 1.6; out.push([o, hi, lo, p]);
+  }
+  return out;
+}
+const SERIES = {}; ['up', 'pump', 'side', 'meta', 'demo', 'flash', 'crash3', 'mixed'].forEach(s => SERIES[s] = series(s, 160));
+function rr2(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+function drawChart(g, x, y, w, h, scen, prog, o = {}) {
+  const S = SERIES[scen]; const n = Math.max(12, Math.min(S.length, Math.floor(prog))); const vis = S.slice(Math.max(0, n - 44), n);
+  let lo = Infinity, hi = -Infinity; vis.forEach(c => { lo = Math.min(lo, c[2]); hi = Math.max(hi, c[1]); }); const pad = (hi - lo) * .12 + 1; lo -= pad; hi += pad;
+  const Y = v => y + h - (v - lo) / (hi - lo) * h; const cw = w / 44;
+  g.strokeStyle = 'rgba(255,255,255,.07)'; g.lineWidth = 1; for (let i = 1; i < 5; i++) { g.beginPath(); g.moveTo(x, y + h * i / 5); g.lineTo(x + w, y + h * i / 5); g.stroke(); }
+  vis.forEach((c, i) => { const up = c[3] >= c[0]; g.strokeStyle = g.fillStyle = up ? '#22C55E' : '#EF4444'; const cx = x + i * cw + cw / 2; g.lineWidth = 2; g.beginPath(); g.moveTo(cx, Y(c[1])); g.lineTo(cx, Y(c[2])); g.stroke(); const t1 = Y(Math.max(c[0], c[3])), t2 = Y(Math.min(c[0], c[3])); g.fillRect(cx - cw * .32, t1, cw * .64, Math.max(2, t2 - t1)); });
+  const last = vis[vis.length - 1][3]; g.setLineDash([6, 6]); g.strokeStyle = '#94A3B8'; g.beginPath(); g.moveTo(x, Y(last)); g.lineTo(x + w, Y(last)); g.stroke(); g.setLineDash([]);
+  if (o.stop) { const sy = Y(last - (hi - lo) * .12); g.fillStyle = 'rgba(239,68,68,.15)'; g.fillRect(x, sy, w, y + h - sy); g.strokeStyle = '#EF4444'; g.lineWidth = 3; g.beginPath(); g.moveTo(x, sy); g.lineTo(x + w, sy); g.stroke(); g.fillStyle = '#EF4444'; g.font = '800 22px P'; g.fillText('STOP', x + w - 70, sy - 8); }
+  if (o.target) { const ty = Y(last + (hi - lo) * .1); g.strokeStyle = '#22C55E'; g.lineWidth = 3; g.beginPath(); g.moveTo(x, ty); g.lineTo(x + w, ty); g.stroke(); g.fillStyle = '#22C55E'; g.font = '800 22px P'; g.fillText('ALVO', x + w - 70, ty - 8); }
+  return last;
+}
+let SC = { mode: 'off' };
+function drawScreen(t) {
+  const g = sg, w = 1024, h = 640; const st = SC; const u = t - (st.t0 ?? 0);
+  g.fillStyle = '#0B1220'; g.fillRect(0, 0, w, h);
+  if (st.mode === 'off') { g.fillStyle = '#05070c'; g.fillRect(0, 0, w, h); }
+  else if (st.mode === 'chart') {
+    g.fillStyle = '#111A2E'; g.fillRect(0, 0, w, 76); g.fillStyle = '#fff'; g.font = '900 34px P'; g.fillText('BTC / USD', 28, 50);
+    if (st.demo) { g.fillStyle = '#F59E0B'; rr2(g, 230, 18, 150, 42, 10); g.fill(); g.fillStyle = '#111'; g.font = '900 26px P'; g.fillText('DEMO', 262, 49); }
+    if (st.lev) { g.fillStyle = '#EF4444'; g.font = '900 24px P'; const lw = g.measureText('ALAVANCAGEM ' + st.lev + 'x').width + 28; rr2(g, 400, 18, lw, 42, 10); g.fill(); g.fillStyle = '#fff'; g.fillText('ALAVANCAGEM ' + st.lev + 'x', 414, 48); }
+    const bal = st.bal ? lerp(st.bal[0], st.bal[1], ease(u / (st.bd || 1.5))) : null;
+    if (bal !== null) { g.textAlign = 'right'; g.fillStyle = '#94A3B8'; g.font = '700 20px P'; g.fillText('SALDO', w - 28, 28); g.fillStyle = st.bal[1] >= st.bal[0] ? '#22C55E' : '#EF4444'; g.font = '900 38px P'; g.fillText('US$ ' + bal.toFixed(2).replace('.', ','), w - 28, 64); g.textAlign = 'left'; }
+    drawChart(g, 24, 100, w - 48, h - 130, st.scen || 'up', (st.p0 ?? 40) + u * (st.sp ?? 2), st);
+    if (st.alert) { const a = .5 + .5 * Math.sin(t * 8); g.fillStyle = `rgba(239,68,68,${.25 + a * .25})`; g.fillRect(0, 0, w, h); g.fillStyle = '#fff'; g.font = '900 64px P'; g.textAlign = 'center'; g.fillText(st.alert, w / 2, h / 2); g.textAlign = 'left'; }
+  } else if (st.mode === 'video') {
+    g.fillStyle = '#0F172A'; g.fillRect(0, 0, w, h); g.fillStyle = '#1E293B'; rr2(g, 40, 40, w - 80, 440, 18); g.fill();
+    g.fillStyle = '#FF8A1F'; g.font = '900 30px P'; g.fillText('EDUCAÇÃO FINANCEIRA', 80, 100);
+    g.fillStyle = '#fff'; g.font = '900 64px P'; g.fillText('AULA ' + (st.n || 1) + ' DE 10', 80, 200); g.font = '800 40px P'; g.fillStyle = '#CBD5E1'; g.fillText(st.topic || 'Introdução às criptomoedas', 80, 260);
+    drawChart(g, 520, 290, 420, 170, 'demo', 60 + u * 2, {});
+    g.fillStyle = '#334155'; g.fillRect(40, 520, w - 80, 14); g.fillStyle = '#EF4444'; g.fillRect(40, 520, (w - 80) * clamp(((st.n || 1) - 1) / 10 + u / 60), 14);
+    g.fillStyle = '#fff'; g.beginPath(); g.moveTo(60, 560); g.lineTo(60, 600); g.lineTo(92, 580); g.fill(); g.font = '800 26px P'; g.fillText('GRÁTIS · ' + (st.n || 1) + '/10', 120, 592);
+  } else if (st.mode === 'course') {
+    g.fillStyle = '#F8FAFC'; g.fillRect(0, 0, w, h); g.fillStyle = '#111'; g.font = '900 46px P'; g.fillText('CURSO COMPLETO', 50, 90);
+    [['▶', 'Aulas gravadas', 'do básico ao avançado', '#3B82F6'], ['💬', 'Suporte de alunos', 'grupo para tirar dúvidas', '#22C55E'], ['●', 'Ao vivo', 'encontros com o professor', '#EF4444']].forEach(([ic, a, b, c], i) => {
+      const yy = 140 + i * 160; const on = u > i * .9; g.globalAlpha = on ? 1 : .25; g.fillStyle = '#fff'; rr2(g, 50, yy, w - 100, 130, 22); g.fill(); g.strokeStyle = '#111'; g.lineWidth = 5; g.stroke(); g.fillStyle = c; g.beginPath(); g.arc(125, yy + 65, 42, 0, 7); g.fill(); g.fillStyle = '#fff'; g.font = '900 40px P'; g.textAlign = 'center'; g.fillText(ic === '💬' ? '?' : ic, 125, yy + 80); g.textAlign = 'left'; g.fillStyle = '#111'; g.font = '900 40px P'; g.fillText(a, 200, yy + 60); g.font = '700 28px P'; g.fillStyle = '#475569'; g.fillText(b, 200, yy + 100); g.globalAlpha = 1; });
+  } else if (st.mode === 'live') {
+    g.fillStyle = '#0F172A'; g.fillRect(0, 0, w, h); g.fillStyle = '#1E293B'; rr2(g, 24, 24, 640, 592, 18); g.fill();
+    // professor
+    g.fillStyle = '#334155'; g.fillRect(24, 360, 640, 256); const bob = Math.sin(t * 3) * 3;
+    g.fillStyle = '#1D4ED8'; g.beginPath(); g.ellipse(344, 600, 170, 150, 0, Math.PI, 0); g.fill();
+    g.fillStyle = '#E8B98F'; g.beginPath(); g.arc(344, 330 + bob, 92, 0, 7); g.fill(); g.fillStyle = '#3F2A1D'; g.beginPath(); g.arc(344, 300 + bob, 95, Math.PI, 0); g.fill();
+    g.fillStyle = '#111'; g.beginPath(); g.arc(312, 330 + bob, 9, 0, 7); g.arc(376, 330 + bob, 9, 0, 7); g.fill(); g.strokeStyle = '#111'; g.lineWidth = 5; g.beginPath(); g.arc(344, 365 + bob, 24, .2, Math.PI - .2); g.stroke();
+    g.strokeStyle = '#111'; g.lineWidth = 4; g.strokeRect(290, 312 + bob, 46, 34); g.strokeRect(352, 312 + bob, 46, 34);
+    g.fillStyle = '#EF4444'; rr2(g, 44, 44, 150, 46, 10); g.fill(); g.fillStyle = '#fff'; g.font = '900 28px P'; g.fillText('● AO VIVO', 56, 77);
+    if (st.slide) { g.fillStyle = '#fff'; rr2(g, 60, 110, 570, 190, 16); g.fill(); g.fillStyle = '#111'; g.font = '900 ' + (st.slideSize || 44) + 'px P'; (st.slide).split('|').forEach((l, i) => g.fillText(l, 84, 175 + i * 56)); }
+    g.fillStyle = '#111827'; rr2(g, 684, 24, 316, 592, 18); g.fill(); g.fillStyle = '#fff'; g.font = '900 26px P'; g.fillText('CHAT', 708, 64);
+    (st.chat || ['Ana: boa noite!', 'Leo: 🔥', 'Bia: anotando tudo']).forEach((m, i) => { const on = u > i * .8; if (!on) return; g.fillStyle = m.startsWith('Fernando') ? '#16A34A' : '#1F2937'; rr2(g, 700, 90 + i * 104, 284, 92, 14); g.fill(); g.fillStyle = '#fff'; g.font = '800 20px P'; wrap(g, m, 714, 120 + i * 104, 260, 24); });
+  } else if (st.mode === 'sheet') {
+    g.fillStyle = '#fff'; g.fillRect(0, 0, w, h); g.fillStyle = '#16A34A'; g.fillRect(0, 0, w, 60); g.fillStyle = '#fff'; g.font = '900 30px P'; g.fillText('DIÁRIO DE OPERAÇÕES', 24, 42);
+    const cols = ['DATA', 'PAR', 'STOP', 'ALVO', 'RESULT.', 'EMOÇÃO']; const cx = [20, 150, 330, 480, 630, 800];
+    g.fillStyle = '#E5E7EB'; g.fillRect(0, 60, w, 52); g.fillStyle = '#111'; g.font = '900 24px P'; cols.forEach((c, i) => g.fillText(c, cx[i], 96));
+    const rows = st.rows || []; rows.forEach((r, i) => { if (u < i * .35) return; const yy = 150 + i * 54; g.fillStyle = i % 2 ? '#F9FAFB' : '#fff'; g.fillRect(0, yy - 36, w, 54); r.forEach((c, j) => { g.fillStyle = j === 4 ? (String(c).startsWith('-') ? '#E11D48' : '#16A34A') : j === 5 && (c === 'PRESSA' || c === 'EUFORIA') ? '#E11D48' : '#111'; g.font = (j === 5 ? '900 ' : '700 ') + '24px P'; g.fillText(c, cx[j], yy); }); });
+    if (st.total) { g.fillStyle = '#111'; g.fillRect(0, h - 70, w, 70); g.fillStyle = '#fff'; g.font = '900 32px P'; g.fillText('TOTAL DO MÊS', 24, h - 24); g.fillStyle = '#22C55E'; g.textAlign = 'right'; g.fillText(st.total, w - 24, h - 24); g.textAlign = 'left'; }
+  }
+  scrTex.needsUpdate = true;
+}
+function wrap(g, txt, x, y, mw, lh) { const ws = txt.split(' '); let line = ''; let yy = y; for (const w of ws) { const tt = line + w + ' '; if (g.measureText(tt).width > mw && line) { g.fillText(line, x, yy); line = w + ' '; yy += lh; } else line = tt; } g.fillText(line, x, yy); }
+
+// ======== CÂMERAS ========
+const CAMS = {
+  // quarto
+  r_wide: [ROOM, [-.6, 2.3, 3.6], [.3, .9, -1.3]], r_desk: [ROOM, [-.6, 1.55, -.8], [1.25, 1.1, -1.5]], r_over: [ROOM, [1.75, 1.6, -.45], [1.2, .98, -2.0]],
+  r_screen: [ROOM, [1.3, 1.1, -1.42], [1.3, .98, -2.1]], r_face: [ROOM, [.35, 1.42, -2.4], [1.3, 1.2, -1.25]], r_bed: [ROOM, [-1.0, 1.65, -.3], [-2.3, .75, -1.6]],
+  r_bedtop: [ROOM, [-1.55, 1.55, -2.35], [-2.3, .8, -1.85]], r_win: [ROOM, [.6, 1.6, .6], [-1.0, 1.4, -2.4]], r_side: [ROOM, [2.9, 1.5, -.6], [1.2, 1.0, -1.7]],
+  // cozinha
+  k_wide: [KIT, [0, 2.0, 2.9], [0, .9, -.7]], k_fer: [KIT, [.65, 1.35, .4], [-.95, 1.15, -.6]], k_mom: [KIT, [-.65, 1.35, .4], [.95, 1.15, -.6]], k_cup: [KIT, [-.1, 1.1, .2], [-.42, .85, -.55]], k_side: [KIT, [0, 1.3, 1.6], [0, 1.0, -.6]],
+  // loja
+  s_wide: [STORE, [-1.5, 2.6, 6.2], [.5, 1.0, -1.2]], s_counter: [STORE, [1.6, 1.55, 3.0], [2.6, 1.1, .1]], s_racks: [STORE, [-4.6, 1.5, 3.4], [-2.2, 1.1, -.4]], s_shelf: [STORE, [0, 1.6, .6], [0, 1.2, -3.8]],
+  s_fold: [STORE, [2.2, 1.6, 1.6], [2.5, 1.05, .3]], s_door: [STORE, [3.8, 2.2, 3.6], [-3.5, .9, .4]],
+  o_wide: [OFFICE, [1.6, 2.0, 2.0], [0, .9, -.6]], o_mgr: [OFFICE, [-.35, 1.3, .9], [0, 1.25, -1.45]], o_fer: [OFFICE, [.4, 1.35, -1.0], [0, 1.15, .2]],
+  // rua
+  x_wide: [OUT, [0, 3.2, 9], [0, 1.2, -9]], x_back: [OUT, [.4, 1.7, 1.2], [0, 1.4, -8]], x_left: [OUT, [-2.5, 2.0, -7], [-7.5, 1.8, -16]], x_right: [OUT, [2.5, 2.0, -7], [7.5, 1.5, -16]],
+  x_face: [OUT, [-.6, 1.6, -4.4], [0, 1.5, -2.0]], x_walk: [OUT, [5, 1.6, 2], [2.1, 1.1, 2]], x_walk2: [OUT, [2.4, 1.5, -3], [2.1, 1.1, 4]],
+  x_bench: [OUT, [-2.2, 1.6, 6.8], [-3.2, .9, 3.0]], x_sky: [OUT, [-3.0, 1.5, 6.2], [-3.4, 3.5, -40]], x_benchside: [OUT, [-.4, 1.2, 2.2], [-3.2, 1.05, 3.4]],
+};
+let camState = null;
+function setCam(name, t0, t1) { camState = { name, t0, t1 }; }
+function updateCam(t) {
+  const c = CAMS[camState.name]; const [o, p, tg] = c; const u = ease(clamp((t - camState.t0) / Math.max(1, camState.t1 - camState.t0)));
+  const P = V(o.x + p[0], o.y + p[1], o.z + p[2]), T = V(o.x + tg[0], o.y + tg[1], o.z + tg[2]);
+  const dir = T.clone().sub(P); const side = V(dir.z, 0, -dir.x).normalize();
+  const k = camState.k || 0; const sgn = (k % 2 ? 1 : -1);
+  cam.position.copy(P.clone().add(dir.clone().multiplyScalar(.06 * u)).add(side.multiplyScalar(sgn * .18 * (u - .5))));
+  cam.lookAt(T); cam.fov = 42; cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  return o;
+}
+
+// ======== TIMELINE (batidas por frase) ========
+const BEATS = [];
+const B = (p, k, o) => { const t = L(p, k); if (t === null) { console.log('sem frase', p, k); return; } BEATS.push({ t, p, k, ...o }); };
+const FER = (x) => x;
+// p0 gancho
+B(0, 0, { light: 'night', outfit: 'hoodie', fer: { at: 'desk', pose: 'type', face: 'neutral' }, cams: ['r_over', 'r_face', 'r_screen', 'r_desk', 'r_side'], screen: { mode: 'chart', scen: 'pump', p0: 60, sp: 6, bal: [138, 9], bd: 9 }, card: { type: 'money', label: 'NA CONTA', from: 10000, to: 10000, pre: 'R$ ', cls: 'g' }, chip: null, title: true });
+B(0, 1, { card: { type: 'money', label: 'NA CORRETORA', from: 138, to: 9, pre: 'US$ ', cls: 'r', dur: 3 }, fer: { at: 'desk', pose: 'sitHead', face: 'sad' } });
+B(0, 2, { card: null, fer: { at: 'desk', pose: 'sitThink', face: 'neutral' } });
+B(0, 3, { card: { type: 'big', big: 'UM ERRO CARO', sub: 'e a lição mais importante da vida financeira dele', cls: 'o2' } });
+B(0, 4, { card: { type: 'big', big: 'FICA ATÉ O FINAL', sub: 'pode te poupar muito dinheiro', cls: 'r' }, fer: { at: 'desk', pose: 'type', face: 'neutral' } });
+// p1 a loja
+B(1, 0, { light: 'day', outfit: 'store', chip: [1, 'A DEMISSÃO'], fade: true, cams: ['s_wide', 's_counter', 's_fold', 's_racks', 's_shelf', 's_door', 's_counter'], fer: { at: 'counter', pose: 'fold', face: 'happy' }, card: null, screen: { mode: 'off' }, stock: 1, sale: 0, npc: 3 });
+B(1, 1, { card: { type: 'big', big: '20 ANOS', sub: 'vendedor numa loja de roupas no centro da cidade', cls: 'o2' } });
+B(1, 3, { card: { type: 'list', title: 'A ROTINA', items: ['Chegar às 9h', 'Dobrar camisetas', 'Arrumar a vitrine', 'Atender e bater meta'], each: .7 } });
+B(1, 4, { card: { type: 'list', title: 'O SALÁRIO PAGAVA', items: ['Ajuda em casa', 'Parcela do celular', 'Um pouquinho guardado'], each: .9 } });
+B(1, 5, { card: { type: 'big', big: '3 ANOS', sub: 'de uma vida simples e previsível', cls: 'g' } });
+B(1, 6, { card: null, fer: { at: 'counter', pose: 'think', face: 'neutral' } });
+// p2 a loja muda
+B(2, 0, { npc: 1, cams: ['s_wide', 's_door', 's_racks', 's_shelf', 's_wide'], card: { type: 'big', big: 'O MOVIMENTO CAIU', sub: '', cls: 'r' } });
+B(2, 1, { npc: 0, card: { type: 'big', big: 'SÁBADO VAZIO', sub: 'dava pra contar os clientes nos dedos', cls: 'r' } });
+B(2, 2, { stock: .55, card: null }); B(2, 3, { stock: .3, sale: 4, card: { type: 'list', title: 'SINAIS DE CRISE', items: ['Prateleiras vazias', 'Araras pela metade', 'Promoção atrás de promoção'], each: .8 } });
+B(2, 4, { card: null, fer: { at: 'counter', pose: 'arms', face: 'neutral' } });
+B(2, 5, { cams: ['o_wide', 'o_mgr', 'o_fer', 'o_mgr', 'o_fer', 'o_wide', 'o_fer', 'o_wide'], fer: { at: 'office', pose: 'sit', face: 'neutral' }, mgr: 'office', card: null });
+B(2, 7, { card: { type: 'big', big: 'A LOJA VAI FECHAR', sub: 'todo mundo ia ser desligado', cls: 'r' }, fer: { at: 'office', pose: 'sitSlump', face: 'sad' } });
+B(2, 9, { card: { type: 'list', title: 'ELE SAIU DE LÁ COM', items: ['A carteira assinada', 'Um aperto no peito', 'A rescisão na cabeça'], each: .9 } });
+B(2, 10, { light: 'night', outfit: 'home', cams: ['r_desk', 'r_screen', 'r_face'], fer: { at: 'desk', pose: 'type', face: 'shock' }, mgr: null, screen: { mode: 'bank' }, card: { type: 'money', label: 'RESCISÃO', from: 0, to: 10000, pre: 'R$ ', cls: 'g', dur: 1.6 }, sfx: 'cash' });
+B(2, 11, { fer: { at: 'desk', pose: 'sitCheer', face: 'happy' } }); B(2, 12, { fer: { at: 'desk', pose: 'sitThink', face: 'neutral' }, card: { type: 'big', big: 'TUDO O QUE ELE TINHA', sub: 'sem salário, sem emprego', cls: 'r' } });
+// p3 noite
+B(3, 0, { light: 'dark', cams: ['r_bed', 'r_bedtop', 'r_bed', 'r_win', 'r_bedtop', 'r_bed', 'r_bedtop', 'r_wide'], fer: { at: 'bed', pose: 'lie', face: 'neutral' }, screen: { mode: 'off' }, card: null });
+B(3, 1, { fer: { at: 'bed', pose: 'lieThink', face: 'neutral' } });
+B(3, 3, { card: { type: 'months', title: 'R$ 10 MIL DURA QUANTO?', n: 12 } });
+B(3, 6, { card: null }); B(3, 7, { card: { type: 'compare', l: ['CAMINHO 1', 'Conserto de celular', '#2A9D8F'], r: ['CAMINHO 2', 'Day trade', '#E11D48'] } });
+// p4 dois caminhos
+B(4, 0, { light: 'day', chip: [2, 'DOIS CAMINHOS'], fade: true, cams: ['x_wide', 'x_left', 'x_back', 'x_left', 'x_right', 'x_face', 'x_right'], fer: { at: 'fork', pose: 'stand', face: 'neutral' }, card: null, outfit: 'home' });
+B(4, 1, { card: { type: 'list', title: 'CONSERTO DE CELULAR', items: ['Gosta desde moleque', 'Os amigos sempre pedem ajuda', 'Profissão com procura'], each: .9 } });
+B(4, 4, { card: { type: 'big', big: 'DAY TRADE', sub: 'o caminho mais arriscado', cls: 'r' }, fer: { at: 'fork', pose: 'think', face: 'neutral' } });
+B(4, 6, { card: null });
+// p5 flashback
+B(5, 0, { light: 'day', sepia: true, outfit: 'store', cams: ['s_counter', 's_fold', 's_counter', 's_fold'], fer: { at: 'counterPhone', pose: 'phone', face: 'happy' }, stock: 1, sale: 0, npc: 0, card: { type: 'phone', from: 800, to: 800, scen: 'flash', tag: '3 ANOS ANTES' } });
+B(5, 3, { card: { type: 'phone', from: 800, to: 800, scen: 'demo', tag: 'R$ 800 NA CORRETORA' } });
+B(5, 4, { card: { type: 'list', title: 'SEM...', items: ['Estudar nada', 'Saber o que é risco', 'Nenhuma estratégia'], each: .8, x: true } });
+B(5, 6, { card: { type: 'phone', from: 800, to: 380, scen: 'crash3', tag: 'COMPRA · VENDE · COMPRA...', dur: 3 }, fer: { at: 'counterPhone', pose: 'phone', face: 'shock' } });
+B(5, 7, { card: { type: 'phone', from: 380, to: 120, scen: 'crash3', tag: 'EM DUAS SEMANAS', dur: 2 }, fer: { at: 'counterPhone', pose: 'phone', face: 'sad' } });
+B(5, 8, { card: { type: 'big', big: 'APP APAGADO', sub: '"nunca mais mexo com isso"', cls: 'r' } });
+B(5, 10, { sepia: false, light: 'night', outfit: 'home', cams: ['r_desk', 'r_face', 'r_win'], fer: { at: 'desk', pose: 'sitThink', face: 'neutral' }, screen: { mode: 'off' }, card: { type: 'quote', text: 'Não perdeu para o mercado. Perdeu para a própria falta de preparo.' } });
+// p6 canal e aulas
+B(6, 0, { light: 'day', chip: [2, 'DOIS CAMINHOS'], cams: ['r_wide', 'r_over', 'r_screen', 'r_face', 'r_over', 'r_screen', 'r_desk', 'r_face', 'r_wide'], fer: { at: 'desk', pose: 'type', face: 'neutral' }, screen: { mode: 'video', n: 1, topic: 'Organização do dinheiro' }, card: null });
+B(6, 3, { card: { type: 'list', title: 'O CANAL FALAVA DE', items: ['Organização do dinheiro', 'Reserva de emergência', 'Investimentos'], each: .9 } });
+B(6, 4, { card: { type: 'big', big: '10 AULAS GRÁTIS', sub: 'sobre operações com criptomoedas', cls: 'o2' }, screen: { mode: 'video', n: 1, topic: 'Operações com cripto' } });
+B(6, 5, { card: { type: 'big', big: 'SALVAR PRA DEPOIS', sub: '...e nunca assistir', cls: 'r' } });
+B(6, 7, { card: { type: 'quote', text: 'Se eu for tentar de novo, vai ser diferente. Vai ser estudando primeiro.' }, fer: { at: 'desk', pose: 'sitThink', face: 'calm' } });
+// p7 reserva
+B(7, 0, { card: null, fer: { at: 'desk', pose: 'type', face: 'neutral' }, cams: ['r_desk', 'r_face', 'r_over', 'r_desk', 'r_screen'] });
+B(7, 1, { card: { type: 'jars', a: ['RESERVA', 'pagar as contas', 92, '#16A34A'], b: ['PARA OPERAR', 'só um pouco', 8, '#FF8A1F'] } });
+B(7, 4, { card: { type: 'big', big: 'ENTRAR COM POUCO', sub: 'dinheiro que ele podia perder', cls: 'g' } });
+// p8 estudando
+B(8, 0, { chip: [3, 'A PRIMEIRA QUEDA'], fade: true, light: 'night', cams: ['r_screen', 'r_over', 'r_face', 'r_screen', 'r_over', 'r_desk', 'r_screen', 'r_face', 'r_desk', 'r_side'], screen: { mode: 'video', n: 2, topic: 'O que é uma corretora' }, card: { type: 'list', title: 'O QUE ELE APRENDEU', items: ['Corretora de cripto', 'Par BTC / USD', 'Gráfico de velas', 'Suporte e resistência', 'Gerenciamento de banca'], bySentence: [2, 3, 4, 5, 6] } });
+B(8, 3, { screen: { mode: 'video', n: 4, topic: 'Pares: BTC contra o dólar' } }); B(8, 4, { screen: { mode: 'video', n: 6, topic: 'Lendo um gráfico de velas' } }); B(8, 5, { screen: { mode: 'video', n: 8, topic: 'Suporte e resistência' } }); B(8, 6, { screen: { mode: 'video', n: 10, topic: 'Gerenciamento de banca' } });
+B(8, 7, { card: null, fer: { at: 'desk', pose: 'sitDesk', face: 'neutral' } }); B(8, 8, { fer: { at: 'desk', pose: 'sitArms', face: 'happy' }, card: { type: 'big', big: 'PRONTO?', sub: 'talvez pronto demais', cls: 'y' } });
+// p9 os primeiros US$100
+B(9, 0, { light: 'day', cams: ['r_screen', 'r_over', 'r_face', 'r_screen', 'r_over', 'r_screen', 'r_face', 'r_screen', 'r_over', 'r_screen', 'r_face', 'r_desk', 'r_face', 'r_side', 'r_wide'], fer: { at: 'desk', pose: 'type', face: 'neutral' }, screen: { mode: 'chart', scen: 'up', bal: [0, 100], bd: 1.2, sp: 1.5 }, card: { type: 'money', label: 'BANCA INICIAL', from: 0, to: 100, pre: 'US$ ', cls: 'g' }, sfx: 'cash' });
+B(9, 2, { card: { type: 'big', big: 'POUCO DE PROPÓSITO', sub: 'era essa a ideia', cls: 'g' } });
+B(9, 3, { card: { type: 'list', title: 'O PLANO', items: ['Esperar o ponto certo', 'Entrar pequeno', 'Sair quando o plano manda'], each: 1.0 }, screen: { mode: 'chart', scen: 'up', bal: [100, 100], sp: 2, stop: true, target: true } });
+B(9, 6, { card: { type: 'days', items: [['DIA 1', '+3', 'g'], ['DIA 2', '-1', 'r'], ['DIA 3', '+4', 'g']] }, screen: { mode: 'chart', scen: 'up', bal: [100, 106], sp: 3, stop: true } });
+B(9, 9, { card: { type: 'money', label: 'FIM DA 1ª SEMANA', from: 106, to: 118, pre: 'US$ ', cls: 'g' }, screen: { mode: 'chart', scen: 'up', bal: [106, 118], sp: 3 }, sfx: 'cash' });
+B(9, 10, { card: { type: 'money', label: 'FIM DA 2ª SEMANA', from: 118, to: 138, pre: 'US$ ', cls: 'g' }, screen: { mode: 'chart', scen: 'up', bal: [118, 138], sp: 3 }, fer: { at: 'desk', pose: 'sitCheer', face: 'happy' }, sfx: 'cash' });
+B(9, 11, { card: { type: 'big', big: '+38%', sub: 'em duas semanas', cls: 'g' } });
+B(9, 12, { fer: { at: 'desk', pose: 'sitThink', face: 'happy' }, card: { type: 'quote', text: '"Nesse ritmo, em poucos meses eu ganho mais do que na loja."' } });
+B(9, 14, { card: { type: 'big', big: 'O ERRO COMEÇA AQUI', sub: '', cls: 'r' }, fer: { at: 'desk', pose: 'type', face: 'neutral' } });
+// p10 euforia
+B(10, 0, { cams: ['r_face', 'r_over', 'r_desk', 'r_face', 'r_screen', 'r_over', 'r_screen', 'r_face', 'r_screen', 'r_over', 'r_face', 'r_desk'], card: { type: 'compare', l: ['O QUE ELE FEZ', 'Seguiu um plano', '#16A34A'], r: ['O QUE O CÉREBRO APRENDEU', '"Eu sou bom nisso"', '#E11D48'] }, fer: { at: 'desk', pose: 'sitArms', face: 'happy' } });
+B(10, 4, { card: { type: 'risk', from: 1, to: 25 }, fer: { at: 'desk', pose: 'type', face: 'happy' }, screen: { mode: 'chart', scen: 'up', bal: [138, 138], sp: 3 } });
+B(10, 6, { card: { type: 'lever', from: 1, to: 20 }, screen: { mode: 'chart', scen: 'up', bal: [138, 138], sp: 3, lev: 20 } });
+B(10, 8, { card: { type: 'compare', l: ['GANHOS', 'ficam maiores', '#16A34A'], r: ['PERDAS', 'também', '#E11D48'] } });
+B(10, 10, { card: { type: 'big', big: 'AS AULAS AVISARAM', sub: 'ele preferiu lembrar só da primeira parte', cls: 'y' } });
+// p11 queda
+B(11, 0, { light: 'night', cams: ['r_screen', 'r_face', 'r_over', 'r_screen', 'r_face', 'r_screen', 'r_face', 'r_over', 'r_screen', 'r_face', 'r_desk', 'r_screen', 'r_over', 'r_face', 'r_screen', 'r_screen', 'r_face', 'r_wide', 'r_bed', 'r_bedtop', 'r_bed'], fer: { at: 'desk', pose: 'type', face: 'happy' }, screen: { mode: 'chart', scen: 'pump', p0: 30, sp: 2.2, bal: [138, 138], lev: 20 }, card: { type: 'list', title: 'QUINTA-FEIRA À NOITE', items: ['Comprado', 'Alavancagem alta', 'Sem stop'], bySentence: [1, 1, 1], x: true } });
+B(11, 3, { screen: { mode: 'chart', scen: 'pump', p0: 72, sp: 2.5, bal: [138, 125], bd: 2, lev: 20 }, fer: { at: 'desk', pose: 'type', face: 'neutral' }, card: null });
+B(11, 5, { card: { type: 'quote', text: '"É só uma correção, já volta."' } });
+B(11, 6, { screen: { mode: 'chart', scen: 'pump', p0: 82, sp: 2.5, bal: [125, 95], bd: 3, lev: 20 }, fer: { at: 'desk', pose: 'sitHead', face: 'shock' }, card: null, sfx: 'buzz' });
+B(11, 8, { screen: { mode: 'chart', scen: 'pump', p0: 92, sp: 2.5, bal: [95, 69], bd: 2, lev: 20 }, card: null });
+B(11, 9, { card: { type: 'money', label: 'METADE DA BANCA SUMIU', from: 138, to: 69, pre: 'US$ ', cls: 'r' }, fer: { at: 'desk', pose: 'sitSlump', face: 'sad' } });
+B(11, 10, { card: { type: 'big', big: 'O PIOR ERRO', sub: 'tentar recuperar tudo de uma vez', cls: 'r' }, fer: { at: 'desk', pose: 'type', face: 'angry' }, screen: { mode: 'chart', scen: 'crash3', p0: 20, sp: 3, bal: [69, 69], lev: 20 } });
+B(11, 13, { screen: { mode: 'chart', scen: 'crash3', p0: 40, sp: 3, bal: [69, 30], bd: 2, lev: 20 }, card: null, sfx: 'buzz' });
+B(11, 15, { screen: { mode: 'chart', scen: 'crash3', p0: 60, sp: 3, bal: [30, 9], bd: 2, lev: 20, alert: 'LIQUIDADO' }, card: { type: 'money', label: 'EM UMA NOITE', from: 138, to: 9, pre: 'US$ ', cls: 'r', dur: 2.2 }, fer: { at: 'desk', pose: 'sitHead', face: 'shock' }, sfx: 'buzz' });
+B(11, 17, { light: 'dark', screen: { mode: 'off' }, fer: { at: 'bed', pose: 'lie', face: 'sad' }, card: null, lid: 0 });
+B(11, 19, { card: { type: 'quote', text: 'Ele sabia o que tinha que fazer. E mesmo assim não fez.' } });
+// p12 mãe
+B(12, 0, { light: 'morning', chip: [4, 'RECOMEÇO'], fade: true, lid: 1, cams: ['k_wide', 'k_fer', 'k_cup', 'k_mom', 'k_fer', 'k_side', 'k_fer', 'k_mom', 'k_wide', 'k_mom', 'k_mom', 'k_fer', 'k_mom', 'k_fer', 'k_side', 'k_wide'], fer: { at: 'kitchen', pose: 'sitCup', face: 'sad' }, mom: 'kitchen', momFace: 'neutral', card: null, outfit: 'home' });
+B(12, 2, { momFace: 'talk', momPose: 'sitTalk' }); B(12, 3, { momFace: 'neutral', momPose: 'sit' });
+B(12, 4, { fer: { at: 'kitchen', pose: 'sitTalk', face: 'talk' }, card: { type: 'list', title: 'ELE CONTOU TUDO', items: ['Os R$ 800 de 3 anos atrás', 'As duas semanas boas', 'A noite em que perdeu quase tudo'], bySentence: [5, 6, 7] } });
+B(12, 8, { fer: { at: 'kitchen', pose: 'sitCup', face: 'sad' }, card: null });
+B(12, 10, { momFace: 'talk', momPose: 'sitTalk', card: { type: 'quote', text: '"E o dinheiro da rescisão, filho?"' } });
+B(12, 11, { momFace: 'neutral', momPose: 'sit', fer: { at: 'kitchen', pose: 'sitTalk', face: 'talk' }, card: { type: 'jars', a: ['RESERVA', 'guardada', 92, '#16A34A'], b: ['CORRETORA', 'parte pequena', 8, '#E11D48'] } });
+B(12, 12, { momFace: 'talk', momPose: 'sitTalk', fer: { at: 'kitchen', pose: 'sitCup', face: 'neutral' }, card: { type: 'quote', text: '"Você perdeu uma aula cara. Mas não perdeu a casa."', big: true } });
+B(12, 13, { momFace: 'calm', momPose: 'sit' }); B(12, 15, { card: { type: 'big', big: 'AULA CARA', sub: 'só vale a pena se você aprende com ela', cls: 'o2' }, fer: { at: 'kitchen', pose: 'sitCup', face: 'calm' } });
+// p13 não desistir
+B(13, 0, { light: 'day', cams: ['x_wide', 'x_left', 'x_back', 'x_face', 'x_right', 'x_face', 'x_back', 'x_face', 'x_wide', 'x_face'], fer: { at: 'fork', pose: 'think', face: 'neutral' }, mom: null, card: null });
+B(13, 1, { card: { type: 'big', big: 'DESISTIR?', sub: 'fazer o curso de celular e esquecer os gráficos', cls: 'y' } });
+B(13, 4, { card: { type: 'compare', l: ['SEGUIU AS REGRAS', 'deu certo', '#16A34A'], r: ['ABANDONOU A ESTRATÉGIA', 'desandou', '#E11D48'] } });
+B(13, 6, { card: { type: 'compare', l: ['O PROBLEMA', 'não era o mercado', '#64748B'], r: ['ERA', 'o comportamento dele', '#E11D48'] } });
+B(13, 8, { card: { type: 'big', big: 'DÁ PRA TREINAR', sub: 'comportamento se treina', cls: 'g' }, fer: { at: 'fork', pose: 'point', face: 'calm' } });
+// p14 curso
+B(14, 0, { light: 'day', cams: ['r_over', 'r_screen', 'r_screen', 'r_screen', 'r_face', 'r_desk', 'r_face'], fer: { at: 'desk', pose: 'type', face: 'neutral' }, screen: { mode: 'course' }, card: null });
+B(14, 4, { card: { type: 'compare', l: ['JÁ PERDEU', 'R$ 800 + US$ 129', '#E11D48'], r: ['VAI INVESTIR', 'em aprender', '#16A34A'] } });
+B(14, 5, { card: { type: 'big', big: 'APRENDER ANTES DE OPERAR', sub: '', cls: 'g' } });
+B(14, 6, { card: { type: 'quote', text: '"Nenhum centavo de dinheiro real até terminar o treino."', big: true }, fer: { at: 'desk', pose: 'sitArms', face: 'calm' } });
+// p15 aula ao vivo
+B(15, 0, { light: 'night', cams: ['r_over', 'r_screen', 'r_face', 'r_screen', 'r_over', 'r_screen', 'r_face'], screen: { mode: 'live', slide: 'Bem-vindos!' }, fer: { at: 'desk', pose: 'sitDesk', face: 'neutral' }, card: null });
+B(15, 1, { screen: { mode: 'live', slide: 'Quem entra pra ficar|rico rápido, sai mais|pobre rápido.', slideSize: 40 }, card: { type: 'quote', text: '"Quem entra no mercado pra ficar rico rápido, geralmente sai mais pobre rápido."' } });
+B(15, 2, { card: null, screen: { mode: 'live', slide: 'Um dado importante...' } });
+B(15, 3, { card: { type: 'stat', big: '97%', text: 'dos que fizeram day trade por mais de 300 dias em minicontratos perderam dinheiro', src: 'Chague, De-Losso e Giovannetti (FGV/USP, 2019)' }, screen: { mode: 'live', slide: '97% perderam|dinheiro', slideSize: 56 }, fer: { at: 'desk', pose: 'sitSlump', face: 'shock' } });
+B(15, 5, { card: { type: 'list', title: 'DAY TRADE NÃO É RENDA GARANTIDA', items: ['Altíssimo risco', 'Exige preparo e disciplina', 'Você pode perder'], each: 1.0, x: true }, fer: { at: 'desk', pose: 'sitDesk', face: 'neutral' } });
+// p16 conta demo
+B(16, 0, { chip: [5, '10 DIAS DE TREINO'], fade: true, light: 'day', cams: ['r_wide', 'r_screen', 'r_over', 'r_screen', 'r_face'], fer: { at: 'desk', pose: 'type', face: 'neutral' }, screen: { mode: 'chart', scen: 'demo', demo: true, bal: [1000, 1000] }, card: { type: 'big', big: '10 DIAS', sub: 'só em conta demo', cls: 'o2' } });
+B(16, 2, { card: { type: 'compare', l: ['MERCADO', 'real', '#16A34A'], r: ['DINHEIRO', 'de mentirinha', '#F59E0B'] } });
+B(16, 4, { card: { type: 'big', big: 'O LABORATÓRIO', sub: 'onde ele descobriu quem era como trader', cls: 'g' } });
+// p17 dia 1
+B(17, 0, { cams: ['r_screen', 'r_over', 'r_screen', 'r_face', 'r_over', 'r_face'], card: { type: 'big', big: 'DIA 1', sub: 'gerenciamento de banca', cls: 'o2' }, screen: { mode: 'chart', scen: 'demo', demo: true, bal: [1000, 1000], stop: true } });
+B(17, 2, { card: { type: 'grid', title: 'MÁXIMO 1% POR OPERAÇÃO', sub: 'banca de US$ 100 → risco de US$ 1' } });
+B(17, 4, { card: { type: 'big', big: 'DIFÍCIL QUEBRAR', sub: 'precisaria errar muitas vezes seguidas', cls: 'g' } });
+B(17, 5, { card: { type: 'compare', l: ['QUINTA-FEIRA', 'quase 100% numa operação', '#E11D48'], r: ['AGORA', '1% por operação', '#16A34A'] } });
+// p18 stop
+B(18, 0, { cams: ['r_screen', 'r_screen', 'r_face', 'r_over', 'r_screen', 'r_face'], card: { type: 'big', big: 'DIAS 2 E 3', sub: 'stop loss', cls: 'o2' }, screen: { mode: 'chart', scen: 'demo', demo: true, bal: [1000, 1000], stop: true, target: true, p0: 50 } });
+B(18, 1, { card: { type: 'stop' } });
+B(18, 3, { card: { type: 'big', big: 'CINTO DE SEGURANÇA', sub: 'stop não é fraqueza', cls: 'g' } });
+B(18, 4, { card: { type: 'compare', l: ['COM STOP', 'perderia US$ 1 ou 2', '#16A34A'], r: ['SEM STOP', 'perdeu a banca', '#E11D48'] } });
+// p19 dia 4
+B(19, 0, { cams: ['r_face', 'r_screen', 'r_over', 'r_screen', 'r_face', 'r_desk'], card: { type: 'big', big: 'DIA 4', sub: 'metas e limites diários', cls: 'o2' } });
+B(19, 1, { card: { type: 'limits' } });
+B(19, 3, { card: { type: 'big', big: 'PARAR GANHANDO?', sub: 'a empolgação faz arriscar demais', cls: 'y' }, screen: { mode: 'live', slide: 'Ganhando = cuidado|com a empolgação', slideSize: 40 } });
+// p20 planilha
+B(20, 0, { cams: ['r_screen', 'r_over', 'r_screen', 'r_face', 'r_screen', 'r_screen', 'r_face', 'r_screen'], card: { type: 'big', big: 'DIA 5', sub: 'diário de operações', cls: 'o2' }, screen: { mode: 'sheet', rows: [['05/06', 'BTC', '61.200', '62.400', '+1,2', 'CALMO'], ['05/06', 'ETH', '3.110', '3.190', '-1,0', 'ANSIOSO'], ['06/06', 'BTC', '61.900', '63.000', '+0,9', 'CALMO'], ['06/06', 'BTC', '62.300', '63.800', '-1,0', 'PRESSA'], ['07/06', 'SOL', '142', '151', '-1,0', 'PRESSA'], ['07/06', 'BTC', '63.100', '64.500', '+1,4', 'CALMO'], ['08/06', 'ETH', '3.050', '3.160', '-1,0', 'PRESSA'], ['08/06', 'BTC', '62.800', '64.000', '+1,1', 'CALMO']] } });
+B(20, 2, { card: { type: 'emotions', items: ['CALMO', 'ANSIOSO', 'COM RAIVA', 'COM PRESSA'] } });
+B(20, 4, { card: { type: 'big', big: 'PRESSA', sub: 'a emoção das operações ruins', cls: 'r' } });
+B(20, 6, { card: { type: 'list', title: 'PRESSA DE...', items: ['Recuperar uma perda', 'Ganhar logo'], bySentence: [6, 7], x: true } });
+// p21 controle emocional
+B(21, 0, { light: 'night', cams: ['r_face', 'r_desk', 'r_over', 'r_screen', 'r_screen', 'r_screen', 'r_screen', 'r_face', 'r_screen', 'r_face', 'r_wide'], card: { type: 'list', title: 'DIAS 6 A 10 · CONTROLE EMOCIONAL', items: ['Operar menos, e não mais', 'Ficar fora sem oportunidade clara', 'Aceitar perda pequena'], bySentence: [1, 2, 3] }, screen: { mode: 'chart', scen: 'side', demo: true, bal: [1000, 1000], stop: true } });
+B(21, 4, { card: { type: 'chat', q: 'Professor, como eu sei se estou pronto pra voltar pro dinheiro real?' }, screen: { mode: 'live', slide: 'Perguntas', chat: ['Ana: ótima aula!', 'Fernando: Professor, como sei se estou pronto?', 'Leo: boa pergunta'] } });
+B(21, 6, { card: { type: 'chat', q: 'Professor, como eu sei se estou pronto pra voltar pro dinheiro real?', a: 'Não existe dia mágico. O sinal é seguir o próprio plano várias vezes seguidas.' }, screen: { mode: 'live', slide: 'Seguir o plano|várias vezes seguidas', slideSize: 40, chat: ['Ana: ótima aula!', 'Fernando: Professor, como sei se estou pronto?', 'Leo: boa pergunta'] } });
+B(21, 9, { card: { type: 'quote', text: '"Se você não respeita o stop com dinheiro de mentira, não vai respeitar com dinheiro de verdade."' } });
+B(21, 10, { card: null, fer: { at: 'desk', pose: 'sitDesk', face: 'calm' } });
+// p22 fim do treino
+B(22, 0, { light: 'day', cams: ['r_screen', 'r_face', 'r_over', 'r_face', 'r_wide'], screen: { mode: 'chart', scen: 'demo', demo: true, bal: [1000, 1006], bd: 2 }, card: { type: 'money', label: 'RESULTADO NA DEMO', from: 0, to: .6, pre: '+', suf: '%', dec: 1, cls: 'g' } });
+B(22, 2, { card: { type: 'checks', title: 'REGRAS SEGUIDAS', n: 10 }, fer: { at: 'desk', pose: 'sitArms', face: 'calm' } });
+B(22, 4, { card: { type: 'big', big: 'O VERDADEIRO RESULTADO', sub: 'seguir as regras sem exceção', cls: 'g' } });
+// p23 regras
+B(23, 0, { chip: [6, 'O MÊS DE VERDADE'], fade: true, cams: ['r_wide', 'r_over', 'r_desk', 'r_side', 'r_side', 'r_side', 'r_side', 'r_side', 'r_side', 'r_side', 'r_side'], fer: { at: 'desk', pose: 'type', face: 'neutral' }, screen: { mode: 'chart', scen: 'mixed', bal: [0, 150], bd: 1.2 }, card: { type: 'big', big: 'DINHEIRO REAL', sub: 'pouco, que ele podia perder', cls: 'o2' } });
+B(23, 3, { postit: 1, card: { type: 'rules', items: ['Máximo 1% por operação', 'Toda operação com stop', 'Perdeu 3% no dia: para', 'Ganhou 2% no dia: para', 'Sem alavancagem alta', 'Anotar tudo na planilha', 'Sentiu pressa: sai da tela'], bySentence: [4, 5, 6, 7, 8, 9, 10] } });
+// p24 semanas 1-2
+B(24, 0, { cams: ['r_screen', 'r_over', 'r_screen', 'r_screen', 'r_face', 'r_face', 'r_screen', 'r_face', 'x_walk', 'x_walk2', 'x_walk'], card: { type: 'calendar', title: 'SEMANA 1', days: ['g', 'r', 'g', 'r', 'g'] }, screen: { mode: 'chart', scen: 'mixed', bal: [150, 150.6], stop: true } });
+B(24, 2, { card: { type: 'calendar', title: 'SEMANA 2 · TERÇA-FEIRA', days: ['g', 's'] } });
+B(24, 3, { card: { type: 'stops' }, screen: { mode: 'chart', scen: 'crash3', bal: [150, 145.5], bd: 3, stop: true }, fer: { at: 'desk', pose: 'type', face: 'angry' }, sfx: 'buzz' });
+B(24, 4, { card: { type: 'big', big: 'LIMITE DO DIA: -3%', sub: 'antes do almoço', cls: 'r' }, screen: { mode: 'chart', scen: 'crash3', bal: [145.5, 145.5], alert: 'LIMITE DIÁRIO' } });
+B(24, 5, { card: { type: 'quote', text: 'A vontade de recuperar voltou. O dedo coçou.' }, fer: { at: 'desk', pose: 'sitHead', face: 'angry' } });
+B(24, 7, { fer: { at: 'walk', pose: 'stand', face: 'neutral' }, light: 'day', card: { type: 'note', text: 'Sentiu pressa: sai da tela.' }, lid: 0 });
+B(24, 8, { card: { type: 'big', big: 'A OPERAÇÃO MAIS LUCRATIVA', sub: 'a perda que ele evitou', cls: 'g' }, fer: { at: 'walk', pose: 'stand', face: 'calm' } });
+// p25 euforia controlada
+B(25, 0, { lid: 1, cams: ['r_face', 'r_screen', 'r_screen', 'r_face', 'r_face', 'r_screen', 'r_over', 'r_screen', 'r_screen', 'r_wide', 'r_face'], fer: { at: 'desk', pose: 'type', face: 'neutral' }, screen: { mode: 'chart', scen: 'meta', p0: 20, sp: 2.2, bal: [150, 150], target: true, stop: true }, card: { type: 'big', big: 'O TESTE CONTRÁRIO', sub: 'e se tudo der certo?', cls: 'y' } });
+B(25, 2, { screen: { mode: 'chart', scen: 'meta', p0: 50, sp: 2.2, bal: [150, 153], bd: 2, target: true }, card: { type: 'money', label: 'META DO DIA BATIDA', from: 0, to: 2, pre: '+', suf: '%', cls: 'g' }, fer: { at: 'desk', pose: 'sitCheer', face: 'happy' }, sfx: 'cash' });
+B(25, 3, { card: { type: 'quote', text: '"Continua, hoje é o seu dia!"' }, fer: { at: 'desk', pose: 'type', face: 'happy' } });
+B(25, 4, { card: { type: 'emotions', items: ['EUFORIA'], one: true }, fer: { at: 'desk', pose: 'sitThink', face: 'calm' } });
+B(25, 6, { screen: { mode: 'off' }, lid: 0, card: { type: 'big', big: 'CORRETORA FECHADA', sub: '+2% no bolso', cls: 'g' }, fer: { at: 'desk', pose: 'sitArms', face: 'calm' } });
+B(25, 7, { lid: 1, screen: { mode: 'chart', scen: 'meta', p0: 110, sp: 3, bal: [153, 153] }, card: { type: 'big', big: 'MAIS TARDE...', sub: 'o preço despencou', cls: 'r' }, fer: { at: 'desk', pose: 'sitDesk', face: 'shock' } });
+B(25, 9, { light: 'night', card: { type: 'compare', l: ['NOS DIAS RUINS', 'as regras protegem', '#64748B'], r: ['NOS DIAS BONS', 'também', '#16A34A'] }, fer: { at: 'desk', pose: 'sitDesk', face: 'calm' } });
+// p26 semanas 3-4
+B(26, 0, { light: 'day', cams: ['r_screen', 'r_wide', 'r_face', 'r_screen', 'r_over', 'r_face'], screen: { mode: 'chart', scen: 'side', p0: 40, sp: 1.5, bal: [153, 153] }, card: { type: 'calendar', title: 'SEMANA 3', days: ['-', '-', 'g', '-', '-'] }, fer: { at: 'desk', pose: 'sitArms', face: 'calm' } });
+B(26, 2, { card: { type: 'big', big: 'NÃO FAZER NADA', sub: 'também é uma decisão', cls: 'o2' } });
+B(26, 3, { card: { type: 'calendar', title: 'SEMANA 4', days: ['g', 'r', 'g', '-', 'g'] }, screen: { mode: 'chart', scen: 'up', p0: 40, sp: 2, bal: [153, 156], stop: true, target: true }, fer: { at: 'desk', pose: 'type', face: 'neutral' } });
+// p27 resultado
+B(27, 0, { cams: ['r_screen', 'r_face', 'r_screen', 'r_screen', 'r_screen', 'r_face', 'r_face', 'r_face', 'r_screen', 'r_screen', 'r_screen', 'r_face'], screen: { mode: 'sheet', total: '+ US$ 6,40', rows: [['01/07', 'BTC', 'sim', 'sim', '+1,4', 'CALMO'], ['02/07', 'ETH', 'sim', 'sim', '-1,0', 'CALMO'], ['09/07', 'BTC', 'sim', 'sim', '-3,0', 'PAREI'], ['12/07', 'BTC', 'sim', 'sim', '+2,0', 'EUFORIA'], ['22/07', 'SOL', 'sim', 'sim', '+1,1', 'CALMO'], ['26/07', 'BTC', 'sim', 'sim', '+1,3', 'CALMO']] }, card: null, fer: { at: 'desk', pose: 'sitDesk', face: 'neutral' } });
+B(27, 1, { card: { type: 'money', label: 'RESULTADO DO MÊS', from: 0, to: 4, pre: '+', suf: '%', cls: 'g' } });
+B(27, 4, { card: { type: 'big', big: 'BEM PEQUENO', sub: 'nem pagava a conta de luz', cls: 'y' } });
+B(27, 7, { fer: { at: 'desk', pose: 'sitArms', face: 'happy' }, card: null });
+B(27, 8, { card: { type: 'checksList', items: ['Nenhuma operação sem stop', 'Nenhum dia acima do limite', 'Nenhuma entrada por raiva'], bySentence: [9, 10, 11] } });
+// p28-31 lição
+B(28, 0, { chip: [7, 'A LIÇÃO'], fade: true, light: 'sunset', cams: ['x_bench', 'x_benchside', 'x_sky'], fer: { at: 'bench', pose: 'sitBench', face: 'calm' }, card: null, screen: { mode: 'off' } });
+B(28, 1, { card: { type: 'compare', l: ['O DINHEIRO', 'mudou pouco', '#64748B'], r: ['ELE', 'mudou', '#16A34A'] } });
+B(29, 0, { cams: ['x_benchside', 'x_bench', 'x_sky', 'x_benchside', 'x_bench'], card: { type: 'list', title: 'O QUE O FERNANDO ENTENDEU', items: ['Day trade não é dinheiro fácil', 'Não existe lucro garantido', 'Quem promete ganho certo vende um sonho'], bySentence: [0, 1, 2], x: true } });
+B(29, 3, { card: { type: 'pillars', items: ['DISCIPLINA', 'CONHECIMENTO', 'CONTROLE DE RISCO'] } });
+B(30, 0, { cams: ['x_bench', 'x_benchside', 'x_sky', 'x_bench', 'x_benchside', 'x_bench', 'x_sky', 'x_benchside'], card: { type: 'compare', l: ['ANTES', 'operar por impulso', '#E11D48'], r: ['AGORA', 'decisões conscientes', '#16A34A'] } });
+B(30, 3, { card: { type: 'list', title: 'HOJE ELE', items: ['Mantém a reserva guardada', 'Continua estudando', 'Sabe que pode ter meses negativos'], bySentence: [3, 4, 5] } });
+B(30, 6, { card: { type: 'big', big: 'REGRAS + CORAGEM', sub: 'de respeitar as regras quando é difícil', cls: 'g' } });
+B(31, 0, { cams: ['x_bench', 'x_sky', 'x_benchside', 'x_bench', 'x_sky', 'x_wide'], card: { type: 'big', big: 'MANDA PRA ALGUÉM', sub: 'que precisa ouvir essa história', cls: 'o2' } });
+B(31, 1, { card: { type: 'quote', text: 'Você já tomou alguma decisão com dinheiro por impulso? Conta nos comentários.' } });
+B(31, 2, { card: { type: 'warn' } });
+BEATS.sort((a, b) => a.t - b.t);
+
+// estado acumulado
+function stateAt(t) {
+  const s = { cams: ['r_wide'], camK0: 0, fer: { at: 'desk', pose: 'type', face: 'neutral' }, light: 'day', outfit: 'home', screen: { mode: 'off' }, card: null, cardT: 0, chip: null, stock: 1, sale: 0, npc: 0, mom: null, mgr: null, momFace: 'neutral', momPose: 'sit', sepia: false, lid: 1, postit: 0, title: false, fadeT: -9, ferT: 0, prevFer: null, screenT: 0, lightT: 0, prevLight: 'day', camsT: 0, camsP: 0 };
+  for (const b of BEATS) {
+    if (b.t > t + 1e-6) break;
+    if (b.cams) { s.cams = b.cams; s.camsP = b.p; s.camsK = b.k; s.camsT = b.t; }
+    if (b.fer) { s.prevFer = s.fer; s.fer = b.fer; s.ferT = b.t; }
+    if (b.light && b.light !== s.light) { s.prevLight = s.light; s.light = b.light; s.lightT = b.t; }
+    if (b.screen) { s.screen = b.screen; s.screenT = b.t; }
+    if ('card' in b) { s.card = b.card; s.cardT = b.t; s.cardP = b.p; s.cardK = b.k; }
+    for (const k of ['outfit', 'chip', 'stock', 'sale', 'npc', 'mom', 'mgr', 'momFace', 'momPose', 'sepia', 'lid', 'postit', 'title']) if (k in b) s[k] = b[k];
+    if (b.fade) s.fadeT = b.t;
+  }
+  return s;
+}
+// índice da frase atual
+function sentAt(t) { let i = 0; while (i + 1 < SN.length && SN[i + 1].start <= t) i++; return i; }
+
+// ======== POSIÇÕES DOS PERSONAGENS ========
+const AT = {
+  desk: [ROOM, 1.3, 0, -1.35, Math.PI], bed: [ROOM, -2.3, .66, -.36, 0, 'lie'], counter: [STORE, 2.6, 0, -.25, 0], counterPhone: [STORE, 2.0, 0, -.35, .3],
+  office: [OFFICE, 0, 0, .2, Math.PI], kitchen: [KIT, -.95, 0, -.6, Math.PI / 2], fork: [OUT, 0, 0, -2.6, Math.PI], bench: [OUT, -3.2, 0, 3.45, Math.PI], walk: [OUT, 2.1, 0, 0, Math.PI],
+};
+function placePerson(p, at, t, walkT0) {
+  const a = AT[at]; const o = a[0]; p.root.position.set(o.x + a[1], a[2], o.z + a[3]); p.root.rotation.set(a[5] === 'lie' ? -Math.PI / 2 : 0, a[4], 0);
+  if (at === 'walk') { const u = t - walkT0; p.root.position.z = o.z + 7 - u * .9; }
+}
+
+// ======== CARTÕES (DOM) ========
+const panel = document.getElementById('panel'); let lastCardKey = '';
+const fmt = (v, dec = 0) => v.toLocaleString('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+function cardHTML(c, u, nSent) {
+  const ttl = c.title ? `<h3>${c.title}</h3>` : '';
+  switch (c.type) {
+    case 'big': return `<div class="card"><div class="big ${c.cls || ''}" style="font-size:${c.big.length > 14 ? 74 : 96}px">${c.big}</div>${c.sub ? `<div class="sub" style="margin-top:12px">${c.sub}</div>` : ''}</div>`;
+    case 'money': { const v = lerp(c.from, c.to, ease(u / (c.dur || 1.2))); return `<div class="card"><div class="sub" style="font-weight:900;letter-spacing:1px">${c.label}</div><div class="big ${c.cls}">${c.pre || ''}${fmt(v, c.dec ?? (c.pre === 'US$ ' && c.to < 20 ? 0 : 0))}${c.suf || ''}</div></div>`; }
+    case 'list': { const vis = c.bySentence ? c.bySentence.filter(k => k <= nSent).length : Math.min(c.items.length, 1 + Math.floor(u / (c.each || .8))); return `<div class="card">${c.title ? `<h3>${c.title}</h3>` : ''}<ul>${c.items.map((it, i) => `<li style="opacity:${i < vis ? 1 : 0}"><b style="background:${c.x ? '#E11D48' : '#16A34A'}">${c.x ? '✕' : '✓'}</b>${it}</li>`).join('')}</ul></div>`; }
+    case 'quote': return `<div class="card"><div class="quote" style="font-size:${c.big ? 52 : 44}px">${c.text}</div></div>`;
+    case 'stat': return `<div class="card"><div class="big r" style="font-size:150px">${c.big}</div><div class="sub" style="font-weight:800;color:#111;font-size:34px">${c.text}</div><div class="sub" style="font-size:22px;margin-top:14px">Fonte: ${c.src}</div></div>`;
+    case 'compare': return `<div style="display:flex;gap:22px">${[c.l, c.r].map((x, i) => `<div class="card" style="flex:1;padding:24px;opacity:${i === 0 || u > .5 ? 1 : 0};border-color:#111"><div class="sub" style="font-weight:900;color:${x[2]};font-size:26px;letter-spacing:1px">${x[0]}</div><div style="font-weight:900;font-size:40px;line-height:1.12;margin-top:8px">${x[1]}</div></div>`).join('')}</div>`;
+    case 'months': { const n = Math.min(12, Math.floor(u * 3.2)); return `<div class="card"><h3>${c.title}</h3><div class="cal" style="grid-template-columns:repeat(4,1fr)">${Array.from({ length: 12 }, (_, i) => `<div style="background:${i < n ? (i < 6 ? '#16A34A' : i < 8 ? '#F59E0B' : '#E11D48') : '#E5E7EB'};color:#fff;height:70px">${['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'][i]}</div>`).join('')}</div><div class="sub" style="margin-top:12px;font-weight:800">6? 8? Apertando muito, 1 ano. E depois?</div></div>`; }
+    case 'phone': { const v = lerp(c.from, c.to, ease(u / (c.dur || 1.5))); return `<div style="display:flex;justify-content:center"><div style="width:400px;background:#111;border-radius:48px;padding:18px;box-shadow:0 14px 0 rgba(0,0,0,.4)"><div style="background:#0B1220;border-radius:34px;padding:22px;height:640px;position:relative;overflow:hidden"><div style="color:#FF8A1F;font-weight:900;font-size:24px">${c.tag}</div><div style="color:#94A3B8;font-weight:800;font-size:20px;margin-top:20px">SALDO</div><div style="color:${c.to < c.from ? '#EF4444' : '#22C55E'};font-weight:900;font-size:64px">R$ ${fmt(v)}</div><canvas id="phc" width="356" height="380" style="margin-top:14px"></canvas></div></div></div>`; }
+    case 'jars': return `<div style="display:flex;gap:22px;align-items:flex-end">${[c.a, c.b].map(x => `<div class="card" style="flex:1;padding:20px;text-align:center"><div style="height:${60 + x[2] * 3.4}px;background:${x[3]};border-radius:18px;border:5px solid #111;display:flex;align-items:flex-end;justify-content:center;color:#fff;font-weight:900;font-size:40px;padding-bottom:10px">${x[2]}%</div><div style="font-weight:900;font-size:34px;margin-top:14px">${x[0]}</div><div class="sub">${x[1]}</div></div>`).join('')}</div>`;
+    case 'days': return `<div style="display:flex;gap:18px">${c.items.map((d, i) => `<div class="card" style="flex:1;text-align:center;padding:22px;opacity:${i <= nSent - 6 ? 1 : 0}"><div class="sub" style="font-weight:900">${d[0]}</div><div class="big ${d[2]}" style="font-size:80px">${d[1]}</div><div class="sub">dólares</div></div>`).join('')}</div>`;
+    case 'risk': { const v = lerp(c.from, c.to, ease(u / 2.5)); return `<div class="card"><h3>RISCO POR OPERAÇÃO</h3><div style="height:60px;background:#E5E7EB;border-radius:30px;border:5px solid #111;overflow:hidden"><div style="height:100%;width:${v * 3.6}%;background:${v > 5 ? '#E11D48' : '#16A34A'}"></div></div><div class="big ${v > 5 ? 'r' : 'g'}" style="margin-top:14px">${Math.round(v)}%</div><div class="sub">da banca em cada operação</div></div>`; }
+    case 'lever': { const v = lerp(c.from, c.to, ease(u / 2.5)); return `<div class="card"><h3>ALAVANCAGEM</h3><div class="big r" style="font-size:140px">${Math.round(v)}x</div><div class="sub">US$ 138 operando como se fossem <b>US$ ${fmt(138 * Math.round(v))}</b></div></div>`; }
+    case 'grid': return `<div class="card"><h3>${c.title}</h3><div class="grid">${Array.from({ length: 100 }, (_, i) => `<div class="${i === 0 && u > .8 ? 'red' : ''}"></div>`).join('')}</div><div class="sub" style="margin-top:14px;font-weight:800">${c.sub}</div></div>`;
+    case 'stop': return `<div class="card"><h3>STOP LOSS</h3><div class="sub" style="font-size:32px;color:#111;font-weight:800">Uma ordem que <span class="r">fecha a operação sozinha</span> quando o preço chega no limite de perda que você definiu <u>antes</u> de entrar.</div></div>`;
+    case 'limits': return `<div style="display:flex;gap:22px"><div class="card" style="flex:1;text-align:center;opacity:${u > 0 ? 1 : 0}"><div class="sub" style="font-weight:900">STOP DIÁRIO</div><div class="big r">-3%</div><div class="sub">fecha a corretora</div></div><div class="card" style="flex:1;text-align:center;opacity:${nSent >= 2 ? 1 : 0}"><div class="sub" style="font-weight:900">META DIÁRIA</div><div class="big g">+2%</div><div class="sub">para também</div></div></div>`;
+    case 'emotions': return `<div class="card"><h3>${c.one ? 'NA PLANILHA' : 'COMO EU ESTAVA ME SENTINDO?'}</h3><div style="display:flex;flex-wrap:wrap;gap:14px">${c.items.map((e, i) => `<div style="opacity:${u > i * .6 ? 1 : 0};padding:14px 24px;border-radius:999px;border:5px solid #111;font-weight:900;font-size:36px;background:${/PRESSA|EUFORIA|RAIVA/.test(e) ? '#E11D48' : e === 'ANSIOSO' ? '#F59E0B' : '#16A34A'};color:#fff">${e}</div>`).join('')}</div></div>`;
+    case 'chat': return `<div><div class="bubble me"><small>Fernando</small>${c.q}</div>${c.a ? `<div class="bubble"><small>Professor</small>${c.a}</div>` : ''}</div>`;
+    case 'checks': { const n = Math.min(c.n, Math.floor(u * 4)); return `<div class="card"><h3>${c.title}</h3><div class="cal" style="grid-template-columns:repeat(5,1fr)">${Array.from({ length: 10 }, (_, i) => `<div style="background:${i < n ? '#16A34A' : '#E5E7EB'};height:80px;font-size:22px">DIA ${i + 1}</div>`).join('')}</div><div class="big g" style="font-size:64px;margin-top:14px">${n}/10 ✓</div></div>`; }
+    case 'checksList': { const vis = c.bySentence.filter(k => k <= nSent).length; return `<div class="card"><ul>${c.items.map((it, i) => `<li style="opacity:${i < vis ? 1 : 0}"><b style="background:#16A34A">✓</b>${it}</li>`).join('')}</ul></div>`; }
+    case 'rules': { const vis = c.bySentence.filter(k => k <= nSent).length; return `<div class="note"><h3>MINHAS REGRAS</h3><ul style="list-style:none;margin:0;padding:0">${c.items.map((it, i) => `<li style="opacity:${i < vis ? 1 : .0}"><b>${i + 1}</b>${it}</li>`).join('')}</ul></div>`; }
+    case 'note': return `<div class="note"><h3 style="font-size:52px">${c.text}</h3></div>`;
+    case 'calendar': return `<div class="card"><h3>${c.title}</h3><div class="cal" style="grid-template-columns:repeat(5,1fr)">${['SEG', 'TER', 'QUA', 'QUI', 'SEX'].map((d, i) => { const v = c.days[i]; const col = { g: '#16A34A', r: '#E11D48', s: '#111', '-': '#94A3B8' }[v] || '#E5E7EB'; return `<div style="background:${col};height:110px;flex-direction:column;opacity:${u > i * .3 ? 1 : .25}"><span style="font-size:22px">${d}</span><span style="font-size:30px">${{ g: '+', r: '−', s: 'STOP', '-': '—' }[v] || ''}</span></div>`; }).join('')}</div>${c.days.includes('-') ? '<div class="sub" style="margin-top:12px;font-weight:800">— = dia sem operar</div>' : ''}</div>`;
+    case 'stops': return `<div class="card"><h3>TERÇA-FEIRA</h3><div style="display:flex;gap:16px">${[0, 1, 2].map(i => `<div style="flex:1;opacity:${u > i * .7 ? 1 : 0};background:#E11D48;color:#fff;border:5px solid #111;border-radius:18px;text-align:center;padding:16px 0;font-weight:900;font-size:34px">STOP<br>-1%</div>`).join('')}</div><div class="sub" style="margin-top:14px;font-weight:800">três stops seguidos</div></div>`;
+    case 'pillars': return `<div style="display:flex;gap:16px;align-items:flex-end">${c.items.map((x, i) => `<div style="flex:1;opacity:${u > i * .5 ? 1 : 0};height:${300 + i * 20}px;background:${['#3B82F6', '#16A34A', '#FF8A1F'][i]};border:7px solid #111;border-radius:22px 22px 6px 6px;box-shadow:0 10px 0 #111;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);color:#fff;font-weight:900;font-size:40px">${x}</div>`).join('')}</div><div class="card" style="margin-top:24px;padding:18px 26px"><div style="font-weight:900;font-size:40px">não são detalhes: <span class="o2">são a base</span></div></div>`;
+    case 'warn': return `<div class="card" style="border-color:#E11D48"><h3 class="r">⚠ AVISO</h3><div class="sub" style="font-size:31px;color:#111;font-weight:800">História para ensinar sobre comportamento e risco. <u>Não é recomendação de investimento.</u><br><br>Day trade e criptomoedas são de alto risco: você pode perder todo o dinheiro que colocar.</div></div>`;
+  }
+  return '';
+}
+let phoneScen = null, phoneT0 = 0;
+function updateCard(s, t) {
+  const c = s.card; if (!c) { panel.style.opacity = 0; lastCardKey = ''; return; }
+  const u = t - s.cardT; const nSent = SN[sentAt(t)].p === s.cardP ? SN[sentAt(t)].k : 99;
+  panel.innerHTML = cardHTML(c, u, nSent);
+  const sc = pop(u, .32); panel.style.opacity = 1; panel.style.transform = `scale(${Math.max(.001, sc)})`;
+  const ph = document.getElementById('phc'); if (ph) { const g = ph.getContext('2d'); g.fillStyle = '#0B1220'; g.fillRect(0, 0, 356, 380); drawChart(g, 0, 0, 356, 380, c.scen, 40 + u * 4, {}); }
+}
+
+// ======== DRAW ========
+const EVENTS = []; let evDone = false;
+function collectEvents() { BEATS.forEach(b => { if (b.sfx) EVENTS.push({ t: b.t, type: b.sfx }); if (b.card && !b.sfx) EVENTS.push({ t: b.t, type: 'pop' }); if (b.fade) EVENTS.push({ t: b.t, type: 'whoosh' }); }); }
+collectEvents(); window.EVENTS = EVENTS;
+const chip = document.getElementById('chip'), cap = document.getElementById('cap'), fadeEl = document.getElementById('fade'), titleEl = document.getElementById('title');
+
+window.draw = function (t) {
+  const s = stateAt(t); const si = sentAt(t); const sn = SN[si];
+  // câmera: troca a cada frase dentro do bloco
+  const nInBlock = SN.filter((x, i) => i <= si && x.start >= s.camsT - 1e-6).length - 1;
+  const ci = Math.max(0, nInBlock) % s.cams.length; const camName = s.cams[ci];
+  const segStart = Math.max(s.camsT, sn.start); const segEnd = si + 1 < SN.length ? SN[si + 1].start : TP.duration;
+  if (!camState || camState.name !== camName || camState.seg !== segStart) { camState = { name: camName, t0: segStart, t1: segEnd, seg: segStart, k: si }; }
+  let origin = updateCam(t);
+  for (const [o, g] of SETS) g.visible = o === origin; scene.children.forEach(c => { if (c.isMesh && c !== sky && !c.userData.keep) c.visible = c.visible; });
+  if (s.fer.at === 'walk') { placePerson(fer, 'walk', t, s.ferT); const fp = fer.root.position; const k = camName === 'x_walk2' ? -1 : 1; cam.position.set(fp.x + 2.6 * k, 1.5, fp.z + (k > 0 ? -1.5 : 3)); cam.lookAt(fp.x, 1.05, fp.z); cam.updateMatrixWorld(true); }
+  // luz
+  if (s.light !== curLight || lightT0 !== s.lightT) { prevLight = s.prevLight; curLight = s.light; lightT0 = s.lightT; }
+  applyLight(t, origin);
+  outfit(s.outfit);
+  // Fernando
+  const f = s.fer; placePerson(fer, f.at, t, s.ferT);
+  const prevPose = s.prevFer && s.prevFer.at === f.at ? PP[s.prevFer.pose] : PP[f.pose];
+  let P = mixP(prevPose, PP[f.pose], ease((t - s.ferT) / .45));
+  if (f.pose === 'type') { const k = Math.sin(t * 14) * .06; P = { ...P, le: P.le + k, re: P.re - k }; }
+  if (f.pose === 'fold') { const k = Math.sin(t * 3) * .25; P = { ...P, lz: P.lz - k * .5, rz: P.rz + k * .5, le: P.le + k }; }
+  if (f.pose === 'lieThink') { P = { ...P, hy: Math.sin(t * .7) * .2 }; }
+  P.hy = (P.hy || 0) + Math.sin(t * .9) * .04;
+  poseP(fer, P, f.at === 'walk' ? 1 : 0, t); face(fer, f.face, t);
+  fer.root.visible = camName !== 'r_screen';
+  phoneHand.visible = f.at === 'counterPhone';
+  if (phoneHand.visible) { fer.armR.hand.getWorldPosition(phoneHand.position); fer.root.getWorldQuaternion(phoneHand.quaternion); phoneHand.rotateX(-.7); phoneHand.position.y += .05; }
+  // mãe e gerente
+  mom.root.visible = s.mom === 'kitchen'; if (mom.root.visible) { mom.root.position.set(KIT.x + .95, 0, KIT.z - .6); mom.root.rotation.set(0, -Math.PI / 2, 0); poseP(mom, PP[s.momPose]); face(mom, s.momFace, t + 1.3); }
+  mgr.root.visible = s.mgr === 'office'; if (mgr.root.visible) { mgr.root.position.set(OFFICE.x, 0, OFFICE.z - 1.45); mgr.root.rotation.set(0, 0, 0); poseP(mgr, PP.sitTalk); face(mgr, sn.p === 2 && [5, 7, 8].includes(sn.k) ? 'talk' : 'neutral', t); }
+  // clientes
+  npcs.forEach((n, i) => { n.root.visible = i < s.npc && f.at.startsWith('counter'); if (!n.root.visible) return; const a = t * .25 + i * 2.1; n.root.position.set(STORE.x - 2.5 + Math.cos(a) * 1.6 + i * .5, 0, STORE.z + .8 + Math.sin(a) * 1.2); n.root.rotation.y = -a; poseP(n, PP.stand, .7, t + i); face(n, 'neutral', t + i); });
+  // estoque e cartazes
+  stockItems.forEach(it => it.visible = it.userData.k < s.stock); sales.forEach((sp, i) => sp.visible = i < s.sale);
+  // notebook
+  lid.rotation.x = s.lid ? -.22 : -1.55; SC = { ...s.screen, t0: s.screenT }; drawScreen(t);
+  postit.visible = s.postit > 0; rulesTex.needsUpdate = false;
+  // overlay
+  renderer.domElement.style.filter = s.sepia ? 'sepia(.85) contrast(1.05) brightness(1.02)' : 'none';
+  document.getElementById('vign').style.opacity = s.sepia || curLight === 'dark' || curLight === 'night' ? 1 : .55;
+  const fa = t - s.fadeT; fadeEl.style.opacity = fa >= 0 && fa < .5 ? (1 - fa / .5) * .85 : 0;
+  if (s.chip) { chip.style.opacity = 1; const sp = chip.firstElementChild; sp.children[0].textContent = s.chip[0]; sp.children[1].textContent = 'CAPÍTULO ' + s.chip[0] + ' · ' + s.chip[1]; } else chip.style.opacity = 0;
+  const tt = L(0, 0); titleEl.style.opacity = t < 4.2 ? Math.min(1, t / .3) * (1 - clamp((t - 3.7) / .5)) : 0; titleEl.style.transform = `scale(${1 + t * .01})`;
+  updateCard(s, t);
+  // legenda por blocos
+  let txt = '';
+  if (sn && t >= sn.start - .05 && t <= sn.end + .35) { const ws = sn.words; const chunks = []; let cur = []; ws.forEach((w, i) => { cur.push(w); if (cur.length >= 7 || /[.,:?!]$/.test(w.w) && cur.length >= 3 || i === ws.length - 1) { chunks.push(cur); cur = []; } }); const ch = chunks.find(c => t < c[c.length - 1].end + .12) || chunks[chunks.length - 1]; txt = ch.map(w => w.w).join(' '); }
+  cap.textContent = txt; cap.style.opacity = txt ? 1 : 0;
+  renderer.render(scene, cam); return 1;
+};
+await document.fonts.load('900 60px P'); await document.fonts.load('800 60px P'); await document.fonts.load('600 30px P'); await document.fonts.ready;
+window.ready = true;
+</script></body></html>
