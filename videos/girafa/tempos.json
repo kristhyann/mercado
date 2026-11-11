@@ -1,0 +1,1292 @@
+{
+ "duration": 88.109,
+ "sentences": [
+  {
+   "text": "Você tem quase seis metros de altura, enxerga predadores de longe e pode derrubar um leão com um único chute.",
+   "start": 0.0,
+   "end": 6.98,
+   "words": [
+    {
+     "w": "Você",
+     "start": 0.0,
+     "end": 0.28
+    },
+    {
+     "w": "tem",
+     "start": 0.28,
+     "end": 0.46
+    },
+    {
+     "w": "quase",
+     "start": 0.46,
+     "end": 0.78
+    },
+    {
+     "w": "seis",
+     "start": 0.78,
+     "end": 1.24
+    },
+    {
+     "w": "metros",
+     "start": 1.24,
+     "end": 1.72
+    },
+    {
+     "w": "de",
+     "start": 1.72,
+     "end": 1.9
+    },
+    {
+     "w": "altura,",
+     "start": 1.9,
+     "end": 2.32
+    },
+    {
+     "w": "enxerga",
+     "start": 2.76,
+     "end": 3.14
+    },
+    {
+     "w": "predadores",
+     "start": 3.14,
+     "end": 3.66
+    },
+    {
+     "w": "de",
+     "start": 3.66,
+     "end": 3.92
+    },
+    {
+     "w": "longe",
+     "start": 3.92,
+     "end": 4.32
+    },
+    {
+     "w": "e",
+     "start": 4.32,
+     "end": 4.82
+    },
+    {
+     "w": "pode",
+     "start": 4.82,
+     "end": 5.0
+    },
+    {
+     "w": "derrubar",
+     "start": 5.0,
+     "end": 5.46
+    },
+    {
+     "w": "um",
+     "start": 5.46,
+     "end": 5.6
+    },
+    {
+     "w": "leão",
+     "start": 5.6,
+     "end": 5.88
+    },
+    {
+     "w": "com",
+     "start": 5.88,
+     "end": 6.08
+    },
+    {
+     "w": "um",
+     "start": 6.08,
+     "end": 6.3
+    },
+    {
+     "w": "único",
+     "start": 6.3,
+     "end": 6.56
+    },
+    {
+     "w": "chute.",
+     "start": 6.56,
+     "end": 6.98
+    }
+   ]
+  },
+  {
+   "text": "Você é uma girafa.",
+   "start": 7.62,
+   "end": 9.1,
+   "words": [
+    {
+     "w": "Você",
+     "start": 7.62,
+     "end": 8.04
+    },
+    {
+     "w": "é",
+     "start": 8.04,
+     "end": 8.44
+    },
+    {
+     "w": "uma",
+     "start": 8.44,
+     "end": 8.58
+    },
+    {
+     "w": "girafa.",
+     "start": 8.58,
+     "end": 9.1
+    }
+   ]
+  },
+  {
+   "text": "Primeiro, o pescoço.",
+   "start": 9.62,
+   "end": 11.06,
+   "words": [
+    {
+     "w": "Primeiro,",
+     "start": 9.62,
+     "end": 10.2
+    },
+    {
+     "w": "o",
+     "start": 10.48,
+     "end": 10.48
+    },
+    {
+     "w": "pescoço.",
+     "start": 10.48,
+     "end": 11.06
+    }
+   ]
+  },
+  {
+   "text": "Ele tem uns dois metros, mas só sete ossos, a mesma quantidade que o seu pescoço de humano.",
+   "start": 11.58,
+   "end": 17.3,
+   "words": [
+    {
+     "w": "Ele",
+     "start": 11.58,
+     "end": 11.74
+    },
+    {
+     "w": "tem",
+     "start": 11.74,
+     "end": 11.9
+    },
+    {
+     "w": "uns",
+     "start": 11.9,
+     "end": 12.14
+    },
+    {
+     "w": "dois",
+     "start": 12.14,
+     "end": 12.36
+    },
+    {
+     "w": "metros,",
+     "start": 12.36,
+     "end": 12.86
+    },
+    {
+     "w": "mas",
+     "start": 13.16,
+     "end": 13.36
+    },
+    {
+     "w": "só",
+     "start": 13.36,
+     "end": 13.64
+    },
+    {
+     "w": "sete",
+     "start": 13.64,
+     "end": 14.2
+    },
+    {
+     "w": "ossos,",
+     "start": 14.2,
+     "end": 14.7
+    },
+    {
+     "w": "a",
+     "start": 15.02,
+     "end": 15.12
+    },
+    {
+     "w": "mesma",
+     "start": 15.12,
+     "end": 15.42
+    },
+    {
+     "w": "quantidade",
+     "start": 15.42,
+     "end": 15.9
+    },
+    {
+     "w": "que",
+     "start": 15.9,
+     "end": 16.22
+    },
+    {
+     "w": "o",
+     "start": 16.22,
+     "end": 16.3
+    },
+    {
+     "w": "seu",
+     "start": 16.3,
+     "end": 16.42
+    },
+    {
+     "w": "pescoço",
+     "start": 16.42,
+     "end": 16.9
+    },
+    {
+     "w": "de",
+     "start": 16.9,
+     "end": 17.04
+    },
+    {
+     "w": "humano.",
+     "start": 17.04,
+     "end": 17.3
+    }
+   ]
+  },
+  {
+   "text": "Cada osso é que é gigante.",
+   "start": 17.78,
+   "end": 19.34,
+   "words": [
+    {
+     "w": "Cada",
+     "start": 17.78,
+     "end": 18.08
+    },
+    {
+     "w": "osso",
+     "start": 18.08,
+     "end": 18.36
+    },
+    {
+     "w": "é",
+     "start": 18.36,
+     "end": 18.64
+    },
+    {
+     "w": "que",
+     "start": 18.64,
+     "end": 18.78
+    },
+    {
+     "w": "é",
+     "start": 18.78,
+     "end": 18.86
+    },
+    {
+     "w": "gigante.",
+     "start": 18.86,
+     "end": 19.34
+    }
+   ]
+  },
+  {
+   "text": "Pra empurrar sangue lá pra cima, seu coração pesa uns onze quilos.",
+   "start": 19.34,
+   "end": 23.96,
+   "words": [
+    {
+     "w": "Pra",
+     "start": 19.34,
+     "end": 20.02
+    },
+    {
+     "w": "empurrar",
+     "start": 20.02,
+     "end": 20.36
+    },
+    {
+     "w": "sangue",
+     "start": 20.36,
+     "end": 20.88
+    },
+    {
+     "w": "lá",
+     "start": 20.88,
+     "end": 21.14
+    },
+    {
+     "w": "pra",
+     "start": 21.14,
+     "end": 21.32
+    },
+    {
+     "w": "cima,",
+     "start": 21.32,
+     "end": 21.7
+    },
+    {
+     "w": "seu",
+     "start": 22.06,
+     "end": 22.16
+    },
+    {
+     "w": "coração",
+     "start": 22.16,
+     "end": 22.48
+    },
+    {
+     "w": "pesa",
+     "start": 22.48,
+     "end": 22.96
+    },
+    {
+     "w": "uns",
+     "start": 22.96,
+     "end": 23.08
+    },
+    {
+     "w": "onze",
+     "start": 23.08,
+     "end": 23.42
+    },
+    {
+     "w": "quilos.",
+     "start": 23.42,
+     "end": 23.96
+    }
+   ]
+  },
+  {
+   "text": "E quando você abaixa a cabeça pra beber água, válvulas nas veias seguram o sangue, senão você desmaiava.",
+   "start": 24.5,
+   "end": 31.02,
+   "words": [
+    {
+     "w": "E",
+     "start": 24.5,
+     "end": 24.64
+    },
+    {
+     "w": "quando",
+     "start": 24.64,
+     "end": 24.8
+    },
+    {
+     "w": "você",
+     "start": 24.8,
+     "end": 25.06
+    },
+    {
+     "w": "abaixa",
+     "start": 25.06,
+     "end": 25.5
+    },
+    {
+     "w": "a",
+     "start": 25.5,
+     "end": 25.64
+    },
+    {
+     "w": "cabeça",
+     "start": 25.64,
+     "end": 26.0
+    },
+    {
+     "w": "pra",
+     "start": 26.0,
+     "end": 26.18
+    },
+    {
+     "w": "beber",
+     "start": 26.18,
+     "end": 26.36
+    },
+    {
+     "w": "água,",
+     "start": 26.36,
+     "end": 26.8
+    },
+    {
+     "w": "válvulas",
+     "start": 27.34,
+     "end": 27.68
+    },
+    {
+     "w": "nas",
+     "start": 27.68,
+     "end": 27.9
+    },
+    {
+     "w": "veias",
+     "start": 27.9,
+     "end": 28.34
+    },
+    {
+     "w": "seguram",
+     "start": 28.34,
+     "end": 28.92
+    },
+    {
+     "w": "o",
+     "start": 28.92,
+     "end": 29.08
+    },
+    {
+     "w": "sangue,",
+     "start": 29.08,
+     "end": 29.48
+    },
+    {
+     "w": "senão",
+     "start": 29.48,
+     "end": 30.22
+    },
+    {
+     "w": "você",
+     "start": 30.22,
+     "end": 30.4
+    },
+    {
+     "w": "desmaiava.",
+     "start": 30.4,
+     "end": 31.02
+    }
+   ]
+  },
+  {
+   "text": "Agora, a visão.",
+   "start": 31.54,
+   "end": 32.72,
+   "words": [
+    {
+     "w": "Agora,",
+     "start": 31.54,
+     "end": 32.02
+    },
+    {
+     "w": "a",
+     "start": 32.38,
+     "end": 32.42
+    },
+    {
+     "w": "visão.",
+     "start": 32.42,
+     "end": 32.72
+    }
+   ]
+  },
+  {
+   "text": "Lá de cima, você é uma torre de vigia.",
+   "start": 33.38,
+   "end": 35.94,
+   "words": [
+    {
+     "w": "Lá",
+     "start": 33.38,
+     "end": 33.54
+    },
+    {
+     "w": "de",
+     "start": 33.54,
+     "end": 33.66
+    },
+    {
+     "w": "cima,",
+     "start": 33.66,
+     "end": 34.06
+    },
+    {
+     "w": "você",
+     "start": 34.34,
+     "end": 34.56
+    },
+    {
+     "w": "é",
+     "start": 34.56,
+     "end": 34.68
+    },
+    {
+     "w": "uma",
+     "start": 34.68,
+     "end": 34.84
+    },
+    {
+     "w": "torre",
+     "start": 34.84,
+     "end": 35.32
+    },
+    {
+     "w": "de",
+     "start": 35.32,
+     "end": 35.44
+    },
+    {
+     "w": "vigia.",
+     "start": 35.44,
+     "end": 35.94
+    }
+   ]
+  },
+  {
+   "text": "Seus olhos ficam dos lados da cabeça e veem quase tudo ao seu redor.",
+   "start": 36.38,
+   "end": 40.48,
+   "words": [
+    {
+     "w": "Seus",
+     "start": 36.38,
+     "end": 36.64
+    },
+    {
+     "w": "olhos",
+     "start": 36.64,
+     "end": 36.92
+    },
+    {
+     "w": "ficam",
+     "start": 36.92,
+     "end": 37.3
+    },
+    {
+     "w": "dos",
+     "start": 37.3,
+     "end": 37.48
+    },
+    {
+     "w": "lados",
+     "start": 37.48,
+     "end": 37.84
+    },
+    {
+     "w": "da",
+     "start": 37.84,
+     "end": 38.06
+    },
+    {
+     "w": "cabeça",
+     "start": 38.06,
+     "end": 38.5
+    },
+    {
+     "w": "e",
+     "start": 38.5,
+     "end": 38.84
+    },
+    {
+     "w": "veem",
+     "start": 38.84,
+     "end": 39.04
+    },
+    {
+     "w": "quase",
+     "start": 39.04,
+     "end": 39.36
+    },
+    {
+     "w": "tudo",
+     "start": 39.36,
+     "end": 39.8
+    },
+    {
+     "w": "ao",
+     "start": 39.8,
+     "end": 40.0
+    },
+    {
+     "w": "seu",
+     "start": 40.0,
+     "end": 40.14
+    },
+    {
+     "w": "redor.",
+     "start": 40.14,
+     "end": 40.48
+    }
+   ]
+  },
+  {
+   "text": "Por isso que zebras gostam de ficar perto de você: quando você corre, elas já sabem que tem perigo.",
+   "start": 40.96,
+   "end": 46.74,
+   "words": [
+    {
+     "w": "Por",
+     "start": 40.96,
+     "end": 41.16
+    },
+    {
+     "w": "isso",
+     "start": 41.16,
+     "end": 41.38
+    },
+    {
+     "w": "que",
+     "start": 41.38,
+     "end": 41.54
+    },
+    {
+     "w": "zebras",
+     "start": 41.54,
+     "end": 41.92
+    },
+    {
+     "w": "gostam",
+     "start": 41.92,
+     "end": 42.4
+    },
+    {
+     "w": "de",
+     "start": 42.4,
+     "end": 42.52
+    },
+    {
+     "w": "ficar",
+     "start": 42.52,
+     "end": 42.74
+    },
+    {
+     "w": "perto",
+     "start": 42.74,
+     "end": 43.1
+    },
+    {
+     "w": "de",
+     "start": 43.1,
+     "end": 43.24
+    },
+    {
+     "w": "você:",
+     "start": 43.24,
+     "end": 43.54
+    },
+    {
+     "w": "quando",
+     "start": 44.06,
+     "end": 44.24
+    },
+    {
+     "w": "você",
+     "start": 44.24,
+     "end": 44.52
+    },
+    {
+     "w": "corre,",
+     "start": 44.52,
+     "end": 44.94
+    },
+    {
+     "w": "elas",
+     "start": 45.24,
+     "end": 45.42
+    },
+    {
+     "w": "já",
+     "start": 45.42,
+     "end": 45.64
+    },
+    {
+     "w": "sabem",
+     "start": 45.64,
+     "end": 46.06
+    },
+    {
+     "w": "que",
+     "start": 46.06,
+     "end": 46.22
+    },
+    {
+     "w": "tem",
+     "start": 46.22,
+     "end": 46.36
+    },
+    {
+     "w": "perigo.",
+     "start": 46.36,
+     "end": 46.74
+    }
+   ]
+  },
+  {
+   "text": "Depois, as pernas.",
+   "start": 47.26,
+   "end": 48.8,
+   "words": [
+    {
+     "w": "Depois,",
+     "start": 47.26,
+     "end": 47.74
+    },
+    {
+     "w": "as",
+     "start": 48.24,
+     "end": 48.34
+    },
+    {
+     "w": "pernas.",
+     "start": 48.34,
+     "end": 48.8
+    }
+   ]
+  },
+  {
+   "text": "Só elas têm quase dois metros, mais que muita gente.",
+   "start": 49.38,
+   "end": 52.94,
+   "words": [
+    {
+     "w": "Só",
+     "start": 49.38,
+     "end": 49.68
+    },
+    {
+     "w": "elas",
+     "start": 49.68,
+     "end": 49.96
+    },
+    {
+     "w": "têm",
+     "start": 49.96,
+     "end": 50.18
+    },
+    {
+     "w": "quase",
+     "start": 50.18,
+     "end": 50.48
+    },
+    {
+     "w": "dois",
+     "start": 50.48,
+     "end": 50.9
+    },
+    {
+     "w": "metros,",
+     "start": 50.9,
+     "end": 51.44
+    },
+    {
+     "w": "mais",
+     "start": 51.72,
+     "end": 52.04
+    },
+    {
+     "w": "que",
+     "start": 52.04,
+     "end": 52.22
+    },
+    {
+     "w": "muita",
+     "start": 52.22,
+     "end": 52.54
+    },
+    {
+     "w": "gente.",
+     "start": 52.54,
+     "end": 52.94
+    }
+   ]
+  },
+  {
+   "text": "Com elas, você chega a uns cinquenta quilômetros por hora.",
+   "start": 53.52,
+   "end": 56.7,
+   "words": [
+    {
+     "w": "Com",
+     "start": 53.52,
+     "end": 53.72
+    },
+    {
+     "w": "elas,",
+     "start": 53.72,
+     "end": 54.02
+    },
+    {
+     "w": "você",
+     "start": 54.26,
+     "end": 54.54
+    },
+    {
+     "w": "chega",
+     "start": 54.54,
+     "end": 54.8
+    },
+    {
+     "w": "a",
+     "start": 54.8,
+     "end": 54.92
+    },
+    {
+     "w": "uns",
+     "start": 54.92,
+     "end": 55.04
+    },
+    {
+     "w": "cinquenta",
+     "start": 55.04,
+     "end": 55.58
+    },
+    {
+     "w": "quilômetros",
+     "start": 55.58,
+     "end": 56.18
+    },
+    {
+     "w": "por",
+     "start": 56.18,
+     "end": 56.46
+    },
+    {
+     "w": "hora.",
+     "start": 56.46,
+     "end": 56.7
+    }
+   ]
+  },
+  {
+   "text": "Mas pra beber água, você precisa abrir as pernas e abaixar tudo. É o seu momento mais perigoso.",
+   "start": 56.7,
+   "end": 63.9,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 56.7,
+     "end": 57.44
+    },
+    {
+     "w": "pra",
+     "start": 57.44,
+     "end": 57.74
+    },
+    {
+     "w": "beber",
+     "start": 57.74,
+     "end": 57.96
+    },
+    {
+     "w": "água,",
+     "start": 57.96,
+     "end": 58.42
+    },
+    {
+     "w": "você",
+     "start": 58.68,
+     "end": 58.9
+    },
+    {
+     "w": "precisa",
+     "start": 58.9,
+     "end": 59.28
+    },
+    {
+     "w": "abrir",
+     "start": 59.28,
+     "end": 59.66
+    },
+    {
+     "w": "as",
+     "start": 59.66,
+     "end": 59.88
+    },
+    {
+     "w": "pernas",
+     "start": 59.88,
+     "end": 60.32
+    },
+    {
+     "w": "e",
+     "start": 60.32,
+     "end": 60.62
+    },
+    {
+     "w": "abaixar",
+     "start": 60.62,
+     "end": 61.12
+    },
+    {
+     "w": "tudo.",
+     "start": 61.12,
+     "end": 61.56
+    },
+    {
+     "w": "É",
+     "start": 62.02,
+     "end": 62.22
+    },
+    {
+     "w": "o",
+     "start": 62.22,
+     "end": 62.32
+    },
+    {
+     "w": "seu",
+     "start": 62.32,
+     "end": 62.4
+    },
+    {
+     "w": "momento",
+     "start": 62.4,
+     "end": 62.78
+    },
+    {
+     "w": "mais",
+     "start": 62.78,
+     "end": 63.3
+    },
+    {
+     "w": "perigoso.",
+     "start": 63.3,
+     "end": 63.9
+    }
+   ]
+  },
+  {
+   "text": "E aí entram os coices.",
+   "start": 64.4,
+   "end": 65.78,
+   "words": [
+    {
+     "w": "E",
+     "start": 64.4,
+     "end": 64.56
+    },
+    {
+     "w": "aí",
+     "start": 64.56,
+     "end": 64.8
+    },
+    {
+     "w": "entram",
+     "start": 65.04,
+     "end": 65.18
+    },
+    {
+     "w": "os",
+     "start": 65.18,
+     "end": 65.4
+    },
+    {
+     "w": "coices.",
+     "start": 65.4,
+     "end": 65.78
+    }
+   ]
+  },
+  {
+   "text": "Se um leão chega perto, você não foge. Você chuta.",
+   "start": 66.42,
+   "end": 69.96,
+   "words": [
+    {
+     "w": "Se",
+     "start": 66.42,
+     "end": 66.58
+    },
+    {
+     "w": "um",
+     "start": 66.58,
+     "end": 66.72
+    },
+    {
+     "w": "leão",
+     "start": 66.72,
+     "end": 66.94
+    },
+    {
+     "w": "chega",
+     "start": 66.94,
+     "end": 67.16
+    },
+    {
+     "w": "perto,",
+     "start": 67.16,
+     "end": 67.62
+    },
+    {
+     "w": "você",
+     "start": 68.02,
+     "end": 68.2
+    },
+    {
+     "w": "não",
+     "start": 68.2,
+     "end": 68.36
+    },
+    {
+     "w": "foge.",
+     "start": 68.36,
+     "end": 68.78
+    },
+    {
+     "w": "Você",
+     "start": 69.18,
+     "end": 69.4
+    },
+    {
+     "w": "chuta.",
+     "start": 69.4,
+     "end": 69.96
+    }
+   ]
+  },
+  {
+   "text": "Seu coice vai pra frente, pra trás e pros lados, e pode matar um leão.",
+   "start": 70.56,
+   "end": 75.26,
+   "words": [
+    {
+     "w": "Seu",
+     "start": 70.56,
+     "end": 70.78
+    },
+    {
+     "w": "coice",
+     "start": 70.78,
+     "end": 71.1
+    },
+    {
+     "w": "vai",
+     "start": 71.1,
+     "end": 71.3
+    },
+    {
+     "w": "pra",
+     "start": 71.3,
+     "end": 71.44
+    },
+    {
+     "w": "frente,",
+     "start": 71.44,
+     "end": 71.9
+    },
+    {
+     "w": "pra",
+     "start": 71.9,
+     "end": 72.32
+    },
+    {
+     "w": "trás",
+     "start": 72.32,
+     "end": 72.72
+    },
+    {
+     "w": "e",
+     "start": 72.72,
+     "end": 73.02
+    },
+    {
+     "w": "pros",
+     "start": 73.02,
+     "end": 73.26
+    },
+    {
+     "w": "lados,",
+     "start": 73.26,
+     "end": 73.58
+    },
+    {
+     "w": "e",
+     "start": 73.92,
+     "end": 74.1
+    },
+    {
+     "w": "pode",
+     "start": 74.1,
+     "end": 74.26
+    },
+    {
+     "w": "matar",
+     "start": 74.26,
+     "end": 74.72
+    },
+    {
+     "w": "um",
+     "start": 74.72,
+     "end": 74.98
+    },
+    {
+     "w": "leão.",
+     "start": 74.98,
+     "end": 75.26
+    }
+   ]
+  },
+  {
+   "text": "Por isso que leão quase nunca ataca uma girafa adulta.",
+   "start": 75.62,
+   "end": 78.82,
+   "words": [
+    {
+     "w": "Por",
+     "start": 75.62,
+     "end": 75.92
+    },
+    {
+     "w": "isso",
+     "start": 75.92,
+     "end": 76.14
+    },
+    {
+     "w": "que",
+     "start": 76.14,
+     "end": 76.32
+    },
+    {
+     "w": "leão",
+     "start": 76.32,
+     "end": 76.6
+    },
+    {
+     "w": "quase",
+     "start": 76.6,
+     "end": 76.88
+    },
+    {
+     "w": "nunca",
+     "start": 76.88,
+     "end": 77.32
+    },
+    {
+     "w": "ataca",
+     "start": 77.32,
+     "end": 77.74
+    },
+    {
+     "w": "uma",
+     "start": 77.74,
+     "end": 77.98
+    },
+    {
+     "w": "girafa",
+     "start": 77.98,
+     "end": 78.32
+    },
+    {
+     "w": "adulta.",
+     "start": 78.32,
+     "end": 78.82
+    }
+   ]
+  },
+  {
+   "text": "Então, se alguém te chamar de girafa, agradece.",
+   "start": 79.3,
+   "end": 82.58,
+   "words": [
+    {
+     "w": "Então,",
+     "start": 79.3,
+     "end": 79.64
+    },
+    {
+     "w": "se",
+     "start": 79.9,
+     "end": 80.08
+    },
+    {
+     "w": "alguém",
+     "start": 80.08,
+     "end": 80.34
+    },
+    {
+     "w": "te",
+     "start": 80.34,
+     "end": 80.52
+    },
+    {
+     "w": "chamar",
+     "start": 80.52,
+     "end": 80.88
+    },
+    {
+     "w": "de",
+     "start": 80.88,
+     "end": 81.04
+    },
+    {
+     "w": "girafa,",
+     "start": 81.04,
+     "end": 81.56
+    },
+    {
+     "w": "agradece.",
+     "start": 81.86,
+     "end": 82.58
+    }
+   ]
+  },
+  {
+   "text": "Segue a página, porque daqui de cima dá pra ver quem não seguiu.",
+   "start": 82.58,
+   "end": 86.6,
+   "words": [
+    {
+     "w": "Segue",
+     "start": 82.58,
+     "end": 83.26
+    },
+    {
+     "w": "a",
+     "start": 83.26,
+     "end": 83.36
+    },
+    {
+     "w": "página,",
+     "start": 83.36,
+     "end": 83.76
+    },
+    {
+     "w": "porque",
+     "start": 84.06,
+     "end": 84.24
+    },
+    {
+     "w": "daqui",
+     "start": 84.24,
+     "end": 84.48
+    },
+    {
+     "w": "de",
+     "start": 84.48,
+     "end": 84.7
+    },
+    {
+     "w": "cima",
+     "start": 84.7,
+     "end": 85.06
+    },
+    {
+     "w": "dá",
+     "start": 85.06,
+     "end": 85.38
+    },
+    {
+     "w": "pra",
+     "start": 85.38,
+     "end": 85.54
+    },
+    {
+     "w": "ver",
+     "start": 85.54,
+     "end": 85.86
+    },
+    {
+     "w": "quem",
+     "start": 85.86,
+     "end": 86.04
+    },
+    {
+     "w": "não",
+     "start": 86.04,
+     "end": 86.18
+    },
+    {
+     "w": "seguiu.",
+     "start": 86.18,
+     "end": 86.6
+    }
+   ]
+  }
+ ]
+}
