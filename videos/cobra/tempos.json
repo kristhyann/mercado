@@ -1,0 +1,1209 @@
+{
+ "duration": 85.393,
+ "sentences": [
+  {
+   "text": "Você engole coisas muito maiores que a sua própria cabeça.",
+   "start": 0.0,
+   "end": 3.52,
+   "words": [
+    {
+     "w": "Você",
+     "start": 0.0,
+     "end": 0.36
+    },
+    {
+     "w": "engole",
+     "start": 0.36,
+     "end": 0.68
+    },
+    {
+     "w": "coisas",
+     "start": 0.68,
+     "end": 1.0
+    },
+    {
+     "w": "muito",
+     "start": 1.0,
+     "end": 1.56
+    },
+    {
+     "w": "maiores",
+     "start": 1.56,
+     "end": 2.16
+    },
+    {
+     "w": "que",
+     "start": 2.16,
+     "end": 2.36
+    },
+    {
+     "w": "a",
+     "start": 2.36,
+     "end": 2.42
+    },
+    {
+     "w": "sua",
+     "start": 2.42,
+     "end": 2.56
+    },
+    {
+     "w": "própria",
+     "start": 2.56,
+     "end": 3.0
+    },
+    {
+     "w": "cabeça.",
+     "start": 3.0,
+     "end": 3.52
+    }
+   ]
+  },
+  {
+   "text": "Calma! Sua mandíbula tem uma flexibilidade impressionante.",
+   "start": 4.04,
+   "end": 8.0,
+   "words": [
+    {
+     "w": "Calma!",
+     "start": 4.04,
+     "end": 4.62
+    },
+    {
+     "w": "Sua",
+     "start": 5.04,
+     "end": 5.24
+    },
+    {
+     "w": "mandíbula",
+     "start": 5.24,
+     "end": 5.76
+    },
+    {
+     "w": "tem",
+     "start": 5.76,
+     "end": 6.0
+    },
+    {
+     "w": "uma",
+     "start": 6.0,
+     "end": 6.12
+    },
+    {
+     "w": "flexibilidade",
+     "start": 6.12,
+     "end": 6.92
+    },
+    {
+     "w": "impressionante.",
+     "start": 6.92,
+     "end": 8.0
+    }
+   ]
+  },
+  {
+   "text": "Você é uma cobra.",
+   "start": 8.54,
+   "end": 10.0,
+   "words": [
+    {
+     "w": "Você",
+     "start": 8.54,
+     "end": 8.98
+    },
+    {
+     "w": "é",
+     "start": 8.98,
+     "end": 9.38
+    },
+    {
+     "w": "uma",
+     "start": 9.38,
+     "end": 9.54
+    },
+    {
+     "w": "cobra.",
+     "start": 9.54,
+     "end": 10.0
+    }
+   ]
+  },
+  {
+   "text": "Primeiro, a mandíbula.",
+   "start": 10.72,
+   "end": 11.96,
+   "words": [
+    {
+     "w": "Primeiro,",
+     "start": 10.72,
+     "end": 11.18
+    },
+    {
+     "w": "a",
+     "start": 11.42,
+     "end": 11.44
+    },
+    {
+     "w": "mandíbula.",
+     "start": 11.44,
+     "end": 11.96
+    }
+   ]
+  },
+  {
+   "text": "Ela não desloca, como muita gente pensa.",
+   "start": 12.4,
+   "end": 14.52,
+   "words": [
+    {
+     "w": "Ela",
+     "start": 12.4,
+     "end": 12.6
+    },
+    {
+     "w": "não",
+     "start": 12.6,
+     "end": 12.8
+    },
+    {
+     "w": "desloca,",
+     "start": 12.8,
+     "end": 13.4
+    },
+    {
+     "w": "como",
+     "start": 13.48,
+     "end": 13.64
+    },
+    {
+     "w": "muita",
+     "start": 13.64,
+     "end": 13.88
+    },
+    {
+     "w": "gente",
+     "start": 13.88,
+     "end": 14.12
+    },
+    {
+     "w": "pensa.",
+     "start": 14.12,
+     "end": 14.52
+    }
+   ]
+  },
+  {
+   "text": "As duas metades de baixo são soltas, presas por um elástico, e abrem pros lados.",
+   "start": 15.08,
+   "end": 19.94,
+   "words": [
+    {
+     "w": "As",
+     "start": 15.08,
+     "end": 15.26
+    },
+    {
+     "w": "duas",
+     "start": 15.26,
+     "end": 15.46
+    },
+    {
+     "w": "metades",
+     "start": 15.46,
+     "end": 15.96
+    },
+    {
+     "w": "de",
+     "start": 15.96,
+     "end": 16.16
+    },
+    {
+     "w": "baixo",
+     "start": 16.16,
+     "end": 16.48
+    },
+    {
+     "w": "são",
+     "start": 16.48,
+     "end": 16.74
+    },
+    {
+     "w": "soltas,",
+     "start": 16.74,
+     "end": 17.32
+    },
+    {
+     "w": "presas",
+     "start": 17.56,
+     "end": 17.9
+    },
+    {
+     "w": "por",
+     "start": 17.9,
+     "end": 18.1
+    },
+    {
+     "w": "um",
+     "start": 18.1,
+     "end": 18.2
+    },
+    {
+     "w": "elástico,",
+     "start": 18.2,
+     "end": 18.68
+    },
+    {
+     "w": "e",
+     "start": 19.0,
+     "end": 19.14
+    },
+    {
+     "w": "abrem",
+     "start": 19.14,
+     "end": 19.42
+    },
+    {
+     "w": "pros",
+     "start": 19.42,
+     "end": 19.68
+    },
+    {
+     "w": "lados.",
+     "start": 19.68,
+     "end": 19.94
+    }
+   ]
+  },
+  {
+   "text": "Aí você vai puxando a comida, um lado de cada vez.",
+   "start": 20.64,
+   "end": 23.62,
+   "words": [
+    {
+     "w": "Aí",
+     "start": 20.64,
+     "end": 20.88
+    },
+    {
+     "w": "você",
+     "start": 20.88,
+     "end": 21.1
+    },
+    {
+     "w": "vai",
+     "start": 21.1,
+     "end": 21.28
+    },
+    {
+     "w": "puxando",
+     "start": 21.28,
+     "end": 21.78
+    },
+    {
+     "w": "a",
+     "start": 21.78,
+     "end": 21.9
+    },
+    {
+     "w": "comida,",
+     "start": 21.9,
+     "end": 22.24
+    },
+    {
+     "w": "um",
+     "start": 22.52,
+     "end": 22.72
+    },
+    {
+     "w": "lado",
+     "start": 22.72,
+     "end": 22.98
+    },
+    {
+     "w": "de",
+     "start": 22.98,
+     "end": 23.12
+    },
+    {
+     "w": "cada",
+     "start": 23.12,
+     "end": 23.3
+    },
+    {
+     "w": "vez.",
+     "start": 23.3,
+     "end": 23.62
+    }
+   ]
+  },
+  {
+   "text": "Parece estranho, mas você respira enquanto engole: um tubinho sai pela boca, tipo um snorkel.",
+   "start": 24.26,
+   "end": 30.2,
+   "words": [
+    {
+     "w": "Parece",
+     "start": 24.26,
+     "end": 24.56
+    },
+    {
+     "w": "estranho,",
+     "start": 24.56,
+     "end": 25.2
+    },
+    {
+     "w": "mas",
+     "start": 25.42,
+     "end": 25.58
+    },
+    {
+     "w": "você",
+     "start": 25.58,
+     "end": 25.86
+    },
+    {
+     "w": "respira",
+     "start": 25.86,
+     "end": 26.48
+    },
+    {
+     "w": "enquanto",
+     "start": 26.48,
+     "end": 26.7
+    },
+    {
+     "w": "engole:",
+     "start": 26.7,
+     "end": 27.24
+    },
+    {
+     "w": "um",
+     "start": 27.24,
+     "end": 27.7
+    },
+    {
+     "w": "tubinho",
+     "start": 27.7,
+     "end": 28.2
+    },
+    {
+     "w": "sai",
+     "start": 28.2,
+     "end": 28.48
+    },
+    {
+     "w": "pela",
+     "start": 28.48,
+     "end": 28.72
+    },
+    {
+     "w": "boca,",
+     "start": 28.72,
+     "end": 29.06
+    },
+    {
+     "w": "tipo",
+     "start": 29.24,
+     "end": 29.54
+    },
+    {
+     "w": "um",
+     "start": 29.54,
+     "end": 29.72
+    },
+    {
+     "w": "snorkel.",
+     "start": 29.72,
+     "end": 30.2
+    }
+   ]
+  },
+  {
+   "text": "Agora, as presas.",
+   "start": 30.76,
+   "end": 32.06,
+   "words": [
+    {
+     "w": "Agora,",
+     "start": 30.76,
+     "end": 31.18
+    },
+    {
+     "w": "as",
+     "start": 31.58,
+     "end": 31.62
+    },
+    {
+     "w": "presas.",
+     "start": 31.62,
+     "end": 32.06
+    }
+   ]
+  },
+  {
+   "text": "Nas cobras venenosas, elas são ocas, igual agulha de injeção.",
+   "start": 32.72,
+   "end": 36.42,
+   "words": [
+    {
+     "w": "Nas",
+     "start": 32.72,
+     "end": 32.88
+    },
+    {
+     "w": "cobras",
+     "start": 32.88,
+     "end": 33.16
+    },
+    {
+     "w": "venenosas,",
+     "start": 33.16,
+     "end": 33.98
+    },
+    {
+     "w": "elas",
+     "start": 34.0,
+     "end": 34.2
+    },
+    {
+     "w": "são",
+     "start": 34.2,
+     "end": 34.44
+    },
+    {
+     "w": "ocas,",
+     "start": 34.44,
+     "end": 34.84
+    },
+    {
+     "w": "igual",
+     "start": 35.12,
+     "end": 35.38
+    },
+    {
+     "w": "agulha",
+     "start": 35.62,
+     "end": 35.84
+    },
+    {
+     "w": "de",
+     "start": 35.84,
+     "end": 35.98
+    },
+    {
+     "w": "injeção.",
+     "start": 35.98,
+     "end": 36.42
+    }
+   ]
+  },
+  {
+   "text": "Na jararaca, elas dobram pra dentro quando a boca fecha.",
+   "start": 36.96,
+   "end": 40.26,
+   "words": [
+    {
+     "w": "Na",
+     "start": 36.96,
+     "end": 37.12
+    },
+    {
+     "w": "jararaca,",
+     "start": 37.12,
+     "end": 37.7
+    },
+    {
+     "w": "elas",
+     "start": 38.04,
+     "end": 38.14
+    },
+    {
+     "w": "dobram",
+     "start": 38.14,
+     "end": 38.68
+    },
+    {
+     "w": "pra",
+     "start": 38.68,
+     "end": 38.86
+    },
+    {
+     "w": "dentro",
+     "start": 38.86,
+     "end": 39.26
+    },
+    {
+     "w": "quando",
+     "start": 39.26,
+     "end": 39.48
+    },
+    {
+     "w": "a",
+     "start": 39.48,
+     "end": 39.64
+    },
+    {
+     "w": "boca",
+     "start": 39.64,
+     "end": 39.74
+    },
+    {
+     "w": "fecha.",
+     "start": 39.74,
+     "end": 40.26
+    }
+   ]
+  },
+  {
+   "text": "E quando uma cai, outra nasce no lugar.",
+   "start": 40.68,
+   "end": 43.02,
+   "words": [
+    {
+     "w": "E",
+     "start": 40.68,
+     "end": 40.76
+    },
+    {
+     "w": "quando",
+     "start": 40.76,
+     "end": 40.94
+    },
+    {
+     "w": "uma",
+     "start": 40.94,
+     "end": 41.24
+    },
+    {
+     "w": "cai,",
+     "start": 41.24,
+     "end": 41.58
+    },
+    {
+     "w": "outra",
+     "start": 41.96,
+     "end": 42.18
+    },
+    {
+     "w": "nasce",
+     "start": 42.18,
+     "end": 42.62
+    },
+    {
+     "w": "no",
+     "start": 42.62,
+     "end": 42.74
+    },
+    {
+     "w": "lugar.",
+     "start": 42.74,
+     "end": 43.02
+    }
+   ]
+  },
+  {
+   "text": "Depois, o veneno.",
+   "start": 43.7,
+   "end": 45.12,
+   "words": [
+    {
+     "w": "Depois,",
+     "start": 43.7,
+     "end": 44.06
+    },
+    {
+     "w": "o",
+     "start": 44.58,
+     "end": 44.64
+    },
+    {
+     "w": "veneno.",
+     "start": 44.64,
+     "end": 45.12
+    }
+   ]
+  },
+  {
+   "text": "Ele é uma saliva modificada, feita em glândulas atrás dos olhos.",
+   "start": 45.56,
+   "end": 49.22,
+   "words": [
+    {
+     "w": "Ele",
+     "start": 45.56,
+     "end": 45.74
+    },
+    {
+     "w": "é",
+     "start": 45.74,
+     "end": 45.82
+    },
+    {
+     "w": "uma",
+     "start": 45.82,
+     "end": 45.92
+    },
+    {
+     "w": "saliva",
+     "start": 45.92,
+     "end": 46.26
+    },
+    {
+     "w": "modificada,",
+     "start": 46.26,
+     "end": 47.18
+    },
+    {
+     "w": "feita",
+     "start": 47.44,
+     "end": 47.68
+    },
+    {
+     "w": "em",
+     "start": 47.68,
+     "end": 47.84
+    },
+    {
+     "w": "glândulas",
+     "start": 47.84,
+     "end": 48.26
+    },
+    {
+     "w": "atrás",
+     "start": 48.26,
+     "end": 48.66
+    },
+    {
+     "w": "dos",
+     "start": 48.66,
+     "end": 48.9
+    },
+    {
+     "w": "olhos.",
+     "start": 48.9,
+     "end": 49.22
+    }
+   ]
+  },
+  {
+   "text": "Ele paralisa a presa e já começa a digestão por dentro.",
+   "start": 49.82,
+   "end": 53.28,
+   "words": [
+    {
+     "w": "Ele",
+     "start": 49.82,
+     "end": 50.02
+    },
+    {
+     "w": "paralisa",
+     "start": 50.02,
+     "end": 50.62
+    },
+    {
+     "w": "a",
+     "start": 50.62,
+     "end": 50.8
+    },
+    {
+     "w": "presa",
+     "start": 50.8,
+     "end": 51.2
+    },
+    {
+     "w": "e",
+     "start": 51.2,
+     "end": 51.52
+    },
+    {
+     "w": "já",
+     "start": 51.52,
+     "end": 51.66
+    },
+    {
+     "w": "começa",
+     "start": 51.66,
+     "end": 52.02
+    },
+    {
+     "w": "a",
+     "start": 52.02,
+     "end": 52.26
+    },
+    {
+     "w": "digestão",
+     "start": 52.26,
+     "end": 52.68
+    },
+    {
+     "w": "por",
+     "start": 52.68,
+     "end": 52.9
+    },
+    {
+     "w": "dentro.",
+     "start": 52.9,
+     "end": 53.28
+    }
+   ]
+  },
+  {
+   "text": "Por isso que, se uma cobra picar alguém, é hospital na hora: nada de torniquete nem de chupar o veneno.",
+   "start": 53.28,
+   "end": 60.18,
+   "words": [
+    {
+     "w": "Por",
+     "start": 53.28,
+     "end": 54.0
+    },
+    {
+     "w": "isso",
+     "start": 54.0,
+     "end": 54.28
+    },
+    {
+     "w": "que,",
+     "start": 54.28,
+     "end": 54.5
+    },
+    {
+     "w": "se",
+     "start": 54.62,
+     "end": 54.7
+    },
+    {
+     "w": "uma",
+     "start": 54.7,
+     "end": 54.88
+    },
+    {
+     "w": "cobra",
+     "start": 54.88,
+     "end": 55.16
+    },
+    {
+     "w": "picar",
+     "start": 55.16,
+     "end": 55.52
+    },
+    {
+     "w": "alguém,",
+     "start": 55.52,
+     "end": 55.88
+    },
+    {
+     "w": "é",
+     "start": 56.16,
+     "end": 56.26
+    },
+    {
+     "w": "hospital",
+     "start": 56.26,
+     "end": 56.74
+    },
+    {
+     "w": "na",
+     "start": 56.74,
+     "end": 57.02
+    },
+    {
+     "w": "hora:",
+     "start": 57.02,
+     "end": 57.34
+    },
+    {
+     "w": "nada",
+     "start": 57.68,
+     "end": 58.08
+    },
+    {
+     "w": "de",
+     "start": 58.08,
+     "end": 58.28
+    },
+    {
+     "w": "torniquete",
+     "start": 58.28,
+     "end": 58.86
+    },
+    {
+     "w": "nem",
+     "start": 59.06,
+     "end": 59.2
+    },
+    {
+     "w": "de",
+     "start": 59.2,
+     "end": 59.34
+    },
+    {
+     "w": "chupar",
+     "start": 59.34,
+     "end": 59.7
+    },
+    {
+     "w": "o",
+     "start": 59.7,
+     "end": 59.82
+    },
+    {
+     "w": "veneno.",
+     "start": 59.82,
+     "end": 60.18
+    }
+   ]
+  },
+  {
+   "text": "E aí entram as escamas.",
+   "start": 60.62,
+   "end": 62.16,
+   "words": [
+    {
+     "w": "E",
+     "start": 60.62,
+     "end": 60.86
+    },
+    {
+     "w": "aí",
+     "start": 60.86,
+     "end": 61.1
+    },
+    {
+     "w": "entram",
+     "start": 61.1,
+     "end": 61.48
+    },
+    {
+     "w": "as",
+     "start": 61.48,
+     "end": 61.68
+    },
+    {
+     "w": "escamas.",
+     "start": 61.68,
+     "end": 62.16
+    }
+   ]
+  },
+  {
+   "text": "Elas não são babentas: são secas, tipo unha.",
+   "start": 62.7,
+   "end": 65.8,
+   "words": [
+    {
+     "w": "Elas",
+     "start": 62.7,
+     "end": 62.94
+    },
+    {
+     "w": "não",
+     "start": 62.94,
+     "end": 63.08
+    },
+    {
+     "w": "são",
+     "start": 63.08,
+     "end": 63.3
+    },
+    {
+     "w": "babentas:",
+     "start": 63.3,
+     "end": 63.88
+    },
+    {
+     "w": "são",
+     "start": 64.18,
+     "end": 64.34
+    },
+    {
+     "w": "secas,",
+     "start": 64.34,
+     "end": 64.96
+    },
+    {
+     "w": "tipo",
+     "start": 65.14,
+     "end": 65.36
+    },
+    {
+     "w": "unha.",
+     "start": 65.36,
+     "end": 65.8
+    }
+   ]
+  },
+  {
+   "text": "As da barriga agarram o chão e te empurram pra frente.",
+   "start": 66.3,
+   "end": 69.52,
+   "words": [
+    {
+     "w": "As",
+     "start": 66.3,
+     "end": 66.48
+    },
+    {
+     "w": "da",
+     "start": 66.48,
+     "end": 66.6
+    },
+    {
+     "w": "barriga",
+     "start": 66.6,
+     "end": 67.1
+    },
+    {
+     "w": "agarram",
+     "start": 67.1,
+     "end": 67.72
+    },
+    {
+     "w": "o",
+     "start": 67.72,
+     "end": 67.94
+    },
+    {
+     "w": "chão",
+     "start": 67.94,
+     "end": 68.14
+    },
+    {
+     "w": "e",
+     "start": 68.14,
+     "end": 68.38
+    },
+    {
+     "w": "te",
+     "start": 68.38,
+     "end": 68.52
+    },
+    {
+     "w": "empurram",
+     "start": 68.52,
+     "end": 68.98
+    },
+    {
+     "w": "pra",
+     "start": 68.98,
+     "end": 69.14
+    },
+    {
+     "w": "frente.",
+     "start": 69.14,
+     "end": 69.52
+    }
+   ]
+  },
+  {
+   "text": "E você não tem pálpebra: uma escama transparente cobre o olho, por isso você dorme de olho aberto.",
+   "start": 70.04,
+   "end": 76.18,
+   "words": [
+    {
+     "w": "E",
+     "start": 70.04,
+     "end": 70.22
+    },
+    {
+     "w": "você",
+     "start": 70.22,
+     "end": 70.48
+    },
+    {
+     "w": "não",
+     "start": 70.48,
+     "end": 70.86
+    },
+    {
+     "w": "tem",
+     "start": 70.86,
+     "end": 71.1
+    },
+    {
+     "w": "pálpebra:",
+     "start": 71.1,
+     "end": 71.64
+    },
+    {
+     "w": "uma",
+     "start": 72.04,
+     "end": 72.24
+    },
+    {
+     "w": "escama",
+     "start": 72.24,
+     "end": 72.56
+    },
+    {
+     "w": "transparente",
+     "start": 72.56,
+     "end": 73.38
+    },
+    {
+     "w": "cobre",
+     "start": 73.38,
+     "end": 73.78
+    },
+    {
+     "w": "o",
+     "start": 73.78,
+     "end": 73.94
+    },
+    {
+     "w": "olho,",
+     "start": 73.94,
+     "end": 74.14
+    },
+    {
+     "w": "por",
+     "start": 74.42,
+     "end": 74.64
+    },
+    {
+     "w": "isso",
+     "start": 74.64,
+     "end": 74.86
+    },
+    {
+     "w": "você",
+     "start": 74.86,
+     "end": 75.12
+    },
+    {
+     "w": "dorme",
+     "start": 75.12,
+     "end": 75.58
+    },
+    {
+     "w": "de",
+     "start": 75.58,
+     "end": 75.66
+    },
+    {
+     "w": "olho",
+     "start": 75.66,
+     "end": 75.8
+    },
+    {
+     "w": "aberto.",
+     "start": 75.8,
+     "end": 76.18
+    }
+   ]
+  },
+  {
+   "text": "Então, se alguém te chamar de cobra, agradece.",
+   "start": 76.7,
+   "end": 79.94,
+   "words": [
+    {
+     "w": "Então,",
+     "start": 76.7,
+     "end": 77.1
+    },
+    {
+     "w": "se",
+     "start": 77.46,
+     "end": 77.56
+    },
+    {
+     "w": "alguém",
+     "start": 77.56,
+     "end": 77.8
+    },
+    {
+     "w": "te",
+     "start": 77.8,
+     "end": 77.96
+    },
+    {
+     "w": "chamar",
+     "start": 77.96,
+     "end": 78.3
+    },
+    {
+     "w": "de",
+     "start": 78.3,
+     "end": 78.42
+    },
+    {
+     "w": "cobra,",
+     "start": 78.42,
+     "end": 78.82
+    },
+    {
+     "w": "agradece.",
+     "start": 79.16,
+     "end": 79.94
+    }
+   ]
+  },
+  {
+   "text": "Segue a página, senão você troca de pele e eu nem percebo.",
+   "start": 79.94,
+   "end": 83.94,
+   "words": [
+    {
+     "w": "Segue",
+     "start": 79.94,
+     "end": 80.64
+    },
+    {
+     "w": "a",
+     "start": 80.64,
+     "end": 80.72
+    },
+    {
+     "w": "página,",
+     "start": 80.72,
+     "end": 81.08
+    },
+    {
+     "w": "senão",
+     "start": 81.4,
+     "end": 81.62
+    },
+    {
+     "w": "você",
+     "start": 81.62,
+     "end": 81.8
+    },
+    {
+     "w": "troca",
+     "start": 81.8,
+     "end": 82.2
+    },
+    {
+     "w": "de",
+     "start": 82.2,
+     "end": 82.32
+    },
+    {
+     "w": "pele",
+     "start": 82.32,
+     "end": 82.64
+    },
+    {
+     "w": "e",
+     "start": 82.64,
+     "end": 82.94
+    },
+    {
+     "w": "eu",
+     "start": 82.94,
+     "end": 83.04
+    },
+    {
+     "w": "nem",
+     "start": 83.04,
+     "end": 83.3
+    },
+    {
+     "w": "percebo.",
+     "start": 83.3,
+     "end": 83.94
+    }
+   ]
+  }
+ ]
+}
