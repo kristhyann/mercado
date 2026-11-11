@@ -1,0 +1,261 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:250px;text-align:center;font-weight:900;font-size:130px;line-height:1.0}
+#hook b{color:#FF8A1F;display:block;font-size:170px}
+#label{width:1080px;top:180px;text-align:center}
+#label span{display:inline-block;font-weight:900;font-size:96px;color:#FF8A1F;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#cap{width:1080px;top:1290px;text-align:center;font-weight:900;font-size:118px}
+#cap.hl{color:#FF8A1F}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:66px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF3B3B;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}
+#xmark{font-weight:900;font-size:300px;color:#FF2D2D;-webkit-text-stroke:12px #fff;paint-order:stroke fill;line-height:1}
+.comic{font-weight:900;font-size:160px;color:#FFD21F;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 10px 0 rgba(0,0,0,.3);white-space:nowrap}
+#final{left:60px;width:960px;top:1330px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:80px;line-height:1.05;padding:30px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#FF8A1F}
+</style></head><body>
+<div id="hook" class="o stroke">QUEM SOLTA<b>O PÃO?</b></div>
+<div id="label" class="o"><span>X</span></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag"></div>
+<div id="xmark" class="o">✕</div>
+<div id="comic" class="o comic"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Segue a página,<br><em>senão a torrada queima.</em></span></div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, bounce, M, mesh, buildWorld } from '/_kit/kit.js';
+
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; const S = i => SN[i].start, E = i => SN[i].end; window.DURATION = TP.duration;
+const WD = (i, re) => { const w = SN[i].words.find(w => re.test(w.w)); return w ? w.start : S(i); };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(window.devicePixelRatio || 1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .05, 600);
+const world = buildWorld(scene);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const box = (w, h, d, c, x, y, z, par = scene, o = {}) => mesh(new THREE.BoxGeometry(w, h, d), typeof c === 'number' ? M(c, o) : c, x, y, z, par);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+
+// ---------- tempos ----------
+const T_FIOS = WD(5, /fios/i), T_ELET = WD(5, /eletricidade/i), T_500 = WD(6, /quinhentos|500/i);
+const T_ALAV = WD(10, /alavanca/i), T_LIGA = WD(10, /liga/i), T_SOLTA = WD(12, /solta/i), T_SOBE = WD(12, /sobe/i);
+const T_IMA = WD(13, /ímã|imã/i), T_SEG = WD(13, /segura/i), T_REL = WD(16, /relógio/i), T_DESL = WD(16, /desliga/i);
+const T_MOLA = WD(20, /mola/i), T_PULA = WD(21, /pular/i), T_GARFO = WD(22, /garfo/i);
+const T_PARAB = S(23);
+
+// ---------- peças ----------
+const ROOT = grp(); ROOT.position.set(0, 0, 0);
+// base
+const base = grp(ROOT); box(2.4, .14, 1.4, 0x3A3F47, 0, .07, 0, base); for (const [x, z] of [[-1, -.55], [1, -.55], [-1, .55], [1, .55]]) mesh(new THREE.CylinderGeometry(.08, .1, .08, 8), M(0x111111), x, -.0, z, base);
+// carcaça (fundo + laterais + topo com fenda), frente aberta
+const shellM = M(0xE63946, { roughness: .45, metalness: .2 });
+const shell = grp(ROOT);
+box(2.4, 1.5, .08, shellM, 0, .89, -.66, shell); box(.08, 1.5, 1.4, shellM, -1.16, .89, 0, shell); box(.08, 1.5, 1.4, shellM, 1.16, .89, 0, shell);
+box(2.4, .08, .5, shellM, 0, 1.68, -.45, shell); box(2.4, .08, .5, shellM, 0, 1.68, .45, shell); box(.5, .08, .4, shellM, -1.0, 1.68, 0, shell); box(.62, .08, .4, shellM, .9, 1.68, 0, shell);
+const slotLip = box(1.12, .03, .36, 0xBBBBBB, -.18, 1.725, 0, shell, { metalness: .7, roughness: .3 });
+const leverSlot = box(.02, .9, .08, 0x111111, 1.205, .9, .25, shell);
+const glassFront = new THREE.Mesh(new THREE.BoxGeometry(2.4, 1.5, .03), new THREE.MeshStandardMaterial({ color: 0xBFE6FF, transparent: true, opacity: .18, roughness: .05 })); glassFront.position.set(0, .89, .69); ROOT.add(glassFront);
+// pão
+const breadM = M(0xF2D29B), crustM = M(0xB8762E);
+const bread = grp(ROOT);
+box(.9, .95, .13, breadM, 0, .475, 0, bread); box(.96, .08, .15, crustM, 0, .97, 0, bread); box(.05, .95, .15, crustM, -.47, .475, 0, bread); box(.05, .95, .15, crustM, .47, .475, 0, bread); box(.96, .05, .15, crustM, 0, -.0, 0, bread);
+const toastFace = box(.86, .9, .005, M(0x9A5A1E), 0, .48, .072, bread); toastFace.material.transparent = true; toastFace.material.opacity = 0;
+const toastBack = box(.86, .9, .005, toastFace.material, 0, .48, -.072, bread);
+// fogo (problema 1)
+const fire = grp(ROOT); const flames = [];
+for (let i = 0; i < 4; i++) { const l = mesh(new THREE.CylinderGeometry(.06, .07, .9, 6), M(0x6E4B30), 0, .06, 0, fire); l.rotation.set(Math.PI / 2, 0, i * Math.PI / 4); }
+[[0xFF4500, .32, .9], [0xFF8A1F, .24, .7], [0xFFD21F, .14, .5]].forEach(([c, r, h], k) => { for (let i = 0; i < 3; i++) { const f = mesh(new THREE.ConeGeometry(r, h, 6), new THREE.MeshBasicMaterial({ color: c }), (i - 1) * .15, h / 2 + .08, (k - 1) * .05, fire); f.castShadow = false; flames.push(f); } });
+const handArm = grp(ROOT); mesh(new THREE.CylinderGeometry(.12, .13, 1.6, 8), M(0x2A9D8F), .9, 0, 0, handArm).rotation.z = Math.PI / 2.3; mesh(new THREE.IcosahedronGeometry(.16, 1), M(0xD9A27A), .1, .05, 0, handArm);
+// resistências: duas placas de mica com fio em zigue-zague
+const coilM = new THREE.MeshStandardMaterial({ color: 0x9AA3AE, metalness: .6, roughness: .35, emissive: 0xFF5A00, emissiveIntensity: 0, flatShading: true });
+const micaM = new THREE.MeshStandardMaterial({ color: 0xF3E9D2, transparent: true, opacity: .55, roughness: .8 });
+const wires = [];
+for (const z of [-.24, .24]) {
+  const g = grp(ROOT); g.position.set(-.18, .95, z); box(1.1, 1.0, .02, micaM, 0, 0, 0, g);
+  for (let i = 0; i < 12; i++) { const s = mesh(new THREE.CylinderGeometry(.012, .012, .95, 4), coilM, -.5 + i * .09, 0, z > 0 ? .02 : -.02, g); s.rotation.z = (i % 2 ? .09 : -.09); }
+  box(1.05, .015, .015, coilM, 0, .47, z > 0 ? .02 : -.02, g); box(1.05, .015, .015, coilM, 0, -.47, z > 0 ? .02 : -.02, g);
+  wires.push(g);
+}
+const heatL = new THREE.PointLight(0xFF6A00, 0, 4, 1.6); heatL.position.set(-.18, 1.0, .6); ROOT.add(heatL);
+const heatP = []; for (let i = 0; i < 18; i++) { const p = mesh(new THREE.OctahedronGeometry(.03, 0), new THREE.MeshBasicMaterial({ color: i % 2 ? 0xFF8A1F : 0xFF3B1F }), 0, 0, 0, ROOT); p.castShadow = false; heatP.push(p); }
+const irWaves = []; for (let i = 0; i < 6; i++) { const w = new THREE.Mesh(new THREE.TorusGeometry(.18, .012, 4, 14, Math.PI), new THREE.MeshBasicMaterial({ color: 0xFF3B3B, transparent: true })); ROOT.add(w); irWaves.push(w); }
+// bandeja (carrinho) + alavanca
+const carriage = grp(ROOT); box(1.0, .03, .3, 0xC0C6CE, -.18, 0, 0, carriage, { metalness: .7, roughness: .3 }); box(.03, .03, .3, 0xC0C6CE, -.66, .06, 0, carriage); box(.03, .03, .3, 0xC0C6CE, .3, .06, 0, carriage);
+const leverArm = box(1.15, .04, .06, 0x9AA3AE, .55, 0, .25, carriage, { metalness: .6 });
+const knob = box(.32, .14, .2, 0x111111, 1.32, 0, .25, carriage); knob.position.x = 1.33;
+const contacts = grp(ROOT); box(.12, .05, .12, 0xFFC21A, .55, .36, .25, contacts, { metalness: .6 }); const contactTop = box(.12, .05, .12, 0xFFC21A, .55, 0, .25, carriage, { metalness: .6 }); contactTop.position.y = -.06;
+// ímã elétrico
+const magnet = grp(ROOT); magnet.position.set(.9, .28, .25);
+mesh(new THREE.CylinderGeometry(.09, .09, .26, 12), M(0x6B7280, { metalness: .6 }), 0, 0, 0, magnet);
+const coilCu = mesh(new THREE.CylinderGeometry(.12, .12, .18, 14), M(0xC86B2B, { metalness: .5, roughness: .4 }), 0, 0, 0, magnet);
+const magField = []; for (let i = 0; i < 3; i++) { const f = new THREE.Mesh(new THREE.TorusGeometry(.16 + i * .07, .01, 4, 20), new THREE.MeshBasicMaterial({ color: 0x3B82F6, transparent: true })); f.rotation.x = Math.PI / 2; magnet.add(f); magField.push(f); }
+const armature = box(.2, .03, .14, 0x9AA3AE, .9, 0, .25, carriage, { metalness: .6 }); armature.position.y = -.02;
+// timer: painel com botão + placa
+const timer = grp(ROOT); timer.position.set(.88, .62, .62);
+box(.5, .7, .04, 0x2F3640, 0, 0, 0, timer);
+const dialTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d'); g.fillStyle = '#f5f5f5'; g.beginPath(); g.arc(128, 128, 124, 0, 7); g.fill(); g.fillStyle = '#111'; g.font = '900 34px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; for (let i = 1; i <= 7; i++) { const a = -Math.PI * .75 + (i - 1) / 6 * Math.PI * 1.5; g.fillText(i, 128 + Math.sin(a) * 92, 128 - Math.cos(a) * 92); } const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; })();
+const dialFace = new THREE.Mesh(new THREE.CircleGeometry(.2, 24), new THREE.MeshStandardMaterial({ map: dialTex })); dialFace.position.set(0, .06, .025); timer.add(dialFace);
+const dialKnob = grp(timer); dialKnob.position.set(0, .06, .04); mesh(new THREE.CylinderGeometry(.09, .1, .06, 12), M(0x111111), 0, 0, 0, dialKnob).rotation.x = Math.PI / 2; box(.025, .1, .02, 0xFF8A1F, 0, .05, .035, dialKnob);
+const pcb = box(.4, .02, .3, 0x16A34A, .0, -.28, -.2, timer); for (let i = 0; i < 4; i++) box(.06, .04, .06, 0x111111, -.12 + i * .08, -.25, -.2, timer);
+const led = mesh(new THREE.IcosahedronGeometry(.025, 0), new THREE.MeshBasicMaterial({ color: 0x22C55E }), .17, -.25, .03, timer);
+// mola
+const springGeo = (() => { const pts = []; for (let i = 0; i <= 160; i++) { const a = i / 160 * Math.PI * 2 * 8; pts.push(new THREE.Vector3(Math.cos(a) * .1, i / 160, Math.sin(a) * .1)); } return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 320, .014, 5, false); })();
+const spring = new THREE.Mesh(springGeo, M(0x60A5FA, { metalness: .6, roughness: .3 })); spring.position.set(-.18, .14, 0); ROOT.add(spring);
+// garfo
+const fork = grp(ROOT); box(.06, .9, .03, 0xC0C6CE, 0, .45, 0, fork, { metalness: .8, roughness: .2 }); for (let i = 0; i < 4; i++) box(.018, .3, .02, 0xC0C6CE, -.045 + i * .03, 1.05, 0, fork, { metalness: .8 }); box(.1, .05, .03, 0xC0C6CE, 0, .9, 0, fork, { metalness: .8 });
+const bolts = []; for (let i = 0; i < 5; i++) { const b = grp(ROOT); [[0, 0, .4], [.05, -.12, -.5], [0, -.24, .4]].forEach(([x, y, r]) => { const s = box(.035, .16, .02, new THREE.MeshBasicMaterial({ color: 0xFFE14D }), x, y, 0, b); s.rotation.z = r; }); bolts.push(b); }
+// fumaça, faíscas, confete, interrogações
+const smokeM = new THREE.MeshStandardMaterial({ color: 0x777777, transparent: true, roughness: 1, flatShading: true });
+const smoke = []; for (let i = 0; i < 12; i++) { const s = mesh(new THREE.IcosahedronGeometry(.12, 0), smokeM.clone(), 0, 0, 0, ROOT); s.castShadow = false; smoke.push(s); }
+const conf = []; const confCols = [0xFF3B3B, 0x3B82F6, 0xFFD21F, 0x22C55E, 0xA855F7, 0xFF8A1F]; for (let i = 0; i < 60; i++) { const c = box(.06, .06, .01, new THREE.MeshBasicMaterial({ color: confCols[i % 6], side: THREE.DoubleSide }), 0, 0, 0, ROOT); c.userData = { x: (Math.sin(i * 12.9) * .5) * 4, z: Math.cos(i * 7.3) * 1.2, s: .6 + (i % 7) / 7 }; conf.push(c); }
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function scr(p) { const v = p.clone().project(cam); return { x: (v.x + 1) / 2 * W, y: (1 - v.y) / 2 * H }; }
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const sc = (o, t0, t, k = 1) => { const s = pop(t - t0, .32) * k; o.visible = s > 0; o.scale.setScalar(Math.max(s, .001)); return s; };
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [S(2), 'pop'], [T_FIOS, 'pop'], [T_ELET, 'zap'], [T_ALAV, 'pop'], [T_LIGA, 'pop'], [T_IMA, 'pop'], [T_REL, 'pop'], [T_DESL, 'ding'], [T_MOLA, 'pop'], [T_PULA, 'boing'], [T_GARFO, 'zap'], [T_PARAB, 'win'], [S(24) + .4, 'boing']].forEach(([t, k]) => ev(t, k));
+[4, 9, 12, 15, 19].forEach(i => ev(S(i) + .1, 'buzz')); ev(T_SOBE, 'boing'); ev(S(0) + .6, 'boing'); ev(S(0) + 2.0, 'boing');
+const LABELS = [[7, 9, 'RESISTÊNCIAS'], [11, 12, 'ALAVANCA'], [14, 15, 'TRAVA MAGNÉTICA'], [17, 19, 'TIMER'], [21, 22, 'MOLA']];
+// etiqueta fica até a próxima peça
+const LBL = [[T_FIOS, 'RESISTÊNCIAS'], [T_ALAV, 'ALAVANCA'], [T_IMA, 'TRAVA MAGNÉTICA'], [T_REL, 'TIMER'], [T_MOLA, 'MOLA']];
+const HL = /pão|torradeira|fios|resistências|alavanca|ímã|imã|magnética|relógio|timer|mola|garfo|tomada|quinhentos|500|fogo|tempo|calor/i;
+
+// câmera: chaves suaves (um plano contínuo)
+const KEYS = [
+  [0, [0, 1.2, 4.6], [0, .85, 0]], [S(2), [.4, 2.4, 6.6], [0, .8, 0]], [S(3), [1.6, 1.5, 4.4], [0, 1.0, 0]], [S(4) + .5, [-1.2, 1.4, 4.0], [0, .95, 0]],
+  [S(5), [2.2, 1.9, 4.8], [-.1, 1.0, 0]], [T_ELET, [1.2, 1.5, 3.4], [-.15, 1.0, 0]], [S(7), [1.6, 1.7, 4.2], [-.1, 1.0, 0]], [S(8) + 1, [.4, 1.2, 2.7], [-.15, 1.0, 0]],
+  [S(9) + .4, [0, 2.0, 5.2], [0, 1.0, 0]], [S(10), [1.9, 1.7, 4.6], [.5, .9, 0]], [S(12), [1.4, 1.5, 4.8], [.4, .9, 0]], [S(13), [1.5, 1.0, 3.0], [.8, .55, .2]],
+  [S(14) + .6, [1.6, 1.6, 4.6], [.3, .9, 0]], [S(15), [0, 2.2, 5.4], [0, 1.0, 0]], [S(16), [1.8, 1.25, 3.0], [.88, .7, .5]], [S(18), [1.3, .95, 2.3], [.88, .65, .55]],
+  [S(19), [-1.6, 1.6, 4.0], [-.1, .7, 0]], [S(20), [-.6, .9, 3.0], [-.15, .65, 0]], [S(21), [0, 1.8, 5.2], [0, 1.4, 0]], [S(22), [-1.2, 2.0, 4.2], [-.1, 1.6, 0]],
+  [S(23), [2.6, 2.3, 6.0], [0, 1.0, 0]], [S(24), [0, 1.7, 5.4], [0, 1.25, 0]], [TP.duration, [-.6, 1.8, 6.2], [0, 1.2, 0]],
+];
+function camAt(t) {
+  let i = 0; while (i + 1 < KEYS.length && KEYS[i + 1][0] <= t) i++;
+  const a = KEYS[i], b = KEYS[Math.min(i + 1, KEYS.length - 1)]; const u = b === a ? 0 : ease(clamp((t - a[0]) / Math.max(.6, Math.min(1.6, b[0] - a[0]))));
+  const tg = V(...a[2]).lerp(V(...b[2]), u); const p = V(...a[1]).lerp(V(...b[1]), u).sub(tg).multiplyScalar(1.45).add(tg);
+  // deriva lenta para nunca ficar parado
+  p.x += Math.sin(t * .35) * .12; p.y += Math.sin(t * .27) * .05;
+  cam.position.copy(p); cam.lookAt(tg); cam.fov = 40; cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+}
+
+// estado da bandeja (altura do pão)
+const UP = .95, DOWN = .45;
+function carriageY(t) {
+  if (t < T_ALAV) return null;
+  if (t < T_LIGA) return lerp(UP, DOWN, ease((t - T_ALAV) / .5));
+  if (t < T_SOLTA) return DOWN;
+  if (t < S(13)) return UP + (t < T_SOLTA + .5 ? (1 - bounce(clamp((t - T_SOLTA) / .5))) * -.0 : 0) - (t < T_SOLTA + .25 ? lerp(UP - DOWN, 0, easeOut((t - T_SOLTA) / .25)) : 0);
+  if (t < T_SEG) return lerp(UP, DOWN, ease((t - S(13)) / .6));
+  if (t < T_PULA) return DOWN;
+  if (t < T_GARFO - .3) return UP;
+  if (t < S(24) + .4) return DOWN;
+  return UP;
+}
+const tmp = new THREE.Vector3();
+window.draw = function (t) {
+  camAt(t);
+  world.clouds.forEach((c, i) => c.position.x += 0);
+  // ---- visibilidade das peças
+  sc(base, S(2), t);
+  const shellOn = t >= T_ALAV - .6; shell.visible = shellOn; shell.scale.setScalar(shellOn ? Math.max(.001, pop(t - T_ALAV + .6, .4)) : .001);
+  glassFront.visible = t >= T_PARAB; glassFront.scale.setScalar(Math.max(.001, pop(t - T_PARAB, .35)));
+  wires.forEach((w, i) => sc(w, T_FIOS + i * .15, t));
+  carriage.visible = t >= T_ALAV - .6; contacts.visible = carriage.visible;
+  knob.visible = leverArm.visible = t >= T_ALAV;
+  magnet.visible = t >= T_IMA; magnet.scale.setScalar(Math.max(.001, pop(t - T_IMA, .32))); armature.visible = magnet.visible;
+  timer.visible = t >= T_REL; timer.scale.setScalar(Math.max(.001, pop(t - T_REL, .32)));
+  spring.visible = t >= T_MOLA;
+  fire.visible = win(t, S(3), S(5)); handArm.visible = win(t, S(3), S(5));
+  fork.visible = win(t, T_GARFO - .4, S(23));
+  // ---- pão
+  let by = .14, bx = -.18, brot = 0;
+  if (t < S(2)) { // pão pulando sozinho na grama
+    const ph = ((t + .2) % 1.4) / 1.4; by = .02 + Math.sin(ph * Math.PI) * 1.1; bx = 0; brot = Math.sin(t * 3) * .15;
+  } else if (t < S(3)) { by = lerp(1.8, .48, bounce(clamp((t - S(2)) / .8))); bx = -.18; }
+  else if (t < S(5)) { by = .95; bx = 0; brot = Math.sin(t * 2) * .05; }
+  else if (t < T_ALAV) by = .48;
+  const cy = carriageY(t);
+  if (cy !== null) {
+    let y = cy; if (t >= T_PULA && t < T_PULA + 1.0) { const u = (t - T_PULA) / 1.0; y = UP + Math.sin(u * Math.PI) * 1.2 * (1 - u * .3); }
+    if (t >= S(24) + .4 && t < S(24) + 1.4) { const u = (t - S(24) - .4) / 1.0; y = UP + Math.sin(u * Math.PI) * 1.0; }
+    carriage.position.y = cy; by = y + .03;
+  }
+  bread.position.set(bx, by, 0); bread.rotation.set(0, 0, brot); bread.visible = true;
+  // cor da torrada (acúmulo de calor)
+  const heatOn = (t >= T_ELET && t < T_ALAV) ? 1 : (t >= T_LIGA && t < T_SOLTA) ? 1 : (t >= T_SEG && t < T_DESL + .2) ? 1 : 0;
+  let toast = 0; if (t > T_ELET) toast = clamp((Math.min(t, T_ALAV) - T_ELET) / 10) * .45; if (t > T_LIGA) toast = Math.max(toast, .45);
+  if (t > T_SEG) toast = Math.max(toast, .45 + clamp((Math.min(t, T_DESL) - T_SEG) / 8) * .45);
+  let burnt = win(t, S(15), S(16)) ? clamp((t - S(15)) / 1.4) : 0; if (t >= S(24) + .4) burnt = 1;
+  toastFace.material.opacity = clamp(toast + burnt * .2); toastFace.material.color.setHex(burnt > 0 ? 0x2A1A10 : 0x9A5A1E).lerp(new THREE.Color(0x2A1A10), burnt);
+  // fogo: lado só (problema)
+  if (fire.visible) { flames.forEach((f, i) => { f.scale.set(1, .8 + .3 * Math.sin(t * 12 + i * 1.7), 1); }); fire.position.set(0, 0, 0); handArm.position.set(.35, 1.95, 0); handArm.rotation.z = Math.sin(t * 20) * (win(t, S(3) + 1.5, S(4)) ? .05 : 0); if (t >= S(4)) { toastFace.material.opacity = .9; toastBack.visible = false; } }
+  toastBack.visible = !(t >= S(4) && t < S(5));
+  // ---- resistências brilhando
+  const glow = heatOn ? (.7 + .3 * Math.sin(t * 8)) : 0; coilM.emissiveIntensity = lerp(coilM.emissiveIntensity, glow * 1.6, .5); coilM.emissiveIntensity = glow * 1.6;
+  heatL.intensity = glow * 2.2;
+  heatP.forEach((p, i) => { p.visible = glow > 0 && wires[0].visible; if (!p.visible) return; const u = ((t * .8 + i * .17) % 1); p.position.set(-.7 + (i * .37) % 1.1, .5 + u * 1.3, (i % 2 ? .3 : -.3)); p.scale.setScalar(1 - u); });
+  irWaves.forEach((w, i) => { w.visible = win(t, S(8) + .6, S(9)); if (!w.visible) return; const u = ((t - S(8)) * .9 + i * .33) % 1; const side = i % 2 ? 1 : -1; w.position.set(-.5 + (i % 3) * .3, 1.0 + (i % 3 - 1) * .2, side * lerp(.22, .09, u)); w.rotation.set(0, side > 0 ? -Math.PI / 2 : Math.PI / 2, Math.PI / 2); w.material.opacity = 1 - u; w.scale.setScalar(.6 + u * .5); });
+  // ---- ímã
+  const magOn = t >= T_SEG && t < T_DESL; magField.forEach((f, i) => { f.visible = magOn; f.material.opacity = .5 + .5 * Math.sin(t * 8 - i); f.scale.setScalar(1 + ((t * 1.2 + i * .33) % 1) * .4); });
+  // ---- timer
+  if (timer.visible) { let a = 0; if (t < T_DESL) a = -Math.PI * .75 + clamp((t - T_REL) / .6) * Math.PI * 1.2 - clamp((t - T_REL - .6) / Math.max(.5, T_DESL - T_REL - .6)) * Math.PI * 1.2; else a = -Math.PI * .75; if (win(t, S(18), S(19))) a = -Math.PI * .75 + (Math.sin((t - S(18)) * 2) * .5 + .5) * Math.PI * 1.5; dialKnob.rotation.z = -a; led.material.color.setHex(magOn ? 0x22C55E : 0x444444); }
+  // ---- mola
+  if (spring.visible) { const top = carriage.position.y - .03; const s0 = pop(t - T_MOLA, .3); spring.scale.set(Math.max(.001, s0), Math.max(.01, top - .14), Math.max(.001, s0)); }
+  // ---- garfo + raios
+  if (fork.visible) { const u = clamp((t - T_GARFO + .4) / .7); fork.position.set(-.18 + .2, lerp(3.2, 1.75, ease(u)), .05); fork.rotation.z = Math.PI + .1; }
+  bolts.forEach((b, i) => { b.visible = win(t, T_GARFO + .3, S(23)); if (!b.visible) return; const a = i / 5 * Math.PI * 2 + t; b.position.set(-.1 + Math.cos(a) * .45, 1.9 + Math.sin(a * 2) * .2, .4 + Math.sin(a) * .2); b.scale.setScalar((.8 + .4 * Math.sin(t * 25 + i)) * 1.6); b.lookAt(cam.position); });
+  // ---- fumaça (mão queimando / pão queimando / perigo / torrada final)
+  const smk = win(t, S(3) + 1.2, S(5)) ? [.35, 1.9] : win(t, S(15) + .5, S(16)) ? [-.18, 1.7] : t >= S(24) + .6 ? [-.18, 2.2] : null;
+  smoke.forEach((s, i) => { s.visible = !!smk; if (!smk) return; const u = ((t * .6 + i / smoke.length) % 1); s.position.set(smk[0] + Math.sin(i * 3 + t) * .2, smk[1] + u * 1.4, Math.cos(i) * .15); s.scale.setScalar(.6 + u * 1.6); s.material.opacity = (1 - u) * .7; });
+  // ---- confete
+  conf.forEach((c, i) => { const u = t - T_PARAB; c.visible = u > 0 && u < 3; if (!c.visible) return; c.position.set(c.userData.x, 4 - u * 1.6 * c.userData.s - (i % 5) * .2, c.userData.z); c.rotation.set(u * 6 + i, u * 4, 0); });
+
+  // ---------- textos ----------
+  fixed($('hook'), t < E(1) + .3 ? pop(t - .05, .35) * (1 - clamp((t - E(1) - .1) / .2)) : 0);
+  const lb = [...LBL].reverse().find(l => t >= l[0]); const lbOn = lb && t < T_PARAB && t >= lb[0];
+  if (lbOn) { $('label').firstElementChild.textContent = lb[1]; fixed($('label'), pop(t - lb[0], .3)); } else fixed($('label'), 0);
+  const t1 = $('t1'), t2 = $('t2');
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return false; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); return true; };
+  t1.style.opacity = 0; t2.style.opacity = 0;
+  tag(t1, '+500 °C', 'red', win(t, T_500, S(8)), 760, 560, T_500, 5);
+  tag(t1, 'NÃO ENCOSTA', 'blue', win(t, S(8) + .3, S(9)), 540, 560, S(8) + .3, -4);
+  tag(t2, 'CALOR = IGUAL', '', win(t, S(18) + .5, S(19)), 540, 520, S(18) + .5, -4);
+  tag(t1, 'SÓ MUDA O TEMPO', 'green', win(t, S(18) + 1.4, S(19)), 540, 640, S(18) + 1.4, 4);
+  tag(t1, 'NUNCA!', 'red', win(t, T_GARFO + .2, S(23)), 540, 560, T_GARFO + .2, -6);
+  // X vermelho nos "Mas..."
+  const xOn = [3, 4, 9, 12, 15, 19].find(i => win(t, S(i) + (i === 3 ? 2.2 : .4), E(i) + .1));
+  place($('xmark'), xOn !== undefined, 780, 620, xOn !== undefined ? pop(t - S(xOn) - (xOn === 3 ? 2.2 : .4), .25) : 0, -8);
+  const cm = $('comic');
+  if (win(t, S(3) + 2.2, S(4))) { cm.textContent = 'AI!'; place(cm, true, 330, 600, pop(t - S(3) - 2.2, .25), -8); }
+  else if (win(t, T_PULA, T_PULA + 1.1)) { cm.textContent = 'PLIM!'; place(cm, true, 540, 560, pop(t - T_PULA, .25), -6); }
+  else if (win(t, T_PARAB, S(24))) { cm.textContent = 'PARABÉNS!'; cm.style.fontSize = '130px'; place(cm, true, 540, 520, pop(t - T_PARAB, .3), -4); }
+  else if (t < S(2) && t > S(1)) { cm.textContent = '?!'; place(cm, true, 760, 700, pop(t - S(1), .25), 8); }
+  else cm.style.opacity = 0;
+  if (!win(t, T_PARAB, S(24))) cm.style.fontSize = '160px';
+  fixed($('final'), t >= S(24) + .3 ? pop(t - S(24) - .3, .35) : 0);
+  // legenda
+  let wTxt = null, wSt = 0;
+  for (let i = 2; i < SN.length - 1; i++) for (const w of SN[i].words) if (t >= w.start - .03 && t < w.end + .2) { wTxt = w.w; wSt = w.start; }
+  const cap = $('cap');
+  if (wTxt) { cap.textContent = wTxt.toUpperCase().replace(/[.,!?:]/g, ''); cap.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+await document.fonts.load('900 60px P'); await document.fonts.ready;
+window.ready = true;
+</script></body></html>

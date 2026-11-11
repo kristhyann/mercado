@@ -1,0 +1,1355 @@
+{
+ "duration": 91.322,
+ "sentences": [
+  {
+   "text": "Ninguém aperta nada, mas o pão pula sozinho no ponto certo.",
+   "start": 0.0,
+   "end": 3.96,
+   "words": [
+    {
+     "w": "Ninguém",
+     "start": 0.0,
+     "end": 0.4
+    },
+    {
+     "w": "aperta",
+     "start": 0.4,
+     "end": 0.9
+    },
+    {
+     "w": "nada,",
+     "start": 0.9,
+     "end": 1.26
+    },
+    {
+     "w": "mas",
+     "start": 1.58,
+     "end": 1.8
+    },
+    {
+     "w": "o",
+     "start": 1.8,
+     "end": 1.98
+    },
+    {
+     "w": "pão",
+     "start": 1.98,
+     "end": 2.18
+    },
+    {
+     "w": "pula",
+     "start": 2.18,
+     "end": 2.5
+    },
+    {
+     "w": "sozinho",
+     "start": 2.5,
+     "end": 3.12
+    },
+    {
+     "w": "no",
+     "start": 3.12,
+     "end": 3.3
+    },
+    {
+     "w": "ponto",
+     "start": 3.3,
+     "end": 3.52
+    },
+    {
+     "w": "certo.",
+     "start": 3.52,
+     "end": 3.96
+    }
+   ]
+  },
+  {
+   "text": "Quem solta o pão?",
+   "start": 4.54,
+   "end": 5.4,
+   "words": [
+    {
+     "w": "Quem",
+     "start": 4.54,
+     "end": 4.72
+    },
+    {
+     "w": "solta",
+     "start": 4.72,
+     "end": 5.1
+    },
+    {
+     "w": "o",
+     "start": 5.1,
+     "end": 5.24
+    },
+    {
+     "w": "pão?",
+     "start": 5.24,
+     "end": 5.4
+    }
+   ]
+  },
+  {
+   "text": "Pra entender, vamos construir uma torradeira do zero.",
+   "start": 5.4,
+   "end": 9.18,
+   "words": [
+    {
+     "w": "Pra",
+     "start": 5.4,
+     "end": 6.14
+    },
+    {
+     "w": "entender,",
+     "start": 6.14,
+     "end": 6.54
+    },
+    {
+     "w": "vamos",
+     "start": 6.92,
+     "end": 7.14
+    },
+    {
+     "w": "construir",
+     "start": 7.14,
+     "end": 7.64
+    },
+    {
+     "w": "uma",
+     "start": 7.64,
+     "end": 7.9
+    },
+    {
+     "w": "torradeira",
+     "start": 7.9,
+     "end": 8.66
+    },
+    {
+     "w": "do",
+     "start": 8.66,
+     "end": 8.82
+    },
+    {
+     "w": "zero.",
+     "start": 8.82,
+     "end": 9.18
+    }
+   ]
+  },
+  {
+   "text": "Se você segurar o pão no fogo, ele torra, mas queima sua mão.",
+   "start": 9.82,
+   "end": 13.52,
+   "words": [
+    {
+     "w": "Se",
+     "start": 9.82,
+     "end": 9.92
+    },
+    {
+     "w": "você",
+     "start": 9.92,
+     "end": 10.12
+    },
+    {
+     "w": "segurar",
+     "start": 10.12,
+     "end": 10.56
+    },
+    {
+     "w": "o",
+     "start": 10.56,
+     "end": 10.68
+    },
+    {
+     "w": "pão",
+     "start": 10.68,
+     "end": 10.86
+    },
+    {
+     "w": "no",
+     "start": 10.86,
+     "end": 11.0
+    },
+    {
+     "w": "fogo,",
+     "start": 11.0,
+     "end": 11.46
+    },
+    {
+     "w": "ele",
+     "start": 11.66,
+     "end": 11.8
+    },
+    {
+     "w": "torra,",
+     "start": 11.8,
+     "end": 12.26
+    },
+    {
+     "w": "mas",
+     "start": 12.5,
+     "end": 12.72
+    },
+    {
+     "w": "queima",
+     "start": 12.72,
+     "end": 13.14
+    },
+    {
+     "w": "sua",
+     "start": 13.14,
+     "end": 13.32
+    },
+    {
+     "w": "mão.",
+     "start": 13.32,
+     "end": 13.52
+    }
+   ]
+  },
+  {
+   "text": "Mas o fogo torra de um lado só.",
+   "start": 14.08,
+   "end": 15.94,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 14.08,
+     "end": 14.28
+    },
+    {
+     "w": "o",
+     "start": 14.28,
+     "end": 14.38
+    },
+    {
+     "w": "fogo",
+     "start": 14.38,
+     "end": 14.8
+    },
+    {
+     "w": "torra",
+     "start": 14.8,
+     "end": 15.16
+    },
+    {
+     "w": "de",
+     "start": 15.16,
+     "end": 15.28
+    },
+    {
+     "w": "um",
+     "start": 15.28,
+     "end": 15.38
+    },
+    {
+     "w": "lado",
+     "start": 15.38,
+     "end": 15.58
+    },
+    {
+     "w": "só.",
+     "start": 15.58,
+     "end": 15.94
+    }
+   ]
+  },
+  {
+   "text": "Então você coloca fios de metal dos dois lados do pão e passa a eletricidade.",
+   "start": 16.5,
+   "end": 21.42,
+   "words": [
+    {
+     "w": "Então",
+     "start": 16.5,
+     "end": 16.8
+    },
+    {
+     "w": "você",
+     "start": 16.8,
+     "end": 17.08
+    },
+    {
+     "w": "coloca",
+     "start": 17.08,
+     "end": 17.4
+    },
+    {
+     "w": "fios",
+     "start": 17.4,
+     "end": 17.82
+    },
+    {
+     "w": "de",
+     "start": 17.82,
+     "end": 18.0
+    },
+    {
+     "w": "metal",
+     "start": 18.0,
+     "end": 18.36
+    },
+    {
+     "w": "dos",
+     "start": 18.36,
+     "end": 18.7
+    },
+    {
+     "w": "dois",
+     "start": 18.7,
+     "end": 18.98
+    },
+    {
+     "w": "lados",
+     "start": 18.98,
+     "end": 19.32
+    },
+    {
+     "w": "do",
+     "start": 19.32,
+     "end": 19.56
+    },
+    {
+     "w": "pão",
+     "start": 19.56,
+     "end": 19.86
+    },
+    {
+     "w": "e",
+     "start": 19.86,
+     "end": 20.14
+    },
+    {
+     "w": "passa",
+     "start": 20.14,
+     "end": 20.54
+    },
+    {
+     "w": "a",
+     "start": 20.54,
+     "end": 20.72
+    },
+    {
+     "w": "eletricidade.",
+     "start": 20.72,
+     "end": 21.42
+    }
+   ]
+  },
+  {
+   "text": "Eles esquentam até ficar vermelhos, passando de quinhentos graus.",
+   "start": 22.02,
+   "end": 26.02,
+   "words": [
+    {
+     "w": "Eles",
+     "start": 22.02,
+     "end": 22.24
+    },
+    {
+     "w": "esquentam",
+     "start": 22.24,
+     "end": 22.82
+    },
+    {
+     "w": "até",
+     "start": 22.82,
+     "end": 23.02
+    },
+    {
+     "w": "ficar",
+     "start": 23.02,
+     "end": 23.36
+    },
+    {
+     "w": "vermelhos,",
+     "start": 23.36,
+     "end": 24.14
+    },
+    {
+     "w": "passando",
+     "start": 24.26,
+     "end": 24.7
+    },
+    {
+     "w": "de",
+     "start": 24.7,
+     "end": 24.88
+    },
+    {
+     "w": "quinhentos",
+     "start": 24.88,
+     "end": 25.4
+    },
+    {
+     "w": "graus.",
+     "start": 25.4,
+     "end": 26.02
+    }
+   ]
+  },
+  {
+   "text": "Essas são as resistências.",
+   "start": 26.44,
+   "end": 28.0,
+   "words": [
+    {
+     "w": "Essas",
+     "start": 26.44,
+     "end": 26.88
+    },
+    {
+     "w": "são",
+     "start": 26.88,
+     "end": 27.12
+    },
+    {
+     "w": "as",
+     "start": 27.12,
+     "end": 27.28
+    },
+    {
+     "w": "resistências.",
+     "start": 27.28,
+     "end": 28.0
+    }
+   ]
+  },
+  {
+   "text": "Parece estranho, mas o pão nem encosta no fio: ele torra pelo calor que o fio irradia.",
+   "start": 28.0,
+   "end": 34.36,
+   "words": [
+    {
+     "w": "Parece",
+     "start": 28.0,
+     "end": 28.86
+    },
+    {
+     "w": "estranho,",
+     "start": 28.86,
+     "end": 29.54
+    },
+    {
+     "w": "mas",
+     "start": 29.66,
+     "end": 29.92
+    },
+    {
+     "w": "o",
+     "start": 29.92,
+     "end": 30.06
+    },
+    {
+     "w": "pão",
+     "start": 30.06,
+     "end": 30.26
+    },
+    {
+     "w": "nem",
+     "start": 30.26,
+     "end": 30.6
+    },
+    {
+     "w": "encosta",
+     "start": 30.6,
+     "end": 31.1
+    },
+    {
+     "w": "no",
+     "start": 31.1,
+     "end": 31.32
+    },
+    {
+     "w": "fio:",
+     "start": 31.32,
+     "end": 31.62
+    },
+    {
+     "w": "ele",
+     "start": 31.94,
+     "end": 32.2
+    },
+    {
+     "w": "torra",
+     "start": 32.2,
+     "end": 32.66
+    },
+    {
+     "w": "pelo",
+     "start": 32.66,
+     "end": 32.9
+    },
+    {
+     "w": "calor",
+     "start": 32.9,
+     "end": 33.3
+    },
+    {
+     "w": "que",
+     "start": 33.3,
+     "end": 33.54
+    },
+    {
+     "w": "o",
+     "start": 33.54,
+     "end": 33.68
+    },
+    {
+     "w": "fio",
+     "start": 33.68,
+     "end": 33.88
+    },
+    {
+     "w": "irradia.",
+     "start": 33.88,
+     "end": 34.36
+    }
+   ]
+  },
+  {
+   "text": "Mas fio ligado o tempo todo é perigoso.",
+   "start": 34.94,
+   "end": 37.6,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 34.94,
+     "end": 35.18
+    },
+    {
+     "w": "fio",
+     "start": 35.18,
+     "end": 35.52
+    },
+    {
+     "w": "ligado",
+     "start": 35.52,
+     "end": 35.94
+    },
+    {
+     "w": "o",
+     "start": 35.94,
+     "end": 36.1
+    },
+    {
+     "w": "tempo",
+     "start": 36.1,
+     "end": 36.34
+    },
+    {
+     "w": "todo",
+     "start": 36.34,
+     "end": 36.74
+    },
+    {
+     "w": "é",
+     "start": 36.74,
+     "end": 37.06
+    },
+    {
+     "w": "perigoso.",
+     "start": 37.06,
+     "end": 37.6
+    }
+   ]
+  },
+  {
+   "text": "Então você cria uma alavanca que desce o pão e liga a energia.",
+   "start": 38.08,
+   "end": 41.96,
+   "words": [
+    {
+     "w": "Então",
+     "start": 38.08,
+     "end": 38.36
+    },
+    {
+     "w": "você",
+     "start": 38.36,
+     "end": 38.62
+    },
+    {
+     "w": "cria",
+     "start": 38.62,
+     "end": 38.9
+    },
+    {
+     "w": "uma",
+     "start": 38.9,
+     "end": 39.18
+    },
+    {
+     "w": "alavanca",
+     "start": 39.18,
+     "end": 39.84
+    },
+    {
+     "w": "que",
+     "start": 39.84,
+     "end": 40.04
+    },
+    {
+     "w": "desce",
+     "start": 40.04,
+     "end": 40.44
+    },
+    {
+     "w": "o",
+     "start": 40.44,
+     "end": 40.58
+    },
+    {
+     "w": "pão",
+     "start": 40.58,
+     "end": 40.82
+    },
+    {
+     "w": "e",
+     "start": 40.82,
+     "end": 41.1
+    },
+    {
+     "w": "liga",
+     "start": 41.1,
+     "end": 41.42
+    },
+    {
+     "w": "a",
+     "start": 41.42,
+     "end": 41.54
+    },
+    {
+     "w": "energia.",
+     "start": 41.54,
+     "end": 41.96
+    }
+   ]
+  },
+  {
+   "text": "Essa é a alavanca.",
+   "start": 42.48,
+   "end": 43.96,
+   "words": [
+    {
+     "w": "Essa",
+     "start": 42.48,
+     "end": 42.94
+    },
+    {
+     "w": "é",
+     "start": 42.94,
+     "end": 43.22
+    },
+    {
+     "w": "a",
+     "start": 43.22,
+     "end": 43.34
+    },
+    {
+     "w": "alavanca.",
+     "start": 43.34,
+     "end": 43.96
+    }
+   ]
+  },
+  {
+   "text": "Mas, quando você solta o dedo, tudo sobe.",
+   "start": 44.42,
+   "end": 47.3,
+   "words": [
+    {
+     "w": "Mas,",
+     "start": 44.42,
+     "end": 44.74
+    },
+    {
+     "w": "quando",
+     "start": 45.02,
+     "end": 45.22
+    },
+    {
+     "w": "você",
+     "start": 45.22,
+     "end": 45.5
+    },
+    {
+     "w": "solta",
+     "start": 45.5,
+     "end": 45.96
+    },
+    {
+     "w": "o",
+     "start": 45.96,
+     "end": 46.08
+    },
+    {
+     "w": "dedo,",
+     "start": 46.08,
+     "end": 46.38
+    },
+    {
+     "w": "tudo",
+     "start": 46.66,
+     "end": 46.82
+    },
+    {
+     "w": "sobe.",
+     "start": 46.82,
+     "end": 47.3
+    }
+   ]
+  },
+  {
+   "text": "Então você coloca um ímã elétrico que segura a bandeja lá embaixo.",
+   "start": 47.8,
+   "end": 51.72,
+   "words": [
+    {
+     "w": "Então",
+     "start": 47.8,
+     "end": 48.1
+    },
+    {
+     "w": "você",
+     "start": 48.1,
+     "end": 48.36
+    },
+    {
+     "w": "coloca",
+     "start": 48.36,
+     "end": 48.7
+    },
+    {
+     "w": "um",
+     "start": 48.7,
+     "end": 48.98
+    },
+    {
+     "w": "ímã",
+     "start": 48.98,
+     "end": 49.24
+    },
+    {
+     "w": "elétrico",
+     "start": 49.24,
+     "end": 49.82
+    },
+    {
+     "w": "que",
+     "start": 49.82,
+     "end": 50.02
+    },
+    {
+     "w": "segura",
+     "start": 50.02,
+     "end": 50.52
+    },
+    {
+     "w": "a",
+     "start": 50.52,
+     "end": 50.66
+    },
+    {
+     "w": "bandeja",
+     "start": 50.66,
+     "end": 51.1
+    },
+    {
+     "w": "lá",
+     "start": 51.1,
+     "end": 51.36
+    },
+    {
+     "w": "embaixo.",
+     "start": 51.36,
+     "end": 51.72
+    }
+   ]
+  },
+  {
+   "text": "Essa é a trava magnética.",
+   "start": 52.28,
+   "end": 54.1,
+   "words": [
+    {
+     "w": "Essa",
+     "start": 52.28,
+     "end": 52.7
+    },
+    {
+     "w": "é",
+     "start": 52.7,
+     "end": 52.98
+    },
+    {
+     "w": "a",
+     "start": 52.98,
+     "end": 53.06
+    },
+    {
+     "w": "trava",
+     "start": 53.06,
+     "end": 53.4
+    },
+    {
+     "w": "magnética.",
+     "start": 53.4,
+     "end": 54.1
+    }
+   ]
+  },
+  {
+   "text": "Mas alguém precisa decidir a hora de parar.",
+   "start": 54.6,
+   "end": 56.9,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 54.6,
+     "end": 54.88
+    },
+    {
+     "w": "alguém",
+     "start": 54.88,
+     "end": 55.18
+    },
+    {
+     "w": "precisa",
+     "start": 55.18,
+     "end": 55.64
+    },
+    {
+     "w": "decidir",
+     "start": 55.64,
+     "end": 56.22
+    },
+    {
+     "w": "a",
+     "start": 56.22,
+     "end": 56.34
+    },
+    {
+     "w": "hora",
+     "start": 56.34,
+     "end": 56.52
+    },
+    {
+     "w": "de",
+     "start": 56.52,
+     "end": 56.68
+    },
+    {
+     "w": "parar.",
+     "start": 56.68,
+     "end": 56.9
+    }
+   ]
+  },
+  {
+   "text": "Então você coloca um relógio que, no fim do tempo, desliga o ímã.",
+   "start": 56.9,
+   "end": 61.44,
+   "words": [
+    {
+     "w": "Então",
+     "start": 56.9,
+     "end": 57.72
+    },
+    {
+     "w": "você",
+     "start": 57.72,
+     "end": 58.06
+    },
+    {
+     "w": "coloca",
+     "start": 58.06,
+     "end": 58.34
+    },
+    {
+     "w": "um",
+     "start": 58.34,
+     "end": 58.6
+    },
+    {
+     "w": "relógio",
+     "start": 58.6,
+     "end": 59.2
+    },
+    {
+     "w": "que,",
+     "start": 59.2,
+     "end": 59.4
+    },
+    {
+     "w": "no",
+     "start": 59.44,
+     "end": 59.52
+    },
+    {
+     "w": "fim",
+     "start": 59.52,
+     "end": 59.76
+    },
+    {
+     "w": "do",
+     "start": 59.76,
+     "end": 59.88
+    },
+    {
+     "w": "tempo,",
+     "start": 59.88,
+     "end": 60.22
+    },
+    {
+     "w": "desliga",
+     "start": 60.54,
+     "end": 61.02
+    },
+    {
+     "w": "o",
+     "start": 61.02,
+     "end": 61.2
+    },
+    {
+     "w": "ímã.",
+     "start": 61.2,
+     "end": 61.44
+    }
+   ]
+  },
+  {
+   "text": "Esse é o timer.",
+   "start": 62.0,
+   "end": 63.06,
+   "words": [
+    {
+     "w": "Esse",
+     "start": 62.0,
+     "end": 62.3
+    },
+    {
+     "w": "é",
+     "start": 62.3,
+     "end": 62.56
+    },
+    {
+     "w": "o",
+     "start": 62.56,
+     "end": 62.66
+    },
+    {
+     "w": "timer.",
+     "start": 62.66,
+     "end": 63.06
+    }
+   ]
+  },
+  {
+   "text": "Por isso que o botão de tostar não muda o calor, só o tempo.",
+   "start": 63.68,
+   "end": 67.52,
+   "words": [
+    {
+     "w": "Por",
+     "start": 63.68,
+     "end": 63.88
+    },
+    {
+     "w": "isso",
+     "start": 63.88,
+     "end": 64.08
+    },
+    {
+     "w": "que",
+     "start": 64.08,
+     "end": 64.22
+    },
+    {
+     "w": "o",
+     "start": 64.22,
+     "end": 64.3
+    },
+    {
+     "w": "botão",
+     "start": 64.3,
+     "end": 64.6
+    },
+    {
+     "w": "de",
+     "start": 64.6,
+     "end": 64.76
+    },
+    {
+     "w": "tostar",
+     "start": 64.76,
+     "end": 65.22
+    },
+    {
+     "w": "não",
+     "start": 65.22,
+     "end": 65.58
+    },
+    {
+     "w": "muda",
+     "start": 65.58,
+     "end": 65.94
+    },
+    {
+     "w": "o",
+     "start": 65.94,
+     "end": 66.02
+    },
+    {
+     "w": "calor,",
+     "start": 66.02,
+     "end": 66.3
+    },
+    {
+     "w": "só",
+     "start": 66.62,
+     "end": 67.04
+    },
+    {
+     "w": "o",
+     "start": 67.04,
+     "end": 67.16
+    },
+    {
+     "w": "tempo.",
+     "start": 67.16,
+     "end": 67.52
+    }
+   ]
+  },
+  {
+   "text": "Mas, sem o ímã, a bandeja precisa subir.",
+   "start": 68.08,
+   "end": 70.84,
+   "words": [
+    {
+     "w": "Mas,",
+     "start": 68.08,
+     "end": 68.38
+    },
+    {
+     "w": "sem",
+     "start": 68.58,
+     "end": 68.9
+    },
+    {
+     "w": "o",
+     "start": 68.9,
+     "end": 69.04
+    },
+    {
+     "w": "ímã,",
+     "start": 69.04,
+     "end": 69.3
+    },
+    {
+     "w": "a",
+     "start": 69.6,
+     "end": 69.66
+    },
+    {
+     "w": "bandeja",
+     "start": 69.66,
+     "end": 70.04
+    },
+    {
+     "w": "precisa",
+     "start": 70.04,
+     "end": 70.42
+    },
+    {
+     "w": "subir.",
+     "start": 70.42,
+     "end": 70.84
+    }
+   ]
+  },
+  {
+   "text": "Então você prende uma mola esticada embaixo dela.",
+   "start": 71.36,
+   "end": 74.36,
+   "words": [
+    {
+     "w": "Então",
+     "start": 71.36,
+     "end": 71.68
+    },
+    {
+     "w": "você",
+     "start": 71.68,
+     "end": 71.94
+    },
+    {
+     "w": "prende",
+     "start": 71.94,
+     "end": 72.4
+    },
+    {
+     "w": "uma",
+     "start": 72.4,
+     "end": 72.52
+    },
+    {
+     "w": "mola",
+     "start": 72.52,
+     "end": 72.9
+    },
+    {
+     "w": "esticada",
+     "start": 72.9,
+     "end": 73.56
+    },
+    {
+     "w": "embaixo",
+     "start": 73.56,
+     "end": 73.98
+    },
+    {
+     "w": "dela.",
+     "start": 73.98,
+     "end": 74.36
+    }
+   ]
+  },
+  {
+   "text": "Essa é a mola, e é ela que faz o pão pular.",
+   "start": 74.86,
+   "end": 77.82,
+   "words": [
+    {
+     "w": "Essa",
+     "start": 74.86,
+     "end": 75.26
+    },
+    {
+     "w": "é",
+     "start": 75.26,
+     "end": 75.5
+    },
+    {
+     "w": "a",
+     "start": 75.5,
+     "end": 75.62
+    },
+    {
+     "w": "mola,",
+     "start": 75.62,
+     "end": 75.96
+    },
+    {
+     "w": "e",
+     "start": 76.24,
+     "end": 76.42
+    },
+    {
+     "w": "é",
+     "start": 76.42,
+     "end": 76.54
+    },
+    {
+     "w": "ela",
+     "start": 76.54,
+     "end": 76.8
+    },
+    {
+     "w": "que",
+     "start": 76.8,
+     "end": 76.98
+    },
+    {
+     "w": "faz",
+     "start": 76.98,
+     "end": 77.2
+    },
+    {
+     "w": "o",
+     "start": 77.2,
+     "end": 77.4
+    },
+    {
+     "w": "pão",
+     "start": 77.4,
+     "end": 77.52
+    },
+    {
+     "w": "pular.",
+     "start": 77.52,
+     "end": 77.82
+    }
+   ]
+  },
+  {
+   "text": "Por isso que nunca se enfia um garfo aí: os fios estão ligados na tomada.",
+   "start": 78.26,
+   "end": 82.7,
+   "words": [
+    {
+     "w": "Por",
+     "start": 78.26,
+     "end": 78.56
+    },
+    {
+     "w": "isso",
+     "start": 78.56,
+     "end": 78.74
+    },
+    {
+     "w": "que",
+     "start": 78.74,
+     "end": 78.9
+    },
+    {
+     "w": "nunca",
+     "start": 78.9,
+     "end": 79.2
+    },
+    {
+     "w": "se",
+     "start": 79.2,
+     "end": 79.42
+    },
+    {
+     "w": "enfia",
+     "start": 79.42,
+     "end": 79.7
+    },
+    {
+     "w": "um",
+     "start": 79.7,
+     "end": 79.84
+    },
+    {
+     "w": "garfo",
+     "start": 79.84,
+     "end": 80.18
+    },
+    {
+     "w": "aí:",
+     "start": 80.18,
+     "end": 80.36
+    },
+    {
+     "w": "os",
+     "start": 80.8,
+     "end": 81.0
+    },
+    {
+     "w": "fios",
+     "start": 81.0,
+     "end": 81.28
+    },
+    {
+     "w": "estão",
+     "start": 81.28,
+     "end": 81.58
+    },
+    {
+     "w": "ligados",
+     "start": 81.58,
+     "end": 82.08
+    },
+    {
+     "w": "na",
+     "start": 82.08,
+     "end": 82.28
+    },
+    {
+     "w": "tomada.",
+     "start": 82.28,
+     "end": 82.7
+    }
+   ]
+  },
+  {
+   "text": "Parabéns, você construiu uma torradeira.",
+   "start": 83.36,
+   "end": 86.08,
+   "words": [
+    {
+     "w": "Parabéns,",
+     "start": 83.36,
+     "end": 83.96
+    },
+    {
+     "w": "você",
+     "start": 84.22,
+     "end": 84.44
+    },
+    {
+     "w": "construiu",
+     "start": 84.44,
+     "end": 85.14
+    },
+    {
+     "w": "uma",
+     "start": 85.14,
+     "end": 85.36
+    },
+    {
+     "w": "torradeira.",
+     "start": 85.36,
+     "end": 86.08
+    }
+   ]
+  },
+  {
+   "text": "Segue a página, senão sua próxima torrada sai queimada.",
+   "start": 86.08,
+   "end": 89.84,
+   "words": [
+    {
+     "w": "Segue",
+     "start": 86.08,
+     "end": 86.92
+    },
+    {
+     "w": "a",
+     "start": 86.92,
+     "end": 87.02
+    },
+    {
+     "w": "página,",
+     "start": 87.02,
+     "end": 87.38
+    },
+    {
+     "w": "senão",
+     "start": 87.78,
+     "end": 87.96
+    },
+    {
+     "w": "sua",
+     "start": 87.96,
+     "end": 88.12
+    },
+    {
+     "w": "próxima",
+     "start": 88.12,
+     "end": 88.58
+    },
+    {
+     "w": "torrada",
+     "start": 88.58,
+     "end": 89.1
+    },
+    {
+     "w": "sai",
+     "start": 89.1,
+     "end": 89.36
+    },
+    {
+     "w": "queimada.",
+     "start": 89.36,
+     "end": 89.84
+    }
+   ]
+  }
+ ]
+}
