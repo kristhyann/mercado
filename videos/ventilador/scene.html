@@ -1,0 +1,250 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:250px;text-align:center;font-weight:900;font-size:130px;line-height:1.0}
+#hook b{color:#FF3B3B;display:block;font-size:160px}
+#label{width:1080px;top:180px;text-align:center}
+#label span{display:inline-block;font-weight:900;font-size:100px;color:#FF8A1F;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#cap{width:1080px;top:1290px;text-align:center;font-weight:900;font-size:118px}
+#cap.hl{color:#FF8A1F}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:64px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF3B3B;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}
+#xmark{font-weight:900;font-size:300px;color:#FF2D2D;-webkit-text-stroke:12px #fff;paint-order:stroke fill;line-height:1}
+.comic{font-weight:900;font-size:150px;color:#FFD21F;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 10px 0 rgba(0,0,0,.3);white-space:nowrap}
+#final{left:60px;width:960px;top:1330px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:78px;line-height:1.05;padding:30px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#FF8A1F}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.8;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">E SE ELE<b>CAIR?</b></div>
+<div id="label" class="o"><span>X</span></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag"></div>
+<div id="xmark" class="o">✕</div>
+<div id="comic" class="o comic"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Segue a página,<br><em>senão ele balança hoje.</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, bounce, M, mesh, buildWorld } from '/_kit/kit.js';
+import { buildPerson, PP, mixP, poseP, face } from '/_kit/pessoas.js';
+
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; const S = i => SN[i].start, E = i => SN[i].end; window.DURATION = TP.duration;
+const WD = (i, re) => { const w = SN[i].words.find(w => re.test(w.w)); return w ? w.start : S(i); };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(window.devicePixelRatio || 1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .03, 600);
+const world = buildWorld(scene);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const box = (w, h, d, c, x, y, z, par = scene, o = {}) => mesh(new THREE.BoxGeometry(w, h, d), typeof c === 'number' ? M(c, o) : c, x, y, z, par);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+
+// ---------- tempos ----------
+const T_MOTOR = WD(4, /motor/i), T_PECA = WD(7, /pecinha/i), T_EMP = WD(7, /empurrão/i), T_ESTRAGA = WD(9, /estraga/i), T_EMPURRAR = WD(9, /empurrar/i);
+const T_PLACAS = WD(11, /placas/i), T_CINCO = WD(13, /cinco/i), T_GANCHO = WD(14, /gancho/i), T_CANO = WD(17, /cano/i), T_CHAVE = WD(19, /chavinha/i), T_INV = WD(19, /inverte/i);
+const T_BUCHA = WD(20, /bucha/i), T_RARO = WD(20, /raro/i), T_PARAB = S(21), T_BAL = WD(22, /balançar/i);
+
+// ---------- quarto em corte ----------
+const room = grp();
+box(4.4, .2, 4.0, 0xC89F72, 0, .1, 0, room); box(4.4, 3.2, .15, 0xE8DCC8, 0, 1.8, -1.95, room); box(.15, 3.2, 4.0, 0xDDD0BA, -2.15, 1.8, 0, room);
+// laje em corte (concreto + ferragem)
+const ceilY = 3.4;
+const slab = box(4.4, .3, 4.0, 0xA9A9A9, 0, ceilY + .15, 0, room); slab.material.roughness = 1; slab.material.transparent = true; slab.material.opacity = .55; slab.material.depthWrite = false;
+box(4.4, .04, 4.0, 0xF4EFE6, 0, ceilY - .02, 0, room); // reboco
+for (let i = 0; i < 9; i++) mesh(new THREE.CylinderGeometry(.03, .03, .02, 8), M(0x6B3B1F), -2 + i * .5, ceilY + .12, 2.01, room).rotation.x = Math.PI / 2;
+room.traverse(o => { if (o.isMesh) o.castShadow = false; });
+const roomL = new THREE.PointLight(0xFFF1DC, 5, 9, 1.4); roomL.position.set(.6, 2.6, 1.6); scene.add(roomL);
+const roomL2 = new THREE.PointLight(0xFFFFFF, 2.2, 8, 1.4); roomL2.position.set(-1.2, 1.4, 2.2); scene.add(roomL2);
+// cama
+const bed = grp(room); bed.position.set(0, 0, .1);
+box(1.5, .35, 2.2, 0x7A5638, 0, .38, 0, bed); box(1.4, .2, 2.1, 0xF5F5F5, 0, .62, 0, bed); box(.9, .12, .4, 0xffffff, 0, .76, -.8, bed); box(1.5, .9, .1, 0x7A5638, 0, .65, -1.1, bed);
+const blanket = box(1.45, .08, 1.3, 0x3A6EA5, 0, .76, .35, bed);
+// tapete, criado-mudo, abajur
+mesh(new THREE.CylinderGeometry(.9, .9, .02, 20), M(0xD9C8A9), 1.5, .21, 1.2, room).scale.z = .6;
+box(.5, .5, .45, 0x8B5E3C, -1.35, .45, -1.4, room); mesh(new THREE.CylinderGeometry(.12, .16, .25, 10), M(0xFFD166, { emissive: 0x332200 }), -1.35, .95, -1.4, room);
+// pessoa deitada
+const per = buildPerson({ shirt: 0xF4A261, pants: 0x3B4A5A, hair: 0x23150C }); scene.add(per.root);
+per.root.position.set(0, .88, .95); per.root.rotation.set(-Math.PI / 2, 0, 0);
+const cardboard = box(.35, .45, .02, 0xC9A06A, 0, 0, 0); cardboard.visible = false;
+const sweat = []; for (let i = 0; i < 3; i++) { const d = mesh(new THREE.IcosahedronGeometry(.04, 1), new THREE.MeshStandardMaterial({ color: 0x7FD4FF, roughness: .1 }), 0, 0, 0); d.scale.y = 1.5; scene.add(d); sweat.push(d); }
+
+// ---------- ventilador ----------
+const FAN = grp(); // origem = ponto de fixação no teto
+FAN.position.set(0, ceilY, 0);
+// gancho embutido na laje
+const hook = grp(FAN); const steel = M(0x9AA3AE, { metalness: .7, roughness: .3 });
+mesh(new THREE.CylinderGeometry(.03, .03, .4, 8), steel, 0, .15, 0, hook); const hk = mesh(new THREE.TorusGeometry(.07, .022, 6, 14, Math.PI * 1.6), steel, 0, -.1, 0, hook); hk.rotation.z = -Math.PI * .3;
+mesh(new THREE.BoxGeometry(.25, .04, .04), steel, 0, .32, 0, hook);
+// canopla
+const canopy = mesh(new THREE.CylinderGeometry(.14, .2, .1, 14), M(0xF5F5F5), 0, -.07, 0, FAN);
+// haste
+const rod = mesh(new THREE.CylinderGeometry(.035, .035, 1, 10), M(0xD4D8DE, { metalness: .6, roughness: .3 }), 0, 0, 0, FAN);
+// motor (em corte: carcaça translúcida, bobina de cobre e rotor visíveis)
+const motor = grp(FAN);
+const shellM = new THREE.MeshStandardMaterial({ color: 0xF5F5F5, transparent: true, opacity: .45, roughness: .4 });
+mesh(new THREE.CylinderGeometry(.34, .34, .3, 20, 1, true), shellM, 0, 0, 0, motor).material.side = THREE.DoubleSide;
+mesh(new THREE.CylinderGeometry(.34, .3, .06, 20), M(0xF5F5F5), 0, .17, 0, motor); mesh(new THREE.CylinderGeometry(.3, .34, .06, 20), M(0xF5F5F5), 0, -.17, 0, motor);
+const stator = mesh(new THREE.TorusGeometry(.22, .06, 8, 20), M(0xC86B2B, { metalness: .5, roughness: .4 }), 0, 0, 0, motor); stator.rotation.x = Math.PI / 2;
+const rotor = grp(motor); mesh(new THREE.CylinderGeometry(.13, .13, .24, 12), M(0x6B7280, { metalness: .6 }), 0, 0, 0, rotor); for (let i = 0; i < 6; i++) box(.04, .24, .26, 0x4B5563, 0, 0, 0, rotor).rotation.y = i * Math.PI / 6;
+// capacitor
+const capg = grp(motor); capg.position.set(.22, .26, 0);
+box(.14, .1, .09, 0x111827, 0, 0, 0, capg); const capLbl = box(.1, .05, .002, 0xFACC15, 0, 0, .046, capg);
+const wire1 = mesh(new THREE.CylinderGeometry(.008, .008, .12, 4), M(0xE11D48), -.05, -.08, 0, capg), wire2 = mesh(new THREE.CylinderGeometry(.008, .008, .12, 4), M(0x111111), .05, -.08, 0, capg);
+const capBolts = []; for (let i = 0; i < 4; i++) { const b = grp(capg); [[0, 0, .4], [.03, -.07, -.5], [0, -.14, .4]].forEach(([x, y, r]) => { const s = box(.022, .09, .015, new THREE.MeshBasicMaterial({ color: 0xFFE14D }), x, y, 0, b); s.rotation.z = r; }); capBolts.push(b); }
+// chave ventilar/exaustão
+const sw = grp(motor); sw.position.set(-.3, -.05, .12); box(.06, .12, .06, 0x333333, 0, 0, 0, sw); const swKnob = box(.03, .06, .03, 0xFF8A1F, 0, .04, .03, sw);
+// pás
+const blades = grp(motor); const bladeArr = [];
+for (let i = 0; i < 4; i++) { const arm = grp(blades); arm.rotation.y = i * Math.PI / 2; box(.32, .03, .07, 0x9AA3AE, .45, -.12, 0, arm, { metalness: .6 }); const b = box(1.15, .025, .3, 0x8B5E3C, 1.1, -.12, 0, arm); b.rotation.x = .2; bladeArr.push(arm); }
+// vento
+const windM = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true });
+const winds = []; for (let i = 0; i < 10; i++) { const w = new THREE.Mesh(new THREE.TorusGeometry(.3, .012, 4, 16, Math.PI * .8), windM.clone()); scene.add(w); winds.push(w); }
+// setas de peso
+const arrows = []; for (let i = 0; i < 3; i++) { const a = grp(); mesh(new THREE.ConeGeometry(.1, .2, 8), new THREE.MeshBasicMaterial({ color: 0xFF3B3B }), 0, -.15, 0, a).rotation.x = Math.PI; mesh(new THREE.CylinderGeometry(.03, .03, .3, 6), new THREE.MeshBasicMaterial({ color: 0xFF3B3B }), 0, .05, 0, a); arrows.push(a); }
+// bucha fraca (exemplo)
+const bucha = grp(); bucha.position.set(1.4, ceilY, 1.2);
+const plug = mesh(new THREE.CylinderGeometry(.04, .03, .25, 8), M(0xF3F4F6), 0, .1, 0, bucha); const screw = mesh(new THREE.CylinderGeometry(.015, .015, .35, 6), steel, 0, 0, 0, bucha);
+const crumbs = []; for (let i = 0; i < 8; i++) { const c = mesh(new THREE.TetrahedronGeometry(.03, 0), M(0xA9A9A9), 0, 0, 0); scene.add(c); crumbs.push(c); }
+// fumaça, confete, interrogações
+const smokeM = new THREE.MeshStandardMaterial({ color: 0x666666, transparent: true, roughness: 1, flatShading: true });
+const smoke = []; for (let i = 0; i < 8; i++) { const s = mesh(new THREE.IcosahedronGeometry(.06, 0), smokeM.clone(), 0, 0, 0); scene.add(s); smoke.push(s); }
+const conf = []; const confCols = [0xFF3B3B, 0x3B82F6, 0xFFD21F, 0x22C55E, 0xA855F7, 0xFF8A1F]; for (let i = 0; i < 60; i++) { const c = box(.07, .07, .01, new THREE.MeshBasicMaterial({ color: confCols[i % 6], side: THREE.DoubleSide }), 0, 0, 0); c.userData = { x: Math.sin(i * 12.9) * 2.0, z: Math.cos(i * 7.3) * 1.5, s: .6 + (i % 7) / 7 }; conf.push(c); }
+const pufM = new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, roughness: 1, flatShading: true, emissive: 0xffffff, emissiveIntensity: .25 });
+const puf = []; for (let i = 0; i < 12; i++) { const b = mesh(new THREE.IcosahedronGeometry(.3, 0), pufM, 0, 0, 0); b.userData.d = V(Math.cos(i) * 1.2, Math.sin(i * 1.7) * .8, Math.sin(i) * .8); scene.add(b); puf.push(b); }
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [S(2) + .3, 'whoosh'], [T_MOTOR, 'pop'], [T_PECA, 'pop'], [T_EMP, 'zap'], [T_EMPURRAR, 'pop'], [T_PLACAS, 'pop'], [T_GANCHO, 'pop'], [T_CANO, 'pop'], [T_CHAVE, 'pop'], [T_INV, 'whoosh'], [T_BUCHA, 'buzz'], [T_PARAB, 'win'], [T_BAL, 'boing']].forEach(([t, k]) => ev(t, k));
+[6, 10, 13, 16].forEach(i => ev(S(i) + .3, 'buzz')); ev(T_ESTRAGA, 'buzz');
+const LBL = [[T_MOTOR, 'MOTOR'], [T_PECA, 'CAPACITOR'], [T_PLACAS, 'PÁS'], [T_GANCHO, 'GANCHO DE TETO'], [T_CANO, 'HASTE']];
+const HL = /motor|capacitor|pás|pá|gancho|haste|cano|laje|quilos|bucha|exaustão|ventilar|teto|ventilador|cair/i;
+
+// câmera: um plano contínuo
+const KEYS = [
+  [0, [.4, 2.0, 7.6], [0, 2.0, .2]], [S(1), [.3, 2.8, 4.0], [0, 3.1, 0]], [S(2), [1.4, 2.4, 8.4], [0, 1.9, 0]], [S(3), [1.2, 2.0, 4.6], [0, 1.2, .6]],
+  [S(4), [.8, 2.9, 3.0], [0, 3.0, 0]], [S(6), [.7, 3.0, 2.4], [0, 3.0, 0]], [S(7), [.9, 3.25, 1.9], [.15, 3.1, 0]], [S(9), [.6, 3.0, 2.4], [0, 3.0, 0]],
+  [S(10), [1.4, 2.0, 5.2], [0, 1.9, .3]], [S(11), [2.2, 2.6, 6.2], [0, 2.2, 0]], [S(13), [1.0, 1.6, 6.8], [0, 2.0, .3]], [S(14), [.6, 3.3, 3.0], [0, 3.35, .4]],
+  [S(16), [1.5, 2.8, 5.0], [0, 2.8, 0]], [S(17), [1.0, 2.7, 4.4], [0, 2.8, 0]], [S(19), [-.9, 2.6, 3.0], [-.2, 2.5, 0]], [S(20), [2.0, 3.3, 3.4], [1.0, 3.3, .8]],
+  [S(21), [2.4, 2.4, 8.6], [0, 1.9, 0]], [S(22), [0, 2.2, 7.4], [0, 2.1, .2]], [TP.duration, [-.4, 2.3, 7.8], [0, 2.1, .2]],
+];
+function camAt(t) {
+  let i = 0; while (i + 1 < KEYS.length && KEYS[i + 1][0] <= t) i++;
+  const b = KEYS[i], a = KEYS[Math.max(0, i - 1)]; const u = b === a ? 1 : ease(clamp((t - b[0]) / Math.max(.6, Math.min(1.4, (KEYS[i + 1] ? KEYS[i + 1][0] : b[0] + 2) - b[0]))));
+  const tg = V(...a[2]).lerp(V(...b[2]), u); const p = V(...a[1]).lerp(V(...b[1]), u);
+  p.x += Math.sin(t * .35) * .1; p.y += Math.sin(t * .27) * .04;
+  cam.position.copy(p); cam.lookAt(tg); cam.fov = 40; cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+}
+const tmp = new THREE.Vector3();
+window.draw = function (t) {
+  camAt(t);
+  // ---- o que existe em cada momento
+  const intro = t < S(2) + .3; // ventilador pronto no gancho
+  const hasMotor = intro || t >= T_MOTOR, hasCap = intro || t >= T_PECA, hasBlades = intro || t >= T_PLACAS, hasHook = intro || t >= T_GANCHO, hasRod = intro || t >= T_CANO;
+  const vanish = win(t, S(2) + .3, S(2) + .5);
+  FAN.visible = !(t >= S(2) + .3 && t < T_MOTOR);
+  hook.visible = hasHook; hook.scale.setScalar(intro ? 1 : Math.max(.001, pop(t - T_GANCHO, .35)));
+  canopy.visible = hasRod; rod.visible = hasRod;
+  motor.visible = hasMotor; motor.scale.setScalar(intro ? 1 : Math.max(.001, pop(t - T_MOTOR, .35)));
+  capg.visible = hasCap; capg.scale.setScalar(intro ? 1 : Math.max(.001, pop(t - T_PECA, .35)));
+  blades.visible = hasBlades; bladeArr.forEach((a, i) => a.scale.setScalar(intro ? 1 : Math.max(.001, pop(t - T_PLACAS - i * .15, .3))));
+  sw.visible = intro || t >= T_CHAVE;
+  // altura do motor: com haste 0.85 abaixo do teto; sem haste, colado
+  let drop = hasRod ? .85 : .25;
+  if (!intro && t < T_GANCHO) drop = .55; // flutuando antes do gancho
+  if (!intro && win(t, T_GANCHO, T_CANO)) drop = lerp(.55, .25, ease(clamp((t - T_GANCHO) / .5)));
+  if (!intro && t >= T_CANO) drop = lerp(.25, .85, ease(clamp((t - T_CANO) / .8)));
+  motor.position.y = -drop; rod.scale.y = Math.max(.01, drop - .17); rod.position.y = -(drop - .17) / 2 - .02;
+  // peso: balança/afunda (problema)
+  let wob = 0; if (win(t, S(13), T_GANCHO)) wob = Math.sin(t * 7) * .06; if (win(t, S(16), T_CANO)) wob = Math.sin(t * 9) * .05; if (t >= T_BAL) wob = Math.sin(t * 8) * .07;
+  if (intro) wob = Math.sin(t * 6) * .025;
+  FAN.rotation.set(wob, 0, wob * .7); if (win(t, S(13), T_GANCHO)) FAN.position.y = ceilY - .06 - Math.abs(Math.sin(t * 3.5)) * .08; else FAN.position.y = ceilY;
+  // velocidade de giro (integrada de forma determinística)
+  const wAt = (x) => { const it = x < S(2) + .3; if (it) return 7; if (x < T_MOTOR) return 0; if (x < S(6)) return 4; if (x < T_EMP) return 0; if (x < T_ESTRAGA) return 5; if (x < T_EMPURRAR + .2) return 0; if (x >= T_INV && x < S(20)) return -6; return 6; };
+  const w = wAt(t); let spin = 0; for (let x = 0; x < t; x += .02) spin += wAt(x) * Math.min(.02, t - x);
+  rotor.rotation.y = spin; blades.rotation.y = spin; if (win(t, S(6), T_EMP)) motor.rotation.z = Math.sin(t * 40) * .01; else motor.rotation.z = 0;
+  swKnob.position.y = t >= T_INV ? -.04 : .04;
+  // capacitor: raios na partida, fumaça quando estraga
+  capBolts.forEach((b, i) => { b.visible = win(t, T_EMP, T_EMP + 1.2); if (!b.visible) return; b.position.set(Math.cos(i * 1.6 + t * 5) * .14, .05, Math.sin(i * 1.6 + t * 5) * .14); b.scale.setScalar(1.3 + Math.sin(t * 30 + i) * .3); b.lookAt(cam.position); });
+  capg.getWorldPosition(tmp);
+  smoke.forEach((s, i) => { const on = win(t, T_ESTRAGA, T_EMPURRAR + .5); s.visible = on; if (!on) return; const u = ((t * .7 + i / 8) % 1); s.position.set(tmp.x + Math.sin(i * 2) * .05, tmp.y + .05 + u * .5, tmp.z); s.scale.setScalar(.6 + u * 1.4); s.material.opacity = (1 - u) * .8; });
+  // vento das pás
+  const windOn = hasBlades && Math.abs(w) > 1; const strong = !(!intro && win(t, S(16), T_CANO + .6));
+  motor.getWorldPosition(tmp);
+  winds.forEach((m, i) => { m.visible = windOn; if (!windOn) return; const u = ((t * (strong ? .8 : .4) + i / 10) % 1); const dir = w > 0 ? -1 : 1; const ang = i * 2.4; const r = .5 + (i % 3) * .35; m.position.set(Math.cos(ang) * r, tmp.y + dir * (.3 + u * (strong ? 2.0 : .7)), Math.sin(ang) * r * .6 + .2); m.rotation.set(Math.PI / 2, 0, ang); m.material.opacity = (1 - u) * (strong ? .85 : .4); m.scale.setScalar(.8 + u * .5); });
+  // setas de peso
+  arrows.forEach((a, i) => { const on = win(t, T_CINCO, T_GANCHO); a.visible = on; if (!on) return; a.position.set(-.6 + i * .6, tmp.y - .3 - ((t * 1.5 + i * .3) % 1) * .4, .5); a.scale.setScalar(1.3); });
+  // bucha fraca saindo do teto
+  bucha.visible = win(t, S(20), T_PARAB); if (bucha.visible) { const u = clamp((t - T_BUCHA) / 1.2); bucha.position.y = ceilY - u * u * .8; bucha.rotation.z = u * .6; }
+  crumbs.forEach((c, i) => { const u = t - T_BUCHA; c.visible = win(t, T_BUCHA, T_BUCHA + 1.5); if (!c.visible) return; c.position.set(1.4 + Math.sin(i) * .15, ceilY - u * u * 3 - (i % 3) * .05, 1.2 + Math.cos(i) * .15); c.rotation.set(u * 9, u * 7, 0); });
+  // sumiço na introdução
+  const pu = (t - S(2) - .25) / .7; puf.forEach(b => { b.visible = pu > 0 && pu < 1; if (!b.visible) return; const e = easeOut(pu); b.position.set(b.userData.d.x * e, ceilY - .8 + b.userData.d.y * e, b.userData.d.z * e); b.scale.setScalar(lerp(.6, 1.6, e) * (1 - pu * .5)); b.material.opacity = 1 - pu; });
+  conf.forEach((c, i) => { const u = t - T_PARAB; c.visible = u > 0 && u < 3; if (!c.visible) return; c.position.set(c.userData.x, 3.3 - u * 1.4 * c.userData.s - (i % 5) * .15, c.userData.z); c.rotation.set(u * 6 + i, u * 4, 0); });
+  // ---- pessoa na cama
+  let P = PP.lie, fc = 'neutral';
+  if (intro) { P = { ...PP.lie, hx: -.4 }; fc = 'shock'; }
+  if (win(t, S(3), S(4))) { const tired = clamp((t - S(3) - 2.2) / .8); P = { ...PP.lie, rx: -2.6 + tired * 2.5, rz: -.2, re: -.3 + Math.sin(t * 14) * .5 * (1 - tired) }; fc = tired > .5 ? 'sad' : 'neutral'; }
+  if (win(t, S(10), T_PLACAS)) fc = 'sad';
+  if (win(t, T_PLACAS + .5, S(13))) fc = 'happy';
+  if (win(t, S(13), T_GANCHO)) { P = { ...PP.lieThink }; fc = 'shock'; }
+  if (win(t, T_GANCHO + .5, S(20))) fc = 'calm';
+  if (win(t, S(20), T_PARAB)) fc = 'neutral';
+  if (t >= T_PARAB) { fc = 'happy'; }
+  if (t >= T_BAL) { fc = 'shock'; }
+  poseP(per, P); face(per, fc, t);
+  cardboard.visible = win(t, S(3), S(4) - .3); if (cardboard.visible) { per.armR.hand.getWorldPosition(cardboard.position); cardboard.rotation.set(Math.sin(t * 14) * .5, 0, 0); }
+  per.head.getWorldPosition(tmp);
+  sweat.forEach((d, i) => { const on = win(t, S(3) + 2, S(4)) || win(t, S(10), T_PLACAS); d.visible = on; if (!on) return; const u = ((t * 1.4 + i * .33) % 1); d.position.set(tmp.x + (i - 1) * .18, tmp.y + .25 - u * .2, tmp.z + .1); });
+
+  // ---------- textos ----------
+  fixed($('hook'), t < E(1) + .3 ? pop(t - .05, .35) * (1 - clamp((t - E(1) - .1) / .2)) : 0);
+  const lb = [...LBL].reverse().find(l => t >= l[0]); const lbOn = lb && t < S(19);
+  if (lbOn) { $('label').firstElementChild.textContent = lb[1]; fixed($('label'), pop(t - lb[0], .3)); } else fixed($('label'), 0);
+  const t1 = $('t1'), t2 = $('t2'); t1.style.opacity = 0; t2.style.opacity = 0;
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  tag(t1, 'BRAÇO CANSADO', 'red', win(t, S(3) + 2.4, S(4)), 540, 640, S(3) + 2.4, -4);
+  tag(t1, 'PRA QUE LADO?', '', win(t, S(6) + .4, T_PECA), 540, 640, S(6) + .4, -4);
+  tag(t1, 'EMPURRÃO NA PARTIDA', 'blue', win(t, T_EMP, S(9)), 540, 640, T_EMP, -3);
+  tag(t1, 'CAPACITOR QUEIMADO', 'red', win(t, T_ESTRAGA, S(10)), 540, 620, T_ESTRAGA, -4);
+  tag(t1, 'SEM VENTO', 'red', win(t, S(10) + .4, T_PLACAS), 540, 640, S(10) + .4, -4);
+  tag(t1, '≈ 5 KG', 'red', win(t, T_CINCO, T_GANCHO), 760, 640, T_CINCO, 5);
+  tag(t1, 'PRESO NA LAJE', 'green', win(t, T_GANCHO + .6, S(16)), 540, 640, T_GANCHO + .6, -4);
+  tag(t1, 'POUCO AR', 'red', win(t, S(16) + .4, T_CANO), 540, 640, S(16) + .4, -4);
+  tag(t1, 'VENTILAR', 'green', win(t, T_CHAVE, T_INV), 540, 620, T_CHAVE, -4);
+  tag(t1, 'EXAUSTÃO', 'blue', win(t, T_INV, S(20)), 540, 620, T_INV, -4);
+  tag(t1, 'BUCHA FRACA', 'red', win(t, T_BUCHA - .3, T_PARAB), 760, 560, T_BUCHA - .3, 5);
+  tag(t2, 'COM GANCHO: É RARO', 'green', win(t, T_RARO, T_PARAB), 470, 760, T_RARO, -3);
+  const xOn = [6, 10, 13, 16].find(i => win(t, S(i) + .3, E(i) + .2)); const x3 = win(t, S(3) + 2.4, E(3) + .2) || win(t, T_ESTRAGA + .3, E(9));
+  place($('xmark'), xOn !== undefined || x3, 820, 760, xOn !== undefined ? pop(t - S(xOn) - .3, .25) : 1, -8);
+  const cm = $('comic');
+  if (win(t, T_PARAB, S(22))) { cm.textContent = 'PARABÉNS!'; cm.style.fontSize = '130px'; place(cm, true, 540, 520, pop(t - T_PARAB, .3), -4); }
+  else if (win(t, T_EMPURRAR, T_EMPURRAR + 1)) { cm.textContent = 'EMPURRA!'; cm.style.fontSize = '120px'; place(cm, true, 540, 560, pop(t - T_EMPURRAR, .25), -6); }
+  else if (t >= T_PARAB + 1.5 && t < S(22)) { cm.style.opacity = 0; }
+  else cm.style.opacity = 0;
+  fixed($('final'), t >= S(22) + .4 ? pop(t - S(22) - .4, .35) : 0);
+  $('wm').style.opacity = .8;
+  // legenda
+  let wTxt = null, wSt = 0;
+  for (let i = 2; i < SN.length - 1; i++) for (const w2 of SN[i].words) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap = $('cap');
+  if (wTxt) { cap.textContent = wTxt.toUpperCase().replace(/[.,!?:]/g, ''); cap.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+await document.fonts.load('900 60px P'); await document.fonts.ready;
+window.ready = true;
+</script></body></html>

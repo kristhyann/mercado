@@ -1,0 +1,1276 @@
+{
+ "duration": 81.396,
+ "sentences": [
+  {
+   "text": "Quatro pás girando em cima da sua cama.",
+   "start": 0.0,
+   "end": 2.34,
+   "words": [
+    {
+     "w": "Quatro",
+     "start": 0.0,
+     "end": 0.3
+    },
+    {
+     "w": "pás",
+     "start": 0.3,
+     "end": 0.72
+    },
+    {
+     "w": "girando",
+     "start": 0.72,
+     "end": 1.18
+    },
+    {
+     "w": "em",
+     "start": 1.18,
+     "end": 1.38
+    },
+    {
+     "w": "cima",
+     "start": 1.38,
+     "end": 1.66
+    },
+    {
+     "w": "da",
+     "start": 1.66,
+     "end": 1.78
+    },
+    {
+     "w": "sua",
+     "start": 1.78,
+     "end": 1.96
+    },
+    {
+     "w": "cama.",
+     "start": 1.96,
+     "end": 2.34
+    }
+   ]
+  },
+  {
+   "text": "O que segura isso no teto?",
+   "start": 2.68,
+   "end": 4.0,
+   "words": [
+    {
+     "w": "O",
+     "start": 2.68,
+     "end": 2.94
+    },
+    {
+     "w": "que",
+     "start": 2.94,
+     "end": 3.02
+    },
+    {
+     "w": "segura",
+     "start": 3.02,
+     "end": 3.36
+    },
+    {
+     "w": "isso",
+     "start": 3.36,
+     "end": 3.6
+    },
+    {
+     "w": "no",
+     "start": 3.6,
+     "end": 3.76
+    },
+    {
+     "w": "teto?",
+     "start": 3.76,
+     "end": 4.0
+    }
+   ]
+  },
+  {
+   "text": "Pra entender, vamos construir um ventilador de teto do zero.",
+   "start": 4.0,
+   "end": 8.48,
+   "words": [
+    {
+     "w": "Pra",
+     "start": 4.0,
+     "end": 4.88
+    },
+    {
+     "w": "entender,",
+     "start": 4.88,
+     "end": 5.28
+    },
+    {
+     "w": "vamos",
+     "start": 5.84,
+     "end": 5.9
+    },
+    {
+     "w": "construir",
+     "start": 5.9,
+     "end": 6.42
+    },
+    {
+     "w": "um",
+     "start": 6.42,
+     "end": 6.62
+    },
+    {
+     "w": "ventilador",
+     "start": 6.62,
+     "end": 7.24
+    },
+    {
+     "w": "de",
+     "start": 7.24,
+     "end": 7.5
+    },
+    {
+     "w": "teto",
+     "start": 7.5,
+     "end": 7.92
+    },
+    {
+     "w": "do",
+     "start": 7.92,
+     "end": 8.1
+    },
+    {
+     "w": "zero.",
+     "start": 8.1,
+     "end": 8.48
+    }
+   ]
+  },
+  {
+   "text": "Se você abanar um papelão, o vento acaba quando o braço cansa.",
+   "start": 9.24,
+   "end": 12.84,
+   "words": [
+    {
+     "w": "Se",
+     "start": 9.24,
+     "end": 9.36
+    },
+    {
+     "w": "você",
+     "start": 9.36,
+     "end": 9.54
+    },
+    {
+     "w": "abanar",
+     "start": 9.54,
+     "end": 9.98
+    },
+    {
+     "w": "um",
+     "start": 9.98,
+     "end": 10.12
+    },
+    {
+     "w": "papelão,",
+     "start": 10.12,
+     "end": 10.64
+    },
+    {
+     "w": "o",
+     "start": 11.0,
+     "end": 11.06
+    },
+    {
+     "w": "vento",
+     "start": 11.06,
+     "end": 11.32
+    },
+    {
+     "w": "acaba",
+     "start": 11.32,
+     "end": 11.7
+    },
+    {
+     "w": "quando",
+     "start": 11.7,
+     "end": 12.02
+    },
+    {
+     "w": "o",
+     "start": 12.02,
+     "end": 12.18
+    },
+    {
+     "w": "braço",
+     "start": 12.18,
+     "end": 12.38
+    },
+    {
+     "w": "cansa.",
+     "start": 12.38,
+     "end": 12.84
+    }
+   ]
+  },
+  {
+   "text": "Então você coloca um motor elétrico, que gira sozinho por horas.",
+   "start": 13.22,
+   "end": 17.1,
+   "words": [
+    {
+     "w": "Então",
+     "start": 13.22,
+     "end": 13.62
+    },
+    {
+     "w": "você",
+     "start": 13.62,
+     "end": 13.9
+    },
+    {
+     "w": "coloca",
+     "start": 13.9,
+     "end": 14.18
+    },
+    {
+     "w": "um",
+     "start": 14.18,
+     "end": 14.46
+    },
+    {
+     "w": "motor",
+     "start": 14.46,
+     "end": 14.72
+    },
+    {
+     "w": "elétrico,",
+     "start": 14.72,
+     "end": 15.3
+    },
+    {
+     "w": "que",
+     "start": 15.3,
+     "end": 15.64
+    },
+    {
+     "w": "gira",
+     "start": 15.64,
+     "end": 15.92
+    },
+    {
+     "w": "sozinho",
+     "start": 15.92,
+     "end": 16.48
+    },
+    {
+     "w": "por",
+     "start": 16.48,
+     "end": 16.74
+    },
+    {
+     "w": "horas.",
+     "start": 16.74,
+     "end": 17.1
+    }
+   ]
+  },
+  {
+   "text": "Esse é o motor.",
+   "start": 17.7,
+   "end": 18.68,
+   "words": [
+    {
+     "w": "Esse",
+     "start": 17.7,
+     "end": 18.02
+    },
+    {
+     "w": "é",
+     "start": 18.02,
+     "end": 18.32
+    },
+    {
+     "w": "o",
+     "start": 18.32,
+     "end": 18.4
+    },
+    {
+     "w": "motor.",
+     "start": 18.4,
+     "end": 18.68
+    }
+   ]
+  },
+  {
+   "text": "Mas esse motor não sabe pra que lado começar a girar.",
+   "start": 19.38,
+   "end": 22.24,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 19.38,
+     "end": 19.52
+    },
+    {
+     "w": "esse",
+     "start": 19.52,
+     "end": 19.72
+    },
+    {
+     "w": "motor",
+     "start": 19.72,
+     "end": 20.04
+    },
+    {
+     "w": "não",
+     "start": 20.04,
+     "end": 20.26
+    },
+    {
+     "w": "sabe",
+     "start": 20.26,
+     "end": 20.62
+    },
+    {
+     "w": "pra",
+     "start": 20.62,
+     "end": 20.82
+    },
+    {
+     "w": "que",
+     "start": 20.82,
+     "end": 20.96
+    },
+    {
+     "w": "lado",
+     "start": 20.96,
+     "end": 21.22
+    },
+    {
+     "w": "começar",
+     "start": 21.22,
+     "end": 21.66
+    },
+    {
+     "w": "a",
+     "start": 21.66,
+     "end": 21.84
+    },
+    {
+     "w": "girar.",
+     "start": 21.84,
+     "end": 22.24
+    }
+   ]
+  },
+  {
+   "text": "Então você liga uma pecinha que dá um empurrão elétrico na partida.",
+   "start": 22.56,
+   "end": 26.38,
+   "words": [
+    {
+     "w": "Então",
+     "start": 22.56,
+     "end": 22.96
+    },
+    {
+     "w": "você",
+     "start": 22.96,
+     "end": 23.28
+    },
+    {
+     "w": "liga",
+     "start": 23.28,
+     "end": 23.52
+    },
+    {
+     "w": "uma",
+     "start": 23.52,
+     "end": 23.68
+    },
+    {
+     "w": "pecinha",
+     "start": 23.68,
+     "end": 24.26
+    },
+    {
+     "w": "que",
+     "start": 24.26,
+     "end": 24.44
+    },
+    {
+     "w": "dá",
+     "start": 24.44,
+     "end": 24.56
+    },
+    {
+     "w": "um",
+     "start": 24.56,
+     "end": 24.7
+    },
+    {
+     "w": "empurrão",
+     "start": 24.7,
+     "end": 25.12
+    },
+    {
+     "w": "elétrico",
+     "start": 25.12,
+     "end": 25.72
+    },
+    {
+     "w": "na",
+     "start": 25.72,
+     "end": 25.86
+    },
+    {
+     "w": "partida.",
+     "start": 25.86,
+     "end": 26.38
+    }
+   ]
+  },
+  {
+   "text": "Esse é o capacitor.",
+   "start": 26.38,
+   "end": 27.78,
+   "words": [
+    {
+     "w": "Esse",
+     "start": 26.38,
+     "end": 27.12
+    },
+    {
+     "w": "é",
+     "start": 27.12,
+     "end": 27.36
+    },
+    {
+     "w": "o",
+     "start": 27.36,
+     "end": 27.44
+    },
+    {
+     "w": "capacitor.",
+     "start": 27.44,
+     "end": 27.78
+    }
+   ]
+  },
+  {
+   "text": "Por isso que, quando ele estraga, o ventilador só gira se alguém empurrar a pá.",
+   "start": 28.64,
+   "end": 32.9,
+   "words": [
+    {
+     "w": "Por",
+     "start": 28.64,
+     "end": 28.84
+    },
+    {
+     "w": "isso",
+     "start": 28.84,
+     "end": 29.04
+    },
+    {
+     "w": "que,",
+     "start": 29.04,
+     "end": 29.26
+    },
+    {
+     "w": "quando",
+     "start": 29.5,
+     "end": 29.54
+    },
+    {
+     "w": "ele",
+     "start": 29.54,
+     "end": 29.72
+    },
+    {
+     "w": "estraga,",
+     "start": 29.72,
+     "end": 30.2
+    },
+    {
+     "w": "o",
+     "start": 30.48,
+     "end": 30.54
+    },
+    {
+     "w": "ventilador",
+     "start": 30.54,
+     "end": 31.02
+    },
+    {
+     "w": "só",
+     "start": 31.02,
+     "end": 31.3
+    },
+    {
+     "w": "gira",
+     "start": 31.3,
+     "end": 31.72
+    },
+    {
+     "w": "se",
+     "start": 31.72,
+     "end": 31.92
+    },
+    {
+     "w": "alguém",
+     "start": 31.92,
+     "end": 32.18
+    },
+    {
+     "w": "empurrar",
+     "start": 32.18,
+     "end": 32.56
+    },
+    {
+     "w": "a",
+     "start": 32.56,
+     "end": 32.72
+    },
+    {
+     "w": "pá.",
+     "start": 32.72,
+     "end": 32.9
+    }
+   ]
+  },
+  {
+   "text": "Mas um motor girando não faz vento.",
+   "start": 33.44,
+   "end": 35.72,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 33.44,
+     "end": 33.66
+    },
+    {
+     "w": "um",
+     "start": 33.66,
+     "end": 33.84
+    },
+    {
+     "w": "motor",
+     "start": 33.84,
+     "end": 34.12
+    },
+    {
+     "w": "girando",
+     "start": 34.12,
+     "end": 34.68
+    },
+    {
+     "w": "não",
+     "start": 34.68,
+     "end": 34.88
+    },
+    {
+     "w": "faz",
+     "start": 34.88,
+     "end": 35.16
+    },
+    {
+     "w": "vento.",
+     "start": 35.16,
+     "end": 35.72
+    }
+   ]
+  },
+  {
+   "text": "Então você prende placas largas e inclinadas, que empurram o ar pra baixo.",
+   "start": 35.98,
+   "end": 40.26,
+   "words": [
+    {
+     "w": "Então",
+     "start": 35.98,
+     "end": 36.3
+    },
+    {
+     "w": "você",
+     "start": 36.3,
+     "end": 36.56
+    },
+    {
+     "w": "prende",
+     "start": 36.56,
+     "end": 36.94
+    },
+    {
+     "w": "placas",
+     "start": 36.94,
+     "end": 37.32
+    },
+    {
+     "w": "largas",
+     "start": 37.32,
+     "end": 37.86
+    },
+    {
+     "w": "e",
+     "start": 37.86,
+     "end": 38.04
+    },
+    {
+     "w": "inclinadas,",
+     "start": 38.04,
+     "end": 38.58
+    },
+    {
+     "w": "que",
+     "start": 38.58,
+     "end": 38.88
+    },
+    {
+     "w": "empurram",
+     "start": 38.88,
+     "end": 39.42
+    },
+    {
+     "w": "o",
+     "start": 39.42,
+     "end": 39.6
+    },
+    {
+     "w": "ar",
+     "start": 39.6,
+     "end": 39.72
+    },
+    {
+     "w": "pra",
+     "start": 39.72,
+     "end": 39.88
+    },
+    {
+     "w": "baixo.",
+     "start": 39.88,
+     "end": 40.26
+    }
+   ]
+  },
+  {
+   "text": "Essas são as pás.",
+   "start": 40.72,
+   "end": 41.84,
+   "words": [
+    {
+     "w": "Essas",
+     "start": 40.72,
+     "end": 41.1
+    },
+    {
+     "w": "são",
+     "start": 41.1,
+     "end": 41.34
+    },
+    {
+     "w": "as",
+     "start": 41.34,
+     "end": 41.52
+    },
+    {
+     "w": "pás.",
+     "start": 41.52,
+     "end": 41.84
+    }
+   ]
+  },
+  {
+   "text": "Mas tudo isso pesa uns cinco quilos, bem em cima da sua cabeça.",
+   "start": 42.5,
+   "end": 46.22,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 42.5,
+     "end": 42.68
+    },
+    {
+     "w": "tudo",
+     "start": 42.68,
+     "end": 42.94
+    },
+    {
+     "w": "isso",
+     "start": 42.94,
+     "end": 43.28
+    },
+    {
+     "w": "pesa",
+     "start": 43.28,
+     "end": 43.6
+    },
+    {
+     "w": "uns",
+     "start": 43.6,
+     "end": 43.74
+    },
+    {
+     "w": "cinco",
+     "start": 43.74,
+     "end": 44.08
+    },
+    {
+     "w": "quilos,",
+     "start": 44.08,
+     "end": 44.64
+    },
+    {
+     "w": "bem",
+     "start": 44.64,
+     "end": 45.1
+    },
+    {
+     "w": "em",
+     "start": 45.1,
+     "end": 45.38
+    },
+    {
+     "w": "cima",
+     "start": 45.38,
+     "end": 45.58
+    },
+    {
+     "w": "da",
+     "start": 45.58,
+     "end": 45.7
+    },
+    {
+     "w": "sua",
+     "start": 45.7,
+     "end": 45.86
+    },
+    {
+     "w": "cabeça.",
+     "start": 45.86,
+     "end": 46.22
+    }
+   ]
+  },
+  {
+   "text": "Então você prende um gancho de aço firme na laje.",
+   "start": 46.76,
+   "end": 50.16,
+   "words": [
+    {
+     "w": "Então",
+     "start": 46.76,
+     "end": 47.1
+    },
+    {
+     "w": "você",
+     "start": 47.1,
+     "end": 47.38
+    },
+    {
+     "w": "prende",
+     "start": 47.38,
+     "end": 47.76
+    },
+    {
+     "w": "um",
+     "start": 47.76,
+     "end": 47.88
+    },
+    {
+     "w": "gancho",
+     "start": 47.88,
+     "end": 48.28
+    },
+    {
+     "w": "de",
+     "start": 48.28,
+     "end": 48.44
+    },
+    {
+     "w": "aço",
+     "start": 48.44,
+     "end": 48.72
+    },
+    {
+     "w": "firme",
+     "start": 48.72,
+     "end": 49.18
+    },
+    {
+     "w": "na",
+     "start": 49.18,
+     "end": 49.34
+    },
+    {
+     "w": "laje.",
+     "start": 49.34,
+     "end": 50.16
+    }
+   ]
+  },
+  {
+   "text": "Esse é o gancho de teto.",
+   "start": 50.16,
+   "end": 51.8,
+   "words": [
+    {
+     "w": "Esse",
+     "start": 50.16,
+     "end": 50.52
+    },
+    {
+     "w": "é",
+     "start": 50.52,
+     "end": 50.8
+    },
+    {
+     "w": "o",
+     "start": 50.8,
+     "end": 50.9
+    },
+    {
+     "w": "gancho",
+     "start": 50.9,
+     "end": 51.3
+    },
+    {
+     "w": "de",
+     "start": 51.3,
+     "end": 51.46
+    },
+    {
+     "w": "teto.",
+     "start": 51.46,
+     "end": 51.8
+    }
+   ]
+  },
+  {
+   "text": "Mas, colado no teto, ele quase não puxa ar e balança mais.",
+   "start": 52.3,
+   "end": 56.36,
+   "words": [
+    {
+     "w": "Mas,",
+     "start": 52.3,
+     "end": 52.64
+    },
+    {
+     "w": "colado",
+     "start": 52.64,
+     "end": 53.14
+    },
+    {
+     "w": "no",
+     "start": 53.14,
+     "end": 53.32
+    },
+    {
+     "w": "teto,",
+     "start": 53.32,
+     "end": 53.74
+    },
+    {
+     "w": "ele",
+     "start": 53.9,
+     "end": 54.1
+    },
+    {
+     "w": "quase",
+     "start": 54.1,
+     "end": 54.44
+    },
+    {
+     "w": "não",
+     "start": 54.44,
+     "end": 54.66
+    },
+    {
+     "w": "puxa",
+     "start": 54.66,
+     "end": 55.02
+    },
+    {
+     "w": "ar",
+     "start": 55.02,
+     "end": 55.36
+    },
+    {
+     "w": "e",
+     "start": 55.36,
+     "end": 55.62
+    },
+    {
+     "w": "balança",
+     "start": 55.62,
+     "end": 56.08
+    },
+    {
+     "w": "mais.",
+     "start": 56.08,
+     "end": 56.36
+    }
+   ]
+  },
+  {
+   "text": "Então você desce o motor com um cano de metal.",
+   "start": 56.38,
+   "end": 59.52,
+   "words": [
+    {
+     "w": "Então",
+     "start": 56.38,
+     "end": 57.2
+    },
+    {
+     "w": "você",
+     "start": 57.2,
+     "end": 57.56
+    },
+    {
+     "w": "desce",
+     "start": 57.56,
+     "end": 58.04
+    },
+    {
+     "w": "o",
+     "start": 58.04,
+     "end": 58.14
+    },
+    {
+     "w": "motor",
+     "start": 58.14,
+     "end": 58.42
+    },
+    {
+     "w": "com",
+     "start": 58.42,
+     "end": 58.66
+    },
+    {
+     "w": "um",
+     "start": 58.66,
+     "end": 58.78
+    },
+    {
+     "w": "cano",
+     "start": 58.78,
+     "end": 59.12
+    },
+    {
+     "w": "de",
+     "start": 59.12,
+     "end": 59.2
+    },
+    {
+     "w": "metal.",
+     "start": 59.2,
+     "end": 59.52
+    }
+   ]
+  },
+  {
+   "text": "Essa é a haste.",
+   "start": 60.02,
+   "end": 61.28,
+   "words": [
+    {
+     "w": "Essa",
+     "start": 60.02,
+     "end": 60.38
+    },
+    {
+     "w": "é",
+     "start": 60.38,
+     "end": 60.66
+    },
+    {
+     "w": "a",
+     "start": 60.66,
+     "end": 60.78
+    },
+    {
+     "w": "haste.",
+     "start": 60.78,
+     "end": 61.28
+    }
+   ]
+  },
+  {
+   "text": "Por isso que muitos têm a chavinha ventilar e exaustão: ela inverte o giro.",
+   "start": 61.76,
+   "end": 66.22,
+   "words": [
+    {
+     "w": "Por",
+     "start": 61.76,
+     "end": 61.88
+    },
+    {
+     "w": "isso",
+     "start": 61.88,
+     "end": 62.06
+    },
+    {
+     "w": "que",
+     "start": 62.06,
+     "end": 62.22
+    },
+    {
+     "w": "muitos",
+     "start": 62.22,
+     "end": 62.5
+    },
+    {
+     "w": "têm",
+     "start": 62.5,
+     "end": 62.82
+    },
+    {
+     "w": "a",
+     "start": 62.82,
+     "end": 62.92
+    },
+    {
+     "w": "chavinha",
+     "start": 62.92,
+     "end": 63.34
+    },
+    {
+     "w": "ventilar",
+     "start": 63.34,
+     "end": 64.02
+    },
+    {
+     "w": "e",
+     "start": 64.02,
+     "end": 64.2
+    },
+    {
+     "w": "exaustão:",
+     "start": 64.2,
+     "end": 64.7
+    },
+    {
+     "w": "ela",
+     "start": 65.1,
+     "end": 65.26
+    },
+    {
+     "w": "inverte",
+     "start": 65.26,
+     "end": 65.8
+    },
+    {
+     "w": "o",
+     "start": 65.8,
+     "end": 65.92
+    },
+    {
+     "w": "giro.",
+     "start": 65.92,
+     "end": 66.22
+    }
+   ]
+  },
+  {
+   "text": "E se ele cair? É raro. Quando cai, quase sempre foi preso só numa bucha fraca, sem gancho.",
+   "start": 66.72,
+   "end": 72.92,
+   "words": [
+    {
+     "w": "E",
+     "start": 66.72,
+     "end": 66.9
+    },
+    {
+     "w": "se",
+     "start": 66.9,
+     "end": 66.98
+    },
+    {
+     "w": "ele",
+     "start": 66.98,
+     "end": 67.1
+    },
+    {
+     "w": "cair?",
+     "start": 67.1,
+     "end": 67.4
+    },
+    {
+     "w": "É",
+     "start": 67.92,
+     "end": 68.1
+    },
+    {
+     "w": "raro.",
+     "start": 68.1,
+     "end": 68.4
+    },
+    {
+     "w": "Quando",
+     "start": 68.76,
+     "end": 68.96
+    },
+    {
+     "w": "cai,",
+     "start": 68.96,
+     "end": 69.32
+    },
+    {
+     "w": "quase",
+     "start": 69.66,
+     "end": 69.86
+    },
+    {
+     "w": "sempre",
+     "start": 69.86,
+     "end": 70.24
+    },
+    {
+     "w": "foi",
+     "start": 70.24,
+     "end": 70.48
+    },
+    {
+     "w": "preso",
+     "start": 70.48,
+     "end": 70.9
+    },
+    {
+     "w": "só",
+     "start": 70.9,
+     "end": 71.12
+    },
+    {
+     "w": "numa",
+     "start": 71.12,
+     "end": 71.28
+    },
+    {
+     "w": "bucha",
+     "start": 71.28,
+     "end": 71.58
+    },
+    {
+     "w": "fraca,",
+     "start": 71.58,
+     "end": 72.14
+    },
+    {
+     "w": "sem",
+     "start": 72.3,
+     "end": 72.44
+    },
+    {
+     "w": "gancho.",
+     "start": 72.44,
+     "end": 72.92
+    }
+   ]
+  },
+  {
+   "text": "Parabéns, você construiu um ventilador de teto.",
+   "start": 73.6,
+   "end": 76.64,
+   "words": [
+    {
+     "w": "Parabéns,",
+     "start": 73.6,
+     "end": 74.2
+    },
+    {
+     "w": "você",
+     "start": 74.4,
+     "end": 74.66
+    },
+    {
+     "w": "construiu",
+     "start": 74.66,
+     "end": 75.26
+    },
+    {
+     "w": "um",
+     "start": 75.26,
+     "end": 75.36
+    },
+    {
+     "w": "ventilador",
+     "start": 75.36,
+     "end": 75.96
+    },
+    {
+     "w": "de",
+     "start": 75.96,
+     "end": 76.24
+    },
+    {
+     "w": "teto.",
+     "start": 76.24,
+     "end": 76.64
+    }
+   ]
+  },
+  {
+   "text": "Segue a página, senão ele começa a balançar hoje à noite.",
+   "start": 77.0,
+   "end": 79.84,
+   "words": [
+    {
+     "w": "Segue",
+     "start": 77.0,
+     "end": 77.3
+    },
+    {
+     "w": "a",
+     "start": 77.3,
+     "end": 77.42
+    },
+    {
+     "w": "página,",
+     "start": 77.42,
+     "end": 77.8
+    },
+    {
+     "w": "senão",
+     "start": 78.1,
+     "end": 78.28
+    },
+    {
+     "w": "ele",
+     "start": 78.28,
+     "end": 78.4
+    },
+    {
+     "w": "começa",
+     "start": 78.4,
+     "end": 78.72
+    },
+    {
+     "w": "a",
+     "start": 78.72,
+     "end": 78.9
+    },
+    {
+     "w": "balançar",
+     "start": 78.9,
+     "end": 79.38
+    },
+    {
+     "w": "hoje",
+     "start": 79.38,
+     "end": 79.52
+    },
+    {
+     "w": "à",
+     "start": 79.52,
+     "end": 79.62
+    },
+    {
+     "w": "noite.",
+     "start": 79.62,
+     "end": 79.84
+    }
+   ]
+  }
+ ]
+}
