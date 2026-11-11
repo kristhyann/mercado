@@ -1,0 +1,1362 @@
+{
+ "duration": 94.771,
+ "sentences": [
+  {
+   "text": "Ele fez uma coisa flutuar no ar sem encostar nela.",
+   "start": 0.0,
+   "end": 3.42,
+   "words": [
+    {
+     "w": "Ele",
+     "start": 0.0,
+     "end": 0.16
+    },
+    {
+     "w": "fez",
+     "start": 0.16,
+     "end": 0.38
+    },
+    {
+     "w": "uma",
+     "start": 0.38,
+     "end": 0.58
+    },
+    {
+     "w": "coisa",
+     "start": 0.58,
+     "end": 0.88
+    },
+    {
+     "w": "flutuar",
+     "start": 0.88,
+     "end": 1.58
+    },
+    {
+     "w": "no",
+     "start": 1.58,
+     "end": 1.82
+    },
+    {
+     "w": "ar",
+     "start": 1.82,
+     "end": 2.06
+    },
+    {
+     "w": "sem",
+     "start": 2.06,
+     "end": 2.42
+    },
+    {
+     "w": "encostar",
+     "start": 2.42,
+     "end": 3.06
+    },
+    {
+     "w": "nela.",
+     "start": 3.06,
+     "end": 3.42
+    }
+   ]
+  },
+  {
+   "text": "E essa coisa era um sapo vivo.",
+   "start": 3.72,
+   "end": 6.2,
+   "words": [
+    {
+     "w": "E",
+     "start": 3.72,
+     "end": 3.96
+    },
+    {
+     "w": "essa",
+     "start": 3.96,
+     "end": 4.16
+    },
+    {
+     "w": "coisa",
+     "start": 4.16,
+     "end": 4.62
+    },
+    {
+     "w": "era",
+     "start": 4.62,
+     "end": 5.06
+    },
+    {
+     "w": "um",
+     "start": 5.06,
+     "end": 5.18
+    },
+    {
+     "w": "sapo",
+     "start": 5.18,
+     "end": 5.76
+    },
+    {
+     "w": "vivo.",
+     "start": 5.76,
+     "end": 6.2
+    }
+   ]
+  },
+  {
+   "text": "Pra entender, vamos construir uma levitação do zero.",
+   "start": 6.2,
+   "end": 9.98,
+   "words": [
+    {
+     "w": "Pra",
+     "start": 6.2,
+     "end": 6.94
+    },
+    {
+     "w": "entender,",
+     "start": 6.94,
+     "end": 7.28
+    },
+    {
+     "w": "vamos",
+     "start": 7.8,
+     "end": 7.94
+    },
+    {
+     "w": "construir",
+     "start": 7.94,
+     "end": 8.46
+    },
+    {
+     "w": "uma",
+     "start": 8.46,
+     "end": 8.7
+    },
+    {
+     "w": "levitação",
+     "start": 8.7,
+     "end": 9.5
+    },
+    {
+     "w": "do",
+     "start": 9.5,
+     "end": 9.66
+    },
+    {
+     "w": "zero.",
+     "start": 9.66,
+     "end": 9.98
+    }
+   ]
+  },
+  {
+   "text": "Se você virar dois ímãs com os polos iguais de frente, um empurra o outro pra cima.",
+   "start": 10.46,
+   "end": 15.96,
+   "words": [
+    {
+     "w": "Se",
+     "start": 10.46,
+     "end": 10.56
+    },
+    {
+     "w": "você",
+     "start": 10.56,
+     "end": 10.76
+    },
+    {
+     "w": "virar",
+     "start": 10.76,
+     "end": 11.1
+    },
+    {
+     "w": "dois",
+     "start": 11.1,
+     "end": 11.46
+    },
+    {
+     "w": "ímãs",
+     "start": 11.46,
+     "end": 12.0
+    },
+    {
+     "w": "com",
+     "start": 12.0,
+     "end": 12.1
+    },
+    {
+     "w": "os",
+     "start": 12.1,
+     "end": 12.3
+    },
+    {
+     "w": "polos",
+     "start": 12.3,
+     "end": 12.54
+    },
+    {
+     "w": "iguais",
+     "start": 12.54,
+     "end": 12.98
+    },
+    {
+     "w": "de",
+     "start": 12.98,
+     "end": 13.22
+    },
+    {
+     "w": "frente,",
+     "start": 13.22,
+     "end": 13.58
+    },
+    {
+     "w": "um",
+     "start": 14.16,
+     "end": 14.36
+    },
+    {
+     "w": "empurra",
+     "start": 14.36,
+     "end": 15.02
+    },
+    {
+     "w": "o",
+     "start": 15.02,
+     "end": 15.18
+    },
+    {
+     "w": "outro",
+     "start": 15.18,
+     "end": 15.42
+    },
+    {
+     "w": "pra",
+     "start": 15.42,
+     "end": 15.6
+    },
+    {
+     "w": "cima.",
+     "start": 15.6,
+     "end": 15.96
+    }
+   ]
+  },
+  {
+   "text": "Mas ele nunca fica parado: gira e gruda de lado.",
+   "start": 16.36,
+   "end": 20.0,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 16.36,
+     "end": 16.54
+    },
+    {
+     "w": "ele",
+     "start": 16.54,
+     "end": 16.7
+    },
+    {
+     "w": "nunca",
+     "start": 16.7,
+     "end": 17.08
+    },
+    {
+     "w": "fica",
+     "start": 17.08,
+     "end": 17.42
+    },
+    {
+     "w": "parado:",
+     "start": 17.42,
+     "end": 17.92
+    },
+    {
+     "w": "gira",
+     "start": 18.28,
+     "end": 18.74
+    },
+    {
+     "w": "e",
+     "start": 18.74,
+     "end": 19.08
+    },
+    {
+     "w": "gruda",
+     "start": 19.08,
+     "end": 19.48
+    },
+    {
+     "w": "de",
+     "start": 19.48,
+     "end": 19.66
+    },
+    {
+     "w": "lado.",
+     "start": 19.66,
+     "end": 20.0
+    }
+   ]
+  },
+  {
+   "text": "Parece estranho, mas um cientista provou, há quase duzentos anos, que ímã comum sozinho nunca segura nada parado no ar.",
+   "start": 20.36,
+   "end": 28.9,
+   "words": [
+    {
+     "w": "Parece",
+     "start": 20.36,
+     "end": 20.64
+    },
+    {
+     "w": "estranho,",
+     "start": 20.64,
+     "end": 21.3
+    },
+    {
+     "w": "mas",
+     "start": 21.5,
+     "end": 21.66
+    },
+    {
+     "w": "um",
+     "start": 21.66,
+     "end": 21.8
+    },
+    {
+     "w": "cientista",
+     "start": 21.8,
+     "end": 22.32
+    },
+    {
+     "w": "provou,",
+     "start": 22.32,
+     "end": 22.84
+    },
+    {
+     "w": "há",
+     "start": 22.84,
+     "end": 23.12
+    },
+    {
+     "w": "quase",
+     "start": 23.12,
+     "end": 23.42
+    },
+    {
+     "w": "duzentos",
+     "start": 23.42,
+     "end": 23.88
+    },
+    {
+     "w": "anos,",
+     "start": 23.88,
+     "end": 24.44
+    },
+    {
+     "w": "que",
+     "start": 24.44,
+     "end": 24.94
+    },
+    {
+     "w": "ímã",
+     "start": 24.94,
+     "end": 25.26
+    },
+    {
+     "w": "comum",
+     "start": 25.26,
+     "end": 25.66
+    },
+    {
+     "w": "sozinho",
+     "start": 25.88,
+     "end": 26.38
+    },
+    {
+     "w": "nunca",
+     "start": 26.78,
+     "end": 27.08
+    },
+    {
+     "w": "segura",
+     "start": 27.08,
+     "end": 27.54
+    },
+    {
+     "w": "nada",
+     "start": 27.54,
+     "end": 27.94
+    },
+    {
+     "w": "parado",
+     "start": 27.94,
+     "end": 28.5
+    },
+    {
+     "w": "no",
+     "start": 28.5,
+     "end": 28.66
+    },
+    {
+     "w": "ar.",
+     "start": 28.66,
+     "end": 28.9
+    }
+   ]
+  },
+  {
+   "text": "Então você coloca um sensor e um ímã elétrico que corrige a posição milhares de vezes por segundo.",
+   "start": 28.9,
+   "end": 35.42,
+   "words": [
+    {
+     "w": "Então",
+     "start": 28.9,
+     "end": 29.52
+    },
+    {
+     "w": "você",
+     "start": 29.52,
+     "end": 29.8
+    },
+    {
+     "w": "coloca",
+     "start": 29.8,
+     "end": 30.16
+    },
+    {
+     "w": "um",
+     "start": 30.16,
+     "end": 30.42
+    },
+    {
+     "w": "sensor",
+     "start": 30.42,
+     "end": 30.86
+    },
+    {
+     "w": "e",
+     "start": 30.86,
+     "end": 31.28
+    },
+    {
+     "w": "um",
+     "start": 31.28,
+     "end": 31.44
+    },
+    {
+     "w": "ímã",
+     "start": 31.44,
+     "end": 31.66
+    },
+    {
+     "w": "elétrico",
+     "start": 31.66,
+     "end": 32.24
+    },
+    {
+     "w": "que",
+     "start": 32.24,
+     "end": 32.46
+    },
+    {
+     "w": "corrige",
+     "start": 32.46,
+     "end": 32.96
+    },
+    {
+     "w": "a",
+     "start": 32.96,
+     "end": 33.08
+    },
+    {
+     "w": "posição",
+     "start": 33.08,
+     "end": 33.48
+    },
+    {
+     "w": "milhares",
+     "start": 33.48,
+     "end": 34.22
+    },
+    {
+     "w": "de",
+     "start": 34.22,
+     "end": 34.4
+    },
+    {
+     "w": "vezes",
+     "start": 34.4,
+     "end": 34.72
+    },
+    {
+     "w": "por",
+     "start": 34.72,
+     "end": 35.0
+    },
+    {
+     "w": "segundo.",
+     "start": 35.0,
+     "end": 35.42
+    }
+   ]
+  },
+  {
+   "text": "Esse é o controle eletrônico.",
+   "start": 35.72,
+   "end": 37.74,
+   "words": [
+    {
+     "w": "Esse",
+     "start": 35.72,
+     "end": 36.08
+    },
+    {
+     "w": "é",
+     "start": 36.08,
+     "end": 36.4
+    },
+    {
+     "w": "o",
+     "start": 36.4,
+     "end": 36.5
+    },
+    {
+     "w": "controle",
+     "start": 36.5,
+     "end": 36.98
+    },
+    {
+     "w": "eletrônico.",
+     "start": 36.98,
+     "end": 37.74
+    }
+   ]
+  },
+  {
+   "text": "Por isso que o globo flutuante de enfeite vive ligado na tomada.",
+   "start": 37.98,
+   "end": 41.7,
+   "words": [
+    {
+     "w": "Por",
+     "start": 37.98,
+     "end": 38.18
+    },
+    {
+     "w": "isso",
+     "start": 38.18,
+     "end": 38.42
+    },
+    {
+     "w": "que",
+     "start": 38.42,
+     "end": 38.58
+    },
+    {
+     "w": "o",
+     "start": 38.58,
+     "end": 38.7
+    },
+    {
+     "w": "globo",
+     "start": 38.7,
+     "end": 38.96
+    },
+    {
+     "w": "flutuante",
+     "start": 38.96,
+     "end": 39.54
+    },
+    {
+     "w": "de",
+     "start": 39.54,
+     "end": 39.72
+    },
+    {
+     "w": "enfeite",
+     "start": 39.72,
+     "end": 40.2
+    },
+    {
+     "w": "vive",
+     "start": 40.2,
+     "end": 40.58
+    },
+    {
+     "w": "ligado",
+     "start": 40.58,
+     "end": 41.1
+    },
+    {
+     "w": "na",
+     "start": 41.1,
+     "end": 41.26
+    },
+    {
+     "w": "tomada.",
+     "start": 41.26,
+     "end": 41.7
+    }
+   ]
+  },
+  {
+   "text": "Mas um sapo não tem ímã nenhum.",
+   "start": 42.02,
+   "end": 43.86,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 42.02,
+     "end": 42.2
+    },
+    {
+     "w": "um",
+     "start": 42.2,
+     "end": 42.36
+    },
+    {
+     "w": "sapo",
+     "start": 42.36,
+     "end": 42.88
+    },
+    {
+     "w": "não",
+     "start": 42.88,
+     "end": 43.04
+    },
+    {
+     "w": "tem",
+     "start": 43.04,
+     "end": 43.28
+    },
+    {
+     "w": "ímã",
+     "start": 43.28,
+     "end": 43.56
+    },
+    {
+     "w": "nenhum.",
+     "start": 43.56,
+     "end": 43.86
+    }
+   ]
+  },
+  {
+   "text": "Então você usa um ímã gigante, centenas de milhares de vezes mais forte que o campo da Terra.",
+   "start": 44.24,
+   "end": 50.74,
+   "words": [
+    {
+     "w": "Então",
+     "start": 44.24,
+     "end": 44.58
+    },
+    {
+     "w": "você",
+     "start": 44.58,
+     "end": 44.94
+    },
+    {
+     "w": "usa",
+     "start": 44.94,
+     "end": 45.26
+    },
+    {
+     "w": "um",
+     "start": 45.26,
+     "end": 45.44
+    },
+    {
+     "w": "ímã",
+     "start": 45.44,
+     "end": 45.66
+    },
+    {
+     "w": "gigante,",
+     "start": 45.66,
+     "end": 46.46
+    },
+    {
+     "w": "centenas",
+     "start": 46.7,
+     "end": 47.44
+    },
+    {
+     "w": "de",
+     "start": 47.44,
+     "end": 47.7
+    },
+    {
+     "w": "milhares",
+     "start": 47.7,
+     "end": 48.28
+    },
+    {
+     "w": "de",
+     "start": 48.28,
+     "end": 48.42
+    },
+    {
+     "w": "vezes",
+     "start": 48.42,
+     "end": 48.78
+    },
+    {
+     "w": "mais",
+     "start": 48.78,
+     "end": 49.14
+    },
+    {
+     "w": "forte",
+     "start": 49.14,
+     "end": 49.6
+    },
+    {
+     "w": "que",
+     "start": 49.6,
+     "end": 49.8
+    },
+    {
+     "w": "o",
+     "start": 49.8,
+     "end": 49.92
+    },
+    {
+     "w": "campo",
+     "start": 49.92,
+     "end": 50.2
+    },
+    {
+     "w": "da",
+     "start": 50.2,
+     "end": 50.4
+    },
+    {
+     "w": "Terra.",
+     "start": 50.4,
+     "end": 50.74
+    }
+   ]
+  },
+  {
+   "text": "A água do corpo do sapo é empurrada de leve pra longe do ímã.",
+   "start": 51.14,
+   "end": 55.18,
+   "words": [
+    {
+     "w": "A",
+     "start": 51.14,
+     "end": 51.28
+    },
+    {
+     "w": "água",
+     "start": 51.28,
+     "end": 51.56
+    },
+    {
+     "w": "do",
+     "start": 51.56,
+     "end": 51.74
+    },
+    {
+     "w": "corpo",
+     "start": 51.74,
+     "end": 52.02
+    },
+    {
+     "w": "do",
+     "start": 52.02,
+     "end": 52.18
+    },
+    {
+     "w": "sapo",
+     "start": 52.18,
+     "end": 52.64
+    },
+    {
+     "w": "é",
+     "start": 52.64,
+     "end": 52.86
+    },
+    {
+     "w": "empurrada",
+     "start": 52.86,
+     "end": 53.3
+    },
+    {
+     "w": "de",
+     "start": 53.3,
+     "end": 53.54
+    },
+    {
+     "w": "leve",
+     "start": 53.54,
+     "end": 53.94
+    },
+    {
+     "w": "pra",
+     "start": 53.94,
+     "end": 54.24
+    },
+    {
+     "w": "longe",
+     "start": 54.24,
+     "end": 54.62
+    },
+    {
+     "w": "do",
+     "start": 54.62,
+     "end": 54.86
+    },
+    {
+     "w": "ímã.",
+     "start": 54.86,
+     "end": 55.18
+    }
+   ]
+  },
+  {
+   "text": "Isso é o diamagnetismo.",
+   "start": 55.42,
+   "end": 57.36,
+   "words": [
+    {
+     "w": "Isso",
+     "start": 55.42,
+     "end": 55.78
+    },
+    {
+     "w": "é",
+     "start": 55.78,
+     "end": 56.1
+    },
+    {
+     "w": "o",
+     "start": 56.1,
+     "end": 56.22
+    },
+    {
+     "w": "diamagnetismo.",
+     "start": 56.22,
+     "end": 57.36
+    }
+   ]
+  },
+  {
+   "text": "Parece estranho, mas com um ímã forte o bastante, até você flutuaria.",
+   "start": 57.36,
+   "end": 62.32,
+   "words": [
+    {
+     "w": "Parece",
+     "start": 57.36,
+     "end": 57.88
+    },
+    {
+     "w": "estranho,",
+     "start": 57.88,
+     "end": 58.56
+    },
+    {
+     "w": "mas",
+     "start": 58.76,
+     "end": 58.96
+    },
+    {
+     "w": "com",
+     "start": 58.96,
+     "end": 59.14
+    },
+    {
+     "w": "um",
+     "start": 59.14,
+     "end": 59.32
+    },
+    {
+     "w": "ímã",
+     "start": 59.32,
+     "end": 59.52
+    },
+    {
+     "w": "forte",
+     "start": 59.52,
+     "end": 59.98
+    },
+    {
+     "w": "o",
+     "start": 59.98,
+     "end": 60.1
+    },
+    {
+     "w": "bastante,",
+     "start": 60.1,
+     "end": 60.42
+    },
+    {
+     "w": "até",
+     "start": 60.8,
+     "end": 61.14
+    },
+    {
+     "w": "você",
+     "start": 61.14,
+     "end": 61.7
+    },
+    {
+     "w": "flutuaria.",
+     "start": 61.7,
+     "end": 62.32
+    }
+   ]
+  },
+  {
+   "text": "E o sapo saiu inteiro.",
+   "start": 62.78,
+   "end": 64.26,
+   "words": [
+    {
+     "w": "E",
+     "start": 62.78,
+     "end": 62.94
+    },
+    {
+     "w": "o",
+     "start": 62.94,
+     "end": 63.08
+    },
+    {
+     "w": "sapo",
+     "start": 63.08,
+     "end": 63.48
+    },
+    {
+     "w": "saiu",
+     "start": 63.48,
+     "end": 63.82
+    },
+    {
+     "w": "inteiro.",
+     "start": 63.82,
+     "end": 64.26
+    }
+   ]
+  },
+  {
+   "text": "Quem fez isso foi o físico Andre Geim, e ganhou o Ig Nobel, o prêmio das pesquisas que fazem rir.",
+   "start": 64.74,
+   "end": 71.14,
+   "words": [
+    {
+     "w": "Quem",
+     "start": 64.74,
+     "end": 64.9
+    },
+    {
+     "w": "fez",
+     "start": 64.9,
+     "end": 65.16
+    },
+    {
+     "w": "isso",
+     "start": 65.16,
+     "end": 65.48
+    },
+    {
+     "w": "foi",
+     "start": 65.48,
+     "end": 65.7
+    },
+    {
+     "w": "o",
+     "start": 65.7,
+     "end": 65.8
+    },
+    {
+     "w": "físico",
+     "start": 65.8,
+     "end": 66.26
+    },
+    {
+     "w": "Andre",
+     "start": 66.26,
+     "end": 66.82
+    },
+    {
+     "w": "Geim,",
+     "start": 66.82,
+     "end": 67.24
+    },
+    {
+     "w": "e",
+     "start": 67.24,
+     "end": 67.64
+    },
+    {
+     "w": "ganhou",
+     "start": 67.64,
+     "end": 68.0
+    },
+    {
+     "w": "o",
+     "start": 68.0,
+     "end": 68.18
+    },
+    {
+     "w": "Ig",
+     "start": 68.18,
+     "end": 68.34
+    },
+    {
+     "w": "Nobel,",
+     "start": 68.34,
+     "end": 68.66
+    },
+    {
+     "w": "o",
+     "start": 69.12,
+     "end": 69.18
+    },
+    {
+     "w": "prêmio",
+     "start": 69.18,
+     "end": 69.58
+    },
+    {
+     "w": "das",
+     "start": 69.58,
+     "end": 69.72
+    },
+    {
+     "w": "pesquisas",
+     "start": 69.72,
+     "end": 70.28
+    },
+    {
+     "w": "que",
+     "start": 70.28,
+     "end": 70.5
+    },
+    {
+     "w": "fazem",
+     "start": 70.5,
+     "end": 70.8
+    },
+    {
+     "w": "rir.",
+     "start": 70.8,
+     "end": 71.14
+    }
+   ]
+  },
+  {
+   "text": "Dez anos depois, ele ganhou o Nobel de verdade, pelo grafeno.",
+   "start": 71.56,
+   "end": 75.64,
+   "words": [
+    {
+     "w": "Dez",
+     "start": 71.56,
+     "end": 71.92
+    },
+    {
+     "w": "anos",
+     "start": 71.92,
+     "end": 72.1
+    },
+    {
+     "w": "depois,",
+     "start": 72.1,
+     "end": 72.5
+    },
+    {
+     "w": "ele",
+     "start": 72.84,
+     "end": 72.98
+    },
+    {
+     "w": "ganhou",
+     "start": 72.98,
+     "end": 73.36
+    },
+    {
+     "w": "o",
+     "start": 73.36,
+     "end": 73.5
+    },
+    {
+     "w": "Nobel",
+     "start": 73.5,
+     "end": 73.82
+    },
+    {
+     "w": "de",
+     "start": 73.82,
+     "end": 74.06
+    },
+    {
+     "w": "verdade,",
+     "start": 74.06,
+     "end": 74.5
+    },
+    {
+     "w": "pelo",
+     "start": 74.5,
+     "end": 75.0
+    },
+    {
+     "w": "grafeno.",
+     "start": 75.0,
+     "end": 75.64
+    }
+   ]
+  },
+  {
+   "text": "Ninguém mais no mundo tem os dois.",
+   "start": 76.02,
+   "end": 78.04,
+   "words": [
+    {
+     "w": "Ninguém",
+     "start": 76.02,
+     "end": 76.46
+    },
+    {
+     "w": "mais",
+     "start": 76.46,
+     "end": 76.84
+    },
+    {
+     "w": "no",
+     "start": 76.84,
+     "end": 77.02
+    },
+    {
+     "w": "mundo",
+     "start": 77.02,
+     "end": 77.4
+    },
+    {
+     "w": "tem",
+     "start": 77.4,
+     "end": 77.7
+    },
+    {
+     "w": "os",
+     "start": 77.7,
+     "end": 77.84
+    },
+    {
+     "w": "dois.",
+     "start": 77.84,
+     "end": 78.04
+    }
+   ]
+  },
+  {
+   "text": "E é levitação que faz trem flutuar: no Japão, um deles chegou a seiscentos e três quilômetros por hora.",
+   "start": 78.56,
+   "end": 85.68,
+   "words": [
+    {
+     "w": "E",
+     "start": 78.56,
+     "end": 78.72
+    },
+    {
+     "w": "é",
+     "start": 78.72,
+     "end": 78.82
+    },
+    {
+     "w": "levitação",
+     "start": 78.82,
+     "end": 79.62
+    },
+    {
+     "w": "que",
+     "start": 79.62,
+     "end": 79.8
+    },
+    {
+     "w": "faz",
+     "start": 79.8,
+     "end": 80.14
+    },
+    {
+     "w": "trem",
+     "start": 80.14,
+     "end": 80.48
+    },
+    {
+     "w": "flutuar:",
+     "start": 80.48,
+     "end": 81.02
+    },
+    {
+     "w": "no",
+     "start": 81.44,
+     "end": 81.58
+    },
+    {
+     "w": "Japão,",
+     "start": 81.58,
+     "end": 82.0
+    },
+    {
+     "w": "um",
+     "start": 82.26,
+     "end": 82.44
+    },
+    {
+     "w": "deles",
+     "start": 82.44,
+     "end": 82.68
+    },
+    {
+     "w": "chegou",
+     "start": 82.68,
+     "end": 83.1
+    },
+    {
+     "w": "a",
+     "start": 83.1,
+     "end": 83.28
+    },
+    {
+     "w": "seiscentos",
+     "start": 83.28,
+     "end": 83.63
+    },
+    {
+     "w": "e",
+     "start": 83.63,
+     "end": 83.98
+    },
+    {
+     "w": "três",
+     "start": 83.98,
+     "end": 84.33
+    },
+    {
+     "w": "quilômetros",
+     "start": 84.33,
+     "end": 84.68
+    },
+    {
+     "w": "por",
+     "start": 84.68,
+     "end": 85.44
+    },
+    {
+     "w": "hora.",
+     "start": 85.44,
+     "end": 85.68
+    }
+   ]
+  },
+  {
+   "text": "Parabéns, você entendeu a levitação magnética.",
+   "start": 85.68,
+   "end": 89.36,
+   "words": [
+    {
+     "w": "Parabéns,",
+     "start": 85.68,
+     "end": 86.7
+    },
+    {
+     "w": "você",
+     "start": 86.92,
+     "end": 87.18
+    },
+    {
+     "w": "entendeu",
+     "start": 87.18,
+     "end": 87.8
+    },
+    {
+     "w": "a",
+     "start": 87.8,
+     "end": 87.98
+    },
+    {
+     "w": "levitação",
+     "start": 87.98,
+     "end": 88.72
+    },
+    {
+     "w": "magnética.",
+     "start": 88.72,
+     "end": 89.36
+    }
+   ]
+  },
+  {
+   "text": "Segue a página, senão o sapo vai flutuar até a sua casa.",
+   "start": 89.72,
+   "end": 93.2,
+   "words": [
+    {
+     "w": "Segue",
+     "start": 89.72,
+     "end": 90.04
+    },
+    {
+     "w": "a",
+     "start": 90.04,
+     "end": 90.14
+    },
+    {
+     "w": "página,",
+     "start": 90.14,
+     "end": 90.5
+    },
+    {
+     "w": "senão",
+     "start": 90.82,
+     "end": 91.14
+    },
+    {
+     "w": "o",
+     "start": 91.14,
+     "end": 91.24
+    },
+    {
+     "w": "sapo",
+     "start": 91.24,
+     "end": 91.66
+    },
+    {
+     "w": "vai",
+     "start": 91.66,
+     "end": 91.78
+    },
+    {
+     "w": "flutuar",
+     "start": 91.78,
+     "end": 92.32
+    },
+    {
+     "w": "até",
+     "start": 92.32,
+     "end": 92.6
+    },
+    {
+     "w": "a",
+     "start": 92.6,
+     "end": 92.78
+    },
+    {
+     "w": "sua",
+     "start": 92.78,
+     "end": 92.88
+    },
+    {
+     "w": "casa.",
+     "start": 92.88,
+     "end": 93.2
+    }
+   ]
+  }
+ ]
+}
