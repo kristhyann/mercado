@@ -1,0 +1,245 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:P;font-weight:800;unicode-range:U+0100-024F;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-ext-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;unicode-range:U+0100-024F;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-ext-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:250px;text-align:center;font-weight:900;font-size:120px;line-height:1.0}
+#hook b{color:#FF8A1F;display:block;font-size:150px}
+#label{width:1080px;top:180px;text-align:center}
+#label span{display:inline-block;font-weight:900;font-size:100px;color:#FF8A1F;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#cap{width:1080px;top:1290px;text-align:center;font-weight:900;font-size:118px}
+#cap.hl{color:#FF8A1F}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:64px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF3B3B;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}
+#xmark{font-weight:900;font-size:300px;color:#FF2D2D;-webkit-text-stroke:12px #fff;paint-order:stroke fill;line-height:1}
+.comic{font-weight:900;font-size:150px;color:#FFD21F;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 10px 0 rgba(0,0,0,.3);white-space:nowrap}
+#final{left:60px;width:960px;top:1330px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:78px;line-height:1.05;padding:30px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#FF8A1F}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.8;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">QUEM INVENTOU<b>ISSO?</b></div>
+<div id="label" class="o"><span>X</span></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag"></div>
+<div id="xmark" class="o">✕</div>
+<div id="comic" class="o comic"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Segue a página,<br><em>antes que a caneta suma.</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, bounce, M, mesh, buildWorld } from '/_kit/kit.js';
+
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; const S = i => SN[i].start, E = i => SN[i].end; window.DURATION = TP.duration;
+const WD = (i, re) => { const w = SN[i].words.find(w => re.test(w.w)); return w ? w.start : S(i); };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(window.devicePixelRatio || 1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .02, 600);
+const world = buildWorld(scene);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const box = (w, h, d, c, x, y, z, par = scene, o = {}) => mesh(new THREE.BoxGeometry(w, h, d), typeof c === 'number' ? M(c, o) : c, x, y, z, par);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const glassM = (op = .28) => new THREE.MeshStandardMaterial({ color: 0xE6F4FF, transparent: true, opacity: op, roughness: .05, metalness: .1, depthWrite: false });
+const inkM = new THREE.MeshStandardMaterial({ color: 0x1D4ED8, roughness: .15, metalness: .1 });
+const brassM = M(0xD4A73A, { metalness: .8, roughness: .3 });
+const steelM = new THREE.MeshStandardMaterial({ color: 0xD5DAE2, metalness: .35, roughness: .18, flatShading: true });
+
+// ---------- tempos ----------
+const T_PENA = WD(3, /pena/i), T_GROSSA = WD(5, /grossa/i), T_CANUDO = WD(8, /canudo/i), T_BOLA = WD(11, /bolinha/i), T_GIRA = WD(11, /gira/i);
+const T_TUNG = WD(13, /tungstênio/i), T_BICO = WD(15, /bico/i), T_GRAV = WD(17, /gravidade/i), T_FURO = WD(18, /furinho/i), T_RESP = WD(18, /respirar/i);
+const T_1938 = WD(19, /^mil$/i), T_NOME = WD(19, /László/i), T_JORNAL = WD(19, /jornal/i), T_PARAB = S(20), T_SUMIR = WD(21, /sumir/i);
+
+// ---------- papel ----------
+const paperTex = (() => { const c = document.createElement('canvas'); c.width = 1024; c.height = 1365; const g = c.getContext('2d'); g.fillStyle = '#FBFBF7'; g.fillRect(0, 0, 1024, 1365); g.strokeStyle = '#A9C7EE'; g.lineWidth = 4; for (let y = 120; y < 1365; y += 56) { g.beginPath(); g.moveTo(0, y); g.lineTo(1024, y); g.stroke(); } g.strokeStyle = '#F2A3A3'; g.beginPath(); g.moveTo(130, 0); g.lineTo(130, 1365); g.stroke(); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; })();
+const paper = new THREE.Mesh(new THREE.PlaneGeometry(6, 8), new THREE.MeshStandardMaterial({ map: paperTex, roughness: .9 })); paper.rotation.x = -Math.PI / 2; paper.rotation.z = .15; paper.position.set(0, .05, .4); paper.receiveShadow = true; scene.add(paper);
+
+// rastro de tinta (discos ao longo de um caminho)
+function makeTrail(pts, r = .03, n = 260) {
+  const curve = new THREE.CatmullRomCurve3(pts); const g = grp(); const ds = [];
+  const geo = new THREE.CylinderGeometry(r, r, .004, 8); const m = new THREE.MeshStandardMaterial({ color: 0x1D4ED8, roughness: .3 });
+  for (let i = 0; i < n; i++) { const p = curve.getPointAt(i / (n - 1)); const d = new THREE.Mesh(geo, m); d.position.set(p.x, .056, p.z); d.visible = false; g.add(d); ds.push(d); }
+  return { curve, ds, show(u) { const k = Math.floor(u * ds.length); ds.forEach((d, i) => d.visible = i < k); } };
+}
+const hookTrail = makeTrail([V(-1.4, 0, .9), V(-.8, 0, .5), V(-.3, 0, .8), V(.2, 0, .4), V(.7, 0, .7), V(1.3, 0, .3)], .05);
+const writeTrail = makeTrail([V(-.9, 0, 1.3), V(-.6, 0, 1.0), V(-.4, 0, 1.4), V(-.15, 0, 1.0), V(.05, 0, 1.35), V(.3, 0, 1.0), V(.5, 0, 1.4), V(.8, 0, 1.1), V(1.0, 0, 1.3)], .035);
+const failTrail = makeTrail([V(-.5, 0, 1.2), V(.5, 0, 1.2)], .03, 40);
+
+// bolona do gancho
+const bigBall = new THREE.Mesh(new THREE.IcosahedronGeometry(.28, 2), steelM); bigBall.castShadow = true; scene.add(bigBall);
+const bigInk = new THREE.Mesh(new THREE.IcosahedronGeometry(.285, 2), new THREE.MeshStandardMaterial({ color: 0x1D4ED8, transparent: true, opacity: .55, roughness: .1 })); bigBall.add(bigInk); bigInk.scale.set(1, .5, 1); bigInk.position.y = -.12;
+
+// pena + tinteiro + borrões (problema 1)
+const quill = grp(); { const f = mesh(new THREE.ConeGeometry(.12, 1.2, 4), M(0xF5F5F5, { side: THREE.DoubleSide }), 0, .6, 0, quill); f.scale.z = .25; mesh(new THREE.CylinderGeometry(.012, .005, .5, 5), M(0x444444), 0, -.1, 0, quill); }
+const pot = grp(); pot.position.set(.75, 0, .7); mesh(new THREE.CylinderGeometry(.22, .25, .35, 10), glassM(.4), 0, .175, 0, pot); mesh(new THREE.CylinderGeometry(.2, .23, .25, 10), inkM, 0, .13, 0, pot); mesh(new THREE.CylinderGeometry(.12, .12, .08, 10), M(0x111111), 0, .38, 0, pot);
+const blots = []; for (let i = 0; i < 6; i++) { const b = mesh(new THREE.CylinderGeometry(.06 + (i % 3) * .04, .06 + (i % 3) * .04, .006, 10), inkM, -.6 + i * .25, .058, .6 + Math.sin(i * 2) * .3); b.visible = false; blots.push(b); }
+const drops = []; for (let i = 0; i < 4; i++) { const d = mesh(new THREE.IcosahedronGeometry(.035, 1), inkM, 0, 0, 0); d.scale.y = 1.5; drops.push(d); }
+const puddle = mesh(new THREE.CylinderGeometry(1, 1, .006, 24), inkM, -.1, .058, .5); puddle.visible = false;
+[...blots, ...drops, puddle].forEach(o => scene.add(o));
+// pasta de tinta
+const paste = new THREE.Mesh(new THREE.IcosahedronGeometry(.3, 2), new THREE.MeshStandardMaterial({ color: 0x1E40AF, roughness: .08, metalness: .15 })); paste.position.set(-.45, .25, .5); paste.castShadow = true; scene.add(paste);
+
+// ---------- caneta (em pé, ponta pra baixo) ----------
+const PEN = grp(); // pivô na ponta
+PEN.position.y = .05;
+const refill = grp(PEN);
+const tubeTop = 2.75, tubeBot = .38;
+const tube = mesh(new THREE.CylinderGeometry(.12, .12, tubeTop - tubeBot, 14, 1, true), glassM(.35), 0, (tubeTop + tubeBot) / 2, 0, refill); tube.material.side = THREE.DoubleSide;
+const ink = mesh(new THREE.CylinderGeometry(.1, .1, 1, 12), inkM, 0, 0, 0, refill);
+const tipG = grp(refill); const cone = mesh(new THREE.ConeGeometry(.12, .32, 14), brassM, 0, .22, 0, tipG); cone.rotation.x = Math.PI; mesh(new THREE.CylinderGeometry(.125, .125, .06, 14), brassM, 0, .38, 0, tipG);
+const ball = new THREE.Mesh(new THREE.IcosahedronGeometry(.06, 1), steelM); ball.position.set(0, .1, 0); refill.add(ball);
+const leakDrops = []; for (let i = 0; i < 6; i++) { const d = mesh(new THREE.IcosahedronGeometry(.04, 1), inkM, 0, 0, 0); d.scale.y = 1.6; leakDrops.push(d); }
+leakDrops.forEach(o => scene.add(o));
+// corpo sextavado transparente + tampinha do fundo
+const bodyG = grp(PEN);
+const barrel = mesh(new THREE.CylinderGeometry(.3, .3, 2.55, 6, 1, true), glassM(.22), 0, 1.75, 0, bodyG); barrel.material.side = THREE.DoubleSide;
+const front = mesh(new THREE.CylinderGeometry(.3, .14, .42, 6, 1, true), glassM(.3), 0, .29, 0, bodyG); front.material.side = THREE.DoubleSide;
+mesh(new THREE.CylinderGeometry(.25, .25, .14, 12), M(0x1D4ED8), 0, 3.06, 0, bodyG);
+// tampa (com furo)
+const capG = grp(); const capM = M(0x1D4ED8, { roughness: .35 });
+mesh(new THREE.CylinderGeometry(.21, .23, .8, 12, 1, true), capM, 0, 0, 0, capG).material.side = THREE.DoubleSide; mesh(new THREE.ConeGeometry(.21, .25, 12), capM, 0, .52, 0, capG);
+box(.06, .75, .05, capM, 0, -.02, .25, capG); box(.08, .12, .1, capM, 0, -.38, .23, capG);
+const hole = mesh(new THREE.CylinderGeometry(.05, .05, .02, 12), M(0x111111), 0, .66, 0, capG);
+const airArrows = []; for (let i = 0; i < 3; i++) { const a = grp(); mesh(new THREE.ConeGeometry(.05, .12, 8), new THREE.MeshBasicMaterial({ color: 0x7FD4FF }), 0, .06, 0, a); mesh(new THREE.CylinderGeometry(.015, .015, .2, 6), new THREE.MeshBasicMaterial({ color: 0x7FD4FF }), 0, -.1, 0, a); airArrows.push(a); }
+// jornal
+const paperNews = (() => { const c = document.createElement('canvas'); c.width = 512; c.height = 700; const g = c.getContext('2d'); g.fillStyle = '#EFE7D2'; g.fillRect(0, 0, 512, 700); g.fillStyle = '#111'; g.font = '900 64px serif'; g.textAlign = 'center'; g.fillText('O DIÁRIO', 256, 80); g.fillRect(30, 100, 452, 6); g.font = '900 40px P'; g.fillText('BUDAPESTE · 1938', 256, 160); g.fillStyle = '#777'; for (let col = 0; col < 3; col++) for (let l = 0; l < 22; l++) g.fillRect(36 + col * 152, 200 + l * 21, 130 - (l % 5 === 4 ? 50 : 0), 8); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; })();
+const news = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 1.78), new THREE.MeshStandardMaterial({ map: paperNews, side: THREE.DoubleSide, roughness: .9 })); news.castShadow = true; scene.add(news);
+const stampTex = (() => { const c = document.createElement('canvas'); c.width = 512; c.height = 256; const g = c.getContext('2d'); g.strokeStyle = '#D61F26'; g.lineWidth = 16; g.strokeRect(14, 14, 484, 228); g.fillStyle = '#D61F26'; g.font = '900 80px P'; g.textAlign = 'center'; g.fillText('PATENTE', 256, 120); g.font = '900 70px P'; g.fillText('1938', 256, 205); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; })();
+const stamp = new THREE.Mesh(new THREE.PlaneGeometry(.8, .4), new THREE.MeshBasicMaterial({ map: stampTex, transparent: true })); scene.add(stamp);
+// faíscas (tungstênio), confete, fumaça do sumiço
+const sparks = []; for (let i = 0; i < 10; i++) { const s = new THREE.Mesh(new THREE.OctahedronGeometry(.02, 0), new THREE.MeshBasicMaterial({ color: 0xFFFFFF })); s.scale.set(1, 2.5, .4); scene.add(s); sparks.push(s); }
+const conf = []; const confCols = [0xFF3B3B, 0x3B82F6, 0xFFD21F, 0x22C55E, 0xA855F7, 0xFF8A1F]; for (let i = 0; i < 60; i++) { const c = box(.07, .07, .01, new THREE.MeshBasicMaterial({ color: confCols[i % 6], side: THREE.DoubleSide }), 0, 0, 0); c.userData = { x: Math.sin(i * 12.9) * 2.2, z: Math.cos(i * 7.3) * 1.2, s: .6 + (i % 7) / 7 }; conf.push(c); }
+const pufM = new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, roughness: 1, flatShading: true, emissive: 0xffffff, emissiveIntensity: .25 });
+const puf = []; for (let i = 0; i < 14; i++) { const b = mesh(new THREE.IcosahedronGeometry(.3, 0), pufM, 0, 0, 0); b.userData.d = V(Math.cos(i) * 1.1, Math.sin(i * 1.7) * 1.2, Math.sin(i) * .6); puf.push(b); }
+
+puf.forEach(o => scene.add(o)); conf.forEach(o => scene.add(o));
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [S(2), 'pop'], [T_GROSSA, 'pop'], [T_CANUDO, 'pop'], [T_BOLA, 'pop'], [T_TUNG, 'ding'], [T_BICO, 'pop'], [T_GRAV, 'whoosh'], [T_FURO, 'pop'], [T_1938, 'pop'], [T_NOME, 'ding'], [T_PARAB, 'win'], [T_SUMIR, 'whoosh']].forEach(([t, k]) => ev(t, k));
+[4, 7, 10, 14].forEach(i => ev(S(i) + .3, 'buzz')); ev(S(3) + 2.2, 'buzz');
+const LBL = [[T_GROSSA, 'TINTA'], [T_CANUDO, 'TUBO'], [T_BOLA, 'ESFERA'], [T_BICO, 'PONTA']];
+const HL = /tinta|tubo|esfera|ponta|bolinha|canudo|pasta|tungstênio|gravidade|furinho|bíró|lászló|jornal|caneta|esferográfica|milímetro|bico/i;
+
+// câmera: um plano contínuo com chaves suaves
+const KEYS = [
+  [0, [0, .55, 2.6], [0, .18, .55]], [S(2), [0, 2.0, 6.0], [0, .6, .4]], [S(3), [1.0, 1.5, 3.6], [.25, .6, .4]], [S(4), [-.6, 1.6, 3.2], [-.1, .1, .5]],
+  [S(5), [-.1, 1.1, 3.0], [-.35, .3, .5]], [S(7), [1.4, 1.1, 3.0], [.7, .25, .6]], [S(8), [0, 1.7, 8.6], [0, 1.55, 0]], [S(10), [.9, .7, 2.8], [0, .45, 0]],
+  [S(11), [.4, .35, 1.2], [0, .12, 0]], [S(13), [.24, .44, .7], [0, .36, 0]], [S(14), [.9, .6, 2.4], [.3, .15, .3]], [S(15), [.45, .5, 1.5], [0, .25, 0]],
+  [S(17), [0, 1.8, 9.6], [0, 1.7, 0]], [S(18), [1.6, 2.0, 6.0], [.9, 1.4, .2]], [S(19), [-.4, 1.4, 5.0], [-1.0, .95, .4]], [S(20), [1.8, 2.4, 10.0], [0, 1.2, .3]],
+  [S(21), [0, 1.6, 8.6], [0, 1.4, 0]], [TP.duration, [-.4, 1.8, 9.2], [0, 1.3, 0]],
+];
+function camAt(t) {
+  let i = 0; while (i + 1 < KEYS.length && KEYS[i + 1][0] <= t) i++;
+  const b = KEYS[i], a = KEYS[Math.max(0, i - 1)]; const u = b === a ? 1 : ease(clamp((t - b[0]) / Math.max(.6, Math.min(1.4, (KEYS[i + 1] ? KEYS[i + 1][0] : b[0] + 2) - b[0]))));
+  const tg = V(...a[2]).lerp(V(...b[2]), u); const p = V(...a[1]).lerp(V(...b[1]), u);
+  p.x += Math.sin(t * .35) * .08; p.y += Math.sin(t * .27) * .04;
+  if (t < S(2)) { const bp = hookTrail.curve.getPointAt(clamp(t / (S(2) - .2))); tg.set(bp.x * .8, .25, bp.z); p.set(bp.x * .8 + .3, .95, bp.z + 3.2); }
+  cam.position.copy(p); cam.lookAt(tg); cam.fov = 40; cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+}
+const tmp = new THREE.Vector3();
+window.draw = function (t) {
+  camAt(t);
+  // ---- gancho: bola rolando desenhando
+  const hk = t < S(2) + .3; bigBall.visible = hk; hookTrail.ds.forEach(d => d.visible = false);
+  if (hk) { const u = clamp(t / (S(2) - .2)); const p = hookTrail.curve.getPointAt(u); bigBall.position.set(p.x, .33, p.z); bigBall.rotation.set(t * 6, 0, -t * 6); hookTrail.show(u); }
+  if (t >= S(2) + .3 && t < S(5)) hookTrail.show(0);
+  // ---- pena e tinteiro
+  quill.visible = win(t, T_PENA - .3, S(4)); pot.visible = win(t, T_PENA - .3, S(5)) || win(t, S(7), T_CANUDO);
+  if (quill.visible) { const dip = t < T_PENA + .8; quill.position.set(dip ? .75 : lerp(.75, 0, ease((t - T_PENA - .8) / .6)), dip ? lerp(.9, .25, Math.sin(clamp((t - T_PENA + .3) / 1.1) * Math.PI)) + .2 : .7, dip ? .7 : lerp(.7, .5, ease((t - T_PENA - .8) / .6))); quill.rotation.set(0, 0, .5); }
+  blots.forEach((b, i) => b.visible = win(t, T_PENA + 1.6 + i * .3, S(5)));
+  drops.forEach((d, i) => { const on = win(t, T_PENA + 1.4, S(4)); d.visible = on; if (!on) return; const u = ((t * 1.5 + i * .25) % 1); d.position.set(Math.sin(i) * .1, lerp(.6, .07, u * u), .5); });
+  puddle.visible = win(t, S(4), S(5)); if (puddle.visible) { const u = easeOut(clamp((t - S(4)) / 2.5)); puddle.scale.set(.15 + u * .6, 1, .1 + u * .45); }
+  if (win(t, S(7), T_CANUDO)) { const u = easeOut(clamp((t - S(7) - .3) / .5)); pot.rotation.z = u * 1.4; pot.position.set(.75, u * .1, .7); puddle.visible = true; puddle.position.set(.3, .058, .7); puddle.scale.set(u * .7, 1, u * .45); } else { pot.rotation.z = 0; pot.position.set(.75, 0, .7); puddle.position.set(-.1, .058, .5); }
+  // ---- pasta
+  paste.visible = win(t, T_GROSSA, T_CANUDO + 1.5); if (paste.visible) { let s = pop(t - T_GROSSA, .35); if (t > T_CANUDO) s *= 1 - ease((t - T_CANUDO) / 1.5); const w = 1 + Math.sin(t * 5) * .06; paste.scale.set(s * w * 1.1, s * .75 / w, s * w); }
+  // ---- caneta
+  PEN.visible = t >= T_CANUDO; refill.visible = PEN.visible;
+  tube.visible = t >= T_CANUDO; tube.scale.set(1, Math.max(.001, ease(clamp((t - T_CANUDO) / .5))), 1);
+  // nível da tinta
+  let fill = t < T_CANUDO ? 0 : clamp((t - T_CANUDO) / 1.5) * .9;
+  if (win(t, S(10) + .3, T_BOLA)) fill = .9 - clamp((t - S(10) - .3) / 3) * .25;
+  if (t >= T_BOLA) fill = .65 + Math.min(.25, (t - T_BOLA) * .1);
+  let inkBottom = tubeBot, inkLen = (tubeTop - tubeBot) * fill;
+  // de cabeça pra baixo: a tinta escorre pro outro lado
+  const flipK = win(t, S(17), S(18)) ? ease(clamp((t - S(17) - .2) / .8)) : 0;
+  if (flipK > 0) { inkBottom = lerp(tubeBot, tubeTop - inkLen, ease(clamp((t - S(17) - 1.0) / 1.5))); }
+  ink.visible = inkLen > .01; ink.scale.y = Math.max(.001, inkLen); ink.position.y = inkBottom + inkLen / 2;
+  tipG.visible = t >= T_BICO; tipG.scale.setScalar(Math.max(.001, pop(t - T_BICO, .35)));
+  ball.visible = t >= T_BOLA && !win(t, S(14) + .5, T_BICO); ball.scale.setScalar(Math.max(.001, pop(t - T_BOLA, .35)) * (t < S(15) ? 1.3 : 1)); ball.rotation.set(t * 4, t * 2, 0); ball.position.y = t < T_BICO ? .36 : lerp(.36, .1, ease(clamp((t - T_BICO) / .4)));
+  // bola caindo e rolando (problema)
+  if (win(t, S(14) + .5, T_BICO)) { }
+  const fallBall = win(t, S(14) + .5, T_BICO);
+  bigBall.visible = bigBall.visible || fallBall; if (fallBall) { const u = t - S(14) - .5; bigBall.scale.setScalar(.12); bigBall.position.set(u * .35, .085, u * .2); bigBall.rotation.set(u * 10, 0, -u * 10); } else bigBall.scale.setScalar(1);
+  // vazamento com tubo aberto
+  leakDrops.forEach((d, i) => { const on = win(t, S(10) + .3, T_BOLA); d.visible = on; if (!on) return; const u = ((t * 1.6 + i / 6) % 1); d.position.set(0, lerp(.36, .07, u * u), 0); });
+  // corpo + tampa do fundo aparecem no Parabéns
+  bodyG.visible = t >= T_PARAB; bodyG.scale.setScalar(Math.max(.001, pop(t - T_PARAB, .4)));
+  // pose da caneta
+  PEN.position.set(0, 0, 0); PEN.rotation.set(0, t * .15, 0);
+  if (flipK > 0) { PEN.rotation.z = Math.PI * flipK; PEN.position.y = lerp(0, 3.1, flipK); }
+  // escrevendo no final
+  let writing = 0; if (win(t, T_PARAB + 1.2, S(21))) writing = clamp((t - T_PARAB - 1.2) / (S(21) - T_PARAB - 1.4));
+  if (writing > 0) { const p = writeTrail.curve.getPointAt(writing); PEN.position.set(p.x, 0, p.z); PEN.rotation.set(-.35, 0, .25); }
+  writeTrail.show(t >= T_PARAB + 1.2 && t < T_SUMIR + .2 ? writing || (t >= S(21) ? 1 : 0) : 0);
+  failTrail.show(win(t, T_GRAV - .2, S(18)) ? 0 : 0);
+  // sumiço
+  if (t >= T_SUMIR + .1) { const k = clamp((t - T_SUMIR - .1) / .12); PEN.scale.setScalar(Math.max(.001, 1 - k)); if (k >= 1) PEN.visible = false; } else PEN.scale.setScalar(1);
+  const pu = (t - T_SUMIR - .05) / .8; puf.forEach(b => { b.visible = pu > 0 && pu < 1; if (!b.visible) return; const e = easeOut(pu); b.position.set(PEN.position.x + b.userData.d.x * e, 1.5 + b.userData.d.y * e, PEN.position.z + b.userData.d.z * e); b.scale.setScalar(lerp(.6, 1.8, e) * (1 - pu * .5)); b.material.opacity = 1 - pu; });
+  // tampa com furo
+  capG.visible = win(t, S(18), S(19)); if (capG.visible) { const s = pop(t - S(18), .35) * 1.6; capG.scale.setScalar(Math.max(.001, s)); capG.position.set(1.0, 1.4, .3); capG.rotation.set(.25, t * .5, -.1); }
+  airArrows.forEach((a, i) => { const on = win(t, T_RESP - .2, S(19)); a.visible = on; if (!on) return; hole.getWorldPosition(tmp); const u = ((t * 1.3 + i / 3) % 1); a.position.set(tmp.x, tmp.y + .05 + u * .7, tmp.z); a.scale.setScalar(1.6 * (1 - u * .4)); });
+  // jornal + carimbo
+  news.visible = win(t, S(19), S(20)); if (news.visible) { const s = pop(t - S(19), .4); news.scale.setScalar(Math.max(.001, s)); news.position.set(-1.1, .95, .5); news.rotation.set(-.12, .35, .04); }
+  stamp.visible = win(t, T_1938, S(20)); if (stamp.visible) { const s = t - T_1938 < .2 ? lerp(2.2, 1, (t - T_1938) / .2) : 1; stamp.scale.setScalar(s); stamp.position.set(-1.05, .55, .62); stamp.rotation.set(-.12, .35, -.2); }
+  // faíscas (dureza)
+  sparks.forEach((s, i) => { const on = win(t, T_TUNG, S(14)); s.visible = on; if (!on) return; const a = i / 10 * Math.PI * 2 + t * 2; s.position.set(Math.cos(a) * .11, .3 + Math.sin(t * 6 + i) * .04, Math.sin(a) * .11); s.rotation.set(0, a, 0); s.scale.setScalar(.6 + .4 * Math.sin(t * 12 + i)); });
+  conf.forEach((c, i) => { const u = t - T_PARAB; c.visible = u > 0 && u < 3; if (!c.visible) return; c.position.set(c.userData.x, 4.4 - u * 1.6 * c.userData.s - (i % 5) * .2, c.userData.z); c.rotation.set(u * 6 + i, u * 4, 0); });
+
+  // ---------- textos ----------
+  fixed($('hook'), t < E(1) + .3 ? pop(t - .05, .35) * (1 - clamp((t - E(1) - .1) / .2)) : 0);
+  const lb = [...LBL].reverse().find(l => t >= l[0]); const lbOn = lb && t < S(17);
+  if (lbOn) { $('label').firstElementChild.textContent = lb[1]; fixed($('label'), pop(t - lb[0], .3)); } else fixed($('label'), 0);
+  const t1 = $('t1'), t2 = $('t2'); t1.style.opacity = 0; t2.style.opacity = 0;
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  tag(t1, '1 MILÍMETRO', '', win(t, .4, S(1)), 760, 640, .4, 5);
+  tag(t1, 'SECA RÁPIDO', 'green', win(t, T_GROSSA + .8, S(7)), 540, 600, T_GROSSA + .8, -4);
+  tag(t1, 'SUPERDURO', 'blue', win(t, T_TUNG, S(14)), 540, 600, T_TUNG, -4);
+  tag(t1, 'GRAVIDADE', 'red', win(t, T_GRAV, S(18)), 540, 600, T_GRAV, -4);
+  tag(t2, 'SEM TINTA NA PONTA', '', win(t, T_GRAV + .6, S(18)), 540, 720, T_GRAV + .6, 4);
+  tag(t1, 'FURO = AR', 'blue', win(t, T_RESP - .3, S(19)), 540, 600, T_RESP - .3, -4);
+  tag(t1, 'LÁSZLÓ BÍRÓ', '', win(t, T_NOME, S(20)), 640, 560, T_NOME, -3);
+  tag(t2, 'JORNALISTA · HUNGRIA', 'blue', win(t, T_NOME + .5, S(20)), 600, 680, T_NOME + .5, 3);
+  const xOn = [4, 7, 10, 14].find(i => win(t, S(i) + .3, E(i) + .2)); const x3 = win(t, S(3) + 2.2, E(3) + .2);
+  place($('xmark'), xOn !== undefined || x3, 790, 640, xOn !== undefined ? pop(t - S(xOn) - .3, .25) : pop(t - S(3) - 2.2, .25), -8);
+  const cm = $('comic');
+  if (win(t, T_PARAB, S(21))) { cm.textContent = 'PARABÉNS!'; cm.style.fontSize = '130px'; place(cm, true, 540, 520, pop(t - T_PARAB, .3), -4); }
+  else if (win(t, T_SUMIR + .05, T_SUMIR + 1.2)) { cm.textContent = 'PUF!'; cm.style.fontSize = '160px'; place(cm, true, 540, 560, pop(t - T_SUMIR - .05, .25), -6); }
+  else cm.style.opacity = 0;
+  fixed($('final'), t >= T_SUMIR + .6 ? pop(t - T_SUMIR - .6, .35) : 0);
+  $('wm').style.opacity = .8; $('wm').style.transform = 'none';
+  // legenda
+  let wTxt = null, wSt = 0;
+  for (let i = 2; i < SN.length - 1; i++) for (const w of SN[i].words) if (t >= w.start - .03 && t < w.end + .2) { wTxt = w.w; wSt = w.start; }
+  if (t > E(0) - 1 && t < S(1)) { for (const w of SN[0].words) if (t >= w.start - .03 && t < w.end + .2) { wTxt = w.w; wSt = w.start; } }
+  const cap = $('cap');
+  if (wTxt && t > 1.0) { cap.textContent = wTxt.toUpperCase().replace(/[.,!?:]/g, ''); cap.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV; window.DBG = () => { const v = puddle.position.clone().project(cam); return { pv: puddle.visible, ps: puddle.scale.toArray(), scr: v.toArray(), cam: cam.position.toArray(), paperY: paper.position.y }; };
+await document.fonts.load('900 60px P'); await document.fonts.load('900 60px P', 'ŐŰ'); await document.fonts.ready;
+window.ready = true;
+</script></body></html>
