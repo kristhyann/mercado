@@ -1,0 +1,233 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:250px;text-align:center;font-weight:900;font-size:104px;line-height:1.02}
+#hook b{color:#FF8A1F;display:block;font-size:140px}
+#label{width:1080px;top:180px;text-align:center}
+#label span{display:inline-block;font-weight:900;font-size:100px;color:#FF8A1F;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#cap{width:1080px;top:1290px;text-align:center;font-weight:900;font-size:118px}
+#cap.hl{color:#FF8A1F}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:62px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF3B3B;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}
+.comic{font-weight:900;font-size:160px;color:#FFD21F;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 10px 0 rgba(0,0,0,.3);white-space:nowrap}
+#final{left:60px;width:960px;top:1330px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:78px;line-height:1.05;padding:30px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#FF8A1F}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.8;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">VOCÊ TEM UM<b>NEGÓCIO ENORME</b></div>
+<div id="label" class="o"><span>X</span></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag"></div>
+<div id="comic" class="o comic"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Segue a página,<br><em>eu tô ouvindo daqui.</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, bounce, M, mesh, buildWorld } from '/_kit/kit.js';
+
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; const S = i => SN[i].start, E = i => SN[i].end; window.DURATION = TP.duration;
+const WD = (i, re) => { const w = SN[i].words.find(w => re.test(w.w)); return w ? w.start : S(i); };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(window.devicePixelRatio || 1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .05, 600);
+const world = buildWorld(scene);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const box = (w, h, d, c, x, y, z, par = scene, o = {}) => mesh(new THREE.BoxGeometry(w, h, d), typeof c === 'number' ? M(c, o) : c, x, y, z, par);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+
+// ---------- tempos ----------
+const T_CALMA = S(1), T_ORELHAS = WD(1, /orelhas/i), T_JUM = WD(2, /jumento/i), T_25 = WD(4, /vinte/i), T_GIRAM = WD(4, /giram/i), T_AR = WD(5, /ar-condicionado|condicionado/i), T_SANGUE = WD(5, /sangue/i), T_DESERTO = WD(6, /deserto/i);
+const T_QUILO = WD(8, /quilômetros/i), T_ZURRO = WD(9, /zurro/i), T_CAVALO = WD(10, /cavalo/i), T_ESCUTA = WD(10, /escuta/i), T_TEIM = WD(11, /teimoso/i), T_AVAL = WD(11, /avaliando/i);
+const T_PEQ = WD(13, /pequenos/i), T_TRILHA = WD(14, /trilha/i), T_CACH = WD(16, /cachorro/i), T_CHUTA = WD(16, /chuta/i), T_FRENTE = WD(16, /frente/i), T_TRAS = WD(16, /trás/i), T_OVELHAS = WD(17, /ovelhas/i), T_AGRAD = WD(18, /agradece/i);
+
+// ---------- jumento (ou cavalo) ----------
+function equine(o = {}) {
+  const C = Object.assign({ body: 0x8F857B, belly: 0xE8E2D8, dark: 0x3B3530, ear: .62, scale: 1, mane: 0x3B3530 }, o);
+  const mB = M(C.body), mL = M(C.belly), mD = M(C.dark);
+  const root = grp(); const body = grp(root); body.position.y = 1.05;
+  const torso = mesh(new THREE.IcosahedronGeometry(.5, 1), mB, 0, 0, 0, body); torso.scale.set(1.45, .85, .75);
+  mesh(new THREE.IcosahedronGeometry(.42, 1), mL, 0, -.12, 0, body).scale.set(1.3, .6, .7);
+  // pescoço e cabeça
+  const neck = grp(body); neck.position.set(.6, .2, 0); neck.rotation.z = -.55;
+  mesh(new THREE.CylinderGeometry(.17, .24, .7, 7), mB, 0, .3, 0, neck);
+  for (let i = 0; i < 5; i++) box(.06, .14, .08, mD, -.16, .1 + i * .12, 0, neck);
+  const head = grp(neck); head.position.y = .68; head.rotation.z = 1.25;
+  const sk = mesh(new THREE.IcosahedronGeometry(.2, 1), mB, .12, 0, 0, head); sk.scale.set(1.5, .9, .85);
+  const muz = mesh(new THREE.IcosahedronGeometry(.15, 1), mL, .4, -.04, 0, head); muz.scale.set(1.1, .85, .95);
+  mesh(new THREE.IcosahedronGeometry(.03, 0), mD, .52, .0, .07, head); mesh(new THREE.IcosahedronGeometry(.03, 0), mD, .52, .0, -.07, head);
+  const jaw = grp(head); jaw.position.set(.3, -.1, 0); mesh(new THREE.BoxGeometry(.22, .05, .16), mL, .1, 0, 0, jaw);
+  const eyes = []; for (const s of [-1, 1]) { const e = grp(head); e.position.set(.14, .08, s * .15); mesh(new THREE.IcosahedronGeometry(.055, 2), new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: .2 }), 0, 0, 0, e); mesh(new THREE.IcosahedronGeometry(.033, 1), new THREE.MeshBasicMaterial({ color: 0x111111 }), .015, 0, s * .03, e); eyes.push(e); }
+  // orelhas grandes
+  const earMats = []; const ears = [];
+  for (const s of [-1, 1]) {
+    const ep = grp(head); ep.position.set(-.05, .14, s * .1);
+    const em = M(C.body); earMats.push(em);
+    const outer = mesh(new THREE.ConeGeometry(.14, C.ear, 7), em, 0, C.ear / 2, 0, ep); outer.scale.z = .45;
+    const inner = mesh(new THREE.ConeGeometry(.1, C.ear * .82, 7), M(0xF4A9B8), .03, C.ear * .45, s * .035, ep); inner.scale.z = .25;
+    mesh(new THREE.ConeGeometry(.035, .09, 6), mD, 0, C.ear - .02, 0, ep);
+    ep.rotation.x = -s * .35; ears.push(ep); ep.userData.s = s;
+  }
+  // pernas
+  const legs = []; for (const [x, z] of [[.48, .2], [.48, -.2], [-.5, .2], [-.5, -.2]]) { const h = grp(body); h.position.set(x, -.25, z); mesh(new THREE.CylinderGeometry(.08, .07, .45, 6), mB, 0, -.22, 0, h); const k = grp(h); k.position.y = -.45; mesh(new THREE.CylinderGeometry(.065, .06, .32, 6), mL, 0, -.16, 0, k); const hoof = mesh(new THREE.CylinderGeometry(.065, .075, .07, 7), M(0x2B2420), 0, -.34, 0, k); legs.push({ h, k, hoof, front: x > 0 }); }
+  const tail = grp(body); tail.position.set(-.72, .15, 0); mesh(new THREE.CylinderGeometry(.025, .03, .55, 5), mB, 0, -.27, 0, tail); mesh(new THREE.ConeGeometry(.07, .2, 5), mD, 0, -.6, 0, tail).rotation.x = Math.PI; tail.rotation.z = -.3;
+  root.scale.setScalar(C.scale);
+  return { root, body, neck, head, jaw, eyes, ears, earMats, legs, tail };
+}
+const D = equine(); scene.add(D.root);
+const horse = equine({ body: 0x8B4A23, belly: 0xC27A45, dark: 0x2B1A10, ear: .2, scale: 1.25 }); scene.add(horse.root);
+const far = equine(); far.root.scale.setScalar(.9); scene.add(far.root);
+// bolsas de carga
+const packs = grp(D.body); box(.5, .32, .14, 0xB5651D, 0, .1, .43, packs); box(.5, .32, .14, 0xB5651D, 0, .1, -.43, packs); box(.55, .06, .9, 0x7A4A20, 0, .45, 0, packs);
+// coiote
+function coyote() { const root = grp(); const m = M(0x9C8B6E), l = M(0xD9CBB0); const b = mesh(new THREE.IcosahedronGeometry(.3, 1), m, 0, .5, 0, root); b.scale.set(1.5, .7, .6); const h = grp(root); h.position.set(.5, .65, 0); mesh(new THREE.IcosahedronGeometry(.16, 1), m, 0, 0, 0, h); mesh(new THREE.ConeGeometry(.08, .22, 5), l, .18, -.03, 0, h).rotation.z = -Math.PI / 2; for (const s of [-1, 1]) mesh(new THREE.ConeGeometry(.05, .14, 4), m, -.03, .15, s * .07, h); const legs = []; for (const [x, z] of [[.28, .1], [.28, -.1], [-.28, .1], [-.28, -.1]]) { const g = grp(root); g.position.set(x, .38, z); mesh(new THREE.CylinderGeometry(.04, .035, .38, 5), m, 0, -.19, 0, g); legs.push(g); } const tl = grp(root); tl.position.set(-.45, .55, 0); mesh(new THREE.ConeGeometry(.07, .4, 5), m, 0, -.2, 0, tl).rotation.x = Math.PI; tl.rotation.z = .9; return { root, legs }; }
+const CY = coyote(); scene.add(CY.root);
+// ovelhas
+const sheep = []; for (let i = 0; i < 4; i++) { const g = grp(); const wM = M(0xF8F8F2); for (let k = 0; k < 6; k++) mesh(new THREE.IcosahedronGeometry(.22, 0), wM, (k % 3 - 1) * .18, .55 + (k > 2 ? .12 : 0), (k % 2 - .5) * .15, g); mesh(new THREE.IcosahedronGeometry(.13, 1), M(0x2B2420), .38, .6, 0, g); for (const [x, z] of [[.18, .1], [.18, -.1], [-.18, .1], [-.18, -.1]]) mesh(new THREE.CylinderGeometry(.035, .03, .35, 5), M(0x2B2420), x, .18, z, g); sheep.push(g); }
+// trilha de montanha (rampa + pedras)
+const ramp = grp(); ramp.position.set(5.0, 0, 0);
+const slope = .42; const rampLen = 7;
+const slab = box(rampLen, .5, 2.2, 0xA39383, rampLen / 2 * Math.cos(Math.atan(slope)), rampLen / 2 * Math.sin(Math.atan(slope)) - .2, 0, ramp); slab.rotation.z = Math.atan(slope);
+for (let i = 0; i < 14; i++) { const r = mesh(new THREE.DodecahedronGeometry(.15 + (i % 3) * .1, 0), M([0x9A8676, 0xB9A897, 0x8A7666][i % 3]), (i * .5) * Math.cos(Math.atan(slope)), (i * .5) * slope + .1, (i % 2 ? .95 : -.95), ramp); }
+// régua da orelha, ondas sonoras, vento, vasos, estrelas
+const ruler = grp(); box(.04, .5, .02, 0xffffff, 0, .25, 0, ruler); for (let i = 0; i <= 5; i++) box(.08, .012, .025, 0xFF3B3B, .03, i * .1, 0, ruler);
+const ringM = new THREE.MeshBasicMaterial({ color: 0xFFD21F, transparent: true, side: THREE.DoubleSide });
+const rings = []; for (let i = 0; i < 5; i++) { const r = new THREE.Mesh(new THREE.TorusGeometry(1, .03, 4, 30), ringM.clone()); scene.add(r); rings.push(r); }
+const windM = new THREE.MeshBasicMaterial({ color: 0x9FD8FF, transparent: true });
+const winds = []; for (let i = 0; i < 6; i++) { const w = mesh(new THREE.BoxGeometry(.5, .02, .02), windM.clone(), 0, 0, 0); scene.add(w); winds.push(w); }
+const stars = []; for (let i = 0; i < 10; i++) { const s = new THREE.Mesh(new THREE.OctahedronGeometry(.07, 0), new THREE.MeshBasicMaterial({ color: 0xFFE14D })); s.scale.set(1, 1.8, .4); scene.add(s); stars.push(s); }
+const dust = []; for (let i = 0; i < 10; i++) { const d = mesh(new THREE.IcosahedronGeometry(.12, 0), new THREE.MeshStandardMaterial({ color: 0xD9C08A, transparent: true, roughness: 1 }), 0, 0, 0); scene.add(d); dust.push(d); }
+const qmark = grp(); { const m = new THREE.MeshBasicMaterial({ color: 0xFFD21F }); const t = new THREE.Mesh(new THREE.TorusGeometry(.12, .04, 6, 12, Math.PI * 1.3), m); t.rotation.z = -.6; t.position.y = .2; qmark.add(t); const st = mesh(new THREE.CylinderGeometry(.04, .04, .12, 6), m, 0, .02, 0, qmark); mesh(new THREE.IcosahedronGeometry(.045, 0), m, 0, -.12, 0, qmark); } scene.add(qmark);
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [T_CALMA, 'pop'], [T_ORELHAS, 'boing'], [T_JUM, 'pop'], [S(3), 'pop'], [T_GIRAM, 'pop'], [T_AR, 'whoosh'], [S(7), 'pop'], [T_QUILO, 'ding'], [T_ZURRO, 'buzz'], [T_CAVALO, 'whoosh'], [T_AVAL, 'pop'], [S(12), 'pop'], [T_TRILHA, 'pop'], [S(15), 'pop'], [T_CHUTA, 'crack'], [T_TRAS, 'crack'], [T_OVELHAS, 'pop'], [T_AGRAD, 'win']].forEach(([t, k]) => ev(t, k));
+const LBL = [[S(3), 'ORELHAS'], [S(7), 'AUDIÇÃO'], [S(12), 'CASCOS'], [S(15), 'COICE']];
+const HL = /orelhas|jumento|centímetros|ar-condicionado|sangue|deserto|audição|antenas|quilômetros|zurro|cavalo|teimoso|perigo|cascos|pedra|trilha|coice|chuta|coiote|cachorro|ovelhas|enorme/i;
+
+// câmera
+const KEYS = [
+  [0, [1.6, .55, 3.0], [.3, .5, 0]], [T_CALMA, [2.2, 2.1, 1.9], [1.05, 2.05, 0]], [T_JUM, [1.8, 1.6, 5.8], [.3, 1.2, 0]], [S(3), [2.0, 2.1, 1.9], [1.0, 2.05, 0]],
+  [T_AR, [1.8, 2.15, 1.5], [1.0, 2.1, 0]], [S(7), [1.2, 2.6, 3.6], [.6, 1.8, 0]], [T_QUILO, [4.0, 3.0, 9.0], [-2.0, 1.4, -2]], [T_ZURRO, [2.2, 1.9, 2.4], [1.0, 1.8, 0]],
+  [S(10), [1.0, 2.0, 7.4], [-.8, 1.2, 0]], [S(11), [2.0, 2.0, 3.0], [.9, 1.8, 0]], [S(12), [1.0, .45, 2.0], [.3, .25, 0]], [S(14), [6.0, 3.2, 7.5], [6.0, 1.8, 0]],
+  [S(15), [1.0, 1.8, 7.2], [-.6, 1.0, 0]], [T_FRENTE, [3.2, 1.6, 6.0], [.0, 1.0, 0]], [S(17), [-.4, 2.0, 8.4], [-1.2, 1.0, 0]], [S(18), [2.2, 2.1, 2.8], [1.0, 1.9, 0]],
+  [S(19), [2.0, 2.15, 1.7], [1.05, 2.05, 0]], [TP.duration, [1.9, 2.15, 1.6], [1.05, 2.05, 0]],
+];
+function camAt(t, dx = 0, dy = 0) {
+  let i = 0; while (i + 1 < KEYS.length && KEYS[i + 1][0] <= t) i++;
+  const b = KEYS[i], a = KEYS[Math.max(0, i - 1)]; const u = b === a ? 1 : ease(clamp((t - b[0]) / Math.max(.6, Math.min(1.4, (KEYS[i + 1] ? KEYS[i + 1][0] : b[0] + 2) - b[0]))));
+  const tg = V(...a[2]).lerp(V(...b[2]), u); const p = V(...a[1]).lerp(V(...b[1]), u);
+  p.x += Math.sin(t * .35) * .08; p.y += Math.sin(t * .27) * .04;
+  cam.position.copy(p); cam.lookAt(tg); cam.fov = 40; cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+}
+function walkLegs(e, t, k, speed = 8) { e.legs.forEach((l, i) => { const ph = (i % 2 ? 0 : Math.PI) + (l.front ? 0 : Math.PI / 2); l.h.rotation.z = Math.sin(t * speed + ph) * .45 * k; l.k.rotation.z = Math.max(0, -Math.sin(t * speed + ph)) * .5 * k; }); }
+const tmp = new THREE.Vector3();
+window.draw = function (t) {
+  // ---- jumento: posição
+  let dx = 0, dy = 0, dz = 0, walk = 0;
+  const climb = win(t, S(14), S(15));
+  if (climb) { const u = clamp((t - S(14)) / (S(15) - S(14))); const along = .3 + u * 4.2; dx = 5.0 + along * Math.cos(Math.atan(slope)); dy = along * slope + .05; walk = 1; }
+  camAt(t);
+  if (climb) { cam.position.set(dx + 1.0, dy + 1.6, 6.6); cam.lookAt(dx, dy + .9, 0); cam.updateMatrixWorld(true); }
+  D.root.position.set(dx, dy, dz); D.root.rotation.set(0, 0, climb ? Math.atan(slope) * .8 : 0);
+  packs.visible = climb;
+  walkLegs(D, t, walk);
+  // pescoço/cabeça
+  const bray = win(t, T_ZURRO, T_ZURRO + 1.5); D.jaw.rotation.z = bray ? -.35 - Math.abs(Math.sin(t * 9)) * .2 : 0;
+  D.neck.rotation.z = -.55 + (bray ? -.25 : 0) + Math.sin(t * .8) * .03;
+  D.eyes.forEach(e => e.scale.y = (t % 3.1) > 3.0 ? .15 : 1);
+  // orelhas: crescem no "Calma", giram, apontam pro som
+  let eL = -.35, eR = .35, ey = 0, eyR = 0, earS = 1;
+  if (t < T_ORELHAS) earS = .55; else if (t < T_ORELHAS + .5) earS = lerp(.55, 1, bounce(clamp((t - T_ORELHAS) / .5)));
+  if (win(t, T_GIRAM, S(5))) { ey = Math.sin(t * 2.2) * .9; eyR = Math.sin(t * 2.2 + 2.5) * .9; }
+  if (win(t, S(8), S(10))) { ey = eyR = 1.0; } // apontam pro jumento distante
+  if (win(t, T_ESCUTA - .3, S(12))) { ey = .8 + Math.sin(t * 3) * .2; eyR = -.6; }
+  if (t >= S(19)) { ey = Math.sin(t * 2) * .4; eyR = -Math.sin(t * 2.3) * .4; }
+  D.ears.forEach((e, i) => { e.scale.setScalar(earS); e.rotation.set(i ? eR : eL, i ? eyR : ey, -.75); });
+  // ar-condicionado: orelhas avermelham e esfriam
+  const hot = win(t, T_SANGUE - .3, T_DESERTO + .5) ? (t < T_SANGUE + 1.3 ? 1 : lerp(1, 0, clamp((t - T_SANGUE - 1.3) / 1.5))) : 0;
+  D.earMats.forEach(m => m.color.setHex(0x8F857B).lerp(new THREE.Color(0xE0533A), hot * .7));
+  D.ears[1].getWorldPosition(tmp);
+  winds.forEach((w, i) => { const on = win(t, T_AR, T_DESERTO + .6); w.visible = on; if (!on) return; const u = ((t * 1.2 + i / 6) % 1); w.position.set(tmp.x - 1 + u * 2, tmp.y + .1 + (i % 3) * .12, tmp.z + .1); w.material.opacity = Math.sin(u * Math.PI) * .9; });
+  // régua
+  ruler.visible = win(t, T_25, S(5)); if (ruler.visible) { ruler.position.copy(tmp).add(V(.0, -.05, .25)); ruler.scale.setScalar(Math.max(.001, pop(t - T_25, .3)) * earS); }
+  // ondas sonoras: do jumento distante até você / do seu zurro
+  far.root.visible = win(t, S(8) - .3, S(10)); far.root.position.set(-6, 0, -5); far.root.rotation.y = -.6; far.jaw.rotation.z = -.3 - Math.abs(Math.sin(t * 8)) * .2;
+  D.head.getWorldPosition(tmp);
+  rings.forEach((r, i) => {
+    let on = false; let c = V(), k = 0;
+    if (win(t, S(8), S(9))) { on = true; c.set(-6, 1.6, -5); const u = ((t - S(8)) * .6 + i / 5) % 1; k = u; r.position.copy(c).lerp(tmp, u); r.scale.setScalar(.3 + u * .6); r.lookAt(tmp); r.material.opacity = (1 - u) * .9; }
+    if (win(t, T_ZURRO, S(10))) { on = true; const u = ((t - T_ZURRO) * .8 + i / 5) % 1; r.position.copy(tmp).add(V(.5, 0, 0)); r.scale.setScalar(.2 + u * 2.2); r.rotation.set(0, Math.PI / 2, 0); r.material.opacity = (1 - u) * .9; }
+    r.visible = on;
+  });
+  // cavalo foge, jumento para
+  horse.root.visible = win(t, S(10), S(11)); if (horse.root.visible) { const run = t > T_CAVALO; horse.root.position.set(-.6 - (run ? (t - T_CAVALO) * 4.5 : 0), 0, 1.6); horse.root.rotation.y = Math.PI; walkLegs(horse, t, run ? 1.3 : 0, 12); }
+  qmark.visible = win(t, T_ESCUTA, S(12)); if (qmark.visible) { qmark.position.copy(tmp).add(V(0, .75, 0)); qmark.scale.setScalar(Math.max(.001, pop(t - T_ESCUTA, .3)) * 1.4); qmark.rotation.y = Math.sin(t * 2) * .4; }
+  // coiote + coice
+  CY.root.visible = win(t, S(16) - .3, S(17)); let flyU = -1;
+  if (CY.root.visible) { const appr = t < T_CHUTA; const cx = appr ? lerp(-4.5, -1.6, clamp((t - S(16) + .3) / 1.8)) : -1.6; flyU = t - T_CHUTA - .15; CY.root.position.set(cx, 0, .1); CY.root.rotation.set(0, 0, 0); CY.legs.forEach((l, k) => l.rotation.z = appr ? Math.sin(t * 12 + k * 1.6) * .6 : 0); if (flyU > 0) { CY.root.position.set(cx - flyU * 4, Math.max(0, flyU * 4.5 - flyU * flyU * 5), .1); CY.root.rotation.z = flyU * 7; } }
+  const kick = (t0, back) => { const u = (t - t0) / .45; if (u < 0 || u > 1) return; const k = Math.sin(u * Math.PI); D.legs.forEach(l => { if (back && !l.front) { l.h.rotation.z = -1.3 * k; l.k.rotation.z = .4 * k; } if (!back && l.front) { l.h.rotation.z = 1.1 * k; l.k.rotation.z = -.5 * k; } }); D.body.rotation.z = (back ? .2 : -.15) * k; };
+  D.body.rotation.z = 0; kick(T_CHUTA, true); kick(T_FRENTE, false); kick(T_TRAS, true);
+  D.tail.rotation.z = -.3 + Math.sin(t * 2) * .2;
+  // ovelhas protegidas
+  sheep.forEach((g, i) => { g.visible = win(t, T_OVELHAS - .9, S(19)); if (!g.visible) return; g.position.set(1.4 + (i % 2) * .7, 0, -1.2 + i * .55); g.rotation.y = .3 + i * .2; g.scale.setScalar(Math.max(.001, pop(t - T_OVELHAS + .6 - i * .1, .3)) * 1.1); });
+  // poeira dos coices
+  dust.forEach((d, i) => { const on = win(t, T_CHUTA, T_CHUTA + 1) || win(t, T_TRAS, T_TRAS + 1) || climb; d.visible = on; if (!on) return; const u = ((t * 1.2 + i / 10) % 1); d.position.set(dx - .8 - u * 1.2, dy + .1 + u * .4, Math.sin(i * 2) * .4); d.scale.setScalar(.5 + u * 1.2); d.material.opacity = (1 - u) * .6; });
+  // estrelinhas
+  stars.forEach((s, i) => { const on = win(t, T_AGRAD - .2, S(19) + .5); s.visible = on; if (!on) return; const a = i / 10 * Math.PI * 2 + t * 1.5; s.position.set(tmp.x + Math.cos(a) * .6, tmp.y + .45 + Math.sin(a * 2) * .15, tmp.z + Math.sin(a) * .5); s.rotation.y = t * 4; });
+
+  // ---------- textos ----------
+  fixed($('hook'), t < T_CALMA ? pop(t - .05, .35) * (1 - clamp((t - T_CALMA + .2) / .2)) : 0);
+  const lb = [...LBL].reverse().find(l => t >= l[0]); const lbOn = lb && t < S(18);
+  if (lbOn) { $('label').firstElementChild.textContent = lb[1]; fixed($('label'), pop(t - lb[0], .3)); } else fixed($('label'), 0);
+  const t1 = $('t1'), t2 = $('t2'); t1.style.opacity = 0; t2.style.opacity = 0;
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  tag(t1, 'AS ORELHAS!', 'green', win(t, T_ORELHAS, T_JUM), 540, 600, T_ORELHAS, -4);
+  tag(t1, 'VOCÊ É UM JUMENTO', 'green', win(t, T_JUM, S(3)), 540, 560, T_JUM, -3);
+  tag(t1, '+25 CM', '', win(t, T_25, T_GIRAM), 760, 600, T_25, 5);
+  tag(t1, 'GIRAM SEPARADAS', 'blue', win(t, T_GIRAM, S(5)), 540, 600, T_GIRAM, -4);
+  tag(t1, 'AR-CONDICIONADO', 'blue', win(t, T_AR, S(6)), 540, 600, T_AR, -4);
+  tag(t1, 'CALOR DO DESERTO', 'red', win(t, S(6), S(7)), 540, 600, S(6), -4);
+  tag(t1, 'QUILÔMETROS', '', win(t, T_QUILO, S(9)), 540, 600, T_QUILO, -4);
+  tag(t1, 'IÓÓÓ!', 'red', win(t, T_ZURRO, S(10)), 760, 600, T_ZURRO, 6);
+  tag(t1, 'CAVALO: FOGE', 'red', win(t, T_CAVALO, T_ESCUTA), 540, 600, T_CAVALO, -4);
+  tag(t2, 'JUMENTO: PARA E ESCUTA', 'green', win(t, T_ESCUTA - .2, S(11)), 540, 720, T_ESCUTA - .2, 3);
+  tag(t1, 'TEIMOSO?', '', win(t, T_TEIM, T_AVAL), 540, 600, T_TEIM, -4);
+  tag(t1, 'AVALIANDO O PERIGO', 'green', win(t, T_AVAL, S(12)), 540, 600, T_AVAL, -3);
+  tag(t1, 'PEQUENOS · DUROS · RETOS', '', win(t, T_PEQ, S(14)), 540, 600, T_PEQ, -3);
+  tag(t1, 'SEM ESCORREGAR', 'green', win(t, T_TRILHA, S(15)), 540, 560, T_TRILHA, -4);
+  tag(t1, 'FRENTE', 'blue', win(t, T_FRENTE, T_TRAS), 540, 600, T_FRENTE, -4);
+  tag(t1, 'TRÁS', 'blue', win(t, T_TRAS, S(17)), 540, 600, T_TRAS, 4);
+  tag(t1, 'GUARDA DAS OVELHAS', 'green', win(t, T_OVELHAS, S(18)), 540, 600, T_OVELHAS, -3);
+  const cm = $('comic');
+  if (win(t, T_CALMA, T_ORELHAS)) { cm.textContent = 'CALMA!'; place(cm, true, 540, 600, pop(t - T_CALMA, .25), -6); }
+  else if (win(t, T_CHUTA + .15, T_CHUTA + 1.2)) { cm.textContent = 'POW!'; place(cm, true, 380, 640, pop(t - T_CHUTA - .15, .25), -8); }
+  else cm.style.opacity = 0;
+  fixed($('final'), t >= S(19) + .4 ? pop(t - S(19) - .4, .35) : 0);
+  $('wm').style.opacity = .8;
+  // legenda
+  let wTxt = null, wSt = 0;
+  for (let i = 1; i < SN.length - 1; i++) for (const w2 of SN[i].words) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap = $('cap');
+  if (wTxt) { cap.textContent = wTxt.toUpperCase().replace(/[.,!?:]/g, ''); cap.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+await document.fonts.load('900 60px P'); await document.fonts.ready;
+window.ready = true;
+</script></body></html>

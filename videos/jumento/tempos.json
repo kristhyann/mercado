@@ -1,0 +1,1165 @@
+{
+ "duration": 82.833,
+ "sentences": [
+  {
+   "text": "Você tem um negócio enorme...",
+   "start": 0.0,
+   "end": 1.68,
+   "words": [
+    {
+     "w": "Você",
+     "start": 0.0,
+     "end": 0.28
+    },
+    {
+     "w": "tem",
+     "start": 0.28,
+     "end": 0.5
+    },
+    {
+     "w": "um",
+     "start": 0.5,
+     "end": 0.62
+    },
+    {
+     "w": "negócio",
+     "start": 0.62,
+     "end": 1.04
+    },
+    {
+     "w": "enorme...",
+     "start": 1.04,
+     "end": 1.68
+    }
+   ]
+  },
+  {
+   "text": "Calma! Estamos falando das suas orelhas, que são gigantes e ajudam a perceber qualquer perigo.",
+   "start": 2.24,
+   "end": 8.48,
+   "words": [
+    {
+     "w": "Calma!",
+     "start": 2.24,
+     "end": 2.76
+    },
+    {
+     "w": "Estamos",
+     "start": 3.12,
+     "end": 3.4
+    },
+    {
+     "w": "falando",
+     "start": 3.4,
+     "end": 3.8
+    },
+    {
+     "w": "das",
+     "start": 3.8,
+     "end": 4.02
+    },
+    {
+     "w": "suas",
+     "start": 4.02,
+     "end": 4.22
+    },
+    {
+     "w": "orelhas,",
+     "start": 4.22,
+     "end": 4.78
+    },
+    {
+     "w": "que",
+     "start": 5.1,
+     "end": 5.18
+    },
+    {
+     "w": "são",
+     "start": 5.18,
+     "end": 5.36
+    },
+    {
+     "w": "gigantes",
+     "start": 5.36,
+     "end": 6.06
+    },
+    {
+     "w": "e",
+     "start": 6.06,
+     "end": 6.54
+    },
+    {
+     "w": "ajudam",
+     "start": 6.54,
+     "end": 7.0
+    },
+    {
+     "w": "a",
+     "start": 7.0,
+     "end": 7.12
+    },
+    {
+     "w": "perceber",
+     "start": 7.12,
+     "end": 7.46
+    },
+    {
+     "w": "qualquer",
+     "start": 7.46,
+     "end": 7.84
+    },
+    {
+     "w": "perigo.",
+     "start": 7.84,
+     "end": 8.48
+    }
+   ]
+  },
+  {
+   "text": "Você é um jumento.",
+   "start": 9.08,
+   "end": 10.48,
+   "words": [
+    {
+     "w": "Você",
+     "start": 9.08,
+     "end": 9.5
+    },
+    {
+     "w": "é",
+     "start": 9.5,
+     "end": 9.7
+    },
+    {
+     "w": "um",
+     "start": 9.7,
+     "end": 9.82
+    },
+    {
+     "w": "jumento.",
+     "start": 9.82,
+     "end": 10.48
+    }
+   ]
+  },
+  {
+   "text": "Primeiro, as orelhas.",
+   "start": 10.88,
+   "end": 12.14,
+   "words": [
+    {
+     "w": "Primeiro,",
+     "start": 10.88,
+     "end": 11.38
+    },
+    {
+     "w": "as",
+     "start": 11.64,
+     "end": 11.72
+    },
+    {
+     "w": "orelhas.",
+     "start": 11.72,
+     "end": 12.14
+    }
+   ]
+  },
+  {
+   "text": "Elas podem passar de vinte e cinco centímetros e giram, cada uma pra um lado.",
+   "start": 12.7,
+   "end": 17.42,
+   "words": [
+    {
+     "w": "Elas",
+     "start": 12.7,
+     "end": 12.94
+    },
+    {
+     "w": "podem",
+     "start": 12.94,
+     "end": 13.16
+    },
+    {
+     "w": "passar",
+     "start": 13.16,
+     "end": 13.52
+    },
+    {
+     "w": "de",
+     "start": 13.52,
+     "end": 13.78
+    },
+    {
+     "w": "vinte",
+     "start": 13.78,
+     "end": 14.11
+    },
+    {
+     "w": "e",
+     "start": 14.11,
+     "end": 14.44
+    },
+    {
+     "w": "cinco",
+     "start": 14.44,
+     "end": 14.77
+    },
+    {
+     "w": "centímetros",
+     "start": 14.77,
+     "end": 15.1
+    },
+    {
+     "w": "e",
+     "start": 15.1,
+     "end": 15.74
+    },
+    {
+     "w": "giram,",
+     "start": 15.74,
+     "end": 16.16
+    },
+    {
+     "w": "cada",
+     "start": 16.16,
+     "end": 16.54
+    },
+    {
+     "w": "uma",
+     "start": 16.54,
+     "end": 16.88
+    },
+    {
+     "w": "pra",
+     "start": 16.88,
+     "end": 17.04
+    },
+    {
+     "w": "um",
+     "start": 17.04,
+     "end": 17.16
+    },
+    {
+     "w": "lado.",
+     "start": 17.16,
+     "end": 17.42
+    }
+   ]
+  },
+  {
+   "text": "E ainda funcionam como ar-condicionado: o sangue passa por elas e esfria no vento.",
+   "start": 18.06,
+   "end": 23.32,
+   "words": [
+    {
+     "w": "E",
+     "start": 18.06,
+     "end": 18.08
+    },
+    {
+     "w": "ainda",
+     "start": 18.08,
+     "end": 18.28
+    },
+    {
+     "w": "funcionam",
+     "start": 18.28,
+     "end": 18.88
+    },
+    {
+     "w": "como",
+     "start": 18.88,
+     "end": 19.1
+    },
+    {
+     "w": "ar-condicionado:",
+     "start": 19.1,
+     "end": 20.48
+    },
+    {
+     "w": "o",
+     "start": 20.48,
+     "end": 20.58
+    },
+    {
+     "w": "sangue",
+     "start": 20.58,
+     "end": 21.06
+    },
+    {
+     "w": "passa",
+     "start": 21.06,
+     "end": 21.36
+    },
+    {
+     "w": "por",
+     "start": 21.36,
+     "end": 21.64
+    },
+    {
+     "w": "elas",
+     "start": 21.64,
+     "end": 21.88
+    },
+    {
+     "w": "e",
+     "start": 21.88,
+     "end": 22.24
+    },
+    {
+     "w": "esfria",
+     "start": 22.24,
+     "end": 22.68
+    },
+    {
+     "w": "no",
+     "start": 22.68,
+     "end": 22.86
+    },
+    {
+     "w": "vento.",
+     "start": 22.86,
+     "end": 23.32
+    }
+   ]
+  },
+  {
+   "text": "Por isso que os jumentos do deserto têm orelhas tão grandes.",
+   "start": 23.66,
+   "end": 26.76,
+   "words": [
+    {
+     "w": "Por",
+     "start": 23.66,
+     "end": 23.86
+    },
+    {
+     "w": "isso",
+     "start": 23.86,
+     "end": 24.08
+    },
+    {
+     "w": "que",
+     "start": 24.08,
+     "end": 24.22
+    },
+    {
+     "w": "os",
+     "start": 24.22,
+     "end": 24.34
+    },
+    {
+     "w": "jumentos",
+     "start": 24.34,
+     "end": 24.76
+    },
+    {
+     "w": "do",
+     "start": 24.76,
+     "end": 24.9
+    },
+    {
+     "w": "deserto",
+     "start": 24.9,
+     "end": 25.44
+    },
+    {
+     "w": "têm",
+     "start": 25.44,
+     "end": 25.6
+    },
+    {
+     "w": "orelhas",
+     "start": 25.6,
+     "end": 25.94
+    },
+    {
+     "w": "tão",
+     "start": 25.94,
+     "end": 26.32
+    },
+    {
+     "w": "grandes.",
+     "start": 26.32,
+     "end": 26.76
+    }
+   ]
+  },
+  {
+   "text": "Agora, a audição.",
+   "start": 27.46,
+   "end": 28.8,
+   "words": [
+    {
+     "w": "Agora,",
+     "start": 27.46,
+     "end": 27.94
+    },
+    {
+     "w": "a",
+     "start": 28.28,
+     "end": 28.34
+    },
+    {
+     "w": "audição.",
+     "start": 28.34,
+     "end": 28.8
+    }
+   ]
+  },
+  {
+   "text": "Com essas antenas, você escuta outro jumento a quilômetros de distância.",
+   "start": 28.8,
+   "end": 33.68,
+   "words": [
+    {
+     "w": "Com",
+     "start": 28.8,
+     "end": 29.48
+    },
+    {
+     "w": "essas",
+     "start": 29.48,
+     "end": 29.72
+    },
+    {
+     "w": "antenas,",
+     "start": 29.72,
+     "end": 30.4
+    },
+    {
+     "w": "você",
+     "start": 30.52,
+     "end": 30.74
+    },
+    {
+     "w": "escuta",
+     "start": 30.74,
+     "end": 31.16
+    },
+    {
+     "w": "outro",
+     "start": 31.16,
+     "end": 31.58
+    },
+    {
+     "w": "jumento",
+     "start": 31.58,
+     "end": 32.12
+    },
+    {
+     "w": "a",
+     "start": 32.12,
+     "end": 32.2
+    },
+    {
+     "w": "quilômetros",
+     "start": 32.2,
+     "end": 32.9
+    },
+    {
+     "w": "de",
+     "start": 32.9,
+     "end": 33.12
+    },
+    {
+     "w": "distância.",
+     "start": 33.12,
+     "end": 33.68
+    }
+   ]
+  },
+  {
+   "text": "E o seu zurro também vai longe, pra chamar o grupo.",
+   "start": 33.98,
+   "end": 36.94,
+   "words": [
+    {
+     "w": "E",
+     "start": 33.98,
+     "end": 34.22
+    },
+    {
+     "w": "o",
+     "start": 34.22,
+     "end": 34.3
+    },
+    {
+     "w": "seu",
+     "start": 34.3,
+     "end": 34.46
+    },
+    {
+     "w": "zurro",
+     "start": 34.46,
+     "end": 34.92
+    },
+    {
+     "w": "também",
+     "start": 34.92,
+     "end": 35.34
+    },
+    {
+     "w": "vai",
+     "start": 35.34,
+     "end": 35.62
+    },
+    {
+     "w": "longe,",
+     "start": 35.62,
+     "end": 36.0
+    },
+    {
+     "w": "pra",
+     "start": 36.0,
+     "end": 36.22
+    },
+    {
+     "w": "chamar",
+     "start": 36.22,
+     "end": 36.6
+    },
+    {
+     "w": "o",
+     "start": 36.6,
+     "end": 36.7
+    },
+    {
+     "w": "grupo.",
+     "start": 36.7,
+     "end": 36.94
+    }
+   ]
+  },
+  {
+   "text": "Parece estranho, mas você não sai correndo igual cavalo: primeiro você para e escuta.",
+   "start": 37.5,
+   "end": 43.38,
+   "words": [
+    {
+     "w": "Parece",
+     "start": 37.5,
+     "end": 37.78
+    },
+    {
+     "w": "estranho,",
+     "start": 37.78,
+     "end": 38.44
+    },
+    {
+     "w": "mas",
+     "start": 38.58,
+     "end": 38.76
+    },
+    {
+     "w": "você",
+     "start": 38.76,
+     "end": 39.06
+    },
+    {
+     "w": "não",
+     "start": 39.06,
+     "end": 39.28
+    },
+    {
+     "w": "sai",
+     "start": 39.28,
+     "end": 39.6
+    },
+    {
+     "w": "correndo",
+     "start": 39.6,
+     "end": 40.04
+    },
+    {
+     "w": "igual",
+     "start": 40.04,
+     "end": 40.26
+    },
+    {
+     "w": "cavalo:",
+     "start": 40.4,
+     "end": 40.78
+    },
+    {
+     "w": "primeiro",
+     "start": 41.16,
+     "end": 41.72
+    },
+    {
+     "w": "você",
+     "start": 41.94,
+     "end": 41.98
+    },
+    {
+     "w": "para",
+     "start": 41.98,
+     "end": 42.44
+    },
+    {
+     "w": "e",
+     "start": 42.44,
+     "end": 42.84
+    },
+    {
+     "w": "escuta.",
+     "start": 42.84,
+     "end": 43.38
+    }
+   ]
+  },
+  {
+   "text": "Por isso que chamam jumento de teimoso. Na verdade, você só está avaliando o perigo.",
+   "start": 43.8,
+   "end": 49.18,
+   "words": [
+    {
+     "w": "Por",
+     "start": 43.8,
+     "end": 44.04
+    },
+    {
+     "w": "isso",
+     "start": 44.04,
+     "end": 44.26
+    },
+    {
+     "w": "que",
+     "start": 44.26,
+     "end": 44.4
+    },
+    {
+     "w": "chamam",
+     "start": 44.4,
+     "end": 44.72
+    },
+    {
+     "w": "jumento",
+     "start": 44.72,
+     "end": 45.34
+    },
+    {
+     "w": "de",
+     "start": 45.34,
+     "end": 45.48
+    },
+    {
+     "w": "teimoso.",
+     "start": 45.48,
+     "end": 46.06
+    },
+    {
+     "w": "Na",
+     "start": 46.34,
+     "end": 46.58
+    },
+    {
+     "w": "verdade,",
+     "start": 46.58,
+     "end": 46.96
+    },
+    {
+     "w": "você",
+     "start": 47.26,
+     "end": 47.46
+    },
+    {
+     "w": "só",
+     "start": 47.46,
+     "end": 47.72
+    },
+    {
+     "w": "está",
+     "start": 47.72,
+     "end": 48.04
+    },
+    {
+     "w": "avaliando",
+     "start": 48.04,
+     "end": 48.72
+    },
+    {
+     "w": "o",
+     "start": 48.72,
+     "end": 48.86
+    },
+    {
+     "w": "perigo.",
+     "start": 48.86,
+     "end": 49.18
+    }
+   ]
+  },
+  {
+   "text": "Depois, os cascos.",
+   "start": 49.7,
+   "end": 51.18,
+   "words": [
+    {
+     "w": "Depois,",
+     "start": 49.7,
+     "end": 50.2
+    },
+    {
+     "w": "os",
+     "start": 50.62,
+     "end": 50.74
+    },
+    {
+     "w": "cascos.",
+     "start": 50.74,
+     "end": 51.18
+    }
+   ]
+  },
+  {
+   "text": "Eles são pequenos, duros e retinhos, feitos pra pedra e chão seco.",
+   "start": 51.76,
+   "end": 56.34,
+   "words": [
+    {
+     "w": "Eles",
+     "start": 51.76,
+     "end": 51.94
+    },
+    {
+     "w": "são",
+     "start": 51.94,
+     "end": 52.12
+    },
+    {
+     "w": "pequenos,",
+     "start": 52.12,
+     "end": 52.68
+    },
+    {
+     "w": "duros",
+     "start": 53.06,
+     "end": 53.46
+    },
+    {
+     "w": "e",
+     "start": 53.46,
+     "end": 53.62
+    },
+    {
+     "w": "retinhos,",
+     "start": 53.62,
+     "end": 54.14
+    },
+    {
+     "w": "feitos",
+     "start": 54.46,
+     "end": 54.84
+    },
+    {
+     "w": "pra",
+     "start": 54.84,
+     "end": 55.08
+    },
+    {
+     "w": "pedra",
+     "start": 55.08,
+     "end": 55.54
+    },
+    {
+     "w": "e",
+     "start": 55.54,
+     "end": 55.68
+    },
+    {
+     "w": "chão",
+     "start": 55.68,
+     "end": 55.84
+    },
+    {
+     "w": "seco.",
+     "start": 55.84,
+     "end": 56.34
+    }
+   ]
+  },
+  {
+   "text": "Por isso que você sobe trilha de montanha carregando peso sem escorregar.",
+   "start": 56.34,
+   "end": 60.64,
+   "words": [
+    {
+     "w": "Por",
+     "start": 56.34,
+     "end": 56.88
+    },
+    {
+     "w": "isso",
+     "start": 56.88,
+     "end": 57.12
+    },
+    {
+     "w": "que",
+     "start": 57.12,
+     "end": 57.26
+    },
+    {
+     "w": "você",
+     "start": 57.26,
+     "end": 57.46
+    },
+    {
+     "w": "sobe",
+     "start": 57.46,
+     "end": 57.84
+    },
+    {
+     "w": "trilha",
+     "start": 57.84,
+     "end": 58.2
+    },
+    {
+     "w": "de",
+     "start": 58.2,
+     "end": 58.32
+    },
+    {
+     "w": "montanha",
+     "start": 58.32,
+     "end": 58.8
+    },
+    {
+     "w": "carregando",
+     "start": 58.8,
+     "end": 59.3
+    },
+    {
+     "w": "peso",
+     "start": 59.3,
+     "end": 59.72
+    },
+    {
+     "w": "sem",
+     "start": 59.72,
+     "end": 60.1
+    },
+    {
+     "w": "escorregar.",
+     "start": 60.1,
+     "end": 60.64
+    }
+   ]
+  },
+  {
+   "text": "E aí entra o coice.",
+   "start": 61.36,
+   "end": 62.56,
+   "words": [
+    {
+     "w": "E",
+     "start": 61.36,
+     "end": 61.42
+    },
+    {
+     "w": "aí",
+     "start": 61.42,
+     "end": 61.66
+    },
+    {
+     "w": "entra",
+     "start": 61.66,
+     "end": 62.02
+    },
+    {
+     "w": "o",
+     "start": 62.02,
+     "end": 62.16
+    },
+    {
+     "w": "coice.",
+     "start": 62.16,
+     "end": 62.56
+    }
+   ]
+  },
+  {
+   "text": "Se um cachorro ou um coiote chega perto, você não foge: você chuta, pra frente e pra trás.",
+   "start": 63.02,
+   "end": 69.3,
+   "words": [
+    {
+     "w": "Se",
+     "start": 63.02,
+     "end": 63.18
+    },
+    {
+     "w": "um",
+     "start": 63.18,
+     "end": 63.3
+    },
+    {
+     "w": "cachorro",
+     "start": 63.3,
+     "end": 63.82
+    },
+    {
+     "w": "ou",
+     "start": 63.82,
+     "end": 64.08
+    },
+    {
+     "w": "um",
+     "start": 64.08,
+     "end": 64.18
+    },
+    {
+     "w": "coiote",
+     "start": 64.18,
+     "end": 64.6
+    },
+    {
+     "w": "chega",
+     "start": 64.6,
+     "end": 64.84
+    },
+    {
+     "w": "perto,",
+     "start": 64.84,
+     "end": 65.3
+    },
+    {
+     "w": "você",
+     "start": 65.6,
+     "end": 65.82
+    },
+    {
+     "w": "não",
+     "start": 65.82,
+     "end": 66.14
+    },
+    {
+     "w": "foge:",
+     "start": 66.14,
+     "end": 66.62
+    },
+    {
+     "w": "você",
+     "start": 66.94,
+     "end": 67.22
+    },
+    {
+     "w": "chuta,",
+     "start": 67.22,
+     "end": 67.78
+    },
+    {
+     "w": "pra",
+     "start": 67.78,
+     "end": 68.16
+    },
+    {
+     "w": "frente",
+     "start": 68.16,
+     "end": 68.6
+    },
+    {
+     "w": "e",
+     "start": 68.6,
+     "end": 68.88
+    },
+    {
+     "w": "pra",
+     "start": 68.88,
+     "end": 69.02
+    },
+    {
+     "w": "trás.",
+     "start": 69.02,
+     "end": 69.3
+    }
+   ]
+  },
+  {
+   "text": "É tão forte que tem fazendeiro que usa jumento pra proteger as ovelhas.",
+   "start": 69.82,
+   "end": 73.92,
+   "words": [
+    {
+     "w": "É",
+     "start": 69.82,
+     "end": 69.98
+    },
+    {
+     "w": "tão",
+     "start": 69.98,
+     "end": 70.26
+    },
+    {
+     "w": "forte",
+     "start": 70.26,
+     "end": 70.68
+    },
+    {
+     "w": "que",
+     "start": 70.68,
+     "end": 71.0
+    },
+    {
+     "w": "tem",
+     "start": 71.0,
+     "end": 71.16
+    },
+    {
+     "w": "fazendeiro",
+     "start": 71.16,
+     "end": 71.72
+    },
+    {
+     "w": "que",
+     "start": 71.72,
+     "end": 71.9
+    },
+    {
+     "w": "usa",
+     "start": 71.9,
+     "end": 72.14
+    },
+    {
+     "w": "jumento",
+     "start": 72.14,
+     "end": 72.72
+    },
+    {
+     "w": "pra",
+     "start": 72.72,
+     "end": 72.84
+    },
+    {
+     "w": "proteger",
+     "start": 72.84,
+     "end": 73.26
+    },
+    {
+     "w": "as",
+     "start": 73.26,
+     "end": 73.48
+    },
+    {
+     "w": "ovelhas.",
+     "start": 73.48,
+     "end": 73.92
+    }
+   ]
+  },
+  {
+   "text": "Então, se alguém te chamar de jumento, agradece.",
+   "start": 74.4,
+   "end": 77.66,
+   "words": [
+    {
+     "w": "Então,",
+     "start": 74.4,
+     "end": 74.74
+    },
+    {
+     "w": "se",
+     "start": 74.94,
+     "end": 75.18
+    },
+    {
+     "w": "alguém",
+     "start": 75.18,
+     "end": 75.44
+    },
+    {
+     "w": "te",
+     "start": 75.44,
+     "end": 75.6
+    },
+    {
+     "w": "chamar",
+     "start": 75.6,
+     "end": 76.0
+    },
+    {
+     "w": "de",
+     "start": 76.0,
+     "end": 76.14
+    },
+    {
+     "w": "jumento,",
+     "start": 76.14,
+     "end": 76.78
+    },
+    {
+     "w": "agradece.",
+     "start": 76.94,
+     "end": 77.66
+    }
+   ]
+  },
+  {
+   "text": "Segue a página, senão eu vou ouvir daqui que você não seguiu.",
+   "start": 78.16,
+   "end": 81.38,
+   "words": [
+    {
+     "w": "Segue",
+     "start": 78.16,
+     "end": 78.48
+    },
+    {
+     "w": "a",
+     "start": 78.48,
+     "end": 78.58
+    },
+    {
+     "w": "página,",
+     "start": 78.58,
+     "end": 79.0
+    },
+    {
+     "w": "senão",
+     "start": 79.28,
+     "end": 79.56
+    },
+    {
+     "w": "eu",
+     "start": 79.56,
+     "end": 79.68
+    },
+    {
+     "w": "vou",
+     "start": 79.68,
+     "end": 79.76
+    },
+    {
+     "w": "ouvir",
+     "start": 79.76,
+     "end": 80.06
+    },
+    {
+     "w": "daqui",
+     "start": 80.06,
+     "end": 80.4
+    },
+    {
+     "w": "que",
+     "start": 80.4,
+     "end": 80.64
+    },
+    {
+     "w": "você",
+     "start": 80.64,
+     "end": 80.86
+    },
+    {
+     "w": "não",
+     "start": 80.86,
+     "end": 81.0
+    },
+    {
+     "w": "seguiu.",
+     "start": 81.0,
+     "end": 81.38
+    }
+   ]
+  }
+ ]
+}
