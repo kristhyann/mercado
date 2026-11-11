@@ -1,0 +1,583 @@
+{
+ "duration": 38.451,
+ "sentences": [
+  {
+   "text": "Se você não seguir essa página, uma viúva-negra vai aparecer na sua casa.",
+   "start": 0.0,
+   "end": 5.34,
+   "words": [
+    {
+     "w": "Se",
+     "start": 0.0,
+     "end": 0.3
+    },
+    {
+     "w": "você",
+     "start": 0.3,
+     "end": 0.62
+    },
+    {
+     "w": "não",
+     "start": 0.62,
+     "end": 0.94
+    },
+    {
+     "w": "seguir",
+     "start": 0.94,
+     "end": 1.38
+    },
+    {
+     "w": "essa",
+     "start": 1.38,
+     "end": 1.66
+    },
+    {
+     "w": "página,",
+     "start": 1.66,
+     "end": 2.22
+    },
+    {
+     "w": "uma",
+     "start": 2.72,
+     "end": 2.98
+    },
+    {
+     "w": "viúva-negra",
+     "start": 2.98,
+     "end": 3.88
+    },
+    {
+     "w": "vai",
+     "start": 3.88,
+     "end": 4.06
+    },
+    {
+     "w": "aparecer",
+     "start": 4.06,
+     "end": 4.52
+    },
+    {
+     "w": "na",
+     "start": 4.52,
+     "end": 4.72
+    },
+    {
+     "w": "sua",
+     "start": 4.72,
+     "end": 4.9
+    },
+    {
+     "w": "casa.",
+     "start": 4.9,
+     "end": 5.34
+    }
+   ]
+  },
+  {
+   "text": "Calma. Ela não quer te morder.",
+   "start": 5.8,
+   "end": 7.86,
+   "words": [
+    {
+     "w": "Calma.",
+     "start": 5.8,
+     "end": 6.4
+    },
+    {
+     "w": "Ela",
+     "start": 6.84,
+     "end": 7.0
+    },
+    {
+     "w": "não",
+     "start": 7.0,
+     "end": 7.14
+    },
+    {
+     "w": "quer",
+     "start": 7.14,
+     "end": 7.4
+    },
+    {
+     "w": "te",
+     "start": 7.4,
+     "end": 7.54
+    },
+    {
+     "w": "morder.",
+     "start": 7.54,
+     "end": 7.86
+    }
+   ]
+  },
+  {
+   "text": "Ela só morde quando é apertada, tipo quando você enfia o pé no sapato onde ela estava dormindo.",
+   "start": 8.32,
+   "end": 13.34,
+   "words": [
+    {
+     "w": "Ela",
+     "start": 8.32,
+     "end": 8.5
+    },
+    {
+     "w": "só",
+     "start": 8.5,
+     "end": 8.72
+    },
+    {
+     "w": "morde",
+     "start": 8.72,
+     "end": 8.98
+    },
+    {
+     "w": "quando",
+     "start": 8.98,
+     "end": 9.14
+    },
+    {
+     "w": "é",
+     "start": 9.14,
+     "end": 9.3
+    },
+    {
+     "w": "apertada,",
+     "start": 9.3,
+     "end": 9.92
+    },
+    {
+     "w": "tipo",
+     "start": 10.18,
+     "end": 10.44
+    },
+    {
+     "w": "quando",
+     "start": 10.44,
+     "end": 10.82
+    },
+    {
+     "w": "você",
+     "start": 10.82,
+     "end": 11.08
+    },
+    {
+     "w": "enfia",
+     "start": 11.08,
+     "end": 11.4
+    },
+    {
+     "w": "o",
+     "start": 11.4,
+     "end": 11.52
+    },
+    {
+     "w": "pé",
+     "start": 11.52,
+     "end": 11.7
+    },
+    {
+     "w": "no",
+     "start": 11.7,
+     "end": 11.8
+    },
+    {
+     "w": "sapato",
+     "start": 11.8,
+     "end": 12.28
+    },
+    {
+     "w": "onde",
+     "start": 12.28,
+     "end": 12.48
+    },
+    {
+     "w": "ela",
+     "start": 12.48,
+     "end": 12.6
+    },
+    {
+     "w": "estava",
+     "start": 12.6,
+     "end": 12.82
+    },
+    {
+     "w": "dormindo.",
+     "start": 12.82,
+     "end": 13.34
+    }
+   ]
+  },
+  {
+   "text": "O nome vem da fêmea, que às vezes come o macho depois do acasalamento.",
+   "start": 13.72,
+   "end": 18.3,
+   "words": [
+    {
+     "w": "O",
+     "start": 13.72,
+     "end": 13.96
+    },
+    {
+     "w": "nome",
+     "start": 13.96,
+     "end": 14.22
+    },
+    {
+     "w": "vem",
+     "start": 14.22,
+     "end": 14.44
+    },
+    {
+     "w": "da",
+     "start": 14.44,
+     "end": 14.58
+    },
+    {
+     "w": "fêmea,",
+     "start": 14.58,
+     "end": 15.2
+    },
+    {
+     "w": "que",
+     "start": 15.36,
+     "end": 15.58
+    },
+    {
+     "w": "às",
+     "start": 15.58,
+     "end": 15.76
+    },
+    {
+     "w": "vezes",
+     "start": 15.76,
+     "end": 16.12
+    },
+    {
+     "w": "come",
+     "start": 16.12,
+     "end": 16.6
+    },
+    {
+     "w": "o",
+     "start": 16.6,
+     "end": 16.8
+    },
+    {
+     "w": "macho",
+     "start": 16.8,
+     "end": 17.18
+    },
+    {
+     "w": "depois",
+     "start": 17.18,
+     "end": 17.5
+    },
+    {
+     "w": "do",
+     "start": 17.5,
+     "end": 17.68
+    },
+    {
+     "w": "acasalamento.",
+     "start": 17.68,
+     "end": 18.3
+    }
+   ]
+  },
+  {
+   "text": "E o macho é tão pequeno que quase nem dá pra ver.",
+   "start": 18.8,
+   "end": 22.14,
+   "words": [
+    {
+     "w": "E",
+     "start": 18.8,
+     "end": 18.96
+    },
+    {
+     "w": "o",
+     "start": 18.96,
+     "end": 19.04
+    },
+    {
+     "w": "macho",
+     "start": 19.04,
+     "end": 19.34
+    },
+    {
+     "w": "é",
+     "start": 19.34,
+     "end": 19.44
+    },
+    {
+     "w": "tão",
+     "start": 19.44,
+     "end": 19.74
+    },
+    {
+     "w": "pequeno",
+     "start": 19.74,
+     "end": 20.34
+    },
+    {
+     "w": "que",
+     "start": 20.34,
+     "end": 20.78
+    },
+    {
+     "w": "quase",
+     "start": 20.78,
+     "end": 21.16
+    },
+    {
+     "w": "nem",
+     "start": 21.16,
+     "end": 21.48
+    },
+    {
+     "w": "dá",
+     "start": 21.48,
+     "end": 21.72
+    },
+    {
+     "w": "pra",
+     "start": 21.72,
+     "end": 21.9
+    },
+    {
+     "w": "ver.",
+     "start": 21.9,
+     "end": 22.14
+    }
+   ]
+  },
+  {
+   "text": "O veneno age direto no sistema nervoso e causa dor forte e cãibra no corpo todo.",
+   "start": 22.56,
+   "end": 28.42,
+   "words": [
+    {
+     "w": "O",
+     "start": 22.56,
+     "end": 22.7
+    },
+    {
+     "w": "veneno",
+     "start": 22.7,
+     "end": 23.04
+    },
+    {
+     "w": "age",
+     "start": 23.04,
+     "end": 23.3
+    },
+    {
+     "w": "direto",
+     "start": 23.3,
+     "end": 23.86
+    },
+    {
+     "w": "no",
+     "start": 23.86,
+     "end": 23.98
+    },
+    {
+     "w": "sistema",
+     "start": 23.98,
+     "end": 24.38
+    },
+    {
+     "w": "nervoso",
+     "start": 24.38,
+     "end": 25.02
+    },
+    {
+     "w": "e",
+     "start": 25.02,
+     "end": 25.36
+    },
+    {
+     "w": "causa",
+     "start": 25.36,
+     "end": 25.56
+    },
+    {
+     "w": "dor",
+     "start": 25.56,
+     "end": 25.92
+    },
+    {
+     "w": "forte",
+     "start": 25.92,
+     "end": 26.54
+    },
+    {
+     "w": "e",
+     "start": 26.54,
+     "end": 26.86
+    },
+    {
+     "w": "cãibra",
+     "start": 26.86,
+     "end": 27.4
+    },
+    {
+     "w": "no",
+     "start": 27.4,
+     "end": 27.56
+    },
+    {
+     "w": "corpo",
+     "start": 27.56,
+     "end": 27.98
+    },
+    {
+     "w": "todo.",
+     "start": 27.98,
+     "end": 28.42
+    }
+   ]
+  },
+  {
+   "text": "Mas morte é raríssima, e existe o soro.",
+   "start": 28.42,
+   "end": 31.64,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 28.42,
+     "end": 28.98
+    },
+    {
+     "w": "morte",
+     "start": 28.98,
+     "end": 29.4
+    },
+    {
+     "w": "é",
+     "start": 29.4,
+     "end": 29.56
+    },
+    {
+     "w": "raríssima,",
+     "start": 29.56,
+     "end": 30.36
+    },
+    {
+     "w": "e",
+     "start": 30.36,
+     "end": 30.66
+    },
+    {
+     "w": "existe",
+     "start": 30.66,
+     "end": 31.0
+    },
+    {
+     "w": "o",
+     "start": 31.0,
+     "end": 31.16
+    },
+    {
+     "w": "soro.",
+     "start": 31.16,
+     "end": 31.64
+    }
+   ]
+  },
+  {
+   "text": "Então sacode o sapato antes de calçar.",
+   "start": 31.72,
+   "end": 33.88,
+   "words": [
+    {
+     "w": "Então",
+     "start": 31.72,
+     "end": 32.02
+    },
+    {
+     "w": "sacode",
+     "start": 32.02,
+     "end": 32.58
+    },
+    {
+     "w": "o",
+     "start": 32.58,
+     "end": 32.64
+    },
+    {
+     "w": "sapato",
+     "start": 32.64,
+     "end": 33.12
+    },
+    {
+     "w": "antes",
+     "start": 33.12,
+     "end": 33.28
+    },
+    {
+     "w": "de",
+     "start": 33.28,
+     "end": 33.44
+    },
+    {
+     "w": "calçar.",
+     "start": 33.44,
+     "end": 33.88
+    }
+   ]
+  },
+  {
+   "text": "E segue a página, porque ela está de olho.",
+   "start": 33.88,
+   "end": 36.7,
+   "words": [
+    {
+     "w": "E",
+     "start": 33.88,
+     "end": 34.3
+    },
+    {
+     "w": "segue",
+     "start": 34.3,
+     "end": 34.62
+    },
+    {
+     "w": "a",
+     "start": 34.62,
+     "end": 34.76
+    },
+    {
+     "w": "página,",
+     "start": 34.76,
+     "end": 35.22
+    },
+    {
+     "w": "porque",
+     "start": 35.48,
+     "end": 35.8
+    },
+    {
+     "w": "ela",
+     "start": 35.8,
+     "end": 35.96
+    },
+    {
+     "w": "está",
+     "start": 35.96,
+     "end": 36.18
+    },
+    {
+     "w": "de",
+     "start": 36.18,
+     "end": 36.38
+    },
+    {
+     "w": "olho.",
+     "start": 36.38,
+     "end": 36.7
+    }
+   ]
+  }
+ ]
+}

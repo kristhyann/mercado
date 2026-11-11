@@ -24,8 +24,11 @@ seq=[523,659,784,1047]; win=np.zeros(int(.9*SR))
 for i,f in enumerate(seq):
     s=tone(f,f,.45,6)+.3*tone(2*f,2*f,.45,8); o=int(i*.09*SR); win[o:o+len(s)]+=s
 S['win']=win
+t=np.arange(int(.35*SR))/SR; S['gulp']=np.sin(2*np.pi*np.cumsum(np.linspace(300,90,len(t)))/SR)*env(len(t),.005,7)
+n=int(.25*SR); z=rng.standard_normal(n)*np.sign(np.sin(2*np.pi*60*np.arange(n)/SR)); S['zap']=z*env(n,.002,14)
+S['buzz']=S['buzzx']
 for k in S: S[k]=S[k]/np.abs(S[k]).max()
-vol={'pop':.16,'clang':.2,'puf':.2,'ding':.18,'buzzx':.12,'crack':.25,'mosq':.1,'whoosh':.12,'win':.2}
+vol={'gulp':.25,'zap':.12,'buzz':.12,'pop':.16,'clang':.2,'puf':.2,'ding':.18,'buzzx':.12,'crack':.25,'mosq':.1,'whoosh':.12,'win':.2}
 for e in json.load(open(d+'/eventos.json')):
     s=S[e['type']]*vol[e['type']]; o=int(e['t']*SR); out[o:o+len(s)]+=s[:N-o]
 sf.write(d+'/mix_bruta.wav',out,SR)
