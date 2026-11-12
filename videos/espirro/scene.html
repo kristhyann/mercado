@@ -1,0 +1,224 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:250px;text-align:center;font-weight:900;font-size:110px;line-height:1.02}
+#hook b{color:#FF3B3B;display:block;font-size:140px}
+#label{width:1080px;top:180px;text-align:center}
+#label span{display:inline-block;font-weight:900;font-size:96px;color:#FF8A1F;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#cap{width:1080px;top:1290px;text-align:center;font-weight:900;font-size:118px}
+#cap.hl{color:#FF8A1F}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:60px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF3B3B;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}
+.comic{font-weight:900;font-size:150px;color:#FFD21F;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 10px 0 rgba(0,0,0,.3);white-space:nowrap}
+#xmark{font-weight:900;font-size:300px;color:#FF2D2D;-webkit-text-stroke:12px #fff;paint-order:stroke fill;line-height:1}
+#final{left:60px;width:960px;top:1330px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:78px;line-height:1.05;padding:30px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#FF8A1F}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.8;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+#redv{width:1080px;height:1920px;background:radial-gradient(ellipse at center,rgba(255,0,0,0) 45%,rgba(255,0,0,.55) 100%)}
+</style></head><body>
+<div id="redv" class="o"></div>
+<div id="hook" class="o stroke">SEGURAR O<b>ESPIRRO?</b></div>
+<div id="label" class="o"><span>X</span></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag"></div>
+<div id="xmark" class="o">✕</div>
+<div id="comic" class="o comic"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Segue a página,<br><em>e saúde!</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, bounce, M, mesh, buildWorld } from '/_kit/kit.js';
+import { buildPerson, PP, mixP, poseP, face } from '/_kit/pessoas.js';
+
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; const S = i => SN[i].start, E = i => SN[i].end; window.DURATION = TP.duration;
+const WD = (i, re) => { const w = SN[i].words.find(w => re.test(w.w)); return w ? w.start : S(i); };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(window.devicePixelRatio || 1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .02, 600);
+const world = buildWorld(scene);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const box = (w, h, d, c, x, y, z, par = scene, o = {}) => mesh(new THREE.BoxGeometry(w, h, d), typeof c === 'number' ? M(c, o) : c, x, y, z, par);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+
+// ---------- tempos ----------
+const T_PERIGO = WD(1, /perigoso/i), T_POEIRA = WD(3, /poeirinha/i), T_ALARME = WD(4, /alarme/i), T_EXPULSA = WD(4, /expulsa/i), T_PUXA = WD(5, /puxa/i), T_FECHA = WD(5, /fecha/i), T_ABRE = WD(6, /abre/i);
+const T_GOTAS = WD(7, /gotinhas/i), T_OITO = WD(7, /oito/i), T_TAMPAR = WD(8, /tampar/i), T_PRESSAO = WD(9, /pressão/i), T_OUVIDO = WD(10, /ouvido/i), T_TIMP = WD(10, /tímpano/i), T_RASGAR = WD(11, /rasgar/i);
+const T_ING = WD(12, /Inglaterra/i), T_ESC = WD(13, /Escócia/i), T_TRAQ = WD(13, /traqueia/i), T_OLHO = WD(14, /olho/i), T_CORACAO = WD(14, /coração/i), T_MENTIRA = WD(14, /mentira/i);
+const T_COTOVELO = WD(15, /cotovelo/i), T_LENCO = WD(15, /lenço/i), T_MAO = WD(16, /mão/i), T_GERMES = WD(16, /germes/i), T_MANDA = S(17), T_SAUDE = WD(18, /saúde/i);
+
+// ---------- pessoa + órgãos (raio-x) ----------
+const per = buildPerson({ shirt: 0x2A9D8F, pants: 0x2F4A7A, hair: 0x23150C }); scene.add(per.root);
+const bodyMats = new Set(); per.root.traverse(o => { if (o.isMesh) bodyMats.add(o.material); });
+const organ = (geo, col, x, y, z, par, emi = 0x000000) => { const m = mesh(geo, new THREE.MeshStandardMaterial({ color: col, emissive: emi, roughness: .5 }), x, y, z, par); m.renderOrder = 2; return m; };
+const organs = grp(per.hips); const headOrg = grp(per.head);
+const lungs = [-1, 1].map(s => organ(new THREE.IcosahedronGeometry(.1, 1), 0xF472B6, s * .09, .36, 0, organs)); lungs.forEach(l => l.scale.set(.85, 1.5, .7));
+const trachea = organ(new THREE.CylinderGeometry(.025, .025, .34, 8), 0xF9A8D4, 0, .58, .02, organs);
+const throatRing = organ(new THREE.TorusGeometry(.035, .012, 6, 14), 0xE11D48, 0, .7, .03, organs); throatRing.rotation.x = Math.PI / 2;
+const brain = organ(new THREE.IcosahedronGeometry(.1, 1), 0xF0A6CA, 0, .07, -.02, headOrg); brain.scale.set(1, .75, 1.1);
+const nasal = organ(new THREE.CylinderGeometry(.018, .018, .16, 6), 0xF9A8D4, 0, -.01, .07, headOrg); nasal.rotation.x = Math.PI / 2;
+const eus = organ(new THREE.CylinderGeometry(.01, .01, .17, 6), 0xF9A8D4, .07, -.05, .0, headOrg); eus.rotation.z = Math.PI / 2 - .5;
+const drum = organ(new THREE.CircleGeometry(.035, 14), 0xFF8AC0, .14, -.0, 0, headOrg); drum.rotation.y = Math.PI / 2; drum.material.side = THREE.DoubleSide;
+const nerve = organ(new THREE.CylinderGeometry(.008, .008, .12, 4), 0xFFD21F, 0, .03, .07, headOrg, 0x554400); nerve.rotation.x = .9;
+const allOrg = [...lungs, trachea, throatRing, brain, nasal, eus, drum, nerve];
+// partículas
+const dust = []; for (let i = 0; i < 10; i++) { const d = mesh(new THREE.IcosahedronGeometry(.012, 0), M(0x8A8070), 0, 0, 0); scene.add(d); dust.push(d); }
+const pulse = []; for (let i = 0; i < 4; i++) { const p = mesh(new THREE.IcosahedronGeometry(.015, 0), new THREE.MeshBasicMaterial({ color: 0xFFE14D }), 0, 0, 0); scene.add(p); pulse.push(p); }
+const airP = []; for (let i = 0; i < 26; i++) { const a = mesh(new THREE.IcosahedronGeometry(.02, 0), new THREE.MeshBasicMaterial({ color: 0xFFFFFF, transparent: true }), 0, 0, 0); scene.add(a); airP.push(a); }
+const drops = []; for (let i = 0; i < 70; i++) { const d = mesh(new THREE.IcosahedronGeometry(.05, 0), new THREE.MeshStandardMaterial({ color: 0x3B9FE0, roughness: .1, transparent: true }), 0, 0, 0); d.userData = { a: (Math.sin(i * 12.9) * .5) * .5, b: Math.cos(i * 7.7) * .25, s: .5 + (i % 9) / 9 }; scene.add(d); drops.push(d); }
+const earP = []; for (let i = 0; i < 6; i++) { const e = mesh(new THREE.IcosahedronGeometry(.012, 0), new THREE.MeshBasicMaterial({ color: 0xFF3B3B }), 0, 0, 0); scene.add(e); earP.push(e); }
+const pressA = []; for (let i = 0; i < 6; i++) { const a = grp(); mesh(new THREE.ConeGeometry(.03, .06, 6), new THREE.MeshBasicMaterial({ color: 0xFF3B3B }), 0, .03, 0, a); mesh(new THREE.CylinderGeometry(.01, .01, .06, 4), new THREE.MeshBasicMaterial({ color: 0xFF3B3B }), 0, -.02, 0, a); scene.add(a); pressA.push(a); }
+// régua de 8 m
+const ruler = grp(); ruler.position.set(0, .02, 0); box(.12, .02, 8, 0xFFFFFF, 0, 0, 4.2, ruler); for (let i = 0; i <= 8; i++) box(.4, .03, .06, 0xFF3B3B, 0, .01, .2 + i, ruler);
+// hospital e carro
+const hosp = grp(); hosp.position.set(-3.5, 0, 0); box(1.6, .45, .8, 0xFFFFFF, 0, .45, 0, hosp); box(1.7, .1, .9, 0x6B7280, 0, .2, 0, hosp); box(.4, .15, .6, 0xF5F5F5, -.6, .75, 0, hosp); box(.06, 1.6, .06, 0x6B7280, .9, .8, -.3, hosp); { const s = grp(hosp); s.position.set(-.2, 1.6, -.4); box(.7, .5, .04, 0xFFFFFF, 0, 0, 0, s); box(.32, .1, .05, 0xE11D48, 0, 0, .01, s); box(.1, .32, .05, 0xE11D48, 0, 0, .01, s); }
+const car = grp(); car.position.set(3.5, 0, 0); { const cm = M(0x3B82F6, { roughness: .35 }); box(2.0, .5, .95, cm, 0, .45, 0, car); box(1.1, .45, .9, cm, -.1, .9, 0, car); box(1.0, .38, .92, 0xBFE6FF, -.1, .92, 0, car, { transparent: true, opacity: .6 }); for (const [x, z] of [[-.65, .48], [.65, .48], [-.65, -.48], [.65, -.48]]) { const w = mesh(new THREE.CylinderGeometry(.2, .2, .12, 12), M(0x111111), x, .2, z, car); w.rotation.x = Math.PI / 2; } }
+// mitos: olho e coração
+const heart = grp(); { const sh = new THREE.Shape(); sh.moveTo(0, -.12); sh.bezierCurveTo(-.22, .05, -.12, .22, 0, .12); sh.bezierCurveTo(.12, .22, .22, .05, 0, -.12); mesh(new THREE.ExtrudeGeometry(sh, { depth: .06, bevelEnabled: false }), M(0xE11D48, { emissive: 0x330000 }), 0, 0, 0, heart); } scene.add(heart);
+const eyeBig = grp(); mesh(new THREE.IcosahedronGeometry(.14, 2), M(0xFFFFFF, { roughness: .2 }), 0, 0, 0, eyeBig); mesh(new THREE.IcosahedronGeometry(.07, 2), new THREE.MeshBasicMaterial({ color: 0x2563EB }), 0, 0, .1, eyeBig); mesh(new THREE.IcosahedronGeometry(.035, 1), new THREE.MeshBasicMaterial({ color: 0x111111 }), 0, 0, .14, eyeBig); scene.add(eyeBig);
+// germes, celular, maçaneta, lenço
+const germs = []; for (let i = 0; i < 14; i++) { const g = mesh(new THREE.IcosahedronGeometry(.025, 0), new THREE.MeshStandardMaterial({ color: 0x84CC16, emissive: 0x2A4A00 }), 0, 0, 0); scene.add(g); germs.push(g); }
+const phone = box(.12, .02, .24, 0x111827, .55, .9, .4); const knob = grp(); knob.position.set(-.55, 1.0, .3); mesh(new THREE.IcosahedronGeometry(.05, 1), M(0xD4A73A, { metalness: .7 }), 0, 0, 0, knob); box(.15, .3, .02, 0x8B5E3C, 0, 0, -.04, knob);
+const table = grp(); table.position.set(.55, 0, .4); box(.5, .05, .4, 0x8B5E3C, 0, .87, 0, table); box(.05, .85, .05, 0x5A3E2B, 0, .43, 0, table);
+const tissue = box(.18, .14, .02, 0xFFFFFF, 0, 0, 0);
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [T_PERIGO, 'buzz'], [S(2), 'whoosh'], [T_POEIRA, 'pop'], [T_ALARME, 'zap'], [T_EXPULSA, 'pop'], [T_PUXA, 'whoosh'], [T_ABRE, 'crack'], [T_OITO, 'pop'], [T_TAMPAR, 'pop'], [T_PRESSAO, 'buzz'], [T_TIMP, 'buzz'], [T_RASGAR, 'crack'], [T_ING, 'pop'], [T_ESC, 'pop'], [T_OLHO, 'pop'], [T_MENTIRA, 'ding'], [T_COTOVELO, 'pop'], [T_GERMES, 'buzz'], [T_SAUDE, 'win']].forEach(([t, k]) => ev(t, k));
+const LBL = [[S(3), 'NARIZ'], [T_ALARME, 'CÉREBRO'], [T_PUXA, 'PULMÕES'], [T_OUVIDO, 'OUVIDO'], [T_RASGAR, 'GARGANTA']];
+const HL = /espirro|nariz|boca|perigoso|poeirinha|nervos|cérebro|expulsa|garganta|pulmões|força|gotinhas|oito|metros|pressão|ouvido|tímpano|rasgar|traqueia|internado|mito|mentira|cotovelo|lenço|braço|mão|germes|saúde/i;
+
+// câmera (absoluta)
+const HEADY = 1.78;
+const KEYS = [
+  [0, [.6, 1.85, 1.6], [0, 1.65, 0]], [S(2), [1.2, 1.6, 2.6], [0, 1.4, 0]], [S(3), [.85, 1.9, 1.25], [0, 1.74, .05]], [T_ALARME, [.95, 2.0, 1.3], [0, 1.78, 0]],
+  [S(5), [.9, 1.55, 1.7], [0, 1.4, 0]], [S(6), [.9, 1.7, 1.4], [0, 1.65, .1]], [S(7), [1.8, 2.9, -2.2], [0, .9, 4.2]], [S(8), [.7, 1.75, 1.2], [0, 1.65, 0]],
+  [T_OUVIDO, [1.0, 1.9, .9], [.05, 1.76, 0]], [T_RASGAR, [.5, 1.6, .9], [0, 1.55, 0]], [S(12), [-1.6, 1.6, 3.4], [-3.3, .9, 0]], [S(13), [1.6, 1.6, 3.6], [3.4, .9, 0]],
+  [S(14), [.6, 1.8, 1.8], [0, 1.6, 0]], [S(15), [1.0, 1.7, 1.8], [0, 1.6, 0]], [S(16), [.2, 1.5, 2.2], [0, 1.2, .2]], [S(17), [.9, 1.75, 2.2], [0, 1.6, 0]], [TP.duration, [.8, 1.75, 2.0], [0, 1.6, 0]],
+];
+function camAt(t) {
+  let i = 0; while (i + 1 < KEYS.length && KEYS[i + 1][0] <= t) i++;
+  const b = KEYS[i], a = KEYS[Math.max(0, i - 1)]; const u = b === a ? 1 : ease(clamp((t - b[0]) / Math.max(.6, Math.min(1.4, (KEYS[i + 1] ? KEYS[i + 1][0] : b[0] + 2) - b[0]))));
+  const tg = V(...a[2]).lerp(V(...b[2]), u); const p = V(...a[1]).lerp(V(...b[1]), u);
+  p.x += Math.sin(t * .35) * .03; p.y += Math.sin(t * .27) * .015;
+  if (win(t, T_PRESSAO, T_RASGAR + 1)) p.x += Math.sin(t * 45) * .006;
+  cam.position.copy(p); cam.lookAt(tg); cam.fov = 40; cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+}
+// poses
+const PINCH = { ...PP.stand, lx: -2.15, lz: -.55, le: -1.1, rx: -2.15, rz: .55, re: -1.1, hx: .1 };
+const ELBOW = { ...PP.stand, rx: -1.35, rz: .75, re: -2.0, hx: .35, hy: -.3 };
+const INHALE = { ...PP.stand, hx: -.35, lean: -.12 };
+const SNEEZE = { ...PP.stand, hx: .5, lean: .25 };
+const tmp = new THREE.Vector3(), tmp2 = new THREE.Vector3();
+window.draw = function (t) {
+  camAt(t);
+  // ---- pose da pessoa
+  let P = PP.stand, fc = 'neutral', k = 1;
+  if (t < S(2)) { P = t < 1.2 ? INHALE : PINCH; fc = t < 1.2 ? 'shock' : 'neutral'; }
+  if (win(t, S(2), T_PUXA)) { P = PP.stand; fc = 'neutral'; }
+  if (win(t, T_PUXA, T_ABRE)) { P = INHALE; fc = 'shock'; k = ease(clamp((t - T_PUXA) / .6)); }
+  if (win(t, T_ABRE, T_ABRE + .8)) { P = SNEEZE; fc = 'talk'; }
+  if (win(t, T_ABRE + .8, S(8))) { P = PP.stand; fc = 'happy'; }
+  if (win(t, S(8), S(12))) { P = PINCH; fc = 'neutral'; }
+  if (win(t, T_RASGAR, S(12))) fc = 'sad';
+  if (win(t, S(12), S(14))) { P = PP.stand; fc = 'neutral'; }
+  if (win(t, S(14), S(15))) { P = PP.shrug; fc = 'happy'; }
+  if (win(t, S(15), S(16))) { P = t > T_COTOVELO ? ELBOW : PP.stand; fc = 'calm'; }
+  if (win(t, S(16), S(17))) { P = { ...PP.stand, rx: -1.2, rz: -.3, re: -.6 }; fc = 'neutral'; }
+  if (t >= S(17)) { P = PP.cheer; fc = 'happy'; }
+  poseP(per, P, 0, t); face(per, fc, t);
+  per.root.position.set(0, 0, 0); per.root.rotation.y = 0;
+  if (win(t, T_ABRE, T_ABRE + .3)) per.hips.position.z = Math.sin((t - T_ABRE) / .3 * Math.PI) * .05; else per.hips.position.z = 0;
+  // pressão: bochechas/corpo avermelhando
+  const xray = win(t, S(2) + .4, S(12)); const pres = win(t, T_PRESSAO, S(12)) ? .5 + .3 * Math.sin(t * 10) : 0;
+  bodyMats.forEach(m => { m.transparent = true; m.opacity = xray ? .3 : 1; m.depthWrite = !xray; });
+  allOrg.forEach(o => o.visible = xray);
+  lungs.forEach(l => { const inf = win(t, T_PUXA, T_ABRE) ? 1 + k * .25 : win(t, S(8), S(12)) ? 1.18 : 1; l.scale.set(.85 * inf, 1.5 * inf, .7 * inf); l.material.emissive.setHex(pres ? 0x550000 : 0x000000); });
+  throatRing.visible = xray && (win(t, T_FECHA, T_ABRE) || win(t, S(8), S(12))); throatRing.material.color.setHex(win(t, T_RASGAR, S(12)) ? 0x7F1D1D : 0xE11D48);
+  trachea.material.emissive.setHex(win(t, T_RASGAR, S(12)) && Math.sin(t * 10) > 0 ? 0x660000 : 0x000000);
+  nerve.material.emissive.setHex(win(t, S(3) + .4, S(5)) && Math.sin(t * 12) > 0 ? 0xAA8800 : 0x332200);
+  brain.material.emissive.setHex(win(t, T_ALARME + .4, S(5)) ? 0x662244 : 0x000000);
+  drum.scale.setScalar(win(t, T_TIMP - .3, S(11)) ? 1 + .4 * Math.abs(Math.sin(t * 8)) : 1); drum.material.color.setHex(win(t, T_TIMP - .3, S(11)) ? 0xE11D48 : 0xFF8AC0);
+  // poeira entrando no nariz
+  per.head.getWorldPosition(tmp); const nose = tmp.clone().add(V(0, -.02, .17));
+  dust.forEach((d, i) => { const on = win(t, T_POEIRA - .3, S(4)); d.visible = on; if (!on) return; const u = clamp(((t - T_POEIRA + .3) * .7 + i * .06) % 1.2); d.position.copy(nose).add(V(Math.sin(i * 3) * .15 * (1 - u), Math.cos(i * 2) * .1 * (1 - u), .35 * (1 - u))); });
+  // sinal pro cérebro
+  pulse.forEach((p, i) => { const on = win(t, T_ALARME - .2, S(5)); p.visible = on; if (!on) return; const u = ((t * 1.4 + i / 4) % 1); p.position.lerpVectors(nose, tmp.clone().add(V(0, .08, -.02)), u); });
+  // ar saindo no espirro
+  airP.forEach((a, i) => { const u = (t - T_ABRE) / 1.0; a.visible = u > 0 && u < 1; if (!a.visible) return; const dir = V(Math.sin(i * 2.1) * .3, Math.cos(i * 1.3) * .2 - .05, 1).normalize(); a.position.copy(nose).add(dir.multiplyScalar(easeOut(u) * 1.2)); a.material.opacity = 1 - u; a.scale.setScalar(1 + u * 2); });
+  // gotinhas até 8 m
+  drops.forEach((d, i) => { const u = (t - S(7) - (i % 10) * .03) / 3.0; d.visible = win(t, S(7), S(8)) && u > 0; if (!d.visible) return; const e = easeOut(clamp(u)); const dist = 8.2 * e * d.userData.s; d.position.set(d.userData.a * dist * .4, Math.max(.03, 1.7 - dist * .12 + d.userData.b - e * e * .6), .2 + dist); d.material.opacity = 1 - clamp(u - .7) * 2; });
+  ruler.visible = win(t, S(7), S(8)) ? true : false; ruler.scale.z = Math.max(.001, ease(clamp((t - S(7)) / 1.5)));
+  // ar indo pro ouvido
+  earP.forEach((e, i) => { const on = win(t, T_OUVIDO - .3, S(11)); e.visible = on; if (!on) return; const u = ((t * 1.3 + i / 6) % 1); const thr = tmp.clone().add(V(0, -.12, .03)), ear = tmp.clone().add(V(.14, 0, 0)); e.position.lerpVectors(thr, ear, u); });
+  pressA.forEach((a, i) => { const on = win(t, T_PRESSAO, T_OUVIDO); a.visible = on; if (!on) return; const ang = i / 6 * Math.PI * 2 + t; a.position.copy(tmp).add(V(Math.cos(ang) * .22, -.35 + Math.sin(ang) * .1, Math.sin(ang) * .12)); a.lookAt(tmp); a.rotateX(-Math.PI / 2); });
+  // hospital / carro
+  hosp.visible = win(t, S(12) - .4, S(13) + .6); hosp.scale.setScalar(Math.max(.001, pop(t - S(12) + .4, .35)));
+  car.visible = win(t, S(13) - .4, S(14) + .6); car.scale.setScalar(Math.max(.001, pop(t - S(13) + .4, .35))); car.position.y = Math.abs(Math.sin(t * 20)) * .01;
+  // mitos
+  heart.visible = win(t, T_CORACAO - .2, S(15)); if (heart.visible) { heart.position.copy(tmp).add(V(.35, -.5, .2)); heart.scale.setScalar((1 + .15 * Math.max(0, Math.sin(t * 7))) * Math.max(.001, pop(t - T_CORACAO + .2, .3))); heart.lookAt(cam.position); }
+  eyeBig.visible = win(t, T_OLHO - .2, S(15)); if (eyeBig.visible) { eyeBig.position.copy(tmp).add(V(-.35, .15, .2)); eyeBig.scale.setScalar(Math.max(.001, pop(t - T_OLHO + .2, .3)) * 1.2); eyeBig.lookAt(cam.position); }
+  // germes da mão → celular e maçaneta
+  per.armR.hand.getWorldPosition(tmp2);
+  germs.forEach((g, i) => { const on = win(t, T_MAO, S(17)); g.visible = on; if (!on) return; let p = tmp2.clone().add(V(Math.sin(i * 2) * .06, Math.cos(i * 3) * .06, .03)); if (t > T_GERMES && i >= 5) { const u = clamp((t - T_GERMES - (i % 5) * .1) / .6); const tgt = i < 10 ? V(.55 + Math.sin(i) * .05, .93, .4 + Math.cos(i) * .08) : V(-.55 + Math.sin(i) * .04, 1.0 + Math.cos(i) * .04, .35); p.lerp(tgt, ease(u)); } g.position.copy(p); g.scale.setScalar(1 + .2 * Math.sin(t * 8 + i)); });
+  phone.visible = knob.visible = table.visible = win(t, S(16) - .3, S(17) + .4);
+  tissue.visible = win(t, T_LENCO, S(16)); if (tissue.visible) { per.armL.hand.getWorldPosition(tissue.position); tissue.lookAt(cam.position); }
+
+  // ---------- textos ----------
+  fixed($('hook'), t < S(1) ? pop(t - .05, .35) * (1 - clamp((t - S(1) + .2) / .2)) : 0);
+  const lb = [...LBL].reverse().find(l => t >= l[0]); const lbOn = lb && t < S(12) && !win(t, S(7), S(10));
+  if (lbOn) { $('label').firstElementChild.textContent = lb[1]; fixed($('label'), pop(t - lb[0], .3)); } else fixed($('label'), 0);
+  const t1 = $('t1'), t2 = $('t2'); t1.style.opacity = 0; t2.style.opacity = 0;
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  tag(t1, 'PODE SER PERIGOSO', 'red', win(t, T_PERIGO - .2, S(2)), 540, 600, T_PERIGO - .2, -3);
+  tag(t1, 'IRRITA OS NERVOS', '', win(t, T_POEIRA + .5, S(4)), 540, 600, T_POEIRA + .5, -4);
+  tag(t1, 'PUXA O AR · FECHA A GARGANTA', 'blue', win(t, T_PUXA, T_ABRE), 540, 600, T_PUXA, -3);
+  tag(t1, 'ATÉ 8 METROS', 'red', win(t, T_OITO, S(8)), 540, 600, T_OITO, -4);
+  tag(t1, 'PRESSÃO SOBE', 'red', win(t, T_PRESSAO, T_OUVIDO), 540, 600, T_PRESSAO, -4);
+  tag(t1, 'PODE MACHUCAR O TÍMPANO', 'red', win(t, T_TIMP - .3, S(11)), 540, 600, T_TIMP - .3, -3);
+  tag(t1, 'CASOS RAROS', '', win(t, S(11), S(12)), 540, 600, S(11), -4);
+  tag(t1, 'INGLATERRA · 2018', 'blue', win(t, T_ING, S(13)), 540, 600, T_ING, -4);
+  tag(t2, '1 SEMANA INTERNADO', 'red', win(t, T_ING + 1.2, S(13)), 540, 720, T_ING + 1.2, 3);
+  tag(t1, 'ESCÓCIA · 2023', 'blue', win(t, T_ESC, S(14)), 540, 600, T_ESC, -4);
+  tag(t2, 'TRAQUEIA RASGADA', 'red', win(t, T_TRAQ - .2, S(14)), 540, 720, T_TRAQ - .2, 3);
+  tag(t1, 'OLHO SALTA? MITO', 'green', win(t, T_OLHO, T_CORACAO), 540, 600, T_OLHO, -3);
+  tag(t1, 'CORAÇÃO PARA? MITO', 'green', win(t, T_CORACAO, S(15)), 540, 600, T_CORACAO, -3);
+  tag(t1, 'NO COTOVELO', 'green', win(t, T_COTOVELO, T_LENCO), 540, 600, T_COTOVELO, -4);
+  tag(t1, 'OU NUM LENÇO', 'green', win(t, T_LENCO, S(16)), 540, 600, T_LENCO, -4);
+  tag(t1, 'MÃO ESPALHA GERMES', 'red', win(t, T_MAO, S(17)), 540, 600, T_MAO, -3);
+  place($('xmark'), win(t, T_TAMPAR, S(9)) || win(t, T_GERMES, S(17)), 800, 780, 1, -8);
+  const cm = $('comic');
+  if (win(t, 1.2, S(1) + .5)) { cm.textContent = 'ATCH...'; cm.style.fontSize = '130px'; place(cm, true, 540, 840, pop(t - 1.2, .25), -4); }
+  else if (win(t, T_EXPULSA, T_EXPULSA + 1.0)) { cm.textContent = 'EXPULSA!'; cm.style.fontSize = '130px'; place(cm, true, 540, 820, pop(t - T_EXPULSA, .25), -6); }
+  else if (win(t, T_ABRE, T_ABRE + 1.2)) { cm.textContent = 'ATCHIM!'; cm.style.fontSize = '150px'; place(cm, true, 540, 820, pop(t - T_ABRE, .25), 6); }
+  else if (win(t, T_SAUDE, 99)) { cm.textContent = 'SAÚDE!'; cm.style.fontSize = '150px'; place(cm, true, 540, 560, pop(t - T_SAUDE, .25), -4); }
+  else cm.style.opacity = 0;
+  $('redv').style.opacity = win(t, T_PRESSAO, S(12)) ? .45 + .3 * Math.sin(t * 10) : 0;
+  fixed($('final'), t >= T_SAUDE + .3 ? pop(t - T_SAUDE - .3, .35) : 0);
+  $('wm').style.opacity = .8;
+  // legenda
+  let wTxt = null, wSt = 0;
+  for (let i = 0; i < SN.length - 1; i++) for (const w2 of SN[i].words) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap = $('cap');
+  if (wTxt && t > S(1) - .05) { cap.textContent = wTxt.toUpperCase().replace(/[.,!?:]/g, ''); cap.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const kk = t - wSt; fixed(cap, kk < .06 ? lerp(.75, 1.1, clamp(kk / .06)) : kk < .12 ? lerp(1.1, 1, (kk - .06) / .06) : 1); } else fixed(cap, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+await document.fonts.load('900 60px P'); await document.fonts.ready;
+window.ready = true;
+</script></body></html>
