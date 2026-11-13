@@ -1,0 +1,1282 @@
+{
+ "duration": 83.878,
+ "sentences": [
+  {
+   "text": "Você aperta um botão e tudo some.",
+   "start": 0.0,
+   "end": 2.32,
+   "words": [
+    {
+     "w": "Você",
+     "start": 0.0,
+     "end": 0.26
+    },
+    {
+     "w": "aperta",
+     "start": 0.26,
+     "end": 0.68
+    },
+    {
+     "w": "um",
+     "start": 0.68,
+     "end": 0.8
+    },
+    {
+     "w": "botão",
+     "start": 0.8,
+     "end": 1.16
+    },
+    {
+     "w": "e",
+     "start": 1.16,
+     "end": 1.48
+    },
+    {
+     "w": "tudo",
+     "start": 1.48,
+     "end": 1.88
+    },
+    {
+     "w": "some.",
+     "start": 1.88,
+     "end": 2.32
+    }
+   ]
+  },
+  {
+   "text": "Mas pra onde vai?",
+   "start": 2.78,
+   "end": 4.04,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 2.78,
+     "end": 3.04
+    },
+    {
+     "w": "pra",
+     "start": 3.04,
+     "end": 3.52
+    },
+    {
+     "w": "onde",
+     "start": 3.52,
+     "end": 3.74
+    },
+    {
+     "w": "vai?",
+     "start": 3.74,
+     "end": 4.04
+    }
+   ]
+  },
+  {
+   "text": "Pra entender, vamos construir uma descarga do zero.",
+   "start": 4.04,
+   "end": 7.52,
+   "words": [
+    {
+     "w": "Pra",
+     "start": 4.04,
+     "end": 4.68
+    },
+    {
+     "w": "entender,",
+     "start": 4.68,
+     "end": 5.06
+    },
+    {
+     "w": "vamos",
+     "start": 5.54,
+     "end": 5.62
+    },
+    {
+     "w": "construir",
+     "start": 5.62,
+     "end": 6.12
+    },
+    {
+     "w": "uma",
+     "start": 6.12,
+     "end": 6.36
+    },
+    {
+     "w": "descarga",
+     "start": 6.36,
+     "end": 6.98
+    },
+    {
+     "w": "do",
+     "start": 6.98,
+     "end": 7.16
+    },
+    {
+     "w": "zero.",
+     "start": 7.16,
+     "end": 7.52
+    }
+   ]
+  },
+  {
+   "text": "Se você jogar um balde de água no vaso, até funciona, mas molha o banheiro inteiro.",
+   "start": 8.02,
+   "end": 13.28,
+   "words": [
+    {
+     "w": "Se",
+     "start": 8.02,
+     "end": 8.12
+    },
+    {
+     "w": "você",
+     "start": 8.12,
+     "end": 8.32
+    },
+    {
+     "w": "jogar",
+     "start": 8.32,
+     "end": 8.64
+    },
+    {
+     "w": "um",
+     "start": 8.64,
+     "end": 8.82
+    },
+    {
+     "w": "balde",
+     "start": 8.82,
+     "end": 9.2
+    },
+    {
+     "w": "de",
+     "start": 9.2,
+     "end": 9.34
+    },
+    {
+     "w": "água",
+     "start": 9.34,
+     "end": 9.58
+    },
+    {
+     "w": "no",
+     "start": 9.58,
+     "end": 9.74
+    },
+    {
+     "w": "vaso,",
+     "start": 9.74,
+     "end": 10.2
+    },
+    {
+     "w": "até",
+     "start": 10.32,
+     "end": 10.7
+    },
+    {
+     "w": "funciona,",
+     "start": 10.7,
+     "end": 11.18
+    },
+    {
+     "w": "mas",
+     "start": 11.58,
+     "end": 11.92
+    },
+    {
+     "w": "molha",
+     "start": 11.92,
+     "end": 12.3
+    },
+    {
+     "w": "o",
+     "start": 12.3,
+     "end": 12.4
+    },
+    {
+     "w": "banheiro",
+     "start": 12.4,
+     "end": 12.8
+    },
+    {
+     "w": "inteiro.",
+     "start": 12.8,
+     "end": 13.28
+    }
+   ]
+  },
+  {
+   "text": "Então você guarda uns seis litros de água num tanque atrás do vaso.",
+   "start": 13.76,
+   "end": 17.86,
+   "words": [
+    {
+     "w": "Então",
+     "start": 13.76,
+     "end": 14.06
+    },
+    {
+     "w": "você",
+     "start": 14.2,
+     "end": 14.42
+    },
+    {
+     "w": "guarda",
+     "start": 14.42,
+     "end": 14.84
+    },
+    {
+     "w": "uns",
+     "start": 14.84,
+     "end": 14.96
+    },
+    {
+     "w": "seis",
+     "start": 14.96,
+     "end": 15.32
+    },
+    {
+     "w": "litros",
+     "start": 15.32,
+     "end": 15.74
+    },
+    {
+     "w": "de",
+     "start": 15.74,
+     "end": 15.96
+    },
+    {
+     "w": "água",
+     "start": 15.96,
+     "end": 16.22
+    },
+    {
+     "w": "num",
+     "start": 16.22,
+     "end": 16.38
+    },
+    {
+     "w": "tanque",
+     "start": 16.38,
+     "end": 16.88
+    },
+    {
+     "w": "atrás",
+     "start": 16.88,
+     "end": 17.2
+    },
+    {
+     "w": "do",
+     "start": 17.2,
+     "end": 17.44
+    },
+    {
+     "w": "vaso.",
+     "start": 17.44,
+     "end": 17.86
+    }
+   ]
+  },
+  {
+   "text": "Essa é a caixa acoplada.",
+   "start": 18.14,
+   "end": 19.96,
+   "words": [
+    {
+     "w": "Essa",
+     "start": 18.14,
+     "end": 18.5
+    },
+    {
+     "w": "é",
+     "start": 18.5,
+     "end": 18.8
+    },
+    {
+     "w": "a",
+     "start": 18.8,
+     "end": 18.9
+    },
+    {
+     "w": "caixa",
+     "start": 18.9,
+     "end": 19.32
+    },
+    {
+     "w": "acoplada.",
+     "start": 19.32,
+     "end": 19.96
+    }
+   ]
+  },
+  {
+   "text": "Mas a água precisa ficar presa lá até a hora certa.",
+   "start": 20.36,
+   "end": 23.56,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 20.36,
+     "end": 20.56
+    },
+    {
+     "w": "a",
+     "start": 20.56,
+     "end": 20.72
+    },
+    {
+     "w": "água",
+     "start": 20.72,
+     "end": 21.0
+    },
+    {
+     "w": "precisa",
+     "start": 21.0,
+     "end": 21.3
+    },
+    {
+     "w": "ficar",
+     "start": 21.3,
+     "end": 21.68
+    },
+    {
+     "w": "presa",
+     "start": 21.68,
+     "end": 22.22
+    },
+    {
+     "w": "lá",
+     "start": 22.22,
+     "end": 22.44
+    },
+    {
+     "w": "até",
+     "start": 22.44,
+     "end": 22.78
+    },
+    {
+     "w": "a",
+     "start": 22.78,
+     "end": 22.96
+    },
+    {
+     "w": "hora",
+     "start": 22.96,
+     "end": 23.12
+    },
+    {
+     "w": "certa.",
+     "start": 23.12,
+     "end": 23.56
+    }
+   ]
+  },
+  {
+   "text": "Então você tampa o furo do fundo com uma borracha que levanta quando você aperta o botão.",
+   "start": 23.92,
+   "end": 29.34,
+   "words": [
+    {
+     "w": "Então",
+     "start": 23.92,
+     "end": 24.24
+    },
+    {
+     "w": "você",
+     "start": 24.5,
+     "end": 24.6
+    },
+    {
+     "w": "tampa",
+     "start": 24.6,
+     "end": 25.14
+    },
+    {
+     "w": "o",
+     "start": 25.14,
+     "end": 25.32
+    },
+    {
+     "w": "furo",
+     "start": 25.32,
+     "end": 25.54
+    },
+    {
+     "w": "do",
+     "start": 25.54,
+     "end": 25.7
+    },
+    {
+     "w": "fundo",
+     "start": 25.7,
+     "end": 26.08
+    },
+    {
+     "w": "com",
+     "start": 26.08,
+     "end": 26.32
+    },
+    {
+     "w": "uma",
+     "start": 26.32,
+     "end": 26.52
+    },
+    {
+     "w": "borracha",
+     "start": 26.52,
+     "end": 27.0
+    },
+    {
+     "w": "que",
+     "start": 27.0,
+     "end": 27.4
+    },
+    {
+     "w": "levanta",
+     "start": 27.4,
+     "end": 28.0
+    },
+    {
+     "w": "quando",
+     "start": 28.0,
+     "end": 28.2
+    },
+    {
+     "w": "você",
+     "start": 28.2,
+     "end": 28.48
+    },
+    {
+     "w": "aperta",
+     "start": 28.48,
+     "end": 28.92
+    },
+    {
+     "w": "o",
+     "start": 28.92,
+     "end": 29.0
+    },
+    {
+     "w": "botão.",
+     "start": 29.0,
+     "end": 29.34
+    }
+   ]
+  },
+  {
+   "text": "Essa é a válvula.",
+   "start": 29.34,
+   "end": 30.96,
+   "words": [
+    {
+     "w": "Essa",
+     "start": 29.34,
+     "end": 30.0
+    },
+    {
+     "w": "é",
+     "start": 30.0,
+     "end": 30.34
+    },
+    {
+     "w": "a",
+     "start": 30.34,
+     "end": 30.42
+    },
+    {
+     "w": "válvula.",
+     "start": 30.42,
+     "end": 30.96
+    }
+   ]
+  },
+  {
+   "text": "Mas depois alguém precisa encher a caixa de novo, e parar na hora certa.",
+   "start": 31.26,
+   "end": 35.74,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 31.26,
+     "end": 31.5
+    },
+    {
+     "w": "depois",
+     "start": 31.5,
+     "end": 31.88
+    },
+    {
+     "w": "alguém",
+     "start": 31.88,
+     "end": 32.38
+    },
+    {
+     "w": "precisa",
+     "start": 32.38,
+     "end": 32.7
+    },
+    {
+     "w": "encher",
+     "start": 32.7,
+     "end": 33.16
+    },
+    {
+     "w": "a",
+     "start": 33.16,
+     "end": 33.36
+    },
+    {
+     "w": "caixa",
+     "start": 33.36,
+     "end": 33.64
+    },
+    {
+     "w": "de",
+     "start": 33.64,
+     "end": 33.8
+    },
+    {
+     "w": "novo,",
+     "start": 33.8,
+     "end": 34.08
+    },
+    {
+     "w": "e",
+     "start": 34.08,
+     "end": 34.54
+    },
+    {
+     "w": "parar",
+     "start": 34.54,
+     "end": 34.84
+    },
+    {
+     "w": "na",
+     "start": 34.84,
+     "end": 35.1
+    },
+    {
+     "w": "hora",
+     "start": 35.1,
+     "end": 35.34
+    },
+    {
+     "w": "certa.",
+     "start": 35.34,
+     "end": 35.74
+    }
+   ]
+  },
+  {
+   "text": "Então você coloca uma peça que flutua: a água sobe, ela sobe junto e fecha a entrada sozinha.",
+   "start": 36.14,
+   "end": 42.9,
+   "words": [
+    {
+     "w": "Então",
+     "start": 36.14,
+     "end": 36.46
+    },
+    {
+     "w": "você",
+     "start": 36.54,
+     "end": 36.78
+    },
+    {
+     "w": "coloca",
+     "start": 36.78,
+     "end": 37.08
+    },
+    {
+     "w": "uma",
+     "start": 37.08,
+     "end": 37.36
+    },
+    {
+     "w": "peça",
+     "start": 37.36,
+     "end": 37.72
+    },
+    {
+     "w": "que",
+     "start": 37.72,
+     "end": 37.88
+    },
+    {
+     "w": "flutua:",
+     "start": 37.88,
+     "end": 38.46
+    },
+    {
+     "w": "a",
+     "start": 38.88,
+     "end": 38.96
+    },
+    {
+     "w": "água",
+     "start": 38.96,
+     "end": 39.2
+    },
+    {
+     "w": "sobe,",
+     "start": 39.2,
+     "end": 39.68
+    },
+    {
+     "w": "ela",
+     "start": 40.0,
+     "end": 40.14
+    },
+    {
+     "w": "sobe",
+     "start": 40.14,
+     "end": 40.48
+    },
+    {
+     "w": "junto",
+     "start": 40.48,
+     "end": 40.8
+    },
+    {
+     "w": "e",
+     "start": 40.8,
+     "end": 41.32
+    },
+    {
+     "w": "fecha",
+     "start": 41.32,
+     "end": 41.78
+    },
+    {
+     "w": "a",
+     "start": 41.78,
+     "end": 41.9
+    },
+    {
+     "w": "entrada",
+     "start": 41.9,
+     "end": 42.24
+    },
+    {
+     "w": "sozinha.",
+     "start": 42.24,
+     "end": 42.9
+    }
+   ]
+  },
+  {
+   "text": "Essa é a boia.",
+   "start": 43.3,
+   "end": 44.48,
+   "words": [
+    {
+     "w": "Essa",
+     "start": 43.3,
+     "end": 43.66
+    },
+    {
+     "w": "é",
+     "start": 43.66,
+     "end": 43.96
+    },
+    {
+     "w": "a",
+     "start": 43.96,
+     "end": 44.08
+    },
+    {
+     "w": "boia.",
+     "start": 44.08,
+     "end": 44.48
+    }
+   ]
+  },
+  {
+   "text": "Por isso que, quando a boia emperra, a caixa fica escorrendo sem parar.",
+   "start": 44.86,
+   "end": 49.04,
+   "words": [
+    {
+     "w": "Por",
+     "start": 44.86,
+     "end": 45.06
+    },
+    {
+     "w": "isso",
+     "start": 45.06,
+     "end": 45.3
+    },
+    {
+     "w": "que,",
+     "start": 45.3,
+     "end": 45.54
+    },
+    {
+     "w": "quando",
+     "start": 45.82,
+     "end": 45.88
+    },
+    {
+     "w": "a",
+     "start": 45.88,
+     "end": 46.04
+    },
+    {
+     "w": "boia",
+     "start": 46.04,
+     "end": 46.32
+    },
+    {
+     "w": "emperra,",
+     "start": 46.32,
+     "end": 46.86
+    },
+    {
+     "w": "a",
+     "start": 47.16,
+     "end": 47.26
+    },
+    {
+     "w": "caixa",
+     "start": 47.26,
+     "end": 47.54
+    },
+    {
+     "w": "fica",
+     "start": 47.54,
+     "end": 47.76
+    },
+    {
+     "w": "escorrendo",
+     "start": 47.76,
+     "end": 48.34
+    },
+    {
+     "w": "sem",
+     "start": 48.34,
+     "end": 48.68
+    },
+    {
+     "w": "parar.",
+     "start": 48.68,
+     "end": 49.04
+    }
+   ]
+  },
+  {
+   "text": "Mas, se o vaso for ligado direto no cano, o cheiro do esgoto sobe todinho.",
+   "start": 49.5,
+   "end": 54.68,
+   "words": [
+    {
+     "w": "Mas,",
+     "start": 49.5,
+     "end": 49.8
+    },
+    {
+     "w": "se",
+     "start": 50.02,
+     "end": 50.2
+    },
+    {
+     "w": "o",
+     "start": 50.2,
+     "end": 50.28
+    },
+    {
+     "w": "vaso",
+     "start": 50.28,
+     "end": 50.6
+    },
+    {
+     "w": "for",
+     "start": 50.6,
+     "end": 50.76
+    },
+    {
+     "w": "ligado",
+     "start": 50.76,
+     "end": 51.14
+    },
+    {
+     "w": "direto",
+     "start": 51.14,
+     "end": 51.68
+    },
+    {
+     "w": "no",
+     "start": 51.68,
+     "end": 51.82
+    },
+    {
+     "w": "cano,",
+     "start": 51.82,
+     "end": 52.18
+    },
+    {
+     "w": "o",
+     "start": 52.46,
+     "end": 52.52
+    },
+    {
+     "w": "cheiro",
+     "start": 52.52,
+     "end": 52.94
+    },
+    {
+     "w": "do",
+     "start": 52.94,
+     "end": 53.08
+    },
+    {
+     "w": "esgoto",
+     "start": 53.08,
+     "end": 53.42
+    },
+    {
+     "w": "sobe",
+     "start": 53.42,
+     "end": 53.9
+    },
+    {
+     "w": "todinho.",
+     "start": 53.9,
+     "end": 54.68
+    }
+   ]
+  },
+  {
+   "text": "Então você faz uma curva no cano, que sempre fica com água parada no fundo.",
+   "start": 54.68,
+   "end": 59.72,
+   "words": [
+    {
+     "w": "Então",
+     "start": 54.68,
+     "end": 55.34
+    },
+    {
+     "w": "você",
+     "start": 55.5,
+     "end": 55.74
+    },
+    {
+     "w": "faz",
+     "start": 55.74,
+     "end": 55.96
+    },
+    {
+     "w": "uma",
+     "start": 55.96,
+     "end": 56.18
+    },
+    {
+     "w": "curva",
+     "start": 56.18,
+     "end": 56.66
+    },
+    {
+     "w": "no",
+     "start": 56.66,
+     "end": 56.8
+    },
+    {
+     "w": "cano,",
+     "start": 56.8,
+     "end": 57.2
+    },
+    {
+     "w": "que",
+     "start": 57.2,
+     "end": 57.46
+    },
+    {
+     "w": "sempre",
+     "start": 57.46,
+     "end": 57.84
+    },
+    {
+     "w": "fica",
+     "start": 57.84,
+     "end": 58.26
+    },
+    {
+     "w": "com",
+     "start": 58.26,
+     "end": 58.44
+    },
+    {
+     "w": "água",
+     "start": 58.44,
+     "end": 58.72
+    },
+    {
+     "w": "parada",
+     "start": 58.72,
+     "end": 59.24
+    },
+    {
+     "w": "no",
+     "start": 59.24,
+     "end": 59.4
+    },
+    {
+     "w": "fundo.",
+     "start": 59.4,
+     "end": 59.72
+    }
+   ]
+  },
+  {
+   "text": "Esse é o sifão.",
+   "start": 60.12,
+   "end": 61.28,
+   "words": [
+    {
+     "w": "Esse",
+     "start": 60.12,
+     "end": 60.46
+    },
+    {
+     "w": "é",
+     "start": 60.46,
+     "end": 60.74
+    },
+    {
+     "w": "o",
+     "start": 60.74,
+     "end": 60.82
+    },
+    {
+     "w": "sifão.",
+     "start": 60.82,
+     "end": 61.28
+    }
+   ]
+  },
+  {
+   "text": "Parece estranho, mas é essa água parada que tampa o cheiro.",
+   "start": 61.64,
+   "end": 65.38,
+   "words": [
+    {
+     "w": "Parece",
+     "start": 61.64,
+     "end": 61.9
+    },
+    {
+     "w": "estranho,",
+     "start": 61.9,
+     "end": 62.56
+    },
+    {
+     "w": "mas",
+     "start": 62.74,
+     "end": 62.92
+    },
+    {
+     "w": "é",
+     "start": 62.92,
+     "end": 63.14
+    },
+    {
+     "w": "essa",
+     "start": 63.14,
+     "end": 63.44
+    },
+    {
+     "w": "água",
+     "start": 63.64,
+     "end": 63.74
+    },
+    {
+     "w": "parada",
+     "start": 63.74,
+     "end": 64.28
+    },
+    {
+     "w": "que",
+     "start": 64.28,
+     "end": 64.48
+    },
+    {
+     "w": "tampa",
+     "start": 64.48,
+     "end": 64.94
+    },
+    {
+     "w": "o",
+     "start": 64.94,
+     "end": 65.06
+    },
+    {
+     "w": "cheiro.",
+     "start": 65.06,
+     "end": 65.38
+    }
+   ]
+  },
+  {
+   "text": "E quando a descarga enche a curva de uma vez, ela puxa tudo pra baixo, com aquele glup.",
+   "start": 65.72,
+   "end": 71.76,
+   "words": [
+    {
+     "w": "E",
+     "start": 65.72,
+     "end": 65.8
+    },
+    {
+     "w": "quando",
+     "start": 65.86,
+     "end": 65.98
+    },
+    {
+     "w": "a",
+     "start": 65.98,
+     "end": 66.1
+    },
+    {
+     "w": "descarga",
+     "start": 66.1,
+     "end": 66.6
+    },
+    {
+     "w": "enche",
+     "start": 66.6,
+     "end": 67.0
+    },
+    {
+     "w": "a",
+     "start": 67.0,
+     "end": 67.12
+    },
+    {
+     "w": "curva",
+     "start": 67.12,
+     "end": 67.44
+    },
+    {
+     "w": "de",
+     "start": 67.44,
+     "end": 67.6
+    },
+    {
+     "w": "uma",
+     "start": 67.6,
+     "end": 67.74
+    },
+    {
+     "w": "vez,",
+     "start": 67.74,
+     "end": 68.1
+    },
+    {
+     "w": "ela",
+     "start": 68.44,
+     "end": 68.54
+    },
+    {
+     "w": "puxa",
+     "start": 68.54,
+     "end": 68.92
+    },
+    {
+     "w": "tudo",
+     "start": 68.92,
+     "end": 69.32
+    },
+    {
+     "w": "pra",
+     "start": 69.32,
+     "end": 69.58
+    },
+    {
+     "w": "baixo,",
+     "start": 69.58,
+     "end": 69.94
+    },
+    {
+     "w": "com",
+     "start": 70.04,
+     "end": 70.3
+    },
+    {
+     "w": "aquele",
+     "start": 70.3,
+     "end": 70.6
+    },
+    {
+     "w": "glup.",
+     "start": 70.6,
+     "end": 71.76
+    }
+   ]
+  },
+  {
+   "text": "Mas cuidado: com a tampa aberta, as gotinhas da descarga podem subir até um metro e meio.",
+   "start": 71.76,
+   "end": 77.14,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 71.76,
+     "end": 72.0
+    },
+    {
+     "w": "cuidado:",
+     "start": 72.04,
+     "end": 72.26
+    },
+    {
+     "w": "com",
+     "start": 72.8,
+     "end": 72.92
+    },
+    {
+     "w": "a",
+     "start": 72.92,
+     "end": 73.02
+    },
+    {
+     "w": "tampa",
+     "start": 73.02,
+     "end": 73.34
+    },
+    {
+     "w": "aberta,",
+     "start": 73.34,
+     "end": 73.74
+    },
+    {
+     "w": "as",
+     "start": 74.1,
+     "end": 74.12
+    },
+    {
+     "w": "gotinhas",
+     "start": 74.12,
+     "end": 74.6
+    },
+    {
+     "w": "da",
+     "start": 74.6,
+     "end": 74.8
+    },
+    {
+     "w": "descarga",
+     "start": 74.8,
+     "end": 75.32
+    },
+    {
+     "w": "podem",
+     "start": 75.32,
+     "end": 75.6
+    },
+    {
+     "w": "subir",
+     "start": 75.6,
+     "end": 75.94
+    },
+    {
+     "w": "até",
+     "start": 75.94,
+     "end": 76.2
+    },
+    {
+     "w": "um",
+     "start": 76.2,
+     "end": 76.42
+    },
+    {
+     "w": "metro",
+     "start": 76.42,
+     "end": 76.72
+    },
+    {
+     "w": "e",
+     "start": 76.72,
+     "end": 76.9
+    },
+    {
+     "w": "meio.",
+     "start": 76.9,
+     "end": 77.14
+    }
+   ]
+  },
+  {
+   "text": "Parabéns, você construiu uma descarga.",
+   "start": 77.74,
+   "end": 80.24,
+   "words": [
+    {
+     "w": "Parabéns,",
+     "start": 77.74,
+     "end": 78.3
+    },
+    {
+     "w": "você",
+     "start": 78.54,
+     "end": 78.74
+    },
+    {
+     "w": "construiu",
+     "start": 78.74,
+     "end": 79.5
+    },
+    {
+     "w": "uma",
+     "start": 79.5,
+     "end": 79.66
+    },
+    {
+     "w": "descarga.",
+     "start": 79.66,
+     "end": 80.24
+    }
+   ]
+  },
+  {
+   "text": "Segue a página, e fecha a tampa.",
+   "start": 80.58,
+   "end": 82.54,
+   "words": [
+    {
+     "w": "Segue",
+     "start": 80.58,
+     "end": 80.88
+    },
+    {
+     "w": "a",
+     "start": 80.88,
+     "end": 81.0
+    },
+    {
+     "w": "página,",
+     "start": 81.0,
+     "end": 81.32
+    },
+    {
+     "w": "e",
+     "start": 81.32,
+     "end": 81.74
+    },
+    {
+     "w": "fecha",
+     "start": 81.74,
+     "end": 82.1
+    },
+    {
+     "w": "a",
+     "start": 82.1,
+     "end": 82.24
+    },
+    {
+     "w": "tampa.",
+     "start": 82.24,
+     "end": 82.54
+    }
+   ]
+  }
+ ]
+}
