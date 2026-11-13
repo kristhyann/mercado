@@ -1,0 +1,1128 @@
+{
+ "duration": 79.802,
+ "sentences": [
+  {
+   "text": "Você vive uma semana sem cabeça.",
+   "start": 0.0,
+   "end": 2.48,
+   "words": [
+    {
+     "w": "Você",
+     "start": 0.0,
+     "end": 0.34
+    },
+    {
+     "w": "vive",
+     "start": 0.34,
+     "end": 0.56
+    },
+    {
+     "w": "uma",
+     "start": 0.56,
+     "end": 0.84
+    },
+    {
+     "w": "semana",
+     "start": 0.84,
+     "end": 1.5
+    },
+    {
+     "w": "sem",
+     "start": 1.5,
+     "end": 1.86
+    },
+    {
+     "w": "cabeça.",
+     "start": 1.86,
+     "end": 2.48
+    }
+   ]
+  },
+  {
+   "text": "Calma, não é filme de terror.",
+   "start": 2.92,
+   "end": 4.84,
+   "words": [
+    {
+     "w": "Calma,",
+     "start": 2.92,
+     "end": 3.48
+    },
+    {
+     "w": "não",
+     "start": 3.78,
+     "end": 3.96
+    },
+    {
+     "w": "é",
+     "start": 3.96,
+     "end": 4.2
+    },
+    {
+     "w": "filme",
+     "start": 4.2,
+     "end": 4.42
+    },
+    {
+     "w": "de",
+     "start": 4.42,
+     "end": 4.56
+    },
+    {
+     "w": "terror.",
+     "start": 4.56,
+     "end": 4.84
+    }
+   ]
+  },
+  {
+   "text": "Você é uma barata.",
+   "start": 5.32,
+   "end": 6.98,
+   "words": [
+    {
+     "w": "Você",
+     "start": 5.32,
+     "end": 5.74
+    },
+    {
+     "w": "é",
+     "start": 5.74,
+     "end": 6.12
+    },
+    {
+     "w": "uma",
+     "start": 6.12,
+     "end": 6.3
+    },
+    {
+     "w": "barata.",
+     "start": 6.3,
+     "end": 6.98
+    }
+   ]
+  },
+  {
+   "text": "Primeiro: como você respira sem cabeça?",
+   "start": 7.58,
+   "end": 10.14,
+   "words": [
+    {
+     "w": "Primeiro:",
+     "start": 7.58,
+     "end": 8.04
+    },
+    {
+     "w": "como",
+     "start": 8.38,
+     "end": 8.58
+    },
+    {
+     "w": "você",
+     "start": 8.58,
+     "end": 8.9
+    },
+    {
+     "w": "respira",
+     "start": 8.9,
+     "end": 9.48
+    },
+    {
+     "w": "sem",
+     "start": 9.48,
+     "end": 9.66
+    },
+    {
+     "w": "cabeça?",
+     "start": 9.66,
+     "end": 10.14
+    }
+   ]
+  },
+  {
+   "text": "Você não respira pela boca nem pelo nariz.",
+   "start": 10.56,
+   "end": 13.1,
+   "words": [
+    {
+     "w": "Você",
+     "start": 10.56,
+     "end": 10.78
+    },
+    {
+     "w": "não",
+     "start": 10.78,
+     "end": 10.94
+    },
+    {
+     "w": "respira",
+     "start": 10.94,
+     "end": 11.38
+    },
+    {
+     "w": "pela",
+     "start": 11.38,
+     "end": 11.58
+    },
+    {
+     "w": "boca",
+     "start": 11.58,
+     "end": 12.02
+    },
+    {
+     "w": "nem",
+     "start": 12.02,
+     "end": 12.4
+    },
+    {
+     "w": "pelo",
+     "start": 12.4,
+     "end": 12.64
+    },
+    {
+     "w": "nariz.",
+     "start": 12.64,
+     "end": 13.1
+    }
+   ]
+  },
+  {
+   "text": "Você tem furinhos espalhados pelo corpo, e o ar entra direto por eles.",
+   "start": 13.44,
+   "end": 18.06,
+   "words": [
+    {
+     "w": "Você",
+     "start": 13.44,
+     "end": 13.68
+    },
+    {
+     "w": "tem",
+     "start": 13.68,
+     "end": 13.88
+    },
+    {
+     "w": "furinhos",
+     "start": 13.88,
+     "end": 14.4
+    },
+    {
+     "w": "espalhados",
+     "start": 14.4,
+     "end": 15.16
+    },
+    {
+     "w": "pelo",
+     "start": 15.16,
+     "end": 15.42
+    },
+    {
+     "w": "corpo,",
+     "start": 15.42,
+     "end": 15.82
+    },
+    {
+     "w": "e",
+     "start": 15.82,
+     "end": 16.28
+    },
+    {
+     "w": "o",
+     "start": 16.28,
+     "end": 16.42
+    },
+    {
+     "w": "ar",
+     "start": 16.42,
+     "end": 16.62
+    },
+    {
+     "w": "entra",
+     "start": 16.62,
+     "end": 17.04
+    },
+    {
+     "w": "direto",
+     "start": 17.04,
+     "end": 17.6
+    },
+    {
+     "w": "por",
+     "start": 17.6,
+     "end": 17.84
+    },
+    {
+     "w": "eles.",
+     "start": 17.84,
+     "end": 18.06
+    }
+   ]
+  },
+  {
+   "text": "E ainda consegue prender a respiração por uns quarenta minutos.",
+   "start": 18.06,
+   "end": 21.88,
+   "words": [
+    {
+     "w": "E",
+     "start": 18.06,
+     "end": 18.62
+    },
+    {
+     "w": "ainda",
+     "start": 18.62,
+     "end": 18.84
+    },
+    {
+     "w": "consegue",
+     "start": 18.84,
+     "end": 19.32
+    },
+    {
+     "w": "prender",
+     "start": 19.32,
+     "end": 19.88
+    },
+    {
+     "w": "a",
+     "start": 19.88,
+     "end": 19.98
+    },
+    {
+     "w": "respiração",
+     "start": 19.98,
+     "end": 20.62
+    },
+    {
+     "w": "por",
+     "start": 20.62,
+     "end": 20.78
+    },
+    {
+     "w": "uns",
+     "start": 20.78,
+     "end": 20.96
+    },
+    {
+     "w": "quarenta",
+     "start": 20.96,
+     "end": 21.32
+    },
+    {
+     "w": "minutos.",
+     "start": 21.32,
+     "end": 21.88
+    }
+   ]
+  },
+  {
+   "text": "Mas e o sangue? Sem cabeça, não ia sair tudo?",
+   "start": 22.38,
+   "end": 25.64,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 22.38,
+     "end": 22.76
+    },
+    {
+     "w": "e",
+     "start": 22.76,
+     "end": 23.18
+    },
+    {
+     "w": "o",
+     "start": 23.18,
+     "end": 23.28
+    },
+    {
+     "w": "sangue?",
+     "start": 23.28,
+     "end": 23.7
+    },
+    {
+     "w": "Sem",
+     "start": 24.04,
+     "end": 24.2
+    },
+    {
+     "w": "cabeça,",
+     "start": 24.2,
+     "end": 24.64
+    },
+    {
+     "w": "não",
+     "start": 24.86,
+     "end": 25.0
+    },
+    {
+     "w": "ia",
+     "start": 25.0,
+     "end": 25.14
+    },
+    {
+     "w": "sair",
+     "start": 25.14,
+     "end": 25.34
+    },
+    {
+     "w": "tudo?",
+     "start": 25.34,
+     "end": 25.64
+    }
+   ]
+  },
+  {
+   "text": "Não. Seu sangue corre devagar, e o machucado fecha rapidinho.",
+   "start": 26.1,
+   "end": 30.74,
+   "words": [
+    {
+     "w": "Não.",
+     "start": 26.1,
+     "end": 26.48
+    },
+    {
+     "w": "Seu",
+     "start": 26.94,
+     "end": 27.12
+    },
+    {
+     "w": "sangue",
+     "start": 27.12,
+     "end": 27.62
+    },
+    {
+     "w": "corre",
+     "start": 27.62,
+     "end": 27.9
+    },
+    {
+     "w": "devagar,",
+     "start": 27.9,
+     "end": 28.48
+    },
+    {
+     "w": "e",
+     "start": 28.48,
+     "end": 28.96
+    },
+    {
+     "w": "o",
+     "start": 28.96,
+     "end": 29.04
+    },
+    {
+     "w": "machucado",
+     "start": 29.04,
+     "end": 29.56
+    },
+    {
+     "w": "fecha",
+     "start": 29.56,
+     "end": 29.98
+    },
+    {
+     "w": "rapidinho.",
+     "start": 29.98,
+     "end": 30.74
+    }
+   ]
+  },
+  {
+   "text": "E boa parte dos seus comandos fica espalhada pelo corpo, não só na cabeça.",
+   "start": 31.12,
+   "end": 35.6,
+   "words": [
+    {
+     "w": "E",
+     "start": 31.12,
+     "end": 31.18
+    },
+    {
+     "w": "boa",
+     "start": 31.18,
+     "end": 31.5
+    },
+    {
+     "w": "parte",
+     "start": 31.5,
+     "end": 31.88
+    },
+    {
+     "w": "dos",
+     "start": 31.88,
+     "end": 32.1
+    },
+    {
+     "w": "seus",
+     "start": 32.1,
+     "end": 32.22
+    },
+    {
+     "w": "comandos",
+     "start": 32.22,
+     "end": 32.84
+    },
+    {
+     "w": "fica",
+     "start": 32.84,
+     "end": 33.18
+    },
+    {
+     "w": "espalhada",
+     "start": 33.18,
+     "end": 33.78
+    },
+    {
+     "w": "pelo",
+     "start": 33.78,
+     "end": 33.98
+    },
+    {
+     "w": "corpo,",
+     "start": 33.98,
+     "end": 34.42
+    },
+    {
+     "w": "não",
+     "start": 34.66,
+     "end": 34.82
+    },
+    {
+     "w": "só",
+     "start": 34.82,
+     "end": 35.08
+    },
+    {
+     "w": "na",
+     "start": 35.08,
+     "end": 35.2
+    },
+    {
+     "w": "cabeça.",
+     "start": 35.2,
+     "end": 35.6
+    }
+   ]
+  },
+  {
+   "text": "Então você continua andando por aí, numa boa.",
+   "start": 35.98,
+   "end": 38.86,
+   "words": [
+    {
+     "w": "Então",
+     "start": 35.98,
+     "end": 36.28
+    },
+    {
+     "w": "você",
+     "start": 36.38,
+     "end": 36.62
+    },
+    {
+     "w": "continua",
+     "start": 36.62,
+     "end": 37.1
+    },
+    {
+     "w": "andando",
+     "start": 37.1,
+     "end": 37.52
+    },
+    {
+     "w": "por",
+     "start": 37.52,
+     "end": 37.72
+    },
+    {
+     "w": "aí,",
+     "start": 37.72,
+     "end": 37.98
+    },
+    {
+     "w": "numa",
+     "start": 38.16,
+     "end": 38.46
+    },
+    {
+     "w": "boa.",
+     "start": 38.46,
+     "end": 38.86
+    }
+   ]
+  },
+  {
+   "text": "Parece estranho, mas o que te derruba no fim não é o machucado: é a sede. Sem boca, você não consegue beber água.",
+   "start": 39.28,
+   "end": 47.18,
+   "words": [
+    {
+     "w": "Parece",
+     "start": 39.28,
+     "end": 39.54
+    },
+    {
+     "w": "estranho,",
+     "start": 39.54,
+     "end": 40.2
+    },
+    {
+     "w": "mas",
+     "start": 40.44,
+     "end": 40.58
+    },
+    {
+     "w": "o",
+     "start": 40.58,
+     "end": 40.72
+    },
+    {
+     "w": "que",
+     "start": 40.72,
+     "end": 40.8
+    },
+    {
+     "w": "te",
+     "start": 40.8,
+     "end": 40.92
+    },
+    {
+     "w": "derruba",
+     "start": 40.92,
+     "end": 41.38
+    },
+    {
+     "w": "no",
+     "start": 41.38,
+     "end": 41.52
+    },
+    {
+     "w": "fim",
+     "start": 41.52,
+     "end": 41.8
+    },
+    {
+     "w": "não",
+     "start": 41.8,
+     "end": 42.2
+    },
+    {
+     "w": "é",
+     "start": 42.2,
+     "end": 42.42
+    },
+    {
+     "w": "o",
+     "start": 42.42,
+     "end": 42.5
+    },
+    {
+     "w": "machucado:",
+     "start": 42.5,
+     "end": 43.06
+    },
+    {
+     "w": "é",
+     "start": 43.42,
+     "end": 43.58
+    },
+    {
+     "w": "a",
+     "start": 43.58,
+     "end": 43.66
+    },
+    {
+     "w": "sede.",
+     "start": 43.66,
+     "end": 44.18
+    },
+    {
+     "w": "Sem",
+     "start": 44.66,
+     "end": 44.88
+    },
+    {
+     "w": "boca,",
+     "start": 44.88,
+     "end": 45.24
+    },
+    {
+     "w": "você",
+     "start": 45.48,
+     "end": 45.72
+    },
+    {
+     "w": "não",
+     "start": 45.72,
+     "end": 46.02
+    },
+    {
+     "w": "consegue",
+     "start": 46.02,
+     "end": 46.56
+    },
+    {
+     "w": "beber",
+     "start": 46.56,
+     "end": 46.78
+    },
+    {
+     "w": "água.",
+     "start": 46.78,
+     "end": 47.18
+    }
+   ]
+  },
+  {
+   "text": "Agora, a velocidade.",
+   "start": 47.68,
+   "end": 48.98,
+   "words": [
+    {
+     "w": "Agora,",
+     "start": 47.68,
+     "end": 48.0
+    },
+    {
+     "w": "a",
+     "start": 48.34,
+     "end": 48.4
+    },
+    {
+     "w": "velocidade.",
+     "start": 48.4,
+     "end": 48.98
+    }
+   ]
+  },
+  {
+   "text": "Você corre mais de um metro por segundo e passa por uma fresta de três milímetros.",
+   "start": 49.54,
+   "end": 54.66,
+   "words": [
+    {
+     "w": "Você",
+     "start": 49.54,
+     "end": 49.84
+    },
+    {
+     "w": "corre",
+     "start": 49.84,
+     "end": 50.2
+    },
+    {
+     "w": "mais",
+     "start": 50.2,
+     "end": 50.48
+    },
+    {
+     "w": "de",
+     "start": 50.48,
+     "end": 50.7
+    },
+    {
+     "w": "um",
+     "start": 50.7,
+     "end": 50.84
+    },
+    {
+     "w": "metro",
+     "start": 50.84,
+     "end": 51.18
+    },
+    {
+     "w": "por",
+     "start": 51.18,
+     "end": 51.42
+    },
+    {
+     "w": "segundo",
+     "start": 51.42,
+     "end": 51.9
+    },
+    {
+     "w": "e",
+     "start": 51.9,
+     "end": 52.32
+    },
+    {
+     "w": "passa",
+     "start": 52.32,
+     "end": 52.58
+    },
+    {
+     "w": "por",
+     "start": 52.58,
+     "end": 52.8
+    },
+    {
+     "w": "uma",
+     "start": 52.8,
+     "end": 52.94
+    },
+    {
+     "w": "fresta",
+     "start": 52.94,
+     "end": 53.4
+    },
+    {
+     "w": "de",
+     "start": 53.4,
+     "end": 53.56
+    },
+    {
+     "w": "três",
+     "start": 53.56,
+     "end": 53.98
+    },
+    {
+     "w": "milímetros.",
+     "start": 53.98,
+     "end": 54.66
+    }
+   ]
+  },
+  {
+   "text": "E tem mais: você existe há mais de trezentos milhões de anos.",
+   "start": 55.24,
+   "end": 59.68,
+   "words": [
+    {
+     "w": "E",
+     "start": 55.24,
+     "end": 55.32
+    },
+    {
+     "w": "tem",
+     "start": 55.32,
+     "end": 55.42
+    },
+    {
+     "w": "mais:",
+     "start": 55.42,
+     "end": 55.72
+    },
+    {
+     "w": "você",
+     "start": 56.16,
+     "end": 56.4
+    },
+    {
+     "w": "existe",
+     "start": 56.4,
+     "end": 56.94
+    },
+    {
+     "w": "há",
+     "start": 56.94,
+     "end": 57.24
+    },
+    {
+     "w": "mais",
+     "start": 57.24,
+     "end": 57.46
+    },
+    {
+     "w": "de",
+     "start": 57.46,
+     "end": 57.68
+    },
+    {
+     "w": "trezentos",
+     "start": 57.68,
+     "end": 58.22
+    },
+    {
+     "w": "milhões",
+     "start": 58.22,
+     "end": 58.96
+    },
+    {
+     "w": "de",
+     "start": 58.96,
+     "end": 59.36
+    },
+    {
+     "w": "anos.",
+     "start": 59.36,
+     "end": 59.68
+    }
+   ]
+  },
+  {
+   "text": "Antes dos dinossauros, você já estava aqui.",
+   "start": 60.1,
+   "end": 62.92,
+   "words": [
+    {
+     "w": "Antes",
+     "start": 60.1,
+     "end": 60.44
+    },
+    {
+     "w": "dos",
+     "start": 60.44,
+     "end": 60.68
+    },
+    {
+     "w": "dinossauros,",
+     "start": 60.68,
+     "end": 61.5
+    },
+    {
+     "w": "você",
+     "start": 61.76,
+     "end": 62.06
+    },
+    {
+     "w": "já",
+     "start": 62.06,
+     "end": 62.32
+    },
+    {
+     "w": "estava",
+     "start": 62.32,
+     "end": 62.64
+    },
+    {
+     "w": "aqui.",
+     "start": 62.64,
+     "end": 62.92
+    }
+   ]
+  },
+  {
+   "text": "Por isso que é tão difícil se livrar de você: você sobreviveu a quase tudo que aconteceu no planeta.",
+   "start": 63.38,
+   "end": 69.16,
+   "words": [
+    {
+     "w": "Por",
+     "start": 63.38,
+     "end": 63.48
+    },
+    {
+     "w": "isso",
+     "start": 63.48,
+     "end": 63.7
+    },
+    {
+     "w": "que",
+     "start": 63.7,
+     "end": 63.86
+    },
+    {
+     "w": "é",
+     "start": 63.86,
+     "end": 63.96
+    },
+    {
+     "w": "tão",
+     "start": 63.96,
+     "end": 64.24
+    },
+    {
+     "w": "difícil",
+     "start": 64.24,
+     "end": 64.68
+    },
+    {
+     "w": "se",
+     "start": 64.68,
+     "end": 65.0
+    },
+    {
+     "w": "livrar",
+     "start": 65.0,
+     "end": 65.3
+    },
+    {
+     "w": "de",
+     "start": 65.3,
+     "end": 65.44
+    },
+    {
+     "w": "você:",
+     "start": 65.44,
+     "end": 65.74
+    },
+    {
+     "w": "você",
+     "start": 66.12,
+     "end": 66.32
+    },
+    {
+     "w": "sobreviveu",
+     "start": 66.32,
+     "end": 67.08
+    },
+    {
+     "w": "a",
+     "start": 67.08,
+     "end": 67.16
+    },
+    {
+     "w": "quase",
+     "start": 67.16,
+     "end": 67.46
+    },
+    {
+     "w": "tudo",
+     "start": 67.46,
+     "end": 67.92
+    },
+    {
+     "w": "que",
+     "start": 68.12,
+     "end": 68.16
+    },
+    {
+     "w": "aconteceu",
+     "start": 68.16,
+     "end": 68.64
+    },
+    {
+     "w": "no",
+     "start": 68.64,
+     "end": 68.84
+    },
+    {
+     "w": "planeta.",
+     "start": 68.84,
+     "end": 69.16
+    }
+   ]
+  },
+  {
+   "text": "Então, quando vir uma barata, respeita: ela é mais velha que os dinossauros.",
+   "start": 69.68,
+   "end": 74.84,
+   "words": [
+    {
+     "w": "Então,",
+     "start": 69.68,
+     "end": 70.0
+    },
+    {
+     "w": "quando",
+     "start": 70.26,
+     "end": 70.44
+    },
+    {
+     "w": "vir",
+     "start": 70.44,
+     "end": 70.8
+    },
+    {
+     "w": "uma",
+     "start": 70.8,
+     "end": 70.98
+    },
+    {
+     "w": "barata,",
+     "start": 70.98,
+     "end": 71.48
+    },
+    {
+     "w": "respeita:",
+     "start": 71.8,
+     "end": 72.4
+    },
+    {
+     "w": "ela",
+     "start": 72.72,
+     "end": 72.86
+    },
+    {
+     "w": "é",
+     "start": 72.86,
+     "end": 72.98
+    },
+    {
+     "w": "mais",
+     "start": 72.98,
+     "end": 73.24
+    },
+    {
+     "w": "velha",
+     "start": 73.24,
+     "end": 73.78
+    },
+    {
+     "w": "que",
+     "start": 73.78,
+     "end": 73.9
+    },
+    {
+     "w": "os",
+     "start": 73.9,
+     "end": 74.02
+    },
+    {
+     "w": "dinossauros.",
+     "start": 74.02,
+     "end": 74.84
+    }
+   ]
+  },
+  {
+   "text": "Segue a página, senão ela aparece na sua cozinha hoje.",
+   "start": 75.18,
+   "end": 78.28,
+   "words": [
+    {
+     "w": "Segue",
+     "start": 75.18,
+     "end": 75.44
+    },
+    {
+     "w": "a",
+     "start": 75.44,
+     "end": 75.54
+    },
+    {
+     "w": "página,",
+     "start": 75.54,
+     "end": 75.92
+    },
+    {
+     "w": "senão",
+     "start": 76.26,
+     "end": 76.6
+    },
+    {
+     "w": "ela",
+     "start": 76.6,
+     "end": 76.74
+    },
+    {
+     "w": "aparece",
+     "start": 76.74,
+     "end": 77.08
+    },
+    {
+     "w": "na",
+     "start": 77.08,
+     "end": 77.32
+    },
+    {
+     "w": "sua",
+     "start": 77.32,
+     "end": 77.46
+    },
+    {
+     "w": "cozinha",
+     "start": 77.46,
+     "end": 77.92
+    },
+    {
+     "w": "hoje.",
+     "start": 77.92,
+     "end": 78.28
+    }
+   ]
+  }
+ ]
+}
