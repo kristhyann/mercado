@@ -1,0 +1,792 @@
+{
+ "duration": 57.886,
+ "sentences": [
+  {
+   "text": "Domingo à noite e a agenda vazia?",
+   "start": 0.0,
+   "end": 2.2,
+   "words": [
+    {
+     "w": "Domingo",
+     "start": 0.0,
+     "end": 0.46
+    },
+    {
+     "w": "à",
+     "start": 0.46,
+     "end": 0.58
+    },
+    {
+     "w": "noite",
+     "start": 0.58,
+     "end": 0.92
+    },
+    {
+     "w": "e",
+     "start": 0.92,
+     "end": 1.24
+    },
+    {
+     "w": "a",
+     "start": 1.24,
+     "end": 1.32
+    },
+    {
+     "w": "agenda",
+     "start": 1.32,
+     "end": 1.58
+    },
+    {
+     "w": "vazia?",
+     "start": 1.58,
+     "end": 2.2
+    }
+   ]
+  },
+  {
+   "text": "Você abre o celular. Nenhuma mensagem.",
+   "start": 2.48,
+   "end": 5.36,
+   "words": [
+    {
+     "w": "Você",
+     "start": 2.48,
+     "end": 2.96
+    },
+    {
+     "w": "abre",
+     "start": 2.96,
+     "end": 3.22
+    },
+    {
+     "w": "o",
+     "start": 3.22,
+     "end": 3.34
+    },
+    {
+     "w": "celular.",
+     "start": 3.34,
+     "end": 3.68
+    },
+    {
+     "w": "Nenhuma",
+     "start": 4.18,
+     "end": 4.76
+    },
+    {
+     "w": "mensagem.",
+     "start": 4.76,
+     "end": 5.36
+    }
+   ]
+  },
+  {
+   "text": "Rola o WhatsApp, rola o Instagram... nada.",
+   "start": 5.88,
+   "end": 8.64,
+   "words": [
+    {
+     "w": "Rola",
+     "start": 5.88,
+     "end": 6.04
+    },
+    {
+     "w": "o",
+     "start": 6.04,
+     "end": 6.14
+    },
+    {
+     "w": "WhatsApp,",
+     "start": 6.14,
+     "end": 6.5
+    },
+    {
+     "w": "rola",
+     "start": 7.0,
+     "end": 7.2
+    },
+    {
+     "w": "o",
+     "start": 7.2,
+     "end": 7.24
+    },
+    {
+     "w": "Instagram...",
+     "start": 7.24,
+     "end": 7.46
+    },
+    {
+     "w": "nada.",
+     "start": 8.28,
+     "end": 8.64
+    }
+   ]
+  },
+  {
+   "text": "E aí vem aquele aperto no peito: e a semana que vem?",
+   "start": 9.24,
+   "end": 12.44,
+   "words": [
+    {
+     "w": "E",
+     "start": 9.24,
+     "end": 9.38
+    },
+    {
+     "w": "aí",
+     "start": 9.38,
+     "end": 9.56
+    },
+    {
+     "w": "vem",
+     "start": 9.56,
+     "end": 9.76
+    },
+    {
+     "w": "aquele",
+     "start": 9.76,
+     "end": 10.02
+    },
+    {
+     "w": "aperto",
+     "start": 10.02,
+     "end": 10.54
+    },
+    {
+     "w": "no",
+     "start": 10.54,
+     "end": 10.66
+    },
+    {
+     "w": "peito:",
+     "start": 10.66,
+     "end": 11.08
+    },
+    {
+     "w": "e",
+     "start": 11.56,
+     "end": 11.6
+    },
+    {
+     "w": "a",
+     "start": 11.6,
+     "end": 11.72
+    },
+    {
+     "w": "semana",
+     "start": 11.72,
+     "end": 11.94
+    },
+    {
+     "w": "que",
+     "start": 11.94,
+     "end": 12.16
+    },
+    {
+     "w": "vem?",
+     "start": 12.16,
+     "end": 12.44
+    }
+   ]
+  },
+  {
+   "text": "Você é boa no que faz. Suas clientes amam suas unhas.",
+   "start": 12.96,
+   "end": 16.32,
+   "words": [
+    {
+     "w": "Você",
+     "start": 12.96,
+     "end": 13.2
+    },
+    {
+     "w": "é",
+     "start": 13.2,
+     "end": 13.32
+    },
+    {
+     "w": "boa",
+     "start": 13.32,
+     "end": 13.66
+    },
+    {
+     "w": "no",
+     "start": 13.66,
+     "end": 13.8
+    },
+    {
+     "w": "que",
+     "start": 13.8,
+     "end": 13.92
+    },
+    {
+     "w": "faz.",
+     "start": 13.92,
+     "end": 14.28
+    },
+    {
+     "w": "Suas",
+     "start": 14.58,
+     "end": 14.78
+    },
+    {
+     "w": "clientes",
+     "start": 14.78,
+     "end": 15.26
+    },
+    {
+     "w": "amam",
+     "start": 15.26,
+     "end": 15.7
+    },
+    {
+     "w": "suas",
+     "start": 15.7,
+     "end": 15.92
+    },
+    {
+     "w": "unhas.",
+     "start": 15.92,
+     "end": 16.32
+    }
+   ]
+  },
+  {
+   "text": "Mas talento sozinho não enche agenda.",
+   "start": 16.76,
+   "end": 19.02,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 16.76,
+     "end": 17.02
+    },
+    {
+     "w": "talento",
+     "start": 17.02,
+     "end": 17.46
+    },
+    {
+     "w": "sozinho",
+     "start": 17.46,
+     "end": 17.98
+    },
+    {
+     "w": "não",
+     "start": 17.98,
+     "end": 18.22
+    },
+    {
+     "w": "enche",
+     "start": 18.22,
+     "end": 18.58
+    },
+    {
+     "w": "agenda.",
+     "start": 18.74,
+     "end": 19.02
+    }
+   ]
+  },
+  {
+   "text": "Enquanto você espera alguém chamar, a cliente esquece, deixa pra depois... ou marca com outra.",
+   "start": 19.46,
+   "end": 24.98,
+   "words": [
+    {
+     "w": "Enquanto",
+     "start": 19.46,
+     "end": 19.8
+    },
+    {
+     "w": "você",
+     "start": 19.8,
+     "end": 20.04
+    },
+    {
+     "w": "espera",
+     "start": 20.04,
+     "end": 20.36
+    },
+    {
+     "w": "alguém",
+     "start": 20.36,
+     "end": 20.6
+    },
+    {
+     "w": "chamar,",
+     "start": 20.6,
+     "end": 21.12
+    },
+    {
+     "w": "a",
+     "start": 21.36,
+     "end": 21.44
+    },
+    {
+     "w": "cliente",
+     "start": 21.44,
+     "end": 21.78
+    },
+    {
+     "w": "esquece,",
+     "start": 21.78,
+     "end": 22.36
+    },
+    {
+     "w": "deixa",
+     "start": 22.64,
+     "end": 22.84
+    },
+    {
+     "w": "pra",
+     "start": 22.84,
+     "end": 23.02
+    },
+    {
+     "w": "depois...",
+     "start": 23.02,
+     "end": 23.42
+    },
+    {
+     "w": "ou",
+     "start": 23.42,
+     "end": 24.1
+    },
+    {
+     "w": "marca",
+     "start": 24.1,
+     "end": 24.44
+    },
+    {
+     "w": "com",
+     "start": 24.44,
+     "end": 24.68
+    },
+    {
+     "w": "outra.",
+     "start": 24.68,
+     "end": 24.98
+    }
+   ]
+  },
+  {
+   "text": "Agora imagina outro domingo.",
+   "start": 25.54,
+   "end": 27.36,
+   "words": [
+    {
+     "w": "Agora",
+     "start": 25.54,
+     "end": 25.84
+    },
+    {
+     "w": "imagina",
+     "start": 25.84,
+     "end": 26.36
+    },
+    {
+     "w": "outro",
+     "start": 26.36,
+     "end": 26.82
+    },
+    {
+     "w": "domingo.",
+     "start": 26.82,
+     "end": 27.36
+    }
+   ]
+  },
+  {
+   "text": "Você abre o celular, e a semana já está cheia.",
+   "start": 27.36,
+   "end": 30.68,
+   "words": [
+    {
+     "w": "Você",
+     "start": 27.36,
+     "end": 27.98
+    },
+    {
+     "w": "abre",
+     "start": 27.98,
+     "end": 28.26
+    },
+    {
+     "w": "o",
+     "start": 28.26,
+     "end": 28.36
+    },
+    {
+     "w": "celular,",
+     "start": 28.36,
+     "end": 28.74
+    },
+    {
+     "w": "e",
+     "start": 28.74,
+     "end": 29.18
+    },
+    {
+     "w": "a",
+     "start": 29.18,
+     "end": 29.28
+    },
+    {
+     "w": "semana",
+     "start": 29.28,
+     "end": 29.6
+    },
+    {
+     "w": "já",
+     "start": 29.6,
+     "end": 29.86
+    },
+    {
+     "w": "está",
+     "start": 29.86,
+     "end": 30.06
+    },
+    {
+     "w": "cheia.",
+     "start": 30.06,
+     "end": 30.68
+    }
+   ]
+  },
+  {
+   "text": "Lembrete enviado sozinho. Cliente sumida chamada de volta. Horário vago preenchido.",
+   "start": 30.96,
+   "end": 36.6,
+   "words": [
+    {
+     "w": "Lembrete",
+     "start": 30.96,
+     "end": 31.54
+    },
+    {
+     "w": "enviado",
+     "start": 31.54,
+     "end": 31.96
+    },
+    {
+     "w": "sozinho.",
+     "start": 31.96,
+     "end": 32.6
+    },
+    {
+     "w": "Cliente",
+     "start": 32.92,
+     "end": 33.22
+    },
+    {
+     "w": "sumida",
+     "start": 33.22,
+     "end": 33.74
+    },
+    {
+     "w": "chamada",
+     "start": 33.86,
+     "end": 34.18
+    },
+    {
+     "w": "de",
+     "start": 34.18,
+     "end": 34.34
+    },
+    {
+     "w": "volta.",
+     "start": 34.34,
+     "end": 34.66
+    },
+    {
+     "w": "Horário",
+     "start": 34.66,
+     "end": 35.4
+    },
+    {
+     "w": "vago",
+     "start": 35.4,
+     "end": 35.82
+    },
+    {
+     "w": "preenchido.",
+     "start": 35.82,
+     "end": 36.6
+    }
+   ]
+  },
+  {
+   "text": "Quem fez isso? Uma inteligência artificial trabalhando por você, até enquanto você dorme.",
+   "start": 37.04,
+   "end": 43.04,
+   "words": [
+    {
+     "w": "Quem",
+     "start": 37.04,
+     "end": 37.2
+    },
+    {
+     "w": "fez",
+     "start": 37.2,
+     "end": 37.52
+    },
+    {
+     "w": "isso?",
+     "start": 37.52,
+     "end": 37.86
+    },
+    {
+     "w": "Uma",
+     "start": 38.24,
+     "end": 38.38
+    },
+    {
+     "w": "inteligência",
+     "start": 38.38,
+     "end": 38.96
+    },
+    {
+     "w": "artificial",
+     "start": 38.96,
+     "end": 39.76
+    },
+    {
+     "w": "trabalhando",
+     "start": 39.76,
+     "end": 40.36
+    },
+    {
+     "w": "por",
+     "start": 40.36,
+     "end": 40.68
+    },
+    {
+     "w": "você,",
+     "start": 40.68,
+     "end": 41.14
+    },
+    {
+     "w": "até",
+     "start": 41.38,
+     "end": 41.78
+    },
+    {
+     "w": "enquanto",
+     "start": 41.78,
+     "end": 42.16
+    },
+    {
+     "w": "você",
+     "start": 42.16,
+     "end": 42.5
+    },
+    {
+     "w": "dorme.",
+     "start": 42.5,
+     "end": 43.04
+    }
+   ]
+  },
+  {
+   "text": "Sem correr atrás de cliente. Sem passar o domingo com medo.",
+   "start": 43.22,
+   "end": 46.76,
+   "words": [
+    {
+     "w": "Sem",
+     "start": 43.22,
+     "end": 43.5
+    },
+    {
+     "w": "correr",
+     "start": 43.5,
+     "end": 43.78
+    },
+    {
+     "w": "atrás",
+     "start": 43.78,
+     "end": 44.1
+    },
+    {
+     "w": "de",
+     "start": 44.1,
+     "end": 44.28
+    },
+    {
+     "w": "cliente.",
+     "start": 44.28,
+     "end": 44.86
+    },
+    {
+     "w": "Sem",
+     "start": 44.98,
+     "end": 45.3
+    },
+    {
+     "w": "passar",
+     "start": 45.3,
+     "end": 45.64
+    },
+    {
+     "w": "o",
+     "start": 45.64,
+     "end": 45.84
+    },
+    {
+     "w": "domingo",
+     "start": 45.84,
+     "end": 46.18
+    },
+    {
+     "w": "com",
+     "start": 46.18,
+     "end": 46.36
+    },
+    {
+     "w": "medo.",
+     "start": 46.36,
+     "end": 46.76
+    }
+   ]
+  },
+  {
+   "text": "Você só faz o que ama: unha.",
+   "start": 47.12,
+   "end": 49.5,
+   "words": [
+    {
+     "w": "Você",
+     "start": 47.12,
+     "end": 47.42
+    },
+    {
+     "w": "só",
+     "start": 47.42,
+     "end": 47.68
+    },
+    {
+     "w": "faz",
+     "start": 47.68,
+     "end": 48.1
+    },
+    {
+     "w": "o",
+     "start": 48.1,
+     "end": 48.26
+    },
+    {
+     "w": "que",
+     "start": 48.26,
+     "end": 48.38
+    },
+    {
+     "w": "ama:",
+     "start": 48.38,
+     "end": 48.68
+    },
+    {
+     "w": "unha.",
+     "start": 49.1,
+     "end": 49.5
+    }
+   ]
+  },
+  {
+   "text": "Se você quer ter esse domingo, comenta AGENDA.",
+   "start": 49.98,
+   "end": 52.86,
+   "words": [
+    {
+     "w": "Se",
+     "start": 49.98,
+     "end": 50.06
+    },
+    {
+     "w": "você",
+     "start": 50.06,
+     "end": 50.32
+    },
+    {
+     "w": "quer",
+     "start": 50.32,
+     "end": 50.52
+    },
+    {
+     "w": "ter",
+     "start": 50.52,
+     "end": 50.82
+    },
+    {
+     "w": "esse",
+     "start": 50.82,
+     "end": 51.06
+    },
+    {
+     "w": "domingo,",
+     "start": 51.06,
+     "end": 51.52
+    },
+    {
+     "w": "comenta",
+     "start": 51.8,
+     "end": 52.14
+    },
+    {
+     "w": "AGENDA.",
+     "start": 52.46,
+     "end": 52.86
+    }
+   ]
+  },
+  {
+   "text": "Eu te mostro como funciona.",
+   "start": 53.24,
+   "end": 54.46,
+   "words": [
+    {
+     "w": "Eu",
+     "start": 53.24,
+     "end": 53.34
+    },
+    {
+     "w": "te",
+     "start": 53.34,
+     "end": 53.46
+    },
+    {
+     "w": "mostro",
+     "start": 53.46,
+     "end": 53.84
+    },
+    {
+     "w": "como",
+     "start": 53.84,
+     "end": 54.04
+    },
+    {
+     "w": "funciona.",
+     "start": 54.04,
+     "end": 54.46
+    }
+   ]
+  },
+  {
+   "text": "Comenta: AGENDA.",
+   "start": 54.98,
+   "end": 56.32,
+   "words": [
+    {
+     "w": "Comenta:",
+     "start": 54.98,
+     "end": 55.48
+    },
+    {
+     "w": "AGENDA.",
+     "start": 55.94,
+     "end": 56.32
+    }
+   ]
+  }
+ ]
+}

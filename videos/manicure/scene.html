@@ -1,0 +1,323 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:200px;text-align:center;font-weight:900;font-size:90px;line-height:1.05}
+#hook b{color:#FF5FA2;display:block;font-size:160px;line-height:1}
+#label{width:1080px;top:180px;text-align:center}
+#label span{display:inline-block;font-weight:900;font-size:96px;color:#FF5FA2;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#cap{width:1080px;top:1290px;text-align:center;font-weight:900;font-size:118px}
+#cap.hl{color:#FF5FA2}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:62px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF3B3B;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.pink{background:#FF5FA2;color:#fff}
+.comic{font-weight:900;font-size:160px;color:#FFD21F;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 10px 0 rgba(0,0,0,.3);white-space:nowrap}
+#final{left:60px;width:960px;top:1330px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:80px;line-height:1.05;padding:30px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#FF5FA2}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.8;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">DOMINGO À NOITE<br>E A AGENDA<b>VAZIA?</b></div>
+<div id="label" class="o"><span>X</span></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag"></div><div id="t3" class="o tag"></div>
+<div id="comic" class="o comic"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Comenta <em>AGENDA</em><br>que eu te mostro.</span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, M, mesh } from '/_kit/kit.js';
+import { buildPerson, PP, mixP, poseP, face } from '/_kit/pessoas.js';
+
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; const S = i => SN[i].start, E = i => SN[i].end; window.DURATION = TP.duration;
+const WD = (i, re) => { const w = SN[i].words.find(w => re.test(w.w)); return w ? w.start : S(i); };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(window.devicePixelRatio || 1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .01, 60);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const box = (w, h, d, c, x, y, z, par = scene, o = {}) => mesh(new THREE.BoxGeometry(w, h, d), typeof c === 'number' ? M(c, o) : c, x, y, z, par);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const win = (t, a, b) => t >= a && t < b;
+
+// ---------- tempos ----------
+const T_NENHUMA = WD(1, /nenhuma/i), T_INSTA = WD(2, /instagram/i), T_NADA = WD(2, /nada/i), T_SEMANA = WD(3, /semana/i), T_AMAM = WD(4, /amam/i);
+const T_ESQUECE = WD(6, /esquece/i), T_DEPOIS = WD(6, /depois/i), T_OUTRA = WD(6, /outra/i), T_CHEIA = WD(8, /cheia/i);
+const T_LEMB = S(9), T_SUMIDA = WD(9, /sumida/i), T_HORARIO = WD(9, /horário/i), T_PREENCH = WD(9, /preenchido/i);
+const T_IA = WD(10, /inteligência/i), T_DORME = WD(10, /dorme/i), T_MEDO = WD(11, /medo/i), T_CORRER = WD(11, /correr/i), T_UNHA = WD(12, /unha/i), T_AGENDA1 = WD(13, /agenda/i), T_AGENDA2 = WD(15, /agenda/i);
+
+// ---------- luzes ----------
+const hemi = new THREE.HemisphereLight(0xffffff, 0x8a7a8a, 1.1); scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xffffff, 1.3); sun.position.set(-1.5, 4, 3); sun.castShadow = true; sun.shadow.mapSize.set(1536, 1536);
+Object.assign(sun.shadow.camera, { left: -3, right: 3, top: 3, bottom: -3, near: .5, far: 12 }); sun.shadow.bias = -.0006; scene.add(sun);
+const lamp = new THREE.PointLight(0xFFC48A, 1.4, 3.5, 1.5); lamp.position.set(.75, 1.15, -.7); scene.add(lamp);
+const glow = new THREE.PointLight(0x9AD0FF, 0, 1.2, 2); scene.add(glow);
+
+// ---------- estúdio ----------
+const ctex = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; return { c, g: c.getContext('2d'), t }; };
+const floorC = ctex(256, 256); { const g = floorC.g; g.fillStyle = '#E9D8C4'; g.fillRect(0, 0, 256, 256); g.fillStyle = '#DCC7AE'; for (let i = 0; i < 8; i++) g.fillRect(0, i * 32, 256, 2); for (let i = 0; i < 16; i++) g.fillRect((i * 53) % 256, Math.floor(i / 2) * 32, 2, 32); floorC.t.wrapS = floorC.t.wrapT = THREE.RepeatWrapping; floorC.t.repeat.set(4, 4); }
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(4.8, 5), new THREE.MeshStandardMaterial({ map: floorC.t })); floor.rotation.x = -Math.PI / 2; floor.position.z = .3; floor.receiveShadow = true; scene.add(floor);
+const wallM = M(0xF7D6E0), wallM2 = M(0xFBE7EE);
+const backW = box(4.8, 2.9, .1, wallM, 0, 1.45, -2.05); backW.receiveShadow = true;
+const leftW = box(.1, 2.9, 5, wallM2, -2.45, 1.45, .3); leftW.receiveShadow = true;
+const rightW = box(.1, 2.9, 5, wallM2, 2.25, 1.45, .3); rightW.receiveShadow = true;
+box(4.8, .12, .04, 0xFFFFFF, 0, .06, -1.99);
+// janela
+const sky = new THREE.Mesh(new THREE.PlaneGeometry(1.0, .8), new THREE.MeshBasicMaterial({ color: 0x1B2450 })); sky.position.set(-1.0, 1.65, -1.995); scene.add(sky);
+for (const [w, h, x, y] of [[1.1, .06, -1.0, 2.06], [1.1, .06, -1.0, 1.24], [.06, .86, -1.53, 1.65], [.06, .86, -.47, 1.65], [.03, .8, -1.0, 1.65], [1.0, .03, -1.0, 1.65]]) box(w, h, .06, 0xFFFFFF, x, y, -1.98);
+box(1.2, .05, .16, 0xFFFFFF, -1.0, 1.2, -1.93);
+const moon = mesh(new THREE.CircleGeometry(.08, 18), new THREE.MeshBasicMaterial({ color: 0xFFF6C8 }), -1.25, 1.85, -1.99, scene);
+const sunDisk = mesh(new THREE.CircleGeometry(.1, 18), new THREE.MeshBasicMaterial({ color: 0xFFD54A }), -.75, 1.82, -1.99, scene);
+const starsW = []; for (let i = 0; i < 9; i++) starsW.push(mesh(new THREE.CircleGeometry(.008, 5), new THREE.MeshBasicMaterial({ color: 0xFFFFFF }), -1.45 + (i * .37) % .9, 1.35 + (i * .23) % .6, -1.992, scene));
+// letreiro neon
+const neonC = ctex(512, 160); { const g = neonC.g; g.clearRect(0, 0, 512, 160); g.font = '900 104px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.shadowColor = '#FF5FA2'; g.shadowBlur = 24; g.fillStyle = '#FFE3F0'; g.fillText('NAILS', 256, 84); g.fillText('NAILS', 256, 84); }
+const neon = new THREE.Mesh(new THREE.PlaneGeometry(.75, .235), new THREE.MeshBasicMaterial({ map: neonC.t, transparent: true })); neon.position.set(.3, 2.1, -1.99); scene.add(neon);
+// prateleira de esmaltes
+const polCols = [0xFF3B6B, 0xFF8A1F, 0xFFD21F, 0x22C55E, 0x3B82F6, 0xA855F7, 0xFF5FA2, 0xE11D48];
+box(1.0, .03, .16, 0xFFFFFF, .3, 1.55, -1.92);
+polCols.forEach((c, i) => { const x = -.12 + i * .12; mesh(new THREE.CylinderGeometry(.022, .026, .07, 8), M(c, { roughness: .2 }), x, 1.6, -1.9, scene); mesh(new THREE.CylinderGeometry(.01, .012, .05, 6), M(0x222222), x, 1.66, -1.9, scene); });
+// mesa de manicure
+const table = grp(); { const tm = M(0xFFFFFF), lm = M(0xF2B8CB); box(1.05, .05, .58, tm, .3, .72, -.6, table); for (const [x, z] of [[-.17, -.85], [.77, -.85], [-.17, -.35], [.77, -.35]]) box(.05, .7, .05, lm, x, .35, z, table); box(.3, .03, .2, 0xFFB3CF, .3, .755, -.48, table); }
+mesh(new THREE.CylinderGeometry(.07, .09, .02, 12), M(0x333333), .72, .755, -.78, scene); { const arm = mesh(new THREE.CylinderGeometry(.012, .012, .4, 6), M(0x333333), .72, .95, -.78, scene); const sh = mesh(new THREE.ConeGeometry(.09, .12, 12, 1, true), M(0xFF5FA2, { side: THREE.DoubleSide }), .72, 1.15, -.72, scene); sh.rotation.x = .6; }
+polCols.slice(0, 5).forEach((c, i) => { mesh(new THREE.CylinderGeometry(.018, .022, .06, 8), M(c, { roughness: .2 }), -.05 + i * .05, .775, -.78, scene); mesh(new THREE.CylinderGeometry(.009, .01, .04, 6), M(0x222222), -.05 + i * .05, .82, -.78, scene); });
+// banquinho e cadeira da cliente
+const stool = grp(); mesh(new THREE.CylinderGeometry(.2, .2, .06, 14), M(0xFF5FA2), .3, .48, -1.08, stool); mesh(new THREE.CylinderGeometry(.03, .03, .45, 6), M(0xCCCCCC), .3, .23, -1.08, stool);
+const chair = grp(); box(.45, .06, .45, 0x7C5CFF, .3, .46, -.05, chair); box(.45, .5, .06, 0x7C5CFF, .3, .72, .17, chair); for (const [x, z] of [[.1, -.25], [.5, -.25], [.1, .15], [.5, .15]]) box(.04, .44, .04, 0x5B3FD9, x, .22, z, chair);
+// sofá
+const sofa = grp(); { const sm = M(0x8E7CC3); box(.8, .32, 1.9, sm, 1.75, .26, -.25, sofa); box(.2, .5, 1.9, sm, 2.1, .6, -.25, sofa); box(.8, .3, .2, sm, 1.75, .45, -1.2, sofa); box(.8, .3, .2, sm, 1.75, .45, .7, sofa); box(.5, .12, .35, 0xFFD21F, 1.8, .48, -.95, sofa); }
+// porta (parede esquerda)
+const doorF = grp(); box(.06, 2.1, .06, 0xFFFFFF, -2.38, 1.05, -.48, doorF); box(.06, 2.1, .06, 0xFFFFFF, -2.38, 1.05, .48, doorF); box(.06, .06, 1.0, 0xFFFFFF, -2.38, 2.1, 0, doorF);
+box(.02, 2.04, .9, 0x2A2A40, -2.4, 1.02, 0);
+const doorP = grp(); doorP.position.set(-2.37, 0, -.45); box(.05, 2.04, .9, 0xFFFFFF, 0, 1.02, .45, doorP); mesh(new THREE.IcosahedronGeometry(.03, 0), M(0xF5C542), .05, 1.0, .8, doorP);
+// planta
+mesh(new THREE.CylinderGeometry(.14, .11, .3, 10), M(0xE07A5F), -1.95, .15, -1.65, scene); for (let i = 0; i < 6; i++) { const l = mesh(new THREE.IcosahedronGeometry(.16, 0), M(0x3FA34D), -1.95 + Math.cos(i) * .1, .45 + (i % 3) * .1, -1.65 + Math.sin(i) * .1, scene); l.scale.set(.6, 1.3, .6); }
+
+// calendário de parede
+const CAL = ctex(512, 420);
+const calM = new THREE.Mesh(new THREE.PlaneGeometry(.9, .74), new THREE.MeshBasicMaterial({ map: CAL.t })); calM.position.set(1.35, 1.5, -1.98); scene.add(calM);
+box(.94, .78, .01, 0xFFFFFF, 1.35, 1.5, -1.99);
+const NAMES = ['Ana', 'Bia', 'Carla', 'Duda', 'Eva', 'Fê', 'Gabi', 'Lu', 'Mari', 'Nina', 'Paty', 'Rê', 'Sol', 'Tati', 'Vivi', 'Jô', 'Kel', 'Lia', 'Mel', 'Isa'];
+const SLC = ['#FF5FA2', '#A855F7', '#22C55E', '#3B82F6', '#FF8A1F'];
+function drawCal(fill, special) {
+  const g = CAL.g; g.fillStyle = '#FFFFFF'; g.fillRect(0, 0, 512, 420); g.fillStyle = '#FF5FA2'; g.fillRect(0, 0, 512, 70);
+  g.fillStyle = '#fff'; g.font = '900 42px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('AGENDA DA SEMANA', 256, 38);
+  const days = ['SEG', 'TER', 'QUA', 'QUI', 'SEX']; g.font = '800 26px P'; g.fillStyle = '#555';
+  days.forEach((d, i) => g.fillText(d, 50 + i * 103, 95));
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 5; c++) { const k = r * 5 + c, x = 8 + c * 101, y = 118 + r * 74; const sp = k === 13; const on = sp ? special : k < fill;
+    g.fillStyle = on ? SLC[k % 5] : '#F1F1F1'; g.beginPath(); g.roundRect(x, y, 94, 66, 12); g.fill(); g.strokeStyle = on ? 'rgba(0,0,0,.15)' : '#DDD'; g.lineWidth = 3; g.stroke();
+    if (on) { g.fillStyle = '#fff'; g.font = '800 24px P'; g.fillText(NAMES[k], x + 47, y + 34); } }
+  CAL.t.needsUpdate = true;
+}
+let calKey = '';
+
+// ---------- celular ----------
+const PH = ctex(360, 720);
+const phone = grp(); { box(.08, .158, .009, 0x1A1A1A, 0, 0, -.005, phone); const scr = new THREE.Mesh(new THREE.PlaneGeometry(.072, .144), new THREE.MeshBasicMaterial({ map: PH.t })); scr.position.z = .0001; phone.add(scr); }
+function wrap(g, txt, x, y, maxW, lh) { const ws = txt.split(' '); let line = '', yy = y; for (const w of ws) { const tst = line ? line + ' ' + w : w; if (g.measureText(tst).width > maxW && line) { g.fillText(line, x, yy); line = w; yy += lh; } else line = tst; } if (line) g.fillText(line, x, yy); return yy + lh; }
+function bubble(g, txt, y, right, col, k) { g.save(); g.globalAlpha = k; g.font = '800 21px P'; const lines = []; { const ws = txt.split(' '); let line = ''; for (const w of ws) { const tst = line ? line + ' ' + w : w; if (g.measureText(tst).width > 230 && line) { lines.push(line); line = w; } else line = tst; } lines.push(line); }
+  const h = lines.length * 28 + 22, w = 262, x = right ? 360 - w - 16 : 16; g.translate(0, (1 - k) * 20); g.fillStyle = col; g.beginPath(); g.roundRect(x, y, w, h, 18); g.fill(); g.fillStyle = right ? '#0B3B2A' : '#222'; g.textAlign = 'left'; lines.forEach((l, i) => g.fillText(l, x + 16, y + 30 + i * 28)); g.restore(); return y + h + 14; }
+function drawPhone(st, t, night) {
+  const g = PH.g; g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+  g.fillStyle = st === 'reel' ? '#111' : '#FFFFFF'; g.fillRect(0, 0, 360, 720);
+  const bar = (col, title) => { g.fillStyle = col; g.fillRect(0, 0, 360, 120); g.fillStyle = '#fff'; g.font = '900 30px P'; g.fillText(title, 180, 100); };
+  if (st === 'cal') {
+    const full = clamp((t - S(8) - .2) / 2.2); bar('#FF5FA2', 'Agenda');
+    const days = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB']; g.font = '800 17px P'; g.fillStyle = '#666'; days.forEach((d, i) => g.fillText(d, 33 + i * 59, 150));
+    const n = t >= S(7) ? Math.floor(full * 30) : 0;
+    for (let r = 0; r < 5; r++) for (let c = 0; c < 6; c++) { const k = r * 6 + c, x = 6 + c * 59, y = 165 + r * 82; const on = k < n; g.fillStyle = on ? SLC[(k * 7) % 5] : '#F2F2F2'; g.beginPath(); g.roundRect(x, y, 54, 74, 10); g.fill(); if (on) { g.fillStyle = '#fff'; g.font = '800 15px P'; g.fillText(NAMES[k % 20], x + 27, y + 43); } }
+    if (!n) { g.fillStyle = 'rgba(255,255,255,.85)'; g.fillRect(20, 330, 320, 110); g.fillStyle = '#999'; g.font = '900 28px P'; g.fillText('Nenhum horário', 180, 380); g.font = '800 20px P'; g.fillText('marcado esta semana', 180, 414); }
+  } else if (st === 'msg') {
+    bar('#25A244', 'Conversas'); const sc = (t * 120) % 60; g.strokeStyle = '#EEE'; g.lineWidth = 2; for (let i = 0; i < 9; i++) { const y = 150 + i * 70 - sc; g.beginPath(); g.moveTo(20, y); g.lineTo(340, y); g.stroke(); }
+    g.fillStyle = '#DDD'; g.beginPath(); g.ellipse(180, 330, 60, 48, 0, 0, Math.PI * 2); g.fill(); g.beginPath(); g.moveTo(150, 365); g.lineTo(135, 395); g.lineTo(175, 372); g.fill();
+    g.fillStyle = '#999'; g.font = '900 26px P'; g.fillText('Nenhuma mensagem', 180, 440); g.font = '800 20px P'; g.fillText('nova', 180, 470);
+  } else if (st === 'notif') {
+    const gr = g.createLinearGradient(0, 0, 360, 0); gr.addColorStop(0, '#F58529'); gr.addColorStop(.5, '#DD2A7B'); gr.addColorStop(1, '#8134AF'); bar(gr, 'Notificações');
+    g.strokeStyle = '#DDD'; g.lineWidth = 10; g.beginPath(); g.arc(180, 320, 52, 0, Math.PI * 2); g.stroke(); g.fillStyle = '#DDD'; g.fillRect(172, 290, 16, 36); g.fillRect(172, 336, 16, 16);
+    g.fillStyle = '#999'; g.font = '900 26px P'; g.fillText('Nada por aqui', 180, 430); g.font = '800 20px P'; g.fillText('0 notificações', 180, 462);
+  } else if (st === 'chat') {
+    bar('#0EA5A4', 'Assistente IA'); g.fillStyle = '#ECF7F5'; g.fillRect(0, 120, 360, 600); let y = 140;
+    y = bubble(g, 'Oi Ana! Lembrete: sua unha é amanhã às 14h. Te espero!', y, true, '#C7F5D9', clamp((t - T_LEMB) / .3));
+    if (t > T_SUMIDA) y = bubble(g, 'Carla, sumida! Bora renovar as unhas essa semana?', y, true, '#C7F5D9', clamp((t - T_SUMIDA) / .3));
+    if (t > T_SUMIDA + .9) y = bubble(g, 'Simmm! Quinta 16h?', y, false, '#FFFFFF', clamp((t - T_SUMIDA - .9) / .3));
+    if (t > T_HORARIO) y = bubble(g, 'Horário vago de quinta preenchido.', y, true, '#C7F5D9', clamp((t - T_HORARIO) / .3));
+  } else if (st === 'reel') {
+    const gr = g.createLinearGradient(0, 0, 0, 720); gr.addColorStop(0, '#3B2350'); gr.addColorStop(1, '#141018'); g.fillStyle = gr; g.fillRect(0, 0, 360, 720);
+    g.fillStyle = '#fff'; g.font = '800 22px P'; g.textAlign = 'left'; g.fillText('Comentários', 20, 70); g.fillStyle = '#FFFFFF'; g.globalAlpha = .12; g.fillRect(0, 90, 360, 2); g.globalAlpha = 1;
+    const typed = 'AGENDA'.slice(0, Math.floor(clamp((t - S(13) - .2) / 1.0) * 6)); const sent = t > T_AGENDA1 + .5;
+    const items = sent ? [['você', 'AGENDA'], ['carol.nails', 'AGENDA'], ['bia_unhas', 'AGENDA']] : [['carol.nails', 'AGENDA'], ['bia_unhas', 'AGENDA']];
+    items.forEach(([u, m], i) => { const y = 140 + i * 92; g.fillStyle = SLC[i % 5]; g.beginPath(); g.arc(44, y, 24, 0, Math.PI * 2); g.fill(); g.fillStyle = '#bbb'; g.font = '800 17px P'; g.fillText(u, 82, y - 6); g.fillStyle = '#fff'; g.font = '900 26px P'; g.fillText(m, 82, y + 24); });
+    g.fillStyle = '#2A2333'; g.beginPath(); g.roundRect(14, 620, 332, 64, 32); g.fill(); g.font = '900 26px P'; g.fillStyle = typed && !sent ? '#fff' : '#888'; g.fillText(sent ? 'Adicione um comentário...' : (typed || 'Adicione um comentário...') + (typed && Math.sin(t * 12) > 0 ? '|' : ''), 36, 662);
+    g.fillStyle = '#FF5FA2'; g.beginPath(); g.arc(316, 652, 22, 0, Math.PI * 2); g.fill(); g.fillStyle = '#fff'; g.beginPath(); g.moveTo(306, 642); g.lineTo(328, 652); g.lineTo(306, 662); g.fill();
+    g.textAlign = 'center';
+  }
+  // barra de status
+  if (st !== 'reel') { g.fillStyle = 'rgba(255,255,255,.95)'; g.font = '800 18px P'; g.textAlign = 'left'; g.fillText(night ? '21:47' : '08:12', 18, 28); g.textAlign = 'right'; g.fillText('Dom', 340, 28); g.textAlign = 'center'; }
+  PH.t.needsUpdate = true;
+}
+
+// ---------- pessoas ----------
+const pro = buildPerson({ skin: 0xC68863, shirt: 0xFF5FA2, pants: 0x2D3A5A, hair: 0x2B1A10, hairStyle: 'bun', shoes: 0xFFFFFF }); scene.add(pro.root);
+{ const hm = M(0x2B1A10); const back = mesh(new THREE.SphereGeometry(.175, 9, 6, 0, Math.PI * 2, 0, Math.PI * .62), hm, 0, -.02, -.035, pro.head); back.rotation.x = -.85; }
+const cli = buildPerson({ skin: 0xF0C8A0, shirt: 0x7C5CFF, pants: 0xE5E7EB, hair: 0x8B4513, hairStyle: 'bun', shoes: 0x7C5CFF }); scene.add(cli.root);
+[pro, cli].forEach(p => p.root.traverse(o => { if (o.isMesh) o.castShadow = true; }));
+const P_PHONE = { lx: -1.05, lz: -.3, le: -1.05, rx: -1.05, rz: .3, re: -1.05, hl: -1.5, kl: 1.5, hr: -1.5, kr: 1.5, hx: .35, hy: 0, hz: 0, lean: .05, y: -.42 };
+const P_CHEST = { lx: -.2, lz: .1, le: -1.0, rx: -.7, rz: .55, re: -1.9, hl: -1.5, kl: 1.5, hr: -1.5, kr: 1.5, hx: .25, hy: 0, hz: 0, lean: .12, y: -.44 };
+const P_WAVE = { lx: .05, lz: .12, le: -.15, rx: -2.6, rz: -.35, re: -.6, hl: 0, kl: 0, hr: 0, kr: 0, hx: 0, hy: 0, hz: 0, lean: 0, y: 0 };
+// mão de unhas feitas (herói)
+const hand = grp(); { const sk = M(0xF0C8A0); const palm = box(.085, .025, .09, sk, 0, 0, 0, hand); const nails = [0xFF3B6B, 0xFF3B6B, 0xFF3B6B, 0xFF3B6B, 0xFF3B6B];
+  [[-.032, .06, .055], [-.011, .07, .062], [.011, .068, .058], [.031, .06, .05]].forEach(([x, , l], i) => { const f = mesh(new THREE.CylinderGeometry(.009, .01, l, 6), sk, x, 0, -.045 - l / 2, hand); f.rotation.x = Math.PI / 2; const n = box(.016, .008, .02, M(0xFF3B6B, { roughness: .15, metalness: .2 }), x, .008, -.045 - l + .01, hand); });
+  const th = mesh(new THREE.CylinderGeometry(.01, .011, .05, 6), sk, .055, 0, -.01, hand); th.rotation.set(Math.PI / 2, 0, -.7); box(.016, .008, .018, M(0xFF3B6B, { roughness: .15, metalness: .2 }), .072, .008, -.03, hand);
+  const wr = mesh(new THREE.CylinderGeometry(.035, .038, .12, 8), sk, 0, 0, .1, hand); wr.rotation.x = Math.PI / 2; wr.scale.x = 1.2; }
+hand.position.set(.3, .785, -.5); hand.traverse(o => { if (o.isMesh) o.castShadow = true; });
+const brush = grp(); mesh(new THREE.CylinderGeometry(.006, .006, .09, 6), M(0x222222), 0, 0, 0, brush); mesh(new THREE.ConeGeometry(.006, .02, 6), M(0xFF3B6B), 0, -.055, 0, brush).rotation.x = Math.PI;
+const mug = grp(); mesh(new THREE.CylinderGeometry(.045, .04, .1, 12), M(0xFFFFFF), 0, 0, 0, mug); mesh(new THREE.TorusGeometry(.025, .008, 6, 10), M(0xFFFFFF), .05, 0, 0, mug);
+// robô IA
+const robot = grp(); { const wm = M(0xF8FAFC), cy = new THREE.MeshBasicMaterial({ color: 0x22E5FF });
+  box(.16, .14, .12, wm, 0, .2, 0, robot); box(.13, .09, .005, 0x13203A, 0, .2, .062, robot); for (const s of [-1, 1]) box(.022, .03, .004, cy, s * .03, .205, .066, robot);
+  box(.13, .12, .1, wm, 0, .07, 0, robot); mesh(new THREE.CylinderGeometry(.005, .005, .05, 4), M(0x999999), 0, .3, 0, robot); const ant = mesh(new THREE.IcosahedronGeometry(.016, 1), new THREE.MeshBasicMaterial({ color: 0xFF5FA2 }), 0, .33, 0, robot); robot.userData.ant = ant;
+  robot.userData.arms = [-1, 1].map(s => { const g = grp(robot); g.position.set(s * .08, .1, 0); box(.025, .08, .025, wm, 0, -.03, .02, g); return g; });
+  const lap = grp(robot); lap.position.set(0, 0, .14); box(.2, .01, .13, 0x9CA3AF, 0, .005, 0, lap); const lid = box(.2, .13, .008, 0x9CA3AF, 0, .07, -.065, lap); lid.rotation.x = -.25; box(.18, .11, .002, new THREE.MeshBasicMaterial({ color: 0x22E5FF }), 0, .07, -.06, lap).rotation.x = -.25; }
+robot.rotation.y = .5; robot.position.set(-.02, .745, -.55); robot.traverse(o => { if (o.isMesh) o.castShadow = true; });
+// brilhos e zzz
+const sparkles = []; for (let i = 0; i < 12; i++) { const s = new THREE.Mesh(new THREE.OctahedronGeometry(.012, 0), new THREE.MeshBasicMaterial({ color: 0xFFE14D })); s.scale.set(1, 1.8, .4); scene.add(s); sparkles.push(s); }
+const zzzC = ctex(128, 128); { const g = zzzC.g; g.font = '900 100px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineWidth = 12; g.strokeStyle = '#111'; g.strokeText('Z', 64, 66); g.fillStyle = '#fff'; g.fillText('Z', 64, 66); }
+const zzz = []; for (let i = 0; i < 3; i++) { const z = new THREE.Sprite(new THREE.SpriteMaterial({ map: zzzC.t, transparent: true })); scene.add(z); zzz.push(z); }
+
+// ---------- estados ----------
+function nightK(t) { if (t < S(7) + .3) return 1; if (t < S(7) + 1.4) return 1 - ease((t - S(7) - .3) / 1.1); if (win(t, T_DORME - .1, S(11))) return 1; return 0; }
+const tmp = new THREE.Vector3(), tmp2 = new THREE.Vector3();
+function eyeOf(p) { return p.head.localToWorld(V(0, .03, .15)); }
+function phoneState(t) {
+  if (t < S(2)) return t < T_NENHUMA ? 'cal' : 'msg';
+  if (t < S(3)) return t < T_INSTA ? 'msg' : 'notif';
+  if (win(t, S(8), S(9))) return 'cal';
+  if (win(t, S(9), S(11))) return 'chat';
+  if (win(t, S(13), S(14))) return 'reel';
+  return 'cal';
+}
+const phoneHeld = t => t < S(4) || win(t, S(7), S(10)) || win(t, S(13), S(14));
+
+// ---------- planos (cortes secos a cada ~3s) ----------
+const POV = 'pov';
+const SHOTS = [
+  [0, POV], [S(1), [1.25, 1.4, .95], [.3, 1.15, -.95]], [S(2), POV], [S(3), [.95, 1.55, .55], [.3, 1.28, -.98]],
+  [S(4), [.62, 1.12, -.02], [.3, .8, -.52]], [S(5), [1.05, 1.42, .55], [1.35, 1.5, -2.0]], [S(6), [.5, 1.6, 3.7], [-.8, 1.0, -.5]],
+  [S(7), [-.3, 1.5, 1.6], [-1.0, 1.55, -2.0]], [S(8), POV], [T_HORARIO, [1.05, 1.42, .55], [1.35, 1.5, -2.0]],
+  [S(10), [.5, 1.2, .55], [.05, .88, -.55]], [T_DORME, [.2, 1.45, 1.6], [1.5, .55, -.4]], [S(11), [1.1, 1.38, .45], [.3, 1.15, -.98]],
+  [S(12), [1.6, 1.45, .4], [.3, .95, -.6]], [S(13), POV], [S(14), [.3, 1.5, 2.7], [.3, 1.3, .1]],
+];
+function camAt(t) {
+  let i = 0; while (i + 1 < SHOTS.length && SHOTS[i + 1][0] <= t) i++;
+  const [t0, a, b] = SHOTS[i]; const k = t - t0;
+  if (a === POV) { const eye = eyeOf(pro); const p = pro.head.localToWorld(V(0, .06, .17)); cam.position.copy(p); phone.getWorldPosition(tmp); cam.lookAt(tmp.x, tmp.y - .022, tmp.z); cam.fov = 40; }
+  else { const pa = V(...a), tg = V(...b); const p = pa.clone().lerp(tg, Math.min(.1, k * .03)); p.x += Math.sin(t * .4) * .01; cam.position.copy(p); cam.lookAt(tg); cam.fov = 40; }
+  cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+}
+
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+SHOTS.slice(1).forEach(s => ev(s[0], 'whoosh'));
+[[.02, 'buzz'], [T_NENHUMA, 'pop'], [T_NADA, 'buzzx'], [T_SEMANA, 'pop'], [T_AMAM, 'ding'], [S(5) + .3, 'buzz'], [T_ESQUECE, 'pop'], [T_DEPOIS, 'pop'], [T_OUTRA, 'buzz'], [S(7), 'ding'], [T_CHEIA, 'win'], [T_LEMB + .1, 'pop'], [T_SUMIDA, 'pop'], [T_PREENCH, 'ding'], [T_IA, 'zap'], [T_CORRER, 'pop'], [T_MEDO, 'pop'], [T_UNHA, 'ding'], [T_AGENDA1, 'win'], [T_AGENDA2, 'win']].forEach(([t, k]) => ev(t, k));
+const LBL = [[S(3), ''], [S(5), 'TALENTO'], [S(6), 'O PROBLEMA'], [S(7), ''], [S(10), ''], [S(12), '']];
+const HL = /agenda|domingo|vazia|nada|semana|talento|cliente|outra|cheia|lembrete|sumida|preenchido|inteligência|artificial|dorme|medo|unha|comenta|nenhuma/i;
+
+window.draw = function (t) {
+  const nk = nightK(t);
+  hemi.intensity = lerp(1.15, .75, nk); hemi.color.setHex(nk > .5 ? 0x8090D8 : 0xFFFFFF); sun.intensity = lerp(1.4, .25, nk); sun.color.setHex(nk > .5 ? 0x7A8CFF : 0xFFF2DD);
+  lamp.intensity = lerp(.6, 1.6, nk); sky.material.color.setHex(nk > .5 ? 0x1B2450 : 0x8FD3FF); moon.visible = nk > .5; sunDisk.visible = nk <= .5; starsW.forEach(s => s.visible = nk > .5);
+  scene.background = new THREE.Color(nk > .5 ? 0x141a3a : 0xFDE7C8);
+  // ---- profissional
+  const sleeping = win(t, T_DORME - .1, S(11)), standing = t >= S(14);
+  let P = PP.sitDesk, expr = 'neutral';
+  if (phoneHeld(t)) { P = P_PHONE; expr = t < S(7) ? 'neutral' : 'happy'; }
+  if (win(t, S(3), S(4))) { P = P_CHEST; expr = 'sad'; }
+  if (win(t, S(4), S(7))) { P = PP.sitSlump; expr = 'sad'; }
+  if (win(t, S(7), S(8))) { P = PP.sitCheer; expr = 'happy'; }
+  if (win(t, S(11), S(12))) { P = PP.sitCup; expr = 'calm'; }
+  if (win(t, S(12), S(13))) { P = PP.type; expr = 'happy'; }
+  if (sleeping) { P = PP.lie; expr = 'calm'; }
+  if (standing) { P = mixP(PP.cheer, P_WAVE, .5 + .5 * Math.sin(t * 6)); expr = 'happy'; }
+  if (sleeping) { pro.root.position.set(1.75, .5, .55); pro.root.rotation.set(-Math.PI / 2, 0, 0); }
+  else if (standing) { pro.root.position.set(.3, 0, .15); pro.root.rotation.set(0, 0, 0); }
+  else { pro.root.position.set(.3, 0, -1.08); pro.root.rotation.set(0, 0, 0); }
+  poseP(pro, P, 0, t); face(pro, expr, t); if (sleeping) pro.eyes.forEach(e => e.scale.y = .12);
+  pro.root.updateMatrixWorld(true);
+  // ---- celular
+  const held = phoneHeld(t); const st = phoneState(t);
+  if (held) { const eye = eyeOf(pro); const fwd = V(0, -.17, .36); phone.position.copy(eye).add(fwd); phone.lookAt(eye); phone.visible = true; }
+  else if (win(t, S(10), T_DORME)) { phone.visible = true; phone.position.set(.42, .752, -.5); phone.rotation.set(-Math.PI / 2, 0, -.3); }
+  else phone.visible = false;
+  if (phone.visible) drawPhone(st, t, nk > .5);
+  glow.intensity = held && nk > .5 ? .9 : 0; glow.position.copy(phone.position).add(V(0, .05, .1));
+  // ---- calendário de parede
+  const fillN = t >= S(8) ? Math.floor(clamp((t - S(8)) / 2.6) * 20) : 0; const sp = t >= T_PREENCH; const key = fillN + '_' + sp; if (key !== calKey) { drawCal(fillN, sp); calKey = key; }
+  // ---- cliente
+  cli.root.visible = win(t, S(6), S(7)) || win(t, S(12), S(13));
+  if (win(t, S(6), S(7))) { let x = -.9, z = .3, walk = 0, ry = 0, Pc = PP.stand, ec = 'neutral';
+    if (t >= T_ESQUECE) { Pc = PP.think; ec = 'neutral'; } if (t >= T_DEPOIS) { Pc = PP.shrug; ec = 'happy'; }
+    if (t >= T_OUTRA) { const u = clamp((t - T_OUTRA) / 1.6); x = lerp(-.9, -2.35, u); z = lerp(.3, 0, u); walk = u < 1 ? 1 : 0; ry = -Math.PI / 2; Pc = PP.stand; ec = 'happy'; cli.root.visible = u < .98; }
+    cli.root.position.set(x, 0, z); cli.root.rotation.set(0, ry, 0); poseP(cli, Pc, walk, t); face(cli, ec, t); }
+  if (win(t, S(12), S(13))) { cli.root.position.set(.3, 0, -.02); cli.root.rotation.set(0, Math.PI, 0); poseP(cli, PP.sitDesk, 0, t); face(cli, 'happy', t); }
+  doorP.rotation.y = win(t, T_OUTRA - .2, S(7)) ? -1.3 * ease(clamp((t - T_OUTRA + .2) / .5)) : 0;
+  // ---- mão, pincel, caneca, robô
+  hand.visible = win(t, S(4), S(5)) || win(t, S(12), S(13));
+  brush.visible = win(t, S(12), S(13)); if (brush.visible) { brush.position.set(.3 + Math.sin(t * 4) * .02, .83, -.57); brush.rotation.set(.5, 0, .3); }
+  mug.visible = win(t, S(11), S(12)); if (mug.visible) { pro.armL.hand.getWorldPosition(tmp); pro.armR.hand.getWorldPosition(tmp2); mug.position.copy(tmp).add(tmp2).multiplyScalar(.5).add(V(0, .04, .03)); }
+  robot.visible = t >= S(10) && t < S(11); if (robot.visible) { robot.scale.setScalar(Math.max(.001, pop(t - S(10) - .1, .35))); robot.userData.arms.forEach((a, i) => a.rotation.x = -.9 + Math.sin(t * 18 + i * 3) * .3); robot.userData.ant.material.color.setHex(Math.sin(t * 8) > 0 ? 0xFF5FA2 : 0x22E5FF); }
+  if (win(t, T_DORME - .1, S(11))) { robot.position.set(-.02, .745, -.55); }
+  sparkles.forEach((s, i) => { const on = win(t, S(4), S(5)) || win(t, S(12), S(13)) || win(t, S(7), S(8)); s.visible = on; if (!on) return; const c = win(t, S(7), S(8)) ? V(.3, 1.3, -1.0) : V(.3, .8, -.53); const r = win(t, S(7), S(8)) ? .45 : .09; const a = i / 12 * Math.PI * 2 + t * 1.6; s.position.set(c.x + Math.cos(a) * r, c.y + Math.sin(a * 2 + i) * r * .5, c.z + Math.sin(a) * r * .6); s.rotation.y = t * 4; });
+  zzz.forEach((z, i) => { z.visible = sleeping; if (!sleeping) return; const u = ((t * .6 + i / 3) % 1); z.position.set(1.75 + u * .25, .85 + u * .45, -.95 + u * .1); z.scale.setScalar(.08 + u * .1); z.material.opacity = 1 - u; });
+  camAt(t);
+
+  // ---------- textos ----------
+  fixed($('hook'), t < S(1) ? (t < .12 ? lerp(.85, 1.05, t / .12) : 1) * (1 - clamp((t - S(1) + .15) / .15)) : 0);
+  const lb = [...LBL].reverse().find(l => t >= l[0]); const lbOn = lb && lb[1];
+  if (lbOn) { $('label').firstElementChild.textContent = lb[1]; fixed($('label'), pop(t - lb[0], .3)); } else fixed($('label'), 0);
+  const T = [$('t1'), $('t2'), $('t3')]; T.forEach(e => { e.style.opacity = 0; e.style.fontSize = ''; });
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  tag(T[0], '0 MENSAGENS', 'red', win(t, T_NENHUMA, S(2)), 540, 560, T_NENHUMA, -4);
+  tag(T[0], 'E A SEMANA QUE VEM?', '', win(t, T_SEMANA, S(4)), 540, 560, T_SEMANA, -3);
+  tag(T[0], 'CLIENTES AMAM', 'pink', win(t, T_AMAM, S(5)), 540, 560, T_AMAM, -4);
+  tag(T[0], 'NÃO ENCHE AGENDA', 'red', win(t, S(5) + .3, S(6)), 540, 1000, S(5) + .3, 3);
+  tag(T[0], 'ESQUECE', '', win(t, T_ESQUECE, S(7)), 540, 560, T_ESQUECE, -4);
+  tag(T[1], 'DEIXA PRA DEPOIS', 'blue', win(t, T_DEPOIS, S(7)), 540, 680, T_DEPOIS, 3);
+  tag(T[2], 'MARCA COM OUTRA', 'red', win(t, T_OUTRA, S(7)), 540, 800, T_OUTRA, -3);
+  tag(T[0], 'SEMANA CHEIA', 'green', win(t, T_CHEIA, S(9)), 540, 560, T_CHEIA, -4);
+  tag(T[0], 'LEMBRETE AUTOMÁTICO', 'green', win(t, T_LEMB + .1, T_HORARIO), 540, 1080, T_LEMB + .1, -3);
+  tag(T[1], 'CLIENTE SUMIDA VOLTOU', 'blue', win(t, T_SUMIDA, T_HORARIO), 540, 1190, T_SUMIDA, 3);
+  tag(T[0], 'HORÁRIO VAGO PREENCHIDO', 'green', win(t, T_PREENCH, S(10)), 540, 1000, T_PREENCH, -3);
+  tag(T[0], 'INTELIGÊNCIA ARTIFICIAL', 'blue', win(t, T_IA, T_DORME), 540, 560, T_IA, -3);
+  tag(T[0], 'TRABALHA ATÉ DORMINDO', 'pink', win(t, T_DORME, S(11)), 540, 560, T_DORME, -3);
+  tag(T[0], '✕ CORRER ATRÁS DE CLIENTE', 'red', win(t, T_CORRER, S(12)), 540, 560, T_CORRER, -3); if (win(t, T_CORRER, S(12))) T[0].style.fontSize = '54px';
+  tag(T[1], '✕ DOMINGO COM MEDO', 'red', win(t, T_MEDO, S(12)), 540, 690, T_MEDO, 3);
+  const cm = $('comic'); cm.style.fontSize = '160px';
+  if (win(t, T_NADA, S(3))) { cm.textContent = 'NADA.'; place(cm, true, 540, 600, pop(t - T_NADA, .25), -6); }
+  else if (win(t, S(7), S(8))) { cm.textContent = 'OUTRO DOMINGO...'; cm.style.fontSize = '96px'; place(cm, true, 540, 600, pop(t - S(7), .3), -4); }
+  else if (win(t, S(10), T_IA)) { cm.textContent = 'QUEM?'; place(cm, true, 540, 600, pop(t - S(10), .25), -6); }
+  else if (win(t, T_UNHA, S(13))) { cm.textContent = 'UNHA!'; place(cm, true, 540, 600, pop(t - T_UNHA, .25), -6); }
+  else if (win(t, T_AGENDA1, S(14)) || t >= T_AGENDA2 - .05) { const t0 = t >= T_AGENDA2 - .05 ? T_AGENDA2 - .05 : T_AGENDA1; cm.textContent = 'AGENDA'; cm.style.fontSize = '210px'; cm.style.color = '#FF5FA2'; place(cm, true, 540, t >= S(14) ? 1120 : 640, pop(t - t0, .3) * (1 + .04 * Math.sin(t * 9)), -5); }
+  else cm.style.opacity = 0;
+  if (cm.textContent !== 'AGENDA') cm.style.color = '';
+  fixed($('final'), t >= S(14) + .2 ? pop(t - S(14) - .2, .35) : 0);
+  $('wm').style.opacity = .8;
+  // legenda
+  let wTxt = null, wSt = 0;
+  for (let i = 0; i < SN.length; i++) for (const w2 of SN[i].words) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap = $('cap');
+  if (wTxt && t > S(1) - .1 && t < S(14)) { cap.textContent = wTxt.toUpperCase().replace(/[.,!?:]/g, ''); cap.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+await document.fonts.load('900 60px P'); await document.fonts.load('800 20px P'); await document.fonts.ready;
+window.ready = true;
+</script></body></html>
