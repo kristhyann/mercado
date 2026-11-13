@@ -1,0 +1,1381 @@
+{
+ "duration": 91.949,
+ "sentences": [
+  {
+   "text": "Cada degrau dessa escada some no chão e volta por baixo dos seus pés.",
+   "start": 0.0,
+   "end": 4.52,
+   "words": [
+    {
+     "w": "Cada",
+     "start": 0.0,
+     "end": 0.26
+    },
+    {
+     "w": "degrau",
+     "start": 0.26,
+     "end": 0.68
+    },
+    {
+     "w": "dessa",
+     "start": 0.68,
+     "end": 0.88
+    },
+    {
+     "w": "escada",
+     "start": 0.88,
+     "end": 1.36
+    },
+    {
+     "w": "some",
+     "start": 1.36,
+     "end": 1.84
+    },
+    {
+     "w": "no",
+     "start": 1.84,
+     "end": 2.08
+    },
+    {
+     "w": "chão",
+     "start": 2.08,
+     "end": 2.42
+    },
+    {
+     "w": "e",
+     "start": 2.42,
+     "end": 2.7
+    },
+    {
+     "w": "volta",
+     "start": 2.7,
+     "end": 3.08
+    },
+    {
+     "w": "por",
+     "start": 3.08,
+     "end": 3.34
+    },
+    {
+     "w": "baixo",
+     "start": 3.34,
+     "end": 3.72
+    },
+    {
+     "w": "dos",
+     "start": 3.72,
+     "end": 3.94
+    },
+    {
+     "w": "seus",
+     "start": 3.94,
+     "end": 4.08
+    },
+    {
+     "w": "pés.",
+     "start": 4.08,
+     "end": 4.52
+    }
+   ]
+  },
+  {
+   "text": "Mas como?",
+   "start": 4.94,
+   "end": 5.48,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 4.94,
+     "end": 5.16
+    },
+    {
+     "w": "como?",
+     "start": 5.16,
+     "end": 5.48
+    }
+   ]
+  },
+  {
+   "text": "Pra entender, vamos construir uma escada rolante do zero.",
+   "start": 5.48,
+   "end": 9.38,
+   "words": [
+    {
+     "w": "Pra",
+     "start": 5.48,
+     "end": 6.28
+    },
+    {
+     "w": "entender,",
+     "start": 6.28,
+     "end": 6.66
+    },
+    {
+     "w": "vamos",
+     "start": 7.12,
+     "end": 7.22
+    },
+    {
+     "w": "construir",
+     "start": 7.22,
+     "end": 7.72
+    },
+    {
+     "w": "uma",
+     "start": 7.72,
+     "end": 7.94
+    },
+    {
+     "w": "escada",
+     "start": 7.94,
+     "end": 8.32
+    },
+    {
+     "w": "rolante",
+     "start": 8.32,
+     "end": 8.82
+    },
+    {
+     "w": "do",
+     "start": 8.82,
+     "end": 9.04
+    },
+    {
+     "w": "zero.",
+     "start": 9.04,
+     "end": 9.38
+    }
+   ]
+  },
+  {
+   "text": "Se você fizer uma escada comum, alguém ainda precisa subir degrau por degrau.",
+   "start": 9.9,
+   "end": 14.54,
+   "words": [
+    {
+     "w": "Se",
+     "start": 9.9,
+     "end": 10.02
+    },
+    {
+     "w": "você",
+     "start": 10.02,
+     "end": 10.22
+    },
+    {
+     "w": "fizer",
+     "start": 10.22,
+     "end": 10.52
+    },
+    {
+     "w": "uma",
+     "start": 10.52,
+     "end": 10.74
+    },
+    {
+     "w": "escada",
+     "start": 10.74,
+     "end": 11.04
+    },
+    {
+     "w": "comum,",
+     "start": 11.04,
+     "end": 11.48
+    },
+    {
+     "w": "alguém",
+     "start": 11.8,
+     "end": 12.1
+    },
+    {
+     "w": "ainda",
+     "start": 12.1,
+     "end": 12.44
+    },
+    {
+     "w": "precisa",
+     "start": 12.44,
+     "end": 12.88
+    },
+    {
+     "w": "subir",
+     "start": 12.88,
+     "end": 13.3
+    },
+    {
+     "w": "degrau",
+     "start": 13.3,
+     "end": 13.92
+    },
+    {
+     "w": "por",
+     "start": 13.92,
+     "end": 14.16
+    },
+    {
+     "w": "degrau.",
+     "start": 14.16,
+     "end": 14.54
+    }
+   ]
+  },
+  {
+   "text": "Então você solta os degraus e prende um no outro, formando um laço que dá a volta inteira.",
+   "start": 14.92,
+   "end": 20.72,
+   "words": [
+    {
+     "w": "Então",
+     "start": 14.92,
+     "end": 15.24
+    },
+    {
+     "w": "você",
+     "start": 15.36,
+     "end": 15.54
+    },
+    {
+     "w": "solta",
+     "start": 15.54,
+     "end": 16.06
+    },
+    {
+     "w": "os",
+     "start": 16.06,
+     "end": 16.18
+    },
+    {
+     "w": "degraus",
+     "start": 16.18,
+     "end": 16.68
+    },
+    {
+     "w": "e",
+     "start": 16.68,
+     "end": 16.92
+    },
+    {
+     "w": "prende",
+     "start": 16.92,
+     "end": 17.44
+    },
+    {
+     "w": "um",
+     "start": 17.44,
+     "end": 17.62
+    },
+    {
+     "w": "no",
+     "start": 17.62,
+     "end": 17.8
+    },
+    {
+     "w": "outro,",
+     "start": 17.8,
+     "end": 18.08
+    },
+    {
+     "w": "formando",
+     "start": 18.3,
+     "end": 18.74
+    },
+    {
+     "w": "um",
+     "start": 18.74,
+     "end": 18.92
+    },
+    {
+     "w": "laço",
+     "start": 18.92,
+     "end": 19.34
+    },
+    {
+     "w": "que",
+     "start": 19.34,
+     "end": 19.52
+    },
+    {
+     "w": "dá",
+     "start": 19.52,
+     "end": 19.64
+    },
+    {
+     "w": "a",
+     "start": 19.64,
+     "end": 19.76
+    },
+    {
+     "w": "volta",
+     "start": 19.76,
+     "end": 20.1
+    },
+    {
+     "w": "inteira.",
+     "start": 20.1,
+     "end": 20.72
+    }
+   ]
+  },
+  {
+   "text": "Esses são os degraus.",
+   "start": 21.14,
+   "end": 22.66,
+   "words": [
+    {
+     "w": "Esses",
+     "start": 21.14,
+     "end": 21.54
+    },
+    {
+     "w": "são",
+     "start": 21.54,
+     "end": 22.02
+    },
+    {
+     "w": "os",
+     "start": 22.02,
+     "end": 22.14
+    },
+    {
+     "w": "degraus.",
+     "start": 22.14,
+     "end": 22.66
+    }
+   ]
+  },
+  {
+   "text": "Mas alguém precisa puxar esse laço todo.",
+   "start": 22.92,
+   "end": 25.38,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 22.92,
+     "end": 23.2
+    },
+    {
+     "w": "alguém",
+     "start": 23.2,
+     "end": 23.54
+    },
+    {
+     "w": "precisa",
+     "start": 23.54,
+     "end": 23.92
+    },
+    {
+     "w": "puxar",
+     "start": 23.92,
+     "end": 24.56
+    },
+    {
+     "w": "esse",
+     "start": 24.56,
+     "end": 24.78
+    },
+    {
+     "w": "laço",
+     "start": 24.78,
+     "end": 25.08
+    },
+    {
+     "w": "todo.",
+     "start": 25.08,
+     "end": 25.38
+    }
+   ]
+  },
+  {
+   "text": "Então você liga os degraus numa corrente gigante, com rodinhas que correm em trilhos.",
+   "start": 25.38,
+   "end": 31.06,
+   "words": [
+    {
+     "w": "Então",
+     "start": 25.38,
+     "end": 26.04
+    },
+    {
+     "w": "você",
+     "start": 26.24,
+     "end": 26.46
+    },
+    {
+     "w": "liga",
+     "start": 26.46,
+     "end": 26.86
+    },
+    {
+     "w": "os",
+     "start": 26.86,
+     "end": 27.02
+    },
+    {
+     "w": "degraus",
+     "start": 27.02,
+     "end": 27.46
+    },
+    {
+     "w": "numa",
+     "start": 27.46,
+     "end": 27.64
+    },
+    {
+     "w": "corrente",
+     "start": 27.64,
+     "end": 28.16
+    },
+    {
+     "w": "gigante,",
+     "start": 28.16,
+     "end": 28.92
+    },
+    {
+     "w": "com",
+     "start": 29.08,
+     "end": 29.26
+    },
+    {
+     "w": "rodinhas",
+     "start": 29.26,
+     "end": 29.76
+    },
+    {
+     "w": "que",
+     "start": 29.76,
+     "end": 30.02
+    },
+    {
+     "w": "correm",
+     "start": 30.02,
+     "end": 30.46
+    },
+    {
+     "w": "em",
+     "start": 30.46,
+     "end": 30.62
+    },
+    {
+     "w": "trilhos.",
+     "start": 30.62,
+     "end": 31.06
+    }
+   ]
+  },
+  {
+   "text": "Essa é a corrente.",
+   "start": 31.46,
+   "end": 32.74,
+   "words": [
+    {
+     "w": "Essa",
+     "start": 31.46,
+     "end": 31.88
+    },
+    {
+     "w": "é",
+     "start": 31.88,
+     "end": 32.16
+    },
+    {
+     "w": "a",
+     "start": 32.16,
+     "end": 32.26
+    },
+    {
+     "w": "corrente.",
+     "start": 32.26,
+     "end": 32.74
+    }
+   ]
+  },
+  {
+   "text": "Mas a corrente sozinha não anda.",
+   "start": 33.14,
+   "end": 34.84,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 33.14,
+     "end": 33.3
+    },
+    {
+     "w": "a",
+     "start": 33.3,
+     "end": 33.44
+    },
+    {
+     "w": "corrente",
+     "start": 33.44,
+     "end": 33.78
+    },
+    {
+     "w": "sozinha",
+     "start": 33.78,
+     "end": 34.36
+    },
+    {
+     "w": "não",
+     "start": 34.36,
+     "end": 34.56
+    },
+    {
+     "w": "anda.",
+     "start": 34.56,
+     "end": 34.84
+    }
+   ]
+  },
+  {
+   "text": "Então você coloca lá em cima um motor que gira uma engrenagem e puxa tudo sem parar.",
+   "start": 35.22,
+   "end": 41.02,
+   "words": [
+    {
+     "w": "Então",
+     "start": 35.22,
+     "end": 35.52
+    },
+    {
+     "w": "você",
+     "start": 35.6,
+     "end": 35.8
+    },
+    {
+     "w": "coloca",
+     "start": 35.8,
+     "end": 36.2
+    },
+    {
+     "w": "lá",
+     "start": 36.2,
+     "end": 36.48
+    },
+    {
+     "w": "em",
+     "start": 36.48,
+     "end": 36.66
+    },
+    {
+     "w": "cima",
+     "start": 36.66,
+     "end": 36.98
+    },
+    {
+     "w": "um",
+     "start": 36.98,
+     "end": 37.3
+    },
+    {
+     "w": "motor",
+     "start": 37.3,
+     "end": 37.7
+    },
+    {
+     "w": "que",
+     "start": 37.7,
+     "end": 37.98
+    },
+    {
+     "w": "gira",
+     "start": 37.98,
+     "end": 38.38
+    },
+    {
+     "w": "uma",
+     "start": 38.38,
+     "end": 38.56
+    },
+    {
+     "w": "engrenagem",
+     "start": 38.56,
+     "end": 39.2
+    },
+    {
+     "w": "e",
+     "start": 39.2,
+     "end": 39.5
+    },
+    {
+     "w": "puxa",
+     "start": 39.5,
+     "end": 39.88
+    },
+    {
+     "w": "tudo",
+     "start": 39.88,
+     "end": 40.32
+    },
+    {
+     "w": "sem",
+     "start": 40.32,
+     "end": 40.7
+    },
+    {
+     "w": "parar.",
+     "start": 40.7,
+     "end": 41.02
+    }
+   ]
+  },
+  {
+   "text": "Esse é o motor.",
+   "start": 41.52,
+   "end": 42.58,
+   "words": [
+    {
+     "w": "Esse",
+     "start": 41.52,
+     "end": 41.88
+    },
+    {
+     "w": "é",
+     "start": 41.88,
+     "end": 42.2
+    },
+    {
+     "w": "o",
+     "start": 42.2,
+     "end": 42.3
+    },
+    {
+     "w": "motor.",
+     "start": 42.3,
+     "end": 42.58
+    }
+   ]
+  },
+  {
+   "text": "Parece estranho, mas lá no topo os degraus achatam, viram de cabeça pra baixo e voltam por dentro da escada.",
+   "start": 43.12,
+   "end": 50.28,
+   "words": [
+    {
+     "w": "Parece",
+     "start": 43.12,
+     "end": 43.4
+    },
+    {
+     "w": "estranho,",
+     "start": 43.4,
+     "end": 43.98
+    },
+    {
+     "w": "mas",
+     "start": 44.2,
+     "end": 44.36
+    },
+    {
+     "w": "lá",
+     "start": 44.36,
+     "end": 44.72
+    },
+    {
+     "w": "no",
+     "start": 44.72,
+     "end": 44.84
+    },
+    {
+     "w": "topo",
+     "start": 44.84,
+     "end": 45.34
+    },
+    {
+     "w": "os",
+     "start": 45.48,
+     "end": 45.5
+    },
+    {
+     "w": "degraus",
+     "start": 45.5,
+     "end": 45.94
+    },
+    {
+     "w": "achatam,",
+     "start": 45.94,
+     "end": 46.58
+    },
+    {
+     "w": "viram",
+     "start": 46.86,
+     "end": 47.16
+    },
+    {
+     "w": "de",
+     "start": 47.16,
+     "end": 47.28
+    },
+    {
+     "w": "cabeça",
+     "start": 47.28,
+     "end": 47.68
+    },
+    {
+     "w": "pra",
+     "start": 47.68,
+     "end": 47.88
+    },
+    {
+     "w": "baixo",
+     "start": 47.88,
+     "end": 48.24
+    },
+    {
+     "w": "e",
+     "start": 48.24,
+     "end": 48.6
+    },
+    {
+     "w": "voltam",
+     "start": 48.6,
+     "end": 49.06
+    },
+    {
+     "w": "por",
+     "start": 49.06,
+     "end": 49.28
+    },
+    {
+     "w": "dentro",
+     "start": 49.28,
+     "end": 49.66
+    },
+    {
+     "w": "da",
+     "start": 49.66,
+     "end": 49.86
+    },
+    {
+     "w": "escada.",
+     "start": 49.86,
+     "end": 50.28
+    }
+   ]
+  },
+  {
+   "text": "Por isso que a escada parece infinita: são sempre os mesmos degraus, dando a volta.",
+   "start": 50.56,
+   "end": 55.72,
+   "words": [
+    {
+     "w": "Por",
+     "start": 50.56,
+     "end": 50.84
+    },
+    {
+     "w": "isso",
+     "start": 50.84,
+     "end": 51.1
+    },
+    {
+     "w": "que",
+     "start": 51.1,
+     "end": 51.24
+    },
+    {
+     "w": "a",
+     "start": 51.24,
+     "end": 51.3
+    },
+    {
+     "w": "escada",
+     "start": 51.3,
+     "end": 51.66
+    },
+    {
+     "w": "parece",
+     "start": 51.66,
+     "end": 51.98
+    },
+    {
+     "w": "infinita:",
+     "start": 51.98,
+     "end": 52.78
+    },
+    {
+     "w": "são",
+     "start": 52.78,
+     "end": 53.28
+    },
+    {
+     "w": "sempre",
+     "start": 53.28,
+     "end": 53.8
+    },
+    {
+     "w": "os",
+     "start": 53.8,
+     "end": 53.98
+    },
+    {
+     "w": "mesmos",
+     "start": 53.98,
+     "end": 54.42
+    },
+    {
+     "w": "degraus,",
+     "start": 54.42,
+     "end": 54.96
+    },
+    {
+     "w": "dando",
+     "start": 54.96,
+     "end": 55.26
+    },
+    {
+     "w": "a",
+     "start": 55.26,
+     "end": 55.42
+    },
+    {
+     "w": "volta.",
+     "start": 55.42,
+     "end": 55.72
+    }
+   ]
+  },
+  {
+   "text": "Mas as pessoas precisam se segurar em alguma coisa que ande junto.",
+   "start": 56.06,
+   "end": 59.66,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 56.06,
+     "end": 56.3
+    },
+    {
+     "w": "as",
+     "start": 56.3,
+     "end": 56.48
+    },
+    {
+     "w": "pessoas",
+     "start": 56.48,
+     "end": 56.82
+    },
+    {
+     "w": "precisam",
+     "start": 56.82,
+     "end": 57.48
+    },
+    {
+     "w": "se",
+     "start": 57.48,
+     "end": 57.64
+    },
+    {
+     "w": "segurar",
+     "start": 57.64,
+     "end": 58.1
+    },
+    {
+     "w": "em",
+     "start": 58.1,
+     "end": 58.26
+    },
+    {
+     "w": "alguma",
+     "start": 58.26,
+     "end": 58.46
+    },
+    {
+     "w": "coisa",
+     "start": 58.46,
+     "end": 58.9
+    },
+    {
+     "w": "que",
+     "start": 58.9,
+     "end": 59.14
+    },
+    {
+     "w": "ande",
+     "start": 59.14,
+     "end": 59.36
+    },
+    {
+     "w": "junto.",
+     "start": 59.36,
+     "end": 59.66
+    }
+   ]
+  },
+  {
+   "text": "Então você coloca uma faixa de borracha que roda na mesma velocidade dos degraus.",
+   "start": 60.0,
+   "end": 65.04,
+   "words": [
+    {
+     "w": "Então",
+     "start": 60.0,
+     "end": 60.44
+    },
+    {
+     "w": "você",
+     "start": 60.54,
+     "end": 60.7
+    },
+    {
+     "w": "coloca",
+     "start": 60.7,
+     "end": 61.04
+    },
+    {
+     "w": "uma",
+     "start": 61.04,
+     "end": 61.3
+    },
+    {
+     "w": "faixa",
+     "start": 61.3,
+     "end": 61.72
+    },
+    {
+     "w": "de",
+     "start": 61.72,
+     "end": 61.88
+    },
+    {
+     "w": "borracha",
+     "start": 61.88,
+     "end": 62.34
+    },
+    {
+     "w": "que",
+     "start": 62.34,
+     "end": 62.62
+    },
+    {
+     "w": "roda",
+     "start": 62.62,
+     "end": 63.02
+    },
+    {
+     "w": "na",
+     "start": 63.02,
+     "end": 63.14
+    },
+    {
+     "w": "mesma",
+     "start": 63.14,
+     "end": 63.52
+    },
+    {
+     "w": "velocidade",
+     "start": 63.52,
+     "end": 64.12
+    },
+    {
+     "w": "dos",
+     "start": 64.12,
+     "end": 64.48
+    },
+    {
+     "w": "degraus.",
+     "start": 64.48,
+     "end": 65.04
+    }
+   ]
+  },
+  {
+   "text": "Esse é o corrimão.",
+   "start": 65.34,
+   "end": 66.62,
+   "words": [
+    {
+     "w": "Esse",
+     "start": 65.34,
+     "end": 65.76
+    },
+    {
+     "w": "é",
+     "start": 65.76,
+     "end": 66.08
+    },
+    {
+     "w": "o",
+     "start": 66.08,
+     "end": 66.18
+    },
+    {
+     "w": "corrimão.",
+     "start": 66.18,
+     "end": 66.62
+    }
+   ]
+  },
+  {
+   "text": "Mas onde o degrau entra no chão, um cadarço ou um dedo pode ficar preso.",
+   "start": 67.04,
+   "end": 71.58,
+   "words": [
+    {
+     "w": "Mas",
+     "start": 67.04,
+     "end": 67.2
+    },
+    {
+     "w": "onde",
+     "start": 67.2,
+     "end": 67.5
+    },
+    {
+     "w": "o",
+     "start": 67.5,
+     "end": 67.64
+    },
+    {
+     "w": "degrau",
+     "start": 67.64,
+     "end": 67.94
+    },
+    {
+     "w": "entra",
+     "start": 67.94,
+     "end": 68.28
+    },
+    {
+     "w": "no",
+     "start": 68.28,
+     "end": 68.48
+    },
+    {
+     "w": "chão,",
+     "start": 68.48,
+     "end": 68.78
+    },
+    {
+     "w": "um",
+     "start": 69.0,
+     "end": 69.16
+    },
+    {
+     "w": "cadarço",
+     "start": 69.16,
+     "end": 69.82
+    },
+    {
+     "w": "ou",
+     "start": 69.82,
+     "end": 70.02
+    },
+    {
+     "w": "um",
+     "start": 70.02,
+     "end": 70.14
+    },
+    {
+     "w": "dedo",
+     "start": 70.14,
+     "end": 70.52
+    },
+    {
+     "w": "pode",
+     "start": 70.52,
+     "end": 70.78
+    },
+    {
+     "w": "ficar",
+     "start": 70.78,
+     "end": 71.1
+    },
+    {
+     "w": "preso.",
+     "start": 71.1,
+     "end": 71.58
+    }
+   ]
+  },
+  {
+   "text": "Então você coloca uma placa com dentinhos que se encaixam nos sulcos do degrau e empurram tudo pra fora.",
+   "start": 71.84,
+   "end": 78.06,
+   "words": [
+    {
+     "w": "Então",
+     "start": 71.84,
+     "end": 72.16
+    },
+    {
+     "w": "você",
+     "start": 72.28,
+     "end": 72.46
+    },
+    {
+     "w": "coloca",
+     "start": 72.46,
+     "end": 72.76
+    },
+    {
+     "w": "uma",
+     "start": 72.76,
+     "end": 73.02
+    },
+    {
+     "w": "placa",
+     "start": 73.02,
+     "end": 73.44
+    },
+    {
+     "w": "com",
+     "start": 73.44,
+     "end": 73.66
+    },
+    {
+     "w": "dentinhos",
+     "start": 73.66,
+     "end": 74.26
+    },
+    {
+     "w": "que",
+     "start": 74.26,
+     "end": 74.52
+    },
+    {
+     "w": "se",
+     "start": 74.52,
+     "end": 74.66
+    },
+    {
+     "w": "encaixam",
+     "start": 74.66,
+     "end": 75.24
+    },
+    {
+     "w": "nos",
+     "start": 75.24,
+     "end": 75.4
+    },
+    {
+     "w": "sulcos",
+     "start": 75.4,
+     "end": 75.86
+    },
+    {
+     "w": "do",
+     "start": 75.86,
+     "end": 76.0
+    },
+    {
+     "w": "degrau",
+     "start": 76.0,
+     "end": 76.36
+    },
+    {
+     "w": "e",
+     "start": 76.36,
+     "end": 76.66
+    },
+    {
+     "w": "empurram",
+     "start": 76.66,
+     "end": 77.08
+    },
+    {
+     "w": "tudo",
+     "start": 77.08,
+     "end": 77.44
+    },
+    {
+     "w": "pra",
+     "start": 77.44,
+     "end": 77.72
+    },
+    {
+     "w": "fora.",
+     "start": 77.72,
+     "end": 78.06
+    }
+   ]
+  },
+  {
+   "text": "Esse é o pente de segurança.",
+   "start": 78.4,
+   "end": 80.1,
+   "words": [
+    {
+     "w": "Esse",
+     "start": 78.4,
+     "end": 78.76
+    },
+    {
+     "w": "é",
+     "start": 78.76,
+     "end": 79.04
+    },
+    {
+     "w": "o",
+     "start": 79.04,
+     "end": 79.16
+    },
+    {
+     "w": "pente",
+     "start": 79.16,
+     "end": 79.5
+    },
+    {
+     "w": "de",
+     "start": 79.5,
+     "end": 79.72
+    },
+    {
+     "w": "segurança.",
+     "start": 79.72,
+     "end": 80.1
+    }
+   ]
+  },
+  {
+   "text": "E se alguma coisa travar ali, a escada para sozinha.",
+   "start": 80.42,
+   "end": 84.16,
+   "words": [
+    {
+     "w": "E",
+     "start": 80.42,
+     "end": 80.78
+    },
+    {
+     "w": "se",
+     "start": 80.78,
+     "end": 80.88
+    },
+    {
+     "w": "alguma",
+     "start": 80.88,
+     "end": 81.14
+    },
+    {
+     "w": "coisa",
+     "start": 81.14,
+     "end": 81.52
+    },
+    {
+     "w": "travar",
+     "start": 81.52,
+     "end": 82.1
+    },
+    {
+     "w": "ali,",
+     "start": 82.1,
+     "end": 82.36
+    },
+    {
+     "w": "a",
+     "start": 82.64,
+     "end": 82.74
+    },
+    {
+     "w": "escada",
+     "start": 82.74,
+     "end": 83.14
+    },
+    {
+     "w": "para",
+     "start": 83.14,
+     "end": 83.5
+    },
+    {
+     "w": "sozinha.",
+     "start": 83.5,
+     "end": 84.16
+    }
+   ]
+  },
+  {
+   "text": "Parabéns, você construiu uma escada rolante.",
+   "start": 84.52,
+   "end": 87.58,
+   "words": [
+    {
+     "w": "Parabéns,",
+     "start": 84.52,
+     "end": 85.24
+    },
+    {
+     "w": "você",
+     "start": 85.42,
+     "end": 85.7
+    },
+    {
+     "w": "construiu",
+     "start": 85.7,
+     "end": 86.46
+    },
+    {
+     "w": "uma",
+     "start": 86.46,
+     "end": 86.64
+    },
+    {
+     "w": "escada",
+     "start": 86.64,
+     "end": 87.08
+    },
+    {
+     "w": "rolante.",
+     "start": 87.08,
+     "end": 87.58
+    }
+   ]
+  },
+  {
+   "text": "Segue a página, e não para no fim da escada.",
+   "start": 87.9,
+   "end": 90.58,
+   "words": [
+    {
+     "w": "Segue",
+     "start": 87.9,
+     "end": 88.28
+    },
+    {
+     "w": "a",
+     "start": 88.28,
+     "end": 88.38
+    },
+    {
+     "w": "página,",
+     "start": 88.38,
+     "end": 88.74
+    },
+    {
+     "w": "e",
+     "start": 88.74,
+     "end": 89.18
+    },
+    {
+     "w": "não",
+     "start": 89.18,
+     "end": 89.36
+    },
+    {
+     "w": "para",
+     "start": 89.36,
+     "end": 89.72
+    },
+    {
+     "w": "no",
+     "start": 89.72,
+     "end": 89.86
+    },
+    {
+     "w": "fim",
+     "start": 89.86,
+     "end": 90.06
+    },
+    {
+     "w": "da",
+     "start": 90.06,
+     "end": 90.18
+    },
+    {
+     "w": "escada.",
+     "start": 90.18,
+     "end": 90.58
+    }
+   ]
+  }
+ ]
+}

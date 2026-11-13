@@ -1,0 +1,376 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:230px;text-align:center;font-weight:900;font-size:108px;line-height:1.02}
+#hook b{color:#FFD21F;display:block;font-size:150px}
+#label{width:1080px;top:180px;text-align:center}
+#label span{display:inline-block;font-weight:900;font-size:96px;color:#FFD21F;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35);line-height:1.02}
+#cap{width:1080px;top:1290px;text-align:center;font-weight:900;font-size:118px}
+#cap.hl{color:#FFD21F}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:60px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF3B3B;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}
+.comic{font-weight:900;font-size:150px;color:#FFD21F;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 10px 0 rgba(0,0,0,.3);white-space:nowrap}
+#xmark{font-weight:900;font-size:300px;color:#FF2D2D;-webkit-text-stroke:12px #fff;paint-order:stroke fill;line-height:1}
+#final{left:60px;width:960px;top:1330px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:78px;line-height:1.05;padding:30px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#E11D74}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.8;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">POR QUE OS<br>DEGRAUS<b>SOMEM?</b></div>
+<div id="label" class="o"><span>X</span></div>
+<div id="t1" class="o tag"></div>
+<div id="xmark" class="o">✕</div>
+<div id="comic" class="o comic"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Segue a página,<br><em>e não para no fim da escada.</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, M, mesh } from '/_kit/kit.js';
+import { buildPerson, PP, poseP, face, mixP } from '/_kit/pessoas.js';
+
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; const S = i => SN[i].start, E = i => SN[i].end; window.DURATION = TP.duration;
+const WD = (i, re) => { const w = SN[i].words.find(w => re.test(w.w)); return w ? w.start : S(i); };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(window.devicePixelRatio || 1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .03, 600);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const box = (w, h, d, c, x, y, z, par = scene, o = {}) => mesh(new THREE.BoxGeometry(w, h, d), typeof c === 'number' ? M(c, o) : c, x, y, z, par);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+
+// ---------- tempos ----------
+const T_SOLTA = WD(4, /solta/i), T_LACO = WD(4, /laço/i), T_INTEIRA = WD(4, /inteira/i);
+const T_CORR = WD(7, /corrente/i), T_TRILHOS = WD(7, /trilhos/i), T_MOTOR = WD(10, /motor/i), T_ENGR = WD(10, /engrenagem/i), T_PUXA = WD(10, /puxa/i);
+const T_ACHATA = WD(12, /achatam/i), T_VIRAM = WD(12, /viram/i), T_VOLTAM = WD(12, /voltam/i);
+const T_FAIXA = WD(15, /faixa/i), T_VELOC = WD(15, /velocidade/i);
+const T_CADARCO = WD(17, /cadarço/i), T_DEDO = WD(17, /dedo/i), T_PLACA = WD(18, /placa/i), T_ENCAIXA = WD(18, /encaixam/i), T_EMPURRA = WD(18, /empurram/i);
+const T_TRAVAR = WD(20, /travar/i), T_PARA = WD(20, /^para$/i), T_PARAB = S(21);
+
+// ---------- luz / fundo ----------
+scene.background = new THREE.Color(0xBFE3F2);
+const sun = new THREE.DirectionalLight(0xFFF0D8, 2.4); sun.position.set(5, 12, 9); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+{ const sc = sun.shadow.camera; sc.left = -9; sc.right = 9; sc.top = 9; sc.bottom = -9; sc.far = 40; } sun.shadow.bias = -.0004; scene.add(sun);
+const hemi = new THREE.HemisphereLight(0xEAF6FF, 0x8E7A6A, 1.25); scene.add(hemi);
+const rim = new THREE.DirectionalLight(0xFFE2C0, .9); rim.position.set(-6, 5, -8); scene.add(rim);
+
+// ---------- geometria do caminho dos degraus ----------
+const HT = 2.4, XA = -1.8, XB = 1.8, X0 = -3.0, X1 = 3.0, R = .32, BL = .55;
+const ramp = u => u < -BL ? 0 : u > BL ? u : (u + BL) * (u + BL) / (4 * BL);
+const K = HT / (XB - XA);
+const yTop = x => K * (ramp(x - XA) - ramp(x - XB));
+const slopeAt = x => { const e = .002; return Math.atan2(yTop(x + e) - yTop(x - e), 2 * e); };
+// laço fechado: (x,y,rot)
+const PTS = [];
+for (let i = 0; i <= 240; i++) { const x = lerp(X0, X1, i / 240); PTS.push({ x, y: yTop(x), r: 0, top: 1 }); }
+for (let i = 1; i <= 40; i++) { const th = Math.PI / 2 - Math.PI * i / 40; PTS.push({ x: X1 + R * Math.cos(th), y: HT - R + R * Math.sin(th), r: Math.PI * i / 40, top: 0 }); }
+for (let i = 1; i <= 240; i++) { const x = lerp(X1, X0, i / 240); PTS.push({ x, y: yTop(x) - 2 * R, r: Math.PI, top: 0 }); }
+for (let i = 1; i < 40; i++) { const th = 1.5 * Math.PI - Math.PI * i / 40; PTS.push({ x: X0 + R * Math.cos(th), y: -R + R * Math.sin(th), r: Math.PI + Math.PI * i / 40, top: 0 }); }
+const CUM = [0]; for (let i = 1; i <= PTS.length; i++) { const a = PTS[i - 1], b = PTS[i % PTS.length]; CUM.push(CUM[i - 1] + Math.hypot(b.x - a.x, b.y - a.y)); }
+const LEN = CUM[PTS.length];
+function at(s) {
+  s = ((s % LEN) + LEN) % LEN; let lo = 0, hi = PTS.length; while (hi - lo > 1) { const m = (lo + hi) >> 1; if (CUM[m] <= s) lo = m; else hi = m; }
+  const a = PTS[lo], b = PTS[(lo + 1) % PTS.length]; const u = (s - CUM[lo]) / Math.max(1e-6, CUM[lo + 1] - CUM[lo]);
+  let rb = b.r; if (lo === PTS.length - 1) rb = 2 * Math.PI;
+  return { x: lerp(a.x, b.x, u), y: lerp(a.y, b.y, u), r: lerp(a.r, rb, u), top: a.top && b.top, ang: Math.atan2(b.y - a.y, b.x - a.x) };
+}
+const NST = Math.round(LEN / .4), LS = LEN / NST;
+const S_TOP0 = CUM[0], S_TOP1 = CUM[240];
+
+// velocidade -> deslocamento (integrado)
+const vAt = t => {
+  if (t < S(2)) return .5;
+  if (t < T_PUXA) return 0;
+  if (t < T_TRAVAR + .6) return .5 * ease(clamp((t - T_PUXA) / .9));
+  if (t < T_PARAB) return .5 * (1 - clamp((t - T_TRAVAR - .6) / .35));
+  return .5 * ease(clamp((t - T_PARAB) / .8));
+};
+const DT = 1 / 240, OFF = [0]; for (let k = 1; k < (TP.duration + 2) / DT; k++) OFF.push(OFF[k - 1] + vAt(k * DT) * DT);
+const offAt = t => { const k = clamp(t / DT, 0, OFF.length - 2); const i = Math.floor(k); return lerp(OFF[i], OFF[i + 1], k - i); };
+const OFF_S2 = offAt(S(2));
+
+// ---------- prédio em corte ----------
+const floorTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d'); for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) { g.fillStyle = (i + j) % 2 ? '#F4EBDD' : '#E7D9C3'; g.fillRect(i * 64, j * 64, 64, 64); } g.strokeStyle = '#CDBB9F'; g.lineWidth = 2; for (let i = 0; i <= 4; i++) { g.beginPath(); g.moveTo(i * 64, 0); g.lineTo(i * 64, 256); g.stroke(); g.beginPath(); g.moveTo(0, i * 64); g.lineTo(256, i * 64); g.stroke(); } const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(6, 6); return t; })();
+const floorM = new THREE.MeshStandardMaterial({ map: floorTex, roughness: .7 });
+const concM = M(0xB9B2A8), concD = M(0x8D857B);
+const fl = (x0, x1, z0, z1, y, th = .3, m = floorM) => { const b = box(x1 - x0, th, z1 - z0, m, (x0 + x1) / 2, y - th / 2, (z0 + z1) / 2); b.receiveShadow = true; return b; };
+// térreo
+fl(-9, 9, -6, -.72, 0); fl(-9, -3.65, -.72, 4, 0);
+box(18, 1.2, 5.28, concM, 0, -.9, -3.36); // corte do fosso
+box(18, .2, 10, concD, 0, -1.5, 0).receiveShadow = true;
+// andar de cima
+fl(2.55, 9, -6, -.72, HT, .45); fl(3.95, 9, -.72, 4, HT, .45);
+box(6.45, 1.4, 5.28, concM, 5.78, HT - 1.15, -3.36);
+box(5.05, HT - .45 + 1.4, .2, concD, 6.48, (HT - .45 - 1.4) / 2, -.62);
+// parede do fundo colorida e lojinhas
+box(18, 6, .2, 0xF4C6D7, 0, 2.5, -6);
+const shopCols = [0xFFD21F, 0x3B82F6, 0x22C55E, 0xFF8A1F];
+for (let i = 0; i < 4; i++) { const sx = -6 + i * 4; box(2.6, 1.3, .1, 0xFFFFFF, sx, .9, -5.85); box(2.8, .35, .14, shopCols[i], sx, 1.75, -5.82); box(2.6, 1.0, .1, 0xDFF3FB, sx + .3, HT + 1.0, -5.85); box(2.8, .3, .14, shopCols[(i + 2) % 4], sx + .3, HT + 1.65, -5.82); }
+// placas de piso (patamares) sobre o fosso
+const landM = M(0xC8CED6, { metalness: .5, roughness: .35 });
+box(1.1, .05, 1.3, landM, 3.1, HT, 0).receiveShadow = true;
+box(1.1, .05, 1.3, landM, -3.1, 0, 0).receiveShadow = true;
+// treliça (painel do fundo) — cortada na frente
+{ const sh = new THREE.Shape(); const xs = []; for (let i = 0; i <= 60; i++) xs.push(lerp(X0 - .45, X1 + .45, i / 60)); sh.moveTo(xs[0], yTop(xs[0]) - .05); xs.forEach(x => sh.lineTo(x, yTop(x) - .05)); [...xs].reverse().forEach(x => sh.lineTo(x, yTop(x) - 2 * R - .45)); sh.closePath();
+  const tr = new THREE.Mesh(new THREE.ShapeGeometry(sh), new THREE.MeshStandardMaterial({ color: 0x5B6B82, roughness: .6, side: THREE.DoubleSide })); tr.position.z = -.7; tr.receiveShadow = true; scene.add(tr);
+  const bm = M(0x7F8EA3, { metalness: .4 });
+  for (let i = 0; i <= 12; i++) { const x = lerp(X0, X1, i / 12); const b = box(.06, .5, .06, bm, x, yTop(x) - 2 * R - .2, -.66); }
+}
+
+// ---------- degraus ----------
+const groove = (() => { const c = document.createElement('canvas'); c.width = 64; c.height = 256; const g = c.getContext('2d'); g.fillStyle = '#B9C1CB'; g.fillRect(0, 0, 64, 256); g.fillStyle = '#7C8693'; for (let i = 0; i < 256; i += 12) g.fillRect(0, i, 64, 5); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; })();
+const treadM = new THREE.MeshStandardMaterial({ map: groove, roughness: .5, metalness: .3 });
+const redM = new THREE.MeshStandardMaterial({ color: 0xFF3B5C, roughness: .5, emissive: 0x330010 });
+const riserM = M(0x6E7886, { metalness: .3 }); const yelM = M(0xFFD21F);
+const STEPS = [];
+const riserGeo = new THREE.BoxGeometry(.03, 1, .98); riserGeo.translate(0, .5, 0);
+for (let i = 0; i < NST; i++) {
+  const g = grp(); const tr = box(.33, .05, .98, treadM, 0, 0, 0, g); tr.castShadow = true; tr.receiveShadow = true;
+  const ed = box(.045, .052, .98, yelM, .145, .002, 0, g);
+  const ri = mesh(riserGeo, riserM, .165, 0, 0, g); ri.castShadow = true;
+  const ax = box(.05, .05, 1.16, 0x444C57, -.1, -.06, 0, g);
+  STEPS.push({ g, tr, ed, ri });
+}
+// ---------- corrente, rodinhas e trilhos ----------
+const NL = Math.round(LEN / .085), LL = LEN / NL;
+const linkM = M(0x3A3F47, { metalness: .6, roughness: .4 });
+const links = new THREE.InstancedMesh(new THREE.BoxGeometry(.075, .03, .03), linkM, NL * 2); scene.add(links);
+const pins = new THREE.InstancedMesh(new THREE.CylinderGeometry(.018, .018, .05, 6), M(0xC9CED6, { metalness: .7 }), NL * 2); scene.add(pins);
+const rollers = new THREE.InstancedMesh(new THREE.CylinderGeometry(.045, .045, .04, 10), M(0x111111), NST * 2); scene.add(rollers);
+const railPts = PTS.filter((_, i) => i % 4 === 0).map(p => V(p.x, p.y - .06, 0));
+const railCurve = new THREE.CatmullRomCurve3(railPts, true);
+const railM = M(0xC0C6CE, { metalness: .7, roughness: .3 });
+const rails = [-1, 1].map(s => { const m = new THREE.Mesh(new THREE.TubeGeometry(railCurve, 400, .018, 6, true), railM); m.position.z = s * .64; scene.add(m); return m; });
+// rodas dentadas nas pontas
+function sprocket(cx, cy) {
+  const g = grp(); g.position.set(cx, cy, 0);
+  for (const s of [-1, 1]) { const w = mesh(new THREE.CylinderGeometry(R - .03, R - .03, .05, 18), M(0x9AA3AE, { metalness: .6 }), 0, 0, s * .58, g); w.rotation.x = Math.PI / 2; for (let k = 0; k < 14; k++) { const tth = box(.07, .06, .05, 0x7A838F, Math.cos(k / 14 * 6.283) * (R - .01), Math.sin(k / 14 * 6.283) * (R - .01), s * .58, g); tth.rotation.z = k / 14 * 6.283; } }
+  const ax = mesh(new THREE.CylinderGeometry(.05, .05, 1.3, 10), M(0x555555), 0, 0, 0, g); ax.rotation.x = Math.PI / 2;
+  return g;
+}
+const sprTop = sprocket(X1, HT - R), sprBot = sprocket(X0, -R);
+// ---------- motor ----------
+const motor = grp(); motor.position.set(3.55, 1.25, .25);
+{ const mb = mesh(new THREE.CylinderGeometry(.24, .24, .6, 14), M(0x2563EB), 0, 0, 0, motor); mb.rotation.x = Math.PI / 2; mb.castShadow = true;
+  for (let k = 0; k < 6; k++) { const f = mesh(new THREE.TorusGeometry(.245, .02, 4, 16), M(0x1D4ED8), 0, 0, -.25 + k * .1, motor); }
+  box(.55, .08, .5, 0x334155, 0, -.27, 0, motor); box(.18, .14, .14, 0xFFD21F, 0, .28, -.1, motor);
+}
+const gearM = M(0xFF8A1F, { metalness: .3 });
+function gear(r, n, par) { const g = grp(par); const c = mesh(new THREE.CylinderGeometry(r, r, .06, 20), gearM, 0, 0, 0, g); c.rotation.x = Math.PI / 2; for (let k = 0; k < n; k++) { const tt = box(.06, .07, .06, gearM, Math.cos(k / n * 6.283) * r, Math.sin(k / n * 6.283) * r, 0, g); tt.rotation.z = k / n * 6.283; } mesh(new THREE.CylinderGeometry(.04, .04, .08, 8), M(0x333333), 0, 0, 0, g).rotation.x = Math.PI / 2; return g; }
+const gMotor = gear(.11, 9, scene); gMotor.position.set(3.55, 1.25, .62);
+const gBig = gear(.3, 20, scene); gBig.position.set(X1, HT - R, .72);
+const beltCurve = (() => { const a = V(3.55, 1.25, .67), b = V(X1, HT - R, .67); const pts = []; const d = b.clone().sub(a).normalize(); const nrm = V(-d.y, d.x, 0);
+  pts.push(a.clone().addScaledVector(nrm, .11), b.clone().addScaledVector(nrm, .3)); for (let k = 0; k <= 10; k++) { const th = Math.atan2(nrm.y, nrm.x) - Math.PI * k / 10; pts.push(b.clone().add(V(Math.cos(th) * .3, Math.sin(th) * .3, 0))); }
+  pts.push(a.clone().addScaledVector(nrm, -.11)); for (let k = 0; k <= 10; k++) { const th = Math.atan2(-nrm.y, -nrm.x) - Math.PI * k / 10; pts.push(a.clone().add(V(Math.cos(th) * .11, Math.sin(th) * .11, 0))); }
+  return new THREE.CatmullRomCurve3(pts, true); })();
+const belt = new THREE.Mesh(new THREE.TubeGeometry(beltCurve, 120, .022, 5, true), M(0x222222)); scene.add(belt);
+const sparks = []; for (let i = 0; i < 10; i++) { const s = mesh(new THREE.OctahedronGeometry(.04), new THREE.MeshBasicMaterial({ color: 0xFFE066 }), 0, 0, 0); sparks.push(s); }
+// ---------- corrimão + vidro ----------
+const glassM = new THREE.MeshStandardMaterial({ color: 0xCDEFFF, transparent: true, opacity: .32, roughness: .1, side: THREE.DoubleSide, depthWrite: false });
+const glasses = [-1, 1].map(s => { const sh = new THREE.Shape(); const xs = []; for (let i = 0; i <= 60; i++) xs.push(lerp(X0 - .3, X1 + .3, i / 60)); sh.moveTo(xs[0], yTop(xs[0]) + .06); xs.forEach(x => sh.lineTo(x, yTop(x) + .06)); [...xs].reverse().forEach(x => sh.lineTo(x, yTop(x) + .86)); sh.closePath(); const m = new THREE.Mesh(new THREE.ShapeGeometry(sh), glassM); m.position.z = s * .62; scene.add(m); return m; });
+const hrTex = (() => { const c = document.createElement('canvas'); c.width = 256; c.height = 16; const g = c.getContext('2d'); g.fillStyle = '#1E1E24'; g.fillRect(0, 0, 256, 16); g.fillStyle = '#FFD21F'; g.fillRect(0, 0, 18, 16); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; return t; })();
+const hrPts = []; { const xa = X0 - .35, xb = X1 + .35, rr = .2; for (let i = 0; i <= 60; i++) { const x = lerp(xa, xb, i / 60); hrPts.push(V(x, yTop(x) + .92, 0)); } for (let k = 1; k < 10; k++) { const th = Math.PI / 2 - Math.PI * k / 10; hrPts.push(V(xb + rr * Math.cos(th), yTop(xb) + .72 + rr * Math.sin(th), 0)); } for (let i = 0; i <= 60; i++) { const x = lerp(xb, xa, i / 60); hrPts.push(V(x, yTop(x) + .52, 0)); } for (let k = 1; k < 10; k++) { const th = -Math.PI / 2 - Math.PI * k / 10; hrPts.push(V(xa + rr * Math.cos(th), yTop(xa) + .72 + rr * Math.sin(th), 0)); } }
+const hrCurve = new THREE.CatmullRomCurve3(hrPts, true); const HRLEN = hrCurve.getLength(); hrTex.repeat.set(Math.round(HRLEN / .5), 1);
+const hrM = new THREE.MeshStandardMaterial({ map: hrTex, roughness: .5 });
+const handrails = [-1, 1].map(s => { const m = new THREE.Mesh(new THREE.TubeGeometry(hrCurve, 300, .045, 8, true), hrM); m.position.z = s * .64; m.castShadow = true; scene.add(m); return m; });
+// ---------- pentes de segurança ----------
+function comb(x, y, dir) {
+  const g = grp(); g.position.set(x, y, 0);
+  box(.16, .06, 1.0, 0xFFD21F, dir * -.08 + dir * .08, .02, 0, g);
+  for (let k = 0; k < 19; k++) { const tt = box(.14, .025, .028, 0xF5B800, -dir * .1, .0, -.45 + k * .05, g); tt.rotation.z = dir * .12; }
+  return g;
+}
+const combTop = comb(2.55, HT + .02, 1), combBot = comb(-2.55, .02, -1);
+// ---------- pessoas ----------
+const walker = buildPerson({ shirt: 0xE11D74, pants: 0x1E3A8A, hair: 0x3B2416 }); scene.add(walker.root); walker.root.scale.setScalar(.72);
+const rider = buildPerson({ shirt: 0x22C55E, pants: 0x334155, hair: 0x111111, hairStyle: 'bun', skin: 0xA86E4E }); scene.add(rider.root); rider.root.scale.setScalar(.72);
+const sweat = []; for (let i = 0; i < 3; i++) sweat.push(mesh(new THREE.IcosahedronGeometry(.03, 0), M(0x7DD3FC), 0, 0, 0, walker.head));
+// tênis com cadarço
+const shoe = grp(); { box(.36, .12, .16, 0xFF3B3B, 0, .06, 0, shoe); box(.36, .03, .17, 0xFFFFFF, 0, .015, 0, shoe); box(.16, .08, .15, 0xFF3B3B, -.08, .15, 0, shoe); }
+const lacePts = () => [V(.05, .14, .06), V(.18, .08, .1), V(.32, .03, .12), V(.45, -.02, .1)];
+const laceM = M(0xFFFFFF);
+let lace = null;
+// confete
+const conf = []; const confCols = [0xFF3B3B, 0x3B82F6, 0xFFD21F, 0x22C55E, 0xA855F7, 0xFF8A1F]; for (let i = 0; i < 70; i++) { const c = box(.08, .08, .01, new THREE.MeshBasicMaterial({ color: confCols[i % 6], side: THREE.DoubleSide }), 0, 0, 0); c.userData = { x: Math.sin(i * 12.9) * 3.5, z: Math.cos(i * 7.3) * 1.5, s: .6 + (i % 7) / 7 }; conf.push(c); }
+// luz de parada
+const stopLight = mesh(new THREE.SphereGeometry(.07, 10, 8), new THREE.MeshBasicMaterial({ color: 0xFF2D2D }), 2.9, HT + .95, .66); stopLight.visible = false;
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [S(1), 'pop'], [S(2), 'whoosh'], [T_SOLTA, 'pop'], [S(5), 'ding'], [T_CORR, 'pop'], [T_TRILHOS, 'clang'], [S(8), 'ding'], [T_MOTOR, 'clang'], [T_PUXA, 'zap'], [S(11), 'ding'],
+ [T_ACHATA, 'whoosh'], [T_VIRAM, 'boing'], [S(13), 'pop'], [S(14), 'boing'], [T_FAIXA, 'pop'], [S(16), 'ding'], [T_CADARCO, 'buzz'], [T_PLACA, 'clang'], [T_EMPURRA, 'pop'], [S(19), 'ding'], [T_TRAVAR, 'crack'], [T_PARA, 'buzzx'], [T_PARAB, 'win']].forEach(([t, k]) => ev(t, k));
+for (let k = 0; k < 14; k++) ev(T_SOLTA + .25 + k * (T_INTEIRA - T_SOLTA) / 14, 'pop');
+[3, 9].forEach(i => ev(S(i) + .3, 'buzz'));
+const LBL = [[S(5), 'DEGRAUS'], [S(6), ''], [S(8), 'CORRENTE'], [S(9), ''], [S(11), 'MOTOR'], [S(12), ''], [S(16), 'CORRIMÃO'], [S(17), ''], [S(19), 'PENTE DE<br>SEGURANÇA'], [S(20), '']];
+const HL = /degrau|escada|corrente|rodinhas|trilhos|motor|engrenagem|achatam|cabeça|infinita|mesmos|corrimão|borracha|velocidade|cadarço|dedo|pente|segurança|dentinhos|sulcos|travar|sozinha|rolante|placa|laço/i;
+
+// câmera
+const KEYS = [
+  [0, [1.0, 3.55, 2.2], [2.55, 2.35, 0]],
+  [2.4, [-9.6, 5.0, 7.4], [.3, 1.0, 0]],
+  [S(2), [-8.0, 6.6, 8.8], [.3, .7, 0]],
+  [S(3), [-1.0, 2.6, 6.0], [-.4, 1.2, 0]],
+  [S(4), [-9.6, 5.0, 7.4], [.3, .95, 0]],
+  [S(6), [-7.6, 3.2, 5.6], [.3, 1.0, 0]],
+  [S(7), [-4.6, 1.3, 3.6], [-2.4, .1, .2]],
+  [T_TRILHOS, [-1.2, 1.2, 4.4], [.2, .9, 0]],
+  [S(9), [-9.6, 5.0, 7.4], [.3, .95, 0]],
+  [S(10), [2.2, 1.9, 4.0], [3.3, 1.55, .3]],
+  [S(12), [3.4, 2.9, 4.6], [2.5, 1.7, 0]],
+  [S(13), [-9.6, 5.0, 7.4], [.3, .95, 0]],
+  [S(14), [-3.6, 3.0, 5.2], [-.6, 1.1, .3]],
+  [S(15), [-2.6, 4.0, 6.8], [.3, 1.9, .4]],
+  [S(17), [1.6, 3.4, 2.0], [2.55, 2.35, .1]],
+  [S(20), [-5.5, 4.6, 6.2], [1.0, 1.6, 0]],
+  [S(21), [-10.2, 5.3, 7.9], [.3, 1.0, 0]],
+  [TP.duration, [-9.2, 4.9, 7.1], [.3, 1.0, 0]],
+];
+function camAt(t) {
+  let i = 0; while (i + 1 < KEYS.length && KEYS[i + 1][0] <= t) i++;
+  const b = KEYS[i], a = KEYS[Math.max(0, i - 1)]; const u = b === a ? 1 : ease(clamp((t - b[0]) / .9));
+  const tg = V(...a[2]).lerp(V(...b[2]), u); const p = V(...a[1]).lerp(V(...b[1]), u);
+  p.x += Math.sin(t * .35) * .06; p.y += Math.sin(t * .27) * .03;
+  cam.position.copy(p); cam.lookAt(tg); cam.fov = 40; cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+}
+const dummy = new THREE.Object3D();
+const stepPos = (i, off) => at(i * LS + off);
+// degrau mais próximo de um x na corrida de cima (para a pessoa)
+function stepTopY(x, off) { let best = 0, bd = 9; for (let i = 0; i < NST; i++) { const p = stepPos(i, off); if (!p.top) continue; const d = Math.abs(p.x - x); if (d < bd) { bd = d; best = p.y; } } return best + .025; }
+// degrau que fica no ponto de entrada/saída na hora do gancho (vermelho)
+const RED = (() => { let best = 0, bd = 99; for (let i = 0; i < NST; i++) { const p = stepPos(i, 0); const d = Math.abs(p.x - 1.6) + (p.top ? 0 : 9); if (d < bd) { bd = d; best = i; } } return best; })();
+
+window.draw = function (t) {
+  camAt(t);
+  const intro = t < S(2) + .1;
+  const off = offAt(t);
+  // ---- degraus ----
+  const staticStairs = win(t, S(2) + .1, T_SOLTA);
+  STEPS.forEach((st, i) => {
+    const p = stepPos(i, off);
+    let vis = intro || t >= T_SOLTA;
+    let sc = 1;
+    if (staticStairs) { vis = p.top && p.x > XA - .9 && p.x < XB + .9 && t > S(3) - .3; sc = pop(t - S(3) + .3 - (p.x + 3) * .04, .3); }
+    if (!intro && t >= T_SOLTA && t < T_INTEIRA + 1) { const q = ((i * LS + off - S_TOP0) % LEN + LEN) % LEN / LEN; const wasTop = p.top && p.x > XA - .9 && p.x < XB + .9; if (!wasTop) sc = pop(t - T_SOLTA - q * (T_INTEIRA - T_SOLTA), .3); }
+    st.g.visible = vis && sc > .001; if (!st.g.visible) return;
+    st.g.position.set(p.x, p.y, 0); st.g.rotation.z = -p.r; st.g.scale.setScalar(Math.max(.001, sc));
+    const sl = p.top ? slopeAt(p.x) : (p.r > 3.1 && p.r < 3.18 ? slopeAt(p.x) : 0);
+    const h = Math.max(.001, LS * Math.sin(Math.abs(sl)) - .01);
+    st.ri.scale.y = h;
+    const red = i === RED && (t < S(2) || win(t, S(12), S(14)));
+    st.tr.material = red ? redM : treadM;
+  });
+  // ---- corrente e rodinhas ----
+  const chainOn = intro || t >= T_CORR;
+  links.visible = pins.visible = rollers.visible = chainOn;
+  if (chainOn) {
+    const grow = intro ? 1 : clamp((t - T_CORR) / 1.4);
+    let n = 0;
+    for (let k = 0; k < NL; k++) { const q = k / NL; const p = at(k * LL + off); const show = q <= grow; for (const s of [-1, 1]) { dummy.position.set(p.x, p.y - .06, s * .58); dummy.rotation.set(0, 0, p.ang); dummy.scale.setScalar(show ? 1 : 0); dummy.updateMatrix(); links.setMatrixAt(n, dummy.matrix); dummy.rotation.set(Math.PI / 2, 0, 0); dummy.updateMatrix(); pins.setMatrixAt(n, dummy.matrix); n++; } }
+    links.instanceMatrix.needsUpdate = true; pins.instanceMatrix.needsUpdate = true;
+    let m = 0;
+    for (let i = 0; i < NST; i++) { const p = stepPos(i, off); const q = (((i * LS + off) % LEN) + LEN) % LEN / LEN; const show = q <= grow || intro; for (const s of [-1, 1]) { dummy.position.set(p.x, p.y - .06, s * .62); dummy.rotation.set(Math.PI / 2, 0, 0); dummy.scale.setScalar(show ? 1 : 0); dummy.updateMatrix(); rollers.setMatrixAt(m++, dummy.matrix); } }
+    rollers.instanceMatrix.needsUpdate = true;
+  }
+  const railOn = intro || t >= T_TRILHOS - .2; rails.forEach(r => { r.visible = railOn; r.scale.setScalar(1); });
+  const sprOn = intro || t >= T_CORR; sprTop.visible = sprBot.visible = sprOn;
+  sprTop.rotation.z = -off / R; sprBot.rotation.z = -off / R;
+  // ---- motor ----
+  const motOn = intro || t >= T_MOTOR - .2; motor.visible = gMotor.visible = gBig.visible = belt.visible = motOn;
+  if (motOn) { const s = intro ? 1 : pop(t - T_MOTOR + .2, .35); motor.scale.setScalar(Math.max(.001, s)); gMotor.scale.setScalar(Math.max(.001, s)); gBig.scale.setScalar(Math.max(.001, s)); belt.scale.setScalar(1); belt.visible = s > .9;
+    gBig.rotation.z = -off / R; gMotor.rotation.z = -off / R * (.3 / .11);
+    const spinOnly = win(t, T_ENGR, T_PUXA) ? (t - T_ENGR) * 6 : 0; if (spinOnly) gMotor.rotation.z -= spinOnly; }
+  sparks.forEach((s, i) => { const u = (t - T_PUXA) * 1.5 - i * .05; s.visible = u > 0 && u < .7; if (!s.visible) return; s.position.set(3.55 + Math.cos(i * 2.1) * u * .9, 1.55 + Math.sin(i * 1.3) * u * .5 + u * .4, .7); });
+  // ---- corrimão ----
+  const hrOn = intro || t >= T_FAIXA - .2; handrails.forEach(h => h.visible = hrOn); glasses.forEach(g => g.visible = hrOn);
+  if (hrOn && !intro) { const s = pop(t - T_FAIXA + .2, .35); handrails.forEach(h => h.scale.set(1, Math.max(.001, s), 1)); glasses.forEach(g => g.scale.set(1, Math.max(.001, s), 1)); }
+  else handrails.forEach(h => h.scale.set(1, 1, 1));
+  hrTex.offset.x = -off / HRLEN * hrTex.repeat.x;
+  // ---- pentes ----
+  const cOn = intro || t >= T_PLACA - .2; combTop.visible = combBot.visible = cOn;
+  if (cOn && !intro) { const s = pop(t - T_PLACA + .2, .35); combTop.scale.setScalar(Math.max(.001, s)); combBot.scale.setScalar(Math.max(.001, s)); }
+  // ---- pessoa subindo a pé (escada comum) ----
+  walker.root.visible = win(t, S(3) - .1, T_SOLTA);
+  if (walker.root.visible) { const u = clamp((t - S(3)) / (T_SOLTA - S(3))); const x = lerp(-2.4, .4, u); walker.root.position.set(x, stepTopY(x, OFF_S2), .15); walker.root.rotation.y = Math.PI / 2; poseP(walker, mixP(PP.stand, { ...PP.stand, lean: .25, hx: .2 }, clamp(u * 2)), 1, t); face(walker, u > .3 ? 'sad' : 'neutral', t);
+    sweat.forEach((s, i) => { const k = ((t * 1.3 + i / 3) % 1); s.visible = u > .3; s.position.set(.12 - i * .1, .1 - k * .25, .1); }); }
+  // ---- pessoa na escada ----
+  rider.root.visible = t >= S(14) - .1 && t < S(17);
+  if (rider.root.visible) {
+    const s0 = (() => { const p0 = at(S_TOP0 + 0); return 0; })();
+    const ride = clamp((offAt(t) - offAt(S(14))) / 1); // segue a esteira
+    const x = -1.3 + (offAt(t) - offAt(S(14))) * Math.cos(.55);
+    const xx = Math.min(x, 2.3);
+    rider.root.position.set(xx, yTop(xx) + .025, .2); rider.root.rotation.y = Math.PI / 2;
+    const holding = t >= T_FAIXA + .2;
+    const wob = holding ? 0 : Math.sin(t * 9) * .18;
+    const P = holding ? { ...PP.stand, rx: -.25, rz: -.55, re: -.35 } : { ...PP.stand, lx: -.8, lz: 1.2, rx: -.8, rz: -1.2, le: -.3, re: -.3 };
+    poseP(rider, P, 0, t); rider.hips.rotation.z = wob; face(rider, holding ? 'happy' : 'shock', t);
+  }
+  // ---- tênis e cadarço no pente ----
+  const shoeOn = win(t, S(17) - .1, S(20) + .2);
+  shoe.visible = shoeOn;
+  if (shoeOn) { const sx = 2.15; shoe.position.set(sx, HT + .03, .15); shoe.scale.setScalar(.9);
+    const push = clamp((t - T_EMPURRA) / .4);
+    if (!lace) { lace = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(lacePts()), 20, .012, 5), laceM); shoe.add(lace); }
+    const caught = t >= T_CADARCO - .1; lace.visible = caught; lace.scale.set(1 - push * .6, 1 + push * 2.5, 1);
+  }
+  // ---- parada ----
+  stopLight.visible = win(t, T_PARA - .1, T_PARAB) && Math.sin(t * 14) > 0;
+  // confete
+  conf.forEach((c, i) => { const u = t - T_PARAB; c.visible = u > 0 && u < 3.2; if (!c.visible) return; c.position.set(c.userData.x, 5 - u * 1.6 * c.userData.s - (i % 5) * .2, c.userData.z); c.rotation.set(u * 6 + i, u * 4, 0); });
+
+  // ---------- textos ----------
+  fixed($('hook'), t < S(2) ? pop(t - .02, .3) * (1 - clamp((t - S(2) + .2) / .2)) : 0);
+  const lb = [...LBL].reverse().find(l => t >= l[0]); const lbOn = lb && lb[1];
+  if (lbOn) { $('label').firstElementChild.innerHTML = lb[1]; fixed($('label'), pop(t - lb[0], .3)); } else fixed($('label'), 0);
+  const t1 = $('t1'); t1.style.opacity = 0;
+  const tag = (txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; t1.textContent = txt; t1.className = 'o tag ' + cls; place(t1, true, x, y, pop(t - t0, .3), rot); };
+  tag('SOME AQUI', 'red', win(t, .6, S(1)), 540, 800, .6, -4);
+  tag('VOLTA POR BAIXO', 'blue', win(t, S(1), S(2)), 540, 800, S(1), 4);
+  tag('CANSA!', 'red', win(t, WD(3, /alguém/i), S(4)), 540, 600, WD(3, /alguém/i), -4);
+  tag('LAÇO SEM FIM', '', win(t, T_LACO, S(5)), 540, 600, T_LACO, -3);
+  tag('TRILHOS', 'blue', win(t, T_TRILHOS, S(8)), 540, 600, T_TRILHOS, 4);
+  tag('PARADA', 'red', win(t, WD(9, /não/i), S(10)), 540, 600, WD(9, /não/i), -4);
+  tag('PUXA SEM PARAR', 'green', win(t, T_PUXA, S(11)), 540, 600, T_PUXA, -3);
+  tag('ACHATA', '', win(t, T_ACHATA, T_VIRAM), 540, 600, T_ACHATA, -4);
+  tag('VIRA DE CABEÇA PRA BAIXO', 'blue', win(t, T_VIRAM, T_VOLTAM), 540, 600, T_VIRAM, 3);
+  tag('VOLTA POR DENTRO', 'green', win(t, T_VOLTAM, S(13)), 540, 600, T_VOLTAM, -3);
+  tag('SEMPRE OS MESMOS DEGRAUS', 'green', win(t, WD(13, /mesmos/i) - .3, S(14)), 540, 600, WD(13, /mesmos/i) - .3, -3);
+  tag('MESMA VELOCIDADE', 'blue', win(t, T_VELOC - .2, S(16)), 540, 600, T_VELOC - .2, 3);
+  tag('PERIGO!', 'red', win(t, T_CADARCO, S(18)), 540, 600, T_CADARCO, -4);
+  tag('DENTES NOS SULCOS', '', win(t, T_ENCAIXA - .2, T_EMPURRA), 540, 600, T_ENCAIXA - .2, -3);
+  tag('EMPURRA PRA FORA', 'green', win(t, T_EMPURRA, S(19)), 540, 600, T_EMPURRA, 3);
+  tag('PAROU SOZINHA', 'red', win(t, T_PARA - .1, S(21)), 540, 600, T_PARA - .1, -4);
+  place($('xmark'), [3, 9].some(i => win(t, S(i) + .3, E(i) + .3)), 820, 800, 1, -8);
+  const cm = $('comic'); cm.style.fontSize = '150px';
+  if (win(t, S(6), S(7))) { cm.textContent = 'QUEM PUXA?'; cm.style.fontSize = '120px'; place(cm, true, 540, 620, pop(t - S(6), .25), -5); }
+  else if (win(t, S(14) + .2, T_FAIXA)) { cm.textContent = 'OPA!'; place(cm, true, 300, 470, pop(t - S(14) - .2, .25), 6); }
+  else if (win(t, T_TRAVAR, T_PARA)) { cm.textContent = 'TRAVOU!'; cm.style.fontSize = '130px'; place(cm, true, 540, 620, pop(t - T_TRAVAR, .25), -5); }
+  else if (win(t, T_PARAB, S(22))) { cm.textContent = 'PARABÉNS!'; cm.style.fontSize = '130px'; place(cm, true, 540, 520, pop(t - T_PARAB, .3), -4); }
+  else cm.style.opacity = 0;
+  fixed($('final'), t >= S(22) + .2 ? pop(t - S(22) - .2, .35) : 0);
+  $('wm').style.opacity = .8;
+  // legenda
+  let wTxt = null, wSt = 0;
+  for (let i = 0; i < SN.length - 1; i++) for (const w2 of SN[i].words) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap = $('cap');
+  if (wTxt && t > S(1) - .05) { cap.textContent = wTxt.toUpperCase().replace(/[.,!?:]/g, ''); cap.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+await document.fonts.load('900 60px P'); await document.fonts.ready;
+window.ready = true;
+</script></body></html>
