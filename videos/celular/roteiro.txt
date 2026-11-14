@@ -1,0 +1,22 @@
+Esse pequeno aparelho guarda milhares de fotos, vídeos e músicas.
+Mas onde tudo isso fica?
+Pra entender, vamos abrir um celular, peça por peça.
+Primeiro sai a tela, depois a bateria, que ocupa quase metade do espaço.
+Por baixo, aparece uma placa cheia de circuitos.
+Essa é a placa-mãe.
+No meio dela fica o cérebro do celular, que faz bilhões de contas por segundo.
+Esse é o processador.
+Mas o processador não guarda nada: quando a bateria acaba, ele esquece tudo.
+Então, do lado dele, tem um chip que guarda tudo mesmo desligado.
+Essa é a memória flash.
+Agora, vamos dar um zoom gigante dentro desse chip.
+Lá dentro existem bilhões de células tão pequenas que nem um microscópio comum enxerga.
+Cada célula prende ou solta elétrons, como uma caixinha que fica cheia ou vazia.
+Cheia vale zero, vazia vale um.
+E cada foto vira uma fila enorme de zeros e uns.
+Uma foto comum tem uns vinte milhões de zeros e uns.
+Parece muito, mas um celular de cento e vinte e oito gigas guarda mais de um trilhão de zeros e uns.
+E pra caber tudo nesse espacinho, as células são empilhadas em mais de duzentos andares, como um prédio.
+Por isso cabem dezenas de milhares de fotos no seu bolso.
+Parabéns, você abriu um celular.
+Segue a página, antes que a memória do seu celular fique cheia.
