@@ -1,0 +1,229 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:150px;text-align:center;font-weight:900;font-size:96px;line-height:1}
+#hook b{color:#FFD21F;display:block;font-size:170px}
+#cap{width:1080px;top:1300px;text-align:center;font-weight:900;font-size:112px}
+#cap.hl{color:#FFD21F}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:60px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.white{background:#fff;color:#111}.tag.cyan{background:#22D3EE;color:#111}.tag.pink{background:#FF4FB8;color:#fff}
+.small{font-size:44px;padding:6px 22px;border-radius:18px;border-width:6px;box-shadow:0 6px 0 #111}
+#badge{font-weight:900;font-size:84px;color:#111;background:linear-gradient(90deg,#FFD21F,#FF9F1C);padding:14px 44px;border:9px solid #111;border-radius:30px;box-shadow:0 12px 0 #111;white-space:nowrap}
+#check{font-weight:900;font-size:86px;color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;white-space:nowrap}
+#check i{font-style:normal;display:inline-block;background:#22C55E;color:#fff;border:8px solid #111;border-radius:50%;width:110px;height:110px;line-height:104px;text-align:center;margin-left:16px;-webkit-text-stroke:0;font-size:80px;vertical-align:middle}
+#steps{left:40px;width:1000px;top:200px;display:flex;flex-wrap:wrap;justify-content:center;gap:18px}
+#steps div{font-weight:900;font-size:50px;padding:8px 24px;border-radius:20px;border:6px solid #111;background:#2A2550;color:#8C86C4;box-shadow:0 6px 0 #111;transition:none}
+#steps div.on{background:#FFD21F;color:#111}
+#price{width:1080px;top:520px;text-align:center}
+#price .k{font-weight:900;font-size:76px;color:#fff;-webkit-text-stroke:12px #111;paint-order:stroke fill;letter-spacing:2px}
+#price .a{font-weight:900;font-size:58px;color:#FFD21F;-webkit-text-stroke:10px #111;paint-order:stroke fill}
+#price .v{font-weight:900;font-size:300px;line-height:1;color:#FFD21F;-webkit-text-stroke:22px #111;paint-order:stroke fill;text-shadow:0 18px 0 rgba(0,0,0,.4),0 0 80px rgba(255,210,31,.75)}
+#price .v small{font-size:130px;vertical-align:top;position:relative;top:40px}
+#btn{width:800px;text-align:center;font-weight:900;font-size:80px;color:#fff;background:linear-gradient(180deg,#22C55E,#16A34A);border:10px solid #111;border-radius:60px;box-shadow:0 16px 0 #111;padding:26px 0}
+#c3d{font-weight:900;font-size:62px;color:#111;background:#fff;border:8px solid #111;border-radius:26px;padding:10px 32px;box-shadow:0 10px 0 #111;white-space:nowrap}
+#c3d b{color:#E11D74}
+#arrow{font-weight:900;font-size:150px;color:#FFD21F;-webkit-text-stroke:12px #111;paint-order:stroke fill;line-height:1}
+#flash{left:0;top:0;width:1080px;height:1920px;background:#fff}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.85;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">NÃO FOI UM<b>ESTÚDIO</b></div>
+<div id="badge" class="o">IA + CLAUDE CODE</div>
+<div id="check" class="o">SEM SABER ANIMAR<i>✓</i></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag small"></div><div id="t3" class="o tag small"></div><div id="t4" class="o tag small"></div><div id="t5" class="o tag small"></div>
+<div id="steps" class="o"><div>IDEIA</div><div>ROTEIRO</div><div>VOZ</div><div>ANIMAÇÃO</div><div>EDIÇÃO</div><div>PUBLICAR</div></div>
+<div id="price" class="o"><div class="k">CURSO COMPLETO</div><div class="a">POR APENAS</div><div class="v"><small>R$</small>19,90</div></div>
+<div id="c3d" class="o">OU COMENTA: <b>3D</b></div>
+<div id="arrow" class="o">⬇</div>
+<div id="btn" class="o">QUERO APRENDER</div>
+<div id="cap" class="o stroke"></div>
+<div id="flash" class="o"></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, M, mesh, rnd, rr } from '/_kit/kit.js';
+
+await document.fonts.load('900 60px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const CL = await (await fetch('clips/index.json?' + Date.now())).json();
+const SN = TP.sentences; const S = i => SN[i].start, E = i => SN[i].end; window.DURATION = TP.duration;
+const WD = (i, re, n = 0) => { const ws = SN[i].words.filter(w => re.test(w.w)); return ws[n] ? ws[n].start : S(i); };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(window.devicePixelRatio || 1); renderer.setSize(W, H);
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(35, W / H, .05, 300);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+
+// ---------- tempos ----------
+const T_BAR = WD(2, /barata/i), T_DES = WD(2, /descarga/i), T_CEL = WD(2, /celular/i);
+const T_CUR = WD(3, /curiosidade/i), T_FUN = WD(3, /funcionam/i), T_HIS = WD(3, /histórias/i), T_FE = WD(3, /^fé/i);
+const T_ANIMAR = WD(4, /animar/i), T_PC = WD(4, /computador/i), T_AND = WD(4, /android/i);
+const STEPW = [WD(5, /ideia/i), WD(5, /roteiro/i), WD(5, /voz/i), WD(5, /animação/i), WD(5, /edição/i), WD(5, /publicação/i)];
+const T_CANAIS = WD(6, /canais/i), T_MONET = WD(6, /monetização/i);
+const T_PRICE = WD(7, /dezenove/i), T_COMPLETO = WD(7, /curso/i);
+const T_BOTAO = WD(8, /botão/i), T_3D = WD(8, /3d/i, 0), T_COMECE = WD(8, /comece/i);
+
+// ---------- fundo ----------
+const skyU = { top: { value: new THREE.Color(0x1A0B3D) }, bot: { value: new THREE.Color(0x5B1E8A) }, t: { value: 0 } };
+scene.add(new THREE.Mesh(new THREE.SphereGeometry(150, 32, 16), new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: false, uniforms: skyU,
+  vertexShader: 'varying vec3 vP; void main(){ vP = position; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }',
+  fragmentShader: 'uniform vec3 top; uniform vec3 bot; uniform float t; varying vec3 vP; void main(){ vec3 n = normalize(vP); float h = clamp(n.y*.8+.5,0.,1.); vec3 c = mix(bot,top,h); float g = .5+.5*sin(n.x*6.+t*.7)*sin(n.y*5.-t*.5); c += vec3(.10,.02,.12)*g; gl_FragColor = vec4(c,1.); }' })));
+const gridM = new THREE.LineBasicMaterial({ color: 0xA855F7, transparent: true, opacity: .35 });
+const grid = new THREE.GridHelper(80, 60, 0xFF4FB8, 0xA855F7); grid.material.transparent = true; grid.material.opacity = .3; grid.position.y = -2.2; scene.add(grid);
+const dust = new THREE.Points((() => { const g = new THREE.BufferGeometry(); const p = []; for (let i = 0; i < 400; i++) p.push(rr(-8, 8), rr(-6, 8), rr(-12, 2)); g.setAttribute('position', new THREE.Float32BufferAttribute(p, 3)); return g; })(), new THREE.PointsMaterial({ color: 0xFFE9FF, size: .045, transparent: true, opacity: .7 })); scene.add(dust);
+scene.add(new THREE.HemisphereLight(0xFFFFFF, 0x6040A0, 1.4)); const kl = new THREE.DirectionalLight(0xFFFFFF, 2.2); kl.position.set(3, 4, 6); scene.add(kl);
+const rimL = new THREE.PointLight(0xFF4FB8, 30, 20); rimL.position.set(-4, 2, 2); scene.add(rimL); const rimR = new THREE.PointLight(0x22D3EE, 30, 20); rimR.position.set(4, -1, 2); scene.add(rimR);
+
+// ---------- celulares com vídeo ----------
+const rr2 = (w, h, r) => { const s = new THREE.Shape(); const x = -w / 2, y = -h / 2; s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r); s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h); s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r); s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y); return s; };
+const PW = 1.0, PHH = PW * 16 / 9;
+function makePhone() {
+  const g = grp(); g.visible = false;
+  const body = new THREE.Mesh(new THREE.ExtrudeGeometry(rr2(PW + .09, PHH + .09, .11), { depth: .07, bevelEnabled: true, bevelSize: .015, bevelThickness: .015, bevelSegments: 2 }), new THREE.MeshStandardMaterial({ color: 0x15151C, metalness: .6, roughness: .3 })); body.position.z = -.075; g.add(body);
+  const edge = new THREE.Mesh(new THREE.ExtrudeGeometry((() => { const s = rr2(PW + .11, PHH + .11, .12); s.holes.push(rr2(PW + .07, PHH + .07, .1)); return s; })(), { depth: .03, bevelEnabled: false }), new THREE.MeshStandardMaterial({ color: 0xD8DCE6, metalness: .9, roughness: .25 })); edge.position.z = -.02; g.add(edge);
+  const img = new Image(); const tex = new THREE.Texture(img); tex.colorSpace = THREE.SRGBColorSpace;
+  const scr = new THREE.Mesh(new THREE.PlaneGeometry(PW, PHH), new THREE.MeshBasicMaterial({ map: tex, toneMapped: false, color: 0xFFFFFF })); scr.position.z = .012; g.add(scr);
+  const glare = new THREE.Mesh(new THREE.PlaneGeometry(PW, PHH), new THREE.MeshBasicMaterial({ color: 0xFFFFFF, transparent: true, opacity: .06, depthWrite: false })); glare.position.z = .014; g.add(glare);
+  g.userData = { img, tex, scr, cur: '' }; return g;
+}
+const phones = [0, 1, 2, 3].map(makePhone);
+// notebook
+const laptop = grp(); laptop.visible = false; {
+  const bm = new THREE.MeshStandardMaterial({ color: 0xC9CED8, metalness: .8, roughness: .3 });
+  const base = new THREE.Mesh(new THREE.BoxGeometry(2.4, .08, 1.6), bm); base.position.set(0, -.75, .7); laptop.add(base);
+  const kb = new THREE.Mesh(new THREE.BoxGeometry(2.0, .01, .8), new THREE.MeshStandardMaterial({ color: 0x2B2B33 })); kb.position.set(0, -.705, .55); laptop.add(kb);
+  const lid = new THREE.Mesh(new THREE.BoxGeometry(2.4, 1.55, .06), bm); lid.position.set(0, .03, -.08); laptop.add(lid);
+  const blk = new THREE.Mesh(new THREE.PlaneGeometry(2.24, 1.4), new THREE.MeshBasicMaterial({ color: 0x0B0B12 })); blk.position.set(0, .03, -.045); laptop.add(blk);
+  const img = new Image(); const tex = new THREE.Texture(img); tex.colorSpace = THREE.SRGBColorSpace;
+  const scr = new THREE.Mesh(new THREE.PlaneGeometry(1.4 * 9 / 16, 1.4), new THREE.MeshBasicMaterial({ map: tex, toneMapped: false })); scr.position.set(0, .03, -.04); laptop.add(scr);
+  laptop.userData = { img, tex, scr, cur: '' };
+}
+const loads = [];
+function show(dev, clip, t, t0, speed = 1) {
+  const n = CL[clip].n; const f = Math.floor(Math.max(0, t - t0) * 30 * speed) % n + 1;
+  const src = `clips/${clip}/f_${String(f).padStart(4, '0')}.jpg`;
+  if (dev.userData.cur !== src) { dev.userData.cur = src; const u = dev.userData; loads.push(new Promise(res => { u.img.onload = () => { u.tex.needsUpdate = true; res(); }; u.img.onerror = res; u.img.src = src; })); }
+}
+// ícones genéricos 3D (canais)
+const icons = grp(); icons.visible = false; {
+  const mk = (col, x) => { const g = grp(icons); g.position.x = x; const b = new THREE.Mesh(new THREE.ExtrudeGeometry(rr2(.62, .62, .16), { depth: .12, bevelEnabled: true, bevelSize: .02, bevelThickness: .02 }), new THREE.MeshStandardMaterial({ color: col, roughness: .35 })); g.add(b); return g; };
+  const a = mk(0xFF3B3B, -1.0); const tri = new THREE.Shape(); tri.moveTo(-.1, -.15); tri.lineTo(.17, 0); tri.lineTo(-.1, .15); tri.lineTo(-.1, -.15); const tm = new THREE.Mesh(new THREE.ExtrudeGeometry(tri, { depth: .05, bevelEnabled: false }), new THREE.MeshStandardMaterial({ color: 0xFFFFFF })); tm.position.z = .15; a.add(tm);
+  const b = mk(0x111111, 0); const n1 = new THREE.Mesh(new THREE.SphereGeometry(.07, 10, 8), new THREE.MeshStandardMaterial({ color: 0x22D3EE })); n1.position.set(-.05, -.1, .17); b.add(n1); const st = new THREE.Mesh(new THREE.BoxGeometry(.03, .26, .03), n1.material); st.position.set(.01, .03, .17); b.add(st); const fl = new THREE.Mesh(new THREE.BoxGeometry(.12, .04, .03), new THREE.MeshStandardMaterial({ color: 0xFF4FB8 })); fl.position.set(.07, .15, .17); b.add(fl);
+  const c = mk(0xE1306C, 1.0); const ring = new THREE.Mesh(new THREE.TorusGeometry(.13, .035, 8, 24), new THREE.MeshStandardMaterial({ color: 0xFFFFFF })); ring.position.z = .17; c.add(ring); const fr = new THREE.Mesh(new THREE.TorusGeometry(.24, .03, 6, 4), ring.material); fr.rotation.z = Math.PI / 4; fr.position.z = .17; c.add(fr);
+}
+// moedas e brilho no preço
+const coins = []; for (let i = 0; i < 26; i++) { const c = new THREE.Mesh(new THREE.CylinderGeometry(.12, .12, .03, 18), new THREE.MeshStandardMaterial({ color: 0xFFC83D, metalness: .85, roughness: .25, emissive: 0x3A2600 })); c.userData = { a: i * 2.4, s: .7 + (i % 5) * .15, d: (i % 7) * .04 }; scene.add(c); coins.push(c); }
+const burst = new THREE.Mesh(new THREE.RingGeometry(.1, 1, 48), new THREE.MeshBasicMaterial({ color: 0xFFE27A, transparent: true, opacity: 0, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false })); scene.add(burst);
+const rays = new THREE.Mesh(new THREE.CircleGeometry(6, 24, 0, Math.PI * 2), new THREE.MeshBasicMaterial({ map: (() => { const c = document.createElement('canvas'); c.width = c.height = 512; const g = c.getContext('2d'); g.translate(256, 256); for (let i = 0; i < 24; i++) { g.rotate(Math.PI / 12); g.fillStyle = i % 2 ? 'rgba(255,210,31,.22)' : 'rgba(255,79,184,.12)'; g.beginPath(); g.moveTo(0, 0); g.lineTo(-40, 256); g.lineTo(40, 256); g.fill(); } const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; })(), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending })); rays.position.z = -3; scene.add(rays);
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const proj = v => { const p = v.clone().project(cam); return { x: (p.x + 1) / 2 * W, y: (1 - p.y) / 2 * H }; };
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[0, 'crack'], [.05, 'whoosh'], [S(1), 'whoosh'], [WD(1, /claude/i), 'ding'], [T_BAR, 'pop'], [T_DES, 'pop'], [T_CEL, 'pop'], [S(3), 'whoosh'], [T_CUR, 'ding'], [T_FUN, 'ding'], [T_HIS, 'ding'], [T_FE, 'ding'], [S(4), 'whoosh'], [T_ANIMAR, 'win'], [T_PC, 'pop'], [T_AND, 'pop'],
+ [S(5), 'whoosh'], ...STEPW.map(t => [t, 'pop']), [S(6), 'whoosh'], [T_CANAIS, 'pop'], [T_MONET, 'ding'], [T_PRICE, 'crack'], [T_PRICE + .02, 'win'], [T_BOTAO, 'pop'], [T_3D, 'ding'], [T_COMECE, 'whoosh']].forEach(([t, k]) => ev(t, k));
+const HL = /estúdio|inteligência|artificial|claude|barata|descarga|celular|formato|curiosidade|funcionam|histórias|fé|animar|computador|android|passo|ideia|roteiro|voz|animação|edição|publicação|canais|monetização|completo|dezenove|noventa|botão|3d|comece|hoje/i;
+window.MUSIC_DROP = T_PRICE - .3;
+
+// pose de celular: posição, rotação, escala
+function setPhone(p, on, x, y, z, ry = 0, rz = 0, s = 1) { p.visible = on; if (!on) return; p.position.set(x, y, z); p.rotation.set(0, ry, rz); p.scale.setScalar(Math.max(.001, s)); }
+window.draw = async function (t) {
+  loads.length = 0;
+  phones.forEach(p => p.visible = false); laptop.visible = false; icons.visible = false;
+  coins.forEach(c => c.visible = false); burst.material.opacity = 0; rays.material.opacity = 0;
+  skyU.t.value = t; dust.rotation.y = t * .03; grid.position.z = (t * 1.2) % (80 / 60);
+  let camZ = 8, camY = 0, camX = 0, lookY = 0;
+  const sway = (k, a = .12) => Math.sin(t * 1.3 + k) * a;
+  const punch = (t0) => Math.max(0, 1 - (t - t0) / .25) * .6;
+  if (t < S(1)) { // gancho: 3 celulares em leque
+    const u = ease(clamp(t / .5));
+    [['bar_cab', -1.05, .25, .35], ['cel_cells', 0, .0, 0], ['fil_sunset', 1.05, .25, -.35]].forEach(([c, x, yy, rz], i) => { const p = phones[i]; setPhone(p, true, x * u, -.35 + yy * u, i === 1 ? .4 : 0, sway(i, .15), rz * u, .95 + (i === 1 ? .12 : 0)); show(p, c, t, 0); });
+    camZ = 7.6 - t * .25 - punch(0);
+  } else if (t < S(2)) { // IA + Claude Code: um celular central
+    const k = t - S(1); const p = phones[0]; setPhone(p, true, 0, -.35, 0, sway(0, .25), 0, lerp(.8, 1.15, ease(clamp(k / .5)))); show(p, 'des_sif', t, S(1));
+    camZ = 7.0 - k * .3;
+  } else if (t < S(3)) { // 3 cortes rápidos
+    const cuts = [[T_BAR - .1, 'bar_xray'], [T_DES - .1, 'des_glup'], [T_CEL - .1, 'cel_zoom']]; let c = 0; for (let i = 0; i < 3; i++) if (t >= cuts[i][0]) c = i;
+    const k = t - cuts[c][0]; const p = phones[0]; setPhone(p, true, 0, -.3, 0, [-.35, .35, -.2][c] + sway(c, .08), [.06, -.06, .04][c], 1.25); show(p, cuts[c][1], t, cuts[c][0]);
+    camZ = 6.6 - k * .35 - punch(cuts[c][0]);
+  } else if (t < S(4)) { // grade 2x2
+    const k = t - S(3); const L = [['bar_run', -.64, .62], ['des_tank', .64, .62], ['man_agenda', -.64, -1.22], ['fil_hug', .64, -1.22]]; const TT = [T_CUR, T_FUN, T_HIS, T_FE];
+    let act = -1; TT.forEach((tt, i) => { if (t >= tt - .1) act = i; });
+    L.forEach(([c, x, y], i) => { const p = phones[i]; const inU = ease(clamp((k - i * .1) / .45)); const hi = i === act ? 1 : 0; setPhone(p, true, x * inU, y, hi * .6, sway(i, .06), 0, (.7 + hi * .12) * inU); show(p, c, t, S(3)); p.userData.scr.material.color.setScalar(act < 0 || hi ? 1 : .45); });
+    camZ = 7.2; lookY = -.3;
+  } else if (t < S(5)) { // sem saber animar / PC e Android
+    const k = t - S(4); const lu = ease(clamp((t - T_PC + .2) / .5)), au = ease(clamp((t - T_AND + .2) / .5));
+    laptop.visible = lu > 0; laptop.position.set(lerp(-3, -.55, lu), -.55, -.4); laptop.rotation.set(.12, .35, 0); laptop.scale.setScalar(.85); show(laptop, 'cel_layers', t, S(4));
+    const p = phones[0]; setPhone(p, au > 0, lerp(3, .98, au), -.5, .5, -.35 + sway(1, .06), .05, .78); show(p, 'bar_dino', t, T_AND - .3);
+    if (lu === 0 && au === 0) { const q = phones[1]; setPhone(q, true, 0, -.4, 0, sway(2, .2), 0, 1.0); show(q, 'man_robo', t, S(4)); }
+    camZ = 7.4; lookY = -.2;
+  } else if (t < S(6)) { // passo a passo
+    const k = t - S(5); const seq = ['cel_open', 'des_val', 'man_unha', 'cel_cells', 'fil_festa', 'bar_cab']; let st = 0; STEPW.forEach((w, i) => { if (t >= w - .1) st = i; });
+    const p = phones[0]; setPhone(p, true, 0, -.55, 0, sway(0, .25), 0, 1.05); show(p, seq[st], t, STEPW[st] - .1);
+    camZ = 7.3 - punch(STEPW[st] - .1) * .5; lookY = 0;
+  } else if (t < S(7)) { // canais e monetização
+    const k = t - S(6); const L = [['bar_run', -1.05, -.2, .25], ['fil_sunset', 0, -.05, 0], ['man_agenda', 1.05, -.2, -.25]];
+    L.forEach(([c, x, y, rz], i) => { const p = phones[i]; const u = ease(clamp((k - i * .12) / .45)); setPhone(p, true, x, y - (1 - u) * 2, i === 1 ? .3 : 0, sway(i, .12), rz, .82 * u); show(p, c, t, S(6)); });
+    icons.visible = t > T_CANAIS - .3; icons.position.set(0, 1.25 + Math.sin(t * 2) * .05, .6); icons.scale.setScalar(Math.max(.001, pop(t - T_CANAIS + .3, .35)) * .9); icons.children.forEach((c, i) => c.rotation.y = Math.sin(t * 2 + i) * .4);
+    camZ = 7.6; lookY = .1;
+  } else { // preço + CTA
+    const k = t - T_PRICE; const on = t >= T_PRICE;
+    rays.material.opacity = on ? .9 : 0; rays.rotation.z = t * .25; rays.position.set(0, .9, -3);
+    if (on) { burst.material.opacity = Math.max(0, 1 - k / .6); burst.scale.setScalar(1 + k * 9); burst.position.set(0, 1.0, .5);
+      coins.forEach((c, i) => { const u = k - c.userData.d; c.visible = u > 0 && u < 2.4; if (!c.visible) return; c.position.set(Math.cos(c.userData.a) * u * 2.2 * c.userData.s, 1.0 + Math.sin(c.userData.a) * u * 1.6 * c.userData.s - u * u * 1.2, .5); c.rotation.set(u * 7 + i, u * 4, 0); }); }
+    if (t >= T_BOTAO - .2) { [['bar_cab', -1.25, .2], ['cel_layers', 0, 0], ['fil_hug', 1.25, -.2]].forEach(([c, x, rz], i) => { const p = phones[i]; setPhone(p, true, x, -1.3, -2.2, sway(i, .1), rz, .8); show(p, c, t, T_BOTAO); p.userData.scr.material.color.setScalar(.75); }); }
+    camZ = 7.5;
+  }
+  if (t < S(3) || t >= S(4)) phones.forEach(p => p.userData.scr.material.color.setScalar(t >= T_BOTAO - .2 && t >= S(7) ? .75 : 1));
+  cam.position.set(camX + Math.sin(t * .5) * .08, camY + Math.sin(t * .4) * .05, camZ); cam.lookAt(0, lookY, 0); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+
+  // ---------- textos ----------
+  fixed($('hook'), t < S(1) ? pop(t, .3) * (1 - clamp((t - S(1) + .15) / .15)) : 0);
+  place($('badge'), win(t, WD(1, /inteligência/i) - .2, S(2)), 540, 330, pop(t - WD(1, /inteligência/i) + .2, .35), -3);
+  const t1 = $('t1'); t1.style.opacity = 0;
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  tag(t1, 'SEM CABEÇA', 'red', win(t, T_BAR - .1, T_DES - .1), 540, 330, T_BAR - .1, -4);
+  tag(t1, 'POR DENTRO', 'cyan', win(t, T_DES - .1, T_CEL - .1), 540, 330, T_DES - .1, 4);
+  tag(t1, 'ATÉ A ÚLTIMA CÉLULA', '', win(t, T_CEL - .1, S(3)), 540, 330, T_CEL - .1, -3);
+  tag(t1, 'NÃO É UM FORMATO SÓ', 'white', win(t, S(3), T_CUR - .1), 540, 300, S(3), -3);
+  // rótulos da grade
+  const gl = [['t2', 'CURIOSIDADE', 'pink', T_CUR], ['t3', 'COMO FUNCIONA', 'cyan', T_FUN], ['t4', 'HISTÓRIAS', '', T_HIS], ['t5', 'FÉ', 'white', T_FE]];
+  gl.forEach(([id, txt, cls, tt], i) => { const el = $(id); el.style.opacity = 0; if (!win(t, tt - .1, S(4))) return; const p = proj(phones[i].position.clone().add(V(0, .7 * 16 / 9 / 2 + .05, .1))); el.textContent = txt; el.className = 'o tag small ' + cls; place(el, true, p.x, p.y - 40, pop(t - tt + .1, .3), i % 2 ? 4 : -4); });
+  place($('check'), win(t, T_ANIMAR - .2, S(5)), 540, 300, pop(t - T_ANIMAR + .2, .35), -2);
+  tag($('t2'), 'PC', 'blue', win(t, T_PC, S(5)), 330, 760, T_PC, -4);
+  tag($('t3'), 'ANDROID', 'green', win(t, T_AND, S(5)), 830, 760, T_AND, 4);
+  const stE = $('steps'); const stOn = win(t, S(5), S(6)); fixed(stE, stOn ? pop(t - S(5), .3) : 0); [...stE.children].forEach((d, i) => d.className = t >= STEPW[i] - .1 ? 'on' : '');
+  tag(t1, 'SEUS CANAIS', 'pink', win(t, T_CANAIS - .2, T_MONET - .1), 540, 1150, T_CANAIS - .2, -3);
+  tag(t1, 'COMO FUNCIONA A MONETIZAÇÃO', '', win(t, T_MONET - .1, S(7)), 540, 1150, T_MONET - .1, 2);
+  // preço
+  const pr = $('price'); const prOn = t >= T_COMPLETO - .1;
+  if (prOn) { pr.style.opacity = 1; const k0 = t - T_COMPLETO + .1; pr.children[0].style.transform = `scale(${pop(k0, .3)})`; pr.children[1].style.opacity = t > S(7) + .6 ? 1 : 0; const kv = t - T_PRICE; const v = pr.children[2]; v.style.opacity = kv > 0 ? 1 : 0; v.style.transform = kv > 0 ? `scale(${kv < .12 ? lerp(2.2, .9, kv / .12) : kv < .25 ? lerp(.9, 1.05, (kv - .12) / .13) : 1 + Math.sin(t * 5) * .025}) rotate(-3deg)` : 'scale(0)';
+    const up = ease(clamp((t - T_BOTAO + .3) / .5)); pr.style.transform = `translateY(${-300 * up}px) scale(${1 - .18 * up})`; } else pr.style.opacity = 0;
+  $('flash').style.opacity = win(t, T_PRICE, T_PRICE + .15) ? 1 - (t - T_PRICE) / .15 : 0;
+  const bOn = t >= T_BOTAO - .1; place($('btn'), bOn, 540, 1640, bOn ? pop(t - T_BOTAO + .1, .35) * (1 + Math.sin(t * 7) * .035) : 0, 0);
+  place($('c3d'), t >= T_3D - .2, 540, 1080, pop(t - T_3D + .2, .35), -3);
+  place($('arrow'), t >= T_COMECE, 540, 1480 + Math.abs(Math.sin(t * 6)) * 20, pop(t - T_COMECE, .3), 0);
+  $('wm').style.opacity = .85;
+  // legenda (some no momento do preço)
+  let wTxt = null, wSt = 0;
+  for (let i = 0; i < SN.length; i++) for (const w2 of SN[i].words) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap = $('cap'); const capY = t >= T_BOTAO - .1 ? 1300 : 1300;
+  if (wTxt) { cap.textContent = wTxt.toUpperCase().replace(/[.,!?:]/g, ''); cap.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap, 0);
+  await Promise.all(loads);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>
