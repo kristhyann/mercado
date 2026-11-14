@@ -1,7 +1,8 @@
-# uso: python3 capa.py quadro.png saida.jpg "LINHA 1" "LINHA 2"   (sempre com a marca @olhaso_3D)
+# uso: python3 capa.py quadro.png saida.jpg "LINHA 1" "LINHA 2" [MARCA]   (marca padrão: @olhaso_3D)
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import sys, os
 src, out, l1, l2 = sys.argv[1:5]
+WM = sys.argv[5] if len(sys.argv) > 5 else '@olhaso_3D'
 TTF = '/tmp/claude-0/P900.ttf'
 if not os.path.exists(TTF):
     from fontTools.ttLib import TTFont
@@ -19,5 +20,5 @@ def text(t, y, size, fill, stroke=18):
     ImageDraw.Draw(im).text(((W - w) / 2, y), t, font=fo, fill=fill, stroke_width=stroke, stroke_fill=(17, 17, 17))
 text(l1, 1250, 130, (255, 255, 255), 14)
 text(l2, 1390, 260, (255, 138, 31), 22)
-ImageDraw.Draw(im).text((44, 70), '@olhaso_3D', font=ImageFont.truetype(TTF, 52), fill=(255, 255, 255), stroke_width=7, stroke_fill=(17, 17, 17))
+ImageDraw.Draw(im).text((44, 70), WM, font=ImageFont.truetype(TTF, 52), fill=(255, 255, 255), stroke_width=7, stroke_fill=(17, 17, 17))
 im.save(out, quality=92)
