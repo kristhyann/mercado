@@ -1,0 +1,340 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:200px;text-align:center;font-weight:900;font-size:80px;line-height:1.04}
+#hook b{color:#FFC94A;display:block;font-size:128px;line-height:1}
+#cap{width:1080px;top:1290px;text-align:center;font-weight:900;font-size:112px}
+#cap.hl{color:#FFC94A}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:58px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.white{background:#fff;color:#111}
+.comic{font-weight:900;font-size:150px;color:#FFD21F;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 10px 0 rgba(0,0,0,.3);white-space:nowrap}
+#ref{font-weight:900;font-size:64px;color:#111;background:#FFF6DA;padding:12px 34px;border:7px solid #111;border-radius:20px;box-shadow:0 8px 0 #111;white-space:nowrap}
+#volta{width:1080px;top:330px;text-align:center;font-weight:900;font-size:118px;line-height:1.02;color:#fff;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 10px 0 rgba(0,0,0,.35)}
+#volta b{display:block;color:#FFC94A;font-size:150px}
+#volta svg{vertical-align:middle;margin-left:12px}
+#final{left:60px;width:960px;top:250px;text-align:center}
+#final span{display:block;background:rgba(255,255,255,.95);color:#111;font-weight:900;font-size:64px;line-height:1.12;padding:34px 26px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#D97706}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.85;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">VOCÊ ACHA QUE DEUS<b>DEIXOU DE<br>TE AMAR?</b></div>
+<div id="t1" class="o tag"></div>
+<div id="ref" class="o">LUCAS 15:11-32</div>
+<div id="comic" class="o comic"></div>
+<div id="volta" class="o">EU VOU VOLTAR,<b>SENHOR <svg viewBox="0 0 110 100" width="140" height="128"><path d="M55 92 C20 66 4 48 4 28 C4 13 16 4 29 4 C41 4 50 11 55 20 C60 11 69 4 81 4 C94 4 106 13 106 28 C106 48 90 66 55 92Z" fill="#FF2D55" stroke="#111" stroke-width="8" stroke-linejoin="round"/></svg></b></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Você pode ter se afastado de Deus,<br>mas ainda pode<br><em>escolher voltar.</em></span></div>
+<div id="wm" class="o">parnaiba.com.jesus</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, M, mesh, rnd, rr } from '/_kit/kit.js';
+import { buildPerson, PP, poseP, face, mixP } from '/_kit/pessoas.js';
+
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; const S = i => SN[i].start, E = i => SN[i].end; window.DURATION = TP.duration;
+const WD = (i, re) => { const w = SN[i].words.find(w => re.test(w.w)); return w ? w.start : S(i); };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(window.devicePixelRatio || 1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(38, W / H, .05, 900);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const box = (w, h, d, c, x, y, z, par = scene) => { const m = mesh(new THREE.BoxGeometry(w, h, d), typeof c === 'number' ? M(c) : c, x, y, z, par); m.castShadow = true; m.receiveShadow = true; return m; };
+const C = h => new THREE.Color(h);
+
+// ---------- tempos ----------
+const T_MIL = WD(1, /mil/i), T_CAIU = WD(1, /caiu/i), T_VERG = WD(2, /vergonha/i), T_BIBLIA = WD(3, /bíblia/i);
+const T_HERANCA = WD(4, /herança/i), T_DESP = WD(4, /desperdiçou/i), T_MISERIA = WD(5, /miséria/i), T_PORCOS = WD(5, /porcos/i);
+const T_SI = WD(6, /si,?/i), T_VOLTAR = WD(6, /voltar/i), T_MERECIA = WD(6, /merecia/i), T_LONGE = WD(7, /longe/i);
+const T_CORREU = WD(8, /correu/i), T_ABRACOU = WD(8, /abraçou/i), T_ROUPA = WD(9, /roupa/i), T_ANEL = WD(9, /anel/i), T_FESTA = WD(9, /festa/i);
+const T_VOLTE = WD(11, /volte/i), T_EUVOU = WD(14, /^eu$/i), T_ESCOLHER = WD(15, /escolher/i);
+
+// ---------- céu, luz ----------
+const skyU = { top: { value: C(0x4FA8E8) }, bot: { value: C(0xCFEFFF) } };
+const sky = new THREE.Mesh(new THREE.SphereGeometry(600, 24, 16), new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: false, fog: false, uniforms: skyU,
+  vertexShader: 'varying vec3 vP; void main(){ vP = position; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }',
+  fragmentShader: 'uniform vec3 top; uniform vec3 bot; varying vec3 vP; void main(){ float h = clamp(normalize(vP).y*2.2+.08,0.,1.); gl_FragColor = vec4(mix(bot,top,pow(h,.8)),1.); }' }));
+scene.add(sky);
+scene.fog = new THREE.Fog(0xE8D9B0, 40, 220);
+const sun = new THREE.DirectionalLight(0xFFF2D6, 2.6); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+{ const sc = sun.shadow.camera; sc.left = -18; sc.right = 18; sc.top = 18; sc.bottom = -18; sc.far = 100; } sun.shadow.bias = -.0005; scene.add(sun); scene.add(sun.target);
+const hemi = new THREE.HemisphereLight(0xDDEEFF, 0x7A6A4A, 1.2); scene.add(hemi);
+const sunDisc = new THREE.Mesh(new THREE.CircleGeometry(16, 32), new THREE.MeshBasicMaterial({ color: 0xFFF6D0, fog: false })); scene.add(sunDisc);
+const stars = new THREE.Points((() => { const g = new THREE.BufferGeometry(); const p = []; for (let i = 0; i < 500; i++) { const a = rr(0, 6.28), e = rr(.08, 1.4); p.push(Math.cos(a) * Math.cos(e) * 500, Math.sin(e) * 500, Math.sin(a) * Math.cos(e) * 500); } g.setAttribute('position', new THREE.Float32BufferAttribute(p, 3)); return g; })(), new THREE.PointsMaterial({ color: 0xFFFFFF, size: 2.2, sizeAttenuation: false, fog: false, transparent: true })); scene.add(stars);
+const LOOK = {
+  night: { top: 0x0B1330, bot: 0x2A3A6A, sun: 0x9DB4FF, si: .9, hi: .55, fog: 0x1E2A4A, disc: 0xEFF3FF, el: 30, az: .6, st: 1, ds: .55 },
+  day: { top: 0x4FA8E8, bot: 0xCFEFFF, sun: 0xFFF2D6, si: 2.6, hi: 1.2, fog: 0xE6E2CC, disc: 0xFFF6D0, el: 50, az: -.5, st: 0, ds: 1 },
+  grey: { top: 0x6C7480, bot: 0xB8B6AE, sun: 0xD8D4CC, si: 1.2, hi: 1.0, fog: 0xA8A49A, disc: 0xD8D8D8, el: 40, az: -.5, st: 0, ds: .01 },
+  gold: { top: 0x5F95D6, bot: 0xFFD7A0, sun: 0xFFC27A, si: 2.5, hi: 1.2, fog: 0xF2CF9A, disc: 0xFFE2A0, el: 18, az: -.3, st: 0, ds: 1 },
+  sunset: { top: 0x4A3F80, bot: 0xFF9455, sun: 0xFF9A55, si: 2.4, hi: 1.15, fog: 0xE8946A, disc: 0xFFB070, el: 5, az: -.2, st: .2, ds: 1.3 },
+};
+function setLook(a, b, u) {
+  const A = LOOK[a], B = LOOK[b]; const mix = (x, y) => C(x).lerp(C(y), u);
+  skyU.top.value.copy(mix(A.top, B.top)); skyU.bot.value.copy(mix(A.bot, B.bot)); sun.color.copy(mix(A.sun, B.sun)); sun.intensity = lerp(A.si, B.si, u); hemi.intensity = lerp(A.hi, B.hi, u);
+  scene.fog.color.copy(mix(A.fog, B.fog)); sunDisc.material.color.copy(mix(A.disc, B.disc)); stars.material.opacity = lerp(A.st, B.st, u); stars.position.copy(cam.position);
+  const el = lerp(A.el, B.el, u) * Math.PI / 180, az = lerp(A.az, B.az, u);
+  const dir = V(Math.cos(el) * Math.sin(az), Math.sin(el), -Math.cos(el) * Math.cos(az));
+  sun.position.copy(cam.position).addScaledVector(dir, 40); sun.target.position.copy(cam.position).add(V(0, -2, -4));
+  sunDisc.position.copy(cam.position).addScaledVector(V(Math.sin(az) * Math.cos(el), Math.sin(Math.max(el, .02)) * .9 + .01, -Math.cos(az) * Math.cos(el)), 420); sunDisc.lookAt(cam.position);
+  sunDisc.scale.setScalar(lerp(A.ds, B.ds, u)); sunDisc.visible = sunDisc.scale.x > .05;
+}
+
+// ---------- terreno ----------
+{
+  const geo = new THREE.PlaneGeometry(600, 600, 130, 130); geo.rotateX(-Math.PI / 2); const pos = geo.attributes.position;
+  for (let i = 0; i < pos.count; i++) { const x = pos.getX(i), z = pos.getZ(i); const d = Math.hypot(x, z - 15); pos.setY(i, d < 40 ? rr(-.02, .02) : rr(-.2, .2) + Math.max(0, d - 45) * .06 * (Math.sin(x * .04) + Math.cos(z * .03) + 1.3)); }
+  const ng = geo.toNonIndexed(); const cols = []; const cs = [C(0x9DB45A), C(0x8EA64E), C(0xB8B060), C(0xA9A85A)];
+  for (let i = 0; i < ng.attributes.position.count; i += 3) { const c = cs[Math.floor(rnd() * 4)]; for (let j = 0; j < 3; j++) cols.push(c.r, c.g, c.b); }
+  ng.setAttribute('color', new THREE.Float32BufferAttribute(cols, 3)); ng.computeVertexNormals();
+  const g = new THREE.Mesh(ng, new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 1 })); g.receiveShadow = true; scene.add(g);
+}
+// estrada (fita) da casa até longe
+const roadCurve = new THREE.CatmullRomCurve3([V(0, 0, 1.8), V(.8, 0, 7), V(-1.2, 0, 14), V(1.5, 0, 22), V(-.5, 0, 31), V(2.5, 0, 42), V(0, 0, 60)]);
+{ const N = 160, P = [], I = []; for (let i = 0; i <= N; i++) { const u = i / N; const p = roadCurve.getPointAt(u), tg = roadCurve.getTangentAt(u); const n = V(-tg.z, 0, tg.x).normalize().multiplyScalar(1.1); P.push(p.x + n.x, .02, p.z + n.z, p.x - n.x, .02, p.z - n.z); if (i < N) { const a = i * 2; I.push(a, a + 1, a + 2, a + 1, a + 3, a + 2); } }
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(P, 3)); g.setIndex(I); g.computeVertexNormals();
+  const r = new THREE.Mesh(g, new THREE.MeshStandardMaterial({ color: 0xC9A66B, roughness: 1, side: THREE.DoubleSide })); r.receiveShadow = true; scene.add(r); }
+// casa do pai
+const house = grp(); {
+  const stone = M(0xE3D2B0), roof = M(0xB98B5A), wood = M(0x6B4A2E);
+  box(4.2, 2.6, 3.4, stone, 0, 1.3, -1.6, house); box(4.5, .25, 3.7, roof, 0, 2.72, -1.6, house); box(2.4, 1.6, 2.4, stone, 2.6, .8, -2.2, house);
+  box(1.0, 1.7, .1, wood, 0, .85, .12, house); box(.6, .5, .1, 0x3A2A1C, -1.3, 1.6, .12, house); box(.6, .5, .1, 0x3A2A1C, 1.3, 1.6, .12, house);
+  for (let i = 0; i < 6; i++) box(.18, .9, .18, stone, -3 + i * .5 * (i > 2 ? 3 : 1) - (i > 2 ? 3 : 0), .45, 1.3, house);
+}
+const windowGlow = []; for (const x of [-1.3, 1.3]) windowGlow.push(mesh(new THREE.PlaneGeometry(.5, .4), new THREE.MeshBasicMaterial({ color: 0xFFC46B }), x, 1.6, .18, house));
+const doorGlow = mesh(new THREE.PlaneGeometry(.9, 1.6), new THREE.MeshBasicMaterial({ color: 0xFFD27A, transparent: true, opacity: 0 }), 0, .82, .19, house);
+// oliveiras
+function olive(x, z, s = 1) { const g = grp(); g.position.set(x, 0, z); g.scale.setScalar(s); const tr = mesh(new THREE.CylinderGeometry(.12, .22, 1.4, 6), M(0x7A5C3E), 0, .7, 0, g); tr.rotation.z = .15; tr.castShadow = true;
+  for (const [a, b, c, r] of [[0, 1.8, 0, .9], [.6, 1.6, .2, .6], [-.5, 1.7, -.2, .65]]) { const l = mesh(new THREE.IcosahedronGeometry(r, 0), M(0x7C8F55), a, b, c, g); l.scale.y = .7; l.castShadow = true; } return g; }
+[[-5, -3, 1.2], [5.5, -4, 1.1], [-4, 5, .9], [4.5, 9, 1], [-5, 15, 1.2], [5, 19, 1.1], [-4, 26, 1], [6, 30, 1.3], [-7, 38, 1.4], [7, 47, 1.5], [-9, 9, 1.3], [10, 13, 1.2], [-12, 22, 1.5], [13, 27, 1.4], [-3, -9, 1.5], [6, -10, 1.6]].forEach(a => olive(...a));
+for (let i = 0; i < 30; i++) { const r = mesh(new THREE.DodecahedronGeometry(rr(.15, .5), 0), M(0xA89F8E), rr(-20, 20), .1, rr(-12, 50)); r.scale.y = .6; r.castShadow = true; if (Math.abs(r.position.x - roadCurve.getPointAt(clamp((r.position.z - 1.8) / 58)).x) < 1.6) r.position.x += 3; }
+// pedra da noite + livro
+const NP = V(-15, 0, 2);
+const rock = mesh(new THREE.DodecahedronGeometry(.6, 0), M(0x8F877B), NP.x, .3, NP.z); rock.scale.set(1.2, .6, 1); rock.castShadow = true;
+const bookG = grp(); bookG.position.set(NP.x + 1.6, 0, NP.z + .4); {
+  box(.7, .9, .7, 0x8F877B, 0, .45, 0, bookG);
+  const bk = grp(bookG); bk.position.set(0, .95, 0); bk.rotation.x = -.35;
+  box(1.0, .05, .7, 0x5A2A1A, 0, 0, 0, bk);
+  for (const s of [-1, 1]) { const pg = box(.46, .05, .64, 0xFFF6DA, s * .24, .05, 0, bk); pg.rotation.z = s * -.12; for (let i = 0; i < 5; i++) box(.34, .006, .02, 0x9A8F7A, s * .24, .085 + s * -.02, -.2 + i * .1, bk).rotation.z = s * -.12; }
+}
+const bookLight = new THREE.PointLight(0xFFE2A0, 0, 8); bookLight.position.set(NP.x + 1.6, 1.6, NP.z + .6); scene.add(bookLight);
+const rays = []; for (let i = 0; i < 5; i++) { const r = mesh(new THREE.ConeGeometry(.6 + i * .1, 8, 16, 1, true), new THREE.MeshBasicMaterial({ color: 0xFFE9B0, transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending }), 0, 0, 0); rays.push(r); }
+// chiqueiro
+const PIG = V(16, 0, 34);
+const sty = grp(); sty.position.copy(PIG); {
+  const mud = mesh(new THREE.CylinderGeometry(3.2, 3.2, .04, 18), M(0x5E4127), 0, .03, 0, sty); mud.receiveShadow = true;
+  for (let i = 0; i < 14; i++) { const a = i / 14 * 6.283; box(.12, .9, .12, 0x6B4A2E, Math.cos(a) * 3.4, .45, Math.sin(a) * 3.4, sty); }
+  for (const h of [.35, .7]) { const r = mesh(new THREE.TorusGeometry(3.4, .04, 4, 14), M(0x7A5638), 0, h, 0, sty); r.rotation.x = Math.PI / 2; }
+  box(1.6, .3, .45, 0x6B4A2E, -1.0, .15, -1.6, sty); box(1.4, .08, .35, 0x7A6A3A, -1.0, .3, -1.6, sty);
+}
+const pigs = []; for (let i = 0; i < 5; i++) { const p = grp(sty); const pm = M(0xF2A3B3); const b = mesh(new THREE.SphereGeometry(.45, 9, 7), pm, 0, .45, 0, p); b.scale.set(1.35, .9, .9); b.castShadow = true;
+  const hd = mesh(new THREE.SphereGeometry(.28, 8, 6), pm, .6, .55, 0, p); mesh(new THREE.CylinderGeometry(.11, .12, .1, 8), M(0xE88A9E), .86, .5, 0, p).rotation.z = Math.PI / 2;
+  for (const s of [-1, 1]) { mesh(new THREE.ConeGeometry(.08, .16, 4), pm, .58, .82, s * .14, p); mesh(new THREE.SphereGeometry(.03, 4, 3), M(0x222222), .82, .62, s * .1, p); }
+  p.userData.legs = []; for (const [x, z] of [[.3, .2], [.3, -.2], [-.3, .2], [-.3, -.2]]) { const lg = mesh(new THREE.CylinderGeometry(.07, .06, .3, 5), pm, x, .15, z, p); }
+  const a = i * 1.3; p.position.set(Math.cos(a) * 1.8, 0, Math.sin(a) * 1.4); p.rotation.y = -a + 1.6; p.scale.setScalar(.7); pigs.push(p); }
+// festa: lanternas, mesa, pétalas
+const party = grp(); {
+  const cols = [0xFF5C7A, 0xFFC94A, 0x4FC3F7, 0x8BC34A, 0xFF8A3D];
+  for (let i = 0; i < 12; i++) { const x = -3.2 + i * .58; const y = 2.9 - Math.sin(i / 11 * Math.PI) * .5; const l = mesh(new THREE.SphereGeometry(.13, 7, 6), new THREE.MeshBasicMaterial({ color: cols[i % 5] }), x, y, 1.9, party); }
+  box(2.6, .1, .9, 0x8B5E3C, 2.5, .75, 3.5, party); for (const [x, z] of [[1.4, 3.15], [3.6, 3.15], [1.4, 3.85], [3.6, 3.85]]) box(.08, .75, .08, 0x6B4A2E, x, .37, z, party);
+  for (let i = 0; i < 5; i++) mesh(new THREE.SphereGeometry(.14, 6, 5), M([0xC0392B, 0xF1C40F, 0x8E44AD, 0x27AE60, 0xE67E22][i]), 1.6 + i * .45, .9, 3.5, party);
+  box(.5, .12, .5, 0xD4A35A, 3.2, .87, 3.55, party);
+}
+const petals = []; for (let i = 0; i < 60; i++) { const p = mesh(new THREE.PlaneGeometry(.09, .09), new THREE.MeshBasicMaterial({ color: [0xFF5C7A, 0xFFC94A, 0xFFFFFF, 0x8BC34A][i % 4], side: THREE.DoubleSide }), 0, 0, 0); p.userData = { x: rr(-3, 4), z: rr(0, 5), s: rr(.5, 1.2) }; petals.push(p); }
+// moedas
+const coins = []; for (let i = 0; i < 18; i++) { const c = mesh(new THREE.CylinderGeometry(.07, .07, .02, 10), new THREE.MeshStandardMaterial({ color: 0xFFC83D, metalness: .7, roughness: .3, emissive: 0x332200 }), 0, 0, 0); c.userData.v = V(Math.sin(i * 2.3) * 1.4, 1.6 + (i % 4) * .4, Math.cos(i * 1.7) * 1.2); coins.push(c); }
+const bag = mesh(new THREE.SphereGeometry(.16, 8, 6), M(0x9C7A4A), 0, 0, 0); bag.scale.y = 1.2;
+// anel e brilho
+const ring = mesh(new THREE.TorusGeometry(.06, .018, 6, 16), new THREE.MeshStandardMaterial({ color: 0xFFD54A, metalness: .9, roughness: .2, emissive: 0x442200 }), 0, 0, 0);
+const sparks = []; for (let i = 0; i < 8; i++) sparks.push(mesh(new THREE.OctahedronGeometry(.04), new THREE.MeshBasicMaterial({ color: 0xFFF2A0 }), 0, 0, 0));
+const halo = mesh(new THREE.SphereGeometry(1.6, 20, 14), new THREE.MeshBasicMaterial({ color: 0xFFE2A0, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending }), 0, 0, 0);
+
+// ---------- pessoas ----------
+function tunic(p, col, belt = 0x5A3A22) { const m = M(col); const sk = mesh(new THREE.CylinderGeometry(.19, .3, .55, 9), m, 0, -.15, 0, p.hips); sk.castShadow = true; mesh(new THREE.CylinderGeometry(.2, .2, .06, 9), M(belt), 0, .12, 0, p.hips); p.tunicM = m; return m; }
+const son = buildPerson({ shirt: 0x2A9D8F, pants: 0x2A9D8F, hair: 0x3B2416, skin: 0xC98E66, shoes: 0x6B4A2E }); scene.add(son.root); tunic(son, 0x2A9D8F);
+const dad = buildPerson({ shirt: 0x8B5E3C, pants: 0x8B5E3C, hair: 0xEDEDED, skin: 0xC28A62, shoes: 0x5A3A22, hairStyle: 'bald' }); scene.add(dad.root); tunic(dad, 0x8B5E3C, 0xD9C08A);
+{ const bm = M(0xF2F2F2); const bd = mesh(new THREE.IcosahedronGeometry(.13, 1), bm, 0, -.1, .09, dad.head); bd.scale.set(1.1, 1.2, .8); mesh(new THREE.BoxGeometry(.1, .025, .03), bm, 0, -.04, .16, dad.head); }
+const robe = (() => { const m = new THREE.MeshStandardMaterial({ color: 0xC0262D, roughness: .6 }); const g = grp(son.hips); const c = mesh(new THREE.CylinderGeometry(.27, .36, 1.05, 10, 1, true), m, 0, .02, -.01, g); c.material.side = THREE.DoubleSide; c.castShadow = true; mesh(new THREE.TorusGeometry(.25, .035, 5, 14), M(0xFFC83D, { metalness: .6 }), 0, .55, 0, g).rotation.x = Math.PI / 2; return g; })();
+const COL_SON = C(0x2A9D8F), COL_RAG = C(0x6E6650);
+const P_KNEEL = { lx: .1, lz: .15, le: -.3, rx: .1, rz: -.15, re: -.3, hl: 0, kl: 1.5, hr: 0, kr: 1.5, hx: .5, hy: 0, hz: 0, lean: .25, y: -.43 };
+const P_PRAY = { lx: -.9, lz: -.25, le: -1.5, rx: -.9, rz: .25, re: -1.5, hl: 0, kl: 1.5, hr: 0, kr: 1.5, hx: -.35, hy: 0, hz: 0, lean: 0, y: -.43 };
+const P_HUG = { lx: -1.35, lz: -.55, le: -1.0, rx: -1.35, rz: .55, re: -1.0, hl: 0, kl: 0, hr: 0, kr: 0, hx: .1, hy: 0, hz: 0, lean: .12, y: 0 };
+const P_OPEN = { lx: -1.0, lz: .9, le: -.3, rx: -1.0, rz: -.9, re: -.3, hl: 0, kl: 0, hr: 0, kr: 0, hx: -.1, hy: 0, hz: 0, lean: -.05, y: 0 };
+const P_SAD = { ...PP.stand, hx: .45, lean: .1 };
+const P_WAVE = { ...PP.stand, rx: -2.6, rz: -.3, re: -.4 };
+function person(p, o) { const A = Object.assign({ x: 0, z: 0, ry: 0, P: PP.stand, walk: 0, t: 0, f: 'neutral', y: 0 }, o); p.root.visible = true; p.root.position.set(A.x, A.y, A.z); p.root.rotation.y = A.ry; poseP(p, A.P, A.walk, A.t); face(p, A.f, A.t); }
+const faceTo = (a, b) => Math.atan2(b.x - a.x, b.z - a.z);
+const onRoad = u => roadCurve.getPointAt(clamp(u));
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [T_CAIU, 'puf'], [T_BIBLIA, 'ding'], [T_HERANCA, 'pop'], [T_DESP, 'win'], [T_PORCOS, 'puf'], [T_SI, 'ding'], [T_LONGE, 'whoosh'], [T_ABRACOU, 'ding'], [T_ROUPA, 'pop'], [T_ANEL, 'ding'], [T_FESTA, 'win'], [S(10), 'whoosh'], [T_VOLTE, 'ding'], [T_EUVOU, 'pop'], [S(15), 'whoosh'], [T_ESCOLHER, 'ding']].forEach(([t, k]) => ev(t, k));
+const HL = /deus|pecou|vergonha|bíblia|amor|herança|desperdiçou|miséria|porcos|filho|pai|longe|correu|abraçou|beijou|roupa|anel|festa|destruição|volte|voltar|culpa|senhor|caiu|céu/i;
+
+// ---------- planos ----------
+const hideAll = () => { son.root.visible = dad.root.visible = false; robe.visible = false; coins.forEach(c => c.visible = false); bag.visible = false; ring.visible = false; sparks.forEach(s => s.visible = false); petals.forEach(p => p.visible = false); party.visible = false; rays.forEach(r => r.material.opacity = 0); halo.material.opacity = 0; bookLight.intensity = 0; bookG.visible = false; windowGlow.forEach(w => w.visible = false); doorGlow.material.opacity = 0; };
+const sonCol = c => { son.tunicM.color.copy(c); son.mats.mShirt.color.copy(c); son.mats.mPants.color.copy(c); };
+const SHOTS = [
+  [0, 'night', (t, k) => { // sozinho, cabeça baixa
+    person(son, { x: NP.x, z: NP.z, ry: .5, P: PP.sitHead, y: .2, t, f: 'sad' });
+    return [V(NP.x + 2.4 - k * .1, 1.5, NP.z + 4.6 - k * .15), V(NP.x, 1.0, NP.z)];
+  }],
+  [S(1), 'night', (t, k) => { // prometeu e caiu
+    const fall = clamp((t - T_CAIU) / .5);
+    person(son, { x: NP.x + .6, z: NP.z + 1.2, ry: .3, P: t < T_CAIU ? P_PRAY : mixP(P_PRAY, P_KNEEL, fall), t, f: t < T_CAIU ? 'neutral' : 'sad' });
+    return [V(NP.x + 3.2, 1.3, NP.z + 4.8), V(NP.x + .6, .8, NP.z + 1.2)];
+  }],
+  [S(2), 'night', (t, k) => { // vergonha de olhar para o céu
+    person(son, { x: NP.x + .6, z: NP.z + 1.2, ry: .3, P: P_KNEEL, t, f: 'sad' });
+    return [V(NP.x + 2.2, 7.8 - k * .3, NP.z + 5.2), V(NP.x + .6, .5, NP.z + 1.2)];
+  }],
+  [S(3), 'night', (t, k) => { // a Bíblia
+    bookG.visible = true; bookLight.intensity = 6 * ease(clamp(k / 1.2));
+    rays.forEach((r, i) => { r.position.set(bookG.position.x, 5, bookG.position.z); r.rotation.z = (i - 2) * .06; r.material.opacity = .06 * ease(clamp(k / 1.5)); });
+    return [V(bookG.position.x + 1.4, 2.3, bookG.position.z + 2.0 - k * .1), V(bookG.position.x, 1.0, bookG.position.z)];
+  }],
+  [S(4), 'day', (t, k) => { // pede a herança e vai embora
+    const go = clamp((t - T_HERANCA - .5) / 3.5); const p = onRoad(.02 + go * .12);
+    person(dad, { x: -.4, z: 1.4, ry: faceTo(V(-.4, 0, 1.4), p), P: t > T_DESP ? P_SAD : PP.stand, t, f: 'sad' });
+    person(son, { x: p.x, z: p.z, ry: faceTo(onRoad(.02 + go * .12), onRoad(.04 + go * .12)), P: PP.stand, walk: go > 0 && go < 1 ? 1 : 0, t, f: 'happy' });
+    bag.visible = true; son.armR.hand.getWorldPosition(bag.position); bag.position.y -= .12;
+    coins.forEach((c, i) => { const u = t - T_DESP; c.visible = u > 0 && u < 1.6; if (!c.visible) return; c.position.set(p.x + c.userData.v.x * u * .7, 1.2 + c.userData.v.y * u - 4 * u * u, p.z + c.userData.v.z * u * .5); c.rotation.set(u * 9 + i, u * 5, 0); });
+    return [V(4.5, 2.4, 10.5), V(.2, 1.0, 3.5)];
+  }],
+  [S(5), 'grey', (t, k) => { // miséria com os porcos
+    sonCol(COL_RAG);
+    person(son, { x: PIG.x + .4, z: PIG.z + .9, ry: -.6, P: PP.sitSlump, t, f: 'sad' });
+    pigs.forEach((p, i) => { p.rotation.z = Math.sin(t * 6 + i) * .03; p.position.y = Math.abs(Math.sin(t * 5 + i)) * .02; });
+    return [V(PIG.x + 3.6 - k * .15, 2.0, PIG.z + 5.2 - k * .1), V(PIG.x + .2, .7, PIG.z + .4)];
+  }],
+  [S(6), 'gold', (t, k) => { // caiu em si e volta
+    sonCol(COL_RAG);
+    const up = clamp((t - T_SI) / .8), go = clamp((t - T_VOLTAR) / 4);
+    const p = V(PIG.x + .4 - go * 3.5, 0, PIG.z + .9 - go * 2);
+    person(son, { x: p.x, z: p.z, ry: up < 1 ? -.6 : faceTo(V(1, 0, 1), V(0, 0, 0)), P: up < 1 ? mixP(PP.sitSlump, PP.stand, up) : P_SAD, walk: go > 0 ? .8 : 0, t, f: 'sad' });
+    return [V(PIG.x + 3.4, 1.8, PIG.z + 4.6), V(p.x, 1.0, p.z)];
+  }],
+  [S(7), 'gold', (t, k) => { // o pai o viu de longe
+    sonCol(COL_RAG);
+    const sp = onRoad(.62 - k * .015);
+    person(son, { x: sp.x, z: sp.z, ry: faceTo(sp, onRoad(.5)), P: P_SAD, walk: .8, t, f: 'sad' });
+    const dp = V(.3, 0, 2.6);
+    person(dad, { x: dp.x, z: dp.z, ry: faceTo(dp, sp), P: t > T_LONGE ? { ...PP.point, hx: -.1 } : PP.stand, t, f: t > T_LONGE ? 'shock' : 'neutral' });
+    return [V(-1.0, 2.2, -1.6 + k * .1), V(.6, 1.4, 8)];
+  }],
+  [S(8), 'gold', (t, k) => { // correu, abraçou
+    sonCol(COL_RAG);
+    const meet = V(-.6, 0, 11); const run = clamp((t - S(8)) / 1.2), hug = clamp((t - T_ABRACOU + .2) / .5);
+    const dp = V(lerp(.4, meet.x, ease(run)), 0, lerp(7.6, meet.z - .23, ease(run))); const sp = V(meet.x, 0, meet.z + .23);
+    person(dad, { x: dp.x, z: dp.z, ry: Math.PI * 0, P: hug > 0 ? mixP(PP.stand, P_HUG, hug) : { ...PP.stand, lean: .25 }, walk: run < 1 ? 1.6 : 0, t: t * 1.6, f: 'happy' });
+    person(son, { x: sp.x, z: sp.z, ry: Math.PI, P: hug > 0 ? mixP(P_SAD, P_HUG, hug) : P_SAD, t, f: hug > .5 ? 'happy' : 'sad' });
+    halo.position.set(meet.x, 1.3, meet.z); halo.material.opacity = .18 * hug;
+    return [V(meet.x + 3.0 - k * .2, 1.6, meet.z + 1.0), V(meet.x, 1.3, meet.z)];
+  }],
+  [S(9), 'gold', (t, k) => { // roupa, anel, festa
+    party.visible = t > T_FESTA - .3; windowGlow.forEach(w => w.visible = true);
+    const robed = t > T_ROUPA;
+    sonCol(robed ? COL_SON : COL_RAG); robe.visible = robed; robe.scale.setScalar(robed ? Math.max(.001, pop(t - T_ROUPA, .3)) : .001);
+    person(son, { x: .2, z: 2.6, ry: .3, P: t > T_FESTA ? PP.cheer : P_OPEN, t, f: 'happy' });
+    person(dad, { x: -.7, z: 2.9, ry: .9, P: P_OPEN, t, f: 'happy' });
+    if (t > T_ANEL - .1) { ring.visible = true; son.armL.hand.getWorldPosition(ring.position); ring.rotation.set(t, t * 2, 0); sparks.forEach((s, i) => { const u = ((t * 1.5 + i / 8) % 1); s.visible = true; s.position.copy(ring.position).add(V(Math.cos(i * .8) * u * .4, u * .4, Math.sin(i * .8) * u * .4)); s.scale.setScalar(1 - u); }); }
+    if (t > T_FESTA) petals.forEach((p, i) => { const u = ((t - T_FESTA) * .5 * p.userData.s + i / 60) % 1; p.visible = true; p.position.set(p.userData.x, 3.6 - u * 3.6, p.userData.z); p.rotation.set(t * 3 + i, t * 2, 0); });
+    return [V(1.8, 1.9, 7.6 - k * .15), V(.2, 1.3, 2.4)];
+  }],
+  [S(10), 'sunset', (t, k) => { // longe demais
+    sonCol(COL_SON); const p = onRoad(.72);
+    person(son, { x: p.x, z: p.z, ry: faceTo(p, onRoad(.4)), P: P_SAD, t, f: 'sad' });
+    return [V(p.x + 1.4, 1.8, p.z + 4.2 - k * .1), V(p.x - .3, 1.1, p.z - 2.5)];
+  }],
+  [S(11), 'sunset', (t, k) => { // Ele deseja que você volte
+    sonCol(COL_SON); const p = onRoad(.72);
+    person(son, { x: p.x, z: p.z, ry: faceTo(p, onRoad(.4)), P: t > T_VOLTE ? { ...PP.stand, hx: -.35 } : P_SAD, t, f: t > T_VOLTE ? 'calm' : 'sad' });
+    rays.forEach((r, i) => { r.position.set(p.x + (i - 2) * .5, 4.5, p.z); r.rotation.z = (i - 2) * .08; r.material.opacity = .07 * ease(clamp((t - S(11) - .5) / 1.5)); });
+    windowGlow.forEach(w => w.visible = true); doorGlow.material.opacity = 1;
+    return [V(p.x - 1.6, 2.2, p.z + 5.6), V(p.x, 1.6, p.z - 2)];
+  }],
+  [S(12), 'sunset', (t, k) => { // não importa quantas vezes caiu
+    sonCol(COL_SON); const p = onRoad(.6);
+    const c = (k * 1.4) % 2; const kneel = c < 1 ? ease(c) : 1 - ease(c - 1);
+    person(son, { x: p.x, z: p.z, ry: faceTo(p, onRoad(.4)), P: mixP(PP.stand, P_KNEEL, kneel), t, f: 'sad' });
+    return [V(p.x + 2.6, 1.2, p.z + 2.0), V(p.x, .8, p.z)];
+  }],
+  [S(13), 'sunset', (t, k) => { // procurar o Pai
+    sonCol(COL_SON); const p = onRoad(.32 - k * .02);
+    person(son, { x: p.x, z: p.z, ry: faceTo(p, onRoad(.1)), P: PP.stand, walk: 1, t, f: 'calm' });
+    person(dad, { x: 0, z: 1.0, ry: 0, P: P_OPEN, t, f: 'happy' });
+    windowGlow.forEach(w => w.visible = true); doorGlow.material.opacity = 1;
+    return [V(p.x + 1.4, 1.9, p.z + 4.4), V(.2, 1.3, 1.0)];
+  }],
+  [S(14), 'sunset', (t, k) => { // eu vou voltar, Senhor
+    sonCol(COL_SON); const meet = V(-.6, 0, 11);
+    person(dad, { x: meet.x, z: meet.z - .23, ry: 0, P: P_HUG, t, f: 'happy' });
+    person(son, { x: meet.x, z: meet.z + .23, ry: Math.PI, P: P_HUG, t, f: 'happy' });
+    halo.position.set(meet.x, 1.3, meet.z); halo.material.opacity = .16;
+    return [V(meet.x + 2.6 - k * .08, 1.5, meet.z + 4.2 - k * .1), V(meet.x, 1.6, meet.z)];
+  }],
+  [S(15), 'sunset', (t, k) => { // final: estrada até a casa iluminada
+    sonCol(COL_SON); const p = onRoad(.22 - k * .012);
+    person(son, { x: p.x, z: p.z, ry: faceTo(p, onRoad(.05)), P: PP.stand, walk: 1, t, f: 'calm' });
+    person(dad, { x: 0, z: 1.2, ry: 0, P: P_OPEN, t, f: 'happy' });
+    windowGlow.forEach(w => w.visible = true); doorGlow.material.opacity = 1;
+    return [V(1.4, 2.4, 16.5 - k * .12), V(0, 1.6, 2)];
+  }],
+];
+window.draw = function (t) {
+  hideAll(); sonCol(COL_SON);
+  let i = 0; while (i + 1 < SHOTS.length && SHOTS[i + 1][0] <= t) i++;
+  const [t0, lk, f] = SHOTS[i];
+  const [p0, tg] = f(t, t - t0); const ZK = [1.55,1.6,1,1.45,1.35,1.3,1.4,1,1.8,1.6,1,1,1.8,1.2,1.6,1][i]; const p = tg.clone().add(p0.clone().sub(tg).multiplyScalar(ZK));
+  cam.position.copy(p); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  setLook(lk, lk, 0);
+
+  // ---------- textos ----------
+  fixed($('hook'), t < S(1) ? pop(t - .02, .35) * (1 - clamp((t - S(1) + .2) / .2)) : 0);
+  const t1 = $('t1'); t1.style.opacity = 0;
+  const tag = (txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; t1.textContent = txt; t1.className = 'o tag ' + cls; place(t1, true, x, y, pop(t - t0, .3), rot); };
+  tag('PROMETEU MIL VEZES', 'white', win(t, T_MIL - .2, T_CAIU), 540, 620, T_MIL - .2, -3);
+  tag('CAIU DE NOVO', 'red', win(t, T_CAIU, S(2)), 540, 620, T_CAIU, 3);
+  tag('VERGONHA', 'blue', win(t, T_VERG - .2, S(3)), 540, 620, T_VERG - .2, -4);
+  tag('PEDIU A HERANÇA', '', win(t, T_HERANCA, T_DESP), 540, 600, T_HERANCA, -3);
+  tag('DESPERDIÇOU TUDO', 'red', win(t, T_DESP, S(5)), 540, 600, T_DESP, 3);
+  tag('NA MISÉRIA', 'red', win(t, T_MISERIA, S(6)), 540, 600, T_MISERIA, -4);
+  tag('"NÃO MEREÇO SER SEU FILHO"', 'white', win(t, T_MERECIA - .3, S(7)), 540, 600, T_MERECIA - .3, -2);
+  tag('O PAI O VIU DE LONGE', '', win(t, T_LONGE - .2, S(8)), 540, 600, T_LONGE - .2, 3);
+  tag('CORREU E ABRAÇOU', 'red', win(t, T_CORREU, S(9)), 540, 600, T_CORREU, -3);
+  tag('A MELHOR ROUPA', 'red', win(t, T_ROUPA, T_ANEL), 540, 600, T_ROUPA, -3);
+  tag('UM ANEL', '', win(t, T_ANEL, T_FESTA), 540, 600, T_ANEL, 3);
+  tag('FESTA!', 'green', win(t, T_FESTA, S(10)), 540, 600, T_FESTA, -4);
+  tag('LONGE DEMAIS?', 'blue', win(t, WD(10, /longe/i) - .2, S(11)), 540, 600, WD(10, /longe/i) - .2, -3);
+  tag('ELE DESEJA QUE VOCÊ VOLTE', '', win(t, T_VOLTE - .3, S(12)), 540, 600, T_VOLTE - .3, 3);
+  tag('LEVANTA DE NOVO', 'green', win(t, S(12) + .3, S(13)), 540, 600, S(12) + .3, -3);
+  tag('PROCURE O PAI', 'white', win(t, WD(13, /procurar/i) - .3, S(14)), 540, 600, WD(13, /procurar/i) - .3, 3);
+  place($('ref'), win(t, T_BIBLIA - .2, S(4) + .8), 540, 440, pop(t - T_BIBLIA + .2, .35), -2);
+  const cm = $('comic');
+  if (win(t, T_SI, T_SI + 1.4)) { cm.textContent = '!'; place(cm, true, 760, 760, pop(t - T_SI, .25), 8); } else cm.style.opacity = 0;
+  fixed($('volta'), win(t, T_EUVOU - .1, S(15)) ? pop(t - T_EUVOU + .1, .4) * (1 + Math.sin(t * 6) * .02) : 0);
+  fixed($('final'), t >= T_ESCOLHER - .2 ? pop(t - T_ESCOLHER + .2, .4) : 0);
+  $('wm').style.opacity = .85;
+  // legenda
+  let wTxt = null, wSt = 0;
+  for (let i = 0; i < SN.length; i++) for (const w2 of SN[i].words) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap = $('cap');
+  if (wTxt) { cap.textContent = wTxt.toUpperCase().replace(/[.,!?:]/g, ''); cap.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+await document.fonts.load('900 60px P'); await document.fonts.ready;
+window.ready = true;
+</script></body></html>
