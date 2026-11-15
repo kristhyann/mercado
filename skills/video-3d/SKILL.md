@@ -120,18 +120,32 @@ bash ../_kit/scripts/finalizar.sh .                        # efeitos + volume -1
 - **Trilha:** se quiser música, ponha um `musica.wav` na pasta antes de finalizar. Ela fica baixa e abaixa sozinha quando a voz fala.
 - **Conferência:** depois, tire uns 10 quadros do `final.mp4` com ffmpeg e confira.
 
-## 8. Capa e títulos
-- **Capa:**
-  ```
-  NODE_PATH=$(npm root -g) node ../_kit/scripts/capa.js . <segundo> /tmp/quadro.png
-  python3 ../_kit/scripts/capa.py /tmp/quadro.png capa.jpg "LINHA 1" "LINHA 2" "@MARCA"
-  ```
-  Escolha um segundo em que o objeto ou personagem esteja inteiro e bonito, e o texto da capa não cubra o principal.
-- **`titulos.txt`:**
-  - **títulos:** 3 opções e o texto da capa;
-  - **por rede** (YouTube Shorts, TikTok, Instagram Reels, Facebook Reels e Kwai): título ou legenda e 4–7 hashtags;
-  - **comentário para fixar.**
-  - Não prometa visualizações nem ganhos.
+## 8. Capa, títulos e hashtags (sempre, em todo vídeo)
+
+**Capa (`capa.jpg`, 1080x1920)**
+1. Escolha o segundo mais forte do vídeo: objeto ou personagem inteiro, com expressão, e fundo limpo na metade de baixo.
+   - Teste 2 ou 3 segundos diferentes e escolha o melhor.
+2. Tire o quadro limpo, sem textos:
+   ```
+   NODE_PATH=$(npm root -g) node ../_kit/scripts/capa.js . <segundo> /tmp/quadro.png
+   ```
+3. Monte a capa com 2 linhas de texto e a marca d'água:
+   ```
+   python3 ../_kit/scripts/capa.py /tmp/quadro.png capa.jpg "LINHA 1" "LINHA 2" "@MARCA"
+   ```
+   - **Linha 1:** até uns 18 caracteres, branca.
+   - **Linha 2:** até uns 14, grande e em destaque. Use o gancho do vídeo encurtado (ex.: "PRA ONDE / VAI TUDO?", "POR QUE OS DEGRAUS / SOMEM?").
+4. Olhe a capa pronta. Se o texto cobrir o rosto ou o objeto principal, troque o segundo escolhido.
+5. Para vídeo que vende produto, dá pra acrescentar um selo com o preço ou a oferta com Pillow (retângulo amarelo com contorno preto).
+
+**Títulos e hashtags (`titulos.txt`)**
+- Preencha o modelo `modelos/titulos_modelo.txt` desta skill com:
+  - 3 opções de título e o texto da capa;
+  - um bloco por rede (**YouTube Shorts, TikTok, Instagram Reels, Facebook Reels e Kwai**), com título ou legenda no jeito de cada uma e a quantidade certa de hashtags;
+  - o comentário para fixar.
+- Se o final for "Comenta PALAVRA", repita a palavra igual nas legendas e no comentário fixado.
+- Não prometa visualizações nem ganhos.
+- Na entrega, mostre na conversa o título e as hashtags principais de cada rede, além de mandar o arquivo.
 
 ## 9. Entregar
 - Mande `final.mp4`, `capa.jpg` e `titulos.txt`.

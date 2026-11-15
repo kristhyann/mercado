@@ -1,0 +1,51 @@
+<TEMA EM CAIXA ALTA> <emoji> — títulos, legendas e hashtags
+==============================================================
+
+TÍTULOS (escolha um)
+1. <título curiosidade, até 60 caracteres> <emoji>
+2. <título com número ou fato surpreendente>
+3. <título com identificação ou desafio>
+
+TEXTO NA CAPA: <LINHA 1> <LINHA 2>
+
+────────────────────────────────────────
+YOUTUBE SHORTS
+Título: <título 1> #shorts            (até 100 caracteres; a palavra-chave no começo)
+Descrição:
+<2 a 3 frases resumindo o vídeo, com as palavras que a pessoa buscaria>
+<CTA: "Segue o canal…" ou "Comenta PALAVRA">
+#shorts #<tema> #<nicho> #<formato> #<extra>
+
+────────────────────────────────────────
+TIKTOK
+Legenda: <frase curta que provoca comentário ou compartilhamento> <emoji>
+Hashtags: #<tema> #<nicho> #<formato> #aprendanotiktok #<extra>    (4 a 6, misturando grandes e específicas)
+
+────────────────────────────────────────
+INSTAGRAM REELS
+Legenda:
+<pergunta ou gancho> <emoji>
+👉 <ponto 1 do vídeo>
+👉 <ponto 2>
+👉 <ponto 3>
+<CTA: "Salva e manda pra quem…" / "Comenta PALAVRA">
+Hashtags: #<tema> #<nicho> #<formato> #reels #<extra>    (3 a 5)
+
+────────────────────────────────────────
+FACEBOOK REELS
+Legenda: <1 a 2 frases simples + CTA>
+Hashtags: #<tema> #<nicho> #<extra>
+
+────────────────────────────────────────
+KWAI
+Legenda: <frase curta e direta> <emoji> Assiste até o final!
+Hashtags: #<tema> #<nicho> #kwaibrasil
+
+────────────────────────────────────────
+COMENTÁRIO PARA FIXAR (todas as redes)
+"<pergunta que gera resposta, ex.: 'Você sabia disso? 👇'>"
+
+REGRAS
+- Nada de prometer visualizações, seguidores ou dinheiro.
+- Hashtags em português, sem acento, ligadas ao tema. Nada de hashtag genérica demais (#viral, #fy) sozinha.
+- Mesma marca d'água/@ do vídeo.
