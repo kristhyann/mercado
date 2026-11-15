@@ -4,3 +4,4 @@
 - A pessoa gera a voz em outra plataforma (ElevenLabs). Entregar só o roteiro em texto (`roteiro_voz.txt`) e esperar o mp3; depois montar o vídeo em cima do áudio dela.
 - Formato padrão: vertical 1080x1920, 3D low-poly colorido, legenda palavra por palavra (Poppins), estilo "construa do zero" (skill `construa-do-zero`).
 - Kit reutilizável em `videos/_kit/` (render.js, kit.js, pessoas.js, scripts/).
+- Estratégia de conteúdo e séries: ver `estrategia/README.md` (pilares, séries de 3 partes, formato de entrega).
