@@ -1,0 +1,12 @@
+SKILL "video-3d" — como instalar
+
+PELO SITE / APP DO CLAUDE (inclui Claude Code no navegador e no Android):
+  Configurações → Capacidades (Skills) → Enviar skill → escolha o arquivo video-3d.zip.
+
+NO COMPUTADOR (Claude Code no terminal):
+  Descompacte e coloque a pasta "video-3d" em:
+    Windows:   C:\Users\SEU_USUARIO\.claude\skills\video-3d
+    Mac/Linux: ~/.claude/skills/video-3d
+  (a pasta precisa ter o arquivo SKILL.md dentro)
+
+PARA USAR: abra o Claude Code num projeto e escreva:  quero fazer um vídeo
