@@ -1,0 +1,739 @@
+{
+ "duration": 60.289,
+ "sentences": [
+  {
+   "text": "Antes do papel higiênico existir… como as pessoas se limpavam? Prepara o estômago.",
+   "start": 0.0,
+   "end": 5.74,
+   "words": [
+    {
+     "w": "Antes",
+     "start": 0.0,
+     "end": 0.32
+    },
+    {
+     "w": "do",
+     "start": 0.32,
+     "end": 0.52
+    },
+    {
+     "w": "papel",
+     "start": 0.52,
+     "end": 0.78
+    },
+    {
+     "w": "higiênico",
+     "start": 0.78,
+     "end": 1.36
+    },
+    {
+     "w": "existir…",
+     "start": 1.36,
+     "end": 2.1
+    },
+    {
+     "w": "como",
+     "start": 2.64,
+     "end": 2.86
+    },
+    {
+     "w": "as",
+     "start": 2.86,
+     "end": 3.02
+    },
+    {
+     "w": "pessoas",
+     "start": 3.02,
+     "end": 3.32
+    },
+    {
+     "w": "se",
+     "start": 3.32,
+     "end": 3.54
+    },
+    {
+     "w": "limpavam?",
+     "start": 3.54,
+     "end": 4.02
+    },
+    {
+     "w": "Prepara",
+     "start": 4.6,
+     "end": 5.12
+    },
+    {
+     "w": "o",
+     "start": 5.12,
+     "end": 5.22
+    },
+    {
+     "w": "estômago.",
+     "start": 5.22,
+     "end": 5.74
+    }
+   ]
+  },
+  {
+   "text": "Durante milhares de anos, valia o que tivesse por perto: folhas, grama… e até pedra.",
+   "start": 6.28,
+   "end": 12.72,
+   "words": [
+    {
+     "w": "Durante",
+     "start": 6.28,
+     "end": 6.62
+    },
+    {
+     "w": "milhares",
+     "start": 6.62,
+     "end": 7.24
+    },
+    {
+     "w": "de",
+     "start": 7.24,
+     "end": 7.44
+    },
+    {
+     "w": "anos,",
+     "start": 7.44,
+     "end": 7.76
+    },
+    {
+     "w": "valia",
+     "start": 8.0,
+     "end": 8.34
+    },
+    {
+     "w": "o",
+     "start": 8.34,
+     "end": 8.48
+    },
+    {
+     "w": "que",
+     "start": 8.48,
+     "end": 8.54
+    },
+    {
+     "w": "tivesse",
+     "start": 8.54,
+     "end": 8.9
+    },
+    {
+     "w": "por",
+     "start": 8.9,
+     "end": 9.2
+    },
+    {
+     "w": "perto:",
+     "start": 9.2,
+     "end": 9.56
+    },
+    {
+     "w": "folhas,",
+     "start": 9.9,
+     "end": 10.48
+    },
+    {
+     "w": "grama…",
+     "start": 10.88,
+     "end": 11.32
+    },
+    {
+     "w": "e",
+     "start": 11.32,
+     "end": 11.82
+    },
+    {
+     "w": "até",
+     "start": 11.82,
+     "end": 12.1
+    },
+    {
+     "w": "pedra.",
+     "start": 12.1,
+     "end": 12.72
+    }
+   ]
+  },
+  {
+   "text": "Na Grécia antiga, usavam pedacinhos de cerâmica. É… cerâmica.",
+   "start": 13.12,
+   "end": 17.98,
+   "words": [
+    {
+     "w": "Na",
+     "start": 13.12,
+     "end": 13.32
+    },
+    {
+     "w": "Grécia",
+     "start": 13.32,
+     "end": 13.6
+    },
+    {
+     "w": "antiga,",
+     "start": 13.6,
+     "end": 14.08
+    },
+    {
+     "w": "usavam",
+     "start": 14.08,
+     "end": 14.64
+    },
+    {
+     "w": "pedacinhos",
+     "start": 14.64,
+     "end": 15.32
+    },
+    {
+     "w": "de",
+     "start": 15.32,
+     "end": 15.54
+    },
+    {
+     "w": "cerâmica.",
+     "start": 15.54,
+     "end": 16.16
+    },
+    {
+     "w": "É…",
+     "start": 16.58,
+     "end": 16.78
+    },
+    {
+     "w": "cerâmica.",
+     "start": 17.14,
+     "end": 17.98
+    }
+   ]
+  },
+  {
+   "text": "Na Roma antiga, os banheiros eram públicos, um do lado do outro, sem parede nenhuma. E ali ficava o tersório: uma esponja presa na ponta de um palito. Muitos historiadores acreditam que ele era lavado na água… e passado pro próximo.",
+   "start": 18.38,
+   "end": 33.74,
+   "words": [
+    {
+     "w": "Na",
+     "start": 18.38,
+     "end": 18.54
+    },
+    {
+     "w": "Roma",
+     "start": 18.54,
+     "end": 18.74
+    },
+    {
+     "w": "antiga,",
+     "start": 18.74,
+     "end": 19.24
+    },
+    {
+     "w": "os",
+     "start": 19.5,
+     "end": 19.56
+    },
+    {
+     "w": "banheiros",
+     "start": 19.56,
+     "end": 19.98
+    },
+    {
+     "w": "eram",
+     "start": 19.98,
+     "end": 20.2
+    },
+    {
+     "w": "públicos,",
+     "start": 20.2,
+     "end": 20.94
+    },
+    {
+     "w": "um",
+     "start": 21.14,
+     "end": 21.38
+    },
+    {
+     "w": "do",
+     "start": 21.38,
+     "end": 21.54
+    },
+    {
+     "w": "lado",
+     "start": 21.54,
+     "end": 21.8
+    },
+    {
+     "w": "do",
+     "start": 21.8,
+     "end": 22.0
+    },
+    {
+     "w": "outro,",
+     "start": 22.0,
+     "end": 22.32
+    },
+    {
+     "w": "sem",
+     "start": 22.5,
+     "end": 22.74
+    },
+    {
+     "w": "parede",
+     "start": 22.74,
+     "end": 23.28
+    },
+    {
+     "w": "nenhuma.",
+     "start": 23.28,
+     "end": 23.74
+    },
+    {
+     "w": "E",
+     "start": 24.24,
+     "end": 24.36
+    },
+    {
+     "w": "ali",
+     "start": 24.36,
+     "end": 24.62
+    },
+    {
+     "w": "ficava",
+     "start": 24.62,
+     "end": 25.08
+    },
+    {
+     "w": "o",
+     "start": 25.08,
+     "end": 25.3
+    },
+    {
+     "w": "tersório:",
+     "start": 25.3,
+     "end": 26.2
+    },
+    {
+     "w": "uma",
+     "start": 26.2,
+     "end": 26.38
+    },
+    {
+     "w": "esponja",
+     "start": 26.38,
+     "end": 26.94
+    },
+    {
+     "w": "presa",
+     "start": 26.94,
+     "end": 27.48
+    },
+    {
+     "w": "na",
+     "start": 27.48,
+     "end": 27.58
+    },
+    {
+     "w": "ponta",
+     "start": 27.58,
+     "end": 28.06
+    },
+    {
+     "w": "de",
+     "start": 28.06,
+     "end": 28.16
+    },
+    {
+     "w": "um",
+     "start": 28.16,
+     "end": 28.22
+    },
+    {
+     "w": "palito.",
+     "start": 28.22,
+     "end": 28.64
+    },
+    {
+     "w": "Muitos",
+     "start": 28.64,
+     "end": 29.32
+    },
+    {
+     "w": "historiadores",
+     "start": 29.32,
+     "end": 29.94
+    },
+    {
+     "w": "acreditam",
+     "start": 29.94,
+     "end": 30.64
+    },
+    {
+     "w": "que",
+     "start": 30.64,
+     "end": 30.8
+    },
+    {
+     "w": "ele",
+     "start": 30.8,
+     "end": 30.94
+    },
+    {
+     "w": "era",
+     "start": 30.94,
+     "end": 31.08
+    },
+    {
+     "w": "lavado",
+     "start": 31.08,
+     "end": 31.54
+    },
+    {
+     "w": "na",
+     "start": 31.54,
+     "end": 31.7
+    },
+    {
+     "w": "água…",
+     "start": 31.7,
+     "end": 32.08
+    },
+    {
+     "w": "e",
+     "start": 32.24,
+     "end": 32.58
+    },
+    {
+     "w": "passado",
+     "start": 32.58,
+     "end": 33.06
+    },
+    {
+     "w": "pro",
+     "start": 33.06,
+     "end": 33.42
+    },
+    {
+     "w": "próximo.",
+     "start": 33.42,
+     "end": 33.74
+    }
+   ]
+  },
+  {
+   "text": "Séculos depois, no interior dos Estados Unidos, o queridinho era o sabugo de milho. E, mais tarde, as páginas de catálogos velhos.",
+   "start": 34.2,
+   "end": 42.48,
+   "words": [
+    {
+     "w": "Séculos",
+     "start": 34.2,
+     "end": 34.7
+    },
+    {
+     "w": "depois,",
+     "start": 34.7,
+     "end": 35.04
+    },
+    {
+     "w": "no",
+     "start": 35.46,
+     "end": 35.54
+    },
+    {
+     "w": "interior",
+     "start": 35.54,
+     "end": 35.94
+    },
+    {
+     "w": "dos",
+     "start": 35.94,
+     "end": 36.22
+    },
+    {
+     "w": "Estados",
+     "start": 36.22,
+     "end": 36.48
+    },
+    {
+     "w": "Unidos,",
+     "start": 36.48,
+     "end": 36.9
+    },
+    {
+     "w": "o",
+     "start": 37.28,
+     "end": 37.36
+    },
+    {
+     "w": "queridinho",
+     "start": 37.36,
+     "end": 38.04
+    },
+    {
+     "w": "era",
+     "start": 38.04,
+     "end": 38.32
+    },
+    {
+     "w": "o",
+     "start": 38.32,
+     "end": 38.46
+    },
+    {
+     "w": "sabugo",
+     "start": 38.46,
+     "end": 38.96
+    },
+    {
+     "w": "de",
+     "start": 38.96,
+     "end": 39.16
+    },
+    {
+     "w": "milho.",
+     "start": 39.16,
+     "end": 39.52
+    },
+    {
+     "w": "E,",
+     "start": 39.86,
+     "end": 39.94
+    },
+    {
+     "w": "mais",
+     "start": 39.94,
+     "end": 40.08
+    },
+    {
+     "w": "tarde,",
+     "start": 40.08,
+     "end": 40.48
+    },
+    {
+     "w": "as",
+     "start": 40.8,
+     "end": 40.94
+    },
+    {
+     "w": "páginas",
+     "start": 40.94,
+     "end": 41.42
+    },
+    {
+     "w": "de",
+     "start": 41.42,
+     "end": 41.56
+    },
+    {
+     "w": "catálogos",
+     "start": 41.56,
+     "end": 42.12
+    },
+    {
+     "w": "velhos.",
+     "start": 42.12,
+     "end": 42.48
+    }
+   ]
+  },
+  {
+   "text": "Os chineses já usavam papel pra isso havia séculos. Mas o papel higiênico vendido em pacote só apareceu em mil oitocentos e cinquenta e sete.",
+   "start": 42.96,
+   "end": 52.44,
+   "words": [
+    {
+     "w": "Os",
+     "start": 42.96,
+     "end": 43.14
+    },
+    {
+     "w": "chineses",
+     "start": 43.14,
+     "end": 43.66
+    },
+    {
+     "w": "já",
+     "start": 43.66,
+     "end": 43.98
+    },
+    {
+     "w": "usavam",
+     "start": 43.98,
+     "end": 44.32
+    },
+    {
+     "w": "papel",
+     "start": 44.32,
+     "end": 44.66
+    },
+    {
+     "w": "pra",
+     "start": 44.66,
+     "end": 44.88
+    },
+    {
+     "w": "isso",
+     "start": 44.88,
+     "end": 45.16
+    },
+    {
+     "w": "havia",
+     "start": 45.16,
+     "end": 45.44
+    },
+    {
+     "w": "séculos.",
+     "start": 45.44,
+     "end": 46.12
+    },
+    {
+     "w": "Mas",
+     "start": 46.6,
+     "end": 46.76
+    },
+    {
+     "w": "o",
+     "start": 46.76,
+     "end": 46.86
+    },
+    {
+     "w": "papel",
+     "start": 46.86,
+     "end": 47.14
+    },
+    {
+     "w": "higiênico",
+     "start": 47.14,
+     "end": 47.76
+    },
+    {
+     "w": "vendido",
+     "start": 47.76,
+     "end": 48.22
+    },
+    {
+     "w": "em",
+     "start": 48.22,
+     "end": 48.32
+    },
+    {
+     "w": "pacote",
+     "start": 48.32,
+     "end": 48.82
+    },
+    {
+     "w": "só",
+     "start": 48.82,
+     "end": 49.3
+    },
+    {
+     "w": "apareceu",
+     "start": 49.3,
+     "end": 49.84
+    },
+    {
+     "w": "em",
+     "start": 49.84,
+     "end": 50.06
+    },
+    {
+     "w": "mil",
+     "start": 50.06,
+     "end": 50.457
+    },
+    {
+     "w": "oitocentos",
+     "start": 50.457,
+     "end": 50.853
+    },
+    {
+     "w": "e",
+     "start": 50.853,
+     "end": 51.25
+    },
+    {
+     "w": "cinquenta",
+     "start": 51.25,
+     "end": 51.647
+    },
+    {
+     "w": "e",
+     "start": 51.647,
+     "end": 52.043
+    },
+    {
+     "w": "sete.",
+     "start": 52.043,
+     "end": 52.44
+    }
+   ]
+  },
+  {
+   "text": "Agora me diz: qual desses você encararia? Comenta: folha, sabugo… ou esponja.",
+   "start": 52.44,
+   "end": 58.86,
+   "words": [
+    {
+     "w": "Agora",
+     "start": 52.44,
+     "end": 52.76
+    },
+    {
+     "w": "me",
+     "start": 52.76,
+     "end": 52.96
+    },
+    {
+     "w": "diz:",
+     "start": 52.96,
+     "end": 53.18
+    },
+    {
+     "w": "qual",
+     "start": 53.64,
+     "end": 53.84
+    },
+    {
+     "w": "desses",
+     "start": 53.84,
+     "end": 54.3
+    },
+    {
+     "w": "você",
+     "start": 54.3,
+     "end": 54.68
+    },
+    {
+     "w": "encararia?",
+     "start": 54.68,
+     "end": 55.26
+    },
+    {
+     "w": "Comenta:",
+     "start": 55.26,
+     "end": 56.12
+    },
+    {
+     "w": "folha,",
+     "start": 56.42,
+     "end": 56.92
+    },
+    {
+     "w": "sabugo…",
+     "start": 57.26,
+     "end": 57.78
+    },
+    {
+     "w": "ou",
+     "start": 57.78,
+     "end": 58.28
+    },
+    {
+     "w": "esponja.",
+     "start": 58.28,
+     "end": 58.86
+    }
+   ]
+  }
+ ]
+}
