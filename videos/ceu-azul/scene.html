@@ -1,0 +1,180 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:180px;text-align:center;font-weight:900;font-size:92px;line-height:1.02}
+#hook b{color:#3EC3FF;display:block;font-size:100px}
+#cap{width:1080px;top:1300px;text-align:center;font-weight:900;font-size:112px}
+#cap.hl{color:#FFB23E}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:58px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.white{background:#fff;color:#111}.tag.orange{background:#FF8A1F;color:#fff}
+.small{font-size:46px;padding:6px 22px;border-radius:18px;border-width:6px;box-shadow:0 6px 0 #111}
+#bubble{background:#fff;color:#111;font-weight:900;font-size:64px;padding:16px 36px;border-radius:50px;border:8px solid #111;box-shadow:0 10px 0 #111;white-space:nowrap}
+#xmark{font-weight:900;font-size:240px;color:#FF2D2D;-webkit-text-stroke:12px #fff;paint-order:stroke fill;line-height:1}
+#final{left:60px;width:960px;top:1330px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:70px;line-height:1.08;padding:30px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#FF8A1F}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.85;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">O CÉU NÃO É AZUL<b>POR CAUSA DO MAR</b></div>
+<div id="bubble" class="o">É REFLEXO? 🤔</div>
+<div id="xmark" class="o">✕</div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag small"></div><div id="t3" class="o tag small"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Manda pra quem ainda acha<br><em>que é por causa do mar.</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, M, mesh, rnd, rr } from '/_kit/kit.js';
+import { buildPerson, PP, poseP, face } from '/_kit/pessoas.js';
+await document.fonts.load('900 60px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; const S = i => SN[i].start, E = i => SN[i].end; window.DURATION = TP.duration;
+const WD = (i, re, n = 0) => { const ws = SN[i].words.filter(w => re.test(w.w)); return ws[n] ? ws[n].start : S(i); };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(window.devicePixelRatio || 1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(38, W / H, .05, 900);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const box = (w, h, d, c, x, y, z, par = scene) => { const m = mesh(new THREE.BoxGeometry(w, h, d), typeof c === 'number' ? M(c) : c, x, y, z, par); m.castShadow = true; m.receiveShadow = true; return m; };
+const C = h => new THREE.Color(h);
+const BASIC = c => new THREE.MeshBasicMaterial({ color: c, toneMapped: false });
+
+// ---------- tempos ----------
+const T_CRI = WD(1, /criança/i), T_OCEANO = WD(1, /oceano/i), T_BRANCA = WD(2, /branca/i), T_MIST = WD(2, /mistura/i), T_CORES = WD(2, /cores/i);
+const T_AR = WD(3, /ar/i), T_DESV = WD(3, /desviam/i), T_AZUL3 = WD(3, /azul/i), T_VERM = WD(3, /vermelha/i);
+const T_DIRE = WD(4, /direções/i), T_INT = WD(4, /inteiro/i), T_TARDE = WD(5, /tarde/i), T_GROSSA = WD(5, /grossa/i), T_OLHOS = WD(5, /olhos/i);
+const T_PERDE = WD(6, /perde/i), T_SOBRAM = WD(6, /sobram/i), T_MEIO = WD(7, /meio/i), T_POR = WD(7, /pôr/i), T_MESMA = WD(7, /mesma/i), T_CAMIN = WD(7, /caminhos/i), T_END = E(8);
+
+// ---------- céu controlável ----------
+const skyU = { top: { value: C(0x2E8BEB) }, bot: { value: C(0xBFE8FF) } };
+scene.add(new THREE.Mesh(new THREE.SphereGeometry(700, 32, 16), new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: false, fog: false, uniforms: skyU,
+  vertexShader: 'varying vec3 vP; void main(){ vP = position; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }',
+  fragmentShader: 'uniform vec3 top; uniform vec3 bot; varying vec3 vP; void main(){ float h = clamp(normalize(vP).y*1.8+.15,0.,1.); gl_FragColor = vec4(mix(bot,top,pow(h,.75)),1.); }' })));
+const sun = new THREE.DirectionalLight(0xFFF4E0, 2.4); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+{ const sc = sun.shadow.camera; sc.left = -12; sc.right = 12; sc.top = 12; sc.bottom = -12; sc.far = 120; } sun.shadow.bias = -.0005; scene.add(sun); scene.add(sun.target);
+const hemi = new THREE.HemisphereLight(0xEAF6FF, 0xC8A878, 1.2); scene.add(hemi);
+const DAY = { top: 0x2E8BEB, bot: 0xBFE8FF, sun: 0xFFF4E0, si: 2.4, hi: 1.2, disc: 0xFFF6D0, sea: 0x2F8FD0, el: .9 };
+const SET = { top: 0x3A2E78, bot: 0xFF8A3D, sun: 0xFF9A4A, si: 2.0, hi: .9, disc: 0xFF7A2A, sea: 0x7A4A6A, el: .03 };
+const SPACE = { top: 0x050818, bot: 0x0E1430, sun: 0xFFFFFF, si: 2.2, hi: .7, disc: 0xFFFFFF, sea: 0x1A2A4A, el: .5 };
+const sunDisc = mesh(new THREE.SphereGeometry(14, 24, 16), BASIC(0xFFF6D0), 0, 0, 0, scene);
+function look(a, b, u) { const mx = (x, y) => C(x).lerp(C(y), u); skyU.top.value.copy(mx(a.top, b.top)); skyU.bot.value.copy(mx(a.bot, b.bot)); sun.color.copy(mx(a.sun, b.sun)); sun.intensity = lerp(a.si, b.si, u); hemi.intensity = lerp(a.hi, b.hi, u);
+  sunDisc.material.color.copy(mx(a.disc, b.disc)); seaM.color.copy(mx(a.sea, b.sea)); const el = lerp(a.el, b.el, u); sunDisc.position.set(BEACH.x + 60, BEACH.y + Math.sin(el) * 300, -420); sun.position.set(BEACH.x + 8, Math.max(1, Math.sin(el) * 14), -10); }
+
+// ---------- PRAIA (origem) ----------
+const BEACH = V(0, 0, 0);
+const seaM = new THREE.MeshStandardMaterial({ color: 0x2F8FD0, roughness: .2, metalness: .15 });
+const beachG = grp(); { const sand = box(60, .2, 14, 0xF2D49A, 0, -.1, 4, beachG); const sea = mesh(new THREE.PlaneGeometry(600, 400), seaM, 0, 0.02, -200, beachG); sea.rotation.x = -Math.PI / 2; sea.receiveShadow = true; }
+const waves = []; for (let i = 0; i < 18; i++) { const w = box(rr(1.5, 3), .05, .2, 0xFFFFFF, rr(-12, 12), .06, rr(-8, -2), beachG); w.userData = { x: w.position.x, ph: rr(0, 6) }; waves.push(w); }
+const umb = grp(beachG); umb.position.set(-3.2, 0, 1.5); { mesh(new THREE.CylinderGeometry(.04, .04, 2.2, 6), M(0xEEEEEE), 0, 1.1, 0, umb); const c = mesh(new THREE.ConeGeometry(1.4, .6, 10), M(0xFF4D6D), 0, 2.3, 0, umb); c.castShadow = true; }
+const kid = buildPerson({ skin: 0xC98E66, shirt: 0xFFB23E, pants: 0x3B82F6, hair: 0x2B1A10 }); scene.add(kid.root); kid.root.scale.setScalar(.62);
+const bluePh = []; for (let i = 0; i < 40; i++) { const b = mesh(new THREE.SphereGeometry(.07, 8, 6), BASIC(0x5AB8FF), 0, 0, 0, scene); b.userData = { a: rr(0, 6.28), e: rr(.2, 1.3), d: rr(0, 1) }; bluePh.push(b); }
+
+// ---------- LABORATÓRIO DA LUZ (x=60) ----------
+const LAB = V(60, 1.5, 0);
+const COLS = [0xFF3B3B, 0xFF8A1F, 0xFFD21F, 0x22C55E, 0x3EC3FF, 0x3B5BFF, 0x8B5CF6];
+const beamW = mesh(new THREE.CylinderGeometry(.12, .12, 1, 12), BASIC(0xFFFFFF), 0, 0, 0, scene); beamW.rotation.z = Math.PI / 2;
+const fan = COLS.map((c, i) => { const m = mesh(new THREE.CylinderGeometry(.05, .05, 1, 8), BASIC(c), 0, 0, 0, scene); return m; });
+const airBox = mesh(new THREE.BoxGeometry(4, 3, 3), new THREE.MeshStandardMaterial({ color: 0xBFE8FF, transparent: true, opacity: .12, depthWrite: false }), LAB.x + 1.5, LAB.y, 0, scene);
+const airP = []; for (let i = 0; i < 36; i++) { const p = mesh(new THREE.SphereGeometry(.05, 6, 5), M(0xDDE8F4), LAB.x + rr(-1.3, 1.3), LAB.y - 1.2 + rr(-1.8, 1.8), rr(-1.3, 1.3), scene); airP.push(p); }
+const scatter = []; for (let i = 0; i < 30; i++) { const s = mesh(new THREE.SphereGeometry(.08, 8, 6), BASIC(0x3EC3FF), 0, 0, 0, scene); s.userData = { dir: V(rr(-1, 1), rr(-1, 1), rr(-1, 1)).normalize(), x0: rr(-1.2, 1.2), d: rr(0, 1) }; scatter.push(s); }
+const redBeam = mesh(new THREE.CylinderGeometry(.08, .08, 1, 10), BASIC(0xFF5A3B), 0, 0, 0, scene); redBeam.rotation.z = Math.PI / 2;
+function hBeam(m, x0, x1, y, z = 0) { m.visible = x1 > x0 + .01; m.position.set((x0 + x1) / 2, y, z); m.scale.set(1, Math.max(.001, x1 - x0), 1); m.rotation.set(0, 0, Math.PI / 2); }
+function segBeam(m, a, b) { const d = b.clone().sub(a); m.visible = d.length() > .01; m.position.copy(a).add(b).multiplyScalar(.5); m.scale.set(1, Math.max(.001, d.length()), 1); m.quaternion.setFromUnitVectors(V(0, 1, 0), d.normalize()); }
+
+// ---------- TERRA (x=-60) ----------
+const EA = V(-60, 0, 0), RE = 3;
+const earth = mesh(new THREE.IcosahedronGeometry(RE, 3), new THREE.MeshStandardMaterial({ color: 0x2F7FD0, flatShading: true, roughness: .8 }), EA.x, EA.y, EA.z, scene);
+for (let i = 0; i < 14; i++) { const a = rr(0, 6.28), b = rr(-1.2, 1.2); const c = mesh(new THREE.IcosahedronGeometry(rr(.5, 1.0), 0), M(0x4FAF45), EA.x + Math.cos(a) * Math.cos(b) * (RE - .25), Math.sin(b) * (RE - .25), Math.sin(a) * Math.cos(b) * (RE - .25), scene); }
+const atmo = mesh(new THREE.SphereGeometry(RE + .9, 40, 24), new THREE.MeshStandardMaterial({ color: 0x7FD0FF, transparent: true, opacity: .22, depthWrite: false }), EA.x, EA.y, EA.z, scene);
+const eSun = mesh(new THREE.SphereGeometry(2.0, 20, 14), BASIC(0xFFE27A), EA.x + 1.5, EA.y + 9.5, -1, scene);
+const pins = [0, 1].map(i => { const g = grp(); mesh(new THREE.CylinderGeometry(.06, .06, .5, 6), M(0xFFFFFF), 0, .25, 0, g); mesh(new THREE.SphereGeometry(.16, 10, 8), M(i ? 0xFF8A1F : 0x3EC3FF), 0, .55, 0, g); return g; });
+const ray1 = mesh(new THREE.CylinderGeometry(.07, .07, 1, 8), BASIC(0xFFFFFF), 0, 0, 0, scene), ray2 = mesh(new THREE.CylinderGeometry(.07, .07, 1, 8), BASIC(0xFFFFFF), 0, 0, 0, scene);
+const ray2b = mesh(new THREE.CylinderGeometry(.075, .075, 1, 8), BASIC(0xFF8A1F), 0, 0, 0, scene);
+const peel = []; for (let i = 0; i < 26; i++) { const s = mesh(new THREE.SphereGeometry(.07, 8, 6), BASIC(0x3EC3FF), 0, 0, 0, scene); s.userData = { u: i / 26, dir: V(rr(-1, 1), rr(-.3, 1), rr(-1, 1)).normalize() }; peel.push(s); }
+const pinNoon = V(EA.x, EA.y + RE, 0); // meio-dia: sol bem em cima
+const pinSet = V(EA.x + RE, EA.y, 0);  // pôr do sol: luz chega de raspão
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const proj = v => { const q = v.clone().project(cam); return { x: (q.x + 1) / 2 * W, y: (1 - q.y) / 2 * H }; };
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [S(1), 'whoosh'], [T_OCEANO, 'buzz'], [S(2), 'whoosh'], [T_MIST, 'zap'], [T_DESV, 'pop'], [T_AZUL3, 'ding'], [S(4), 'whoosh'], [T_TARDE, 'whoosh'], [T_GROSSA, 'pop'], [T_PERDE, 'pop'], [T_SOBRAM, 'ding'], [S(7), 'whoosh'], [T_MESMA, 'ding'], [S(8), 'win']].forEach(([t, k]) => ev(t, k));
+const HL = /céu|azul|mar|criança|oceano|luz|branca|cores|ar|desviam|vermelha|direções|tarde|grossa|olhos|caminho|perde|laranja|vermelho|meio-dia|pôr|sol|mesma|caminhos|manda/i;
+const hideAll = () => { [beamW, redBeam, airBox, ray1, ray2, ray2b, kid.root, ...fan, ...pins].forEach(o => o.visible = false); airP.forEach(p => p.visible = false); scatter.forEach(s => s.visible = false); bluePh.forEach(b => b.visible = false); peel.forEach(p => p.visible = false); };
+const kidOn = (t, P, ry = Math.PI, x = 0, z = 2.2) => { kid.root.visible = true; kid.root.position.set(x, 0, z); kid.root.rotation.y = ry; poseP(kid, P, 0, t); face(kid, 'calm', t); };
+const SHOTS = [
+  [0, (t, k) => { look(DAY, SET, ease(clamp(k / 2.2))); kidOn(t, { ...PP.stand, hx: -.4 }); return [V(.6, 1.6, 9.5), V(0, 2.2, -6)]; }],
+  [S(1), (t, k) => { look(DAY, DAY, 0); kidOn(t, { ...PP.think, hx: -.3 }, Math.PI - .4, .2, 2.6); face(kid, 'neutral', t); return [V(1.8, 1.0, 4.6), V(0, .9, 1.4)]; }],
+  [S(2), (t, k) => { look(SPACE, SPACE, 0); const u = ease(clamp(k / 1.2)); const yEnd = t > T_MIST - .1 ? LAB.y + 1 : LAB.y - 3; segBeam(beamW, V(LAB.x, LAB.y + 6, 0), V(LAB.x, lerp(LAB.y + 6, yEnd, u), 0));
+    if (t > T_MIST - .1) { const f = ease(clamp((t - T_MIST + .1) / .8)); fan.forEach((m, i) => segBeam(m, V(LAB.x, LAB.y + 1, 0), V(LAB.x + (i - 3) * .5 * f, LAB.y - 3.5, 0))); }
+    return [V(LAB.x + .3, LAB.y, 12), V(LAB.x, LAB.y - .2, 0)]; }],
+  [S(3), (t, k) => { look(SPACE, SPACE, 0); airBox.visible = true; airBox.position.set(LAB.x, LAB.y - 1.2, 0); airBox.rotation.z = Math.PI / 2; airP.forEach(p => p.visible = true); segBeam(beamW, V(LAB.x, LAB.y + 6, 0), V(LAB.x, LAB.y + .3, 0)); segBeam(redBeam, V(LAB.x, LAB.y + .3, 0), V(LAB.x, LAB.y - 6, 0));
+    const on = clamp((t - T_DESV + .3) / .5); scatter.forEach((s, i) => { const u = ((t * .6 + s.userData.d) % 1); s.visible = on > 0; s.position.set(LAB.x, LAB.y - 1.2 + s.userData.x0, 0).addScaledVector(s.userData.dir, u * 3 * on); s.scale.setScalar(1 - u * .5); });
+    return [V(LAB.x + 1.2, LAB.y + .5, 12), V(LAB.x, LAB.y - .8, 0)]; }],
+  [S(4), (t, k) => { look(DAY, DAY, 0); kidOn(t, { ...PP.cheer, hx: -.5 }, Math.PI, 0, 2.2);
+    bluePh.forEach(b => { const u = ((t * .5 + b.userData.d) % 1); b.visible = true; const r = lerp(9, 1.2, u); b.position.set(Math.cos(b.userData.a) * Math.cos(b.userData.e) * r, 1 + Math.sin(b.userData.e) * r, 2.2 + Math.sin(b.userData.a) * Math.cos(b.userData.e) * r * .6); b.scale.setScalar(.6 + u); });
+    return [V(0, .5, 7.5), V(0, 3, -2)]; }],
+  [S(5), (t, k) => { look(SPACE, SPACE, 0); pins[1].visible = true; pins[1].position.copy(pinSet); pins[1].rotation.set(0, 0, -Math.PI / 2);
+    const u = ease(clamp((t - T_TARDE) / 2)); const a = V(EA.x + RE + .05, EA.y + 9.5, 0), b = pinSet.clone().add(V(.05, .3, 0)); segBeam(ray2, a, a.clone().lerp(b, u));
+    return [V(EA.x + 1.0, EA.y + 3.4, 25), V(EA.x + 1.0, EA.y + 3.4, 0)]; }],
+  [S(6), (t, k) => { look(SPACE, SPACE, 0); pins[1].visible = true; pins[1].position.copy(pinSet); pins[1].rotation.set(0, 0, -Math.PI / 2); const a = V(EA.x + RE + .05, EA.y + 9.5, 0), b = pinSet.clone().add(V(.05, .3, 0));
+    const ent = V(EA.x + RE + .05, EA.y + Math.sqrt((RE + .9) ** 2 - (RE + .05) ** 2), 0);
+    const or = clamp((t - T_SOBRAM + .3) / .8); segBeam(ray2, a, ent); segBeam(ray2b, ent, b); ray2b.material.color.copy(C(0xFFFFFF).lerp(C(0xFF7A2A), Math.max(clamp((t - S(6)) / 2.5), or)));
+    peel.forEach(p => { const u = ((t * .5 + p.userData.u) % 1); p.visible = t > S(6) + .2; const base = ent.clone().lerp(b, p.userData.u); p.position.copy(base).addScaledVector(p.userData.dir, u * 1.4); p.scale.setScalar(1 - u * .6); });
+    return [V(EA.x + 3.6, EA.y + 1.4, 11.5), V(EA.x + 3.2, EA.y + 1.4, 0)]; }],
+  [S(7), (t, k) => { look(SPACE, SPACE, 0); pins.forEach(p => p.visible = true); pins[0].position.copy(pinNoon); pins[0].rotation.set(0, 0, 0); pins[1].position.copy(pinSet); pins[1].rotation.set(0, 0, -Math.PI / 2);
+    segBeam(ray1, V(EA.x, EA.y + 9.5, 0), pinNoon.clone().add(V(0, .5, 0))); const a = V(EA.x + RE + .05, EA.y + 9.5, 0), b = pinSet.clone().add(V(.05, .3, 0)); const ent = V(EA.x + RE + .05, EA.y + Math.sqrt((RE + .9) ** 2 - (RE + .05) ** 2), 0);
+    segBeam(ray2, a, ent); segBeam(ray2b, ent, b); ray2b.material.color.set(0xFF7A2A); ray1.material.color.set(0xFFFFFF);
+    return [V(EA.x + 1.0, EA.y + 3.4, 25), V(EA.x + 1.0, EA.y + 3.4, 0)]; }],
+  [S(8), (t, k) => { look(SET, SET, 0); kidOn(t, { ...PP.stand, hx: -.2 }, Math.PI, 0, 2.2); return [V(1.2, 1.7, 10 - k * .2), V(0, 2.2, -6)]; }],
+];
+const ZK = [1.0, 1.4, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
+window.draw = function (t) {
+  hideAll();
+  let i = 0; while (i + 1 < SHOTS.length && SHOTS[i + 1][0] <= t) i++;
+  const [p0, tg] = SHOTS[i][1](t, t - SHOTS[i][0]); const cp = tg.clone().add(p0.clone().sub(tg).multiplyScalar(ZK[i]));
+  cp.x += Math.sin(t * .35) * .05; cp.y += Math.sin(t * .27) * .03;
+  cam.position.copy(cp); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  if (i >= 2 && i <= 3) { sun.position.copy(tg).add(V(4, 9, 6)); sun.target.position.copy(tg); } else if (i >= 5 && i <= 7) { sun.position.set(EA.x + 4, 30, 8); sun.target.position.copy(EA); } else sun.target.position.set(0, 0, -3);
+  beachG.visible = [0, 1, 4, 8].includes(i); sunDisc.visible = beachG.visible;
+  waves.forEach(w => { w.position.x = w.userData.x + Math.sin(t * .8 + w.userData.ph) * .6; w.position.z = -5 + Math.sin(t * .6 + w.userData.ph) * 3; });
+
+  fixed($('hook'), t < S(1) ? pop(t - .02, .3) * (1 - clamp((t - S(1) + .15) / .15)) : 0);
+  if (win(t, T_CRI - .1, S(2))) { const hp = new THREE.Vector3(); kid.head.getWorldPosition(hp); const q = proj(hp.add(V(0, .5, 0))); place($('bubble'), true, q.x, q.y - 120, pop(t - T_CRI + .1, .3), -3); } else $('bubble').style.opacity = 0;
+  place($('xmark'), win(t, T_OCEANO, S(2)), 780, 700, pop(t - T_OCEANO, .25), -8);
+  const tg2 = [$('t1'), $('t2'), $('t3')]; tg2.forEach(e => e.style.opacity = 0);
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  tag(tg2[0], 'LUZ BRANCA', 'white', win(t, T_BRANCA - .2, T_MIST - .1), 540, 330, T_BRANCA - .2, -3);
+  tag(tg2[0], 'MISTURA DE TODAS AS CORES', '', win(t, T_MIST - .1, S(3)), 540, 330, T_MIST - .1, -2);
+  tag(tg2[0], 'O AZUL SE ESPALHA MAIS', 'blue', win(t, T_DESV - .1, S(4)), 540, 330, T_DESV - .1, -3);
+  tag(tg2[1], 'VERMELHO SEGUE RETO', 'red small', win(t, T_VERM - .2, S(4)), 760, 1120, T_VERM - .2, 3);
+  tag(tg2[0], 'AZUL DE TODAS AS DIREÇÕES', 'blue', win(t, T_DIRE - .3, S(5)), 540, 330, T_DIRE - .3, -3);
+  tag(tg2[0], 'FIM DE TARDE: CAMINHO LONGO', 'orange', win(t, T_TARDE, S(6)), 540, 330, T_TARDE, -2);
+  tag(tg2[0], 'O AZUL SE PERDE NO CAMINHO', 'blue', win(t, S(6), T_SOBRAM - .2), 540, 330, S(6), -3);
+  tag(tg2[0], 'SOBRAM LARANJA E VERMELHO', 'orange', win(t, T_SOBRAM - .2, S(7)), 540, 330, T_SOBRAM - .2, 3);
+  tag(tg2[0], 'A MESMA LUZ', '', win(t, T_MESMA - .2, S(8)), 540, 330, T_MESMA - .2, -3);
+  if (win(t, S(7), S(8))) { const a = proj(pinNoon.clone().add(V(0, 1.2, 0))), b = proj(pinSet.clone().add(V(1.2, -1.2, 0))); tag(tg2[1], 'MEIO-DIA: CAMINHO CURTO', 'blue small', true, clamp(a.x, 300, 780), a.y - 40, S(7), 3); tag(tg2[2], 'PÔR DO SOL: CAMINHO LONGO', 'orange small', true, clamp(b.x, 330, 680), b.y + 40, S(7) + .3, -3); }
+  fixed($('final'), t >= S(8) + .2 ? pop(t - S(8) - .2, .35) : 0);
+  $('wm').style.opacity = .85;
+  let wTxt = null, wSt = 0;
+  for (let i = 0; i < SN.length - 1; i++) for (const w2 of SN[i].words) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap = $('cap');
+  if (wTxt && t > S(1) - .05) { cap.textContent = wTxt.toUpperCase().replace(/[.,!?:]/g, ''); cap.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>
