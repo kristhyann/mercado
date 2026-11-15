@@ -216,7 +216,8 @@ const SHOTS = [
     return [V(FT.x - 5.2, 2.4, 5.8), V(FT.x - 1.2, 1.6, 0)]; }],
   [S(11), (t, k) => { // "tu não tá pensando nisso não, né?"
     catPose(lion, { x: FT.x, y: 2.15, z: 0, ry: Math.PI / 2, t, worried: 1, talk: t > T_TU ? 1 : 0 }); lion.body.rotation.x = 1.0; lion.legs.forEach((lg, i) => { lg.rotation.x = i < 2 ? -1.0 : Math.sin(t * 9 + i) * .5; }); lion.head.rotation.set(-.9, -.5, 0);
-    return [V(FT.x + 2.2, 1.3, 2.6), V(FT.x + .9, 1.6, 0)]; }],
+    lion.root.updateMatrixWorld(true); const hp = new THREE.Vector3(); lion.head.getWorldPosition(hp);
+    return [hp.clone().add(V(2.6 - k * .05, .3, 5.6 - k * .12)), hp.clone().add(V(0, .55, 0))]; }],
   [S(12), (t, k) => { // não seja má, Caco
     catPose(lion, { x: FT.x, y: 2.15, z: 0, ry: Math.PI / 2, t, worried: 1, talk: 1 }); lion.body.rotation.x = 1.0; lion.legs.forEach((lg, i) => { lg.rotation.x = i < 2 ? -1.0 : Math.sin(t * 12 + i) * .7; }); lion.head.rotation.set(-.9, -.5, 0);
     const cp = V(FT.x - 2.0, 0, 1.0); cacoPose({ x: cp.x, z: cp.z, ry: faceTo(cp, V(FT.x - 1.4, 0, 0)), P: POSES.think, t, sly: 1 });
