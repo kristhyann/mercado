@@ -18,3 +18,5 @@ videos/*/*.wav
 videos/_kit/t.html
 videos/*/render.log
 videos/anuncio-curso/clips/
+ebook/ebook.html
+ebook/__pycache__/

@@ -1,0 +1,107 @@
+@font-face{font-family:P;font-weight:400;src:url(FONTDIR/poppins-latin-400-normal.woff2)}
+@font-face{font-family:P;font-weight:500;src:url(FONTDIR/poppins-latin-500-normal.woff2)}
+@font-face{font-family:P;font-weight:600;src:url(FONTDIR/poppins-latin-600-normal.woff2)}
+@font-face{font-family:P;font-weight:700;src:url(FONTDIR/poppins-latin-700-normal.woff2)}
+@font-face{font-family:P;font-weight:800;src:url(FONTDIR/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(FONTDIR/poppins-latin-900-normal.woff2)}
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#0B0C16}
+body{font-family:P,sans-serif;color:#E7E8F3;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;page-break-after:always;break-after:page;
+  background:radial-gradient(120% 60% at 100% 0%,#1C1A3A 0%,rgba(28,26,58,0) 55%),radial-gradient(90% 50% at 0% 100%,#161E33 0%,rgba(22,30,51,0) 60%),#0D0E1B}
+.in{position:absolute;left:15mm;right:15mm;top:13mm;bottom:15mm}
+.wm{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) rotate(-32deg);font-weight:900;font-size:86px;color:rgba(255,255,255,.035);white-space:nowrap;pointer-events:none;letter-spacing:4px}
+.wm2{top:78%;font-size:54px;color:rgba(255,255,255,.03)}
+.ft{position:absolute;left:15mm;right:15mm;bottom:6.5mm;display:flex;justify-content:space-between;align-items:center;font-size:7.2pt;color:#6E7193;border-top:1px solid #23253F;padding-top:2.2mm}
+.ft b{color:#C9CBE6;font-size:9pt}
+b{font-weight:700}
+/* cabeçalhos */
+.hd{margin-bottom:6mm}
+.kick{font-size:8.5pt;font-weight:700;letter-spacing:3px;color:#FFC83D}
+h2{font-weight:900;font-size:27pt;line-height:1.08;margin:1.5mm 0 0;color:#fff}
+.lead{font-size:11pt;line-height:1.55;color:#C9CBE6;margin:0 0 6mm}
+/* capa */
+.pcover .in{left:0;right:0;top:0;bottom:0}
+.cover{position:absolute;inset:0}
+.cgrid{position:absolute;left:0;right:0;top:0;height:60%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.ci{background-size:cover;background-position:center}
+.cfade{position:absolute;left:0;right:0;top:20%;height:42%;background:linear-gradient(180deg,rgba(13,14,27,0) 0%,rgba(13,14,27,.85) 65%,#0D0E1B 100%)}
+.ctext{position:absolute;left:15mm;right:15mm;bottom:20mm}
+.ckick{display:inline-block;font-size:9pt;font-weight:800;letter-spacing:3px;color:#0D0E1B;background:#FFC83D;padding:1.5mm 4mm;border-radius:2mm}
+.cover h1{font-weight:900;font-size:46pt;line-height:.98;margin:5mm 0 4mm;color:#fff;letter-spacing:-.5px}
+.n100{color:#FFC83D;font-size:66pt;display:inline-block;margin-right:2mm;text-shadow:0 0 30px rgba(255,200,61,.45)}
+.csub{font-size:13pt;line-height:1.45;color:#D7D9F0;max-width:160mm}
+.ctags{margin:6mm 0}
+.ctags span{display:inline-block;font-size:9pt;font-weight:700;border:1.5px solid #3A3D66;color:#C9CBE6;border-radius:20mm;padding:1.2mm 4mm;margin-right:2mm}
+.csign{display:flex;align-items:center;gap:3mm;font-size:10.5pt;font-weight:700;color:#FFC83D;border-top:1px solid #2A2C4A;padding-top:5mm}
+/* como usar */
+.howgrid{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin-bottom:6mm}
+.how{background:#15172B;border:1px solid #262949;border-radius:3mm;padding:3.2mm 4mm;font-size:9.5pt;line-height:1.4}
+.how b{display:block;color:#fff;font-size:10.5pt;margin-bottom:.8mm}
+.how span{color:#AEB1D3}
+.tipbox{background:linear-gradient(135deg,#1F1A3D,#15172B);border:1px solid #3A3270;border-radius:4mm;padding:5mm;margin-bottom:6mm}
+.tiph{font-weight:800;color:#FFC83D;font-size:11pt;margin-bottom:3mm}
+.tipt{font-size:10.5pt;line-height:1.5;color:#D7D9F0}
+.tl{display:grid;grid-template-columns:repeat(6,1fr);gap:2mm}
+.tlc{background:#0D0E1B;border-radius:2.5mm;padding:2.5mm 1.5mm;text-align:center}
+.tlc b{display:block;color:#fff;font-size:9.5pt}
+.tlc span{font-size:6.8pt;font-weight:700;letter-spacing:.5px;color:#A78BFA}
+.tips{display:grid;grid-template-columns:1fr 1fr;gap:3mm 6mm;font-size:9.5pt;line-height:1.5;color:#AEB1D3}
+.tips b{color:#fff}
+/* sumário */
+.sum{columns:2;column-gap:8mm}
+.sblock{break-inside:avoid;margin-bottom:4.5mm}
+.sh{display:flex;align-items:center;gap:2mm;font-weight:800;font-size:10pt;border-bottom:1px solid #2A2C4A;padding-bottom:1.5mm;margin-bottom:1.5mm;flex-wrap:wrap}
+.sh span{width:100%;font-size:7.5pt;color:#7E81A6;font-weight:600}
+.si{display:flex;gap:2mm;font-size:8.3pt;line-height:1.3;padding:.75mm 0;color:#C9CBE6}
+.sn{font-weight:800;min-width:7mm}
+.st{flex:1}
+.sp{color:#7E81A6;font-weight:700}
+/* divisória */
+.pdiv .in{display:flex;align-items:center}
+.div{width:100%;text-align:left;padding:0 6mm}
+.dicon{width:44mm;height:44mm;border-radius:10mm;background:color-mix(in srgb,var(--c) 14%,transparent);border:2px solid color-mix(in srgb,var(--c) 45%,transparent);display:flex;align-items:center;justify-content:center;margin-bottom:10mm;box-shadow:0 0 60px color-mix(in srgb,var(--c) 30%,transparent)}
+.dnum{font-weight:800;letter-spacing:4px;font-size:11pt;color:var(--c)}
+.dt{font-size:38pt;margin:3mm 0 4mm}
+.dcount{display:inline-block;font-weight:700;font-size:11pt;color:#0D0E1B;background:var(--c);border-radius:20mm;padding:1.5mm 5mm;margin-bottom:6mm}
+.ddesc{font-size:13pt;line-height:1.55;color:#C9CBE6;max-width:150mm}
+/* página de tema */
+.th{display:flex;justify-content:space-between;align-items:center;margin-bottom:2.5mm}
+.chip{display:flex;align-items:center;gap:1.8mm;font-size:8pt;font-weight:700;color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);border-radius:20mm;padding:1mm 3.5mm}
+.tn{font-size:8.5pt;color:#7E81A6;letter-spacing:1px}
+.tn b{color:#fff;font-size:12pt}
+.tt{font-weight:900;font-size:21pt;line-height:1.15;margin:0 0 3.5mm;color:#fff}
+.hook{border-radius:3.5mm;padding:3.4mm 4.5mm;margin-bottom:3mm;background:linear-gradient(135deg,color-mix(in srgb,var(--c) 26%,#14152A),#14152A 80%);border:1.5px solid var(--c);box-shadow:0 0 22px color-mix(in srgb,var(--c) 22%,transparent)}
+.hl{font-size:7.5pt;font-weight:800;letter-spacing:2px;color:var(--c);margin-bottom:1mm}
+.hx{font-weight:800;font-size:14.5pt;line-height:1.3;color:#fff}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin-bottom:3mm}
+.bx{background:#15172B;border:1px solid #262949;border-radius:3mm;padding:2.8mm 3.8mm;font-size:9.6pt;line-height:1.44;color:#D7D9F0}
+.bl{font-size:6.8pt;font-weight:800;letter-spacing:1.5px;margin-bottom:.8mm}
+.cta{border-color:color-mix(in srgb,var(--c) 50%,#262949)}
+.rot{background:#10111F;border:1px solid #262949;border-left:3px solid var(--c);border-radius:3mm;padding:2.6mm 3.6mm 1.6mm;margin-bottom:3mm}
+.rh{font-size:7.6pt;font-weight:800;letter-spacing:1.5px;color:#fff;margin-bottom:1.6mm;display:flex;justify-content:space-between}
+.rh span{color:#6E7193;font-weight:600;letter-spacing:0}
+.rr{display:flex;gap:3mm;padding:1.5mm 0;border-top:1px dashed #23253F}
+.rr:first-of-type{border-top:0}
+.rt{min-width:23mm;max-width:23mm}
+.rt b{display:block;font-size:8.6pt;color:var(--c)}
+.rt span{font-size:6.2pt;font-weight:700;letter-spacing:.6px;color:#7E81A6}
+.rx{font-size:9.7pt;line-height:1.46;color:#E7E8F3}
+.vis{background:#15172B;border:1px solid #262949;border-radius:3mm;padding:2.6mm 3.6mm;margin-bottom:3mm}
+.rh2{font-size:7.6pt;font-weight:800;letter-spacing:1.5px;margin-bottom:1.2mm}
+.vis ul{margin:0;padding:0;list-style:none}
+.vis li{font-size:8.8pt;line-height:1.38;color:#C9CBE6;padding:.55mm 0}
+.vis li b{display:inline-block;min-width:15mm;color:#fff;font-size:7.6pt}
+/* final */
+.steps{display:grid;gap:3mm;margin-bottom:6mm}
+.step{display:flex;gap:4mm;align-items:flex-start;background:#15172B;border:1px solid #262949;border-radius:3.5mm;padding:3.5mm 4.5mm}
+.sn2{min-width:11mm;height:11mm;border-radius:50%;background:#FFC83D;color:#0D0E1B;font-weight:900;font-size:14pt;display:flex;align-items:center;justify-content:center}
+.step b{display:block;color:#fff;font-size:12pt}
+.step span{font-size:10pt;color:#AEB1D3;line-height:1.45}
+.pend .in{display:flex;align-items:center;justify-content:center;text-align:center}
+.end h2{font-size:36pt;margin:8mm 0 5mm}
+.end p{font-size:13pt;line-height:1.6;color:#C9CBE6}
+.ebrand{margin:12mm 0 6mm;font-weight:900;font-size:20pt;color:#FFC83D}
+.elegal{font-size:8.5pt;color:#6E7193;max-width:140mm;margin:0 auto}
+.eicon{display:flex;justify-content:center}
