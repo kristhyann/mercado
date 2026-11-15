@@ -1,0 +1,96 @@
+MANYCHAT: TEXTOS PRONTOS PARA COPIAR E COLAR
+Reel: anúncio "Comenta 3D" (curso R$ 19,90)
+=====================================================
+
+PASSO 0: ANTES DE TUDO (uma vez só)
+- Instagram em conta profissional (Criador ou Empresa).
+- No Instagram: Configurações > Mensagens e respostas aos stories >
+  Controles de mensagens > Ferramentas conectadas > ATIVAR "Permitir acesso às mensagens".
+- No manychat.com: entrar com "Entrar com Instagram".
+
+-----------------------------------------------------
+PASSO 1: GATILHO
+Automações > + Nova automação > "Usuário comenta no seu Post ou Reel"
+
+Post ou Reel: UM ESPECÍFICO > escolha o Reel do anúncio
+Palavras-chave (opção "contém"):
+3D
+3d
+três d
+quero
+link
+eu quero
+
+-----------------------------------------------------
+PASSO 2: RESPOSTA PÚBLICA NO COMENTÁRIO (ligar "Responder ao comentário")
+Cole as 4 opções (o ManyChat alterna entre elas):
+
+Te mandei no direct! 📩
+Enviado! Confere tuas mensagens 😉
+Corre no direct que o link tá lá 🎬
+Prontinho, olha o seu direct! 🚀
+
+-----------------------------------------------------
+PASSO 3: MENSAGEM 1 (DIRECT DE ABERTURA)
+
+Oi! 👋 Que bom que você quer aprender a criar vídeos 3D com inteligência artificial!
+
+Toca no botão aqui embaixo que eu te mando o link do curso agora. 👇
+
+BOTÃO (leva para a Mensagem 2):
+QUERO O LINK 🎬
+
+-----------------------------------------------------
+PASSO 4: MENSAGEM 2 (O LINK)
+
+Aqui está! 👇
+
+🎬 Curso completo de vídeos 3D com IA e Claude Code
+✅ como achar temas que prendem
+✅ como escrever roteiros com gancho
+✅ voz, ferramentas e montagem dos vídeos
+✅ o que fazer e o que NÃO fazer
+📱 pelo PC ou celular Android, mesmo sem saber animar
+
+Tudo por apenas R$ 19,90.
+
+BOTÃO DE LINK:
+ACESSAR O CURSO
+(cole aqui o link da sua página de vendas)
+
+-----------------------------------------------------
+PASSO 5: MENSAGEM 3 (2 minutos depois, opcional)
+Ação: Atraso de 2 minutos > Mensagem
+
+Qualquer dúvida sobre o curso, é só me responder aqui que eu te ajudo. 😉
+
+-----------------------------------------------------
+PASSO 6: LEMBRETE (opcional, para quem NÃO clicou)
+Ação: Atraso de 23 horas > Condição "não clicou no botão ACESSAR O CURSO" > Mensagem
+(o Instagram só permite mensagens até 24 h depois da última interação da pessoa)
+
+Passando pra lembrar: o curso de vídeos 3D continua por R$ 19,90 👇
+Se ficou alguma dúvida, me responde aqui!
+
+BOTÃO DE LINK:
+VER O CURSO
+(mesmo link da página de vendas)
+
+-----------------------------------------------------
+PASSO 7: ATIVAR E TESTAR
+1. Clique em "Ativar" / "Set Live".
+2. Com OUTRA conta do Instagram, comente "3D" no Reel.
+   (comentando com a sua própria conta não funciona)
+3. Confira: resposta no comentário > direct > botão > link abrindo.
+
+-----------------------------------------------------
+COMENTÁRIO PARA FIXAR NO REEL
+
+Comenta 3D aqui que o link chega no seu direct 📩 (confere também as solicitações de mensagem!)
+
+-----------------------------------------------------
+DICAS
+- Use a mesma palavra (3D) no vídeo, na legenda e no comentário fixado.
+- Vai postar outros vídeos com "Comenta 3D" no final? Adicione cada post novo no mesmo gatilho.
+- Responda pessoalmente quem mandar dúvida no direct: isso ajuda a vender.
+- O plano grátis do ManyChat tem limite de contatos. Confira no site antes de ter muito volume.
