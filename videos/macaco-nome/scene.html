@@ -1,0 +1,277 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:190px;text-align:center;font-weight:900;font-size:92px;line-height:1.02}
+#hook b{color:#FFB23E;display:block;font-size:140px}
+#cap{width:1080px;top:1300px;text-align:center;font-weight:900;font-size:116px}
+#cap.hl{color:#FFB23E}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:60px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.white{background:#fff;color:#111}
+.bub{background:#fff;color:#111;font-weight:900;font-size:58px;padding:16px 34px;border-radius:40px;border:8px solid #111;box-shadow:0 10px 0 #111;white-space:nowrap;text-align:center;line-height:1.05}
+.bub:after{content:'';position:absolute;left:50%;bottom:-40px;margin-left:-22px;border:22px solid transparent;border-top:26px solid #111}
+.comic{font-weight:900;font-size:150px;color:#FFD21F;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 10px 0 rgba(0,0,0,.3);white-space:nowrap}
+#punch{width:1080px;top:360px;text-align:center;font-weight:900;line-height:1}
+#punch .a{font-size:170px;color:#fff;-webkit-text-stroke:18px #111;paint-order:stroke fill;letter-spacing:6px;display:inline-block}
+#punch .a span{display:inline-block}
+#punch .b{font-size:175px;color:#FFB23E;-webkit-text-stroke:20px #111;paint-order:stroke fill;text-shadow:0 14px 0 rgba(0,0,0,.35);display:block;margin-top:20px}
+#final{left:60px;width:960px;top:1330px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:76px;line-height:1.05;padding:30px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#E8771E}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.8;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">POR QUE O MACACO<b>TEM ESSE NOME?</b></div>
+<div id="t1" class="o tag"></div>
+<div id="b1" class="o bub"></div>
+<div id="comic" class="o comic"></div>
+<div id="punch" class="o"><div class="a"><span>MÁ</span> <span>CACO</span></div><div class="b">MACACO!</div></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Segue a página,<br><em>e não conta pro leão.</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, M, mesh, rnd, rr, buildMonkey, POSES, mixPose, applyPose } from '/_kit/kit.js';
+
+await document.fonts.load('900 60px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; const S = i => SN[i].start, E = i => SN[i].end; window.DURATION = TP.duration;
+const WD = (i, re, n = 0) => { const ws = SN[i].words.filter(w => re.test(w.w)); return ws[n] ? ws[n].start : S(i); };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(window.devicePixelRatio || 1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(38, W / H, .05, 600);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const C = h => new THREE.Color(h);
+
+// ---------- tempos ----------
+const T_LEOA = WD(2, /leoa/i), T_ENGR = WD(2, /engraçar/i), T_FICARAM = WD(2, /ficaram/i);
+const T_TERM = S(3), T_NAODEIXA = WD(3, /não/i);
+const T_GABA = WD(4, /gabando/i), T_PEG1 = WD(4, /peguei/i, 0), T_PEG2 = WD(4, /peguei/i, 1), T_CHIB = WD(4, /passei/i);
+const T_NINGUEM = WD(5, /ninguém/i), T_BOATO = WD(6, /boato/i), T_OUVIDO = WD(6, /ouvido/i), T_ATRAS = WD(6, /atrás/i);
+const T_CORREU = WD(7, /correu/i, 0), T_LEAOC = WD(7, /correu/i, 1), T_NUNCA = WD(7, /nunca/i);
+const T_PULOU = WD(8, /pulou/i, 0), T_PULOU2 = WD(8, /pulou/i, 1), T_PRESO = WD(9, /preso/i), T_POPO = WD(9, /popô/i), T_PATAS = WD(9, /patas/i);
+const T_FREOU = WD(10, /freou/i), T_RODEAR = WD(10, /rodear/i), T_DISSE = WD(11, /disse/i), T_TU = WD(11, /^tu$/i);
+const T_MA1 = WD(12, /má/i), T_MA2 = WD(13, /má/i), T_END = E(13);
+
+// ---------- céu, luz ----------
+const skyU = { top: { value: C(0x58B8F0) }, bot: { value: C(0xD8F5E0) } };
+scene.add(new THREE.Mesh(new THREE.SphereGeometry(500, 24, 16), new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: false, fog: false, uniforms: skyU,
+  vertexShader: 'varying vec3 vP; void main(){ vP = position; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }',
+  fragmentShader: 'uniform vec3 top; uniform vec3 bot; varying vec3 vP; void main(){ float h = clamp(normalize(vP).y*2.2+.1,0.,1.); gl_FragColor = vec4(mix(bot,top,pow(h,.8)),1.); }' })));
+scene.fog = new THREE.Fog(0xBFE6CF, 30, 140);
+const sun = new THREE.DirectionalLight(0xFFF2D6, 2.5); sun.position.set(8, 16, 10); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+{ const sc = sun.shadow.camera; sc.left = -25; sc.right = 25; sc.top = 25; sc.bottom = -25; sc.far = 80; } sun.shadow.bias = -.0005; scene.add(sun); scene.add(sun.target);
+scene.add(new THREE.HemisphereLight(0xE6FFF0, 0x4A6A2A, 1.25));
+
+// ---------- selva ----------
+{
+  const geo = new THREE.PlaneGeometry(300, 300, 100, 100); geo.rotateX(-Math.PI / 2); const pos = geo.attributes.position;
+  for (let i = 0; i < pos.count; i++) { const x = pos.getX(i), z = pos.getZ(i); const d = Math.hypot(x, z); pos.setY(i, d < 28 ? rr(-.02, .02) : rr(-.2, .2) + Math.max(0, d - 35) * .08 * (Math.sin(x * .05) + 1.2)); }
+  const ng = geo.toNonIndexed(); const cols = []; const cs = [C(0x5FA83A), C(0x4E9A31), C(0x6DB845), C(0x7A9A3A)];
+  for (let i = 0; i < ng.attributes.position.count; i += 3) { const c = cs[Math.floor(rnd() * 4)]; for (let j = 0; j < 3; j++) cols.push(c.r, c.g, c.b); }
+  ng.setAttribute('color', new THREE.Float32BufferAttribute(cols, 3)); ng.computeVertexNormals();
+  const g = new THREE.Mesh(ng, new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 1 })); g.receiveShadow = true; scene.add(g);
+}
+function tree(x, z, s = 1) { const g = grp(); g.position.set(x, 0, z); g.scale.setScalar(s); const tr = mesh(new THREE.CylinderGeometry(.22, .35, 4, 7), M(0x6B4A2E), 0, 2, 0, g); tr.castShadow = true;
+  for (const [a, b, c, r] of [[0, 4.6, 0, 1.6], [1.1, 4.1, .3, 1.1], [-1.0, 4.2, -.2, 1.2], [.2, 5.4, .1, 1.0]]) { const l = mesh(new THREE.IcosahedronGeometry(r, 0), M([0x2F7D32, 0x388E3C, 0x2E6B2E][Math.floor(rnd() * 3)]), a, b, c, g); l.castShadow = true; } return g; }
+function palm(x, z, s = 1) { const g = grp(); g.position.set(x, 0, z); g.scale.setScalar(s); let p = g; for (let i = 0; i < 6; i++) { const seg = grp(p); seg.position.y = i ? .6 : 0; seg.rotation.z = .06; mesh(new THREE.CylinderGeometry(.13, .16, .62, 6), M(0x8A6A3E), 0, .3, 0, seg).castShadow = true; p = seg; }
+  for (let k = 0; k < 7; k++) { const lf = grp(p); lf.position.y = .6; lf.rotation.y = k / 7 * 6.28; const b = mesh(new THREE.BoxGeometry(1.8, .04, .4), M(0x3E9B3A), .9, 0, 0, lf); b.rotation.z = -.45; b.castShadow = true; } return g; }
+function bush(x, z, s = 1, col = 0x3F8F35) { const g = grp(); g.position.set(x, 0, z); g.scale.setScalar(s); for (const [a, b, c, r] of [[0, .5, 0, .7], [.6, .4, .2, .5], [-.6, .4, -.1, .55], [.1, .8, -.2, .45]]) { const m = mesh(new THREE.IcosahedronGeometry(r, 0), M(col), a, b, c, g); m.castShadow = true; }
+  for (let i = 0; i < 4; i++) mesh(new THREE.SphereGeometry(.07, 6, 4), M([0xFF5C7A, 0xFFD21F, 0xFFFFFF, 0xFF8A3D][i]), rr(-.7, .7), rr(.4, .9), rr(.2, .6), g); return g; }
+[[-6, -6, 1.2], [6, -7, 1.1], [-12, -4, 1.3], [13, -10, 1.4], [-3, -12, 1.5], [20, -6, 1.3], [26, -12, 1.5], [-18, -10, 1.6], [3, -18, 1.8], [30, 4, 1.2], [-8, 8, 1.1], [9, 9, 1.2]].forEach(a => tree(...a));
+[[-3, -5, 1.1], [4, -4, 1.2], [-9, -2, 1], [10, -3, 1.1], [17, -4, 1.2], [23, -3, 1], [-14, 3, 1.2], [15, 6, 1]].forEach(a => palm(...a));
+[[-2, -2.5, 1], [3.5, -2.8, .9], [-5, -1, .8], [7, -1.5, 1], [12, -1.2, .9], [18, 1.5, 1], [22, -1, .8], [-7, 3, .9], [6, 3.5, .8]].forEach(a => bush(...a));
+const loveBush = bush(1.8, -1.2, 1.25, 0x2F8A3A);
+// árvore da forquilha (onde o leão entala)
+const FT = V(26, 0, 0); const forkTree = grp(); forkTree.position.copy(FT); {
+  const bark = M(0x6B4A2E);
+  const tr = mesh(new THREE.CylinderGeometry(.45, .65, 2.4, 9), bark, 0, 1.2, 0, forkTree); tr.castShadow = true;
+  for (const s of [-1, 1]) { const br = mesh(new THREE.CylinderGeometry(.3, .42, 3.2, 8), bark, s * .75, 3.6, 0, forkTree); br.rotation.z = -s * .5; br.castShadow = true;
+    const cn = mesh(new THREE.IcosahedronGeometry(1.7, 0), M(0x2F7D32), s * 1.7, 5.6, 0, forkTree); cn.castShadow = true; }
+  mesh(new THREE.IcosahedronGeometry(1.4, 0), M(0x388E3C), 0, 6.2, -.4, forkTree);
+}
+// ---------- personagens ----------
+const caco = buildMonkey(); scene.add(caco.root); caco.root.scale.setScalar(.6);
+function buildCat(o) {
+  const P = Object.assign({ col: 0xD9A35A, dark: 0x8A5A2B, mane: null, lash: false, s: 1 }, o);
+  const m = M(P.col), md = M(P.dark), wh = new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: .3 }), bk = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: .2 });
+  const root = grp(); root.scale.setScalar(P.s); const body = grp(root); body.position.y = 1.0;
+  const tor = mesh(new THREE.SphereGeometry(.6, 12, 9), m, 0, 0, 0, body); tor.scale.set(.85, .78, 1.55); tor.castShadow = true;
+  const belly = mesh(new THREE.SphereGeometry(.45, 10, 7), M(0xF2D2A0), 0, -.22, .1, body); belly.scale.set(.8, .6, 1.4);
+  const neck = grp(body); neck.position.set(0, .3, .8);
+  const head = grp(neck); head.position.set(0, .3, .15);
+  if (P.mane) { const mn = mesh(new THREE.IcosahedronGeometry(.62, 1), M(P.mane), 0, 0, -.12, head); mn.scale.set(1.15, 1.15, .8); mn.castShadow = true; }
+  const hd = mesh(new THREE.SphereGeometry(.42, 12, 9), m, 0, 0, .05, head); hd.castShadow = true;
+  const muz = mesh(new THREE.SphereGeometry(.22, 10, 7), M(0xF2D2A0), 0, -.12, .38, head); muz.scale.set(1.2, .8, .8);
+  mesh(new THREE.SphereGeometry(.07, 6, 5), M(0x5A2A20), 0, -.02, .56, head);
+  const mouth = mesh(new THREE.SphereGeometry(.09, 8, 6), M(0x5A1A10), 0, -.25, .48, head); mouth.scale.set(1.2, .2, .5);
+  for (const s of [-1, 1]) mesh(new THREE.ConeGeometry(.12, .2, 5), m, s * .3, .38, -.02, head);
+  const eyes = [-1, 1].map(s => { const e = grp(head); e.position.set(s * .15, .1, .4); const w = mesh(new THREE.SphereGeometry(.09, 9, 7), wh, 0, 0, 0, e); w.scale.z = .6; const p = mesh(new THREE.SphereGeometry(.05, 8, 6), bk, 0, 0, .045, e); const br = mesh(new THREE.BoxGeometry(.14, .03, .03), md, 0, .12, .04, e);
+    if (P.lash) for (let k = -1; k <= 1; k++) { const l = mesh(new THREE.BoxGeometry(.012, .07, .01), bk, s * .05 + k * .03, .09, .05, e); l.rotation.z = -s * .4 - k * .2; } return { e, p, br, s }; });
+  const legs = []; for (const [x, z] of [[.3, .55], [-.3, .55], [.3, -.6], [-.3, -.6]]) { const lg = grp(body); lg.position.set(x, -.2, z); mesh(new THREE.CylinderGeometry(.13, .11, .8, 7), m, 0, -.4, 0, lg).castShadow = true; mesh(new THREE.SphereGeometry(.15, 7, 5), m, 0, -.8, .05, lg); legs.push(lg); }
+  const tail = grp(body); tail.position.set(0, .15, -.9); tail.rotation.x = -.9; mesh(new THREE.CylinderGeometry(.04, .03, 1.0, 5), m, 0, .5, 0, tail); mesh(new THREE.SphereGeometry(.1, 6, 5), md, 0, 1.02, 0, tail);
+  const sweat = [0, 1, 2].map(i => mesh(new THREE.SphereGeometry(.05, 6, 5), M(0x7DD3FC), 0, 0, 0, head));
+  return { root, body, neck, head, mouth, eyes, legs, tail, sweat, P };
+}
+const lion = buildCat({ col: 0xD69A48, dark: 0x6B3A12, mane: 0x8A4A16, s: 1.15 });
+const leoa = buildCat({ col: 0xE3B06A, dark: 0x9A6A3A, lash: true, s: .95 });
+// plateia: tucano, sapo, tartaruga, papagaio
+const toucan = grp(); { mesh(new THREE.SphereGeometry(.3, 9, 7), M(0x1A1A1A), 0, .55, 0, toucan).scale.set(.9, 1.2, .9); mesh(new THREE.SphereGeometry(.2, 8, 6), M(0xFFFFFF), 0, .7, .14, toucan); mesh(new THREE.SphereGeometry(.2, 8, 6), M(0x1A1A1A), 0, .95, .05, toucan); const bk = mesh(new THREE.ConeGeometry(.12, .5, 6), M(0xFF8A1F), 0, .95, .35, toucan); bk.rotation.x = Math.PI / 2; for (const s of [-1, 1]) mesh(new THREE.SphereGeometry(.04, 5, 4), M(0xFFFFFF), s * .1, 1.0, .17, toucan); }
+const frog = grp(); { mesh(new THREE.SphereGeometry(.35, 9, 7), M(0x4CC34A), 0, .3, 0, frog).scale.set(1.1, .7, 1); for (const s of [-1, 1]) { mesh(new THREE.SphereGeometry(.12, 7, 6), M(0x4CC34A), s * .17, .55, .15, frog); mesh(new THREE.SphereGeometry(.07, 6, 5), M(0xFFFFFF), s * .17, .6, .22, frog); mesh(new THREE.SphereGeometry(.035, 5, 4), M(0x111111), s * .17, .6, .28, frog); } }
+const turtle = grp(); { const sh = mesh(new THREE.SphereGeometry(.45, 9, 6, 0, Math.PI * 2, 0, Math.PI / 2), M(0x6B8E23), 0, .15, 0, turtle); sh.scale.set(1, .8, 1.2); mesh(new THREE.SphereGeometry(.16, 8, 6), M(0xA8C66C), 0, .3, .6, turtle); for (const s of [-1, 1]) mesh(new THREE.SphereGeometry(.03, 5, 4), M(0x111111), s * .07, .36, .74, turtle); }
+const parrot = grp(); { mesh(new THREE.SphereGeometry(.25, 9, 7), M(0xE53935), 0, .5, 0, parrot).scale.set(.9, 1.25, .9); mesh(new THREE.SphereGeometry(.17, 8, 6), M(0xE53935), 0, .85, .05, parrot); const bk = mesh(new THREE.ConeGeometry(.07, .18, 5), M(0xFFD21F), 0, .82, .23, parrot); bk.rotation.x = Math.PI / 2 + .5; for (const s of [-1, 1]) { const w = mesh(new THREE.BoxGeometry(.06, .4, .25), M(0x1E88E5), s * .22, .5, -.02, parrot); w.rotation.z = s * .2; mesh(new THREE.SphereGeometry(.035, 5, 4), M(0x111111), s * .08, .9, .17, parrot); } }
+const crowd = [toucan, frog, turtle, parrot];
+// corações, poeira, ondas de fofoca, gotas
+const hearts = []; { const s = new THREE.Shape(); s.moveTo(0, -.5); s.bezierCurveTo(-.3, -.25, -.55, -.05, -.55, .2); s.bezierCurveTo(-.55, .45, -.3, .55, -.15, .55); s.bezierCurveTo(-.05, .55, 0, .45, 0, .38); s.bezierCurveTo(0, .45, .05, .55, .15, .55); s.bezierCurveTo(.3, .55, .55, .45, .55, .2); s.bezierCurveTo(.55, -.05, .3, -.25, 0, -.5); const g = new THREE.ExtrudeGeometry(s, { depth: .12, bevelEnabled: false }); for (let i = 0; i < 14; i++) { const h = new THREE.Mesh(g, new THREE.MeshStandardMaterial({ color: 0xFF4D8D, emissive: 0x440011 })); h.userData = { a: i * 2.4, d: (i % 7) / 7, s: .3 + (i % 4) * .08 }; scene.add(h); hearts.push(h); } }
+const dust = []; for (let i = 0; i < 14; i++) { const d = mesh(new THREE.IcosahedronGeometry(.18, 0), new THREE.MeshStandardMaterial({ color: 0xC9B18A, transparent: true }), 0, 0, 0); dust.push(d); }
+const rings = []; for (let i = 0; i < 3; i++) { const r = new THREE.Mesh(new THREE.TorusGeometry(.4, .04, 6, 30), new THREE.MeshBasicMaterial({ color: 0xFFFFFF, transparent: true })); scene.add(r); rings.push(r); }
+const leaves = []; for (let i = 0; i < 20; i++) { const l = mesh(new THREE.PlaneGeometry(.25, .14), new THREE.MeshStandardMaterial({ color: 0x3E9B3A, side: THREE.DoubleSide }), 0, 0, 0); l.userData = { v: V(rr(-2, 2), rr(1, 3), rr(-1.5, 1.5)) }; leaves.push(l); }
+
+// ---------- animação ----------
+const faceTo = (a, b) => Math.atan2(b.x - a.x, b.z - a.z);
+function cacoPose(o) { const A = Object.assign({ x: 0, y: 0, z: 0, ry: 0, P: POSES.idle, walk: 0, t: 0, talk: 0, blush: 0, sly: 0 }, o);
+  caco.root.visible = true; caco.root.position.set(A.x, A.y, A.z); caco.root.rotation.y = A.ry; applyPose(caco, A.P);
+  if (A.walk) { const s = Math.sin(A.t * 11) * .7 * A.walk; caco.legL.hp.rotation.x += s; caco.legR.hp.rotation.x -= s; caco.armL.sh.rotation.x -= s * .8; caco.armR.sh.rotation.x += s * .8; caco.hips.position.y += Math.abs(Math.cos(A.t * 11)) * .08 * A.walk; }
+  caco.mouthO.scale.set(1, A.talk ? .4 + Math.abs(Math.sin(A.t * 13)) * 1.6 : .2, .5); caco.blushM.opacity = A.blush;
+  caco.eyes.forEach(e => { e.brow.rotation.z = -e.s * (.15 + A.sly * .5); e.brow.position.y = .13 - A.sly * .03; e.p.position.x = A.sly * .03; });
+  caco.tsegs.forEach((g, i) => g.rotation.x = Math.sin(A.t * 3 - i * .5) * .12); }
+function catPose(c, o) { const A = Object.assign({ x: 0, y: 0, z: 0, ry: 0, run: 0, walk: 0, t: 0, talk: 0, angry: 0, pitch: 0, worried: 0, love: 0 }, o);
+  c.root.visible = true; c.root.position.set(A.x, A.y, A.z); c.root.rotation.set(0, A.ry, 0); c.body.rotation.x = A.pitch;
+  const sp = A.run ? 16 : 7, amp = A.run ? .8 : .35 * A.walk;
+  c.legs.forEach((lg, i) => { const off = A.run ? (i < 2 ? 0 : Math.PI) + (i % 2) * .4 : (i === 0 || i === 3 ? 0 : Math.PI); lg.rotation.x = Math.sin(A.t * sp + off) * amp; });
+  c.body.position.y = 1.0 + (A.run ? Math.abs(Math.sin(A.t * sp)) * .15 : 0);
+  c.mouth.scale.set(1.2, A.talk ? .3 + Math.abs(Math.sin(A.t * 12)) * 1.4 : .2, .5);
+  c.eyes.forEach(({ br, s, e }) => { br.rotation.z = s * (A.angry * .6 - A.worried * .5); br.position.y = .12 - A.angry * .03 + A.worried * .03; e.scale.y = A.love ? .55 : 1; });
+  c.tail.rotation.x = -.9 + Math.sin(A.t * 4) * .3; c.tail.rotation.z = Math.sin(A.t * 3) * .3;
+  c.sweat.forEach((d, i) => { d.visible = A.worried > 0; const u = ((A.t * 1.2 + i / 3) % 1); d.position.set(.3 - i * .25, .4 - u * .4, .3); }); }
+const hideAll = () => { caco.root.visible = lion.root.visible = leoa.root.visible = false; crowd.forEach(c => c.visible = false); hearts.forEach(h => h.visible = false); dust.forEach(d => d.visible = false); rings.forEach(r => r.visible = false); leaves.forEach(l => l.visible = false); loveBush.rotation.set(0, 0, 0); };
+const heartsAt = (t, c, n = 10, h = 2) => hearts.forEach((hh, i) => { if (i >= n) return; const u = ((t * .5 + hh.userData.d) % 1); hh.visible = true; hh.position.set(c.x + Math.cos(hh.userData.a) * (.3 + u * .6), c.y + u * h, c.z + Math.sin(hh.userData.a) * .4); hh.scale.setScalar(hh.userData.s * Math.sin(u * Math.PI)); hh.rotation.set(Math.PI, t * 2 + i, Math.PI); });
+const dustAt = (t, x, z, dir = -1) => dust.forEach((d, i) => { const u = ((t * 2 + i / 14) % 1); d.visible = true; d.position.set(x + dir * u * 1.4 + Math.sin(i) * .2, .15 + u * .5, z + Math.cos(i * 2) * .3); d.scale.setScalar(.5 + u); d.material.opacity = (1 - u) * .8; });
+const P_BRAG = { ...POSES.wave, lx: -2.6, lz: .4, le: -.4, rx: -2.6, rz: -.4, re: -.4, hx: -.25 };
+const P_RUN = { ...POSES.idle, lean: .35, hx: -.2 };
+const P_SHH = { ...POSES.think, rx: -1.6, rz: .2, re: -2.4 };
+const P_CLIMB = { ...POSES.idle, lx: -2.8, rx: -2.8, le: -.3, re: -.3, hl: -.8, kl: 1.2, hr: -.3, kr: .6 };
+const SHOTS = [
+  [0, (t, k) => { cacoPose({ x: 0, z: 1, ry: .2, P: mixPose(POSES.idle, POSES.wave, clamp(k / .4)), t, talk: 0 }); return [V(.8, 1.0, 4.0 - k * .2), V(0, .75, 1)]; }],
+  [S(1), (t, k) => { cacoPose({ x: 0, z: 1, ry: 0, P: POSES.proud, t }); return [V(-.6, .9, 3.4), V(0, .75, 1)]; }],
+  [S(2), (t, k) => { // leoa se engraça
+    const u = ease(clamp((t - T_LEOA + .3) / 1.4)); const lp = V(lerp(-4, -1.1, u), 0, .6);
+    catPose(leoa, { x: lp.x, z: lp.z, ry: Math.PI / 2, walk: u < 1 ? 1 : 0, t, love: t > T_ENGR ? 1 : 0 });
+    cacoPose({ x: .5, z: .7, ry: -Math.PI / 2 + .3, P: t > T_ENGR ? POSES.cover : POSES.idle, t, blush: t > T_ENGR ? .9 : 0 });
+    if (t > T_ENGR) heartsAt(t, V(-.3, 1.4, .6), 8, 1.6);
+    if (t > T_FICARAM - .2) { caco.root.visible = false; leoa.root.visible = false; loveBush.rotation.z = Math.sin(t * 22) * .06; loveBush.rotation.x = Math.sin(t * 17) * .05; heartsAt(t, V(1.8, 1.2, -1.2), 14, 2.2); return [V(1.9, 1.6, 4.4), V(1.8, .9, -1.2)]; }
+    return [V(-.4, 1.4, 5.6), V(-.4, .9, .6)]; }],
+  [S(3), (t, k) => { // não deixa o leão saber
+    catPose(leoa, { x: -.7, z: .2, ry: .6, t, talk: t > T_NAODEIXA ? 1 : 0 }); leoa.head.rotation.y = -.3;
+    cacoPose({ x: .9, z: .8, ry: -.8, P: POSES.proud, t, blush: .6 });
+    return [V(.6, 1.3, 4.6), V(.0, 1.1, .4)]; }],
+  [S(4), (t, k) => { // se gabando pra bicharada
+    const pos = [V(-2.2, 0, -.6), V(-1, 0, 1.6), V(1.5, 0, 1.8), V(2.6, 0, -.4)]; crowd.forEach((c, i) => { c.visible = true; c.position.copy(pos[i]); c.rotation.y = faceTo(pos[i], V(0, 0, .3)); c.position.y = Math.abs(Math.sin(t * 4 + i)) * .05; });
+    const hop = Math.abs(Math.sin(t * 6)) * .35; const a = t * .9;
+    cacoPose({ x: Math.cos(a) * .4, y: hop, z: .3 + Math.sin(a) * .3, ry: Math.sin(t * 1.5) * .9, P: t > T_PEG1 - .2 ? P_BRAG : POSES.proud, t, talk: 1 });
+    return [V(.4, 2.2, 6.4 - k * .1), V(0, .7, .3)]; }],
+  [S(5), (t, k) => { // ninguém acreditou
+    const pos = [V(-1.4, 0, .4), V(-.4, 0, 1.2), V(.7, 0, 1.1), V(1.6, 0, .3)]; crowd.forEach((c, i) => { c.visible = true; c.position.copy(pos[i]); c.rotation.set(0, faceTo(pos[i], V(0, 0, -1)), Math.sin(t * 9 + i) * .15); });
+    cacoPose({ x: 0, z: -1, ry: 0, P: POSES.proud, t });
+    return [V(0, 1.6, 5.0), V(0, .6, 0)]; }],
+  [S(6), (t, k) => { // boato chega no leão
+    catPose(lion, { x: 0, z: 0, ry: -.5, t, angry: clamp((t - T_OUVIDO) / .6) });
+    toucan.visible = true; toucan.position.set(.9, 1.55, .9); toucan.rotation.y = -2.4; lion.head.rotation.z = Math.sin(t * 2) * .05;
+    rings.forEach((r, i) => { const u = ((t * 1.2 + i / 3) % 1); r.visible = t < T_ATRAS; r.position.set(.7 - u * .5, 1.8, .7); r.rotation.y = .9; r.scale.setScalar(.3 + u); r.material.opacity = 1 - u; });
+    return [V(1.4, 1.9, 5.0), V(.2, 1.5, .3)]; }],
+  [S(7), (t, k) => { // perseguição
+    const cx = -8 + (t - S(7)) * 2.4; const lx = cx - 2.6 + Math.sin(t * 2) * .2;
+    cacoPose({ x: cx, z: 0, ry: Math.PI / 2, P: P_RUN, walk: 1.4, t: t * 1.2 }); catPose(lion, { x: lx, z: 0, ry: Math.PI / 2, run: 1, t, angry: 1, talk: t > T_NUNCA ? 1 : 0 });
+    dustAt(t, lx - .8, 0);
+    const front = t > T_LEAOC; return front ? [V(cx + 3.6, 1.2, 1.6), V(cx - 1.2, 1.1, 0)] : [V(cx - .4, 1.4, 6.2), V(cx - .8, .9, 0)]; }],
+  [S(8), (t, k) => { // pulam na árvore
+    const u1 = clamp((t - T_PULOU) / 1.0), u2 = clamp((t - T_PULOU2) / 1.0);
+    const cx = lerp(FT.x - 3, FT.x + .6, u1), cy = Math.sin(u1 * Math.PI) * 2.5 + u1 * 3.4;
+    cacoPose({ x: cx, y: cy, z: 0, ry: Math.PI / 2, P: u1 > 0 && u1 < 1 ? P_CLIMB : P_RUN, walk: u1 === 0 ? 1.4 : 0, t });
+    const lx = lerp(FT.x - 4.5, FT.x - .6, u2), ly = Math.sin(u2 * Math.PI) * 2.4 + u2 * 1.2;
+    catPose(lion, { x: lx, y: ly, z: 0, ry: Math.PI / 2, run: u2 === 0 ? 1 : 0, t, angry: 1, pitch: u2 > 0 ? -.4 * Math.sin(u2 * Math.PI) : 0 });
+    leaves.forEach((l, i) => { const u = t - T_PULOU2 - .8; l.visible = u > 0 && u < 2; if (!l.visible) return; l.position.set(FT.x + l.userData.v.x * u * .6, 4 + l.userData.v.y * u - 2 * u * u, l.userData.v.z * u * .5); l.rotation.set(u * 5 + i, u * 3, 0); });
+    return [V(FT.x - 2.5, 3.0, 9.5), V(FT.x - .8, 2.6, 0)]; }],
+  [S(9), (t, k) => { // entalado de popô pra cima
+    catPose(lion, { x: FT.x, y: 2.15, z: 0, ry: Math.PI / 2, t, pitch: 1.0, worried: t > T_PRESO ? 1 : 0 });
+    lion.root.rotation.set(0, Math.PI / 2, 0); lion.body.rotation.x = 1.0;
+    lion.legs.forEach((lg, i) => { lg.rotation.x = i < 2 ? -1.0 + Math.sin(t * 3 + i) * .15 : Math.sin(t * 9 + i) * .6; });
+    lion.tail.rotation.x = -.4 + Math.sin(t * 6) * .4;
+    cacoPose({ x: FT.x + 1.6, y: 0, z: 1.2, ry: -1.0, P: POSES.idle, t });
+    const back = t > T_POPO - .2; return back ? [V(FT.x - 6.0, 3.4, 5.0), V(FT.x - .4, 2.8, 0)] : [V(FT.x + .5, 2.8, 10.5), V(FT.x, 2.7, 0)]; }],
+  [S(10), (t, k) => { // freou e rodeia
+    catPose(lion, { x: FT.x, y: 2.15, z: 0, ry: Math.PI / 2, t, worried: 1 }); lion.body.rotation.x = 1.0; lion.legs.forEach((lg, i) => { lg.rotation.x = i < 2 ? -1.0 : Math.sin(t * 9 + i) * .5; });
+    const brake = clamp((t - T_FREOU) / .5); let cp;
+    if (t < T_RODEAR) { cp = V(lerp(FT.x - 6, FT.x - 2.2, easeOut(brake)), 0, 1.4); cacoPose({ x: cp.x, z: cp.z, ry: Math.PI / 2, P: brake < 1 ? { ...P_RUN, lean: -.3 } : POSES.idle, walk: brake < 1 ? .6 : 0, t }); if (brake < 1) dustAt(t, cp.x + .3, cp.z, 1); }
+    else { const a = (t - T_RODEAR) * 1.2 + Math.PI; cp = V(FT.x - 1.6 + Math.cos(a) * 1.2, 0, Math.sin(a) * 1.8); cacoPose({ x: cp.x, z: cp.z, ry: faceTo(cp, V(FT.x - 1.4, 0, 0)), P: POSES.think, walk: .5, t, sly: 1 }); }
+    return [V(FT.x - 5.2, 2.4, 5.8), V(FT.x - 1.2, 1.6, 0)]; }],
+  [S(11), (t, k) => { // "tu não tá pensando nisso não, né?"
+    catPose(lion, { x: FT.x, y: 2.15, z: 0, ry: Math.PI / 2, t, worried: 1, talk: t > T_TU ? 1 : 0 }); lion.body.rotation.x = 1.0; lion.legs.forEach((lg, i) => { lg.rotation.x = i < 2 ? -1.0 : Math.sin(t * 9 + i) * .5; }); lion.head.rotation.set(-.9, -.5, 0);
+    return [V(FT.x + 2.2, 1.3, 2.6), V(FT.x + .9, 1.6, 0)]; }],
+  [S(12), (t, k) => { // não seja má, Caco
+    catPose(lion, { x: FT.x, y: 2.15, z: 0, ry: Math.PI / 2, t, worried: 1, talk: 1 }); lion.body.rotation.x = 1.0; lion.legs.forEach((lg, i) => { lg.rotation.x = i < 2 ? -1.0 : Math.sin(t * 12 + i) * .7; }); lion.head.rotation.set(-.9, -.5, 0);
+    const cp = V(FT.x - 2.0, 0, 1.0); cacoPose({ x: cp.x, z: cp.z, ry: faceTo(cp, V(FT.x - 1.4, 0, 0)), P: POSES.think, t, sly: 1 });
+    return [V(FT.x - 3.5, 2.6, 6.6), V(FT.x - .9, 1.7, 0)]; }],
+  [E(13) + .15, (t, k) => { // final: Caco sorrindo para a câmera
+    catPose(lion, { x: FT.x, y: 2.15, z: 0, ry: Math.PI / 2, t, worried: 1 }); lion.body.rotation.x = 1.0; lion.legs.forEach((lg, i) => { lg.rotation.x = i < 2 ? -1.0 : Math.sin(t * 12 + i) * .7; });
+    cacoPose({ x: FT.x - 2.4, z: 1.4, ry: .4, P: POSES.wave, t, sly: 1 });
+    return [V(FT.x - 1.6, 1.3, 5.4), V(FT.x - 2.0, 1.4, 1.0)]; }],
+];
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [S(1), 'pop'], [T_LEOA, 'whoosh'], [T_ENGR, 'ding'], [T_FICARAM, 'boing'], [T_NAODEIXA, 'pop'], [T_GABA, 'whoosh'], [T_PEG1, 'pop'], [T_PEG2, 'pop'], [T_CHIB, 'zap'], [T_NINGUEM, 'buzz'], [T_BOATO, 'mosq'], [T_ATRAS, 'buzzx'],
+ [T_CORREU, 'whoosh'], [T_LEAOC, 'whoosh'], [T_NUNCA, 'buzzx'], [T_PULOU, 'boing'], [T_PULOU2, 'boing'], [T_PRESO, 'crack'], [T_POPO, 'boing'], [T_FREOU, 'whoosh'], [T_TU, 'gulp'], [T_MA1, 'pop'], [T_MA2, 'pop'], [T_END + .1, 'win']].forEach(([t, k]) => ev(t, k));
+const HL = /macaco|caco|leoa|leão|engraçar|ficaram|gabando|bicharada|peguei|chibata|ninguém|boato|ouvido|correu|mentiras|pulou|árvore|traseira|preso|popô|patas|freou|rodear|pensando|má/i;
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+window.draw = function (t) {
+  hideAll();
+  let i = 0; while (i + 1 < SHOTS.length && SHOTS[i + 1][0] <= t) i++;
+  const [p0, tg] = SHOTS[i][1](t, t - SHOTS[i][0]); const ZK = [1,1,1.45,1.35,1.3,1.2,1.25,1.6,1.35,1,1.6,1,1.4,1][i]; const p = tg.clone().add(p0.clone().sub(tg).multiplyScalar(ZK));
+  cam.position.copy(p); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  sun.position.copy(tg).add(V(8, 16, 10)); sun.target.position.copy(tg);
+
+  fixed($('hook'), t < S(1) ? pop(t - .02, .3) * (1 - clamp((t - S(1) + .15) / .15)) : 0);
+  const t1 = $('t1'); t1.style.opacity = 0;
+  const tag = (txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; t1.textContent = txt; t1.className = 'o tag ' + cls; place(t1, true, x, y, pop(t - t0, .3), rot); };
+  tag('ANTES ERA SÓ "CACO"', '', win(t, S(1) + .1, S(2)), 540, 560, S(1) + .1, -3);
+  tag('OPA... 😳', 'white', win(t, T_ENGR, T_FICARAM - .2), 540, 560, T_ENGR, 3);
+  tag('NINGUÉM ACREDITOU', 'red', win(t, T_NINGUEM - .1, S(6)), 540, 560, T_NINGUEM - .1, -3);
+  tag('FOFOCA!', 'blue', win(t, T_BOATO, T_ATRAS), 540, 560, T_BOATO, 3);
+  tag('ENTALOU!', 'red', win(t, T_PRESO, T_POPO - .2), 540, 560, T_PRESO, -4);
+  tag('POPÔ PRA CIMA', '', win(t, T_POPO - .2, S(10)), 540, 560, T_POPO - .2, 3);
+  const b1 = $('b1'); b1.style.opacity = 0;
+  const bub = (html, on, x, y, t0, rot = -2) => { if (!on) return; b1.innerHTML = html; place(b1, true, x, y, pop(t - t0, .3), rot); };
+  bub('NÃO DEIXA O LEÃO<br>SABER DISSO! 🤫', win(t, T_NAODEIXA - .1, S(4)), 540, 560, T_NAODEIXA - .1);
+  bub('PEGUEI A LEOA!', win(t, T_PEG1 - .1, T_CHIB - .1), 540, 560, T_PEG1 - .1, t > T_PEG2 ? 3 : -3);
+  bub('PASSEI A<br>CHIBATA NELA!', win(t, T_CHIB - .1, S(5)), 540, 560, T_CHIB - .1, -2);
+  bub('NUNCA MAIS VOCÊ VAI<br>ESPALHAR MENTIRAS!', win(t, T_NUNCA - .1, S(8)), 540, 560, T_NUNCA - .1, 2);
+  bub('TU NÃO TÁ PENSANDO<br>NISSO NÃO, NÉ? 😰', win(t, T_TU - .1, S(12)), 540, 560, T_TU - .1, -2);
+  const cm = $('comic'); cm.style.fontSize = '150px';
+  if (win(t, T_ATRAS, S(7))) { cm.textContent = 'GRRR!'; place(cm, true, 540, 600, pop(t - T_ATRAS, .25), -6); }
+  else if (win(t, T_FREOU, T_FREOU + 1.1)) { cm.textContent = 'IIIIH!'; place(cm, true, 540, 600, pop(t - T_FREOU, .25), 5); }
+  else cm.style.opacity = 0;
+  // punchline MÁ CACO -> MACACO
+  const pu = $('punch'); const pOn = t >= T_MA1 - .1 && t < S(13) + 99;
+  if (pOn) { pu.style.opacity = 1; const a = pu.children[0], b = pu.children[1]; const merge = clamp((t - T_END + .1) / .35); a.style.transform = `scale(${pop(t - T_MA1 + .1, .3)})`; a.children[0].style.transform = `translateX(${merge * 40}px)`; a.children[1].style.transform = `translateX(${-merge * 40}px)`; a.style.opacity = 1 - clamp((t - T_END + .1) / .25); b.style.opacity = t > T_END ? 1 : 0; b.style.transform = `scale(${t > T_END ? pop(t - T_END, .35) : 0}) rotate(-4deg)`; pu.style.transform = `translateY(${-clamp((t - T_END - .4) / .4) * 60}px)`; } else pu.style.opacity = 0;
+  fixed($('final'), t >= T_END + .9 ? pop(t - T_END - .9, .35) : 0);
+  $('wm').style.opacity = .8;
+  let wTxt = null, wSt = 0;
+  for (let i = 0; i < SN.length; i++) for (const w2 of SN[i].words) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap = $('cap');
+  if (wTxt && t > S(1) - .05) { cap.textContent = wTxt.toUpperCase().replace(/[.,!?:]/g, ''); cap.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>
