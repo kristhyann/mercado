@@ -1,0 +1,261 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,'Noto Color Emoji',sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:230px;text-align:center;font-weight:900;font-size:92px;line-height:1.04}
+#hook b{color:#7CE07C;display:block;font-size:100px}
+#cap{width:1080px;top:1380px;text-align:center;font-weight:900;font-size:112px}
+#cap.hl{color:#7CE07C}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:58px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.white{background:#fff;color:#111}.tag.orange{background:#FF8A1F;color:#fff}.tag.purple{background:#8B5CF6;color:#fff}
+.small{font-size:46px;padding:6px 22px;border-radius:18px;border-width:6px;box-shadow:0 6px 0 #111}
+#big{font-weight:900;font-size:150px;color:#FFD21F;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 12px 0 rgba(0,0,0,.4);line-height:1;white-space:nowrap}
+#final{left:50px;width:980px;top:1290px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:70px;line-height:1.1;padding:28px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#22A04A}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.85;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">VOCÊ É UMA<br>LAGARTIXA… 🦎<b>E SOLTA O RABO</b></div>
+<div id="big" class="o"></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag small"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Você sabia disso?<br><em>Comenta aqui 👇</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, rr } from '/_kit/kit.js';
+await document.fonts.load('900 60px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; window.DURATION = TP.duration;
+const ALL = SN.flatMap(s => s.words);
+const WA = (re, n = 0, after = 0) => { const ws = ALL.filter(w => w.start >= after && re.test(w.w)); if (!ws[n]) { console.log('WA MISS', re); return after; } return ws[n].start; };
+const S = i => SN[i].start;
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .01, 300);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const MAT = (c, r = .7, ex = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: r }, ex));
+const add = (geo, mat, x, y, z, par) => { const m = new THREE.Mesh(geo, typeof mat === 'number' ? MAT(mat) : mat); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; par.add(m); return m; };
+const box = (w, h, d, c, x, y, z, par) => add(new THREE.BoxGeometry(w, h, d), c, x, y, z, par);
+const cyl = (rt, rb, h, c, x, y, z, par, seg = 16) => add(new THREE.CylinderGeometry(rt, rb, h, seg), c, x, y, z, par);
+const sph = (r, c, x, y, z, par, a = 18, b = 12) => add(new THREE.SphereGeometry(r, a, b), c, x, y, z, par);
+const cap = (r, l, c, x, y, z, par) => add(new THREE.CapsuleGeometry(r, l, 6, 12), c, x, y, z, par);
+const BASIC = c => new THREE.MeshBasicMaterial({ color: c, toneMapped: false });
+
+// ---------- tempos ----------
+const T_GATO = WA(/gato/i), T_RABO0 = WA(/rabo/i), T_SOLT = WA(/Soltar/i);
+const T_AUTO = WA(/autotomia/i), T_PONT = WA(/pontos/i), T_PIC = WA(/picote/i), T_PERI = WA(/perigo/i), T_MUSC = WA(/músculos/i), T_SOLTA = WA(/solta/i, 0, T_MUSC);
+const T_SANG = WA(/sangra/i), T_VASOS = WA(/vasos/i);
+const T_ESTR = WA(/estranha/i), T_MEX = WA(/mexendo/i), T_MIN = WA(/minutos/i), T_NERV = WA(/nervos/i), T_CERE = WA(/cérebro/i);
+const T_PROP = WA(/propósito/i), T_DIST = WA(/distrai/i), T_FOGE = WA(/foge/i);
+const T_CRES = WA(/cresce/i), T_SEM = WA(/semanas/i), T_OSS = WA(/ossinhos/i), T_CART = WA(/cartilagem/i), T_DIF = WA(/diferente/i);
+const T_CARO = WA(/caro/i), T_GORD = WA(/gordura/i), T_ULT = WA(/último/i);
+const T_SAB = WA(/sabia/i);
+
+// ---------- céu e luz ----------
+const skyU = { top: { value: new THREE.Color(0x0C1430) }, bot: { value: new THREE.Color(0x2A3A6A) } };
+scene.add(new THREE.Mesh(new THREE.SphereGeometry(200, 32, 16), new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: false, fog: false, uniforms: skyU,
+  vertexShader: 'varying vec3 vP; void main(){ vP = position; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }',
+  fragmentShader: 'uniform vec3 top; uniform vec3 bot; varying vec3 vP; void main(){ float h = clamp(normalize(vP).y*1.6+.2,0.,1.); gl_FragColor = vec4(mix(bot,top,pow(h,.8)),1.); }' })));
+const key = new THREE.DirectionalLight(0xFFF1D6, 2.4); key.castShadow = true; key.shadow.mapSize.set(2048, 2048); { const c = key.shadow.camera; c.left = -3; c.right = 3; c.top = 3; c.bottom = -3; c.far = 30; } key.shadow.bias = -.0004; scene.add(key); scene.add(key.target);
+const hemi = new THREE.HemisphereLight(0xEAF2FF, 0x5A4A3A, 1.1); scene.add(hemi);
+const lampL = new THREE.PointLight(0xFFD08A, 0, 6, 1.6); scene.add(lampL);
+const LOOK = { night: [0x0C1430, 0x2A3A6A, 2.0, 1.0], lab: [0x0B2A1E, 0x1E5A3E, 2.2, 1.2], day: [0x8EC9F0, 0xFFF0D6, 2.6, 1.2] };
+const setLook = k => { const L = LOOK[k]; skyU.top.value.set(L[0]); skyU.bot.value.set(L[1]); key.intensity = L[2]; hemi.intensity = L[3]; };
+const SETS = {}; const mkSet = (n, x) => { const g = grp(); g.position.set(x, 0, 0); SETS[n] = g; return g; };
+
+// ---------- lagartixa ----------
+function buildGecko(o = {}) {
+  const C = Object.assign({ skin: 0xD8C79A, spots: 0xA8946A, belly: 0xF2E8CC, xray: false }, o);
+  const mS = MAT(C.skin, .55), mSp = MAT(C.spots, .6), mB = MAT(C.belly, .6);
+  const root = new THREE.Group(); const body = grp(root);
+  const torso = cap(.075, .34, mS, 0, .07, 0, body); torso.rotation.z = Math.PI / 2; torso.scale.set(1, 1, .7);
+  for (let i = 0; i < 6; i++) { const s = sph(.016, mSp, -.15 + i * .06, .12, (i % 2 ? .025 : -.025), body, 8, 6); s.scale.y = .4; }
+  const head = grp(body); head.position.set(.26, .075, 0);
+  const sk = sph(.07, mS, 0, 0, 0, head); sk.scale.set(1.35, .7, 1.05);
+  const eyes = [-1, 1].map(s => { const e = sph(.026, MAT(0x1A1208, .1), .02, .025, s * .058, head, 14, 10); sph(.008, BASIC(0xFFFFFF), .012, .012, s * .018, e, 8, 6); return e; });
+  const mouth = add(new THREE.TorusGeometry(.05, .004, 4, 12, Math.PI * .6), MAT(0x7A5A3A), .04, -.01, 0, head); mouth.rotation.set(Math.PI / 2, 0, -.3);
+  const legs = []; [[.12, 1], [.12, -1], [-.13, 1], [-.13, -1]].forEach(([x, s], i) => { const hip = grp(body); hip.position.set(x, .05, s * .05); hip.rotation.y = s * (x > 0 ? -.5 : .5);
+    const up = cap(.02, .07, mS, 0, 0, s * .05, hip); up.rotation.x = Math.PI / 2; const kn = grp(hip); kn.position.z = s * .1;
+    const lo = cap(.017, .06, mS, 0, -.03, s * .02, kn); lo.rotation.x = s * .9; const foot = grp(kn); foot.position.set(0, -.06, s * .04);
+    for (let k = 0; k < 5; k++) { const a = (k - 2) * .45; const toe = sph(.013, mS, Math.cos(a) * .028, 0, s * Math.abs(Math.sin(a)) * .02 + s * .01, foot, 8, 6); toe.scale.set(1.3, .5, 1.3); }
+    legs.push({ hip, kn, s, front: x > 0 }); });
+  // rabo (cadeia de segmentos)
+  const tail = grp(body); tail.position.set(-.24, .065, 0); const segs = []; let par = tail; const NS = 12;
+  for (let i = 0; i < NS; i++) { const g = grp(par); if (i) g.position.x = -.06; const r = .055 * (1 - i / NS * .82); const c = cap(r, .04, i % 3 === 1 ? mSp : mS, -.03, 0, 0, g); c.rotation.z = Math.PI / 2; c.scale.set(1, 1, .75); segs.push(g); par = g; }
+  root.userData = { body, head, eyes, legs, tail, segs };
+  return root;
+}
+function animGecko(gk, t, o = {}) { const { walk = 0, wag = 0, ph = 0, tailGone = 0 } = o; const u = gk.userData; const tt = t * 14 + ph;
+  u.legs.forEach((L, i) => { const p = (i === 0 || i === 3) ? 0 : Math.PI; L.hip.rotation.x = Math.sin(tt + p) * .5 * walk * L.s; });
+  u.body.rotation.y = Math.sin(tt) * .12 * walk;
+  u.segs.forEach((s, i) => { s.rotation.y = Math.sin(t * 3 + ph - i * .5) * (.08 + wag * .25) + (walk ? Math.sin(tt - i * .4) * .1 : 0); });
+  u.tail.visible = !tailGone; const blink = ((t + ph) % 4.1) > 4.0; u.eyes.forEach(e => e.scale.y = blink ? .2 : 1); }
+// rabo solto (mesma aparência), anima se contorcendo
+function buildTail() { const root = new THREE.Group(); const mS = MAT(0xD8C79A, .55), mSp = MAT(0xA8946A, .6); const segs = []; let par = root;
+  for (let i = 0; i < 12; i++) { const g = grp(par); if (i) g.position.x = -.06; const r = .055 * (1 - i / 12 * .82); const c = cap(r, .04, i % 3 === 1 ? mSp : mS, -.03, 0, 0, g); c.rotation.z = Math.PI / 2; c.scale.set(1, 1, .75); segs.push(g); par = g; }
+  root.userData = { segs }; return root; }
+const wriggle = (tl, t, amp = 1) => tl.userData.segs.forEach((s, i) => { s.rotation.y = Math.sin(t * 11 - i * .9) * .45 * amp; s.rotation.z = Math.sin(t * 7 - i * .6) * .12 * amp; });
+
+// ---------- gato ----------
+function buildCat() { const root = new THREE.Group(); const mO = MAT(0xE8964A, .7), mW = MAT(0xFFF4E6, .7);
+  const body = cap(.22, .5, mO, 0, .32, 0, root); body.rotation.z = Math.PI / 2; const head = grp(root); head.position.set(.5, .52, 0);
+  const sk = sph(.2, mO, 0, 0, 0, head); sk.scale.set(1, .9, 1.05); sph(.09, mW, .15, -.06, 0, head);
+  [-1, 1].forEach(s => { const e = add(new THREE.ConeGeometry(.07, .14, 4), mO, -.02, .17, s * .11, head); e.rotation.x = s * -.3; const ey = sph(.035, MAT(0x6ACB4A, .2), .15, .05, s * .08, head); sph(.018, MAT(0x111111, .2), .03, 0, 0, ey); });
+  sph(.022, MAT(0xE87A8A, .4), .2, -.02, 0, head);
+  const paw = grp(root); paw.position.set(.42, .3, .14); const pw = cap(.055, .22, mO, 0, -.12, 0, paw); sph(.06, mW, 0, -.25, 0, paw);
+  const legs = [[.3, -.14], [-.3, .14], [-.3, -.14]].map(([x, z]) => cap(.055, .22, mO, x, .14, z, root));
+  const tail = grp(root); tail.position.set(-.45, .4, 0); const tsegs = []; let par = tail; for (let i = 0; i < 6; i++) { const g = grp(par); if (i) g.position.y = .09; cap(.035, .06, mO, 0, .045, 0, g); tsegs.push(g); par = g; } tail.rotation.z = .8;
+  root.userData = { head, paw, tsegs }; return root; }
+
+// ===== PAREDE (x=0) =====
+const wall = mkSet('wall', 0);
+const wallTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 512; const g = c.getContext('2d'); g.fillStyle = '#E8DCC2'; g.fillRect(0, 0, 512, 512); for (let i = 0; i < 1500; i++) { g.fillStyle = `rgba(120,100,70,${Math.random() * .08})`; g.fillRect(Math.random() * 512, Math.random() * 512, 3, 3); } const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(4, 4); return t; })();
+add(new THREE.PlaneGeometry(10, 8), MAT(0xFFFFFF, .95, { map: wallTex }), 0, 3, 0, wall);
+box(10, .12, 2, 0x8A6A4A, 0, -.06, 1, wall); box(10, .14, .05, 0xFFFFFF, 0, .07, .03, wall);
+const lampW = grp(wall); lampW.position.set(.6, 2.6, .08); box(.16, .2, .1, 0x333333, 0, 0, 0, lampW); sph(.12, MAT(0xFFF1C4, .3, { emissive: 0xFFE2A0, emissiveIntensity: 1.2 }), 0, -.05, .14, lampW);
+const moths = []; for (let i = 0; i < 4; i++) { const m = grp(wall); [-1, 1].forEach(s => { const w = add(new THREE.CircleGeometry(.03, 8), MAT(0xC9B89A, .8, { side: THREE.DoubleSide }), s * .025, 0, 0, m); w.userData.s = s; }); moths.push(m); }
+const crack = add(new THREE.PlaneGeometry(.08, .5), BASIC(0x2A2018), -.2, 3.4, .005, wall);
+const gk = buildGecko(); const gkW = grp(wall); gkW.rotation.x = Math.PI / 2; gkW.add(gk); // deitada na parede (normal +z)
+const cat = buildCat(); wall.add(cat);
+const looseTail = buildTail(); scene.add(looseTail);
+
+// ===== RAIO-X / LAB (x=50) =====
+const lab = mkSet('lab', 50);
+add(new THREE.CircleGeometry(3.5, 48), MAT(0x16402C, .8), 0, 0, 0, lab).rotation.x = -Math.PI / 2;
+const xr = grp(lab); xr.position.set(0, 2.9, 0); xr.scale.setScalar(2.4); xr.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(V(0, 1, 0), V(0, 0, 1), V(1, 0, 0)));
+const xgk = buildGecko(); xr.add(xgk); xgk.userData.tail.visible = false;
+// rabo em corte: pele transparente + vértebras + picotes + músculos + vasos + gordura
+const xt = grp(xr); xt.position.set(-.24, .065, 0);
+const skinM = MAT(0xD8C79A, .5, { transparent: true, opacity: .3, depthWrite: false });
+const XN = 9; const xsegs = []; for (let i = 0; i < XN; i++) { const g = grp(xt); g.position.x = -i * .07; const r = .055 * (1 - i / XN * .7); const sk = cap(r, .05, skinM, -.035, 0, 0, g); sk.rotation.z = Math.PI / 2; sk.castShadow = false;
+  const vert = box(.045, r * .55, r * .55, MAT(0xF4F0E6, .5), -.035, 0, 0, g); const ring = add(new THREE.TorusGeometry(r * .95, .0035, 6, 24), BASIC(0xFFFFFF), -.005, 0, 0, g); ring.rotation.y = Math.PI / 2;
+  const mus = add(new THREE.TorusGeometry(r * .7, r * .18, 8, 20), MAT(0xD9485A, .5), -.035, 0, 0, g); mus.rotation.y = Math.PI / 2;
+  const fat = []; for (let k = 0; k < 3; k++) fat.push(sph(r * .22, MAT(0xFFD24A, .4, { emissive: 0xAA8800, emissiveIntensity: .2 }), -.02 - k * .012, r * .35 * Math.cos(k * 2), r * .35 * Math.sin(k * 2), g, 10, 8));
+  xsegs.push({ g, vert, ring, mus, fat, r }); }
+const vessel = add(new THREE.CylinderGeometry(.008, .008, XN * .07, 8), MAT(0xE02040, .4), 0, -.012, 0, xt); vessel.rotation.z = Math.PI / 2; vessel.position.x = -XN * .035;
+const BREAK = 3; // separa depois do segmento 3
+const cart = add(new THREE.CylinderGeometry(.022, .012, .44, 12), MAT(0x7CE0F0, .3, { emissive: 0x2AB0D0, emissiveIntensity: .9 }), 0, 0, 0, xr); cart.rotation.z = Math.PI / 2;
+const newSkin = add(new THREE.CapsuleGeometry(.035, .42, 6, 12), MAT(0x9A9488, .7, { transparent: true, opacity: .45, depthWrite: false }), 0, 0, 0, xr); newSkin.rotation.z = Math.PI / 2;
+
+// ===== CHÃO (rabo pulando, gato distraído) (x=100) =====
+const floor = mkSet('floor', 100);
+box(8, .1, 8, MAT(0xC9A27A, .8), 0, -.05, 0, floor); for (let i = -6; i <= 6; i++) box(.02, .101, 8, 0xA8825A, i * .6, -.05, 0, floor);
+add(new THREE.PlaneGeometry(8, 4), MAT(0xFFFFFF, .95, { map: wallTex }), 0, 2, -2.5, floor);
+const fTail = buildTail(); floor.add(fTail); fTail.position.set(0, .04, .3); fTail.scale.setScalar(1.6);
+const fCat = buildCat(); floor.add(fCat); fCat.position.set(1.1, 0, -.3); fCat.rotation.y = Math.PI + .3;
+const nerveG = grp(floor); const sparks = []; for (let i = 0; i < 10; i++) { const s = sph(.018, BASIC(0x7CF0FF), 0, 0, 0, scene, 8, 6); sparks.push(s); }
+const fGk = buildGecko(); const fGkW = grp(floor); fGkW.add(fGk); fGkW.position.set(-.8, .02, -2.45); fGkW.rotation.x = Math.PI / 2;
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [T_RABO0, 'boing'], [T_SOLT + .2, 'crack'], [S(1) - .05, 'whoosh'], [T_PIC, 'pop'], [T_SOLTA, 'crack'], [T_VASOS, 'ding'], [S(3) - .05, 'whoosh'], [T_MEX, 'boing'], [T_NERV, 'zap'], [T_DIST, 'boing'], [T_FOGE, 'whoosh'], [T_CRES, 'whoosh'], [T_CART, 'ding'], [T_GORD, 'pop'], [T_SAB, 'win']].forEach(([t, k]) => ev(t, k));
+const HL = /lagartixa|gato|rabo|soltar|autotomia|quebra|picote|perigo|músculos|solta|sangra|vasos|estranha|mexendo|sozinho|minutos|nervos|cérebro|propósito|distrai|foge|cresce|semanas|ossinhos|cartilagem|diferente|caro|gordura|último/i;
+const hideAll = () => { cat.visible = false; Object.values(SETS).forEach(g => g.visible = false); looseTail.visible = false; sparks.forEach(s => s.visible = false); lampL.intensity = 0; cart.visible = newSkin.visible = false; };
+const wallPos = (x, y) => V(x, y, .02);
+
+const SHOTS = [
+  // 0 gancho: lagartixa na parede, gato pega o rabo, ela solta
+  [0, (t, k) => { setLook('night'); wall.visible = true; lampL.intensity = 2.5; lampL.position.set(.6, 2.55, .4);
+    moths.forEach((m, i) => { const a = t * 3 + i * 1.6; m.position.set(.6 + Math.cos(a) * .3, 2.5 + Math.sin(a * 1.3) * .25, .3 + Math.sin(a) * .1); m.children.forEach(w => w.rotation.y = w.userData.s * Math.sin(t * 40) * .8); });
+    const gone = t > T_SOLT + .2; const run = gone ? ease(clamp((t - T_SOLT - .2) / 1.2)) : 0;
+    gkW.position.set(.1, lerp(1.9, 2.8, run), .01); gk.rotation.y = Math.PI / 2; gk.scale.setScalar(1.6); animGecko(gk, t, { walk: gone ? 1 : 0, wag: gone ? 0 : .6, tailGone: gone });
+    // gato: pata sobe e prende o rabo
+    cat.visible = true; cat.position.set(.75, 0, .45); cat.rotation.y = Math.PI / 2 + .5; cat.scale.setScalar(1.15); const reach = ease(clamp((t - T_GATO + .2) / .8));
+    cat.userData.paw.rotation.z = lerp(0, 2.3, reach) - (gone ? .3 : 0); cat.userData.head.rotation.z = .35 * reach; cat.userData.tsegs.forEach((s, i) => s.rotation.x = Math.sin(t * 3 - i) * .2);
+    if (gone) { looseTail.visible = true; const f = clamp((t - T_SOLT - .2) / .45); looseTail.position.set(.1 + f * .3, lerp(1.52, .06, f * f), lerp(.03, .5, f)); looseTail.rotation.set(Math.PI / 2 * (1 - f), 0, -Math.PI / 2 * (1 - f) + f * .6); looseTail.scale.setScalar(1.6); wriggle(looseTail, t, 1); }
+    const ty0 = t > T_SOLT + .2 ? lerp(1.3, 1.0, clamp((t - T_SOLT - .2) / .5)) : 1.3; return [V(.7, ty0 + .15, 3.9 - k * .05), V(.25, ty0, 0)]; }],
+  // 1 raio-X: autotomia, picote, músculos puxam e solta
+  [S(1) - .05, (t, k) => { setLook('lab'); lab.visible = true; animGecko(xgk, t, { tailGone: true });
+    const ringOn = t > T_PONT - .1; xsegs.forEach((s, i) => { s.ring.material.color.set(ringOn ? (Math.sin(t * 6 - i) > 0 ? 0xFFFFFF : 0x9AF0B0) : 0x444444); s.ring.visible = ringOn; s.mus.visible = t > T_MUSC - .2; s.mus.scale.setScalar(t > T_MUSC ? 1 + Math.sin(t * 16) * .08 : 1); s.fat.forEach(f => f.visible = false); });
+    const sep = ease(clamp((t - T_SOLTA + .25) / .6)); xsegs.forEach((s, i) => { s.g.position.x = -i * .07 - (i > BREAK ? sep * .09 : 0); s.g.rotation.y = i > BREAK ? Math.sin(t * 10 - i) * .25 * sep : 0; });
+    const ty = t < T_MUSC - .3 ? 2.3 : 1.7; const dd = t < T_MUSC - .3 ? 5.0 : 3.0;
+    return [lab.position.clone().add(V(.3, ty + .2, dd - k * .04)), lab.position.clone().add(V(0, ty, 0))]; }],
+  // 2 quase não sangra: vasos fecham
+  [S(2), (t, k) => { setLook('lab'); lab.visible = true; animGecko(xgk, t, { tailGone: true }); xsegs.forEach((s, i) => { s.ring.visible = true; s.ring.material.color.set(0x9AF0B0); s.mus.visible = true; s.mus.scale.setScalar(1); s.fat.forEach(f => f.visible = false); s.g.position.x = -i * .07 - (i > BREAK ? .09 : 0); s.g.rotation.y = 0; });
+    const cl = ease(clamp((t - T_VASOS) / 1.0)); vessel.scale.set(1 - .6 * cl, 1, 1 - .6 * cl);
+    const p = new THREE.Vector3(); xsegs[BREAK].g.getWorldPosition(p); p.y -= .1;
+    return [p.clone().add(V(.3, .2, 1.1)), p]; }],
+  // 3 rabo se mexendo sozinho, nervos
+  [S(3), (t, k) => { setLook('day'); floor.visible = true; wriggle(fTail, t, 1.1); fTail.position.x = Math.sin(t * 5) * .05; fTail.rotation.y = Math.sin(t * 2.3) * .4;
+    fCat.position.set(1.4, 0, -.6); fCat.rotation.y = Math.PI + .5; fCat.userData.head.rotation.y = Math.sin(t * 4) * .2; fCat.userData.paw.rotation.z = 0; fCat.userData.tsegs.forEach((s, i) => s.rotation.x = Math.sin(t * 6 - i) * .3);
+    if (t > T_NERV - .2) sparks.forEach((s, i) => { const u = ((t * 1.2 + i / 10) % 1); const seg = fTail.userData.segs[Math.floor(u * 11)]; const v = new THREE.Vector3(); seg.getWorldPosition(v); s.visible = true; s.position.copy(v).add(V(0, .07, 0)); });
+    animGecko(fGk, t, { tailGone: true }); fGk.rotation.y = Math.PI / 2;
+    const pt = floor.position.clone().add(V(-.4, .1, .3)); return [pt.clone().add(V(.5, 1.0, 1.7 - k * .03)), pt]; }],
+  // 4 gato distraído, você foge
+  [S(4), (t, k) => { setLook('day'); floor.visible = true; wriggle(fTail, t, .9); fTail.position.x = Math.sin(t * 4) * .06;
+    const pounce = Math.max(0, Math.sin((t - S(4)) * 4)); fCat.position.set(lerp(1.4, .55, ease(clamp((t - T_DIST) / .8))), 0, -.2); fCat.rotation.y = Math.PI + .2; fCat.userData.paw.rotation.z = pounce * 1.6; fCat.userData.head.rotation.z = -.3;
+    const esc = ease(clamp((t - T_DIST) / 2.0)); fGkW.position.set(-.8, lerp(.1, 1.6, esc), -2.44); fGk.rotation.y = Math.PI / 2; animGecko(fGk, t, { walk: esc > 0 && esc < 1 ? 1 : 0, tailGone: true }); fGk.scale.setScalar(1.3);
+    return [floor.position.clone().add(V(.3, 1.2, 2.6)), floor.position.clone().add(V(-.1, .7, -.8))]; }],
+  // 5 rabo cresce de novo + cartilagem
+  [S(5), (t, k) => { if (t < T_OSS - .3) { setLook('night'); wall.visible = true; lampL.intensity = 2.5; lampL.position.set(.6, 2.55, .4); gkW.position.set(.1, 1.9, .01); gk.rotation.y = Math.PI / 2 + .3; gk.scale.setScalar(1.6); animGecko(gk, t, {});
+      const g = ease(clamp((t - T_CRES) / (T_SEM - T_CRES + .8))); gk.userData.segs.forEach((s, i) => { s.visible = i < 2 + g * 10; s.scale.setScalar(i < 2 ? 1 : lerp(.4, 1, g)); });
+      return [V(.5, 1.6, 3.2), V(.1, 1.45, 0)]; }
+    setLook('lab'); lab.visible = true; animGecko(xgk, t, { tailGone: true }); xsegs.forEach((s, i) => { s.g.visible = i <= BREAK; s.g.position.x = -i * .07; s.ring.visible = false; s.mus.visible = false; s.fat.forEach(f => f.visible = false); }); vessel.visible = false;
+    cart.visible = newSkin.visible = true; const p = V(-.24 - (BREAK + 1) * .07 - .23, .065, 0); cart.position.copy(p); newSkin.position.copy(p); const sh = ease(clamp((t - T_CART + .3) / .5)); cart.scale.set(1, sh, 1); newSkin.scale.set(1, 1, 1);
+    const wp = xr.localToWorld(p.clone()); return [wp.clone().add(V(.3, .4, 2.4)), wp.clone().add(V(0, .3, 0))]; }],
+  // 6 custa caro: reserva de gordura
+  [S(6), (t, k) => { setLook('lab'); lab.visible = true; animGecko(xgk, t, { tailGone: true }); vessel.visible = true; vessel.scale.set(1, 1, 1);
+    xsegs.forEach((s, i) => { s.g.visible = true; s.g.position.x = -i * .07; s.g.rotation.y = Math.sin(t * 2 - i * .4) * .05; s.ring.visible = false; s.mus.visible = false; const on = t > T_GORD - .5 - i * .05; s.fat.forEach(f => { f.visible = on; f.scale.setScalar(on ? 1 + Math.sin(t * 4 + i) * .1 : 0); }); });
+    const p = lab.position.clone().add(V(0, 1.6, 0)); return [p.clone().add(V(.3, .3, 3.0 - k * .05)), p]; }],
+  // 7 CTA
+  [S(7), (t, k) => { setLook('night'); wall.visible = true; lampL.intensity = 2.5; lampL.position.set(.6, 2.55, .4); gkW.position.set(.1, 1.9, .01); gk.rotation.y = Math.PI / 2; gk.scale.setScalar(1.6); gk.userData.segs.forEach(s => { s.visible = true; s.scale.setScalar(1); }); animGecko(gk, t, { wag: 1 });
+    return [V(.5, 1.0, 3.4), V(.1, 1.15, 0)]; }],
+];
+window.draw = function (t) {
+  hideAll(); vessel.visible = true; xsegs.forEach(s => s.g.visible = true); gk.userData.segs.forEach(s => { s.visible = true; s.scale.setScalar(1); }); vessel.scale.set(1, 1, 1);
+  let i = 0; while (i + 1 < SHOTS.length && SHOTS[i + 1][0] <= t) i++;
+  const [cp, tg] = SHOTS[i][1](t, t - SHOTS[i][0]);
+  cp.x += Math.sin(t * .35) * .01; cp.y += Math.sin(t * .27) * .008;
+  cam.position.copy(cp); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  key.position.copy(tg).add(V(2, 4, 4)); key.target.position.copy(tg);
+  fixed($('hook'), t < S(1) - .1 ? pop(t - .02, .3) * (1 - clamp((t - S(1) + .25) / .15)) : 0);
+  const tg2 = [$('t1'), $('t2')]; tg2.forEach(e => e.style.opacity = 0); $('big').style.opacity = 0;
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  tag(tg2[0], 'SOLTA! 💥', 'red', win(t, T_SOLT + .2, S(1) - .1), 540, 1150, T_SOLT + .2, -4);
+  tag(tg2[0], 'AUTOTOMIA', '', win(t, T_AUTO - .1, T_PONT - .1), 540, 380, T_AUTO - .1, -3);
+  tag(tg2[0], 'PONTOS DE QUEBRA ✂️', 'white', win(t, T_PONT - .1, T_MUSC - .2), 540, 380, T_PONT - .1, -3);
+  tag(tg2[1], 'COMO UM PICOTE', 'green small', win(t, T_PIC - .1, T_MUSC - .2), 540, 500, T_PIC - .1, 3);
+  tag(tg2[0], 'MÚSCULOS PUXAM', 'red', win(t, T_MUSC - .2, S(2)), 540, 380, T_MUSC - .2, -3);
+  tag(tg2[0], 'QUASE NÃO SANGRA', 'white', win(t, T_SANG - .2, T_VASOS), 540, 380, T_SANG - .2, -3);
+  tag(tg2[0], 'VASOS FECHAM NA HORA ✅', 'green', win(t, T_VASOS, S(3)), 540, 380, T_VASOS, -3);
+  tag(tg2[0], 'SE MEXE SOZINHO ⚡', '', win(t, T_MEX - .2, T_NERV - .2), 540, 380, T_MEX - .2, -3);
+  tag(tg2[1], 'POR VÁRIOS MINUTOS', 'white small', win(t, T_MIN - .2, T_NERV - .2), 540, 500, T_MIN - .2, 3);
+  tag(tg2[0], 'NERVOS + MÚSCULOS', 'blue', win(t, T_NERV - .2, S(4)), 540, 380, T_NERV - .2, -3);
+  tag(tg2[1], 'SEM O CÉREBRO', 'white small', win(t, T_CERE - .2, S(4)), 540, 500, T_CERE - .2, 3);
+  tag(tg2[0], 'É DE PROPÓSITO', 'purple', win(t, T_PROP - .2, T_DIST - .1), 540, 380, T_PROP - .2, -3);
+  tag(tg2[0], 'GATO DISTRAÍDO 😼', 'orange', win(t, T_DIST - .1, T_FOGE - .1), 540, 380, T_DIST - .1, -3);
+  tag(tg2[0], 'VOCÊ FOGE! 🏃', 'green', win(t, T_FOGE - .1, S(5)), 540, 380, T_FOGE - .1, 3);
+  tag(tg2[0], 'CRESCE DE NOVO 🌱', 'green', win(t, T_CRES - .1, T_OSS - .3), 540, 380, T_CRES - .1, -3);
+  tag(tg2[1], 'EM ALGUMAS SEMANAS', 'white small', win(t, T_SEM - .2, T_OSS - .3), 540, 500, T_SEM - .2, 3);
+  tag(tg2[0], 'SEM OSSINHOS', 'red', win(t, T_OSS - .3, T_CART - .2), 540, 380, T_OSS - .3, -3);
+  tag(tg2[0], 'TUBO DE CARTILAGEM', 'blue', win(t, T_CART - .2, S(6)), 540, 380, T_CART - .2, -3);
+  tag(tg2[1], 'FICA DIFERENTE', 'white small', win(t, T_DIF - .2, S(6)), 540, 500, T_DIF - .2, 3);
+  tag(tg2[0], 'CUSTA CARO 💸', 'orange', win(t, T_CARO - .2, T_GORD - .5), 540, 380, T_CARO - .2, -3);
+  tag(tg2[0], 'RESERVA DE GORDURA', '', win(t, T_GORD - .5, T_ULT - .2), 540, 380, T_GORD - .5, -3);
+  tag(tg2[0], 'SÓ EM ÚLTIMO CASO', 'red', win(t, T_ULT - .2, S(7)), 540, 380, T_ULT - .2, 3);
+  fixed($('final'), t >= T_SAB - .3 ? pop(t - T_SAB + .3, .35) : 0);
+  $('wm').style.opacity = .85;
+  let wTxt = null, wSt = 0;
+  for (const w2 of ALL) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap2 = $('cap'); const capOff = t < S(1) - .15 || t >= T_SAB - .3;
+  if (wTxt && !capOff) { cap2.textContent = wTxt.toUpperCase().replace(/[.,!?:…]/g, ''); cap2.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap2, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap2, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>
