@@ -17,19 +17,22 @@
     "store:export": "tsx scripts/store-export.ts",
     "store:list": "tsx scripts/store-list.ts",
     "demo:images": "tsx scripts/generate-demo-images.ts",
-    "store:schema": "tsx scripts/store-schema.ts"
+    "store:schema": "tsx scripts/store-schema.ts",
+    "admin:create": "tsx scripts/admin-create.ts"
   },
   "engines": {
     "node": ">=20.9.0"
   },
   "dependencies": {
     "@fontsource-variable/plus-jakarta-sans": "^5.3.0",
+    "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.119.0",
     "lucide-react": "^1.73.0",
     "next": "^16.4.5",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "server-only": "^0.0.1",
+    "sharp": "^0.35.5",
     "zod": "^4.6.7",
     "zustand": "^5.1.0"
   },

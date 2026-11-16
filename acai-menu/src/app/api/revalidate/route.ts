@@ -24,6 +24,8 @@ export async function POST(req: Request) {
     /* corpo inválido */
   }
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return Response.json({ ok: false, error: "slug inválido" }, { status: 400 });
+  revalidatePath(`/${slug}`);
+  revalidatePath(`/${slug}/checkout`);
   revalidatePath(`/${slug}`, "layout");
   revalidatePath("/");
   revalidatePath("/sitemap.xml");

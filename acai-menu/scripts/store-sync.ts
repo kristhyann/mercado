@@ -75,9 +75,26 @@ async function revalidate(slug: string) {
   }
 }
 
+/** Evita apagar alterações feitas pelo painel: recusa se o banco for mais novo que o arquivo. */
+async function guardPanelEdits(slug: string): Promise<boolean> {
+  if (dry || arg("--force") || !process.env.SUPABASE_URL) return true;
+  const { data } = await admin().rpc("admin_get_store", { p_slug: slug });
+  if (!data?.updated_at) return true;
+  const remote = new Date(data.updated_at).getTime();
+  const local = fs.statSync(path.join(STORES, slug, "store.json")).mtimeMs;
+  if (remote > local) {
+    c.err(`${slug}: a loja foi alterada pelo painel depois da última edição deste arquivo.`);
+    c.info(`Para não perder essas alterações: npm run store:export -- ${slug}  (baixa a versão do painel)`);
+    c.info(`Para sobrescrever mesmo assim:   npm run store:sync -- ${slug} --force`);
+    return false;
+  }
+  return true;
+}
+
 async function syncOne(slug: string) {
   const config = validate(slug, readRaw(slug));
   if (!config) return false;
+  if (!(await guardPanelEdits(slug))) return false;
   const n = await uploadImages(slug, config);
   c.ok(`${slug}: ${n} imagem(ns) ${dry ? "seriam enviadas" : "enviadas"} ao Storage`);
   const payload = toSyncPayload(config);

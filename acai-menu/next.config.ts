@@ -17,6 +17,8 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // Inclui os arquivos das lojas locais (demonstração) no deploy da Vercel.
   outputFileTracingIncludes: { "/**": ["./stores/**/*"] },
+  // Upload de imagens pelo painel (as fotos já chegam reduzidas pelo navegador).
+  experimental: { serverActions: { bodySizeLimit: "5mb" } },
   images: {
     remotePatterns,
     formats: ["image/avif", "image/webp"],

@@ -6,7 +6,8 @@ Plataforma multiloja de cardápios digitais para açaiterias: cada loja tem link
 montagem de açaí com regras de preço, carrinho persistente e pedido enviado pronto para o WhatsApp da loja.
 
 - **Um único sistema** atende dezenas ou centenas de lojas: `seudominio.com/acai-da-maria`, `seudominio.com/acai-do-joao`…
-- **Sem painel para lojistas** nesta versão: você (proprietário da plataforma) cadastra cada loja em um arquivo JSON e publica com um comando.
+- **Painel administrativo exclusivo do proprietário** em `/admin`: lojas, produtos, tamanhos, acompanhamentos, categorias, imagens, horários e entrega, pelo computador ou celular, sem novo deploy. Comerciantes não têm login.
+- Alternativa para quem prefere arquivos: cada loja também pode ser mantida em JSON e publicada com um comando.
 - Stack: Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · Supabase (Postgres + Storage + RLS) · Vercel · Lucide.
 
 ---
@@ -16,6 +17,7 @@ montagem de açaí com regras de preço, carrinho persistente e pedido enviado p
 1. [Como funciona](#1-como-funciona)
 2. [Rodar no seu computador](#2-rodar-no-seu-computador)
 3. [Configurar o Supabase](#3-configurar-o-supabase)
+3.1. [Painel administrativo](#31-painel-administrativo)
 4. [Cadastrar uma nova loja](#4-cadastrar-uma-nova-loja)
 5. [Alterar produtos, preços e opções](#5-alterar-produtos-preços-e-opções)
 6. [Configurar o WhatsApp](#6-configurar-o-whatsapp)
@@ -71,6 +73,7 @@ Abra http://localhost:3000. Sem Supabase configurado, o site usa as **lojas de d
 2. Abra **SQL Editor** e execute, em ordem, o conteúdo de:
    - `supabase/migrations/0001_schema.sql` (tabelas, índices, RLS e funções)
    - `supabase/migrations/0002_storage.sql` (bucket público `store-assets` para imagens)
+   - `supabase/migrations/0003_admin_panel.sql` (painel: administradores, funções protegidas, permissões do Storage)
 3. Em **Project Settings → API** copie para o `.env.local`:
 
 | Variável | Onde encontrar | Vai para a Vercel? |
@@ -86,7 +89,58 @@ Gere um segredo com: `node -e "console.log(require('crypto').randomBytes(32).toS
 4. Publique as lojas: `npm run store:sync -- --all` (as de demonstração também, se quiser exibi-las).
 5. Confira: `npm run store:list`.
 
+## 3.1. Painel administrativo
+
+Endereço: `https://seudominio.com/admin` (login em `/admin/login`).
+
+**Configuração (uma vez):**
+
+1. Rode a migração `0003_admin_panel.sql` (passo anterior).
+2. No Supabase: **Authentication → Sign In / Providers → Email**: deixe o login por e-mail ativo e **desative "Allow new users to sign up"** (ninguém consegue criar conta sozinho).
+3. No seu computador (com `SUPABASE_SERVICE_ROLE_KEY` no `.env.local`), crie o seu acesso:
+   ```bash
+   npm run admin:create -- voce@email.com "uma-senha-forte-com-10+"
+   ```
+   O mesmo comando troca a senha. Para revogar: `npm run admin:create -- voce@email.com --remove`.
+4. Pronto: entre em `/admin/login`. Nada precisa ser adicionado na Vercel além das variáveis que você já tem.
+
+**O que dá para fazer pelo painel:**
+
+| Área | Recursos |
+|---|---|
+| Painel | total de lojas, ativas, inativas, total de produtos, últimas lojas adicionadas |
+| Lojas | criar (do modelo ou copiando outra loja), ativar/desativar, excluir (com confirmação digitada), alterar endereço do link |
+| Loja | nome, descrição, logotipo, capa, cores com pré-visualização, banner, WhatsApp, Instagram, endereço, região, Google Maps |
+| Produtos | adicionar, editar, duplicar, excluir, ativar/ocultar, disponível/indisponível, destaque, selos, foto, categoria, preço único ou por tamanho, preço promocional, ordem de exibição, grupos de opções com regras próprias |
+| Tamanhos | tabela de preços tamanho × produto, renomear um tamanho em todos os produtos, adicionar um tamanho a vários produtos, regras por tamanho (grátis/máximo) |
+| Acompanhamentos | grupos (base, acompanhamentos, cremes, adicionais…), obrigatório/opcional, mínimo, máximo, quantidade grátis, valor do extra, repetir a mesma opção; opções incluídas/grátis, com preço próprio ou sempre pagas; esgotado; ordem |
+| Categorias | criar, renomear, ocultar, ordenar, excluir (movendo os produtos para outra categoria) |
+| Horários | grade semanal com vários horários por dia, datas especiais, forçar aberto/fechado, pausar pedidos, agendamento quando fechada, fuso horário |
+| Entrega e pagamento | entrega/retirada, taxa fixa, por bairro ou grátis, grátis acima de um valor, pedido mínimo, formas de pagamento, chave Pix |
+| Avançado | mensagem do WhatsApp (cabeçalho/rodapé), SEO e imagem de compartilhamento, loja de demonstração |
+
+**Como funciona:**
+
+- As alterações ficam pendentes até você tocar em **Salvar** (barra inferior; `Ctrl+S` no computador). Ao salvar, tudo é gravado de uma vez (se houver erro, nada é alterado) e o **cardápio público é atualizado na hora**, sem deploy.
+- Antes de salvar, o painel valida tudo (ex.: produto sem preço, WhatsApp de exemplo) e mostra o que corrigir.
+- Se a mesma loja for salva em outra aba ou aparelho, o painel avisa em vez de sobrescrever ("Conflito: recarregue a página").
+- **Imagens:** reduzidas no próprio celular antes do envio e otimizadas no servidor (WebP, tamanho ideal por tipo, rotação corrigida, metadados removidos). Ao substituir ou remover uma imagem, o arquivo antigo é apagado do Storage automaticamente (após 1 hora, para não quebrar uma página que ainda o esteja usando).
+- Lojas novas começam **inativas**: configure e ative quando estiver pronta.
+
+**Segurança do painel:**
+
+- Login pelo Supabase Auth; a sessão fica em cookies `httpOnly` (inacessíveis a scripts da página) e é renovada no servidor.
+- Toda página e toda ação do painel verificam **no servidor** se você é administrador (`platform_admins`); o banco verifica de novo dentro de cada função (`assert_platform_admin`). Um usuário logado que não seja administrador não consegue ler nem alterar nada.
+- As tabelas continuam sem permissão de escrita pública; o painel grava apenas pelas funções protegidas. A chave `service_role` **não** é usada pelo site.
+- Upload de imagens permitido só para o administrador (políticas do Storage); tentativas de login são limitadas; o painel não é indexado por buscadores.
+
+> **Painel x arquivos JSON:** use um dos dois para cada loja. `npm run store:sync` se recusa a sobrescrever uma loja alterada pelo painel depois da última edição do arquivo; para trazer a versão do painel use `npm run store:export -- <slug>`.
+>
+> **Desenvolvimento sem Supabase:** com `ADMIN_LOCAL_PASSWORD` no `.env.local` o painel funciona localmente e grava nos arquivos de `stores/` (nunca é ativado na Vercel).
+
 ## 4. Cadastrar uma nova loja
+
+> Pelo painel: **Nova loja** → nome, endereço e WhatsApp → editar → ativar. O passo a passo abaixo é a alternativa por arquivos.
 
 ```bash
 npm run store:new -- acai-do-joao "Açaí do João" 5511987654321
@@ -205,6 +259,11 @@ src/app/[slug]/page.tsx             cardápio (SEO/Open Graph por loja)
 src/app/[slug]/checkout/page.tsx    finalização
 src/app/[slug]/opengraph-image.tsx  imagem de compartilhamento automática
 src/app/api/revalidate/route.ts     atualização imediata do cache (protegida por segredo)
+src/app/admin/                      painel do proprietário (login, dashboard, lojas, editor)
+src/app/admin/actions.ts            ações do painel (todas verificam o administrador no servidor)
+src/lib/admin/                      autenticação, acesso ao banco/Storage, otimização de imagens
+src/components/admin/               interface do painel
+src/proxy.ts                        renova a sessão e protege /admin
 src/lib/schema.ts                   formato do store.json (validação zod)
 src/lib/menu.ts · pricing.ts        cardápio e regras de preço (centavos, sem erro de arredondamento)
 src/lib/order.ts                    carrinho → totais → mensagem → link wa.me
@@ -227,11 +286,13 @@ stores/                             uma pasta por loja (JSON + imagens)
 ## 10. Testes
 
 ```bash
-npm test            # 44 testes: preços, carrinho, entrega, horários, mensagem e banco (Postgres real em memória)
+npm test            # 56 testes: preços, carrinho, entrega, horários, mensagem e banco (Postgres real em memória)
 npm run typecheck
 npm run build
 ```
 
 `tests/db` executa as migrações em um Postgres real (PGlite) simulando os papéis do Supabase e confirma: cadastro atômico
 de várias lojas, separação entre lojas, RLS (anon não escreve, não vê loja inativa), bloqueio de vínculo entre lojas
-e que o banco devolve exatamente o mesmo cardápio do arquivo JSON.
+e que o banco devolve exatamente o mesmo cardápio do arquivo JSON. Também cobre o painel: administrador lê/salva/ativa/renomeia/exclui,
+conflito de edição simultânea, usuário logado não-administrador bloqueado em todas as funções, visitante sem acesso
+às funções e permissões do Storage.
