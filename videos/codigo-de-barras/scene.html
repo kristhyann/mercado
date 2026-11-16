@@ -71,7 +71,7 @@ const T_PRIM = WA(/primeiros/i), T_PAIS = WA(/país/i), T_BRASIL = WA(/Brasil/i)
 const T_SCAN = WA(/scanner/i), T_LUZ = WA(/luz/i, 0, T_SCAN), T_PRETO = WA(/preto/i, 0, T_SCAN), T_ABS = WA(/absorve/i), T_BR2 = WA(/branco/i, 0, T_ABS), T_REF = WA(/reflete/i);
 const T_SENS = WA(/sensor/i), T_TRANS = WA(/transforma/i), T_VERM = WA(/vermelhas/i), T_CRUZ = WA(/cruzadas/i), T_POS = WA(/posição/i);
 const T_AGORA = WA(/Agora/i), T_PRECO = WA(/preço/i, 0, T_AGORA), T_NAO = WA(/^não/i, 0, T_AGORA), T_LIST = WA(/listras/i, 0, T_AGORA);
-const T_COMP = WA(/computador/i), T_SIST = WA(/sistema/i), T_NOME = WA(/nome/i), T_PRECO2 = WA(/preço/i, 0, T_NOME), T_REG = WA(/registra/i), T_BIP = WA(/Bip/i);
+const T_COMP = WA(/computador/i), T_SIST = WA(/sistema/i), T_NOME = WA(/nome/i), T_PRECO2 = WA(/preço/i, 0, T_NOME), T_REG = WA(/^registra$/i), T_BIP = WA(/Bip/i);
 const T_ISSO = WA(/isso/i, 0, T_BIP), T_MUDA = WA(/muda/i, 0, T_BIP), T_EMB = WA(/embalagem/i), T_SAB = WA(/sabia/i), T_COM = WA(/Comenta/i);
 
 // ---------- céu e luz ----------
@@ -116,7 +116,7 @@ const paintPOS = (st, price) => { const { g, c } = posTex.userData; g.fillStyle 
   const tot = 30.39 + (st >= 1 ? parseFloat(price.replace(',', '.')) : 0); g.fillStyle = '#FFD21F'; g.fillRect(0, 520, c.width, 120); g.fillStyle = '#111'; g.font = '900 48px P'; g.fillText('TOTAL', 24, 600); g.textAlign = 'right'; g.fillText('R$ ' + tot.toFixed(2).replace('.', ','), 488, 600); g.textAlign = 'left'; posTex.needsUpdate = true; };
 paintPOS(0, '12,90');
 const pos = grp(store); pos.position.set(1.3, .95, -.35); cyl(.04, .06, .5, 0x2E3440, 0, .25, 0, pos, 8); box(.62, .76, .06, 0x2E3440, 0, .85, 0, pos).rotation.x = -.15; { const scr = mesh(new THREE.PlaneGeometry(.54, .68), new THREE.MeshBasicMaterial({ map: posTex, toneMapped: false }), 0, .85, .035, pos); scr.rotation.x = -.15; }
-const cashier = buildPerson({ skin: 0xC98E66, shirt: 0x22C55E, pants: 0x2A3A5A, hair: 0x2B1A10, tag: true }); store.add(cashier.root); cashier.root.position.set(.5, 0, 1.15); cashier.root.rotation.y = Math.PI;
+const cashier = buildPerson({ skin: 0xC98E66, shirt: 0x22C55E, pants: 0x2A3A5A, hair: 0x2B1A10, tag: true }); store.add(cashier.root); cashier.root.visible = false; cashier.root.position.set(.5, 0, 1.15); cashier.root.rotation.y = Math.PI;
 const prod = makeBox(store);
 for (let i = 0; i < 4; i++) { const s = grp(store); s.position.set(-4 + i * 2.6, 0, -4.5); box(2.2, 2.4, .6, 0xF2F2F2, 0, 1.2, 0, s); for (let j = 0; j < 3; j++) for (let k = 0; k < 6; k++) box(.28, .4, .3, [0xFF4D6D, 0x3B82F6, 0xFFD21F, 0x22C55E, 0xFF8A1F, 0x8B5CF6][(i + j + k) % 6], -.9 + k * .36, .5 + j * .7, .1, s); }
 
@@ -125,22 +125,22 @@ const bcS = mkSet('bc', 60);
 const bigBc = grp(bcS); bigBc.position.set(0, 1.6, 0);
 const MW = .04; const BW = 95 * MW;
 mesh(new THREE.BoxGeometry(BW + 18 * MW, 2.7, .05), M(0xFFFFFF), 0, -.15, -.03, bigBc);
-const bars = []; for (let i = 0; i < 95; i++) if (BITS[i] === '1') { const guard = i < 3 || (i >= 45 && i < 50) || i >= 92; const h = 2.0 + (guard ? .2 : 0); const b = mesh(new THREE.BoxGeometry(MW, h, .06), M(0x111111), -BW / 2 + (i + .5) * MW, (1 - h / 2) - .9 + .1, 0, bigBc); b.userData = { i, h }; bars.push(b); }
+const bars = []; for (let i = 0; i < 95; i++) if (BITS[i] === '1') { const guard = i < 3 || (i >= 45 && i < 50) || i >= 92; const h = 1.85 + (guard ? .2 : 0); const b = mesh(new THREE.BoxGeometry(MW, h, .06), M(0x111111), -BW / 2 + (i + .5) * MW, 1.0 - h / 2, 0, bigBc); b.userData = { i, h }; bars.push(b); }
 const digitTex = CODE.split('').map(d => canvasTex(64, 96, (g) => { g.fillStyle = '#111'; g.font = '900 84px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(d, 32, 52); }));
-const digits = CODE.split('').map((d, i) => { const m = mesh(new THREE.PlaneGeometry(.26, .39), new THREE.MeshBasicMaterial({ map: digitTex[i], transparent: true, toneMapped: false }), -BW / 2 + (digitMod(i) + 3.5) * MW, -1.15, .04, bigBc); return m; });
-const hiBox = (a, b, col) => { const x0 = -BW / 2 + (digitMod(a)) * MW - .02, x1 = -BW / 2 + (digitMod(b) + 7) * MW + .02; const m = mesh(new THREE.BoxGeometry(x1 - x0, .5, .02), new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: .45, toneMapped: false }), (x0 + x1) / 2, -1.15, .035, bigBc); return m; };
+const digits = CODE.split('').map((d, i) => { const m = mesh(new THREE.PlaneGeometry(.26, .39), new THREE.MeshBasicMaterial({ map: digitTex[i], transparent: true, toneMapped: false }), -BW / 2 + (digitMod(i) + 3.5) * MW, -1.15, .045, bigBc); m.renderOrder = 2; return m; });
+const hiBox = (a, b, col) => { const x0 = -BW / 2 + (digitMod(a)) * MW - .02, x1 = -BW / 2 + (digitMod(b) + 7) * MW + .02; const m = mesh(new THREE.BoxGeometry(x1 - x0, .5, .02), new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: .45, toneMapped: false }), (x0 + x1) / 2, -1.15, .03, bigBc); m.material.depthWrite = false; m.renderOrder = 1; return m; };
 const hiCountry = hiBox(0, 2, 0x22C55E); hiCountry.position.x -= .04; hiCountry.scale.x = 1.15;
 const hiComp = hiBox(3, 6, 0x3B82F6), hiProd = hiBox(7, 11, 0x8B5CF6), hiChk = hiBox(12, 12, 0xFF4D6D);
 const widthMark = grp(bigBc); { const a = mesh(new THREE.BoxGeometry(.04, .3, .02), BASIC(0xFF8A1F), 0, 0, 0, widthMark); }
 // feixe de leitura + sensor
-const sensor = grp(bcS); sensor.position.set(0, 4.2, 1.2); box(1.0, .4, .5, 0x2E3440, 0, 0, 0, sensor); cyl(.12, .12, .1, 0x111111, 0, -.22, 0, sensor, 12);
+const sensor = grp(bcS); sensor.position.set(0, 3.6, 1.0); box(1.0, .4, .5, 0x2E3440, 0, 0, 0, sensor); cyl(.12, .12, .1, 0x111111, 0, -.22, 0, sensor, 12);
 const beamM = new THREE.MeshBasicMaterial({ color: 0xFF2A2A, transparent: true, opacity: .55, toneMapped: false, depthWrite: false });
 const beamDown = mesh(new THREE.CylinderGeometry(.025, .06, 1, 8), beamM, 0, 0, 0, bcS);
 const spot = mesh(new THREE.CircleGeometry(.09, 16), BASIC(0xFF2A2A), 0, 0, .05, bigBc);
 const photons = []; for (let i = 0; i < 24; i++) { const p = mesh(new THREE.SphereGeometry(.04, 8, 6), BASIC(0xFFF2A0), 0, 0, 0, bcS); p.userData.d = i / 24; photons.push(p); }
 const signalTex = canvasTex(1024, 160, () => {});
 const paintSignal = u => { const { g, c } = signalTex.userData; g.fillStyle = '#0E1A2E'; g.fillRect(0, 0, c.width, c.height); g.strokeStyle = '#22C55E'; g.lineWidth = 8; g.beginPath(); const n = Math.floor(95 * u); for (let i = 0; i <= n && i < 95; i++) { const x = 20 + i * (984 / 95), y = BITS[i] === '1' ? 130 : 30; if (i === 0) g.moveTo(x, y); else g.lineTo(x, y); g.lineTo(x + 984 / 95, y); } g.stroke(); signalTex.needsUpdate = true; };
-const signal = mesh(new THREE.PlaneGeometry(3.4, .53), new THREE.MeshBasicMaterial({ map: signalTex, toneMapped: false }), 0, 3.3, .3, bcS);
+const signal = mesh(new THREE.PlaneGeometry(3.4, .53), new THREE.MeshBasicMaterial({ map: signalTex, toneMapped: false }), 0, 4.4, .3, bcS);
 
 // ---------- SERVIDOR / SISTEMA ----------
 const srvS = mkSet('srv', 120);
@@ -154,17 +154,17 @@ const paintDB = (hl, price) => { const { g, c } = dbTex.userData; g.fillStyle = 
   dbTex.needsUpdate = true; };
 const monitor = grp(srvS); monitor.position.set(0, 1.9, 0); box(3.5, 2.5, .12, 0x2E3440, 0, 0, -.07, monitor); mesh(new THREE.PlaneGeometry(3.3, 2.27), new THREE.MeshBasicMaterial({ map: dbTex, toneMapped: false }), 0, 0, 0, monitor); cyl(.08, .12, 1.0, 0x2E3440, 0, -1.6, -.1, monitor, 8);
 const numTex = canvasTex(700, 110, (g) => { g.fillStyle = '#FFD21F'; g.strokeStyle = '#111'; g.lineWidth = 12; g.font = '900 86px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.strokeText(CODE, 350, 58); g.fillText(CODE, 350, 58); });
-const flyNum = new THREE.Sprite(new THREE.SpriteMaterial({ map: numTex, transparent: true, toneMapped: false })); flyNum.scale.set(2.4, .38, 1); scene.add(flyNum);
+const flyNum = new THREE.Sprite(new THREE.SpriteMaterial({ map: numTex, transparent: true, toneMapped: false })); flyNum.scale.set(1.6, .25, 1); scene.add(flyNum);
 
 // ---------- PRATELEIRA (preço muda, embalagem igual) ----------
 const shS = mkSet('shelf', 180);
 mesh(new THREE.PlaneGeometry(30, 30), M(0xD8D2C4), 0, 0, 0, shS).rotation.x = -Math.PI / 2;
-box(4.2, 3.2, .8, 0xF2F2F2, 0, 1.6, -.6, shS); box(4.2, .08, .9, 0xBFC6CC, 0, 1.0, -.55, shS); box(4.2, .08, .9, 0xBFC6CC, 0, 2.1, -.55, shS);
-const shelfBoxes = []; for (let i = 0; i < 4; i++) { const b = makeBox(shS); b.position.set(-1.2 + i * .8, 1.55, -.45); shelfBoxes.push(b); }
+box(4.2, 3.2, .8, 0xF2F2F2, 0, 1.6, -1.0, shS); box(4.2, .08, .9, 0xBFC6CC, 0, 1.0, -.55, shS); box(4.2, .08, .9, 0xBFC6CC, 0, 2.1, -.55, shS);
+const shelfBoxes = []; for (let i = 0; i < 4; i++) { const b = makeBox(shS); b.position.set(-1.2 + i * .8, 1.55, -.35); shelfBoxes.push(b); }
 for (let i = 0; i < 5; i++) box(.6, .7, .5, [0x3B82F6, 0xFFD21F, 0x22C55E, 0xFF4D6D, 0x8B5CF6][i], -1.6 + i * .8, 2.5, -.5, shS);
 const tagTex = canvasTex(400, 200, () => {});
 const paintTag = (price, flash) => { const { g, c } = tagTex.userData; g.fillStyle = flash ? '#FFD21F' : '#FFFFFF'; g.fillRect(0, 0, c.width, c.height); g.fillStyle = '#E53935'; g.fillRect(0, 0, c.width, 50); g.fillStyle = '#fff'; g.font = '900 34px P'; g.textAlign = 'center'; g.fillText('FLOCOS CROC.', 200, 38); g.fillStyle = '#111'; g.font = '900 96px P'; g.fillText('R$' + price, 200, 160); tagTex.needsUpdate = true; };
-const shelfTag = mesh(new THREE.PlaneGeometry(.9, .45), new THREE.MeshBasicMaterial({ map: tagTex, toneMapped: false }), 0, .82, .0, shS);
+const shelfTag = mesh(new THREE.PlaneGeometry(.9, .45), new THREE.MeshBasicMaterial({ map: tagTex, toneMapped: false }), 0, .85, -.07, shS);
 
 // ---------- utilidades ----------
 const $ = id => document.getElementById(id);
@@ -184,15 +184,15 @@ const SHOTS = [
   // 0 gancho: produto passa, bip
   [0, (t, k) => { setSky('store'); store.visible = true; passProduct(t, .3, 2.6); lasers.rotation.y = t * 3; poseP(cashier, PP.point, 0, t); face(cashier, 'calm', t);
     const near = Math.abs(prod.position.x - .45) < .35; beamUp.forEach((b, i) => { b.visible = near; b.position.set(.45 + Math.cos(i) * .1, .96 + .25, Math.sin(i) * .1); b.scale.y = .5; b.rotation.set(0, i, (i - 2.5) * .12); });
-    return [V(.2, 2.3, 3.0 - k * .08), V(.35, 1.1, 0)]; }],
+    return [V(.1, 2.5, 3.9 - k * .08), V(.3, 1.15, 0)]; }],
   // 1 código gigante: barras, números, treze, grupos
   [T_ST - .1, (t, k) => { setSky('lab'); bcS.visible = true; signal.visible = false; beamDown.visible = false; spot.visible = false; photons.forEach(p => p.visible = false); sensor.visible = false;
     const grow = clamp((t - T_ST) / .9); bars.forEach(b => { const s = clamp(grow * 1.6 - b.userData.i / 95 * .6); b.scale.y = Math.max(.001, ease(s)); b.material.color.set(t > T_PRET - .05 && t < T_BRAN ? 0x111111 : 0x111111); });
     const dShow = t > T_NUMS - .2; digits.forEach((d, i) => { const s = dShow ? pop(t - T_NUMS + .2 - i * .04, .25) : 0; d.visible = s > 0; d.scale.setScalar(Math.max(s, .001)); });
     hiCountry.visible = t > T_PAIS - .1; hiComp.visible = t > T_EMP - .1; hiProd.visible = t > T_PROD - .1; hiChk.visible = t > T_CONF - .2;
     widthMark.visible = win(t, T_BRAN, T_NUMS); widthMark.position.set(Math.sin(t * 2.2) * 1.2, 1.25, .05);
-    let tgt = V(0, 1.4, 0), d = 6.2;
-    if (t > T_PRIM - .1 && t < T_EMP - .1) { tgt = V(-1.45, .7, 0); d = 3.2; } else if (t >= T_EMP - .1 && t < T_ULT - .1) { tgt = V(.2, .7, 0); d = 4.6; } else if (t >= T_ULT - .1) { tgt = V(1.75, .7, 0); d = 3.0; }
+    let tgt = V(0, .6, 0), d = 11.5;
+    if (t > T_PRIM - .1 && t < T_EMP - .1) { tgt = V(-1.2, .05, 0); d = 6.5; } else if (t >= T_EMP - .1 && t < T_ULT - .1) { tgt = V(.2, .1, 0); d = 8.5; } else if (t >= T_ULT - .1) { tgt = V(1.4, .05, 0); d = 5.5; }
     return [bcS.position.clone().add(tgt).add(V(0, .4, d)), bcS.position.clone().add(tgt)]; }],
   // 2 scanner de verdade (aí entra o scanner)
   [T_SCAN - .1, (t, k) => { setSky('store'); store.visible = true; lasers.rotation.y = t * 3; passProduct(t, T_SCAN, 2.0); poseP(cashier, PP.point, 0, t); face(cashier, 'calm', t);
@@ -203,28 +203,28 @@ const SHOTS = [
     spot.visible = true; spot.position.set(sx, .5, .05); spot.material.color.set(dark ? 0x551010 : 0xFF3A3A);
     const top = sensor.position.clone().add(V(0, -.25, 0)), hit = bcS.position.clone().add(bigBc.position).add(V(sx, .5, .05)); beamDown.visible = true; beamDown.position.copy(top).add(hit).multiplyScalar(.5); beamDown.scale.y = top.distanceTo(hit); beamDown.quaternion.setFromUnitVectors(V(0, 1, 0), top.clone().sub(hit).normalize());
     photons.forEach(p => { const q = (t * 1.8 + p.userData.d) % 1; const back = !dark && t > T_BR2 - .3; p.visible = back; p.position.copy(hit).lerp(top, q).add(V(Math.sin(p.userData.d * 30) * .06, 0, .1)); });
-    signal.visible = t > T_SENS - .2; paintSignal(u);
-    return [bcS.position.clone().add(V(0, 2.5, 6.6)), bcS.position.clone().add(V(0, 2.25, 0))]; }],
+    signal.visible = t > T_SENS - .25; paintSignal(u);
+    return [bcS.position.clone().add(V(0, 2.0, 11.0)), bcS.position.clone().add(V(0, 1.9, 0))]; }],
   // 4 linhas vermelhas cruzadas: lê em qualquer posição
   [T_VERM - .1, (t, k) => { setSky('store'); store.visible = true; lasers.rotation.y = t * 2.5; const seg = (T_AGORA - T_VERM) / 3; const n = Math.min(2, Math.floor((t - T_VERM) / seg)); const t0 = T_VERM + n * seg;
     passProduct(t, t0, seg * .95, [0, 1.2, 2.4][n], [0, .6, -.5][n]); poseP(cashier, PP.stand, 0, t); face(cashier, 'happy', t);
     return [V(.45, 2.6, .8), V(.45, .95, 0)]; }],
   // 5 o preço NÃO está nas listras
   [T_AGORA - .1, (t, k) => { setSky('lab'); bcS.visible = true; sensor.visible = false; beamDown.visible = false; spot.visible = false; signal.visible = false; photons.forEach(p => p.visible = false); bars.forEach(b => b.scale.y = 1); digits.forEach(d => { d.visible = true; d.scale.setScalar(1); }); [hiCountry, hiComp, hiProd, hiChk, widthMark].forEach(h => h.visible = false);
-    return [bcS.position.clone().add(V(0, 1.5, 6.0 - k * .1)), bcS.position.clone().add(V(0, 1.15, 0))]; }],
+    return [bcS.position.clone().add(V(0, .7, 11.5 - k * .15)), bcS.position.clone().add(V(0, .5, 0))]; }],
   // 6 o computador procura no sistema
   [T_COMP - .1, (t, k) => { setSky('server'); srvS.visible = true; const hl = t > T_NOME - .2 ? clamp((t - T_NOME + .2) / .4) : 0; paintDB(hl, '12,90');
-    if (t < T_NOME) { flyNum.visible = true; const u = ease(clamp((t - T_COMP) / (T_NOME - T_COMP - .1))); flyNum.position.copy(srvS.position).add(V(lerp(-2.5, 0, u), lerp(3.6, 3.4, u), lerp(2.5, .3, u))); flyNum.material.opacity = 1 - clamp((u - .85) / .15); }
-    return [srvS.position.clone().add(V(0, 2.4, 6.2 - k * .1)), srvS.position.clone().add(V(0, 2.1, 0))]; }],
+    if (t < T_NOME) { flyNum.visible = true; const u = ease(clamp((t - T_COMP) / (T_NOME - T_COMP - .1))); flyNum.position.copy(srvS.position).add(V(lerp(-.4, 0, u), lerp(3.9, 3.4, u), lerp(2.5, .3, u))); flyNum.material.opacity = 1 - clamp((u - .85) / .15); }
+    return [srvS.position.clone().add(V(0, 2.2, 9.2 - k * .1)), srvS.position.clone().add(V(0, 2.0, 0))]; }],
   // 7 registra na compra: bip
-  [T_REG - .1, (t, k) => { setSky('store'); store.visible = true; prod.position.set(1.3, .95 + .5, .3); prod.rotation.set(0, -.4, 0); const st = t > T_BIP - .05 ? 1 : 0; if (st !== posState) { paintPOS(st, '12,90'); posState = st; } poseP(cashier, PP.stand, 0, t); face(cashier, 'happy', t);
-    return [V(1.0, 1.95, 1.7), V(1.3, 1.75, -.35)]; }],
+  [T_REG - .1, (t, k) => { setSky('store'); store.visible = true; prod.position.set(.0, .95 + .5, .25); prod.rotation.set(0, .5, 0); const st = t > T_BIP - .05 ? 1 : 0; if (st !== posState) { paintPOS(st, '12,90'); posState = st; } poseP(cashier, PP.stand, 0, t); face(cashier, 'happy', t);
+    return [V(.7, 1.95, 2.4), V(1.2, 1.65, -.35)]; }],
   // 8 muda o preço sem mexer na embalagem
   [T_MUDA - .4, (t, k) => { setSky('shelf'); shS.visible = true; const ch = t > T_EMB - .1; paintTag(ch ? '11,90' : '12,90', ch && t < T_EMB + .5);
-    return [shS.position.clone().add(V(.3, 1.5, 3.3)), shS.position.clone().add(V(0, 1.25, -.4))]; }],
+    return [shS.position.clone().add(V(.2, 1.5, 6.0)), shS.position.clone().add(V(0, 1.45, -.4))]; }],
   // 9 CTA
   [T_SAB - .2, (t, k) => { setSky('lab'); bcS.visible = true; sensor.visible = false; beamDown.visible = false; spot.visible = false; signal.visible = false; photons.forEach(p => p.visible = false); [hiCountry, hiComp, hiProd, hiChk, widthMark].forEach(h => h.visible = false); bigBc.rotation.y = Math.sin(t * .8) * .25;
-    return [bcS.position.clone().add(V(0, .6, 7.0 - k * .1)), bcS.position.clone().add(V(0, .2, 0))]; }],
+    return [bcS.position.clone().add(V(0, 1.0, 12.5 - k * .1)), bcS.position.clone().add(V(0, .3, 0))]; }],
 ];
 window.draw = function (t) {
   hideAll(); bigBc.rotation.y = 0;
@@ -253,9 +253,9 @@ window.draw = function (t) {
   tag(tg2[0], 'DÍGITO DE CONFERÊNCIA', 'red', win(t, T_CONF - .2, T_SCAN - .1), 540, 380, T_CONF - .2, -3);
   tag(tg2[1], 'PEGA ERRO DE LEITURA', 'white small', win(t, T_ERRO - .1, T_SCAN - .1), 540, 500, T_ERRO - .1, 3);
   tag(tg2[0], 'SCANNER', 'red', win(t, T_SCAN - .1, T_LUZ - .15), 540, 380, T_SCAN - .1, -3);
-  tag(tg2[1], '⬛ PRETO ABSORVE', 'white small', win(t, T_ABS - .1, T_SENS - .2), 540, 260, T_ABS - .1, -3);
-  tag(tg2[2], '⬜ BRANCO REFLETE', 'white small', win(t, T_REF - .1, T_SENS - .2), 540, 370, T_REF - .1, 3);
-  tag(tg2[0], 'SENSOR: LUZ E SOMBRA = NÚMEROS', 'green small', win(t, T_SENS - .2, T_VERM - .1), 540, 260, T_SENS - .2, -2);
+  tag(tg2[1], '⬛ PRETO ABSORVE', 'white small', win(t, T_ABS - .1, T_SENS - .25), 540, 240, T_ABS - .1, -3);
+  tag(tg2[2], '⬜ BRANCO REFLETE', 'white small', win(t, T_REF - .1, T_SENS - .25), 540, 340, T_REF - .1, 3);
+  tag(tg2[0], 'SENSOR: LUZ E SOMBRA = NÚMEROS', 'green small', win(t, T_SENS - .25, T_VERM - .1), 540, 220, T_SENS - .2, -2);
   tag(tg2[0], 'LÊ EM QUALQUER POSIÇÃO', 'red', win(t, T_CRUZ - .1, T_AGORA - .1), 540, 380, T_CRUZ - .1, -3);
   tag(tg2[0], 'O PREÇO NÃO ESTÁ AQUI ❌', 'red', win(t, T_NAO - .1, T_COMP - .1), 540, 380, T_NAO - .1, -3);
   tag(tg2[0], 'BUSCA NO SISTEMA 🔎', 'blue', win(t, T_SIST - .2, T_REG - .1), 540, 380, T_SIST - .2, -3);
