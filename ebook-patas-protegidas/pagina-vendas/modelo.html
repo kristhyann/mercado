@@ -1,6 +1,6 @@
 <title>Patas Protegidas</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Meu cachorro, minha responsabilidade: o guia completo de cuidados, saúde, proteção e bem-estar canino. Apoie com um valor simbólico.">
+<meta name="description" content="Meu cachorro, minha responsabilidade: o guia completo de cuidados, saúde, proteção e bem-estar canino. Baixe grátis em PDF.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,500&family=Nunito+Sans:wght@400;600;700;800&display=swap">
 <style>
@@ -76,6 +76,31 @@ p { margin: 0; }
 .vitrine .livro { position: absolute; left: -12%; bottom: -6%; width: 46%; border-radius: 6px; box-shadow: 0 24px 40px -14px rgba(0,0,0,.6); transform: rotate(-5deg); border: 3px solid #fff; }
 .selo { position: absolute; right: -10px; top: 18px; width: 108px; height: 108px; border-radius: 50%; background: var(--laranja); color: #fff; display: grid; place-content: center; text-align: center; font-weight: 800; font-size: 12px; line-height: 1.15; letter-spacing: .05em; transform: rotate(10deg); box-shadow: 0 10px 24px -10px rgba(0,0,0,.5); }
 .selo b { font-family: var(--display); font-size: 30px; letter-spacing: 0; }
+
+.acoes { display: flex; flex-wrap: wrap; gap: 12px; }
+.botao.secundario { background: transparent; color: inherit; border: 2px solid currentColor; box-shadow: none; }
+.botao.secundario:hover { background: rgba(255,255,255,.1); }
+.final .botao.secundario { color: var(--laranja-forte); }
+.final .botao.secundario:hover { background: var(--laranja-claro); }
+.acoes-final { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+button.botao { border: 0; cursor: pointer; font-family: inherit; }
+button.botao[disabled] { opacity: .65; cursor: progress; }
+
+/* Download */
+.baixar { background: var(--papel); }
+.baixar .cabeca { display: grid; gap: 14px; max-width: 760px; margin-bottom: 36px; }
+.arquivos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.arquivo { display: grid; grid-template-columns: 140px 1fr; gap: 22px; align-items: start; border: 1px solid var(--linha); border-radius: 22px; padding: 22px; background: var(--fundo); min-width: 0; }
+.arquivo img { border-radius: 6px; box-shadow: 0 14px 26px -14px rgba(0,0,0,.45); width: 140px; }
+.arquivo-texto { display: grid; gap: 8px; justify-items: start; min-width: 0; }
+.arquivo-texto p { color: var(--tinta-suave); font-size: 16px; }
+.arquivo-texto .meta { font-size: 14px; font-weight: 700; letter-spacing: .04em; color: var(--floresta-2); }
+.arquivo-texto .botao { margin-top: 6px; font-size: 16px; padding: 14px 22px; }
+.abrir { font-size: 14px; color: var(--tinta-suave); }
+.miniatura-fichas { width: 140px; aspect-ratio: 148 / 210; background: var(--papel); border-radius: 6px; box-shadow: 0 14px 26px -14px rgba(0,0,0,.45); padding: 16px 14px; display: grid; gap: 10px; align-content: start; border-top: 14px solid var(--floresta-2); }
+.miniatura-fichas span { height: 8px; border-radius: 3px; border: 2px solid var(--floresta-2); }
+.miniatura-fichas span:nth-child(odd) { width: 70%; }
+.status-download { margin-top: 18px; min-height: 1.5em; font-weight: 700; color: var(--floresta-2); text-align: center; }
 
 /* Vídeo */
 .video .miolo { display: grid; gap: 28px; justify-items: center; text-align: center; }
@@ -162,6 +187,7 @@ summary:focus-visible { outline: 3px solid var(--laranja); outline-offset: 4px; 
   .selo { right: 0; }
   .capitulos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .destaques .grade { grid-template-columns: 1fr; }
+  .arquivos { grid-template-columns: 1fr; }
   .mosaico { grid-template-columns: 1fr 1fr; grid-template-rows: 280px 180px 180px; }
   .mosaico .grande { grid-row: span 1; grid-column: span 2; }
   .mosaico .largo { grid-column: span 2; }
@@ -170,6 +196,8 @@ summary:focus-visible { outline: 3px solid var(--laranja); outline-offset: 4px; 
   body { font-size: 16px; }
   .capitulos { grid-template-columns: 1fr; }
   .botao { width: 100%; }
+  .arquivo { grid-template-columns: 1fr; }
+  .arquivo img, .miniatura-fichas { width: 120px; }
   .selo { width: 88px; height: 88px; font-size: 10px; }
   .selo b { font-size: 24px; }
 }
@@ -184,14 +212,12 @@ summary:focus-visible { outline: 3px solid var(--laranja); outline-offset: 4px; 
         PATAS PROTEGIDAS
       </div>
       <h1>Meu cachorro, <em>minha responsabilidade</em></h1>
-      <p class="lead">O guia definitivo para proteger, alimentar, cuidar e proporcionar uma vida saudável e segura ao seu melhor amigo. Com um valor simbólico, você apoia o projeto e ajuda a combater o abandono.</p>
+      <p class="lead">O guia definitivo para proteger, alimentar, cuidar e proporcionar uma vida saudável e segura ao seu melhor amigo. O e-book é gratuito: baixe agora e, se puder, apoie o projeto com um valor simbólico.</p>
       <div class="acoes">
-        <a class="botao" href="{{LINK}}" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10Z"/></svg>
-          Quero apoiar o Patas Protegidas
-        </a>
-        <p class="nota-botao">Apoio pela plataforma Apoia.se, com o valor que couber no seu bolso.</p>
+        <a class="botao" href="#baixar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Baixar o e-book grátis</a>
+        <a class="botao secundario" href="{{LINK}}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10Z"/></svg>Apoiar o projeto</a>
       </div>
+      <p class="nota-botao">PDF gratuito. O apoio pelo Apoia.se é opcional.</p>
       <div class="fatos">
         <span><b>18</b> capítulos</span>
         <span><b>222</b> páginas</span>
@@ -213,6 +239,39 @@ summary:focus-visible { outline: 3px solid var(--laranja); outline-offset: 4px; 
     <div class="tela">
       {{VIDEO}}
     </div>
+  </div>
+</section>
+
+<section class="baixar faixa" id="baixar" aria-labelledby="t-baixar">
+  <div class="miolo">
+    <div class="cabeca">
+      <p class="sobretitulo">Download gratuito</p>
+      <h2 id="t-baixar">Baixe os PDFs grátis</h2>
+      <p class="lead">Funciona no celular e no computador. As fichas também estão dentro do e-book completo; o arquivo separado é para imprimir.</p>
+    </div>
+    <div class="arquivos">
+      <div class="arquivo">
+        <img src="{{capa}}" alt="Capa do e-book Patas Protegidas">
+        <div class="arquivo-texto">
+          <h3>E-book completo</h3>
+          <p>18 capítulos, 222 páginas, sumário clicável, ilustrações e referências.</p>
+          <p class="meta">PDF · 7,8 MB</p>
+          <button class="botao" type="button" id="baixar-ebook" data-arquivo="arquivos/Patas-Protegidas-ebook-completo.pdf" data-nome="Patas-Protegidas-ebook-completo.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Baixar e-book</button>
+          <a class="abrir" href="arquivos/Patas-Protegidas-ebook-completo.pdf" target="_blank" rel="noopener">Abrir em nova aba</a>
+        </div>
+      </div>
+      <div class="arquivo">
+        <div class="miniatura-fichas" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="arquivo-texto">
+          <h3>Fichas e checklists</h3>
+          <p>Ficha do cachorro, plano de emergência, contatos, transporte e checklists do dia a dia.</p>
+          <p class="meta">PDF · 0,3 MB · 15 páginas</p>
+          <button class="botao" type="button" id="baixar-fichas" data-arquivo="arquivos/Patas-Protegidas-fichas-e-checklists.pdf" data-nome="Patas-Protegidas-fichas-e-checklists.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Baixar fichas</button>
+          <a class="abrir" href="arquivos/Patas-Protegidas-fichas-e-checklists.pdf" target="_blank" rel="noopener">Abrir em nova aba</a>
+        </div>
+      </div>
+    </div>
+    <p class="status-download" id="status-download" role="status" aria-live="polite"></p>
   </div>
 </section>
 
@@ -309,8 +368,9 @@ summary:focus-visible { outline: 3px solid var(--laranja); outline-offset: 4px; 
     <div>
       <p class="sobretitulo" style="color:#f5a46a">Faça parte</p>
       <h2 id="t-apoio">Um valor simbólico, um cão mais protegido</h2>
-      <p class="lead">O Patas Protegidas é um projeto de educação para a posse responsável. Seu apoio ajuda a manter o projeto e a levar este guia para mais tutores.</p>
+      <p class="lead">O e-book é gratuito para todos. Se ele foi útil para você, um valor simbólico ajuda a manter o Patas Protegidas e a levar este guia para mais tutores.</p>
       <ol class="passos">
+        <li><div><b>Baixe o e-book grátis</b><span>Ele é seu, sem precisar pagar nada.</span></div></li>
         <li><div><b>Clique no botão de apoio</b><span>Você vai para a página do projeto no Apoia.se.</span></div></li>
         <li><div><b>Escolha o valor</b><span>Contribua com o valor simbólico que couber no seu bolso.</span></div></li>
         <li><div><b>Compartilhe</b><span>Mande para amigos, familiares e grupos de adoção. Cada tutor informado é um cão a menos nas ruas.</span></div></li>
@@ -320,10 +380,9 @@ summary:focus-visible { outline: 3px solid var(--laranja); outline-offset: 4px; 
       <p class="sobretitulo">Patas Protegidas</p>
       <p class="valor">Apoie com o valor que puder</p>
       <ul>
-        <li>E-book completo com 18 capítulos</li>
-        <li>Fichas e checklists imprimíveis</li>
-        <li>7 projetos caseiros passo a passo</li>
-        <li>Guia de primeiros socorros e Alerta Vermelho</li>
+        <li>Mantém o e-book gratuito para todos</li>
+        <li>Ajuda a divulgar a posse responsável</li>
+        <li>Fortalece o combate ao abandono de cães</li>
       </ul>
       <a class="botao" href="{{LINK}}" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10Z"/></svg>
@@ -346,6 +405,10 @@ summary:focus-visible { outline: 3px solid var(--laranja); outline-offset: 4px; 
         <p>Para quem vai adotar, para quem acabou de receber um cão, para tutores de filhotes e de idosos, e para quem quer ajudar animais de rua. A linguagem é simples e direta.</p>
       </details>
       <details>
+        <summary>O e-book é mesmo gratuito?</summary>
+        <p>Sim. Você baixa os PDFs nesta página sem pagar nada. O apoio pelo Apoia.se é opcional, para quem quiser ajudar o projeto.</p>
+      </details>
+      <details>
         <summary>Em que formato é o e-book?</summary>
         <p>PDF com sumário clicável, que funciona no celular e no computador. As fichas e checklists também vêm em um arquivo separado, pronto para imprimir.</p>
       </details>
@@ -355,7 +418,7 @@ summary:focus-visible { outline: 3px solid var(--laranja); outline-offset: 4px; 
       </details>
       <details>
         <summary>Como faço o apoio?</summary>
-        <p>Pelo botão de apoio desta página, que leva ao Apoia.se. Lá você escolhe o valor e a forma de pagamento oferecidos pela plataforma.</p>
+        <p>Pelo botão de apoio desta página, que leva ao Apoia.se (apoia.se/patasprotegidas). Lá você escolhe o valor e a forma de pagamento oferecidos pela plataforma.</p>
       </details>
       <details>
         <summary>Posso compartilhar o e-book?</summary>
@@ -369,8 +432,49 @@ summary:focus-visible { outline: 3px solid var(--laranja); outline-offset: 4px; 
   <div class="miolo">
     <img src="{{rosto}}" alt="Rosto de um cachorro preto e caramelo">
     <h2>Compartilhe conhecimento. <span>Proteja vidas.</span> Combata o abandono.</h2>
-    <a class="botao" href="{{LINK}}" target="_blank" rel="noopener">Quero apoiar o Patas Protegidas</a>
+    <div class="acoes-final">
+      <a class="botao" href="#baixar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Baixar o e-book grátis</a>
+      <a class="botao secundario" href="{{LINK}}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10Z"/></svg>Apoiar no Apoia.se</a>
+    </div>
   </div>
 </section>
 
 <footer class="rodape">Projeto Patas Protegidas · Conteúdo educativo, não substitui a consulta veterinária.</footer>
+
+<script>
+(function () {
+  const status = document.getElementById("status-download");
+  const botoes = document.querySelectorAll("button[data-arquivo]");
+  let downloads = null;
+  if (window.claude && typeof window.claude.use === "function") {
+    window.claude.use("downloads").then(function (d) { downloads = d; }).catch(function () { downloads = null; });
+  }
+  function abrir(url) {
+    const a = document.createElement("a");
+    a.href = url; a.target = "_blank"; a.rel = "noopener";
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+  botoes.forEach(function (botao) {
+    botao.addEventListener("click", async function () {
+      const url = botao.dataset.arquivo, nome = botao.dataset.nome;
+      if (!downloads) { abrir(url); status.textContent = "O PDF foi aberto em uma nova aba. Use o botão de baixar do seu navegador para salvar."; return; }
+      const textoOriginal = botao.innerHTML;
+      botao.disabled = true; status.textContent = "Preparando o arquivo…";
+      try {
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error("falha");
+        const blob = await resp.blob();
+        await downloads.save({ filename: nome, data: blob });
+        status.textContent = "Pronto! O arquivo foi salvo no seu aparelho.";
+      } catch (e) {
+        const code = e && e.code;
+        if (code === "declined") status.textContent = "Download cancelado. Você pode tentar de novo quando quiser.";
+        else if (code === "rate_limited") status.textContent = "Já existe um download aguardando confirmação. Confirme ou espere alguns segundos.";
+        else { status.textContent = "Não foi possível baixar aqui. Abrimos o PDF em uma nova aba para você salvar."; abrir(url); }
+      } finally {
+        botao.disabled = false; botao.innerHTML = textoOriginal;
+      }
+    });
+  });
+})();
+</script>
