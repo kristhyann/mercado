@@ -1,0 +1,489 @@
+{
+  "$schema": "../store.schema.json",
+  "slug": "acai-da-maria",
+  "name": "Açaí da Maria",
+  "isDemo": true,
+  "active": true,
+  "description": "Açaí cremoso batido na hora, com acompanhamentos fresquinhos. Monte o seu do seu jeito!",
+  "seo": {
+    "title": "Açaí da Maria — Cardápio e pedidos pelo WhatsApp",
+    "description": "Monte seu açaí do seu jeito e peça pelo WhatsApp. Copos, tigelas, barcas, combos e muito mais.",
+    "image": null
+  },
+  "branding": {
+    "logo": "images/logo.svg",
+    "cover": "images/cover.svg",
+    "primaryColor": "#6B21A8",
+    "secondaryColor": "#F59E0B"
+  },
+  "banner": {
+    "enabled": true,
+    "image": "images/banner.svg",
+    "title": "Monte seu açaí do seu jeito!",
+    "subtitle": "Escolha o tamanho, a base e até 6 acompanhamentos."
+  },
+  "contact": {
+    "whatsapp": "550000000000",
+    "instagram": null,
+    "address": "Rua Exemplo, 100 — Centro (endereço de demonstração)",
+    "region": "Entregamos no Centro e bairros vizinhos",
+    "mapsUrl": null
+  },
+  "hours": {
+    "timezone": "America/Sao_Paulo",
+    "mode": "auto",
+    "whenClosed": "schedule",
+    "ordersPaused": false,
+    "weekly": {
+      "sun": [{ "open": "09:00", "close": "23:30" }],
+      "mon": [{ "open": "09:00", "close": "23:30" }],
+      "tue": [{ "open": "09:00", "close": "23:30" }],
+      "wed": [{ "open": "09:00", "close": "23:30" }],
+      "thu": [{ "open": "09:00", "close": "23:30" }],
+      "fri": [{ "open": "09:00", "close": "23:59" }],
+      "sat": [{ "open": "09:00", "close": "23:59" }]
+    },
+    "special": [{ "date": "2026-12-25", "label": "Natal", "closed": true }]
+  },
+  "ordering": {
+    "delivery": true,
+    "pickup": true,
+    "minOrder": 12,
+    "deliveryTime": "30–50 min",
+    "pickupTime": "15–20 min",
+    "paymentMethods": ["pix", "cash", "credit", "debit"],
+    "pixKey": null
+  },
+  "delivery": {
+    "mode": "zones",
+    "freeAbove": null,
+    "allowUnlistedNeighborhoods": false,
+    "zones": [
+      { "neighborhood": "Centro", "fee": 4 },
+      { "neighborhood": "Jardim América", "fee": 5 },
+      { "neighborhood": "São José", "fee": 6 },
+      { "neighborhood": "Vila Nova", "fee": 7 }
+    ]
+  },
+  "whatsappMessage": {
+    "header": null,
+    "footer": "PEDIDO ENVIADO PELO CARDÁPIO DIGITAL."
+  },
+  "categories": [
+    { "key": "promocoes", "name": "Promoções", "icon": "percent" },
+    { "key": "monte-seu-acai", "name": "Monte seu açaí", "icon": "sparkles" },
+    { "key": "combos", "name": "Combos", "icon": "gift" },
+    { "key": "acai-tradicional", "name": "Açaí tradicional", "icon": "cup" },
+    { "key": "acai-premium", "name": "Açaí premium", "icon": "crown" },
+    { "key": "copos", "name": "Copos", "icon": "cup" },
+    { "key": "tigelas", "name": "Tigelas", "icon": "bowl" },
+    { "key": "barcas", "name": "Barcas", "icon": "ship" },
+    { "key": "cremes", "name": "Cremes", "icon": "ice-cream" },
+    { "key": "adicionais", "name": "Adicionais", "icon": "plus" },
+    { "key": "bebidas", "name": "Bebidas", "icon": "drink" }
+  ],
+  "addonGroups": [
+    {
+      "key": "base",
+      "name": "Escolha a base",
+      "min": 1,
+      "max": 1,
+      "free": 1,
+      "addons": [
+        { "key": "tradicional", "name": "Açaí tradicional" },
+        { "key": "zero-acucar", "name": "Açaí zero açúcar", "price": 2, "alwaysPaid": true },
+        { "key": "com-banana", "name": "Açaí com banana" },
+        { "key": "com-morango", "name": "Açaí com morango" },
+        { "key": "cupuacu", "name": "Creme de cupuaçu" }
+      ]
+    },
+    {
+      "key": "acompanhamentos",
+      "name": "Acompanhamentos",
+      "description": "Os primeiros são grátis. Os demais custam R$ 2,00 cada.",
+      "min": 0,
+      "max": 6,
+      "free": 3,
+      "extraPrice": 2,
+      "addons": [
+        { "key": "leite-em-po", "name": "Leite em pó" },
+        { "key": "granola", "name": "Granola" },
+        { "key": "banana", "name": "Banana" },
+        { "key": "morango", "name": "Morango" },
+        { "key": "pacoca", "name": "Paçoca" },
+        { "key": "confete", "name": "Confete" },
+        { "key": "granulado", "name": "Granulado" },
+        { "key": "farinha-lactea", "name": "Farinha láctea" },
+        { "key": "sucrilhos", "name": "Sucrilhos" },
+        { "key": "amendoim", "name": "Amendoim" },
+        { "key": "kiwi", "name": "Kiwi", "available": false }
+      ]
+    },
+    {
+      "key": "cremes",
+      "name": "Cremes",
+      "description": "1 creme grátis. O segundo custa R$ 3,00.",
+      "min": 0,
+      "max": 2,
+      "free": 1,
+      "extraPrice": 3,
+      "addons": [
+        { "key": "creme-ninho", "name": "Creme de ninho" },
+        { "key": "creme-cupuacu", "name": "Creme de cupuaçu" },
+        { "key": "creme-morango", "name": "Creme de morango" },
+        { "key": "creme-chocolate", "name": "Creme de chocolate" },
+        { "key": "creme-maracuja", "name": "Creme de maracujá" }
+      ]
+    },
+    {
+      "key": "coberturas",
+      "name": "Coberturas",
+      "description": "1 cobertura grátis. Nutella é sempre cobrada.",
+      "min": 0,
+      "max": 2,
+      "free": 1,
+      "extraPrice": 1.5,
+      "addons": [
+        { "key": "leite-condensado", "name": "Leite condensado" },
+        { "key": "cobertura-chocolate", "name": "Chocolate" },
+        { "key": "cobertura-morango", "name": "Morango" },
+        { "key": "caramelo", "name": "Caramelo" },
+        { "key": "cobertura-nutella", "name": "Nutella", "price": 3, "alwaysPaid": true }
+      ]
+    },
+    {
+      "key": "adicionais",
+      "name": "Adicionais pagos",
+      "description": "Turbine seu açaí. Até 3 de cada.",
+      "min": 0,
+      "max": 8,
+      "free": 0,
+      "maxPerOption": 3,
+      "addons": [
+        { "key": "nutella-extra", "name": "Nutella extra", "price": 3 },
+        { "key": "leite-em-po-extra", "name": "Leite em pó extra", "price": 2 },
+        { "key": "morango-extra", "name": "Morango extra", "price": 2.5 },
+        { "key": "creme-extra", "name": "Creme extra", "price": 3 },
+        { "key": "kit-kat", "name": "Kit Kat", "price": 3.5 },
+        { "key": "bis", "name": "Bis", "price": 2.5 }
+      ]
+    },
+    {
+      "key": "bebida-combo",
+      "name": "Escolha a bebida",
+      "min": 1,
+      "max": 1,
+      "free": 1,
+      "addons": [
+        { "key": "coca-lata", "name": "Coca-Cola lata 350 ml" },
+        { "key": "guarana-lata", "name": "Guaraná lata 350 ml" },
+        { "key": "agua", "name": "Água mineral 500 ml" },
+        { "key": "suco-laranja", "name": "Suco de laranja 300 ml", "price": 2, "alwaysPaid": true }
+      ]
+    },
+    {
+      "key": "talheres",
+      "name": "Precisa de colher descartável?",
+      "min": 0,
+      "max": 1,
+      "addons": [{ "key": "sim", "name": "Sim, enviar colher" }]
+    }
+  ],
+  "products": [
+    {
+      "key": "monte-seu-acai",
+      "category": "monte-seu-acai",
+      "name": "Monte seu açaí",
+      "description": "Escolha o tamanho, a base, os acompanhamentos, cremes e coberturas. Do seu jeito!",
+      "image": "images/monte-seu-acai.svg",
+      "badges": ["mais-vendido"],
+      "featured": true,
+      "variants": [
+        { "key": "300ml", "name": "300 ml", "price": 12, "rules": { "acompanhamentos": { "free": 2, "max": 5 } } },
+        { "key": "400ml", "name": "400 ml", "price": 15, "rules": { "acompanhamentos": { "free": 3, "max": 6 } } },
+        { "key": "500ml", "name": "500 ml", "price": 18, "rules": { "acompanhamentos": { "free": 3, "max": 6 } } },
+        { "key": "700ml", "name": "700 ml", "price": 23, "rules": { "acompanhamentos": { "free": 4, "max": 8 } } },
+        { "key": "1l", "name": "1 litro", "price": 32, "rules": { "acompanhamentos": { "free": 5, "max": 10 }, "cremes": { "free": 2, "max": 3 } } }
+      ],
+      "addonGroups": ["base", "acompanhamentos", "cremes", "coberturas", "adicionais", "talheres"]
+    },
+    {
+      "key": "promo-500-do-dia",
+      "extends": "monte-seu-acai",
+      "category": "promocoes",
+      "name": "Promoção: Açaí 500 ml do dia",
+      "description": "Monte seu açaí de 500 ml com 4 acompanhamentos grátis por um preço especial.",
+      "image": "images/promo.svg",
+      "badges": ["promocao"],
+      "featured": false,
+      "variants": [
+        { "key": "500ml", "name": "500 ml", "price": 15.9, "compareAtPrice": 18, "rules": { "acompanhamentos": { "free": 4, "max": 6 } } }
+      ]
+    },
+    {
+      "key": "combo-acai-bebida",
+      "category": "combos",
+      "name": "Combo Açaí + Bebida",
+      "description": "Açaí de 500 ml com 3 acompanhamentos + uma bebida gelada.",
+      "image": "images/combo-bebida.svg",
+      "badges": ["promocao"],
+      "price": 22,
+      "compareAtPrice": 24,
+      "addonGroups": ["base", { "group": "acompanhamentos", "free": 3, "max": 6 }, "coberturas", "bebida-combo", "adicionais", "talheres"]
+    },
+    {
+      "key": "combo-dupla",
+      "category": "combos",
+      "name": "Combo Dupla — 2 açaís de 500 ml",
+      "description": "Dois açaís de 500 ml para dividir (ou não!). 6 acompanhamentos grátis no total.",
+      "image": "images/combo-dupla.svg",
+      "price": 33,
+      "compareAtPrice": 36,
+      "addonGroups": [
+        { "group": "base", "min": 1, "max": 2, "free": 2 },
+        { "group": "acompanhamentos", "free": 6, "max": 12 },
+        { "group": "coberturas", "free": 2, "max": 4 },
+        "adicionais",
+        "talheres"
+      ]
+    },
+    {
+      "key": "combo-familia",
+      "category": "combos",
+      "name": "Combo Família — 1 litro + 2 copos 300 ml",
+      "description": "Açaí de 1 litro com 6 acompanhamentos e dois copos de 300 ml. Ideal para 4 pessoas.",
+      "image": "images/combo-familia.svg",
+      "badges": ["destaque"],
+      "price": 52,
+      "addonGroups": [
+        { "group": "acompanhamentos", "free": 6, "max": 12 },
+        { "group": "coberturas", "free": 2, "max": 3 },
+        "adicionais",
+        "talheres"
+      ]
+    },
+    {
+      "key": "acai-tradicional",
+      "category": "acai-tradicional",
+      "name": "Açaí tradicional",
+      "description": "Açaí puro e cremoso com granola e banana.",
+      "image": "images/acai-tradicional.svg",
+      "variants": [
+        { "key": "300ml", "name": "300 ml", "price": 11 },
+        { "key": "500ml", "name": "500 ml", "price": 16 },
+        { "key": "700ml", "name": "700 ml", "price": 21 }
+      ],
+      "addonGroups": ["coberturas", "adicionais", "talheres"]
+    },
+    {
+      "key": "acai-com-morango",
+      "extends": "acai-tradicional",
+      "name": "Açaí com morango",
+      "description": "Açaí com morangos frescos picados e leite condensado.",
+      "image": "images/acai-morango.svg"
+    },
+    {
+      "key": "acai-com-nutella",
+      "extends": "acai-tradicional",
+      "name": "Açaí com Nutella",
+      "description": "Açaí com uma camada generosa de Nutella e morango.",
+      "image": "images/acai-nutella.svg",
+      "badges": ["mais-vendido"],
+      "variants": [
+        { "key": "300ml", "name": "300 ml", "price": 15 },
+        { "key": "500ml", "name": "500 ml", "price": 20 },
+        { "key": "700ml", "name": "700 ml", "price": 26 }
+      ]
+    },
+    {
+      "key": "acai-com-ninho",
+      "extends": "acai-tradicional",
+      "name": "Açaí com Leite Ninho",
+      "description": "Açaí com creme de ninho e leite em pó por cima.",
+      "image": "images/acai-ninho.svg",
+      "variants": [
+        { "key": "300ml", "name": "300 ml", "price": 13 },
+        { "key": "500ml", "name": "500 ml", "price": 18 },
+        { "key": "700ml", "name": "700 ml", "price": 24 }
+      ]
+    },
+    {
+      "key": "acai-com-banana",
+      "extends": "acai-tradicional",
+      "name": "Açaí com banana",
+      "description": "Açaí com banana em rodelas, granola e mel.",
+      "image": "images/acai-banana.svg"
+    },
+    {
+      "key": "acai-com-pacoca",
+      "extends": "acai-tradicional",
+      "name": "Açaí com paçoca",
+      "description": "Açaí com paçoca esfarelada e leite condensado.",
+      "image": "images/acai-pacoca.svg",
+      "available": false
+    },
+    {
+      "key": "acai-premium",
+      "category": "acai-premium",
+      "name": "Açaí Premium",
+      "description": "Açaí com creme de ninho, Nutella, morango, Kit Kat e leite em pó.",
+      "image": "images/acai-premium.svg",
+      "badges": ["destaque"],
+      "variants": [
+        { "key": "500ml", "name": "500 ml", "price": 26 },
+        { "key": "700ml", "name": "700 ml", "price": 32 }
+      ],
+      "addonGroups": ["adicionais", "talheres"]
+    },
+    {
+      "key": "acai-especial",
+      "extends": "acai-premium",
+      "name": "Açaí Especial da Casa",
+      "description": "Receita da Maria: creme de cupuaçu, morango, banana, granola e mel.",
+      "image": "images/acai-especial.svg",
+      "badges": ["novo"]
+    },
+    {
+      "key": "copo-ninho",
+      "category": "copos",
+      "name": "Copo de Ninho",
+      "description": "Camadas de açaí, creme de ninho e leite em pó.",
+      "image": "images/copo-ninho.svg",
+      "variants": [
+        { "key": "300ml", "name": "300 ml", "price": 14 },
+        { "key": "500ml", "name": "500 ml", "price": 19 }
+      ],
+      "addonGroups": ["adicionais", "talheres"]
+    },
+    {
+      "key": "copo-nutella",
+      "extends": "copo-ninho",
+      "name": "Copo de Nutella",
+      "description": "Camadas de açaí, Nutella e morango.",
+      "image": "images/copo-nutella.svg",
+      "variants": [
+        { "key": "300ml", "name": "300 ml", "price": 16 },
+        { "key": "500ml", "name": "500 ml", "price": 22 }
+      ]
+    },
+    {
+      "key": "copo-morango",
+      "extends": "copo-ninho",
+      "name": "Copo de Morango",
+      "description": "Açaí com creme de morango e morangos frescos.",
+      "image": "images/copo-morango.svg"
+    },
+    {
+      "key": "copo-chocolate",
+      "extends": "copo-ninho",
+      "name": "Copo de Chocolate",
+      "description": "Açaí com creme de chocolate, granulado e Bis.",
+      "image": "images/copo-chocolate.svg"
+    },
+    {
+      "key": "tigela-acai",
+      "category": "tigelas",
+      "name": "Tigela de açaí",
+      "description": "Servida na tigela, com base e acompanhamentos à sua escolha.",
+      "image": "images/tigela.svg",
+      "variants": [
+        { "key": "500ml", "name": "500 ml", "price": 19, "rules": { "acompanhamentos": { "free": 3 } } },
+        { "key": "750ml", "name": "750 ml", "price": 25, "rules": { "acompanhamentos": { "free": 4, "max": 8 } } }
+      ],
+      "addonGroups": ["base", "acompanhamentos", "cremes", "coberturas", "adicionais", "talheres"]
+    },
+    {
+      "key": "barca-acai",
+      "category": "barcas",
+      "name": "Barca de açaí",
+      "description": "A barca para compartilhar! Quanto maior, mais acompanhamentos grátis.",
+      "image": "images/barca.svg",
+      "badges": ["mais-vendido"],
+      "variantLabel": "Escolha o tamanho da barca",
+      "variants": [
+        { "key": "pequena", "name": "Pequena (800 ml)", "price": 35, "rules": { "acompanhamentos": { "free": 4, "max": 6 }, "cremes": { "free": 1 } } },
+        { "key": "media", "name": "Média (1,2 litro)", "price": 48, "rules": { "acompanhamentos": { "free": 6, "max": 9 }, "cremes": { "free": 2, "max": 3 } } },
+        { "key": "grande", "name": "Grande (2 litros)", "price": 65, "rules": { "acompanhamentos": { "free": 8, "max": 12 }, "cremes": { "free": 2, "max": 4 } } }
+      ],
+      "addonGroups": ["base", "acompanhamentos", "cremes", "coberturas", "adicionais", "talheres"]
+    },
+    {
+      "key": "creme-cupuacu",
+      "category": "cremes",
+      "name": "Creme de cupuaçu",
+      "description": "Cupuaçu cremoso batido na hora.",
+      "image": "images/cupuacu.svg",
+      "variants": [
+        { "key": "300ml", "name": "300 ml", "price": 13 },
+        { "key": "500ml", "name": "500 ml", "price": 18 }
+      ],
+      "addonGroups": [{ "group": "acompanhamentos", "free": 2, "max": 5 }, "coberturas", "talheres"]
+    },
+    {
+      "key": "sorvete-2-bolas",
+      "category": "cremes",
+      "name": "Sorvete — 2 bolas",
+      "description": "Escolha dois sabores de creme e uma cobertura.",
+      "image": "images/sorvete.svg",
+      "price": 12,
+      "addonGroups": [{ "group": "cremes", "min": 2, "max": 2, "free": 2 }, "coberturas"]
+    },
+    {
+      "key": "mousse-maracuja",
+      "category": "cremes",
+      "name": "Mousse de maracujá",
+      "description": "Sobremesa especial da casa, 200 g.",
+      "image": "images/mousse.svg",
+      "price": 9
+    },
+    {
+      "key": "porcao-nutella",
+      "category": "adicionais",
+      "name": "Porção de Nutella (50 g)",
+      "description": "Para levar à parte e colocar como quiser.",
+      "image": "images/nutella.svg",
+      "price": 6
+    },
+    {
+      "key": "porcao-leite-em-po",
+      "category": "adicionais",
+      "name": "Porção de leite em pó (50 g)",
+      "description": "Leite em pó à parte.",
+      "image": "images/leite-po.svg",
+      "price": 4
+    },
+    {
+      "key": "coca-lata",
+      "category": "bebidas",
+      "name": "Coca-Cola lata 350 ml",
+      "image": "images/refri.svg",
+      "price": 6
+    },
+    {
+      "key": "guarana-lata",
+      "extends": "coca-lata",
+      "name": "Guaraná lata 350 ml",
+      "image": "images/guarana.svg",
+      "price": 5.5
+    },
+    {
+      "key": "agua",
+      "category": "bebidas",
+      "name": "Água mineral 500 ml",
+      "image": "images/agua.svg",
+      "variantLabel": "Escolha",
+      "variants": [
+        { "key": "sem-gas", "name": "Sem gás", "price": 3.5 },
+        { "key": "com-gas", "name": "Com gás", "price": 4 }
+      ]
+    },
+    {
+      "key": "suco-laranja",
+      "category": "bebidas",
+      "name": "Suco de laranja natural 300 ml",
+      "image": "images/suco.svg",
+      "price": 8,
+      "badges": ["novo"]
+    }
+  ]
+}

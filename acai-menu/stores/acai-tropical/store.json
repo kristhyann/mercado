@@ -1,0 +1,147 @@
+{
+  "$schema": "../store.schema.json",
+  "slug": "acai-tropical",
+  "name": "Açaí Tropical",
+  "isDemo": true,
+  "description": "Açaí com frutas tropicais, cremes artesanais e muito sabor. Aberto até tarde!",
+  "seo": { "title": "Açaí Tropical — Peça pelo WhatsApp", "description": "Açaí com frutas tropicais até as 2h da manhã. Entrega grátis acima de R$ 60.", "image": null },
+  "branding": { "logo": "images/logo.svg", "cover": "images/cover.svg", "primaryColor": "#7E22CE", "secondaryColor": "#16A34A" },
+  "banner": { "enabled": true, "image": "images/banner.svg", "title": "Entrega grátis acima de R$ 60!", "subtitle": "Aberto todos os dias até as 2h da manhã." },
+  "contact": { "whatsapp": "550000000000", "instagram": null, "address": "Avenida Demonstração, 250 — Praia (endereço de demonstração)", "region": "Entregamos em toda a cidade" },
+  "hours": {
+    "timezone": "America/Sao_Paulo",
+    "whenClosed": "block",
+    "weekly": {
+      "sun": [{ "open": "10:00", "close": "02:00" }],
+      "mon": [{ "open": "10:00", "close": "02:00" }],
+      "tue": [{ "open": "10:00", "close": "02:00" }],
+      "wed": [{ "open": "10:00", "close": "02:00" }],
+      "thu": [{ "open": "10:00", "close": "02:00" }],
+      "fri": [{ "open": "10:00", "close": "02:00" }],
+      "sat": [{ "open": "10:00", "close": "02:00" }]
+    }
+  },
+  "ordering": { "delivery": true, "pickup": true, "minOrder": 0, "deliveryTime": "40–60 min", "pickupTime": "20 min", "paymentMethods": ["pix", "cash", "credit", "debit"] },
+  "delivery": { "mode": "fixed", "fixedFee": 5, "freeAbove": 60 },
+  "whatsappMessage": { "header": "🌴 *NOVO PEDIDO - AÇAÍ TROPICAL*", "footer": "Pedido feito pelo cardápio digital. Aguarde a confirmação da loja 💜" },
+  "categories": [
+    { "key": "monte-seu-acai", "name": "Monte seu açaí", "icon": "sparkles" },
+    { "key": "tropicais", "name": "Açaí tropical", "icon": "cup" },
+    { "key": "barcas", "name": "Barcas", "icon": "ship" },
+    { "key": "bebidas", "name": "Bebidas", "icon": "drink" }
+  ],
+  "addonGroups": [
+    {
+      "key": "frutas",
+      "name": "Frutas",
+      "description": "2 frutas grátis. Demais R$ 2,50.",
+      "max": 5,
+      "free": 2,
+      "extraPrice": 2.5,
+      "addons": [
+        { "key": "banana", "name": "Banana" },
+        { "key": "morango", "name": "Morango" },
+        { "key": "manga", "name": "Manga" },
+        { "key": "kiwi", "name": "Kiwi" },
+        { "key": "abacaxi", "name": "Abacaxi" },
+        { "key": "uva", "name": "Uva" }
+      ]
+    },
+    {
+      "key": "crocantes",
+      "name": "Crocantes",
+      "description": "2 grátis. Demais R$ 1,50.",
+      "max": 5,
+      "free": 2,
+      "extraPrice": 1.5,
+      "addons": [
+        { "key": "granola", "name": "Granola" },
+        { "key": "pacoca", "name": "Paçoca" },
+        { "key": "castanha", "name": "Castanha-do-pará", "price": 3, "alwaysPaid": true },
+        { "key": "coco-ralado", "name": "Coco ralado" },
+        { "key": "flocos-arroz", "name": "Flocos de arroz" }
+      ]
+    },
+    {
+      "key": "caldas",
+      "name": "Caldas",
+      "max": 2,
+      "free": 1,
+      "extraPrice": 1,
+      "addons": [
+        { "key": "mel", "name": "Mel" },
+        { "key": "leite-condensado", "name": "Leite condensado" },
+        { "key": "calda-maracuja", "name": "Calda de maracujá" }
+      ]
+    },
+    {
+      "key": "extras",
+      "name": "Extras",
+      "maxPerOption": 2,
+      "addons": [
+        { "key": "whey", "name": "Whey protein (30 g)", "price": 5 },
+        { "key": "nutella", "name": "Nutella", "price": 4 },
+        { "key": "creme-cupuacu", "name": "Creme de cupuaçu", "price": 3.5 }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "key": "monte-seu-acai",
+      "category": "monte-seu-acai",
+      "name": "Monte seu açaí tropical",
+      "description": "Escolha tamanho, frutas, crocantes e caldas.",
+      "image": "images/monte-seu-acai.svg",
+      "badges": ["mais-vendido"],
+      "featured": true,
+      "variants": [
+        { "key": "300ml", "name": "300 ml", "price": 13 },
+        { "key": "500ml", "name": "500 ml", "price": 19, "rules": { "frutas": { "free": 3 } } },
+        { "key": "700ml", "name": "700 ml", "price": 25, "rules": { "frutas": { "free": 3 }, "crocantes": { "free": 3 } } }
+      ],
+      "addonGroups": ["frutas", "crocantes", "caldas", "extras"]
+    },
+    {
+      "key": "acai-fit",
+      "category": "tropicais",
+      "name": "Açaí Fit",
+      "description": "Açaí zero açúcar com banana, morango, granola sem açúcar e whey.",
+      "image": "images/acai-fit.svg",
+      "badges": ["zero-acucar"],
+      "variants": [
+        { "key": "400ml", "name": "400 ml", "price": 21 },
+        { "key": "600ml", "name": "600 ml", "price": 27 }
+      ],
+      "addonGroups": ["extras"]
+    },
+    {
+      "key": "acai-havaiano",
+      "category": "tropicais",
+      "name": "Açaí Havaiano",
+      "description": "Açaí com abacaxi, manga, coco ralado e calda de maracujá.",
+      "image": "images/acai-havaiano.svg",
+      "badges": ["novo"],
+      "variants": [
+        { "key": "400ml", "name": "400 ml", "price": 20 },
+        { "key": "600ml", "name": "600 ml", "price": 26 }
+      ],
+      "addonGroups": ["extras"]
+    },
+    {
+      "key": "barca-tropical",
+      "category": "barcas",
+      "name": "Barca Tropical",
+      "description": "Barca com açaí, 4 frutas e 3 crocantes à escolha.",
+      "image": "images/barca.svg",
+      "variantLabel": "Tamanho da barca",
+      "variants": [
+        { "key": "pequena", "name": "Pequena", "price": 38, "rules": { "frutas": { "free": 4, "max": 6 }, "crocantes": { "free": 3 } } },
+        { "key": "media", "name": "Média", "price": 52, "rules": { "frutas": { "free": 5, "max": 6 }, "crocantes": { "free": 4 } } },
+        { "key": "grande", "name": "Grande", "price": 69, "compareAtPrice": 75, "rules": { "frutas": { "free": 6, "max": 6 }, "crocantes": { "free": 5 } } }
+      ],
+      "addonGroups": ["frutas", "crocantes", "caldas", "extras"]
+    },
+    { "key": "agua-coco", "category": "bebidas", "name": "Água de coco 300 ml", "image": "images/agua-coco.svg", "price": 7 },
+    { "key": "suco-maracuja", "category": "bebidas", "name": "Suco de maracujá 400 ml", "image": "images/suco.svg", "price": 9 }
+  ]
+}
