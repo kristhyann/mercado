@@ -74,13 +74,14 @@ scene.add(new THREE.Mesh(new THREE.SphereGeometry(300, 32, 16), new THREE.Shader
 const moon = new THREE.DirectionalLight(0x9DB4FF, 1.6); moon.castShadow = true; moon.shadow.mapSize.set(2048, 2048); { const c = moon.shadow.camera; c.left = -6; c.right = 6; c.top = 6; c.bottom = -6; c.far = 40; } moon.shadow.bias = -.0005; scene.add(moon); scene.add(moon.target);
 const hemi = new THREE.HemisphereLight(0x5A6AB0, 0x1A1630, .7); scene.add(hemi);
 const warm = new THREE.PointLight(0xFFB070, 0, 8, 1.5); scene.add(warm);
-const LOOK = { night: [0x0A0E26, 0x1E2650, 0x9DB4FF, 1.6, .7], dream: [0x1A0C38, 0x4A2A7A, 0xB89BFF, 1.5, .8], lab: [0x0B1026, 0x1B2A4A, 0xCFE0FF, 1.8, 1.0], folk: [0x1A1430, 0x6A4A3A, 0xFFD9A0, 1.6, .7], morning: [0x7CC4F0, 0xFFE8C8, 0xFFE2B0, 2.4, 1.2] };
+const beam = new THREE.SpotLight(0xB8C8FF, 30, 12, .5, .6, 1.2); scene.add(beam); scene.add(beam.target);
+const LOOK = { night: [0x0A0E26, 0x1E2650, 0xA8BEFF, 2.4, 1.25], dream: [0x1A0C38, 0x4A2A7A, 0xC0A8FF, 2.2, 1.25], lab: [0x0B1026, 0x1B2A4A, 0xCFE0FF, 1.8, 1.0], folk: [0x1A1430, 0x6A4A3A, 0xFFD9A0, 2.2, 1.2], morning: [0x7CC4F0, 0xFFE8C8, 0xFFE2B0, 2.4, 1.2] };
 const setLook = k => { const L = LOOK[k]; skyU.top.value.set(L[0]); skyU.bot.value.set(L[1]); moon.color.set(L[2]); moon.intensity = L[3]; hemi.intensity = L[4]; };
 const SETS = {}; const mkSet = (n, x) => { const g = grp(); g.position.set(x, 0, 0); SETS[n] = g; return g; };
 
 // ---------- QUARTO (x=0) ----------
 const room = mkSet('room', 0);
-const wallM = MAT(0x3A4A7A, .95);
+const wallM = MAT(0x5A6AA8, .95);
 box(7, .1, 7, MAT(0x5A4636, .9), 0, -.05, 0, room); box(7, 4, .15, wallM, 0, 2, -3, room); box(.15, 4, 7, wallM, -3.2, 2, 0, room); box(.15, 4, 7, wallM, 3.2, 2, 0, room);
 // janela com lua
 const winG = grp(room); winG.position.set(1.4, 2.0, -2.92); box(1.6, 1.5, .05, BASIC(0x1A2A5A), 0, 0, 0, winG); box(1.72, .08, .1, 0xDDE3F0, 0, .78, .03, winG); box(1.72, .08, .1, 0xDDE3F0, 0, -.78, .03, winG); box(.08, 1.6, .1, 0xDDE3F0, 0, 0, .03, winG); box(1.72, .06, .1, 0xDDE3F0, 0, 0, .03, winG);
@@ -102,7 +103,7 @@ box(1.2, 2.4, .6, 0x5A4030, -2.4, 1.2, -2.6, room); box(.9, 2.1, .06, 0x4A3828, 
 const rug = add(new THREE.CylinderGeometry(1.1, 1.1, .02, 32), MAT(0x7A4A8A, .95), .4, .01, 1.0, room);
 // pessoa deitada
 const sleeper = buildPerson({ skin: 0xC98E66, shirt: 0x8FA8E0, pants: 0x8FA8E0, hair: 0x2B1A10 }); room.add(sleeper.root);
-sleeper.root.position.set(-.6, .62, -.82 - .02); sleeper.root.rotation.set(-Math.PI / 2, 0, 0);
+sleeper.root.position.set(-.6, .7, .3); sleeper.root.rotation.set(-Math.PI / 2, 0, 0);
 const layDown = () => { poseP(sleeper, { ...PP.lie, lx: .05, lz: .15, rx: .05, rz: -.15 }, 0, 0); };
 // sombra estilizada
 const shadowM = new THREE.MeshBasicMaterial({ color: 0x05030C, transparent: true, opacity: .0, depthWrite: false });
@@ -112,7 +113,7 @@ const smokeT = canvasTex(64, 64, g => { const r = g.createRadialGradient(32, 32,
 const smoke = []; for (let i = 0; i < 14; i++) { const s = sprite(smokeT, rr(.4, .8)); s.userData = { y: rr(.2, 2.3), p: rr(0, 6), x: rr(-.35, .35) }; shade.add(s); smoke.push(s); }
 const setShade = op => { shadowM.opacity = op; smoke.forEach(s => s.material.opacity = op); shade.visible = op > .01; };
 // peso no peito e pulmões
-const weight = sph(.22, new THREE.MeshBasicMaterial({ color: 0x120A24, transparent: true, opacity: 0, depthWrite: false }), 0, 0, 0, scene);
+const weight = sph(.13, new THREE.MeshBasicMaterial({ color: 0x120A24, transparent: true, opacity: 0, depthWrite: false }), 0, 0, 0, scene);
 const lungs = grp(scene); [-1, 1].forEach(s => { const l = sph(.1, MAT(0xFF8FB0, .5, { emissive: 0xFF5080, emissiveIntensity: .6, transparent: true, opacity: .9 }), s * .07, 0, 0, lungs); l.scale.set(.8, 1.2, .6); });
 // cadeados
 const lockT = canvasTex(128, 128, g => { g.strokeStyle = '#FFD21F'; g.lineWidth = 14; g.beginPath(); g.arc(64, 50, 24, Math.PI, 0); g.stroke(); g.fillStyle = '#FFD21F'; g.fillRect(28, 50, 72, 56); g.fillStyle = '#111'; g.fillRect(58, 66, 12, 24); });
@@ -151,7 +152,7 @@ const skirt = add(new THREE.ConeGeometry(.32, .75, 16, 1, true), MAT(0x3A2A4A, .
 const house = mkSet('house', 160);
 box(6, .1, 6, MAT(0x6A5040, .9), 0, -.05, 0, house); box(6, 3.5, .15, MAT(0xC9A880, .95), 0, 1.75, -2.5, house);
 const bed2 = grp(house); bed2.position.set(0, 0, -.8); box(1.4, .4, 2.2, 0x7A5A3A, 0, .2, 0, bed2); box(1.32, .2, 2.05, MAT(0xF2EAD8, .9), 0, .5, .02, bed2); box(.6, .12, .35, 0xFFFFFF, 0, .66, -.8, bed2);
-const man = buildPerson({ skin: 0xA8704A, shirt: 0xE07B2A, pants: 0x3B4A6A, hair: 0x111111 }); house.add(man.root); man.root.position.set(0, .62, -1.6); man.root.rotation.set(-Math.PI / 2, 0, 0);
+const man = buildPerson({ skin: 0xA8704A, shirt: 0xE07B2A, pants: 0x3B4A6A, hair: 0x111111 }); house.add(man.root); man.root.position.set(0, .7, .05); man.root.rotation.set(-Math.PI / 2, 0, 0);
 const belly = sph(.24, MAT(0xE07B2A, .9), 0, .3, .12, man.hips); belly.scale.set(1, 1, .8);
 const pot = grp(house); pot.position.set(1.1, .55, -1.3); box(.5, .55, .45, 0x5A4030, 0, -.28, 0, pot); cyl(.18, .15, .2, 0x2A2A2A, 0, .1, 0, pot, 16); cyl(.17, .17, .02, 0x4A2A1A, 0, .19, 0, pot, 16); for (let i = 0; i < 3; i++) { const s = sprite(smokeT, .2); s.material.color.set(0xFFFFFF); s.material.opacity = .25; s.position.set(0, .35 + i * .15, 0); pot.add(s); }
 const foot = grp(house); { const fm = new THREE.MeshBasicMaterial({ color: 0x120A1E, transparent: true, opacity: .75, depthWrite: false }); cap(.12, .3, fm, 0, 0, 0, foot).rotation.x = Math.PI / 2; cap(.08, .9, fm, 0, .55, -.12, foot); }
@@ -191,29 +192,29 @@ const SHOTS = [
   [S(3), (t, k) => { setLook('night'); room.visible = true; layDown(); eyesOpen(sleeper, t > T_ACORDA2 + .1); face(sleeper, 'shock', t);
     const sm = sleeper.root; const tr = Math.sin(t * 30) * .004 * clamp((t - T_CORPO) / .3); sm.position.x = -.6 + tr;
     clampT = t; limbLocks(sleeper, t > T_TRAVA, T_TRAVA);
-    return [V(.9, 2.4, 1.1 - k * .05), V(-.6, .6, -.3)]; }],
+    return [V(1.2, 2.8, 1.7 - k * .05), V(-.6, .7, -.4)]; }],
   // 4 meio dentro do sonho: sombra, presença, peso, respiração
   [S(4), (t, k) => { setLook(t < T_RESP ? 'dream' : 'night'); room.visible = true; layDown(); eyesOpen(sleeper, true); face(sleeper, t < T_RESP ? 'shock' : 'calm', t); dreamM.opacity = t < T_RESP ? .12 + Math.sin(t * 2) * .03 : .0;
     smoke.forEach(s => { s.position.set(s.userData.x + Math.sin(t + s.userData.p) * .08, s.userData.y + Math.sin(t * .7 + s.userData.p) * .05, 0); });
     if (t < T_SOMBRA - .1) { const hp = head(sleeper); return [hp.clone().add(V(.5, 1.0, .9)), hp]; }
     if (t < T_PRES - .1) { setShade(.85 * clamp((t - T_SOMBRA + .1) / .5)); shade.position.set(-2.5, 0, -2.3); return [V(.8, 1.7, 1.8), V(-2.3, 1.3, -2.2)]; }
     if (t < T_PESO - .1) { setShade(.8); shade.position.set(.55, 0, -.2); shade.rotation.y = -1.2; return [V(1.9, 2.0, 2.6), V(-.2, 1.1, -.5)]; }
-    if (t < T_RESP - .1) { weight.visible = true; const c = chest(); weight.position.copy(c).add(V(0, .28 - .06 * ease(clamp((t - T_PESO) / .5)), 0)); weight.material.opacity = .85; return [c.clone().add(V(.6, 1.2, .9)), c]; }
+    if (t < T_RESP - .1) { weight.visible = true; const c = chest(); weight.position.copy(c).add(V(0, .28 - .06 * ease(clamp((t - T_PESO) / .5)), 0)); weight.material.opacity = .7; return [c.clone().add(V(.6, 1.2, .9)), c]; }
     lungs.visible = true; const c = chest(); lungs.position.copy(c).add(V(0, .16, 0)); const br = 1 + Math.sin(t * 2.6) * .15; lungs.scale.setScalar(br * 1.6);
     return [c.clone().add(V(.45, 1.15, .75)), c]; }],
   // 5 Pisadeira nos telhados
   [S(5), (t, k) => { setLook('folk'); if (t < T_VELHA - .1) { folk.visible = true; const u = (t - S(5)) / (T_VELHA - S(5)); const x = lerp(-5.5, -1.5, u); const r = roofs.reduce((a, b) => Math.abs(b.g.position.x - x) < Math.abs(a.g.position.x - x) ? b : a);
       pis.root.position.set(x, r.h + .65, r.g.position.z); pis.root.rotation.y = Math.PI / 2; poseP(pis, { ...PP.stand, lx: -.6, rx: -.6, le: -1.2, re: -1.2 }, .8, t * .6); face(pis, 'calm', t);
-      return [V(folk.position.x + x + 1.5, 2.6, 5.5), V(folk.position.x + x, 2.2, -1)]; }
+      return [V(folk.position.x + x + 1.5, r.h + 2.1, 6.5), V(folk.position.x + x, r.h + 2.2, -1)]; }
     house.visible = true; poseP(man, PP.lie, 0, 0); eyesOpen(man, false); face(man, 'calm', t); warm.intensity = 2.5; warm.position.set(161.2, 1.2, -1.0);
-    foot.visible = true; const d = ease(clamp((t - T_VELHA) / 1.8)); const c = man.hips.localToWorld(V(0, .35, .2)); foot.position.copy(c).add(V(0, lerp(1.4, .35, d), 0));
+    foot.visible = true; const d = ease(clamp((t - T_VELHA) / 1.8)); const c = man.hips.localToWorld(V(0, .35, .2)); foot.position.copy(c).sub(house.position).add(V(.1, lerp(1.6, .62, d), .1)); foot.scale.setScalar(1.3);
     return [house.position.clone().add(V(1.6, 2.3, 1.8)), house.position.clone().add(V(0, .9, -1.2))]; }],
   // 6 dicas: dura pouco, passa sozinha, mexer os dedos, calma, médico
   [S(6), (t, k) => { const morning = t > T_SOZ; setLook(morning ? 'morning' : 'night'); room.visible = true; layDown();
     const sec = Math.round(lerp(0, 120, clamp((t - T_DURA) / (T_SOZ - T_DURA)))); paintClock(morning ? '07:00' : '03:' + String(12 + Math.floor(sec / 60)).padStart(2, '0'));
     eyesOpen(sleeper, true); face(sleeper, morning ? 'happy' : 'neutral', t); setShade(.6 * (1 - clamp((t - T_SOZ + .6) / .6))); shade.position.set(-2.4, 0, .6);
     if (t > T_TENTE - .1 && t < T_CALMA) { hand.visible = true; fingers.forEach(([f1, f2], i) => { const w = Math.max(0, Math.sin(t * 8 + i * .9)) * .6; f1.rotation.x = w; f2.rotation.x = w * .8; });
-      return [room.position.clone().add(V(.25, 1.15, .95)), room.position.clone().add(V(-.1, .66, .6))]; }
+      return [room.position.clone().add(V(.35, 1.4, 1.35)), room.position.clone().add(V(-.1, .66, .6))]; }
     if (t < T_DORM - .1) return [V(1.6, 2.3, 2.4), V(-.2, 1.0, -1.0)];
     return [V(1.2, 2.6, 3.2 - (t - T_DORM) * .05), V(-.5, .8, -.6)]; }],
   // 7 CTA
@@ -226,7 +227,7 @@ window.draw = function (t) {
   const [cp, tg] = SHOTS[i][1](t, t - SHOTS[i][0]);
   cp.x += Math.sin(t * .35) * .02; cp.y += Math.sin(t * .27) * .015;
   cam.position.copy(cp); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
-  moon.position.copy(tg).add(V(3, 6, -5)); moon.target.position.copy(tg);
+  moon.position.copy(tg).add(V(3, 6, -5)); moon.target.position.copy(tg); beam.intensity = room.visible ? 30 : 0; beam.position.set(1.4, 3.2, -2.6); beam.target.position.set(-.6, .6, -.4);
   fixed($('hook'), t < T_ALG - .05 ? pop(t - .02, .3) * (1 - clamp((t - T_ALG + .2) / .15)) : 0);
   fixed($('title'), win(t, T_PARA - .1, S(2)) ? pop(t - T_PARA + .1, .35) : 0);
   const tg2 = [$('t1'), $('t2')]; tg2.forEach(e => e.style.opacity = 0); $('big').style.opacity = 0;
