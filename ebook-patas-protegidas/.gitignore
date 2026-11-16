@@ -1,0 +1,6 @@
+# arquivos intermediários gerados pelo build
+build/ebook.html
+build/fichas.html
+build/editavel.html
+build/estrutura.json
+build/__pycache__/

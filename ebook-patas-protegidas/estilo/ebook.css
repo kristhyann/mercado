@@ -1,0 +1,411 @@
+/* =========================================================
+   PATAS PROTEGIDAS — Folha de estilo editorial
+   Formato: A5 (148 × 210 mm) — ótimo para celular e impressão
+   ========================================================= */
+
+@font-face { font-family: "Fraunces"; src: url("fontes/fraunces-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Fraunces"; src: url("fontes/fraunces-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Fraunces"; src: url("fontes/fraunces-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+@font-face { font-family: "Fraunces"; src: url("fontes/fraunces-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+@font-face { font-family: "Fraunces"; src: url("fontes/fraunces-latin-800-normal.woff2") format("woff2"); font-weight: 800; }
+@font-face { font-family: "Nunito Sans"; src: url("fontes/nunito-sans-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Nunito Sans"; src: url("fontes/nunito-sans-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Nunito Sans"; src: url("fontes/nunito-sans-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+@font-face { font-family: "Nunito Sans"; src: url("fontes/nunito-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+@font-face { font-family: "Nunito Sans"; src: url("fontes/nunito-sans-latin-800-normal.woff2") format("woff2"); font-weight: 800; }
+
+:root {
+  --verde-escuro: #1d4a39;
+  --verde: #2f6b52;
+  --verde-medio: #5b9677;
+  --verde-claro: #a9cbb0;
+  --verde-pastel: #e4efe5;
+  --bege: #f5eee2;
+  --bege-medio: #ece0cc;
+  --bege-escuro: #d8c6a8;
+  --laranja: #e48a45;
+  --laranja-escuro: #bf6526;
+  --laranja-claro: #fbe6d4;
+  --vermelho: #c0392b;
+  --vermelho-claro: #f9e1dd;
+  --texto: #22302a;
+  --texto-suave: #55645c;
+  --branco: #ffffff;
+}
+
+/* ---------------- Páginas ---------------- */
+@page {
+  size: 148mm 210mm;
+  margin: 17mm 13mm 17mm 13mm;
+  @top-left {
+    content: string(capitulo);
+    font-family: "Nunito Sans"; font-size: 6.6pt; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--verde-medio);
+    vertical-align: bottom; padding-bottom: 3mm;
+  }
+  @top-right {
+    content: "PATAS PROTEGIDAS";
+    font-family: "Nunito Sans"; font-size: 6.6pt; font-weight: 800;
+    letter-spacing: .14em; color: var(--laranja);
+    vertical-align: bottom; padding-bottom: 3mm;
+  }
+  @bottom-center {
+    content: counter(page);
+    font-family: "Fraunces"; font-size: 8.5pt; font-weight: 600; color: var(--verde-escuro);
+    vertical-align: top; padding-top: 4mm;
+  }
+}
+@page capa      { margin: 0; @top-left { content: none; } @top-right { content: none; } @bottom-center { content: none; } }
+@page abertura  { margin: 0; @top-left { content: none; } @top-right { content: none; } @bottom-center { content: none; } }
+@page inteira   { margin: 0; @top-left { content: none; } @top-right { content: none; } @bottom-center { content: none; } }
+@page preliminar { @top-left { content: none; } @top-right { content: none; } }
+@page ficha     { margin: 11mm 11mm 13mm 11mm; @top-left { content: none; } @top-right { content: "PATAS PROTEGIDAS · FICHA IMPRIMÍVEL"; } }
+
+html { font-size: 9.4pt; }
+body {
+  font-family: "Nunito Sans", sans-serif;
+  color: var(--texto);
+  line-height: 1.52;
+  margin: 0;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  text-rendering: optimizeLegibility;
+}
+* { box-sizing: border-box; }
+
+/* ---------------- Tipografia ---------------- */
+h1, h2, h3, .h4 { font-family: "Fraunces", serif; color: var(--verde-escuro); line-height: 1.15; hyphens: none; break-after: avoid; }
+h2 {
+  font-size: 15pt; font-weight: 700; margin: 7mm 0 2.5mm;
+  padding-top: 2.5mm; border-top: 1.4pt solid var(--verde-claro);
+  position: relative;
+}
+h2 .num {
+  display: inline-block; font-family: "Nunito Sans"; font-weight: 800;
+  font-size: 7.5pt; color: var(--branco); background: var(--laranja);
+  border-radius: 10pt; padding: .7pt 6pt; margin-right: 6pt; vertical-align: 3pt; letter-spacing: .04em;
+}
+h3 { font-size: 11.6pt; font-weight: 700; margin: 5mm 0 1.5mm; color: var(--verde); }
+.h4 { font-family: "Nunito Sans"; font-size: 8.6pt; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--laranja-escuro); margin: 4mm 0 1mm; }
+p { margin: 0 0 2.4mm; text-align: left; orphans: 2; widows: 2; }
+strong { font-weight: 800; color: var(--verde-escuro); }
+em { font-style: italic; }
+a { color: var(--verde); text-decoration: none; }
+ul, ol { margin: 0 0 2.6mm; padding-left: 5mm; }
+li { margin-bottom: .9mm; }
+ul li::marker { color: var(--laranja); font-size: 1.1em; }
+ol li::marker { color: var(--verde); font-weight: 800; }
+hr { border: 0; border-top: 1pt dashed var(--bege-escuro); margin: 4mm 0; }
+
+.lead {
+  font-family: "Fraunces"; font-size: 11pt; line-height: 1.45; color: var(--verde-escuro);
+  margin-bottom: 4mm; font-weight: 400;
+}
+.lead::first-letter {
+  float: left; font-size: 34pt; line-height: .9; font-weight: 800; color: var(--laranja);
+  padding: 1.2mm 2mm 0 0;
+}
+
+/* ---------------- Quebras ---------------- */
+.quebra { break-after: page; height: 0; }
+.capitulo { break-before: page; }
+.evitar-quebra, .box, figure, table, .passo, .grid-cards > div { break-inside: avoid; }
+
+/* ---------------- Caixas ---------------- */
+.box {
+  border-radius: 3.2mm; padding: 3.2mm 3.8mm 1.4mm; margin: 3.5mm 0 4mm;
+  background: var(--verde-pastel); border-left: 2.4mm solid var(--verde);
+  font-size: .96rem;
+}
+.box-titulo {
+  font-family: "Nunito Sans"; font-weight: 800; font-size: 7.8pt; letter-spacing: .1em;
+  text-transform: uppercase; margin-bottom: 1.4mm; display: flex; align-items: center; gap: 2mm;
+  color: var(--verde-escuro);
+}
+.box-titulo svg { width: 4.4mm; height: 4.4mm; flex: none; }
+.box p:last-child, .box ul:last-child, .box ol:last-child { margin-bottom: 1.6mm; }
+.box.dica { background: var(--verde-pastel); border-color: var(--verde-medio); }
+.box.info { background: var(--bege); border-color: var(--bege-escuro); }
+.box.info .box-titulo { color: #7a5a2b; }
+.box.alerta { background: var(--laranja-claro); border-color: var(--laranja); }
+.box.alerta .box-titulo { color: var(--laranja-escuro); }
+.box.vet { background: #e6f0f4; border-color: #3f7d99; }
+.box.vet .box-titulo { color: #2b5f77; }
+.box.proibido, .box.emergencia { background: var(--vermelho-claro); border-color: var(--vermelho); }
+.box.proibido .box-titulo, .box.emergencia .box-titulo { color: var(--vermelho); }
+.box.mito { background: #f1ecf6; border-color: #7b62a3; }
+.box.mito .box-titulo { color: #5b4485; }
+.box.citacao {
+  background: none; border: 0; border-left: 0; text-align: center; padding: 5mm 6mm;
+  font-family: "Fraunces"; font-style: italic; font-size: 12.5pt; color: var(--verde-escuro); line-height: 1.4;
+}
+.box.citacao::before { content: "“"; display: block; font-size: 40pt; line-height: .6; color: var(--laranja); font-style: normal; }
+
+/* Cartões de doença / primeiros socorros */
+.card {
+  border: 1pt solid var(--bege-escuro); border-radius: 3.5mm; margin: 4mm 0 5mm; overflow: hidden;
+  background: var(--branco);
+}
+.card-topo {
+  background: var(--verde-escuro); color: var(--branco); padding: 2.6mm 4mm;
+  display: flex; align-items: center; gap: 3mm;
+}
+.card-topo h3 { color: var(--branco); margin: 0; font-size: 13pt; }
+.card-topo .tag { margin-left: auto; font-size: 6.6pt; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; background: rgba(255,255,255,.16); padding: .8mm 2.2mm; border-radius: 3mm; white-space: nowrap; }
+.card-topo svg { width: 6mm; height: 6mm; flex: none; }
+.card-corpo { padding: 2.6mm 4mm 1.4mm; }
+.card-corpo .h4 { margin: 2.4mm 0 .6mm; display: flex; align-items: center; gap: 1.6mm; font-size: 7.4pt; }
+.card-corpo .h4::before { content: ""; width: 2.2mm; height: 2.2mm; border-radius: 50%; background: var(--laranja); flex: none; }
+.card-corpo .h4:first-child { margin-top: .5mm; }
+.card-corpo p, .card-corpo ul { font-size: .95rem; margin-bottom: 1.5mm; }
+.card.socorro .card-topo { background: var(--vermelho); }
+.card.socorro .card-corpo .h4.nao::before { background: var(--vermelho); }
+.card.socorro .card-corpo .h4.nao { color: var(--vermelho); }
+.card.socorro .card-corpo .h4.fazer::before { background: var(--verde); }
+.card.socorro .card-corpo .h4.fazer { color: var(--verde); }
+.card.projeto .card-topo { background: var(--laranja-escuro); }
+.card.doenca .card-topo { background: var(--verde-escuro); }
+
+/* Passo a passo */
+.passos { counter-reset: passo; margin: 3mm 0; }
+.passo {
+  display: grid; grid-template-columns: 8mm 1fr; gap: 2.6mm; margin-bottom: 2.6mm; align-items: start;
+}
+.passo::before {
+  counter-increment: passo; content: counter(passo);
+  width: 7.5mm; height: 7.5mm; border-radius: 50%; background: var(--laranja); color: #fff;
+  font-family: "Fraunces"; font-weight: 800; font-size: 11pt; display: flex; align-items: center; justify-content: center;
+}
+.passo > div p:last-child { margin-bottom: 0; }
+.passo strong { display: block; font-size: 1.02rem; }
+
+/* Grade de mini-cartões */
+.grid-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2.6mm; margin: 3mm 0 4mm; }
+.grid-cards.tres { grid-template-columns: 1fr 1fr 1fr; }
+.grid-cards > div {
+  background: var(--bege); border-radius: 3mm; padding: 2.6mm 3mm 1.2mm; font-size: .9rem;
+}
+.grid-cards > div p { margin-bottom: 1.2mm; }
+.grid-cards > div strong:first-child { display: block; font-family: "Fraunces"; font-size: 1.12rem; margin-bottom: .6mm; }
+.grid-cards.verde > div { background: var(--verde-pastel); }
+
+/* ---------------- Tabelas ---------------- */
+table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 3mm 0 4.5mm; font-size: .88rem; line-height: 1.35; border-radius: 2.6mm; overflow: hidden; border: 1pt solid var(--bege-escuro); }
+th { background: var(--verde-escuro); color: #fff; font-weight: 800; text-align: left; padding: 1.8mm 2.2mm; font-size: .84rem; letter-spacing: .02em; }
+td { padding: 1.6mm 2.2mm; border-top: 1pt solid var(--bege-medio); vertical-align: top; }
+tr:nth-child(even) td { background: var(--bege); }
+table.proibidos th { background: var(--vermelho); }
+table.permitidos th { background: var(--verde); }
+td.nao { color: var(--vermelho); font-weight: 800; }
+td.sim { color: var(--verde); font-weight: 800; }
+td:first-child { font-weight: 700; }
+
+/* ---------------- Figuras ---------------- */
+figure { margin: 3.5mm 0 4.5mm; }
+figure img, figure svg { width: 100%; height: auto; display: block; border-radius: 3mm; }
+figure.photo img { object-fit: cover; box-shadow: 0 1.2mm 3mm rgba(30,60,45,.18); }
+figure.direita { float: right; width: 44%; margin: 1mm 0 2mm 4mm; }
+figure.esquerda { float: left; width: 44%; margin: 1mm 4mm 2mm 0; }
+figure.meia { width: 62%; margin-left: auto; margin-right: auto; }
+figure.alta img { height: 78mm; }
+figure.media img { height: 58mm; }
+figure.baixa img { height: 42mm; }
+figure.redonda img { border-radius: 50%; aspect-ratio: 1; }
+figcaption { font-size: 7.2pt; color: var(--texto-suave); margin-top: 1.6mm; font-style: italic; line-height: 1.35; }
+figure.ilustra { background: var(--bege); border-radius: 3.5mm; padding: 3mm; }
+figure.ilustra svg { border-radius: 0; }
+figure.ilustra.branca { background: #fff; border: 1pt solid var(--bege-medio); }
+.limpa { clear: both; }
+
+/* ---------------- Checklists ---------------- */
+ul.check { list-style: none; padding-left: 0; }
+ul.check li { position: relative; padding-left: 6.4mm; margin-bottom: 1.5mm; }
+ul.check li::before {
+  content: ""; position: absolute; left: 0; top: .5mm; width: 3.6mm; height: 3.6mm;
+  border: 1.2pt solid var(--verde); border-radius: 1mm; background: #fff;
+}
+.checklist {
+  background: #fff; border: 1.2pt solid var(--verde-claro); border-radius: 3.5mm;
+  padding: 0 0 1mm; margin: 4mm 0 5mm; break-inside: avoid; overflow: hidden;
+}
+.checklist .box-titulo {
+  background: var(--verde); color: #fff; padding: 2.2mm 4mm; margin-bottom: 2.4mm; font-size: 8pt;
+}
+.checklist ul { padding: 0 4mm; margin-bottom: 1.5mm; }
+.checklist.laranja { border-color: var(--laranja); }
+.checklist.laranja .box-titulo { background: var(--laranja-escuro); }
+
+/* ---------------- Capa ---------------- */
+.capa {
+  page: capa; height: 210mm; width: 148mm; position: relative; overflow: hidden;
+  background: var(--verde-escuro); color: #fff; break-after: page;
+}
+.capa .foto { position: absolute; inset: 0 0 0 0; }
+.capa .foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.capa .veu { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,52,40,.92) 0%, rgba(20,52,40,.55) 30%, rgba(20,52,40,0) 46%, rgba(20,52,40,0) 58%, rgba(20,52,40,.88) 80%, rgba(20,52,40,.98) 100%); }
+.capa .topo { position: absolute; top: 12mm; left: 12mm; right: 12mm; }
+.capa .marca { display: flex; align-items: center; gap: 2.5mm; font-weight: 800; letter-spacing: .26em; font-size: 8.4pt; color: var(--laranja-claro); }
+.capa .marca svg { width: 9mm; height: 9mm; }
+.capa h1 { font-family: "Fraunces"; color: #fff; font-size: 27pt; line-height: 1.02; margin: 5mm 0 0; font-weight: 800; letter-spacing: -.01em; }
+.capa h1 span { color: var(--laranja); }
+.capa .base { position: absolute; bottom: 12mm; left: 12mm; right: 12mm; }
+.capa .sub { font-size: 9.6pt; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; line-height: 1.4; color: #fff; border-top: 1.2pt solid var(--laranja); padding-top: 3mm; }
+.capa .frase { font-family: "Fraunces"; font-style: italic; font-size: 9.6pt; color: var(--verde-claro); margin-top: 3mm; line-height: 1.4; }
+.capa .selo { position: absolute; right: 12mm; top: 50mm; width: 23mm; height: 23mm; border-radius: 50%; background: var(--laranja); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-weight: 800; font-size: 6.4pt; letter-spacing: .06em; line-height: 1.15; transform: rotate(-10deg); box-shadow: 0 1mm 3mm rgba(0,0,0,.25); }
+.capa .selo b { font-family: "Fraunces"; font-size: 15pt; letter-spacing: 0; color: #fff; }
+
+/* ---------------- Páginas preliminares ---------------- */
+.preliminar { page: preliminar; break-before: page; }
+.rosto { text-align: center; padding-top: 30mm; }
+.rosto .logo svg { width: 22mm; height: 22mm; }
+.rosto .projeto { letter-spacing: .3em; font-weight: 800; color: var(--laranja); font-size: 8pt; margin-top: 3mm; }
+.rosto h1 { font-size: 22pt; margin: 6mm 0 3mm; }
+.rosto .sub { font-family: "Fraunces"; font-size: 11pt; color: var(--texto-suave); line-height: 1.45; padding: 0 6mm; }
+.rosto .frase { margin-top: 18mm; font-family: "Fraunces"; font-style: italic; font-size: 11pt; color: var(--verde); padding: 0 8mm; }
+.rosto .edicao { margin-top: 22mm; font-size: 7.4pt; color: var(--texto-suave); line-height: 1.6; }
+
+.creditos { font-size: 7.6pt; color: var(--texto-suave); padding-top: 95mm; line-height: 1.55; }
+.creditos strong { color: var(--texto); }
+
+/* Sumário */
+.sumario h1 { font-size: 22pt; margin: 0 0 1mm; }
+.sumario .kicker { margin-bottom: 4mm; }
+.sumario ol { list-style: none; padding: 0; margin: 0; }
+.sumario li.cap { margin: 2.2mm 0 .4mm; break-inside: avoid; }
+.sumario li.cap > a { display: flex; align-items: baseline; gap: 2mm; font-family: "Fraunces"; font-weight: 700; font-size: 10.4pt; color: var(--verde-escuro); }
+.sumario li.cap > a .n { font-family: "Nunito Sans"; font-size: 7pt; font-weight: 800; color: #fff; background: var(--verde); border-radius: 2mm; padding: .2mm 1.6mm; min-width: 6.4mm; text-align: center; }
+.sumario a .t { flex: 1; }
+.sumario a::after { content: target-counter(attr(href), page); font-family: "Fraunces"; font-weight: 700; color: var(--laranja-escuro); }
+.sumario ol.secoes { padding-left: 8.6mm; margin: .6mm 0 0; }
+.sumario ol.secoes li { margin: 0; font-size: 7.6pt; line-height: 1.45; }
+.sumario ol.secoes a { display: flex; gap: 1.6mm; color: var(--texto-suave); }
+.sumario ol.secoes a .t { border-bottom: .6pt dotted var(--bege-escuro); }
+.sumario ol.secoes a::after { font-family: "Nunito Sans"; font-weight: 700; font-size: 7.4pt; color: var(--verde-medio); }
+
+.kicker { font-size: 7.2pt; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--laranja); }
+
+/* ---------------- Abertura de capítulo ---------------- */
+.abertura {
+  page: abertura; break-before: page; height: 210mm; width: 148mm; position: relative; overflow: hidden;
+  background: var(--verde-escuro); color: #fff;
+}
+.abertura .foto { position: absolute; left: 0; top: 0; width: 100%; height: 112mm; }
+.abertura .foto img { width: 100%; height: 100%; object-fit: cover; }
+.abertura .foto::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(29,74,57,0) 55%, rgba(29,74,57,1) 100%); }
+.abertura .padrao { position: absolute; left: 0; top: 0; width: 100%; height: 112mm; }
+.abertura .padrao svg { width: 100%; height: 100%; display: block; }
+.abertura .texto { position: absolute; left: 12mm; right: 12mm; top: 100mm; }
+.abertura .numero { font-family: "Fraunces"; font-size: 13pt; font-weight: 700; color: var(--laranja); letter-spacing: .04em; display: flex; align-items: center; gap: 3mm; }
+.abertura .numero::after { content: ""; flex: 1; height: 1pt; background: rgba(255,255,255,.3); }
+.abertura h1 { color: #fff; font-size: 23pt; font-weight: 800; margin: 2mm 0 3mm; line-height: 1.05; letter-spacing: -.01em; string-set: capitulo attr(data-curto); }
+.abertura .resumo { font-family: "Fraunces"; font-style: italic; font-size: 10.4pt; color: var(--verde-claro); line-height: 1.4; margin-bottom: 4mm; }
+.abertura .aprende { background: rgba(255,255,255,.08); border-radius: 3mm; padding: 3mm 4mm 1.5mm; }
+.abertura .aprende .kicker { color: var(--laranja-claro); margin-bottom: 1.5mm; }
+.abertura .aprende ul { margin: 0; padding-left: 4.4mm; font-size: 8.2pt; columns: 2; column-gap: 5mm; }
+.abertura .aprende li { margin-bottom: .8mm; break-inside: avoid; color: #eef5f0; }
+.abertura .icone-cap { position: absolute; right: 12mm; top: 88mm; width: 20mm; height: 20mm; border-radius: 50%; background: var(--laranja); display: flex; align-items: center; justify-content: center; box-shadow: 0 1mm 4mm rgba(0,0,0,.3); }
+.abertura .icone-cap svg { width: 11mm; height: 11mm; }
+
+/* ---------------- Página de alerta vermelho ---------------- */
+.alerta-vermelho { page: inteira; break-before: page; height: 210mm; background: var(--vermelho); color: #fff; padding: 13mm 12mm; position: relative; overflow: hidden; }
+.alerta-vermelho h2 { color: #fff; border: 0; font-size: 24pt; margin: 2mm 0 2mm; padding: 0; }
+.alerta-vermelho .kicker { color: #ffd9cf; }
+.alerta-vermelho p.intro { font-size: 9pt; color: #ffe9e4; margin-bottom: 4mm; }
+.alerta-vermelho ul { list-style: none; padding: 0; columns: 2; column-gap: 4mm; }
+.alerta-vermelho li { break-inside: avoid; background: rgba(255,255,255,.12); border-radius: 2.5mm; padding: 2mm 2.6mm 2mm 7mm; margin-bottom: 2.2mm; font-size: 7.9pt; line-height: 1.32; position: relative; }
+.alerta-vermelho li::before { content: "!"; position: absolute; left: 2mm; top: 1.9mm; width: 3.6mm; height: 3.6mm; border-radius: 50%; background: #fff; color: var(--vermelho); font-weight: 800; font-size: 7pt; display: flex; align-items: center; justify-content: center; }
+.alerta-vermelho li strong { color: #fff; }
+.alerta-vermelho .rodape { position: absolute; left: 12mm; right: 12mm; bottom: 11mm; background: #fff; color: var(--vermelho); border-radius: 3mm; padding: 3mm 4mm; font-weight: 800; font-size: 8.6pt; text-align: center; }
+
+/* ---------------- Fichas imprimíveis ---------------- */
+.ficha { page: ficha; break-before: page; }
+.ficha h2 { border: 0; margin-top: 0; padding-top: 0; font-size: 16pt; display: flex; align-items: center; gap: 3mm; }
+.ficha h2 svg { width: 8mm; height: 8mm; }
+.ficha .instr { font-size: 7.4pt; color: var(--texto-suave); margin-bottom: 3mm; }
+.campos { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4mm; }
+.campo { border-bottom: .9pt solid var(--bege-escuro); padding: 3.4mm 0 .8mm; font-size: 7pt; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--verde); }
+.campo.inteiro { grid-column: 1 / -1; }
+.campo.alto { padding-bottom: 9mm; }
+.ficha table { font-size: 7.6pt; }
+.ficha td { height: 7.6mm; }
+.ficha table.grade td { background: #fff !important; }
+.foto-moldura { border: 1.2pt dashed var(--verde-claro); border-radius: 3mm; height: 34mm; display: flex; align-items: center; justify-content: center; color: var(--verde-medio); font-size: 7pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+
+/* ---------------- Contracapa / mensagem final ---------------- */
+.final { page: inteira; break-before: page; height: 210mm; width: 148mm; position: relative; overflow: hidden; background: var(--verde-escuro); color: #fff; }
+.final .foto { position: absolute; inset: 0 0 auto 0; height: 120mm; }
+.final .foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; }
+.final .foto::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(29,74,57,0) 45%, rgba(29,74,57,1) 100%); }
+.final .texto { position: absolute; left: 12mm; right: 12mm; bottom: 14mm; text-align: center; }
+.final .grande { font-family: "Fraunces"; font-size: 17pt; font-weight: 800; line-height: 1.2; color: #fff; }
+.final .grande span { color: var(--laranja); display: block; }
+.final .logo { margin: 7mm auto 2mm; width: 13mm; height: 13mm; }
+.final .assinatura { letter-spacing: .24em; font-weight: 800; font-size: 7.6pt; color: var(--verde-claro); }
+
+/* Referências */
+.referencias ol { font-size: 7.6pt; line-height: 1.42; padding-left: 5.5mm; }
+.referencias li { margin-bottom: 1.6mm; break-inside: avoid; }
+.referencias a { word-break: break-all; color: var(--verde); }
+.referencias h3 { font-size: 10.5pt; margin-top: 4mm; }
+
+/* Utilidades */
+.centro { text-align: center; }
+.pequeno { font-size: 7.6pt; color: var(--texto-suave); }
+.destaque-num { font-family: "Fraunces"; font-size: 24pt; font-weight: 800; color: var(--laranja); line-height: 1; }
+.duas-col { columns: 2; column-gap: 5mm; }
+.duas-col li { break-inside: avoid; }
+.selo-vet { display: inline-block; font-size: 6.6pt; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; background: #e6f0f4; color: #2b5f77; padding: .4mm 1.8mm; border-radius: 2mm; vertical-align: 1pt; }
+
+/* Etapas numeradas (bloco :::passos) */
+.passos ol { list-style: none; padding-left: 0; counter-reset: passo; margin: 3mm 0 4mm; }
+.passos ol > li { position: relative; padding-left: 10mm; min-height: 8mm; margin-bottom: 2.6mm; break-inside: avoid; }
+.passos ol > li::before {
+  counter-increment: passo; content: counter(passo);
+  position: absolute; left: 0; top: -.4mm; width: 7mm; height: 7mm; border-radius: 50%;
+  background: var(--laranja); color: #fff; font-family: "Fraunces"; font-weight: 800; font-size: 10.5pt;
+  display: flex; align-items: center; justify-content: center;
+}
+.passos ol > li > strong:first-child { display: block; }
+
+/* Itens de checklist "- [ ]" */
+ul:has(> li.ck) { list-style: none; padding-left: 0; }
+li.ck { position: relative; padding-left: 6.4mm; margin-bottom: 1.5mm; }
+li.ck::before {
+  content: ""; position: absolute; left: 0; top: .55mm; width: 3.5mm; height: 3.5mm;
+  border: 1.2pt solid var(--verde); border-radius: 1mm; background: #fff;
+}
+.checklist.laranja li.ck::before { border-color: var(--laranja-escuro); }
+.checklist > ul, .checklist > p { padding-left: 4mm; padding-right: 4mm; }
+.checklist > ul { padding-left: 4mm; }
+.checklist > .h4 { padding: 0 4mm; margin-top: 2mm; }
+.duas-col-check ul { columns: 2; column-gap: 4mm; }
+table, th { hyphens: manual; -webkit-hyphens: manual; }
+td:first-child, th:first-child { min-width: 19mm; }
+.creditos { padding-top: 0; }
+.creditos::before { content: ""; display: block; height: 70mm; }
+table.grade td { height: 7.4mm; background: #fff !important; }
+table.semana th, table.semana td { text-align: center; padding: 1.4mm 1mm; }
+table.semana td:first-child, table.semana th:first-child { text-align: left; min-width: 22mm; }
+table.semana td { height: 6.6mm; background: #fff !important; }
+table.semana td + td { border-left: 1pt solid var(--bege-medio); }
+.referencias h1 { font-size: 22pt; }
+.apresentacao h1 { color: var(--verde-escuro); }
+.ficha ul.check { margin-top: 1mm; }
+.ficha .campos .foto-moldura { margin-top: 3.4mm; }
+.card.projeto .card-corpo ul { margin-bottom: 1mm; }
+/* cartões longos podem quebrar entre páginas */
+.card { break-inside: auto; }
+.card-topo { break-after: avoid; }
+.card-corpo .h4 { break-after: avoid; }
+.card-corpo ul, .card-corpo li { break-inside: avoid; }
+.card-topo .so-tag { display: none; }
+.card-topo .tag { margin-left: 0; font-size: 7.4pt; background: none; padding: 0; letter-spacing: .12em; }
+.card-topo:has(h3) .tag { margin-left: auto; font-size: 6.6pt; background: rgba(255,255,255,.16); padding: .8mm 2.2mm; }
+h2 + .card { margin-top: 2mm; }
+.card { overflow: visible; }
+.card-corpo ul { break-inside: auto; }
+.card-topo { border-radius: 3.3mm 3.3mm 0 0; }
+.alerta-vermelho strong { color: #fff; text-decoration: underline; text-decoration-thickness: .6pt; text-underline-offset: 1.2pt; }
+.alerta-vermelho li strong { text-decoration: none; }
+.alerta-vermelho h2 .num { background: #fff; color: var(--vermelho); }
+.capa, .capa *, .abertura h1, .abertura .resumo, .rosto, .final { hyphens: none; -webkit-hyphens: none; }
