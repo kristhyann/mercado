@@ -1,0 +1,11 @@
+Como o caixa consegue reconhecer um produto só de passar aquelas listras?
+
+Tudo começa no código de barras. Barras pretas e espaços brancos, de larguras diferentes, que formam números. Normalmente, treze.
+
+Os primeiros indicam o país onde o código foi registrado. No Brasil, setecentos e oitenta e nove. Depois vêm a empresa e o produto. E o último número é uma conferência, pra pegar erro de leitura.
+
+Aí entra o scanner. Ele joga luz nas listras: o preto absorve, o branco reflete. Um sensor lê esse padrão de luz e sombra e transforma em números. E aquelas linhas vermelhas cruzadas servem pra ler o código em qualquer posição.
+
+Agora, o detalhe que quase ninguém sabe: o preço não está nas listras. O computador procura esse número no sistema do mercado, acha o nome e o preço… e registra na sua compra. Bip!
+
+Por isso o mercado muda o preço sem mexer na embalagem. Você sabia disso? Comenta aí.
