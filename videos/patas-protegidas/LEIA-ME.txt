@@ -1,0 +1,13 @@
+PATAS PROTEGIDAS: vídeo de apresentação (APOIA.se)
+==================================================
+final.mp4        vídeo final 1920x1080 (16:9), 30 fps, narração + trilha + efeitos + legendas
+capa.jpg         miniatura 1920x1080 para a página
+scene.html       cena 3D (three.js): todas as animações, câmeras, textos e legendas
+musica.py        trilha original gerada por código (piano + cordas), sem direitos de terceiros
+musica.wav       trilha renderizada
+voz.mp3          narração (ElevenLabs, enviada pela pessoa)
+tempos.json      tempo de cada palavra da narração (sincronia das cenas e legendas)
+roteiro_voz.txt  texto da narração
+assets/          materiais do projeto: capa do e-book, páginas (da gravação de tela), logo recortado, fotos dos cachorros
+
+Como refazer: ver o kit em videos/_kit (render.js) e skills/video-3d/kit/scripts/finalizar.sh.

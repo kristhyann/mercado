@@ -1,0 +1,446 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:500;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-500-normal.woff2)}
+@font-face{font-family:P;font-weight:600;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:P;font-weight:700;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-700-normal.woff2)}
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#000;font-family:P,'Noto Color Emoji',sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;opacity:0}
+#vig{left:0;top:0;width:1920px;height:1080px;opacity:1;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,0) 55%,rgba(10,20,10,.42) 100%)}
+#fade{left:0;top:0;width:1920px;height:1080px;background:#0E1A12}
+#sub{left:0;width:1920px;bottom:58px;text-align:center}
+#sub span{display:inline-block;max-width:1500px;background:rgba(12,28,18,.62);color:#fff;font-weight:600;font-size:44px;line-height:1.3;padding:10px 30px;border-radius:14px;text-shadow:0 2px 6px rgba(0,0,0,.4)}
+.card{left:0;width:1920px;text-align:center}
+.card span{display:inline-block;background:#F7EEDC;color:#1E4D2B;font-weight:800;font-size:60px;line-height:1.15;padding:26px 54px;border-radius:30px;box-shadow:0 18px 50px rgba(0,0,0,.28);border:6px solid #2F7A45}
+.card span em{font-style:normal;color:#E07B2A}
+#free{left:0;top:0;transform-origin:50% 50%}
+#free span{display:inline-block;background:#E07B2A;color:#fff;font-weight:800;font-size:54px;padding:12px 40px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.25);border:5px solid #fff}
+#endbg{left:0;top:0;width:1920px;height:1080px;background:radial-gradient(ellipse at 50% 40%,rgba(47,122,69,.86),rgba(18,52,30,.96))}
+#logo{left:0;top:0;transform-origin:50% 50%}
+#logo .box{background:#F7EEDC;border-radius:40px;padding:30px 60px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+#logo img{width:760px;display:block}
+#slogan{left:0;width:1920px;top:640px;text-align:center;color:#fff;font-weight:700;font-size:58px;text-shadow:0 4px 18px rgba(0,0,0,.35)}
+#slogan em{font-style:normal;color:#FFC27A}
+#cta{left:0;width:1920px;top:770px;text-align:center}
+#cta span{display:inline-block;background:#E07B2A;color:#fff;font-weight:700;font-size:40px;padding:16px 42px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+#wm{right:34px;bottom:20px;color:#fff;font-weight:600;font-size:22px;opacity:.5;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+</style></head><body>
+<div id="vig" class="o"></div>
+<div id="card1" class="card o" style="top:110px"><span>VOCÊ NÃO PRECISA PAGAR<br>PARA RECEBER NOSSO <em>E-BOOK</em>.</span></div>
+<div id="card2" class="card o" style="top:110px"><span>MAS, SE PUDER CONTRIBUIR, AJUDE ESSA<br>INFORMAÇÃO A <em>CHEGAR MAIS LONGE</em>.</span></div>
+<div id="free" class="o"><span>E-BOOK GRATUITO</span></div>
+<div id="endbg" class="o"></div>
+<div id="logo" class="o"><div class="box"><img src="assets/logo.png"></div></div>
+<div id="slogan" class="o">Informação que protege, <em>cuidado que salva vidas!</em></div>
+<div id="cta" class="o"><span>Acesse nossa página na APOIA.se e faça parte dessa iniciativa</span></div>
+<div id="sub" class="o"><span></span></div>
+<div id="fade" class="o"></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, rr } from '/_kit/kit.js';
+import { buildPerson, PP, poseP, face, mixP } from '/_kit/pessoas.js';
+await document.fonts.load('700 40px P'); await document.fonts.load('800 40px P'); await document.fonts.load('600 40px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; window.DURATION = TP.duration;
+const ALL = SN.flatMap(s => s.words);
+const WA = (re, n = 0, after = 0) => { const ws = ALL.filter(w => w.start >= after && re.test(w.w)); if (!ws[n]) { console.log('WA MISS', re); return after; } return ws[n].start; };
+const W = 1920, H = 1080;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(30, W / H, .03, 600);
+scene.fog = new THREE.Fog(0xF3E2C0, 18, 75);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const MAT = (c, r = .85, extra = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: r }, extra));
+const add = (geo, mat, x, y, z, par) => { const m = new THREE.Mesh(geo, typeof mat === 'number' ? MAT(mat) : mat); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; par.add(m); return m; };
+const box = (w, h, d, c, x, y, z, par) => add(new THREE.BoxGeometry(w, h, d), c, x, y, z, par);
+const cyl = (rt, rb, h, c, x, y, z, par, seg = 20) => add(new THREE.CylinderGeometry(rt, rb, h, seg), c, x, y, z, par);
+const sph = (r, c, x, y, z, par, ws = 20, hs = 14) => add(new THREE.SphereGeometry(r, ws, hs), c, x, y, z, par);
+const cap = (r, len, c, x, y, z, par) => add(new THREE.CapsuleGeometry(r, len, 8, 16), c, x, y, z, par);
+const BASIC = c => new THREE.MeshBasicMaterial({ color: c, toneMapped: false });
+const TL = new THREE.TextureLoader();
+const tex = async p => { const t = await TL.loadAsync(p); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; };
+const [T_CAPA, T_P1, T_P2, T_P3, T_D1, T_D2, T_D3, T_D4, T_ICON, T_LOGO] = await Promise.all(['assets/capa_ebook.png', 'assets/pag_titulo.jpg', 'assets/pag_comousar.jpg', 'assets/pag_escolher.jpg', 'assets/dog1.jpg', 'assets/dog2.jpg', 'assets/dog3.jpg', 'assets/dog4.jpg', 'assets/logo_icone.png', 'assets/logo.png'].map(tex));
+const canvasTex = (w, h, paint) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); paint(g, w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; t.userData = { c, g }; return t; };
+const GREEN = 0x2F7A45, DGREEN = 0x1E4D2B, BEIGE = 0xF7EEDC, ORANGE = 0xE07B2A;
+
+// ---------- tempos ----------
+const T_AMIGO = WA(/^É$/), T_FAM = WA(/membro/i);
+const T_MAS = WA(/^Mas$/i), T_ALIM = WA(/Conhecer/i), T_PREV = WA(/prevenir/i), T_EMER = WA(/reconhecer/i), T_PROT = WA(/^e$/i, 0, WA(/emergência/i)), T_PROT2 = WA(/proteger/i);
+const T_FOI = WA(/^Foi$/i), T_PATAS = WA(/Patas/i, 0, T_FOI), T_CRI = WA(/Criamos/i), T_CUID = WA(/cuidar/i, 0, T_CRI), T_MELHOR = WA(/melhor/i, 1, T_CRI), T_QUER = WA(/^E$/, 0, T_MELHOR), T_GRAT = WA(/gratuitamente/i);
+const T_COM = WA(/^Com$/i), T_IMP = WA(/impulsionar/i), T_ALC = WA(/alcançar/i), T_PROD = WA(/produzir/i), T_APO = WA(/apoiar/i);
+const T_EB = WA(/^O$/, 0, T_APO + .3), T_SE = WA(/^Se$/i, 0, T_EB), T_5 = WA(/cinco/i), T_10 = WA(/dez/i), T_QQ = WA(/qualquer/i), T_EST = WA(/estará/i), T_NAO = WA(/^E,?$/, 0, WA(/crescer/i)), T_COMP = WA(/compartilhe/i);
+const T_PORQ = WA(/Porque/i), T_END = WA(/Patas/i, 0, T_PORQ), T_SLOG = WA(/Informação/i);
+
+// ---------- céu e luz ----------
+const skyU = { top: { value: new THREE.Color(0x8EC9F0) }, bot: { value: new THREE.Color(0xFBE3B8) } };
+const sky = new THREE.Mesh(new THREE.SphereGeometry(400, 32, 16), new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: false, fog: false, uniforms: skyU,
+  vertexShader: 'varying vec3 vP; void main(){ vP = position; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }',
+  fragmentShader: 'uniform vec3 top; uniform vec3 bot; varying vec3 vP; void main(){ float h = clamp(normalize(vP).y*1.6+.08,0.,1.); gl_FragColor = vec4(mix(bot,top,pow(h,.7)),1.); }' }));
+scene.add(sky);
+const sun = new THREE.DirectionalLight(0xFFE2B0, 2.6); sun.castShadow = true; sun.shadow.mapSize.set(4096, 4096);
+{ const sc = sun.shadow.camera; sc.left = -9; sc.right = 9; sc.top = 9; sc.bottom = -9; sc.far = 80; } sun.shadow.bias = -.0004; sun.shadow.normalBias = .02; scene.add(sun); scene.add(sun.target);
+const hemi = new THREE.HemisphereLight(0xFFF4E0, 0x6A7A4A, 1.15); scene.add(hemi);
+const fill = new THREE.DirectionalLight(0xCFE6FF, .45); scene.add(fill); scene.add(fill.target);
+const LOOK = {
+  park: { top: 0x8EC9F0, bot: 0xFBE3B8, fog: 0xF3E2C0, sun: 0xFFE2B0, si: 2.6, hi: 1.15, near: 18, far: 75 },
+  gold: { top: 0x6FA8D8, bot: 0xFFC98A, fog: 0xF5D3A0, sun: 0xFFC27A, si: 2.8, hi: 1.0, near: 16, far: 70 },
+  home: { top: 0x9BD0F2, bot: 0xFFF0D6, fog: 0xF6EAD2, sun: 0xFFE9C4, si: 2.4, hi: 1.2, near: 18, far: 70 },
+  vet: { top: 0xDDEFE6, bot: 0xF4FAF6, fog: 0xEAF4EE, sun: 0xFFFFFF, si: 1.8, hi: 1.5, near: 14, far: 60 },
+  green: { top: 0x1E4D2B, bot: 0x7FBF8A, fog: 0x4E8F5E, sun: 0xFFF1D6, si: 2.2, hi: 1.1, near: 14, far: 50 },
+  town: { top: 0x8EC9F0, bot: 0xEAF6FF, fog: 0xE4F1F8, sun: 0xFFF1D6, si: 2.4, hi: 1.2, near: 25, far: 90 },
+  cream: { top: 0xF7EEDC, bot: 0xFFF8EE, fog: 0xF7EEDC, sun: 0xFFF1D6, si: 2.0, hi: 1.3, near: 12, far: 45 },
+};
+const setLook = k => { const L = LOOK[k]; skyU.top.value.set(L.top); skyU.bot.value.set(L.bot); scene.fog.color.set(L.fog); scene.fog.near = L.near; scene.fog.far = L.far; sun.color.set(L.sun); sun.intensity = L.si; hemi.intensity = L.hi; };
+const SETS = {}; const mkSet = (name, x) => { const g = grp(); g.position.set(x, 0, 0); SETS[name] = g; return g; };
+
+// ---------- cachorro ----------
+function buildDog(o) {
+  const C = Object.assign({ base: 0xC98A4A, belly: 0xF2E2C4, back: null, points: null, muzzle: null, size: 1, leg: .3, body: .42, snout: .11, ear: 'floppy', earC: null, collar: GREEN, socks: false, fluff: false, tailCurl: .9 }, o);
+  const mB = MAT(C.base), mBe = MAT(C.belly), mP = MAT(C.points ?? C.base), mM = MAT(C.muzzle ?? C.points ?? C.belly), mE = MAT(C.earC ?? C.back ?? C.base), mK = C.back != null ? MAT(C.back) : mB;
+  const root = new THREE.Group(); const hipY = C.leg + .13;
+  const body = grp(root); body.position.y = hipY;
+  const torso = cap(.16, C.body, mB, 0, 0, 0, body); torso.rotation.x = Math.PI / 2; torso.scale.set(.92, 1, 1);
+  if (C.back != null) { const s = cap(.163, C.body, mK, 0, .035, -.01, body); s.rotation.x = Math.PI / 2; s.scale.set(.93, 1, .96); }
+  const chest = sph(.135, mBe, 0, -.03, C.body / 2 + .04, body); chest.scale.set(.92, 1.05, .75);
+  const haunch = [-1, 1].map(s => { const h = sph(.1, mK, s * .07, .0, -C.body / 2 + .02, body); h.scale.set(.8, 1.1, 1.1); return h; });
+  if (C.fluff) { for (let i = 0; i < 5; i++) { const f = sph(.07, mB, 0, -.12, C.body / 2 - i * .1, body); f.scale.set(1.2, .7, 1); } const r = sph(.16, mBe, 0, .02, C.body / 2 + .06, body); r.scale.set(1, 1.1, .8); }
+  const neck = cap(.085, .12, mK, 0, .1, C.body / 2 + .08, body); neck.rotation.x = -.7;
+  const headP = grp(body); headP.position.set(0, .23, C.body / 2 + .17);
+  const head = grp(headP);
+  const skull = sph(.125, mK, 0, 0, 0, head); skull.scale.set(1, .93, 1.05);
+  const cheeks = [-1, 1].map(s => { const c = sph(.07, C.points != null ? mP : mB, s * .06, -.045, .06, head); return c; });
+  const muz = cap(.062, C.snout, mM, 0, -.035, .1 + C.snout / 2, head); muz.rotation.x = Math.PI / 2;
+  const nose = sph(.033, MAT(0x1A1614, .3), 0, -.01, .1 + C.snout + .06, head); nose.scale.set(1.2, .85, .9);
+  const tongue = cap(.026, .05, MAT(0xE8788A, .5), 0, -.085, .1 + C.snout + .02, head); tongue.rotation.x = .4; tongue.scale.set(1.1, 1, .5);
+  const eyeM = MAT(0x2A1708, .15);
+  const eyes = [-1, 1].map(s => { const e = sph(.023, eyeM, s * .056, .028, .102, head, 14, 10); const hl = sph(.0065, BASIC(0xFFFFFF), .006, .009, .019, e, 8, 6); return e; });
+  if (C.points != null) [-1, 1].forEach(s => sph(.016, mP, s * .05, .07, .105, head, 10, 8));
+  const ears = [-1, 1].map(s => { const g = grp(head); g.position.set(s * .088, .075, -.015); const L = C.ear === 'long' ? 1.6 : C.ear === 'erect' ? .95 : 1.05; const e = sph(.07, mE, 0, 0, 0, g, 14, 10); e.scale.set(.32, L, .72);
+    if (C.ear === 'erect') { e.position.y = .07; g.rotation.z = -s * .25; } else if (C.ear === 'semi') { e.position.y = .05; g.rotation.z = -s * .2; g.userData.fold = 1; } else { e.position.y = -.06 * L; g.rotation.z = s * .5; g.rotation.x = .15; }
+    g.userData = Object.assign(g.userData || {}, { s, rz: g.rotation.z, rx: g.rotation.x, e }); return g; });
+  const legs = []; const mkLeg = (x, z, front) => { const hip = grp(body); hip.position.set(x, -.03, z); const L = C.leg;
+    cap(front ? .046 : .052, L * .4, front ? mK : mK, 0, -L * .25, 0, hip); const knee = grp(hip); knee.position.y = -L * .5;
+    cap(.037, L * .38, mP, 0, -L * .22, 0, knee); const paw = sph(.046, C.socks ? mBe : mP, 0, -L * .47, .02, knee, 12, 8); paw.scale.set(1, .6, 1.3);
+    legs.push({ hip, knee, front, x, z }); };
+  mkLeg(.085, C.body / 2 - .01, true); mkLeg(-.085, C.body / 2 - .01, true); mkLeg(.085, -C.body / 2 + .03, false); mkLeg(-.085, -C.body / 2 + .03, false);
+  const tail = grp(body); tail.position.set(0, .07, -C.body / 2 - .13); const tsegs = []; let par = tail; for (let i = 0; i < 4; i++) { const g = grp(par); if (i) g.position.y = .075; const c = cap(C.fluff ? .038 - i * .004 : .028 - i * .004, .06, i === 3 && C.socks ? mBe : mK, 0, .04, 0, g); tsegs.push(g); par = g; }
+  tail.rotation.x = -.7;
+  const col = add(new THREE.TorusGeometry(.09, .016, 8, 24), MAT(C.collar, .5), 0, .13, C.body / 2 + .1, body); col.rotation.x = Math.PI / 2 - .7;
+  const tag = add(new THREE.CylinderGeometry(.022, .022, .006, 14), MAT(0xF2C14E, .3, { metalness: .6 }), 0, .065, C.body / 2 + .175, body); tag.rotation.x = Math.PI / 2 - .3;
+  root.scale.setScalar(C.size);
+  return { root, body, head, headP, tongue, eyes, ears, legs, tail, tsegs, hipY, C };
+}
+function poseDog(d, t, o = {}) {
+  const { walk = 0, run = 0, sit = 0, tilt = 0, look = 0, lookUp = 0, wag = 1, pant = 0, eat = 0, ph = 0, lie = 0 } = o;
+  const g = walk + run; const f = run ? 11 : 7; const tt = t * f + ph; const amp = .45 * walk + .8 * run;
+  d.legs.forEach((L, i) => { const p = (i === 0 || i === 3) ? 0 : Math.PI; const s = Math.sin(tt + p);
+    L.hip.rotation.set(s * amp, 0, 0); L.knee.rotation.x = (L.front ? -1 : 1) * Math.max(0, L.front ? s : -s) * amp * 1.1; L.hip.scale.y = 1; });
+  d.body.position.y = d.hipY + Math.abs(Math.sin(tt)) * (.012 * walk + .04 * run); d.body.rotation.x = Math.sin(tt * 2) * .02 * run;
+  if (sit > 0) { const s = ease(sit); d.body.rotation.x = -.52 * s; d.body.position.y = d.hipY - .07 * s;
+    d.legs.forEach(L => { if (L.front) { L.hip.rotation.x = .52 * s; L.hip.scale.y = 1 + .3 * s; } else { L.hip.rotation.x = -1.25 * s + .52 * s; L.knee.rotation.x = 1.9 * s; } }); }
+  if (lie > 0) { const s = ease(lie); d.body.position.y = lerp(d.body.position.y, .16, s); d.legs.forEach(L => { if (L.front) { L.hip.rotation.x = lerp(L.hip.rotation.x, -1.45, s); L.knee.rotation.x = lerp(L.knee.rotation.x, 0, s); } else { L.hip.rotation.x = lerp(L.hip.rotation.x, -1.4, s); L.knee.rotation.x = lerp(L.knee.rotation.x, 2.4, s); } }); }
+  const breathe = 1 + Math.sin(t * (pant ? 9 : 2.2)) * (pant ? .012 : .006);
+  d.body.children[0].scale.set(.92 * breathe, 1, 1 * breathe);
+  d.headP.position.y = .23 - .2 * eat; d.headP.position.z = d.C.body / 2 + .17 + .06 * eat;
+  d.head.rotation.set(-lookUp + .9 * eat + .52 * ease(sit) * (1 - eat) + Math.sin(tt * 2) * .03 * g, look + Math.sin(t * .7 + ph) * .08, tilt);
+  d.tongue.visible = pant > 0; if (pant > 0) d.tongue.scale.set(1.1, 1 + Math.sin(t * 9) * .15, .5);
+  const wg = Math.sin(t * 13 + ph) * .55 * wag; d.tail.rotation.set(-.7 + .25 * ease(sit), wg, 0); d.tsegs.forEach((s, i) => { s.rotation.x = i ? -d.C.tailCurl * .25 : 0; s.rotation.z = wg * .2 * i; });
+  const blink = ((t + ph) % 3.9) > 3.78; d.eyes.forEach(e => e.scale.y = blink ? .15 : 1);
+  d.ears.forEach(e => { e.rotation.z = e.userData.rz + Math.sin(tt * 2) * .06 * g * e.userData.s + tilt * .3; });
+}
+const BREEDS = {
+  caramelo: { base: 0xD39552, belly: 0xF4DEC0, muzzle: 0xE7B47A, ear: 'floppy', earC: 0xC07F40, size: 1.0 },
+  pretoTan: { base: 0xC98A4A, back: 0x1E1A18, points: 0xC98A4A, belly: 0xF2E8DA, muzzle: 0xC98A4A, ear: 'semi', earC: 0x1E1A18, collar: ORANGE },
+  salsicha: { base: 0xB8743A, back: 0x18140F, points: 0xB8743A, belly: 0xB8743A, muzzle: 0xB8743A, earC: 0x18140F, ear: 'long', leg: .17, body: .55, snout: .13, size: .9, collar: 0xD94C6A },
+  salsichaRuivo: { base: 0xC9783A, belly: 0xD99A5A, muzzle: 0xC9783A, earC: 0x9A5426, ear: 'long', leg: .17, body: .55, snout: .13, size: .9, fluff: true, collar: 0x3B82F6 },
+  golden: { base: 0xD9A24E, belly: 0xF0CC8A, muzzle: 0xE5B66A, ear: 'floppy', size: 1.25, fluff: true, collar: 0xD94C6A },
+  collie: { base: 0x1C1A1A, belly: 0xFFFFFF, muzzle: 0xFFFFFF, ear: 'semi', socks: true, size: 1.05, collar: 0xF2C14E },
+};
+const mkDog = (k, extra = {}) => buildDog(Object.assign({}, BREEDS[k], extra));
+
+// ---------- cenário: natureza ----------
+const tree = (x, z, s, par) => { const g = grp(par); g.position.set(x, 0, z); g.scale.setScalar(s); cyl(.12, .18, 1.6, 0x7A5232, 0, .8, 0, g, 10);
+  [[0, 2.1, 0, 1.0, 0x4E8F3A], [.5, 1.8, .2, .75, 0x5FA145], [-.45, 1.9, -.2, .8, 0x437F33], [.1, 2.7, .1, .7, 0x6BAE4E]].forEach(([a, b, c, r, col]) => { const f = add(new THREE.IcosahedronGeometry(r, 2), MAT(col, .9), a, b, c, g); }); return g; };
+const bush = (x, z, s, par, col = 0x4E8F3A) => { const g = grp(par); g.position.set(x, 0, z); g.scale.setScalar(s); for (let i = 0; i < 3; i++) add(new THREE.IcosahedronGeometry(.4, 2), MAT(i ? col : 0x5FA145, .9), (i - 1) * .35, .3, rr(-.1, .1), g); return g; };
+const flowers = (x, z, n, par) => { for (let i = 0; i < n; i++) { const c = [0xFFFFFF, 0xF7D046, 0xF29BB8, 0xE07B2A][i % 4]; const s = sph(.035, MAT(c, .6), x + rr(-.8, .8), .06, z + rr(-.6, .6), par, 8, 6); } };
+const groundGeo = (w, d, seg, amp) => { const g = new THREE.PlaneGeometry(w, d, seg, seg); g.rotateX(-Math.PI / 2); const p = g.attributes.position; for (let i = 0; i < p.count; i++) { const x = p.getX(i), z = p.getZ(i); const r = Math.hypot(x, z); p.setY(i, (Math.sin(x * .18) * Math.cos(z * .15) + Math.sin(x * .07 + z * .05) * 2) * amp * clamp((r - 9) / 15)); } g.computeVertexNormals(); return g; };
+
+// ===== PARQUE (x=0) =====
+const park = mkSet('park', 0);
+{ const gr = new THREE.Mesh(groundGeo(220, 220, 90, .9), MAT(0x78B24E, .95)); gr.receiveShadow = true; park.add(gr);
+  const path = new THREE.Mesh(new THREE.RingGeometry(9, 10.6, 80, 1, Math.PI * .1, Math.PI * 1.1), MAT(0xE6D3A8, .95)); path.rotation.x = -Math.PI / 2; path.position.set(-3, .01, -6); path.receiveShadow = true; park.add(path);
+  for (let i = 0; i < 46; i++) { const a = rr(0, 6.28), r = rr(10, 38); const x = Math.cos(a) * r, z = Math.sin(a) * r - 8; if (z > 2 && Math.abs(x) < 8) continue; tree(x, z, rr(1.1, 1.9), park); }
+  for (let i = 0; i < 30; i++) { const a = rr(0, 6.28), r = rr(6, 20); const x = Math.cos(a) * r, z = Math.sin(a) * r - 6; if (z > 0 && Math.abs(x) < 5) continue; bush(x, z, rr(.7, 1.3), park); flowers(x + 1, z + .5, 6, park); }
+  const bench = grp(park); bench.position.set(-4.5, 0, -3.5); bench.rotation.y = .5; box(1.8, .08, .45, 0x9A6A3A, 0, .48, 0, bench); box(1.8, .4, .06, 0x9A6A3A, 0, .78, -.2, bench); [-.8, .8].forEach(x => { box(.06, .48, .4, 0x333333, x, .24, 0, bench); });
+  const lamp = grp(park); lamp.position.set(3.8, 0, -4.2); cyl(.05, .07, 3, 0x2E3A30, 0, 1.5, 0, lamp, 10); sph(.18, MAT(0xFFF1C4, .3, { emissive: 0xFFE2A0, emissiveIntensity: .4 }), 0, 3.05, 0, lamp);
+}
+// piquenique
+const picnic = grp(park); picnic.position.set(1.2, 0, -1.5);
+{ const blanket = canvasTex(256, 256, (g) => { for (let i = 0; i < 8; i++) for (let j = 0; j < 8; j++) { g.fillStyle = (i + j) % 2 ? '#F7EEDC' : '#E07B2A'; g.fillRect(i * 32, j * 32, 32, 32); } });
+  const b = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 1.7), MAT(0xFFFFFF, .95, { map: blanket })); b.rotation.x = -Math.PI / 2; b.position.y = .015; b.receiveShadow = true; picnic.add(b);
+  const basket = grp(picnic); basket.position.set(.75, 0, -.5); box(.45, .3, .32, 0xB0874A, 0, .15, 0, basket); const hd = add(new THREE.TorusGeometry(.18, .02, 6, 16, Math.PI), MAT(0x8A6232), 0, .3, 0, basket);
+  sph(.06, MAT(0xD94C4C, .5), -.5, .06, .4, picnic); sph(.06, MAT(0x7CC24E, .5), -.38, .06, .48, picnic); }
+const mom = buildPerson({ skin: 0xC98E66, shirt: 0x2F7A45, pants: 0x3B4A6A, hair: 0x2B1A10, hairStyle: 'bun' }); picnic.add(mom.root); mom.root.position.set(-.45, .02, -.2); mom.root.rotation.y = 1.05;
+const kid = buildPerson({ skin: 0xD9A27A, shirt: 0xF2C14E, pants: 0x3B82F6, hair: 0x5A3A1A }); picnic.add(kid.root); kid.root.position.set(.55, .02, -.1); kid.root.scale.setScalar(.66); kid.root.rotation.y = -1.0;
+const ball = sph(.07, MAT(0xF2C14E, .5), 0, .07, 0, park, 16, 12);
+// cachorros do parque
+const pDogs = { hero: mkDog('caramelo'), golden: mkDog('golden'), pt: mkDog('pretoTan'), coll: mkDog('collie'), sal: mkDog('salsicha'), salr: mkDog('salsichaRuivo') };
+Object.values(pDogs).forEach(d => park.add(d.root));
+
+// ===== CASA / QUINTAL (x=100) =====
+const home = mkSet('home', 100);
+{ const gr = new THREE.Mesh(groundGeo(120, 120, 40, .4), MAT(0x7DB653, .95)); gr.receiveShadow = true; home.add(gr);
+  const deck = box(7, .16, 3.4, 0xB9875A, 0, .08, -1.0, home); for (let i = 0; i < 17; i++) box(.02, .165, 3.4, 0x9A6A3A, -3.5 + i * .42, .085, -1.0, home);
+  const wall = box(9, 3.6, .2, 0xF4E9D6, 0, 1.8, -2.8, home); box(9, .25, .3, 0xE0CDB0, 0, 3.6, -2.75, home);
+  const win1 = box(1.5, 1.1, .05, MAT(0xBFE3F2, .15, { emissive: 0x334455, emissiveIntensity: .2 }), -1.8, 1.9, -2.68, home); box(1.62, 1.22, .04, 0xFFFFFF, -1.8, 1.9, -2.7, home);
+  const door = box(1.0, 2.1, .06, 0x3F6E4A, 1.4, 1.13, -2.68, home); sph(.04, MAT(0xF2C14E, .3, { metalness: .7 }), 1.75, 1.1, -2.62, home);
+  for (let i = 0; i < 16; i++) box(.1, .9, .06, 0xF7F2E6, -7 + i * .9, .45, 3.5 + Math.sin(i) * .1, home); box(14, .07, .06, 0xF7F2E6, 0, .75, 3.5, home);
+  [[-3.1, -2.2], [3.1, -2.2], [2.4, -2.3]].forEach(([x, z], i) => { const p = grp(home); p.position.set(x, .16, z); cyl(.22, .16, .4, 0xC9683A, 0, .2, 0, p, 16); add(new THREE.IcosahedronGeometry(.35, 2), MAT(0x4E8F3A, .9), 0, .65, 0, p); add(new THREE.IcosahedronGeometry(.25, 2), MAT(0x5FA145, .9), .15, .9, .1, p); });
+  for (let i = 0; i < 10; i++) tree(rr(-22, 22), rr(-14, -6), rr(1.2, 1.8), home);
+  for (let i = 0; i < 8; i++) bush(rr(-8, 8), rr(4, 7), rr(.8, 1.2), home);
+}
+const tutor = buildPerson({ skin: 0xC98E66, shirt: 0x2F7A45, pants: 0x3B4A6A, hair: 0x2B1A10, hairStyle: 'bun' }); home.add(tutor.root);
+const jug = grp(scene); cyl(.07, .08, .26, MAT(0xCFE8F5, .1, { transparent: true, opacity: .55 }), 0, 0, 0, jug, 16); cyl(.06, .06, .2, MAT(0x6EC1F0, .2, { transparent: true, opacity: .7 }), 0, -.02, 0, jug, 14);
+const stream = add(new THREE.CylinderGeometry(.012, .016, 1, 8), MAT(0x8FD3F7, .1, { transparent: true, opacity: .75 }), 0, 0, 0, scene);
+const mkBowl = (par, col) => { const g = grp(par); const pts = []; for (let i = 0; i <= 8; i++) { const u = i / 8; pts.push(new THREE.Vector2(.12 + u * .06, u * .09)); } const b = add(new THREE.LatheGeometry(pts, 24), MAT(col, .3, { metalness: .5, side: THREE.DoubleSide }), 0, 0, 0, g); cyl(.12, .12, .01, col, 0, .005, 0, g, 24); return g; };
+const bowlW = mkBowl(home, 0xC9D3DB); bowlW.position.set(-.6, .16, -.2);
+const water = cyl(.15, .15, .01, MAT(0x6EC1F0, .05, { transparent: true, opacity: .8 }), 0, .01, 0, bowlW, 24);
+const bowlF = mkBowl(home, ORANGE); bowlF.position.set(.9, .16, -.4);
+const kib = []; for (let i = 0; i < 26; i++) { const k = sph(.022, MAT(0x8A5A2A, .8), 0, 0, 0, bowlF, 8, 6); k.userData = { x: rr(-.1, .1), z: rr(-.1, .1), d: i / 26 }; kib.push(k); }
+const kibBag = grp(home); kibBag.position.set(1.3, .16, -.7); box(.36, .5, .18, 0x2F7A45, 0, .25, 0, kibBag); box(.25, .14, .19, 0xF7EEDC, 0, .3, 0, kibBag);
+const hDog = mkDog('caramelo'); home.add(hDog.root);
+const hDach = mkDog('salsichaRuivo'); home.add(hDach.root);
+const brush = grp(scene); box(.05, .03, .2, 0x9A6A3A, 0, 0, 0, brush); box(.06, .03, .09, 0x333333, 0, -.025, .05, brush);
+const kit = grp(home); kit.position.set(-2.2, .16, -.9); { box(.55, .32, .36, 0xFFFFFF, 0, .16, 0, kit); const cr = MAT(GREEN, .5); box(.2, .06, .01, cr, 0, .2, .185, kit); box(.06, .2, .01, cr, 0, .2, .185, kit); const lid = grp(kit); lid.position.set(0, .32, -.18); box(.55, .04, .36, 0xF2F2F2, 0, .02, .18, lid); kit.userData.lid = lid; box(.12, .05, .03, 0x555555, 0, .34, 0, kit); }
+const phoneSmall = grp(kit); phoneSmall.position.set(.55, 0, .1); { box(.16, .015, .3, 0x222222, 0, .01, 0, phoneSmall); const t = canvasTex(160, 300, g => { g.fillStyle = '#1E4D2B'; g.fillRect(0, 0, 160, 300); g.fillStyle = '#fff'; g.font = '800 26px P'; g.textAlign = 'center'; g.fillText('VET', 80, 110); g.fillText('24H', 80, 145); g.fillStyle = '#E07B2A'; g.beginPath(); g.arc(80, 215, 34, 0, 7); g.fill(); g.fillStyle = '#fff'; g.font = '800 36px P'; g.fillText('☎', 80, 228); });
+  const s = new THREE.Mesh(new THREE.PlaneGeometry(.14, .27), new THREE.MeshBasicMaterial({ map: t, toneMapped: false })); s.rotation.x = -Math.PI / 2; s.position.y = .019; phoneSmall.add(s); }
+const kitDog = mkDog('pretoTan'); home.add(kitDog.root);
+
+// ===== VETERINÁRIO (x=140) =====
+const vet = mkSet('vet', 140);
+{ box(14, .1, 10, 0xE6EEF0, 0, -.05, 0, vet); box(10, 3.4, .2, 0xDDF0E6, 0, 1.7, -2.4, vet); box(.2, 3.4, 6, 0xDDF0E6, -4, 1.7, .6, vet);
+  const sign = canvasTex(256, 256, g => { g.fillStyle = '#fff'; g.fillRect(0, 0, 256, 256); g.fillStyle = '#2F7A45'; g.fillRect(98, 40, 60, 176); g.fillRect(40, 98, 176, 60); });
+  add(new THREE.PlaneGeometry(.8, .8), new THREE.MeshStandardMaterial({ map: sign }), -1.6, 2.2, -2.29, vet);
+  const tbl = grp(vet); tbl.position.set(0, 0, -.6); box(1.6, .06, .8, 0xC9D3DB, 0, .9, 0, tbl); box(.12, .9, .12, 0x9AA5B1, 0, .45, 0, tbl); box(.9, .04, .6, 0x9AA5B1, 0, .03, 0, tbl);
+  box(.9, 1.6, .5, 0xF4F6F8, 2.3, .8, -2.0, vet); for (let i = 0; i < 3; i++) box(.85, .02, .45, 0xDDE3E8, 2.3, .4 + i * .5, -1.76, vet);
+  const plant = grp(vet); plant.position.set(-3.3, 0, -1.6); cyl(.25, .2, .5, 0xF7EEDC, 0, .25, 0, plant); add(new THREE.IcosahedronGeometry(.45, 2), MAT(0x4E8F3A, .9), 0, .85, 0, plant); }
+const vetP = buildPerson({ skin: 0xA8704A, shirt: 0xFFFFFF, pants: 0x2F9A8A, hair: 0x111111, glasses: true }); vet.add(vetP.root); vetP.root.position.set(.15, 0, -1.35); vetP.root.rotation.y = 0;
+const steth = add(new THREE.TorusGeometry(.1, .012, 6, 20, Math.PI * 1.3), MAT(0x333333, .4), 0, .55, .11, vetP.hips); steth.rotation.z = Math.PI * .85;
+const vetDog = mkDog('pretoTan', { collar: GREEN }); vet.add(vetDog.root); vetDog.root.position.set(-.1, .93, -.55); vetDog.root.rotation.y = .5;
+const heartTex = canvasTex(128, 128, g => { g.fillStyle = '#E07B2A'; g.beginPath(); g.moveTo(64, 112); g.bezierCurveTo(-20, 50, 30, -10, 64, 34); g.bezierCurveTo(98, -10, 148, 50, 64, 112); g.fill(); });
+const mkSprite = (t, s) => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthWrite: false })); sp.scale.setScalar(s); return sp; };
+const vetHeart = mkSprite(heartTex, .3); vet.add(vetHeart);
+
+// ===== LIVRO (x=200) =====
+const bookS = mkSet('book', 200);
+{ const plat = cyl(4.2, 4.4, .3, MAT(0xEFE3C8, .9), 0, -.15, 0, bookS, 64); const plat2 = cyl(3.2, 3.2, .04, MAT(0xE3D2AE, .9), 0, .02, 0, bookS, 64);
+  const leaf = (x, z, r, s) => { const g = grp(bookS); g.position.set(x, 0, z); g.rotation.y = r; cyl(.3, .22, .55, 0xF7EEDC, 0, .27, 0, g, 18); for (let i = 0; i < 7; i++) { const l = add(new THREE.SphereGeometry(.32, 14, 10), MAT([0x2F7A45, 0x3F9A55, 0x26663A][i % 3], .8), 0, 0, 0, g); l.scale.set(.5, .07, 1); const a = i / 7 * Math.PI * 2; l.position.set(Math.cos(a) * .3, .75 + (i % 2) * .2, Math.sin(a) * .3); l.rotation.set(.5, -a + Math.PI / 2, 0); } g.scale.setScalar(s); };
+  leaf(-2.6, -1.2, 0, 1.6); leaf(2.7, -1.5, 1, 1.9); leaf(-3.3, .8, 2, 1.2); leaf(3.4, .9, .4, 1.3);
+  const table = grp(bookS); table.position.set(0, 0, -.2); cyl(.9, .9, .06, 0xB9875A, 0, .75, 0, table, 40); cyl(.06, .1, .75, 0x8A6232, 0, .37, 0, table, 12); }
+const bokeh = []; { const bt = canvasTex(64, 64, g => { const r = g.createRadialGradient(32, 32, 0, 32, 32, 32); r.addColorStop(0, 'rgba(255,255,240,.9)'); r.addColorStop(.6, 'rgba(255,250,220,.35)'); r.addColorStop(1, 'rgba(255,250,220,0)'); g.fillStyle = r; g.fillRect(0, 0, 64, 64); });
+  for (let i = 0; i < 60; i++) { const s = mkSprite(bt, rr(.1, .35)); s.position.set(rr(-6, 6), rr(.5, 5), rr(-5, 1)); s.userData = { y: s.position.y, p: rr(0, 6) }; bookS.add(s); bokeh.push(s); } }
+const logo3 = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 2.6 * 245 / 658), new THREE.MeshBasicMaterial({ map: T_LOGO, transparent: true, toneMapped: false, depthWrite: false })); bookS.add(logo3);
+const logoCard = add(new THREE.BoxGeometry(2.95, 1.3, .06), MAT(BEIGE, .7), 0, 0, -.05, logo3);
+// livro
+const BW = 1.1, BH = BW * 1818 / 1284, BT = .1;
+const book = grp(bookS);
+const pageM = MAT(0xF8F4EA, .9);
+const bookBody = box(BW, BH, BT * .8, pageM, BW / 2, 0, -BT * .1, book);
+const spine = box(.04, BH + .02, BT, MAT(DGREEN, .6), 0, 0, 0, book);
+const backC = box(BW + .02, BH + .02, .015, MAT(DGREEN, .6), BW / 2, 0, -BT / 2, book);
+const coverH = grp(book); coverH.position.set(0, 0, BT / 2);
+const coverF = add(new THREE.PlaneGeometry(BW + .02, BH + .02), MAT(0xFFFFFF, .5, { map: T_CAPA }), BW / 2, 0, .007, coverH);
+const coverB = add(new THREE.PlaneGeometry(BW + .02, BH + .02), MAT(0xEFE8D8, .9), BW / 2, 0, -.005, coverH); coverB.rotation.y = Math.PI;
+box(BW + .02, BH + .02, .006, MAT(DGREEN, .6), BW / 2, 0, .001, coverH);
+const pageTop = add(new THREE.PlaneGeometry(BW * .96, BH * .96), MAT(0xFFFFFF, .9, { map: T_P3 }), BW / 2, 0, BT * .31, book);
+const flips = [T_P1, T_P2].map((tx, i) => { const h = grp(book); h.position.set(0, 0, BT * .33 + i * .002); const f = add(new THREE.PlaneGeometry(BW * .96, BH * .96), MAT(0xFFFFFF, .9, { map: tx }), BW * .48, 0, .001, h); const b = add(new THREE.PlaneGeometry(BW * .96, BH * .96), MAT(0xF8F4EA, .9), BW * .48, 0, 0, h); b.rotation.y = Math.PI; return h; });
+const polaroid = (t, par) => { const g = grp(par); box(.62, .74, .01, MAT(0xFFFFFF, .7), 0, 0, 0, g); const img = t.image; const a = img.width / img.height; const w = .54, h = .54; const tt = t.clone(); tt.needsUpdate = true; if (a < 1) { tt.repeat.set(1, a); tt.offset.set(0, (1 - a) / 2); } else { tt.repeat.set(1 / a, 1); tt.offset.set((1 - 1 / a) / 2, 0); } add(new THREE.PlaneGeometry(w, h), MAT(0xFFFFFF, .7, { map: tt }), 0, .06, .006, g); return g; };
+const pols = [T_D1, T_D2, T_D3, T_D4].map((t, i) => { const p = polaroid(t, bookS); p.userData = { a: [-1.95, -1.25, 1.25, 1.95][i], y: [1.85, 2.85, 2.85, 1.85][i], r: [.12, -.08, .08, -.12][i] }; return p; });
+
+// ===== CIDADE / ALCANCE (x=300) =====
+const town = mkSet('town', 300);
+cyl(6, 6.2, .4, MAT(0x86C35A, .95), 0, -.2, 0, town, 64);
+const houses = []; for (let i = 0; i < 26; i++) { const a = i / 26 * Math.PI * 2 + rr(-.08, .08), r = i % 2 ? rr(3.4, 4.2) : rr(4.6, 5.4); const g = grp(town); g.position.set(Math.cos(a) * r, 0, Math.sin(a) * r); g.rotation.y = -a + Math.PI / 2;
+  const w = rr(.5, .7), h = rr(.45, .7); box(w, h, w * .9, [0xF7EEDC, 0xFFFFFF, 0xF2E2C4, 0xE8F0E4][i % 4], 0, h / 2, 0, g); const roof = add(new THREE.ConeGeometry(w * .78, .35, 4), MAT([0xC9683A, GREEN, ORANGE, 0x8A5A3A][i % 4], .8), 0, h + .17, 0, g); roof.rotation.y = Math.PI / 4;
+  const wm = MAT(0xFFE9A8, .4, { emissive: 0xFFC860, emissiveIntensity: 0 }); box(.12, .12, .01, wm, -w * .2, h * .55, w * .45 + .005, g); box(.12, .12, .01, wm, w * .2, h * .55, w * .45 + .005, g); g.userData = { a, wm, r }; houses.push(g); }
+for (let i = 0; i < 16; i++) { const a = rr(0, 6.28), r = rr(2.2, 5.6); const t = tree(Math.cos(a) * r, Math.sin(a) * r, rr(.25, .4), town); }
+const tPeople = []; for (let i = 0; i < 14; i++) { const p = buildPerson({ skin: [0xC98E66, 0xE8B98F, 0xA8704A, 0xD9A27A][i % 4], shirt: [0x2F7A45, ORANGE, 0x3B82F6, 0xF2C14E, 0xD94C6A][i % 5], pants: 0x3B4A6A, hair: [0x2B1A10, 0x6B4A2A, 0x111111][i % 3] }); town.add(p.root); const a = i / 14 * Math.PI * 2 + .2, r = rr(2.3, 2.9); p.root.position.set(Math.cos(a) * r, 0, Math.sin(a) * r); p.root.scale.setScalar(.32); p.root.rotation.y = -a - Math.PI / 2; p.userData = { a }; tPeople.push(p); }
+const tDogs = []; for (let i = 0; i < 6; i++) { const d = mkDog(['caramelo', 'golden', 'pretoTan', 'collie', 'salsicha', 'salsichaRuivo'][i]); town.add(d.root); const a = i / 6 * Math.PI * 2 + .45; d.root.position.set(Math.cos(a) * 2.6, 0, Math.sin(a) * 2.6); d.root.scale.multiplyScalar(.34); d.root.rotation.y = -a - Math.PI / 2; tDogs.push(d); }
+const hearts = []; for (let i = 0; i < 26; i++) { const s = mkSprite(heartTex, .25); town.add(s); hearts.push(s); }
+const rings = []; for (let i = 0; i < 4; i++) { const r = new THREE.Mesh(new THREE.RingGeometry(.95, 1, 64), new THREE.MeshBasicMaterial({ color: 0xFFF1C4, transparent: true, opacity: .8, side: THREE.DoubleSide, toneMapped: false, depthWrite: false })); r.rotation.x = -Math.PI / 2; r.position.y = .03; town.add(r); rings.push(r); }
+// celular gigante no centro
+const postTex = canvasTex(540, 1000, () => {});
+const paintPost = (likes, played) => { const { g, c } = postTex.userData; g.fillStyle = '#101814'; g.fillRect(0, 0, c.width, c.height); g.fillStyle = '#fff'; g.font = '700 34px P'; g.textAlign = 'left';
+  g.fillStyle = '#2F7A45'; g.beginPath(); g.arc(60, 70, 34, 0, 7); g.fill(); g.drawImage(T_ICON.image, 32, 44, 56, 52); g.fillStyle = '#fff'; g.fillText('patasprotegidas', 110, 82);
+  const img = T_D1.image; const s = 520 / img.width; g.drawImage(img, 0, (img.height - 640 / s) / 2, img.width, 640 / s, 10, 130, 520, 640);
+  if (!played) { g.fillStyle = 'rgba(0,0,0,.35)'; g.beginPath(); g.arc(270, 450, 70, 0, 7); g.fill(); g.fillStyle = '#fff'; g.beginPath(); g.moveTo(245, 410); g.lineTo(245, 490); g.lineTo(310, 450); g.fill(); }
+  g.fillStyle = '#E07B2A'; g.font = '800 40px P'; g.fillText('♥ ' + likes.toLocaleString('pt-BR'), 30, 840); g.fillStyle = '#ddd'; g.font = '600 28px P'; g.fillText('Cuidados que salvam vidas 🐾', 30, 900); postTex.needsUpdate = true; };
+paintPost(12, false);
+const bigPhone = grp(town); bigPhone.position.set(0, 0, 0); { const body = add(new THREE.BoxGeometry(1.1, 2.0, .1), MAT(0x1A1A1A, .3), 0, 1.2, 0, bigPhone); add(new THREE.PlaneGeometry(1.0, 1.85), new THREE.MeshBasicMaterial({ map: postTex, toneMapped: false }), 0, 1.2, .051, bigPhone); cyl(.4, .5, .2, MAT(0xF7EEDC, .8), 0, .1, 0, bigPhone, 32); }
+const bookStack = []; for (let i = 0; i < 9; i++) { const b = grp(town); box(.32, .44, .05, MAT(0xFFFFFF, .6, { map: T_CAPA }), 0, 0, 0, b); b.userData = { i }; bookStack.push(b); }
+
+// ===== BEBEDOURO (no quintal, outro canto) =====
+const bebe = grp(home); bebe.position.set(-4.6, 0, 1.4);
+const bebeParts = [];
+{ const base = box(.5, .06, .5, 0x9A6A3A, 0, .03, 0, bebe); const bw = mkBowl(bebe, 0x6EC1F0); bw.position.y = .06; const wt = cyl(.15, .15, .01, MAT(0x6EC1F0, .05, { transparent: true, opacity: .8 }), 0, .1, 0, bebe, 20);
+  const stand = grp(bebe); box(.04, .6, .04, 0x7A5232, -.2, .33, -.15, stand); box(.04, .6, .04, 0x7A5232, .2, .33, -.15, stand); box(.44, .04, .04, 0x7A5232, 0, .55, -.15, stand);
+  const bottle = grp(bebe); bottle.position.set(0, .45, -.02); cyl(.09, .09, .36, MAT(0xCFE8F5, .1, { transparent: true, opacity: .5 }), 0, .1, 0, bottle, 16); cyl(.03, .05, .08, MAT(0xCFE8F5, .1, { transparent: true, opacity: .5 }), 0, -.12, 0, bottle, 12); cyl(.08, .08, .25, MAT(0x6EC1F0, .2, { transparent: true, opacity: .6 }), 0, .06, 0, bottle, 14); bottle.rotation.x = .25;
+  bebeParts.push(base, bw, stand, bottle, wt); }
+const bebeDog = mkDog('collie'); home.add(bebeDog.root);
+const helper = buildPerson({ skin: 0xE8B98F, shirt: ORANGE, pants: 0x3B4A6A, hair: 0x6B4A2A }); home.add(helper.root);
+
+// ===== DOAÇÃO (x=400) =====
+const don = mkSet('don', 400);
+{ box(12, .1, 8, 0xF2E6CE, 0, -.05, 0, don); box(12, 5, .2, 0xF7EEDC, 0, 2.5, -2.6, don); const tbl = grp(don); tbl.position.set(0, 0, -.4); box(3.2, .08, 1.4, 0xB9875A, 0, .78, 0, tbl); [[-1.5, -.6], [1.5, -.6], [-1.5, .6], [1.5, .6]].forEach(([x, z]) => box(.08, .78, .08, 0x8A6232, x, .39, z, tbl));
+  const lampW = grp(don); lampW.position.set(-2.6, 0, -1.8); add(new THREE.IcosahedronGeometry(.45, 2), MAT(0x4E8F3A, .9), 0, 1.2, 0, lampW); cyl(.25, .2, .5, 0xC9683A, 0, .25, 0, lampW, 16); add(new THREE.IcosahedronGeometry(.35, 2), MAT(0x5FA145, .9), .2, 1.55, .1, lampW); }
+const jar = grp(don); jar.position.set(.35, .82, -.35);
+{ cyl(.32, .32, .7, MAT(0xE8F4FF, .05, { transparent: true, opacity: .28, depthWrite: false }), 0, .35, 0, jar, 32); cyl(.34, .34, .06, MAT(GREEN, .5), 0, .73, 0, jar, 32);
+  add(new THREE.PlaneGeometry(.34, .32), MAT(0xFFFFFF, .7, { map: T_ICON, transparent: true }), 0, .38, .325, jar); }
+const coinTex = v => canvasTex(128, 128, g => { g.fillStyle = '#F2C14E'; g.beginPath(); g.arc(64, 64, 62, 0, 7); g.fill(); g.strokeStyle = '#C9962A'; g.lineWidth = 8; g.beginPath(); g.arc(64, 64, 52, 0, 7); g.stroke(); g.fillStyle = '#8A5A10'; g.font = '800 44px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(v, 64, 68); });
+const mkCoin = v => { const g = grp(don); const t = coinTex(v); const m = [MAT(0xE0AE3A, .3, { metalness: .6 }), MAT(0xFFFFFF, .35, { map: t, metalness: .3 }), MAT(0xFFFFFF, .35, { map: t, metalness: .3 })]; const c = new THREE.Mesh(new THREE.CylinderGeometry(.13, .13, .025, 32), m); c.castShadow = true; c.rotation.x = Math.PI / 2; g.add(c); return g; };
+const coins = [['R$5', T_5], ['R$10', T_10]].map(([v, t]) => { const c = mkCoin(v); c.userData.t = t; return c; });
+for (let i = 0; i < 8; i++) { const c = mkCoin(['R$1', 'R$2', 'R$5', '♥'][i % 4]); c.userData.t = T_QQ + i * .18; c.scale.setScalar(.75); coins.push(c); }
+const jarHeart = mkSprite(heartTex, .5); don.add(jarHeart);
+const sprout = grp(don); sprout.position.set(-.55, .82, -.3); { cyl(.16, .12, .22, 0xC9683A, 0, .11, 0, sprout, 16); const st = cyl(.015, .02, .5, 0x3F8A3A, 0, .45, 0, sprout, 8); sprout.userData.st = st; sprout.userData.leaves = [0, 1, 2, 3].map(i => { const l = sph(.09, MAT(i % 2 ? 0x5FA145 : GREEN, .7), 0, .3 + i * .1, 0, sprout, 12, 8); l.scale.set(1, .2, .55); l.rotation.y = i * 1.6; l.position.x = (i % 2 ? .06 : -.06); return l; }); }
+const donBook = grp(don); donBook.position.set(-.1, .82, .05); { box(.5, .04, .7, pageM, 0, .02, 0, donBook); const c = add(new THREE.PlaneGeometry(.5, .7), MAT(0xFFFFFF, .5, { map: T_CAPA }), 0, .042, 0, donBook); c.rotation.x = -Math.PI / 2; }
+// compartilhar: celulares e aviõezinhos
+const shPhones = []; for (let i = 0; i < 6; i++) { const g = grp(don); const a = -1.2 + i / 5 * 2.4; g.position.set(Math.sin(a) * 2.4, 1.6 + Math.cos(i * 1.7) * .5, -1.2 + Math.cos(a) * .2); box(.34, .62, .03, 0x1A1A1A, 0, 0, 0, g); const tt = [T_D1, T_D2, T_D3, T_D4][i % 4]; add(new THREE.PlaneGeometry(.3, .5), new THREE.MeshBasicMaterial({ map: tt, toneMapped: false }), 0, .02, .016, g); g.userData = { i }; shPhones.push(g); }
+const planes = []; for (let i = 0; i < 6; i++) { const g = grp(don); const m = MAT(0xFFFFFF, .6, { side: THREE.DoubleSide }); const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute([0, 0, .12, -.08, 0, -.06, 0, .015, -.03, 0, 0, .12, .08, 0, -.06, 0, .015, -.03], 3)); geo.computeVertexNormals(); const p = new THREE.Mesh(geo, m); g.add(p); planes.push(g); }
+const myPhone = grp(don); myPhone.position.set(.0, 1.35, .3); myPhone.scale.setScalar(1.4); { box(.42, .78, .035, 0x1A1A1A, 0, 0, 0, myPhone); const t = canvasTex(300, 560, g => { g.fillStyle = '#F7EEDC'; g.fillRect(0, 0, 300, 560); g.drawImage(T_CAPA.image, 40, 40, 220, 311); g.fillStyle = '#2F7A45'; g.beginPath(); g.roundRect(40, 400, 220, 80, 40); g.fill(); g.fillStyle = '#fff'; g.font = '700 30px P'; g.textAlign = 'center'; g.fillText('Compartilhar', 150, 452); }); add(new THREE.PlaneGeometry(.38, .72), new THREE.MeshBasicMaterial({ map: t, toneMapped: false }), 0, 0, .019, myPhone); }
+
+// ===== FINAL: parque dourado com todos =====
+const fDogs = ['caramelo', 'golden', 'pretoTan', 'collie', 'salsicha', 'salsichaRuivo'].map(k => { const d = mkDog(k); park.add(d.root); return d; });
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+const win = (t, a, b) => t >= a && t < b;
+const fadeIn = (t, a, d = .5) => clamp((t - a) / d);
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[T_MAS - .2, 'whoosh'], [T_FOI - .2, 'whoosh'], [T_PATAS, 'ding'], [T_GRAT, 'ding'], [T_COM - .2, 'whoosh'], [T_IMP, 'pop'], [T_EB - .2, 'whoosh'], [T_5 + .35, 'pop'], [T_10 + .35, 'pop'], [T_QQ + .5, 'pop'], [T_COMP + .1, 'whoosh'], [T_PORQ - .2, 'whoosh'], [T_END, 'win']].forEach(([t, k]) => ev(t, k));
+const allDogs = [...Object.values(pDogs), hDog, hDach, kitDog, vetDog, bebeDog, ...tDogs, ...fDogs];
+const hideAll = () => { Object.values(SETS).forEach(g => g.visible = false); jug.visible = stream.visible = brush.visible = false; allDogs.forEach(d => d.root.visible = false); [mom, kid, tutor, helper].forEach(p => p.root.visible = false); picnic.visible = false; ball.visible = false; };
+const showDog = (d, x, y, z, ry) => { d.root.visible = true; d.root.position.set(x, y, z); d.root.rotation.y = ry; };
+const at = (g, x, y, z) => g.position.clone().add(V(x, y, z));
+// dog world position helper (for camera)
+const dogHead = d => { const v = new THREE.Vector3(); d.head.getWorldPosition(v); return v; };
+const DIPS = [T_MAS, T_FOI, T_COM, T_EB, T_PORQ];
+
+const SHOTS = [
+  // 0 parque: caramelo vem andando até a câmera
+  [0, (t, k) => { setLook('park'); park.visible = true; const d = pDogs.hero; const u = clamp(t / 4.2); const z = lerp(-7, .2, ease(u));
+    showDog(d, .1, 0, z, 0); poseDog(d, t, { walk: u < 1 ? 1 : 0, sit: clamp((t - 4.0) / .5), tilt: t > 3.5 ? Math.sin(t * 1.3) * .22 : 0, pant: 1, wag: 1.2 });
+    showDog(pDogs.golden, Math.cos(t * .9) * 3 - 3, 0, Math.sin(t * .9) * 2 - 9, -t * .9); poseDog(pDogs.golden, t, { run: 1, pant: 1, ph: 1 });
+    const bx = Math.sin(t * 1.6) * 2.2 + 3; ball.visible = true; ball.position.set(bx, .07 + Math.abs(Math.sin(t * 3.2)) * .8, -8);
+    showDog(pDogs.pt, bx - 1.0, 0, -8.3, Math.cos(t * 1.6) > 0 ? Math.PI / 2 : -Math.PI / 2); poseDog(pDogs.pt, t, { run: 1, pant: 1, ph: 2 });
+    showDog(pDogs.coll, 5.5, 0, -10, -1.2); poseDog(pDogs.coll, t, { sit: 1, look: Math.sin(t * 1.6) * .5, pant: 1, ph: 3 });
+    showDog(pDogs.sal, -5 + t * .4, 0, -6.5, Math.PI / 2); poseDog(pDogs.sal, t, { walk: 1, ph: 4 });
+    const cz = lerp(4.6, 1.75, ease(clamp(t / 4.6))); const hy = lerp(.5, .62, ease(clamp((t - 3.8) / .6)));
+    return [V(.35, lerp(.6, .62, u), cz), V(.1, hy, z + .2)]; }],
+  // 0b família: piquenique
+  [T_AMIGO, (t, k) => { setLook('gold'); park.visible = true; picnic.visible = true; mom.root.visible = kid.root.visible = true;
+    poseP(mom, { ...PP.sit, kl: .15, kr: .15, y: -.66, rx: -.6 - .5 * clamp((t - T_FAM) / .6), re: -.8, hx: .15 }, 0, t); face(mom, 'happy', t); mom.root.position.y = 0;
+    poseP(kid, { ...PP.sitCheer, kl: .15, kr: .15, y: -.66 }, 0, t); face(kid, 'happy', t); kid.root.position.y = 0;
+    const d = pDogs.hero; const u = clamp((t - T_AMIGO) / 2.2); showDog(d, lerp(-2.4, .05, ease(u)) + picnic.position.x, 0, lerp(1.7, .55, ease(u)) + picnic.position.z, lerp(2.0, .9, u)); poseDog(d, t, { run: u < 1 ? .7 : 0, sit: clamp((t - T_AMIGO - 2.2) / .5), pant: 1, wag: 1.4, look: u >= 1 ? -.4 : 0 });
+    showDog(pDogs.salr, picnic.position.x - 1.2, 0, picnic.position.z + .3, .6); poseDog(pDogs.salr, t, { lie: 1, wag: .6, ph: 5, look: .4 });
+    const a = .35 - k * .05; return [at(picnic, Math.sin(a) * 4.2, 1.35, Math.cos(a) * 4.2), at(picnic, .1, .45, -.3)]; }],
+  // 1 água fresca
+  [T_MAS, (t, k) => { setLook('home'); home.visible = true; tutor.root.visible = true; tutor.root.position.set(-.85, .16, -.75); tutor.root.rotation.y = .7; poseP(tutor, { ...PP.stand, hl: -1.7, kl: 2.2, hr: -1.0, kr: 1.6, y: -.42, lean: .35, rx: -1.1, rz: -.2, re: -.5, lx: -.4, le: -.6, hx: .25 }, 0, t); face(tutor, 'happy', t);
+    const pour = clamp((t - T_MAS - .3) / 1.6); jug.visible = pour < 1; const hp = new THREE.Vector3(); tutor.armR.hand.getWorldPosition(hp); jug.position.copy(hp); jug.rotation.set(0, 0, -1.0 * Math.sin(Math.min(1, pour * 1.3) * Math.PI / 2));
+    stream.visible = pour > .15 && pour < .95; const tip = jug.localToWorld(V(-.06, .12, 0)); const bot = at(bowlW, 0, .05, 0); stream.position.copy(tip).add(bot).multiplyScalar(.5); stream.scale.y = Math.max(.01, tip.distanceTo(bot)); stream.quaternion.setFromUnitVectors(V(0, 1, 0), tip.clone().sub(bot).normalize());
+    water.position.y = .01 + .06 * ease(pour); water.scale.setScalar(.75 + .25 * ease(pour));
+    const u = clamp((t - T_MAS - 1.2) / 1.0); showDog(hDog, lerp(.9, -.6, ease(u)) + 100, .16, lerp(.9, .25, ease(u)), Math.PI + .9 * (1 - u) + .0); hDog.root.rotation.y = Math.PI - lerp(.9, 0, u) + Math.PI; poseDog(hDog, t, { walk: u < 1 ? 1 : 0, eat: clamp((t - T_MAS - 2.2) / .4), wag: 1.3 });
+    hDog.root.rotation.y = lerp(-2.2, Math.PI, ease(u)) ; hDog.root.position.set(lerp(.6, -.6, ease(u)), .16, lerp(.9, .32, ease(u)));
+    return [at(home, .7, 1.35, 3.3), at(home, -.45, .75, -.35)]; }],
+  // 2 alimentação
+  [T_ALIM, (t, k) => { setLook('home'); home.visible = true; kib.forEach(kb => { const u = clamp((t - T_ALIM - .1 - kb.userData.d * .8) / .35); kb.visible = u > 0; kb.position.set(kb.userData.x, .05 + (1 - easeOut(u)) * .7, kb.userData.z); });
+    showDog(hDog, .9, .16, -.92, 0); poseDog(hDog, t, { eat: clamp((t - T_ALIM - .9) / .3), wag: 1.5, sit: 0 });
+    return [at(home, 1.25, .75, .85), at(home, .9, .35, -.45)]; }],
+  // 3 prevenir doenças: veterinário
+  [T_PREV, (t, k) => { setLook('vet'); vet.visible = true; vetDog.root.visible = true; poseDog(vetDog, t, { sit: 1, wag: 1.2, pant: 1, tilt: Math.sin(t * 1.5) * .15, look: -.3 }); poseP(vetP, PP.point, 0, t); vetP.armR.sh.rotation.set(-1.0, 0, -.3); face(vetP, 'happy', t);
+    vetHeart.position.copy(at(vet, -.1, 1.75 + Math.sin(t * 3) * .03, -.5)); vetHeart.scale.setScalar(.25 + Math.abs(Math.sin(t * 4)) * .06); vetHeart.material.opacity = fadeIn(t, T_PREV + .3, .3);
+    return [at(vet, .9 - k * .1, 1.55, 1.9), at(vet, -.05, 1.2, -.6)]; }],
+  // 4 emergência: kit de primeiros socorros
+  [T_EMER, (t, k) => { setLook('home'); home.visible = true; kit.userData.lid.rotation.x = -1.6 * ease(clamp((t - T_EMER - .2) / .6)); showDog(kitDog, -2.95, .16, -1.55, .55); poseDog(kitDog, t, { sit: 1, look: -.2, tilt: .15, wag: .8 });
+    return [at(home, -1.55 - k * .05, 1.25, 1.55), at(home, -2.35, .55, -1.0)]; }],
+  // 5 proteger: escovando o salsicha no degrau
+  [T_PROT, (t, k) => { setLook('gold'); home.visible = true; tutor.root.visible = true; tutor.root.position.set(.6, .2, .45); tutor.root.rotation.y = -.4; poseP(tutor, PP.sitBench, 0, t); tutor.armR.sh.rotation.set(-.9 + Math.sin(t * 4) * .15, 0, .25); tutor.armR.el.rotation.x = -.6; face(tutor, 'happy', t); tutor.root.position.y = .02;
+    showDog(hDach, 1.2, .2, .65, -1.4); poseDog(hDach, t, { lie: 1, wag: .8, look: .3, ph: 2 });
+    brush.visible = true; const hp = new THREE.Vector3(); tutor.armR.hand.getWorldPosition(hp); brush.position.copy(hp); brush.rotation.set(0, -1.4, 0);
+    return [at(home, 2.7 - k * .08, 1.45, 3.1), at(home, .9, .85, .45)]; }],
+  // 6 Patas Protegidas: livro
+  [T_FOI, (t, k) => { setLook('green'); bookS.visible = true;
+    bokeh.forEach(b => { b.position.y = b.userData.y + Math.sin(t * .6 + b.userData.p) * .15; });
+    { const li = ease(clamp((t - T_PATAS + .1) / .8)), lo = ease(clamp((t - T_CRI) / .7)); logo3.visible = li > 0 && lo < 1; logo3.position.set(0, 1.9 + lo * 1.2 + Math.sin(t) * .03, .4); logo3.scale.setScalar(Math.max(.001, li * (1 - lo * .5))); logo3.material.opacity = 1 - lo; logoCard.material.transparent = true; logoCard.material.opacity = 1 - lo; }
+    const rise = ease(clamp((t - T_CRI + .3) / 1.4)); book.position.set(-BW / 2 + lerp(0, 0, rise), lerp(.3, 1.85, rise) + Math.sin(t * 1.2) * .03, lerp(-.2, .3, rise)); book.rotation.set(lerp(-1.4, -.05, rise), lerp(.8, .18, rise) + Math.sin(t * .5) * .04, 0);
+    book.visible = t > T_CRI - .4; book.scale.setScalar(Math.max(.001, rise));
+    const op = ease(clamp((t - T_CUID) / 1.0)); coverH.rotation.y = -op * 2.95;
+    flips[0].rotation.y = -ease(clamp((t - T_CUID - 1.5) / .9)) * 2.9; flips[1].rotation.y = -ease(clamp((t - T_QUER) / .9)) * 2.85;
+    pols.forEach((p, i) => { const s = ease(clamp((t - T_MELHOR - .1 - i * .15) / .6)); p.visible = s > 0; p.scale.setScalar(Math.max(.001, s)); p.position.set(p.userData.a, p.userData.y + Math.sin(t * 1.1 + i) * .05, .1 - Math.abs(p.userData.a) * .25); p.rotation.set(0, -p.userData.a * .25, p.userData.r); });
+    const tgt = V(0, lerp(1.4, 1.85, rise), .2); const d = lerp(6.2, 4.9, ease(clamp((t - T_FOI) / 6))) + (t > T_MELHOR ? ease(clamp((t - T_MELHOR) / 1.2)) * .6 : 0);
+    return [at(bookS, Math.sin(.15 - k * .01) * d, tgt.y + .35, Math.cos(.15 - k * .01) * d), at(bookS, tgt.x, tgt.y, tgt.z)]; }],
+  // 7 alcance: celular e cidade
+  [T_COM, (t, k) => { setLook('town'); town.visible = true; const played = t > T_IMP; const lk = played ? Math.round(12 + Math.pow(clamp((t - T_IMP) / 6), 1.6) * 48000) : 12; paintPost(lk, played);
+    rings.forEach((r, i) => { const u = ((t - T_IMP) * .35 + i / 4) % 1; r.visible = t > T_IMP; const s = .5 + u * 6; r.scale.setScalar(s); r.material.opacity = (1 - u) * .8; });
+    houses.forEach(h => { const reach = (t - T_IMP) * 1.2; const lit = clamp((reach - h.userData.r * .5) / .5); h.userData.wm.emissiveIntensity = lit * 1.2; });
+    hearts.forEach((hs, i) => { const h = houses[i]; const st = T_ALC + h.userData.r * .25 + (i % 3) * .2; const u = ((t - st) % 1.6) / 1.6; hs.visible = t > st; hs.position.copy(h.position).add(V(0, .9 + u * .7, 0)); hs.material.opacity = 1 - u; hs.scale.setScalar(.25 + u * .1); });
+    tPeople.forEach((p, i) => { poseP(p, t > T_ALC + i * .1 ? PP.cheer : PP.phone, 0, t + i); face(p, 'happy', t); });
+    tDogs.forEach((d, i) => poseDog(d, t, { sit: 1, wag: 1.3, pant: 1, ph: i }));
+    bookStack.forEach((b, i) => { const st = T_PROD + i * .12; const u = clamp((t - st) / .7); b.visible = u > 0; const h = houses[(i * 3) % houses.length]; const p0 = V(.85, 1.0 + i * .05, .3), p1 = h.position.clone().add(V(0, .9, 0)); b.position.lerpVectors(p0, p1, ease(u)); b.position.y += Math.sin(u * Math.PI) * 1.2; b.rotation.set(-.3, u * 3, 0); b.scale.setScalar(u < 1 ? 1 : Math.max(.001, 1 - (t - st - .7) * 3)); });
+    const pull = ease(clamp((t - T_IMP + .2) / 3.0)); const d = lerp(2.4, 12.5, pull); const y = lerp(1.25, 6.0, pull); const a = .25 + k * .03;
+    return [at(town, Math.sin(a) * d, y, Math.cos(a) * d), at(town, 0, lerp(1.2, .6, pull), 0)]; }],
+  // 8 apoiar ações: bebedouro simples
+  [T_APO - .15, (t, k) => { setLook('gold'); home.visible = true; helper.root.visible = true; helper.root.position.set(-5.25, .0, 1.15); helper.root.rotation.y = 1.3; poseP(helper, mixP(PP.stand, PP.fold, .7), 0, t); face(helper, 'happy', t);
+    bebeParts.forEach((p, i) => { const s = ease(clamp((t - T_APO - i * .18) / .35)); p.scale.setScalar(Math.max(.001, s)); });
+    const u = clamp((t - T_APO - .5) / .9); showDog(bebeDog, lerp(-5.6, -4.6, ease(u)), 0, lerp(2.5, 1.98, ease(u)), Math.PI - lerp(1.0, 0, ease(u))); poseDog(bebeDog, t, { walk: u < 1 ? 1 : 0, eat: clamp((t - T_APO - 1.4) / .3), wag: 1.3 });
+    return [at(home, -2.1, 1.6, 3.3), at(home, -4.85, .78, 1.5)]; }],
+  // 9 e-book gratuito + contribuição
+  [T_EB, (t, k) => { setLook('cream'); don.visible = true;
+    coins.forEach(c => { const u = clamp((t - c.userData.t - .1) / .55); c.visible = u > 0 && u < 1; c.position.set(jar.position.x + Math.sin(c.userData.t * 7) * .05, lerp(1.95, 1.0, u * u), -.35); c.rotation.set(0, u * 6, 0); });
+    const fillU = clamp((t - T_5) / (T_EST - T_5)); jarHeart.visible = t > T_QQ + .8; jarHeart.position.set(.35, 1.3 + ease(clamp((t - T_QQ - .8) / 1)) * .9, -.35); jarHeart.scale.setScalar(.2 + ease(clamp((t - T_QQ - .8) / .8)) * .3 + Math.sin(t * 5) * .02);
+    const g = ease(clamp((t - T_EST) / 1.6)); sprout.userData.st.scale.y = Math.max(.01, g); sprout.userData.st.position.y = .22 + .25 * g; sprout.userData.leaves.forEach((l, i) => { const s = clamp(g * 4 - i * .7); l.scale.set(s, .2 * s, .55 * s); l.position.y = .25 + i * .1 * g + .05; });
+    const share = t > T_NAO - .1; myPhone.visible = share; shPhones.forEach((p, i) => { const s = ease(clamp((t - T_COMP - .3 - i * .12) / .4)); p.visible = share && s > 0; p.scale.setScalar(Math.max(.001, s)); p.rotation.y = Math.sin(t + i) * .1; });
+    planes.forEach((pl, i) => { const st = T_COMP + i * .12; const u = clamp((t - st) / .7); pl.visible = share && u > 0 && u < 1; const p0 = myPhone.position, p1 = shPhones[i].position; pl.position.lerpVectors(p0, p1, ease(u)); pl.position.y += Math.sin(u * Math.PI) * .5; pl.lookAt(at(don, 0, 0, 0).add(p1).sub(don.position).add(don.position)); });
+    donBook.visible = !share; jar.visible = !share; sprout.visible = !share; coins.forEach(c => { if (share) c.visible = false; }); if (share) jarHeart.visible = false;
+    if (share) return [at(don, 0, 1.5, 4.3 - (t - T_NAO) * .08), at(don, 0, 1.45, -.6)];
+    return [at(don, .25 + Math.sin(k * .2) * .3, 1.8, 3.3 - k * .06), at(don, 0, 1.2, -.3)]; }],
+  // 10 final: todos no parque dourado, câmera se afasta
+  [T_PORQ, (t, k) => { setLook('gold'); park.visible = true; const cx = .5, cz = -2; fDogs.forEach((d, i) => { const a = (i - 2.5) * .55; showDog(d, cx + Math.sin(a) * 1.5, 0, cz - Math.cos(a) * .6 + .4, -a * .6); poseDog(d, t, { sit: i % 3 === 2 ? 0 : 1, lie: i % 3 === 2 ? 1 : 0, wag: 1.2, pant: 1, tilt: Math.sin(t * .9 + i) * .12, ph: i * 1.3 }); });
+    const pull = ease(clamp(k / 7.5)); const d = lerp(3.4, 11, pull); const y = lerp(.85, 3.6, pull);
+    return [V(cx + Math.sin(.1) * d, y, cz + Math.cos(.1) * d), V(cx, lerp(.45, .9, pull), cz)]; }],
+];
+// legendas: frases quebradas por pontuação (até ~8 palavras)
+const SUBS = []; { let cur = []; for (const w of ALL) { cur.push(w); const end = /[.,!?…:]$/.test(w.w); if ((end && cur.length >= 3) || cur.length >= 9 || /[.!?…]$/.test(w.w)) { SUBS.push({ a: cur[0].start, b: w.end, txt: cur.map(x => x.w).join(' ') }); cur = []; } } if (cur.length) SUBS.push({ a: cur[0].start, b: cur[cur.length - 1].end, txt: cur.map(x => x.w).join(' ') }); }
+SUBS.forEach((s, i) => { s.b = Math.min(SUBS[i + 1] ? SUBS[i + 1].a - .02 : s.b + .6, s.b + .6); });
+window.draw = function (t) {
+  hideAll();
+  let i = 0; while (i + 1 < SHOTS.length && SHOTS[i + 1][0] <= t) i++;
+  const [cp, tg] = SHOTS[i][1](t, t - SHOTS[i][0]);
+  cp.x += Math.sin(t * .31) * .02; cp.y += Math.sin(t * .23) * .015;
+  cam.position.copy(cp); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  sun.position.copy(tg).add(V(6, 9, 5)); sun.target.position.copy(tg); fill.position.copy(tg).add(V(-6, 4, 6)); fill.target.position.copy(tg); sky.position.copy(cam.position);
+
+  // overlays
+  let dip = 0; DIPS.forEach(c => { const x = Math.abs(t - c); if (x < .35) dip = Math.max(dip, 1 - x / .35); }); dip = Math.max(dip, 1 - clamp(t / .6));
+  $('fade').style.opacity = dip;
+  const card = (id, a, b) => { const u = Math.min(clamp((t - a) / .45), 1 - clamp((t - b + .35) / .35)); $(id).style.opacity = u; $(id).style.transform = `translateY(${(1 - ease(clamp((t - a) / .45))) * 24}px)`; };
+  card('card1', T_EB + .2, T_5 - .1); card('card2', T_EST - .1, T_NAO);
+  { const u = Math.min(clamp((t - T_GRAT + .1) / .35), 1 - clamp((t - T_COM + .5) / .3)); const el = $('free'); el.style.opacity = u; const s = pop(t - T_GRAT + .1, .35); el.style.transform = `translate(${960 - el.offsetWidth / 2}px, 790px) scale(${Math.max(.001, s)}) rotate(-3deg)`; }
+  const endU = clamp((t - T_END + .25) / .9); $('endbg').style.opacity = endU;
+  { const el = $('logo'); const s = pop(t - T_END, .5); el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `translate(${960 - el.offsetWidth / 2}px, ${330 - el.offsetHeight / 2}px) scale(${Math.max(.001, s)})`; }
+  $('slogan').style.opacity = clamp((t - T_SLOG + .1) / .5); $('slogan').style.transform = `translateY(${(1 - ease(clamp((t - T_SLOG + .1) / .5))) * 20}px)`;
+  $('cta').style.opacity = clamp((t - T_SLOG - 2.6) / .5); $('cta').style.transform = `translateY(${(1 - ease(clamp((t - T_SLOG - 2.6) / .5))) * 20}px)`;
+  $('wm').style.opacity = .5;
+  const sub = SUBS.find(s => t >= s.a - .05 && t < s.b); const showSub = sub && t < T_END - .1;
+  $('sub').style.opacity = showSub ? 1 : 0; if (showSub) $('sub').firstChild.textContent = sub.txt;
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>
