@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+<defs><radialGradient id="bg" cx="50%" cy="40%" r="75%"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#f2e9fa"/><stop offset="1" stop-color="#d5eede"/></radialGradient></defs>
+<rect width="800" height="600" fill="url(#bg)"/><circle cx="0.04382766785278342" cy="552.4587102012982" r="10.627796085843721" fill="#7E22CE" opacity="0.05"/><circle cx="583.4965295081477" cy="319.6285825779795" r="11.268997016022446" fill="#7E22CE" opacity="0.08"/><circle cx="604.0598726850282" cy="325.71016295147604" r="16.95223267886426" fill="#7E22CE" opacity="0.07"/><circle cx="653.405938229247" cy="145.20286421533808" r="11.987703124986822" fill="#7E22CE" opacity="0.08"/><circle cx="558.4365508325568" cy="32.332382086819216" r="16.942552884548228" fill="#7E22CE" opacity="0.06"/><circle cx="737.9214569637187" cy="484.44539191408336" r="7.965383999964867" fill="#7E22CE" opacity="0.07"/><circle cx="738.5345868480088" cy="413.1008658619136" r="16.300067764846638" fill="#7E22CE" opacity="0.07"/><circle cx="729.5963983654959" cy="545.0004966673444" r="11.955933014841719" fill="#7E22CE" opacity="0.06"/><circle cx="669.7367645193527" cy="199.35095757215794" r="8.441171073560216" fill="#7E22CE" opacity="0.05"/><circle cx="342.7759801702462" cy="176.9240409959685" r="20.996187179813248" fill="#7E22CE" opacity="0.07"/><circle cx="583.417759362337" cy="526.7112020993192" r="6.9379648868637" fill="#7E22CE" opacity="0.05"/><circle cx="448.50401861989127" cy="305.2807083843652" r="12.743088427345775" fill="#7E22CE" opacity="0.05"/><circle cx="727.1758138794339" cy="32.92790373457964" r="11.847415122132476" fill="#7E22CE" opacity="0.06"/><circle cx="531.5368286015172" cy="554.6087292742956" r="14.237677682301811" fill="#7E22CE" opacity="0.05"/>
+<ellipse cx="400" cy="560" rx="260" ry="22" fill="#7E22CE" opacity=".12"/>
+<g transform="translate(400 330) scale(1.32) translate(-400 -330)"><rect x="300" y="170" width="200" height="320" rx="26" fill="#ffffff" opacity=".55"/>
+      <rect x="312" y="300" width="176" height="180" rx="20" fill="#4a1259"/>
+      <rect x="312" y="250" width="176" height="60" fill="#fb923c"/>
+      <rect x="312" y="215" width="176" height="40" fill="#6d1f7f"/>
+      <g></g>
+      <rect x="300" y="170" width="200" height="320" rx="26" fill="none" stroke="#fff" stroke-width="6" opacity=".8"/>
+      <rect x="320" y="185" width="14" height="280" rx="7" fill="#fff" opacity=".45"/></g>
+</svg>

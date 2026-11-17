@@ -1,0 +1,111 @@
+{
+  "$schema": "../store.schema.json",
+  "slug": "acai-premium",
+  "name": "Açaí Premium",
+  "isDemo": true,
+  "description": "Açaí gourmet com ingredientes selecionados. Entrega grátis em toda a cidade.",
+  "seo": { "title": "Açaí Premium — Açaí gourmet com entrega grátis", "description": "Açaí gourmet, cremes artesanais e coberturas importadas. Entrega grátis.", "image": null },
+  "branding": { "logo": "images/logo.svg", "cover": "images/cover.svg", "primaryColor": "#3B0764", "secondaryColor": "#CA8A04" },
+  "banner": { "enabled": true, "image": "images/banner.svg", "title": "Peça agora e receba em casa!", "subtitle": "Entrega grátis em pedidos acima de R$ 30." },
+  "contact": { "whatsapp": "550000000000", "instagram": null, "address": "Alameda Demonstração, 77 — Jardins (endereço de demonstração)", "region": "Entrega grátis em toda a cidade" },
+  "hours": {
+    "timezone": "America/Sao_Paulo",
+    "whenClosed": "schedule",
+    "weekly": {
+      "tue": [{ "open": "15:00", "close": "23:00" }],
+      "wed": [{ "open": "15:00", "close": "23:00" }],
+      "thu": [{ "open": "15:00", "close": "23:00" }],
+      "fri": [{ "open": "12:00", "close": "15:00" }, { "open": "17:00", "close": "23:30" }],
+      "sat": [{ "open": "12:00", "close": "23:30" }],
+      "sun": [{ "open": "12:00", "close": "22:00" }]
+    },
+    "special": [{ "date": "2026-12-25", "label": "Natal", "closed": true }, { "date": "2026-12-31", "label": "Réveillon", "intervals": [{ "open": "12:00", "close": "18:00" }] }]
+  },
+  "ordering": { "delivery": true, "pickup": true, "minOrder": 30, "deliveryTime": "45–70 min", "pickupTime": "25 min", "paymentMethods": ["pix", "credit", "debit"] },
+  "delivery": { "mode": "free" },
+  "categories": [
+    { "key": "assinatura", "name": "Assinatura da casa", "icon": "crown" },
+    { "key": "monte-seu-acai", "name": "Monte seu açaí", "icon": "sparkles" },
+    { "key": "sobremesas", "name": "Sobremesas", "icon": "ice-cream" }
+  ],
+  "addonGroups": [
+    {
+      "key": "base",
+      "name": "Base",
+      "min": 1,
+      "max": 1,
+      "addons": [
+        { "key": "acai-organico", "name": "Açaí orgânico" },
+        { "key": "acai-pistache", "name": "Açaí com creme de pistache", "price": 6, "alwaysPaid": true }
+      ]
+    },
+    {
+      "key": "toppings",
+      "name": "Toppings gourmet",
+      "description": "3 grátis. Demais R$ 3,00.",
+      "max": 7,
+      "free": 3,
+      "extraPrice": 3,
+      "addons": [
+        { "key": "morango", "name": "Morango" },
+        { "key": "mirtilo", "name": "Mirtilo" },
+        { "key": "granola-artesanal", "name": "Granola artesanal" },
+        { "key": "amendoas", "name": "Amêndoas laminadas" },
+        { "key": "cacau-nibs", "name": "Nibs de cacau" },
+        { "key": "pistache", "name": "Pistache", "price": 5, "alwaysPaid": true }
+      ]
+    },
+    {
+      "key": "finalizacao",
+      "name": "Finalização",
+      "min": 1,
+      "max": 1,
+      "addons": [
+        { "key": "mel-silvestre", "name": "Mel silvestre" },
+        { "key": "nutella", "name": "Nutella" },
+        { "key": "doce-de-leite", "name": "Doce de leite artesanal" },
+        { "key": "sem-finalizacao", "name": "Sem finalização" }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "key": "assinatura-pistache",
+      "category": "assinatura",
+      "name": "Açaí Pistache & Morango",
+      "description": "Açaí orgânico, creme de pistache, morangos e granola artesanal.",
+      "image": "images/acai-premium.svg",
+      "badges": ["destaque", "mais-vendido"],
+      "featured": true,
+      "variants": [
+        { "key": "400ml", "name": "400 ml", "price": 32 },
+        { "key": "600ml", "name": "600 ml", "price": 42 }
+      ]
+    },
+    {
+      "key": "assinatura-cacau",
+      "category": "assinatura",
+      "name": "Açaí Cacau Intenso",
+      "description": "Açaí com nibs de cacau, chocolate 70% e amêndoas.",
+      "image": "images/acai-nutella.svg",
+      "variants": [
+        { "key": "400ml", "name": "400 ml", "price": 30, "compareAtPrice": 34 },
+        { "key": "600ml", "name": "600 ml", "price": 40 }
+      ]
+    },
+    {
+      "key": "monte-seu-acai",
+      "category": "monte-seu-acai",
+      "name": "Monte seu açaí gourmet",
+      "description": "Base, toppings gourmet e finalização à sua escolha.",
+      "image": "images/monte-seu-acai.svg",
+      "variants": [
+        { "key": "400ml", "name": "400 ml", "price": 26 },
+        { "key": "600ml", "name": "600 ml", "price": 34, "rules": { "toppings": { "free": 4 } } }
+      ],
+      "addonGroups": ["base", "toppings", "finalizacao"]
+    },
+    { "key": "brownie", "category": "sobremesas", "name": "Brownie com açaí", "description": "Brownie de chocolate belga com bola de açaí.", "image": "images/mousse.svg", "price": 22 },
+    { "key": "petit-gateau", "category": "sobremesas", "name": "Petit gâteau", "description": "Indisponível hoje.", "image": "images/sorvete.svg", "price": 26, "available": false }
+  ]
+}

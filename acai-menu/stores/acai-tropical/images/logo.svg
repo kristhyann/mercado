@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9143d5"/><stop offset="1" stop-color="#5f1a9b"/></linearGradient></defs>
+<rect width="256" height="256" rx="64" fill="url(#g)"/>
+<circle cx="190" cy="66" r="22" fill="#16A34A"/><path d="M190 44 q10 -16 24 -14" stroke="#22c55e" stroke-width="6" fill="none" stroke-linecap="round"/>
+<text x="128" y="170" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="128" fill="#ffffff">T</text>
+<text x="128" y="214" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="22" letter-spacing="5" fill="#ffffff" opacity=".85">AÇAÍ</text>
+</svg>

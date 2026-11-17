@@ -1,0 +1,65 @@
+{
+  "$schema": "../store.schema.json",
+  "slug": "modelo",
+  "name": "Nome da Açaiteria",
+  "isDemo": false,
+  "active": true,
+  "description": "Açaí cremoso batido na hora. Monte o seu do seu jeito!",
+  "seo": { "title": null, "description": null, "image": null },
+  "branding": { "logo": "images/logo.png", "cover": "images/capa.jpg", "primaryColor": "#6B21A8", "secondaryColor": "#F59E0B" },
+  "banner": { "enabled": true, "image": null, "title": "Monte seu açaí do seu jeito!", "subtitle": "Peça agora e receba em casa." },
+  "contact": { "whatsapp": "550000000000", "instagram": null, "address": "Rua, número — Bairro, Cidade", "region": "Entregamos no Centro e região", "mapsUrl": null },
+  "hours": {
+    "timezone": "America/Sao_Paulo",
+    "mode": "auto",
+    "whenClosed": "block",
+    "ordersPaused": false,
+    "pausedMessage": null,
+    "weekly": {
+      "sun": [{ "open": "14:00", "close": "22:00" }],
+      "mon": [],
+      "tue": [{ "open": "14:00", "close": "22:00" }],
+      "wed": [{ "open": "14:00", "close": "22:00" }],
+      "thu": [{ "open": "14:00", "close": "22:00" }],
+      "fri": [{ "open": "14:00", "close": "23:00" }],
+      "sat": [{ "open": "14:00", "close": "23:00" }]
+    },
+    "special": []
+  },
+  "ordering": { "delivery": true, "pickup": true, "minOrder": 0, "deliveryTime": "30–50 min", "pickupTime": "15 min", "paymentMethods": ["pix", "cash", "credit", "debit"], "pixKey": null },
+  "delivery": {
+    "mode": "zones",
+    "fixedFee": 0,
+    "freeAbove": null,
+    "allowUnlistedNeighborhoods": false,
+    "zones": [{ "neighborhood": "Centro", "fee": 4 }]
+  },
+  "whatsappMessage": { "header": null, "footer": null },
+  "categories": [
+    { "key": "monte-seu-acai", "name": "Monte seu açaí" },
+    { "key": "bebidas", "name": "Bebidas" }
+  ],
+  "addonGroups": [
+    { "key": "base", "name": "Escolha a base", "min": 1, "max": 1, "addons": [{ "key": "tradicional", "name": "Açaí tradicional" }, { "key": "zero-acucar", "name": "Açaí zero açúcar", "price": 2, "alwaysPaid": true }] },
+    { "key": "acompanhamentos", "name": "Acompanhamentos", "max": 6, "free": 3, "extraPrice": 2, "addons": [{ "key": "leite-em-po", "name": "Leite em pó" }, { "key": "granola", "name": "Granola" }, { "key": "banana", "name": "Banana" }, { "key": "morango", "name": "Morango" }, { "key": "pacoca", "name": "Paçoca" }] },
+    { "key": "coberturas", "name": "Coberturas", "max": 2, "free": 1, "extraPrice": 1.5, "addons": [{ "key": "leite-condensado", "name": "Leite condensado" }, { "key": "chocolate", "name": "Chocolate" }] },
+    { "key": "adicionais", "name": "Adicionais pagos", "maxPerOption": 3, "addons": [{ "key": "nutella-extra", "name": "Nutella extra", "price": 3 }] }
+  ],
+  "products": [
+    {
+      "key": "monte-seu-acai",
+      "category": "monte-seu-acai",
+      "name": "Monte seu açaí",
+      "description": "Escolha o tamanho, a base e os acompanhamentos.",
+      "image": null,
+      "featured": true,
+      "variants": [
+        { "key": "300ml", "name": "300 ml", "price": 12, "rules": { "acompanhamentos": { "free": 2 } } },
+        { "key": "500ml", "name": "500 ml", "price": 18 },
+        { "key": "700ml", "name": "700 ml", "price": 23, "rules": { "acompanhamentos": { "free": 4, "max": 8 } } }
+      ],
+      "addonGroups": ["base", "acompanhamentos", "coberturas", "adicionais"]
+    },
+    { "key": "agua", "category": "bebidas", "name": "Água mineral 500 ml", "image": null, "price": 3.5 }
+  ]
+}

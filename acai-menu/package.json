@@ -1,0 +1,51 @@
+{
+  "name": "acai-menu",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Açaí Menu — plataforma multiloja de cardápios digitais para açaiterias com pedidos pelo WhatsApp.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:db": "vitest run tests/db",
+    "store:new": "tsx scripts/store-new.ts",
+    "store:validate": "tsx scripts/store-validate.ts",
+    "store:sync": "tsx scripts/store-sync.ts",
+    "store:duplicate": "tsx scripts/store-duplicate.ts",
+    "store:export": "tsx scripts/store-export.ts",
+    "store:list": "tsx scripts/store-list.ts",
+    "demo:images": "tsx scripts/generate-demo-images.ts",
+    "store:schema": "tsx scripts/store-schema.ts",
+    "admin:create": "tsx scripts/admin-create.ts"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "dependencies": {
+    "@fontsource-variable/plus-jakarta-sans": "^5.3.0",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.119.0",
+    "lucide-react": "^1.73.0",
+    "next": "^16.4.5",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "server-only": "^0.0.1",
+    "sharp": "^0.35.5",
+    "zod": "^4.6.7",
+    "zustand": "^5.1.0"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.16",
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "dotenv": "^18.0.10",
+    "tailwindcss": "^4.3.5",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^5.1.0"
+  }
+}
