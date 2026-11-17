@@ -156,7 +156,7 @@ const EXPL = { up: [upShell.left, -1, 0, 0, .55], upR: [upShell.right, 1, 0, 0, 
 Object.values(EXPL).forEach(e => e[0].userData.p0 = e[0].position.clone());
 safeShell.door.userData.p0 = safeShell.door.position.clone();
 const explode = (e, door, fas) => { safeShell.door.position.x = 0; Object.values(EXPL).forEach(([m, x, y, z, d]) => { m.position.copy(m.userData.p0).add(V(x * d * e, y * d * e, z * d * e)); }); safeShell.door.position.copy(safeShell.door.userData.p0).add(V(0, 0, .65 * door)); fascia.position.z = .6 * fas; };
-const hideAll = () => { card.visible = false; flyNotes.forEach(n => n.visible = false); dblNotes.forEach(n => n.visible = false); tech.root.visible = false; techCass.visible = false; hand.visible = false; bankS.visible = false; lobby.visible = true; atm.visible = true; okS.visible = false; contacts.material.emissiveIntensity = 0; beamS.material.color.set(0xFF3030); };
+const hideAll = () => { safeShell.door.visible = true; card.visible = false; flyNotes.forEach(n => n.visible = false); dblNotes.forEach(n => n.visible = false); tech.root.visible = false; techCass.visible = false; hand.visible = false; bankS.visible = false; lobby.visible = true; atm.visible = true; okS.visible = false; contacts.material.emissiveIntensity = 0; beamS.material.color.set(0xFF3030); };
 const notePos = (u, off = 0) => PATH.getPoint(clamp(u)).add(V(0, off, 0));
 
 const SHOTS = [
@@ -187,7 +187,7 @@ const SHOTS = [
   [S(6), (t, k) => { explode(1, 1, 1); rollers.forEach(r => r.rotation.x = t * 12); beltRollers.forEach(r => r.rotation.x = t * 12);
     flyNotes.forEach((n, i) => { const u = ((t - T_ROLOS) * .35 - i * .18); n.visible = t > T_ROLOS && u > 0 && u < .55; n.position.copy(notePos(u)); n.lookAt(notePos(u + .01)); n.rotateX(Math.PI / 2); });
     const pass = flyNotes.some((n, i) => { const u = ((t - T_ROLOS) * .35 - i * .18); return u > .2 && u < .28; }); beamS.material.color.set(pass && t > T_SENS - .3 ? 0x22FF66 : 0xFF3030);
-    return t < T_SENS - .2 ? [V(.75, .85, -.05), V(0, .7, -.27)] : [V(.6, 1.0, .05), V(0, .84, -.28)]; }],
+    return t < T_SENS - .2 ? [V(.55, 1.15, .45), V(0, .72, -.25)] : [V(.45, 1.05, .2), V(0, .84, -.28)]; }],
   // 7 duas notas grudadas -> rejeição
   [S(7), (t, k) => { explode(1, 1, 1); rollers.forEach(r => r.rotation.x = t * 12); const u = clamp((t - T_DUAS) / 2.2);
     dblNotes.forEach((n, i) => { n.visible = true; let p; if (u < .45) p = notePos(u * .62, i * .003); else { const v = (u - .45) / .55; const a = notePos(.28), b = rejectBin.position.clone().add(V(0, .06, 0)); p = a.clone().lerp(b, ease(v)); p.y += Math.sin(v * Math.PI) * .08 + i * .003; } n.position.copy(p); n.rotation.set(0, 0, 0); });
@@ -201,7 +201,7 @@ const SHOTS = [
   // 9 reabastecimento
   [S(9), (t, k) => { explode(0, 1, 0); upShell.left.position.copy(upShell.left.userData.p0); tech.root.visible = true; tech.root.position.set(.85, 0, .55); tech.root.rotation.y = -1.9; poseP(tech, { ...PP.stand, lx: -1.1, rx: -1.1, le: -.4, re: -.4 }, 0, t); face(tech, 'calm', t);
     techCass.visible = true; const u = ease(clamp((t - T_TROC) / 1.4)); techCass.position.set(lerp(.5, 0, u), .63, lerp(.85, -.02, u)); techCass.rotation.y = lerp(-.6, 0, u); cassettes[3].visible = u >= 1;
-    safeShell.door.position.x = -.95; safeShell.door.position.z = .6; return [V(1.7, 1.35, 2.0), V(.2, .7, .2)]; }],
+    safeShell.door.visible = false; return [V(-.7, 1.55, 4.4), V(.45, .9, .25)]; }],
   // 10 remonta + lista
   [S(10), (t, k) => { const e = 1 - ease(clamp((t - S(10)) / 2.5)); explode(e, e, e); cassettes[3].visible = true; screen.children[1].material.color.set(0xFFFFFF);
     return [V(1.2, 1.5, 3.0 - k * .05), V(0, .95, 0)]; }],
