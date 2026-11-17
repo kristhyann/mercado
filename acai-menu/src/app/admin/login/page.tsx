@@ -21,7 +21,8 @@ export default async function LoginPage() {
         {mode === "disabled" ? (
           <div className="rounded-2xl bg-white p-5 text-sm text-slate-600 shadow-sm ring-1 ring-slate-200">
             <p className="font-bold text-slate-900">Painel não configurado</p>
-            <p className="mt-2">Configure <code>SUPABASE_URL</code> e <code>SUPABASE_ANON_KEY</code> e rode as migrações do Supabase (veja o README, seção “Painel administrativo”).</p>
+            <p className="mt-2">Para só <b>visualizar</b> o painel: na Vercel, em Settings → Environment Variables, crie <code>ADMIN_LOCAL_PASSWORD</code> com uma senha e faça um novo deploy.</p>
+            <p className="mt-2">Para <b>editar</b> de verdade: configure o Supabase (veja o README, seção “Painel administrativo”).</p>
           </div>
         ) : (
           <LoginForm mode={mode} />

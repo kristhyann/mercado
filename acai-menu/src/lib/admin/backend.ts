@@ -229,12 +229,33 @@ const localBackend = {
   },
 };
 
+// ════════════════════════════════════════════════════════════════════════════
+// Visualização (hospedado sem Supabase): lê as lojas da pasta /stores e recusa gravações
+// ════════════════════════════════════════════════════════════════════════════
+export const PREVIEW_MESSAGE = "Modo visualização: nada é salvo. Configure o Supabase para editar as lojas (veja o README).";
+const readOnly = async (): Promise<never> => {
+  throw new Error(PREVIEW_MESSAGE);
+};
+const previewBackend = {
+  listStores: localBackend.listStores,
+  getStore: localBackend.getStore,
+  listImages: async () => [] as StoredImage[],
+  saveStore: readOnly,
+  setActive: readOnly,
+  rename: readOnly,
+  deleteStore: readOnly,
+  uploadImage: readOnly,
+  copyImage: readOnly,
+  deleteImages: async () => {},
+};
+
 export type AdminBackend = typeof supabaseBackend;
 
 export function backend(): AdminBackend {
   const mode = adminMode();
   if (mode === "supabase") return supabaseBackend;
   if (mode === "local") return localBackend as unknown as AdminBackend;
+  if (mode === "preview") return previewBackend as unknown as AdminBackend;
   throw new Error("Painel não configurado.");
 }
 

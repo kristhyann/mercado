@@ -2,11 +2,11 @@ import "server-only";
 import crypto from "node:crypto";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { adminMode } from "./mode";
+import { adminMode, adminPassword } from "./mode";
 import { supabaseSession } from "./supabase-session";
 
 export interface AdminSession {
-  mode: "supabase" | "local";
+  mode: "supabase" | "local" | "preview";
   email: string;
 }
 
@@ -14,7 +14,7 @@ const LOCAL_COOKIE = "acai_admin_local";
 const LOCAL_TTL = 12 * 60 * 60 * 1000;
 
 function localSecret() {
-  return crypto.createHash("sha256").update(`acai-menu:${process.env.ADMIN_LOCAL_PASSWORD ?? ""}:${process.env.ADMIN_SESSION_SECRET ?? ""}`).digest();
+  return crypto.createHash("sha256").update(`acai-menu:${adminPassword()}:${process.env.ADMIN_SESSION_SECRET ?? ""}`).digest();
 }
 function sign(payload: string) {
   return crypto.createHmac("sha256", localSecret()).update(payload).digest("base64url");
@@ -36,11 +36,11 @@ export async function getAdminSession(): Promise<AdminSession | null> {
     if (e2 || isAdmin !== true) return null;
     return { mode, email: data.user.email ?? "" };
   }
-  if (mode === "local") {
+  if (mode === "local" || mode === "preview") {
     const raw = (await cookies()).get(LOCAL_COOKIE)?.value ?? "";
     const [exp, sig] = raw.split(".");
     if (!exp || !sig || Number(exp) < Date.now() || !safeEqual(sig, sign(`admin.${exp}`))) return null;
-    return { mode, email: "admin@local" };
+    return { mode, email: mode === "preview" ? "visualização" : "admin@local" };
   }
   return null;
 }
@@ -97,13 +97,13 @@ export async function login(email: string, password: string, ip: string): Promis
     attempts.delete(key);
     return null;
   }
-  if (mode === "local") {
-    const expected = process.env.ADMIN_LOCAL_PASSWORD ?? "";
+  if (mode === "local" || mode === "preview") {
+    const expected = adminPassword();
     if (!expected || !safeEqual(crypto.createHash("sha256").update(password).digest("hex"), crypto.createHash("sha256").update(expected).digest("hex"))) {
       return fail("Senha incorreta.");
     }
     const exp = String(Date.now() + LOCAL_TTL);
-    (await cookies()).set(LOCAL_COOKIE, `${exp}.${sign(`admin.${exp}`)}`, { httpOnly: true, sameSite: "lax", path: "/", secure: false, maxAge: LOCAL_TTL / 1000 });
+    (await cookies()).set(LOCAL_COOKIE, `${exp}.${sign(`admin.${exp}`)}`, { httpOnly: true, sameSite: "lax", path: "/", secure: mode === "preview", maxAge: LOCAL_TTL / 1000 });
     attempts.delete(key);
     return null;
   }

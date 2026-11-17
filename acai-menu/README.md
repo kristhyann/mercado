@@ -136,6 +136,10 @@ Endereço: `https://seudominio.com/admin` (login em `/admin/login`).
 
 > **Painel x arquivos JSON:** use um dos dois para cada loja. `npm run store:sync` se recusa a sobrescrever uma loja alterada pelo painel depois da última edição do arquivo; para trazer a versão do painel use `npm run store:export -- <slug>`.
 >
+> **Só visualizar o painel, sem Supabase (ex.: site já na Vercel com as lojas de demonstração):** na Vercel, em
+> Settings → Environment Variables, crie `ADMIN_LOCAL_PASSWORD` com uma senha, faça um novo deploy e entre em `/admin`.
+> É um **modo visualização**: dá para navegar por tudo, mas nada é salvo.
+>
 > **Desenvolvimento sem Supabase:** com `ADMIN_LOCAL_PASSWORD` no `.env.local` o painel funciona localmente e grava nos arquivos de `stores/` (nunca é ativado na Vercel).
 
 ## 4. Cadastrar uma nova loja

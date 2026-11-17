@@ -4,12 +4,15 @@ import { Loader2, Lock } from "lucide-react";
 import { loginAction } from "@/app/admin/actions";
 import { inputCls } from "./ui";
 
-export function LoginForm({ mode }: { mode: "supabase" | "local" }) {
+export function LoginForm({ mode }: { mode: "supabase" | "local" | "preview" }) {
   const [state, action, pending] = useActionState(loginAction, { error: null });
   return (
     <form action={action} className="space-y-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
       {mode === "local" && (
         <p className="rounded-xl bg-amber-50 p-3 text-xs text-amber-900">Modo de desenvolvimento local: edita os arquivos da pasta <code>stores/</code>.</p>
+      )}
+      {mode === "preview" && (
+        <p className="rounded-xl bg-sky-50 p-3 text-xs text-sky-900">Modo visualização: você pode navegar por todo o painel, mas nada é salvo.</p>
       )}
       {mode === "supabase" && (
         <label className="block">

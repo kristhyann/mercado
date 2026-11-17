@@ -11,7 +11,7 @@ const NAV = [
   { href: "/admin/lojas/nova", label: "Nova loja", icon: Plus, exact: true },
 ];
 
-export function AdminShell({ email, localMode, children }: { email: string; localMode: boolean; children: React.ReactNode }) {
+export function AdminShell({ email, mode, children }: { email: string; mode: "supabase" | "local" | "preview"; children: React.ReactNode }) {
   const path = usePathname();
   const active = (n: (typeof NAV)[number]) => (n.exact ? path === n.href : path.startsWith(n.href) && path !== "/admin/lojas/nova");
   return (
@@ -51,7 +51,12 @@ export function AdminShell({ email, localMode, children }: { email: string; loca
       </header>
 
       <div className="min-w-0 flex-1 pb-24 lg:pb-10">
-        {localMode && <div className="bg-amber-100 px-4 py-2 text-center text-xs font-semibold text-amber-900">Modo local (desenvolvimento): as alterações são gravadas nos arquivos da pasta stores/.</div>}
+        {mode === "preview" && (
+          <div className="bg-sky-100 px-4 py-2 text-center text-xs font-semibold text-sky-900">
+            👀 Modo visualização: explore à vontade, mas nenhuma alteração é salva. Para editar de verdade, configure o Supabase.
+          </div>
+        )}
+        {mode === "local" && <div className="bg-amber-100 px-4 py-2 text-center text-xs font-semibold text-amber-900">Modo local (desenvolvimento): as alterações são gravadas nos arquivos da pasta stores/.</div>}
         <div className="mx-auto max-w-6xl px-3 py-5 sm:px-6">{children}</div>
       </div>
 
