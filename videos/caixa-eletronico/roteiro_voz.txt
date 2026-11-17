@@ -1,0 +1,11 @@
+Você coloca o cartão no caixa eletrônico… e em poucos segundos o dinheiro sai na sua mão. Mas o que acontece lá dentro? Vamos acompanhar esse caminho, do cartão até o dinheiro.
+Tudo começa na entrada do cartão. Ali dentro, um leitor captura as informações do chip ou da tarja magnética.
+Atrás da tela, tem um computador. É ele que comanda a máquina inteira: mostra as opções, recebe os comandos e controla cada peça.
+Aí você digita a senha. O teclado é criptografado: a senha é protegida antes mesmo de sair da máquina.
+Mas como o caixa sabe se você tem saldo? Ele conversa com o banco por uma rede segura. O banco confere… e autoriza ou recusa o saque.
+Autorizou? Agora entra a parte mais protegida: o cofre. Lá dentro ficam os cassetes, compartimentos com pilhas de notas, um para cada valor.
+O computador manda o comando, e rolos especiais puxam as notas, uma de cada vez. Sensores conferem cada nota que passa.
+Se duas notas vierem grudadas, a máquina percebe. Em muitos modelos, elas são desviadas para um compartimento de rejeição, em vez de chegar até você.
+Conferidas, as notas seguem por um caminho interno de correias e rolos… até a abertura. E o dinheiro chega na sua mão.
+E quem coloca o dinheiro lá dentro? Profissionais autorizados, que trocam ou abastecem os cassetes, com tudo conferido.
+Leitor, computador, teclado, banco, cofre, rolos e sensores, tudo em poucos segundos. Você nunca mais vai olhar pra um caixa eletrônico do mesmo jeito.
