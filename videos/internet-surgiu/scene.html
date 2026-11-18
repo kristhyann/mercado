@@ -1,0 +1,233 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,'Noto Color Emoji',sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:230px;text-align:center;font-weight:900;font-size:86px;line-height:1.04}
+#hook b{color:#7CE0FF;display:block;font-size:96px}
+#cap{width:1080px;top:1380px;text-align:center;font-weight:900;font-size:112px}
+#cap.hl{color:#7CE0FF}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:58px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.white{background:#fff;color:#111}.tag.dark{background:#111;color:#7CE0FF;border-color:#7CE0FF;box-shadow:none}
+.small{font-size:46px;padding:6px 22px;border-radius:18px;border-width:6px;box-shadow:0 6px 0 #111}
+#big{font-weight:900;font-size:210px;color:#FFD21F;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 12px 0 rgba(0,0,0,.4);line-height:1;white-space:nowrap;text-align:center}
+#big small{display:block;font-size:72px;color:#fff;-webkit-text-stroke:12px #111}
+#final{left:50px;width:980px;top:1290px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:64px;line-height:1.1;padding:28px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#2F6FD0}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.85;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">A PRIMEIRA MENSAGEM<br>DA INTERNET<b>TRAVOU 😳</b></div>
+<div id="big" class="o"></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag small"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Qual foi o seu primeiro<br><em>contato com a internet? 👇</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, rr } from '/_kit/kit.js';
+import { buildPerson, PP, poseP, face } from '/_kit/pessoas.js';
+await document.fonts.load('900 60px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; window.DURATION = TP.duration;
+const ALL = SN.flatMap(s => s.words);
+const WA = (re, n = 0, after = 0) => { const ws = ALL.filter(w => w.start >= after && re.test(w.w)); if (!ws[n]) { console.log('WA MISS', re); return after; } return ws[n].start; };
+const S = i => SN[i].start;
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .02, 300);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const MAT = (c, r = .6, ex = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: r }, ex));
+const add = (geo, mat, x, y, z, par) => { const m = new THREE.Mesh(geo, typeof mat === 'number' ? MAT(mat) : mat); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; par.add(m); return m; };
+const box = (w, h, d, c, x, y, z, par) => add(new THREE.BoxGeometry(w, h, d), c, x, y, z, par);
+const cyl = (rt, rb, h, c, x, y, z, par, seg = 24) => add(new THREE.CylinderGeometry(rt, rb, h, seg), c, x, y, z, par);
+const sph = (r, c, x, y, z, par, a = 16, b = 12) => add(new THREE.SphereGeometry(r, a, b), c, x, y, z, par);
+const BASIC = c => new THREE.MeshBasicMaterial({ color: c, toneMapped: false });
+const canvasTex = (w, h, paint) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); paint(g, w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; t.userData = { c, g }; return t; };
+const textSprite = (txt, col, size = 120, w = 512, h = 256) => { const t = canvasTex(w, h, g => { g.font = `900 ${size}px P`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineWidth = 16; g.strokeStyle = '#111'; g.strokeText(txt, w / 2, h / 2); g.fillStyle = col; g.fillText(txt, w / 2, h / 2); }); const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthWrite: false })); s.scale.set(w / 256, h / 256, 1); return s; };
+
+// ---------- tempos ----------
+const T_LOGIN = WA(/LOGIN/i), T_TRAV = WA(/travou/i), T_LO = WA(/^"?LO"?\.?$/i, 0, 6);
+const T_1969 = WA(/sessenta/i), T_GUERRA = WA(/Guerra/i), T_DEF = WA(/Defesa/i), T_ARPA = WA(/ARPANET/i), T_UNIV = WA(/universidades/i);
+const T_TRUQ = WA(/truque/i), T_CORT = WA(/cortada/i), T_PAC = WA(/pacotes/i), T_CAMD = WA(/diferente/i, 0, 33), T_CAIS = WA(/caísse/i), T_DESV = WA(/desviava/i);
+const T_1971 = WA(/setenta/i), T_EMAIL = WA(/e-mail/i), T_ARR = WA(/arroba/i);
+const T_LING = WA(/língua/i), T_TCP = WA(/TCP/i), T_COMUM = WA(/comum/i), T_1983 = WA(/oitenta/i), T_NASC = WA(/nascimento/i);
+const T_FACIL = WA(/fácil/i), T_1991 = WA(/noventa/i), T_CERN = WA(/CERN/i), T_WEB = WA(/web/i), T_LINKS = WA(/links/i);
+const T_BR = WA(/Brasil/i), T_1995 = WA(/noventa/i, 1);
+const T_DUAS = WA(/duas/i, 0, 79), T_BILH = WA(/bilhões/i), T_COM = WA(/Comenta/i);
+
+// ---------- céu, luz ----------
+const skyU = { top: { value: new THREE.Color(0x0B1430) }, bot: { value: new THREE.Color(0x1E3A6A) } };
+scene.add(new THREE.Mesh(new THREE.SphereGeometry(200, 32, 16), new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: false, uniforms: skyU,
+  vertexShader: 'varying vec3 vP; void main(){ vP = position; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }',
+  fragmentShader: 'uniform vec3 top; uniform vec3 bot; varying vec3 vP; void main(){ float h = clamp(normalize(vP).y*1.6+.15,0.,1.); gl_FragColor = vec4(mix(bot,top,pow(h,.8)),1.); }' })));
+const key = new THREE.DirectionalLight(0xFFF4E0, 2.2); key.castShadow = true; key.shadow.mapSize.set(2048, 2048); { const c = key.shadow.camera; c.left = -4; c.right = 4; c.top = 4; c.bottom = -4; c.far = 30; } key.shadow.bias = -.0004; scene.add(key); scene.add(key.target);
+const hemi = new THREE.HemisphereLight(0xEAF2FF, 0x3A3A50, 1.2); scene.add(hemi);
+const SETS = {}; const mkSet = (n, x) => { const g = grp(); g.position.set(x, 0, 0); SETS[n] = g; return g; };
+
+// ===== LAB 1969 (x=0) =====
+const lab = mkSet('lab', 0);
+box(10, .1, 6, MAT(0xC9B48A, .8), 0, -.05, 0, lab); box(10, 3.2, .1, MAT(0xE8DCC0, .9), 0, 1.6, -1.8, lab);
+const mkMainframe = (x, lbl, col) => { const g = grp(lab); g.position.set(x, 0, -1.2); for (let i = 0; i < 3; i++) { box(.55, 1.8, .6, MAT(0xD8D2C4, .6), (i - 1) * .58, .9, 0, g); const reel = cyl(.16, .16, .03, MAT(0x333333, .5), (i - 1) * .58, 1.3, .31, g, 20); reel.rotation.x = Math.PI / 2; for (let k = 0; k < 6; k++) box(.04, .04, .02, BASIC([0xFF4D4D, 0xFFD21F, 0x22C55E][k % 3]), (i - 1) * .58 - .15 + k * .06, .7, .31, g); }
+  const sign = add(new THREE.PlaneGeometry(1.4, .3), new THREE.MeshBasicMaterial({ map: canvasTex(512, 110, gg => { gg.fillStyle = col; gg.fillRect(0, 0, 512, 110); gg.fillStyle = '#fff'; gg.font = '900 64px P'; gg.textAlign = 'center'; gg.textBaseline = 'middle'; gg.fillText(lbl, 256, 58); }), toneMapped: false }), 0, 2.05, .31, g); return g; };
+mkMainframe(-2.2, 'UCLA', '#2F6FD0'); mkMainframe(2.2, 'STANFORD', '#C0392B');
+const cablePath = new THREE.CatmullRomCurve3([V(-1.5, .1, -.8), V(-.5, .05, .2), V(.5, .05, .2), V(1.5, .1, -.8)]);
+add(new THREE.TubeGeometry(cablePath, 40, .025, 8), MAT(0x222222, .7), 0, 0, 0, lab);
+const termTex = canvasTex(320, 240, () => {});
+const paintTerm = (txt, err) => { const { g, c } = termTex.userData; g.fillStyle = '#081A08'; g.fillRect(0, 0, c.width, c.height); g.fillStyle = '#3CFF6A'; g.font = '900 80px monospace'; g.textAlign = 'left'; g.fillText('> ' + txt, 18, 120); if (err) { g.fillStyle = '#FF4D4D'; g.font = '900 44px P'; g.fillText('ERRO!', 70, 200); } termTex.needsUpdate = true; };
+paintTerm('', false);
+const term = grp(lab); term.position.set(-.6, 0, .6); box(.8, .7, .5, 0x1A1A1A, 0, .4, 0, term); box(.75, .65, .6, MAT(0xD8D2C4, .6), 0, .9, 0, term); add(new THREE.PlaneGeometry(.58, .44), new THREE.MeshBasicMaterial({ map: termTex, toneMapped: false }), 0, .92, .305, term); box(.7, .05, .3, MAT(0xBFB8A8, .6), 0, .58, .45, term);
+const pulse = sph(.05, BASIC(0x7CE0FF), 0, 0, 0, lab, 10, 8);
+const sci = buildPerson({ skin: 0xE8B98F, shirt: 0xFFFFFF, pants: 0x3A3A50, hair: 0x6B4A2A, glasses: true }); lab.add(sci.root); sci.root.position.set(-1.25, 0, 1.0); sci.root.rotation.y = Math.PI - .6;
+
+// ===== MAPA ARPANET / PACOTES (x=60) =====
+const net = mkSet('net', 60);
+const tbl = box(4, .12, 6, MAT(0x1E2A4A, .7), 0, -.06, 0, net);
+const gridM = new THREE.LineBasicMaterial({ color: 0x2F4A7A }); { const pts = []; for (let i = -6; i <= 6; i++) { pts.push(V(i * .5, .002, -2), V(i * .5, .002, 2)); } for (let i = -4; i <= 4; i++) pts.push(V(-3, .002, i * .5), V(3, .002, i * .5)); net.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts), gridM)); }
+const NODES = [['UCLA', -1.4, .9], ['SRI', -1.0, -.6], ['UCSB', -1.9, .1], ['UTAH', .2, -.2], ['MIT', 1.8, -.9], ['BBN', 1.6, .2], ['RAND', -.4, 1.2], ['HARVARD', 1.9, .9]];
+const nodes = NODES.map(([n, x0, z0], i) => { const x = z0 * 1.1, z = -x0 * 1.1; const g = grp(net); g.position.set(x, 0, z); cyl(.14, .16, .12, MAT(0x3B82F6, .4), 0, .06, 0, g, 20); const glow = sph(.07, BASIC(0x7CE0FF), 0, .18, 0, g, 12, 8); const lbl = textSprite(n, '#FFFFFF', 70, 384, 128); lbl.position.set(0, .42, 0); lbl.scale.set(.75, .25, 1); g.add(lbl); g.userData = { glow, lbl, i }; return g; });
+const LINKS = [[0, 1], [0, 2], [1, 3], [2, 3], [1, 6], [0, 6], [3, 5], [3, 4], [5, 4], [5, 7], [4, 7], [6, 5]];
+const links = LINKS.map(([a, b]) => { const pa = nodes[a].position.clone().add(V(0, .08, 0)), pb = nodes[b].position.clone().add(V(0, .08, 0)); const m = add(new THREE.CylinderGeometry(.018, .018, pa.distanceTo(pb), 8), BASIC(0x7CE0FF), 0, 0, 0, net); m.position.copy(pa).add(pb).multiplyScalar(.5); m.quaternion.setFromUnitVectors(V(0, 1, 0), pb.clone().sub(pa).normalize()); m.castShadow = false; m.userData = { a, b }; return m; });
+const PKC = [0xFF4D6D, 0xFFD21F, 0x22C55E, 0xFF8A1F, 0xB86BFF];
+const packets = PKC.map(c => box(.12, .12, .12, MAT(c, .4, { emissive: c, emissiveIntensity: .25 }), 0, 0, 0, net));
+const msgBlock = box(.6, .3, .3, MAT(0xFFFFFF, .5, { map: canvasTex(256, 128, g => { g.fillStyle = '#fff'; g.fillRect(0, 0, 256, 128); g.fillStyle = '#111'; g.font = '900 70px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('OLÁ!', 128, 68); }) }), 0, 0, 0, net);
+const breakX = textSprite('✕', '#FF3B30', 200, 256, 256); breakX.scale.set(.6, .6, 1); net.add(breakX);
+// rota: 0 -> 1 -> 3 -> 4 (normal) ; com 1-3 cortado: 0 -> 6 -> 5 -> 4
+const route = ids => new THREE.CatmullRomCurve3(ids.map(i => nodes[i].position.clone().add(V(0, .2, 0))), false, 'catmullrom', 0);
+const R1 = route([0, 1, 3, 4]), R2 = route([0, 6, 5, 4]);
+
+// ===== E-MAIL (x=120) =====
+const mail = mkSet('mail', 120);
+const env = grp(mail); { box(1.2, .8, .04, MAT(0xF7F2E6, .7), 0, 0, 0, env); const flap = add(new THREE.ConeGeometry(.72, .5, 4, 1), MAT(0xE8DCC0, .7), 0, .15, .03, env); flap.rotation.set(Math.PI, Math.PI / 4, 0); flap.scale.set(1.17, 1, .05); }
+const atS = textSprite('@', '#FFD21F', 230, 256, 256); atS.scale.set(1.3, 1.3, 1); mail.add(atS);
+const mailNodes = [[-1.6, 1.2], [1.6, 2.6]].map(([x, y]) => { const c = grp(mail); c.position.set(x, y, -.5); box(.6, .45, .05, 0x2A2E36, 0, 0, 0, c); add(new THREE.PlaneGeometry(.52, .36), BASIC(0x7CE0FF), 0, 0, .03, c); return c; });
+
+// ===== REDES DIFERENTES -> TCP/IP (x=180) =====
+const tcp = mkSet('tcp', 180);
+const NET3 = [[0xFF4D6D, -.68, 3.0], [0x22C55E, .68, 3.0], [0xFFD21F, -.68, .35], [0xB86BFF, .68, .35]];
+const clusters = NET3.map(([c, x, y]) => { const g = grp(tcp); g.position.set(x, y, 0); const ns = []; for (let i = 0; i < 4; i++) { const a = i / 4 * Math.PI * 2; ns.push(sph(.1, MAT(c, .4, { emissive: c, emissiveIntensity: .3 }), Math.cos(a) * .35, Math.sin(a) * .35, 0, g, 12, 8)); }
+  for (let i = 0; i < 4; i++) { const a = ns[i].position, b = ns[(i + 1) % 4].position; const m = add(new THREE.CylinderGeometry(.015, .015, a.distanceTo(b), 6), BASIC(c), 0, 0, 0, g); m.position.copy(a).add(b).multiplyScalar(.5); m.quaternion.setFromUnitVectors(V(0, 1, 0), b.clone().sub(a).normalize()); }
+  const q = textSprite('?', '#FF3B30', 200, 256, 256); q.scale.set(.5, .5, 1); q.position.set(0, .55, .1); g.add(q); g.userData = { q }; return g; });
+const hub = grp(tcp); hub.position.set(0, 1.6, .1); { const h = add(new THREE.IcosahedronGeometry(.45, 1), MAT(0x2F6FD0, .3, { emissive: 0x1E4A8A, emissiveIntensity: .4, flatShading: true }), 0, 0, 0, hub); const lb = textSprite('TCP/IP', '#FFFFFF', 110, 512, 160); lb.scale.set(1.2, .38, 1); lb.position.set(0, .78, .2); hub.add(lb); }
+const hubLinks = clusters.map(c => { const a = hub.position.clone(), b = c.position.clone(); const m = add(new THREE.CylinderGeometry(.03, .03, a.distanceTo(b), 8), BASIC(0x22C55E), 0, 0, 0, tcp); m.position.copy(a).add(b).multiplyScalar(.5); m.quaternion.setFromUnitVectors(V(0, 1, 0), b.clone().sub(a).normalize()); return m; });
+const hubPk = []; for (let i = 0; i < 8; i++) hubPk.push(box(.08, .08, .08, MAT(PKC[i % 5], .4, { emissive: PKC[i % 5], emissiveIntensity: .3 }), 0, 0, 0, tcp));
+
+// ===== WEB 1991 (x=240) =====
+const web = mkSet('web', 240);
+box(6, .1, 4, MAT(0xD8D2C4, .8), 0, -.05, 0, web); box(6, 3, .1, MAT(0xE8E2D6, .9), 0, 1.5, -1.5, web);
+box(2.0, .08, 1.0, MAT(0x9A6A3A, .7), 0, .76, -.3, web); [[-.9, -.7], [.9, -.7], [-.9, .1], [.9, .1]].forEach(([x, z]) => box(.06, .76, .06, MAT(0x7A5232, .7), x, .38, z, web));
+const mon = grp(web); mon.position.set(0, .8, -.5); box(.9, .75, .7, MAT(0xD8D2C4, .6), 0, .45, 0, mon); box(.4, .1, .4, MAT(0xD8D2C4, .6), 0, .03, 0, mon);
+const webTex = canvasTex(400, 320, () => {});
+const paintWeb = u => { const { g, c } = webTex.userData; g.fillStyle = '#FFFFFF'; g.fillRect(0, 0, c.width, c.height); g.fillStyle = '#111'; g.font = '900 30px serif'; g.textAlign = 'left';
+  if (u > .05) g.fillText('World Wide Web', 20, 50); g.font = '22px serif'; const lines = ['The WorldWideWeb (W3) is a', 'wide-area hypermedia', 'information retrieval...']; lines.forEach((l, i) => { if (u > .2 + i * .15) g.fillText(l, 20, 100 + i * 30); });
+  if (u > .6) { g.fillStyle = '#1A0DAB'; g.font = '24px serif'; ['Projeto', 'Como usar', 'Pessoas'].forEach((l, i) => { g.fillText(l, 20 + i * 120, 230); g.fillRect(20 + i * 120, 234, g.measureText(l).width, 2); }); } webTex.needsUpdate = true; };
+paintWeb(0);
+add(new THREE.PlaneGeometry(.78, .62), new THREE.MeshBasicMaterial({ map: webTex, toneMapped: false }), 0, .47, .356, mon);
+const cursor = textSprite('➤', '#111', 160, 256, 256); cursor.scale.set(.18, .18, 1); web.add(cursor);
+const wwwS = textSprite('www', '#2F6FD0', 150, 512, 256); wwwS.scale.set(1.2, .6, 1); web.add(wwwS);
+
+// ===== GLOBO (x=300) =====
+const glob = mkSet('glob', 300);
+const earth = grp(glob); earth.position.set(0, 1.6, 0);
+add(new THREE.IcosahedronGeometry(1.1, 3), MAT(0x2F7FD0, .7, { flatShading: true }), 0, 0, 0, earth);
+const onS = (lat, lon, r = 1.1) => V(Math.cos(lat) * Math.cos(lon) * r, Math.sin(lat) * r, Math.cos(lat) * Math.sin(lon) * r);
+const PINP = onS(-.25, 1.2, 1.0); for (let i = 0; i < 26; i++) { const p = onS(rr(-1, 1.1), rr(0, 6.28), 1.0); if (p.distanceTo(PINP) < .6) continue; const b = add(new THREE.IcosahedronGeometry(rr(.18, .32), 0), MAT(0x4FAF45, .8, { flatShading: true }), p.x, p.y, p.z, earth); b.lookAt(0, 0, 0); b.scale.set(1, 1, .5); }
+const BRpos = onS(-.17, -.92 * -1 + Math.PI * 0, 1.12); // posição estilizada
+const brPin = grp(earth); { const p = onS(-.25, 1.2, 1.12); brPin.position.copy(p); sph(.07, BASIC(0x22C55E), 0, 0, 0, brPin, 12, 8); const lb = textSprite('🇧🇷 1995', '#FFFFFF', 90, 512, 160); lb.scale.set(.9, .28, 1); lb.position.set(0, .25, 0); brPin.add(lb); }
+const arcs = []; for (let i = 0; i < 18; i++) { const a = onS(rr(-1, 1), rr(0, 6.28), 1.12), b = onS(rr(-1, 1), rr(0, 6.28), 1.12); const mid = a.clone().add(b).normalize().multiplyScalar(1.7); const c = new THREE.QuadraticBezierCurve3(a, mid, b); const m = add(new THREE.TubeGeometry(c, 20, .008, 5), BASIC([0x7CE0FF, 0xFFD21F, 0xFF8A1F][i % 3]), 0, 0, 0, earth); m.castShadow = false; m.userData = { d: i / 18 }; arcs.push(m); }
+const lights = []; for (let i = 0; i < 60; i++) { const p = onS(rr(-1.2, 1.2), rr(0, 6.28), 1.13); lights.push(sph(.015, BASIC(0xFFF2B0), p.x, p.y, p.z, earth, 6, 4)); }
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [T_LOGIN + .3, 'pop'], [T_LOGIN + .6, 'pop'], [T_TRAV + .2, 'buzz'], [S(1) - .05, 'whoosh'], [T_1969, 'ding'], [T_ARPA, 'zap'], [T_CORT, 'pop'], [T_CAIS, 'buzz'], [T_DESV, 'whoosh'], [T_1971, 'ding'], [T_ARR, 'pop'], [T_TCP, 'zap'], [T_1983, 'ding'], [T_1991, 'ding'], [T_LINKS, 'pop'], [T_1995, 'ding'], [T_BILH, 'win']].forEach(([t, k]) => ev(t, k));
+const HL = /internet|LOGIN|travou|LO|sessenta|Guerra|Defesa|ARPANET|universidades|pesquisa|dados|pacotes|caminho|desviava|e-mail|arroba|língua|TCP|comum|nascimento|web|sites|links|Brasil|comercial|bilhões|conectadas/i;
+const hideAll = () => { Object.values(SETS).forEach(g => g.visible = false); };
+
+const SHOTS = [
+  // 0 gancho: L-O-travou
+  [0, (t, k) => { lab.visible = true; skyU.top.value.set(0x0B1430); const typed = t < T_LOGIN + .2 ? '' : t < T_LOGIN + .5 ? 'L' : 'LO'; paintTerm(typed, t > T_TRAV + .2); poseP(sci, PP.type, 0, t); sci.root.position.y = 0; poseP(sci, { ...PP.stand, rx: -1.2, lx: -1.2, re: -.6, le: -.6 }, 0, t); face(sci, t > T_TRAV ? 'shock' : 'calm', t);
+    const u = clamp((t - T_LOGIN - .2) / 1.4); pulse.visible = u > 0 && u < .55; pulse.position.copy(cablePath.getPoint(u));
+    return [V(.3, 1.45, 3.1 - k * .05), V(-.6, 1.0, .5)]; }],
+  // 1 1969, ARPANET liga universidades
+  [S(1), (t, k) => { net.visible = true; skyU.top.value.set(0x0B1430); nodes.forEach((n, i) => { const on = t > T_ARPA - .2 + i * .25; n.visible = i < 4 ? t > S(1) + .3 + i * .2 : on; n.userData.glow.scale.setScalar(1 + Math.sin(t * 5 + i) * .2); });
+    links.forEach((l, i) => l.visible = nodes[l.userData.a].visible && nodes[l.userData.b].visible); packets.forEach(p => p.visible = false); msgBlock.visible = false; breakX.visible = false;
+    return [net.position.clone().add(V(0, 8.4 - k * .05, 2.6)), net.position.clone().add(V(0, 0, .3))]; }],
+  // 2 pacotes desviando
+  [S(2), (t, k) => { net.visible = true; nodes.forEach(n => n.visible = true); const cut = t > T_CAIS - .1; links.forEach(l => { l.visible = true; const isCut = (l.userData.a === 1 && l.userData.b === 3); l.material.color.set(isCut && cut ? 0xFF3B30 : 0x7CE0FF); l.visible = !(isCut && t > T_DESV); });
+    breakX.visible = cut && t < T_DESV + 2; breakX.position.copy(nodes[1].position.clone().lerp(nodes[3].position, .5).add(V(0, .35, 0)));
+    const split = t > T_CORT; msgBlock.visible = !split || t < T_CORT + .2; msgBlock.position.copy(nodes[0].position.clone().add(V(0, .5, 0))); msgBlock.scale.setScalar(split ? Math.max(.001, 1 - (t - T_CORT) * 5) : 1);
+    packets.forEach((p, i) => { const st = T_PAC + i * .35; const u = clamp((t - st) / 3.2); p.visible = split && t > T_CORT + .1; const r = (cut && i >= 2) || t > T_DESV ? R2 : (i % 2 ? R2 : R1); p.position.copy(t < st ? nodes[0].position.clone().add(V((i - 2) * .14, .45, 0)) : r.getPoint(u)); p.rotation.set(t, t * 1.3, 0); });
+    return [net.position.clone().add(V(0, 8.2, 2.4)), net.position.clone().add(V(0, 0, .3))]; }],
+  // 3 e-mail e arroba
+  [S(3), (t, k) => { mail.visible = true; skyU.top.value.set(0x1E3A6A); const u = ease(clamp((t - T_EMAIL + .3) / 1.6)); env.position.copy(mailNodes[0].position.clone().lerp(mailNodes[1].position, u)).add(V(0, Math.sin(u * Math.PI) * .6, .3)); env.rotation.set(0, Math.sin(t * 3) * .2, Math.sin(t * 2) * .1); env.scale.setScalar(.8);
+    atS.visible = t > T_ARR - .2; atS.position.set(0, 1.9, .6); atS.material.rotation = Math.sin(t * 2) * .15; atS.scale.setScalar(1.3 * pop(t - T_ARR + .2, .35));
+    return [mail.position.clone().add(V(0, 1.9, 5.2)), mail.position.clone().add(V(0, 1.9, 0))]; }],
+  // 4 redes diferentes -> TCP/IP -> 1983
+  [S(4), (t, k) => { tcp.visible = true; skyU.top.value.set(0x0B1430); const joined = t > T_TCP; clusters.forEach((c, i) => { c.userData.q.visible = !joined; c.rotation.z = Math.sin(t + i) * .1; });
+    hub.visible = joined; hub.scale.setScalar(pop(t - T_TCP, .4)); hub.rotation.y = t * .5; hubLinks.forEach((l, i) => { l.visible = t > T_COMUM - .2 + i * .15; });
+    hubPk.forEach((p, i) => { const c = clusters[i % 4]; const u = ((t * .6 + i / 8) % 1); p.visible = t > T_COMUM + .6; p.position.copy(i % 2 ? hub.position.clone().lerp(c.position, u) : c.position.clone().lerp(hub.position, u)); });
+    return [tcp.position.clone().add(V(0, 1.7, 7.4 - k * .05)), tcp.position.clone().add(V(0, 1.7, 0))]; }],
+  // 5 a web (1991)
+  [S(5), (t, k) => { web.visible = true; skyU.top.value.set(0xC9D4E0); const u = clamp((t - T_WEB + .3) / 2.2); paintWeb(u);
+    cursor.visible = t > T_LINKS - .3; const cu = clamp((t - T_LINKS + .3) / .8); cursor.position.set(lerp(.3, -.24, ease(cu)), .8 + .47 + lerp(.1, -.18, ease(cu)), -.5 + .37); cursor.scale.setScalar(.18 * (t > T_LINKS + .6 ? 1 - Math.sin((t - T_LINKS - .6) * 10) * .1 : 1));
+    wwwS.visible = t > T_WEB - .2 && t < T_LINKS - .4; wwwS.position.set(0, 1.95, -.4); wwwS.scale.set(.7 * pop(t - T_WEB + .2, .3), .35 * pop(t - T_WEB + .2, .3), 1);
+    return [web.position.clone().add(V(.25, 1.5, 2.5 - k * .03)), web.position.clone().add(V(0, 1.3, -.5))]; }],
+  // 6 Brasil 1995
+  [S(6), (t, k) => { glob.visible = true; skyU.top.value.set(0x060A1E); earth.rotation.y = lerp(-1.2, -.37, ease(clamp((t - S(6)) / 2))); brPin.scale.setScalar(pop(t - T_1995 + .3, .4)); arcs.forEach(a => a.visible = false); lights.forEach(l => l.visible = false);
+    return [glob.position.clone().add(V(0, 1.4, 5.2 - k * .1)), glob.position.clone().add(V(0, 1.4, 0))]; }],
+  // 7 bilhões conectados
+  [S(7), (t, k) => { glob.visible = true; skyU.top.value.set(0x060A1E); earth.rotation.y = -.37 + (t - S(7)) * .25; arcs.forEach(a => a.visible = t > T_BILH - .5 + a.userData.d * 1.2); lights.forEach((l, i) => l.visible = t > T_BILH - .3 + (i % 20) * .05);
+    return [glob.position.clone().add(V(0, 1.2, 5.6 - k * .05)), glob.position.clone().add(V(0, 1.2, 0))]; }],
+];
+window.draw = function (t) {
+  hideAll(); skyU.bot.value.set(0x1E3A6A);
+  let i = 0; while (i + 1 < SHOTS.length && SHOTS[i + 1][0] <= t) i++;
+  const [cp, tg] = SHOTS[i][1](t, t - SHOTS[i][0]);
+  cp.x += Math.sin(t * .35) * .01; cp.y += Math.sin(t * .27) * .008;
+  cam.position.copy(cp); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  key.position.copy(tg).add(V(2, 5, 3)); key.target.position.copy(tg);
+  fixed($('hook'), t < S(1) - .1 ? pop(t - .02, .3) * (1 - clamp((t - S(1) + .25) / .15)) : 0);
+  const tg2 = [$('t1'), $('t2')]; tg2.forEach(e => e.style.opacity = 0); $('big').style.opacity = 0;
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  const big = (on, txt, sub, t0, y = 560) => { if (!on) return; $('big').innerHTML = txt + (sub ? `<small>${sub}</small>` : ''); place($('big'), true, 540, y, pop(t - t0, .35)); };
+  tag(tg2[0], 'ERA PRA SER "LOGIN"', 'white', win(t, T_LOGIN - .1, T_TRAV + .2), 540, 660, T_LOGIN - .1, -3);
+  tag(tg2[0], 'TRAVOU NO "LO" ❌', 'red', win(t, T_TRAV + .2, S(1) - .1), 540, 660, T_TRAV + .2, 3);
+  big(win(t, T_1969 - .3, T_GUERRA - .1), '1969', 'EUA', T_1969 - .3);
+  tag(tg2[0], 'GUERRA FRIA · DEFESA DOS EUA', 'dark', win(t, T_GUERRA - .1, T_ARPA - .2), 540, 400, T_GUERRA - .1, 0);
+  tag(tg2[0], 'ARPANET 🖥️', '', win(t, T_ARPA - .2, S(2)), 540, 400, T_ARPA - .2, -3);
+  tag(tg2[1], 'UNIVERSIDADES + PESQUISA', 'white small', win(t, T_UNIV - .2, S(2)), 540, 510, T_UNIV - .2, 3);
+  tag(tg2[0], 'A MENSAGEM VIRA PACOTES 📦', '', win(t, T_CORT - .2, T_CAIS - .1), 540, 400, T_CORT - .2, -3);
+  tag(tg2[0], 'CAMINHO CAIU? DESVIA! ↪️', 'red small', win(t, T_CAIS - .1, S(3)), 540, 400, T_CAIS - .1, 3);
+  big(win(t, T_1971 - .3, T_ARR - .3), '1971', 'O E-MAIL', T_1971 - .3);
+  tag(tg2[0], '@ = ENDEREÇO', '', win(t, T_ARR - .2, S(4)), 540, 400, T_ARR - .2, -3);
+  tag(tg2[0], 'CADA REDE, UMA LÍNGUA ❓', 'red small', win(t, T_LING - .2, T_TCP - .1), 540, 400, T_LING - .2, -3);
+  tag(tg2[0], 'TCP/IP: LÍNGUA COMUM', 'green', win(t, T_TCP - .1, T_1983 - .3), 540, 400, T_TCP - .1, -3);
+  big(win(t, T_1983 - .3, S(5)), '1983', 'NASCE A INTERNET', T_1983 - .3, 1210);
+  big(win(t, T_1991 - .3, T_WEB - .3), '1991', 'A WEB', T_1991 - .3);
+  tag(tg2[0], 'SITES + LINKS 🔗', 'blue', win(t, T_LINKS - .3, S(6)), 540, 400, T_LINKS - .3, -3);
+  tag(tg2[0], 'INTERNET COMERCIAL NO BRASIL', 'green small', win(t, T_BR - .1, S(7)), 540, 400, T_BR - .1, -3);
+  tag(tg2[0], 'BILHÕES DE PESSOAS 🌍', '', win(t, T_BILH - .2, T_COM - .2), 540, 400, T_BILH - .2, -3);
+  fixed($('final'), t >= T_COM - .2 ? pop(t - T_COM + .2, .35) : 0);
+  $('wm').style.opacity = .85;
+  let wTxt = null, wSt = 0;
+  for (const w2 of ALL) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap2 = $('cap'); const capOff = t < S(1) - .15 || t >= T_COM - .2;
+  if (wTxt && !capOff) { cap2.textContent = wTxt.toUpperCase().replace(/[.,!?:…"]/g, ''); cap2.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap2, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap2, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>
