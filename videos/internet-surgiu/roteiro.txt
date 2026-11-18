@@ -1,0 +1,15 @@
+A primeira mensagem da internet era pra ser "LOGIN". Mas o sistema travou no meio… e só chegou "LO".
+
+Isso foi em mil novecentos e sessenta e nove, nos Estados Unidos. Em plena Guerra Fria, uma agência ligada ao Departamento de Defesa financiou a ARPANET: uma rede pra ligar computadores de universidades e centros de pesquisa.
+
+O grande truque era a forma de enviar os dados. Em vez de mandar tudo de uma vez, a mensagem era cortada em pedacinhos, os pacotes. Cada pacote podia seguir um caminho diferente… e, se um caminho caísse, ele desviava por outro.
+
+Em mil novecentos e setenta e um, veio o e-mail. E foi aí que o arroba virou o símbolo de endereço.
+
+Mas cada rede falava uma língua diferente. Então, dois pesquisadores criaram o TCP/IP: uma língua comum pra todas as redes conversarem. Em mil novecentos e oitenta e três, a ARPANET adotou essa língua. Muita gente considera esse o nascimento da internet.
+
+Faltava deixar tudo fácil de usar. Em mil novecentos e noventa e um, um cientista do CERN, na Europa, criou a web: os sites e os links que a gente clica até hoje.
+
+E no Brasil, a internet comercial chegou em mil novecentos e noventa e cinco.
+
+De duas letras travadas… a bilhões de pessoas conectadas. Comenta aí: qual foi o seu primeiro contato com a internet?
