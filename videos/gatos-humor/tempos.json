@@ -1,0 +1,1502 @@
+{
+ "duration": 113.5,
+ "sentences": [
+  {
+   "text": "Se você estiver no home office e um gato deitar no seu teclado, não tire o gato, porque os outros gatos vão pensar que você abriu vaga de estágio. Em menos de cinco minutos, uns nove gatos vão estar na sua reunião e todos com a câmera ligada. Se você pedir licença, o gato do teclado vai dizer que agora ele é o seu gestor e vai marcar uma conversa rápida para a sexta, às seis da tarde. Isso é chamado de gestão felina de pessoas. Nesse caso, o correto é ligar o aspirador, porque gato tem medo de qualquer coisa que trabalhe mais do que ele. Só que, quando você ligar, um gato de crachá vai pedir o seu registro de ponto e quem trabalha com nove gatos está em acúmulo de função. Agora você precisa de carteira assinada, categoria arranhador. Isso é a auditoria trabalhista de Bigode. Se você não tiver o registro, ele vai prender o seu mouse e mandar a planilha se preencher sozinha. Nessa hora, você precisa abrir a gaveta e pegar um sachê, mas não abra na frente de todos. Eles podem interpretar isso como participação nos lucros. Se eles aceitarem, você será obrigado a assinar um acordo coletivo com duas testemunhas e uma caixa de papelão, procedimento conhecido como Convenção Coletiva do Sachê. Depois do acordo, os gatos finalmente vão sair da reunião. Menos um. Esse vai ficar dormindo em cima do notebook, dizendo que não pode sair porque está numa chamada importante. E se você perguntar com quem, ele vai responder com seu chefe. Fui promovido, você não. Esse é o plano de carreira de sete vidas. É por isso que, antes de aceitar um trabalho remoto, você precisa verificar se a sua casa já foi uma caixa de papelão.",
+   "start": 0.0,
+   "end": 109.46,
+   "words": [
+    {
+     "w": "Se",
+     "start": 0.0,
+     "end": 0.22
+    },
+    {
+     "w": "você",
+     "start": 0.22,
+     "end": 0.44
+    },
+    {
+     "w": "estiver",
+     "start": 0.44,
+     "end": 0.8
+    },
+    {
+     "w": "no",
+     "start": 0.8,
+     "end": 0.98
+    },
+    {
+     "w": "home",
+     "start": 0.98,
+     "end": 1.2
+    },
+    {
+     "w": "office",
+     "start": 1.2,
+     "end": 1.64
+    },
+    {
+     "w": "e",
+     "start": 1.64,
+     "end": 1.94
+    },
+    {
+     "w": "um",
+     "start": 1.94,
+     "end": 2.06
+    },
+    {
+     "w": "gato",
+     "start": 2.06,
+     "end": 2.46
+    },
+    {
+     "w": "deitar",
+     "start": 2.46,
+     "end": 2.88
+    },
+    {
+     "w": "no",
+     "start": 2.88,
+     "end": 3.04
+    },
+    {
+     "w": "seu",
+     "start": 3.04,
+     "end": 3.18
+    },
+    {
+     "w": "teclado,",
+     "start": 3.18,
+     "end": 3.68
+    },
+    {
+     "w": "não",
+     "start": 3.94,
+     "end": 4.28
+    },
+    {
+     "w": "tire",
+     "start": 4.28,
+     "end": 4.68
+    },
+    {
+     "w": "o",
+     "start": 4.68,
+     "end": 4.82
+    },
+    {
+     "w": "gato,",
+     "start": 4.82,
+     "end": 5.14
+    },
+    {
+     "w": "porque",
+     "start": 5.56,
+     "end": 5.76
+    },
+    {
+     "w": "os",
+     "start": 5.76,
+     "end": 6.0
+    },
+    {
+     "w": "outros",
+     "start": 6.0,
+     "end": 6.24
+    },
+    {
+     "w": "gatos",
+     "start": 6.24,
+     "end": 6.76
+    },
+    {
+     "w": "vão",
+     "start": 6.76,
+     "end": 6.98
+    },
+    {
+     "w": "pensar",
+     "start": 6.98,
+     "end": 7.26
+    },
+    {
+     "w": "que",
+     "start": 7.26,
+     "end": 7.48
+    },
+    {
+     "w": "você",
+     "start": 7.48,
+     "end": 7.68
+    },
+    {
+     "w": "abriu",
+     "start": 7.68,
+     "end": 8.02
+    },
+    {
+     "w": "vaga",
+     "start": 8.02,
+     "end": 8.34
+    },
+    {
+     "w": "de",
+     "start": 8.34,
+     "end": 8.5
+    },
+    {
+     "w": "estágio.",
+     "start": 8.5,
+     "end": 8.94
+    },
+    {
+     "w": "Em",
+     "start": 9.32,
+     "end": 9.5
+    },
+    {
+     "w": "menos",
+     "start": 9.5,
+     "end": 9.78
+    },
+    {
+     "w": "de",
+     "start": 9.78,
+     "end": 10.0
+    },
+    {
+     "w": "cinco",
+     "start": 10.0,
+     "end": 10.4
+    },
+    {
+     "w": "minutos,",
+     "start": 10.4,
+     "end": 10.78
+    },
+    {
+     "w": "uns",
+     "start": 11.2,
+     "end": 11.42
+    },
+    {
+     "w": "nove",
+     "start": 11.42,
+     "end": 11.9
+    },
+    {
+     "w": "gatos",
+     "start": 11.9,
+     "end": 12.42
+    },
+    {
+     "w": "vão",
+     "start": 12.42,
+     "end": 12.62
+    },
+    {
+     "w": "estar",
+     "start": 12.62,
+     "end": 12.88
+    },
+    {
+     "w": "na",
+     "start": 12.88,
+     "end": 13.08
+    },
+    {
+     "w": "sua",
+     "start": 13.08,
+     "end": 13.26
+    },
+    {
+     "w": "reunião",
+     "start": 13.26,
+     "end": 13.62
+    },
+    {
+     "w": "e",
+     "start": 13.62,
+     "end": 14.16
+    },
+    {
+     "w": "todos",
+     "start": 14.16,
+     "end": 14.58
+    },
+    {
+     "w": "com",
+     "start": 14.58,
+     "end": 14.88
+    },
+    {
+     "w": "a",
+     "start": 14.88,
+     "end": 15.0
+    },
+    {
+     "w": "câmera",
+     "start": 15.0,
+     "end": 15.3
+    },
+    {
+     "w": "ligada.",
+     "start": 15.3,
+     "end": 15.82
+    },
+    {
+     "w": "Se",
+     "start": 16.26,
+     "end": 16.4
+    },
+    {
+     "w": "você",
+     "start": 16.4,
+     "end": 16.56
+    },
+    {
+     "w": "pedir",
+     "start": 16.56,
+     "end": 16.88
+    },
+    {
+     "w": "licença,",
+     "start": 16.88,
+     "end": 17.46
+    },
+    {
+     "w": "o",
+     "start": 17.78,
+     "end": 17.88
+    },
+    {
+     "w": "gato",
+     "start": 17.88,
+     "end": 18.16
+    },
+    {
+     "w": "do",
+     "start": 18.16,
+     "end": 18.32
+    },
+    {
+     "w": "teclado",
+     "start": 18.32,
+     "end": 18.8
+    },
+    {
+     "w": "vai",
+     "start": 18.8,
+     "end": 18.98
+    },
+    {
+     "w": "dizer",
+     "start": 18.98,
+     "end": 19.2
+    },
+    {
+     "w": "que",
+     "start": 19.2,
+     "end": 19.38
+    },
+    {
+     "w": "agora",
+     "start": 19.38,
+     "end": 19.76
+    },
+    {
+     "w": "ele",
+     "start": 19.76,
+     "end": 20.2
+    },
+    {
+     "w": "é",
+     "start": 20.2,
+     "end": 20.3
+    },
+    {
+     "w": "o",
+     "start": 20.3,
+     "end": 20.36
+    },
+    {
+     "w": "seu",
+     "start": 20.36,
+     "end": 20.52
+    },
+    {
+     "w": "gestor",
+     "start": 20.52,
+     "end": 21.02
+    },
+    {
+     "w": "e",
+     "start": 21.02,
+     "end": 21.4
+    },
+    {
+     "w": "vai",
+     "start": 21.4,
+     "end": 21.52
+    },
+    {
+     "w": "marcar",
+     "start": 21.52,
+     "end": 21.84
+    },
+    {
+     "w": "uma",
+     "start": 21.84,
+     "end": 22.02
+    },
+    {
+     "w": "conversa",
+     "start": 22.02,
+     "end": 22.52
+    },
+    {
+     "w": "rápida",
+     "start": 22.52,
+     "end": 22.98
+    },
+    {
+     "w": "para",
+     "start": 22.98,
+     "end": 23.18
+    },
+    {
+     "w": "a",
+     "start": 23.18,
+     "end": 23.4
+    },
+    {
+     "w": "sexta,",
+     "start": 23.4,
+     "end": 23.82
+    },
+    {
+     "w": "às",
+     "start": 23.94,
+     "end": 24.06
+    },
+    {
+     "w": "seis",
+     "start": 24.06,
+     "end": 24.32
+    },
+    {
+     "w": "da",
+     "start": 24.32,
+     "end": 24.54
+    },
+    {
+     "w": "tarde.",
+     "start": 24.54,
+     "end": 24.9
+    },
+    {
+     "w": "Isso",
+     "start": 25.36,
+     "end": 25.62
+    },
+    {
+     "w": "é",
+     "start": 25.62,
+     "end": 25.76
+    },
+    {
+     "w": "chamado",
+     "start": 25.76,
+     "end": 26.08
+    },
+    {
+     "w": "de",
+     "start": 26.08,
+     "end": 26.46
+    },
+    {
+     "w": "gestão",
+     "start": 26.46,
+     "end": 27.28
+    },
+    {
+     "w": "felina",
+     "start": 27.28,
+     "end": 27.82
+    },
+    {
+     "w": "de",
+     "start": 27.82,
+     "end": 27.98
+    },
+    {
+     "w": "pessoas.",
+     "start": 27.98,
+     "end": 28.36
+    },
+    {
+     "w": "Nesse",
+     "start": 29.04,
+     "end": 29.36
+    },
+    {
+     "w": "caso,",
+     "start": 29.36,
+     "end": 29.72
+    },
+    {
+     "w": "o",
+     "start": 29.96,
+     "end": 30.12
+    },
+    {
+     "w": "correto",
+     "start": 30.12,
+     "end": 30.58
+    },
+    {
+     "w": "é",
+     "start": 30.58,
+     "end": 30.7
+    },
+    {
+     "w": "ligar",
+     "start": 30.7,
+     "end": 31.08
+    },
+    {
+     "w": "o",
+     "start": 31.08,
+     "end": 31.18
+    },
+    {
+     "w": "aspirador,",
+     "start": 31.18,
+     "end": 31.72
+    },
+    {
+     "w": "porque",
+     "start": 32.0,
+     "end": 32.32
+    },
+    {
+     "w": "gato",
+     "start": 32.32,
+     "end": 32.8
+    },
+    {
+     "w": "tem",
+     "start": 32.8,
+     "end": 33.0
+    },
+    {
+     "w": "medo",
+     "start": 33.0,
+     "end": 33.3
+    },
+    {
+     "w": "de",
+     "start": 33.3,
+     "end": 33.44
+    },
+    {
+     "w": "qualquer",
+     "start": 33.44,
+     "end": 33.72
+    },
+    {
+     "w": "coisa",
+     "start": 33.72,
+     "end": 34.4
+    },
+    {
+     "w": "que",
+     "start": 34.4,
+     "end": 34.58
+    },
+    {
+     "w": "trabalhe",
+     "start": 34.58,
+     "end": 35.0
+    },
+    {
+     "w": "mais",
+     "start": 35.0,
+     "end": 35.32
+    },
+    {
+     "w": "do",
+     "start": 35.32,
+     "end": 35.48
+    },
+    {
+     "w": "que",
+     "start": 35.48,
+     "end": 35.62
+    },
+    {
+     "w": "ele.",
+     "start": 35.62,
+     "end": 35.88
+    },
+    {
+     "w": "Só",
+     "start": 36.2,
+     "end": 36.44
+    },
+    {
+     "w": "que,",
+     "start": 36.44,
+     "end": 36.68
+    },
+    {
+     "w": "quando",
+     "start": 36.8,
+     "end": 37.1
+    },
+    {
+     "w": "você",
+     "start": 37.1,
+     "end": 37.4
+    },
+    {
+     "w": "ligar,",
+     "start": 37.4,
+     "end": 37.84
+    },
+    {
+     "w": "um",
+     "start": 38.12,
+     "end": 38.24
+    },
+    {
+     "w": "gato",
+     "start": 38.24,
+     "end": 38.6
+    },
+    {
+     "w": "de",
+     "start": 38.6,
+     "end": 38.78
+    },
+    {
+     "w": "crachá",
+     "start": 38.78,
+     "end": 39.22
+    },
+    {
+     "w": "vai",
+     "start": 39.22,
+     "end": 39.4
+    },
+    {
+     "w": "pedir",
+     "start": 39.4,
+     "end": 39.64
+    },
+    {
+     "w": "o",
+     "start": 39.64,
+     "end": 39.82
+    },
+    {
+     "w": "seu",
+     "start": 39.82,
+     "end": 39.92
+    },
+    {
+     "w": "registro",
+     "start": 39.92,
+     "end": 40.46
+    },
+    {
+     "w": "de",
+     "start": 40.46,
+     "end": 40.6
+    },
+    {
+     "w": "ponto",
+     "start": 40.6,
+     "end": 40.98
+    },
+    {
+     "w": "e",
+     "start": 40.98,
+     "end": 41.44
+    },
+    {
+     "w": "quem",
+     "start": 41.44,
+     "end": 41.6
+    },
+    {
+     "w": "trabalha",
+     "start": 41.6,
+     "end": 42.12
+    },
+    {
+     "w": "com",
+     "start": 42.12,
+     "end": 42.3
+    },
+    {
+     "w": "nove",
+     "start": 42.3,
+     "end": 42.7
+    },
+    {
+     "w": "gatos",
+     "start": 42.7,
+     "end": 43.18
+    },
+    {
+     "w": "está",
+     "start": 43.18,
+     "end": 43.68
+    },
+    {
+     "w": "em",
+     "start": 43.68,
+     "end": 43.82
+    },
+    {
+     "w": "acúmulo",
+     "start": 43.82,
+     "end": 44.4
+    },
+    {
+     "w": "de",
+     "start": 44.4,
+     "end": 44.56
+    },
+    {
+     "w": "função.",
+     "start": 44.56,
+     "end": 44.92
+    },
+    {
+     "w": "Agora",
+     "start": 45.34,
+     "end": 45.7
+    },
+    {
+     "w": "você",
+     "start": 45.7,
+     "end": 45.98
+    },
+    {
+     "w": "precisa",
+     "start": 45.98,
+     "end": 46.36
+    },
+    {
+     "w": "de",
+     "start": 46.36,
+     "end": 46.56
+    },
+    {
+     "w": "carteira",
+     "start": 46.56,
+     "end": 47.02
+    },
+    {
+     "w": "assinada,",
+     "start": 47.02,
+     "end": 47.58
+    },
+    {
+     "w": "categoria",
+     "start": 47.78,
+     "end": 48.42
+    },
+    {
+     "w": "arranhador.",
+     "start": 48.42,
+     "end": 49.28
+    },
+    {
+     "w": "Isso",
+     "start": 49.72,
+     "end": 50.0
+    },
+    {
+     "w": "é",
+     "start": 50.0,
+     "end": 50.3
+    },
+    {
+     "w": "a",
+     "start": 50.3,
+     "end": 50.5
+    },
+    {
+     "w": "auditoria",
+     "start": 50.5,
+     "end": 51.48
+    },
+    {
+     "w": "trabalhista",
+     "start": 51.48,
+     "end": 52.16
+    },
+    {
+     "w": "de",
+     "start": 52.16,
+     "end": 52.3
+    },
+    {
+     "w": "Bigode.",
+     "start": 52.3,
+     "end": 52.74
+    },
+    {
+     "w": "Se",
+     "start": 53.16,
+     "end": 53.36
+    },
+    {
+     "w": "você",
+     "start": 53.36,
+     "end": 53.58
+    },
+    {
+     "w": "não",
+     "start": 53.58,
+     "end": 53.84
+    },
+    {
+     "w": "tiver",
+     "start": 53.84,
+     "end": 54.12
+    },
+    {
+     "w": "o",
+     "start": 54.12,
+     "end": 54.28
+    },
+    {
+     "w": "registro,",
+     "start": 54.28,
+     "end": 54.84
+    },
+    {
+     "w": "ele",
+     "start": 55.0,
+     "end": 55.16
+    },
+    {
+     "w": "vai",
+     "start": 55.16,
+     "end": 55.32
+    },
+    {
+     "w": "prender",
+     "start": 55.32,
+     "end": 55.88
+    },
+    {
+     "w": "o",
+     "start": 55.88,
+     "end": 56.12
+    },
+    {
+     "w": "seu",
+     "start": 56.12,
+     "end": 56.22
+    },
+    {
+     "w": "mouse",
+     "start": 56.22,
+     "end": 56.6
+    },
+    {
+     "w": "e",
+     "start": 56.6,
+     "end": 56.74
+    },
+    {
+     "w": "mandar",
+     "start": 56.74,
+     "end": 57.3
+    },
+    {
+     "w": "a",
+     "start": 57.3,
+     "end": 57.48
+    },
+    {
+     "w": "planilha",
+     "start": 57.48,
+     "end": 57.94
+    },
+    {
+     "w": "se",
+     "start": 57.94,
+     "end": 58.12
+    },
+    {
+     "w": "preencher",
+     "start": 58.12,
+     "end": 58.52
+    },
+    {
+     "w": "sozinha.",
+     "start": 58.52,
+     "end": 59.2
+    },
+    {
+     "w": "Nessa",
+     "start": 59.6,
+     "end": 59.92
+    },
+    {
+     "w": "hora,",
+     "start": 59.92,
+     "end": 60.22
+    },
+    {
+     "w": "você",
+     "start": 60.46,
+     "end": 60.66
+    },
+    {
+     "w": "precisa",
+     "start": 60.66,
+     "end": 61.06
+    },
+    {
+     "w": "abrir",
+     "start": 61.06,
+     "end": 61.42
+    },
+    {
+     "w": "a",
+     "start": 61.42,
+     "end": 61.6
+    },
+    {
+     "w": "gaveta",
+     "start": 61.6,
+     "end": 62.04
+    },
+    {
+     "w": "e",
+     "start": 62.04,
+     "end": 62.32
+    },
+    {
+     "w": "pegar",
+     "start": 62.32,
+     "end": 62.56
+    },
+    {
+     "w": "um",
+     "start": 62.56,
+     "end": 62.72
+    },
+    {
+     "w": "sachê,",
+     "start": 62.72,
+     "end": 63.14
+    },
+    {
+     "w": "mas",
+     "start": 63.42,
+     "end": 63.66
+    },
+    {
+     "w": "não",
+     "start": 63.66,
+     "end": 63.98
+    },
+    {
+     "w": "abra",
+     "start": 63.98,
+     "end": 64.34
+    },
+    {
+     "w": "na",
+     "start": 64.34,
+     "end": 64.5
+    },
+    {
+     "w": "frente",
+     "start": 64.5,
+     "end": 64.76
+    },
+    {
+     "w": "de",
+     "start": 64.76,
+     "end": 64.98
+    },
+    {
+     "w": "todos.",
+     "start": 64.98,
+     "end": 65.26
+    },
+    {
+     "w": "Eles",
+     "start": 65.72,
+     "end": 65.9
+    },
+    {
+     "w": "podem",
+     "start": 65.9,
+     "end": 66.22
+    },
+    {
+     "w": "interpretar",
+     "start": 66.22,
+     "end": 66.9
+    },
+    {
+     "w": "isso",
+     "start": 66.9,
+     "end": 67.18
+    },
+    {
+     "w": "como",
+     "start": 67.18,
+     "end": 67.42
+    },
+    {
+     "w": "participação",
+     "start": 67.42,
+     "end": 68.38
+    },
+    {
+     "w": "nos",
+     "start": 68.38,
+     "end": 68.6
+    },
+    {
+     "w": "lucros.",
+     "start": 68.6,
+     "end": 68.98
+    },
+    {
+     "w": "Se",
+     "start": 69.52,
+     "end": 69.74
+    },
+    {
+     "w": "eles",
+     "start": 69.74,
+     "end": 69.92
+    },
+    {
+     "w": "aceitarem,",
+     "start": 69.92,
+     "end": 70.56
+    },
+    {
+     "w": "você",
+     "start": 70.84,
+     "end": 71.0
+    },
+    {
+     "w": "será",
+     "start": 71.0,
+     "end": 71.3
+    },
+    {
+     "w": "obrigado",
+     "start": 71.3,
+     "end": 71.82
+    },
+    {
+     "w": "a",
+     "start": 71.82,
+     "end": 72.12
+    },
+    {
+     "w": "assinar",
+     "start": 72.12,
+     "end": 72.46
+    },
+    {
+     "w": "um",
+     "start": 72.46,
+     "end": 72.66
+    },
+    {
+     "w": "acordo",
+     "start": 72.66,
+     "end": 73.02
+    },
+    {
+     "w": "coletivo",
+     "start": 73.02,
+     "end": 73.7
+    },
+    {
+     "w": "com",
+     "start": 73.7,
+     "end": 74.12
+    },
+    {
+     "w": "duas",
+     "start": 74.12,
+     "end": 74.48
+    },
+    {
+     "w": "testemunhas",
+     "start": 74.48,
+     "end": 75.18
+    },
+    {
+     "w": "e",
+     "start": 75.18,
+     "end": 75.5
+    },
+    {
+     "w": "uma",
+     "start": 75.5,
+     "end": 75.68
+    },
+    {
+     "w": "caixa",
+     "start": 75.68,
+     "end": 76.02
+    },
+    {
+     "w": "de",
+     "start": 76.02,
+     "end": 76.14
+    },
+    {
+     "w": "papelão,",
+     "start": 76.14,
+     "end": 76.64
+    },
+    {
+     "w": "procedimento",
+     "start": 76.92,
+     "end": 77.54
+    },
+    {
+     "w": "conhecido",
+     "start": 77.54,
+     "end": 78.12
+    },
+    {
+     "w": "como",
+     "start": 78.12,
+     "end": 78.52
+    },
+    {
+     "w": "Convenção",
+     "start": 78.52,
+     "end": 79.52
+    },
+    {
+     "w": "Coletiva",
+     "start": 79.52,
+     "end": 80.18
+    },
+    {
+     "w": "do",
+     "start": 80.18,
+     "end": 80.32
+    },
+    {
+     "w": "Sachê.",
+     "start": 80.32,
+     "end": 80.72
+    },
+    {
+     "w": "Depois",
+     "start": 81.12,
+     "end": 81.44
+    },
+    {
+     "w": "do",
+     "start": 81.44,
+     "end": 81.66
+    },
+    {
+     "w": "acordo,",
+     "start": 81.66,
+     "end": 82.04
+    },
+    {
+     "w": "os",
+     "start": 82.4,
+     "end": 82.48
+    },
+    {
+     "w": "gatos",
+     "start": 82.48,
+     "end": 82.74
+    },
+    {
+     "w": "finalmente",
+     "start": 82.74,
+     "end": 83.5
+    },
+    {
+     "w": "vão",
+     "start": 83.5,
+     "end": 83.84
+    },
+    {
+     "w": "sair",
+     "start": 83.84,
+     "end": 84.16
+    },
+    {
+     "w": "da",
+     "start": 84.16,
+     "end": 84.36
+    },
+    {
+     "w": "reunião.",
+     "start": 84.36,
+     "end": 84.76
+    },
+    {
+     "w": "Menos",
+     "start": 84.76,
+     "end": 85.62
+    },
+    {
+     "w": "um.",
+     "start": 85.62,
+     "end": 85.78
+    },
+    {
+     "w": "Esse",
+     "start": 86.12,
+     "end": 86.4
+    },
+    {
+     "w": "vai",
+     "start": 86.4,
+     "end": 86.58
+    },
+    {
+     "w": "ficar",
+     "start": 86.58,
+     "end": 86.82
+    },
+    {
+     "w": "dormindo",
+     "start": 86.82,
+     "end": 87.34
+    },
+    {
+     "w": "em",
+     "start": 87.34,
+     "end": 87.48
+    },
+    {
+     "w": "cima",
+     "start": 87.48,
+     "end": 87.82
+    },
+    {
+     "w": "do",
+     "start": 87.82,
+     "end": 87.98
+    },
+    {
+     "w": "notebook,",
+     "start": 87.98,
+     "end": 88.44
+    },
+    {
+     "w": "dizendo",
+     "start": 88.66,
+     "end": 89.06
+    },
+    {
+     "w": "que",
+     "start": 89.06,
+     "end": 89.26
+    },
+    {
+     "w": "não",
+     "start": 89.26,
+     "end": 89.48
+    },
+    {
+     "w": "pode",
+     "start": 89.48,
+     "end": 89.8
+    },
+    {
+     "w": "sair",
+     "start": 89.8,
+     "end": 90.16
+    },
+    {
+     "w": "porque",
+     "start": 90.16,
+     "end": 90.52
+    },
+    {
+     "w": "está",
+     "start": 90.52,
+     "end": 90.82
+    },
+    {
+     "w": "numa",
+     "start": 90.82,
+     "end": 90.98
+    },
+    {
+     "w": "chamada",
+     "start": 90.98,
+     "end": 91.48
+    },
+    {
+     "w": "importante.",
+     "start": 91.48,
+     "end": 92.1
+    },
+    {
+     "w": "E",
+     "start": 92.56,
+     "end": 92.68
+    },
+    {
+     "w": "se",
+     "start": 92.68,
+     "end": 92.74
+    },
+    {
+     "w": "você",
+     "start": 92.74,
+     "end": 92.96
+    },
+    {
+     "w": "perguntar",
+     "start": 92.96,
+     "end": 93.58
+    },
+    {
+     "w": "com",
+     "start": 93.58,
+     "end": 93.76
+    },
+    {
+     "w": "quem,",
+     "start": 93.76,
+     "end": 94.08
+    },
+    {
+     "w": "ele",
+     "start": 94.36,
+     "end": 94.54
+    },
+    {
+     "w": "vai",
+     "start": 94.54,
+     "end": 94.68
+    },
+    {
+     "w": "responder",
+     "start": 94.68,
+     "end": 95.12
+    },
+    {
+     "w": "com",
+     "start": 95.12,
+     "end": 95.68
+    },
+    {
+     "w": "seu",
+     "start": 95.68,
+     "end": 95.86
+    },
+    {
+     "w": "chefe.",
+     "start": 95.86,
+     "end": 96.36
+    },
+    {
+     "w": "Fui",
+     "start": 96.64,
+     "end": 96.8
+    },
+    {
+     "w": "promovido,",
+     "start": 96.8,
+     "end": 97.38
+    },
+    {
+     "w": "você",
+     "start": 97.72,
+     "end": 98.02
+    },
+    {
+     "w": "não.",
+     "start": 98.02,
+     "end": 98.3
+    },
+    {
+     "w": "Esse",
+     "start": 98.74,
+     "end": 99.08
+    },
+    {
+     "w": "é",
+     "start": 99.08,
+     "end": 99.34
+    },
+    {
+     "w": "o",
+     "start": 99.34,
+     "end": 99.54
+    },
+    {
+     "w": "plano",
+     "start": 99.54,
+     "end": 100.02
+    },
+    {
+     "w": "de",
+     "start": 100.02,
+     "end": 100.24
+    },
+    {
+     "w": "carreira",
+     "start": 100.24,
+     "end": 100.72
+    },
+    {
+     "w": "de",
+     "start": 100.72,
+     "end": 100.9
+    },
+    {
+     "w": "sete",
+     "start": 100.9,
+     "end": 101.36
+    },
+    {
+     "w": "vidas.",
+     "start": 101.36,
+     "end": 101.84
+    },
+    {
+     "w": "É",
+     "start": 102.2,
+     "end": 102.34
+    },
+    {
+     "w": "por",
+     "start": 102.34,
+     "end": 102.5
+    },
+    {
+     "w": "isso",
+     "start": 102.5,
+     "end": 102.76
+    },
+    {
+     "w": "que,",
+     "start": 102.76,
+     "end": 103.02
+    },
+    {
+     "w": "antes",
+     "start": 103.42,
+     "end": 103.52
+    },
+    {
+     "w": "de",
+     "start": 103.52,
+     "end": 103.7
+    },
+    {
+     "w": "aceitar",
+     "start": 103.7,
+     "end": 104.1
+    },
+    {
+     "w": "um",
+     "start": 104.1,
+     "end": 104.26
+    },
+    {
+     "w": "trabalho",
+     "start": 104.26,
+     "end": 104.54
+    },
+    {
+     "w": "remoto,",
+     "start": 104.54,
+     "end": 105.06
+    },
+    {
+     "w": "você",
+     "start": 105.4,
+     "end": 105.54
+    },
+    {
+     "w": "precisa",
+     "start": 105.54,
+     "end": 106.08
+    },
+    {
+     "w": "verificar",
+     "start": 106.08,
+     "end": 106.6
+    },
+    {
+     "w": "se",
+     "start": 106.6,
+     "end": 106.84
+    },
+    {
+     "w": "a",
+     "start": 106.84,
+     "end": 106.92
+    },
+    {
+     "w": "sua",
+     "start": 106.92,
+     "end": 107.2
+    },
+    {
+     "w": "casa",
+     "start": 107.2,
+     "end": 107.62
+    },
+    {
+     "w": "já",
+     "start": 107.62,
+     "end": 107.98
+    },
+    {
+     "w": "foi",
+     "start": 107.98,
+     "end": 108.32
+    },
+    {
+     "w": "uma",
+     "start": 108.32,
+     "end": 108.52
+    },
+    {
+     "w": "caixa",
+     "start": 108.52,
+     "end": 108.86
+    },
+    {
+     "w": "de",
+     "start": 108.86,
+     "end": 108.98
+    },
+    {
+     "w": "papelão.",
+     "start": 108.98,
+     "end": 109.46
+    }
+   ]
+  }
+ ]
+}
