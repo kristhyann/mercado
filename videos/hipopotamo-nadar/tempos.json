@@ -1,0 +1,997 @@
+{
+ "duration": 81.0,
+ "sentences": [
+  {
+   "text": "Hipopótamos não sabem nadar, e isso não é exagero, eles não conseguem nadar nem um pouquinho, pesam mais ou menos o mesmo que um carro e são tão densos que nem conseguem boiar. Então, em vez de nadar, o que eles fazem? Eles simplesmente andam pelo fundo do rio, e quando estão com pressa, eles quicam, dão impulso no fundo, sobem flutuando e depois descem devagar, como um astronauta andando na lua. Hipopótamos conseguem prender a respiração por bastante tempo, uns cinco minutos, depois disso precisam subir para respirar, e as orelhas e as narinas deles se fecham quando eles mergulham. Mas a parte mais louca é esta, hipopótamos dormem debaixo d'água. Como eles fazem isso? A cada poucos minutos, sem acordar, eles sobem, respiram e afundam de novo, e não para por aí. Em terra, eles são incrivelmente rápidos para o tamanho que tem. Correm a uns trinta e dois quilômetros por hora, mais rápido do que a maioria das pessoas conseguem correr. Na velocidade máxima, por uma fração de segundo, as quatro patas saem do chão. Ou seja, hipopótamos não sabem nadar, mas, tecnicamente, por uma fração de segundo de cada vez, eles conseguem voar.",
+   "start": 0.0,
+   "end": 78.16,
+   "words": [
+    {
+     "w": "Hipopótamos",
+     "start": 0.0,
+     "end": 0.76
+    },
+    {
+     "w": "não",
+     "start": 0.76,
+     "end": 1.18
+    },
+    {
+     "w": "sabem",
+     "start": 1.18,
+     "end": 1.66
+    },
+    {
+     "w": "nadar,",
+     "start": 1.66,
+     "end": 2.12
+    },
+    {
+     "w": "e",
+     "start": 2.6,
+     "end": 2.68
+    },
+    {
+     "w": "isso",
+     "start": 2.68,
+     "end": 2.98
+    },
+    {
+     "w": "não",
+     "start": 2.98,
+     "end": 3.24
+    },
+    {
+     "w": "é",
+     "start": 3.24,
+     "end": 3.46
+    },
+    {
+     "w": "exagero,",
+     "start": 3.46,
+     "end": 3.94
+    },
+    {
+     "w": "eles",
+     "start": 4.36,
+     "end": 4.5
+    },
+    {
+     "w": "não",
+     "start": 4.5,
+     "end": 4.68
+    },
+    {
+     "w": "conseguem",
+     "start": 4.68,
+     "end": 5.22
+    },
+    {
+     "w": "nadar",
+     "start": 5.22,
+     "end": 5.64
+    },
+    {
+     "w": "nem",
+     "start": 5.64,
+     "end": 6.06
+    },
+    {
+     "w": "um",
+     "start": 6.06,
+     "end": 6.26
+    },
+    {
+     "w": "pouquinho,",
+     "start": 6.26,
+     "end": 6.66
+    },
+    {
+     "w": "pesam",
+     "start": 7.16,
+     "end": 7.48
+    },
+    {
+     "w": "mais",
+     "start": 7.48,
+     "end": 7.68
+    },
+    {
+     "w": "ou",
+     "start": 7.68,
+     "end": 7.88
+    },
+    {
+     "w": "menos",
+     "start": 7.88,
+     "end": 8.04
+    },
+    {
+     "w": "o",
+     "start": 8.04,
+     "end": 8.24
+    },
+    {
+     "w": "mesmo",
+     "start": 8.24,
+     "end": 8.48
+    },
+    {
+     "w": "que",
+     "start": 8.48,
+     "end": 8.72
+    },
+    {
+     "w": "um",
+     "start": 8.72,
+     "end": 8.84
+    },
+    {
+     "w": "carro",
+     "start": 8.84,
+     "end": 9.3
+    },
+    {
+     "w": "e",
+     "start": 9.3,
+     "end": 9.56
+    },
+    {
+     "w": "são",
+     "start": 9.56,
+     "end": 9.7
+    },
+    {
+     "w": "tão",
+     "start": 9.7,
+     "end": 10.08
+    },
+    {
+     "w": "densos",
+     "start": 10.08,
+     "end": 10.64
+    },
+    {
+     "w": "que",
+     "start": 10.64,
+     "end": 10.84
+    },
+    {
+     "w": "nem",
+     "start": 10.84,
+     "end": 11.16
+    },
+    {
+     "w": "conseguem",
+     "start": 11.16,
+     "end": 11.7
+    },
+    {
+     "w": "boiar.",
+     "start": 11.7,
+     "end": 12.06
+    },
+    {
+     "w": "Então,",
+     "start": 12.54,
+     "end": 12.88
+    },
+    {
+     "w": "em",
+     "start": 13.22,
+     "end": 13.38
+    },
+    {
+     "w": "vez",
+     "start": 13.38,
+     "end": 13.56
+    },
+    {
+     "w": "de",
+     "start": 13.56,
+     "end": 13.72
+    },
+    {
+     "w": "nadar,",
+     "start": 13.72,
+     "end": 14.1
+    },
+    {
+     "w": "o",
+     "start": 14.34,
+     "end": 14.46
+    },
+    {
+     "w": "que",
+     "start": 14.46,
+     "end": 14.5
+    },
+    {
+     "w": "eles",
+     "start": 14.5,
+     "end": 14.68
+    },
+    {
+     "w": "fazem?",
+     "start": 14.68,
+     "end": 15.0
+    },
+    {
+     "w": "Eles",
+     "start": 15.54,
+     "end": 15.7
+    },
+    {
+     "w": "simplesmente",
+     "start": 15.7,
+     "end": 16.46
+    },
+    {
+     "w": "andam",
+     "start": 16.46,
+     "end": 17.18
+    },
+    {
+     "w": "pelo",
+     "start": 17.18,
+     "end": 17.4
+    },
+    {
+     "w": "fundo",
+     "start": 17.4,
+     "end": 17.72
+    },
+    {
+     "w": "do",
+     "start": 17.72,
+     "end": 17.92
+    },
+    {
+     "w": "rio,",
+     "start": 17.92,
+     "end": 18.14
+    },
+    {
+     "w": "e",
+     "start": 18.58,
+     "end": 18.7
+    },
+    {
+     "w": "quando",
+     "start": 18.7,
+     "end": 18.86
+    },
+    {
+     "w": "estão",
+     "start": 18.86,
+     "end": 19.1
+    },
+    {
+     "w": "com",
+     "start": 19.1,
+     "end": 19.26
+    },
+    {
+     "w": "pressa,",
+     "start": 19.26,
+     "end": 19.76
+    },
+    {
+     "w": "eles",
+     "start": 19.96,
+     "end": 20.02
+    },
+    {
+     "w": "quicam,",
+     "start": 20.02,
+     "end": 20.6
+    },
+    {
+     "w": "dão",
+     "start": 21.0,
+     "end": 21.14
+    },
+    {
+     "w": "impulso",
+     "start": 21.14,
+     "end": 21.64
+    },
+    {
+     "w": "no",
+     "start": 21.64,
+     "end": 21.76
+    },
+    {
+     "w": "fundo,",
+     "start": 21.76,
+     "end": 22.16
+    },
+    {
+     "w": "sobem",
+     "start": 22.44,
+     "end": 22.92
+    },
+    {
+     "w": "flutuando",
+     "start": 22.92,
+     "end": 23.5
+    },
+    {
+     "w": "e",
+     "start": 23.5,
+     "end": 23.8
+    },
+    {
+     "w": "depois",
+     "start": 23.8,
+     "end": 24.08
+    },
+    {
+     "w": "descem",
+     "start": 24.08,
+     "end": 24.56
+    },
+    {
+     "w": "devagar,",
+     "start": 24.56,
+     "end": 25.2
+    },
+    {
+     "w": "como",
+     "start": 25.38,
+     "end": 25.66
+    },
+    {
+     "w": "um",
+     "start": 25.66,
+     "end": 25.8
+    },
+    {
+     "w": "astronauta",
+     "start": 25.8,
+     "end": 26.54
+    },
+    {
+     "w": "andando",
+     "start": 26.54,
+     "end": 26.84
+    },
+    {
+     "w": "na",
+     "start": 26.84,
+     "end": 27.04
+    },
+    {
+     "w": "lua.",
+     "start": 27.04,
+     "end": 27.34
+    },
+    {
+     "w": "Hipopótamos",
+     "start": 27.34,
+     "end": 28.46
+    },
+    {
+     "w": "conseguem",
+     "start": 28.46,
+     "end": 29.02
+    },
+    {
+     "w": "prender",
+     "start": 29.02,
+     "end": 29.4
+    },
+    {
+     "w": "a",
+     "start": 29.4,
+     "end": 29.5
+    },
+    {
+     "w": "respiração",
+     "start": 29.5,
+     "end": 30.1
+    },
+    {
+     "w": "por",
+     "start": 30.1,
+     "end": 30.28
+    },
+    {
+     "w": "bastante",
+     "start": 30.28,
+     "end": 30.76
+    },
+    {
+     "w": "tempo,",
+     "start": 30.76,
+     "end": 31.22
+    },
+    {
+     "w": "uns",
+     "start": 31.46,
+     "end": 31.64
+    },
+    {
+     "w": "cinco",
+     "start": 31.64,
+     "end": 31.98
+    },
+    {
+     "w": "minutos,",
+     "start": 31.98,
+     "end": 32.3
+    },
+    {
+     "w": "depois",
+     "start": 32.86,
+     "end": 33.16
+    },
+    {
+     "w": "disso",
+     "start": 33.16,
+     "end": 33.52
+    },
+    {
+     "w": "precisam",
+     "start": 33.52,
+     "end": 34.06
+    },
+    {
+     "w": "subir",
+     "start": 34.06,
+     "end": 34.48
+    },
+    {
+     "w": "para",
+     "start": 34.48,
+     "end": 34.74
+    },
+    {
+     "w": "respirar,",
+     "start": 34.74,
+     "end": 35.32
+    },
+    {
+     "w": "e",
+     "start": 35.72,
+     "end": 35.78
+    },
+    {
+     "w": "as",
+     "start": 35.78,
+     "end": 35.92
+    },
+    {
+     "w": "orelhas",
+     "start": 35.92,
+     "end": 36.38
+    },
+    {
+     "w": "e",
+     "start": 36.38,
+     "end": 36.5
+    },
+    {
+     "w": "as",
+     "start": 36.5,
+     "end": 36.6
+    },
+    {
+     "w": "narinas",
+     "start": 36.6,
+     "end": 36.94
+    },
+    {
+     "w": "deles",
+     "start": 36.94,
+     "end": 37.32
+    },
+    {
+     "w": "se",
+     "start": 37.32,
+     "end": 37.7
+    },
+    {
+     "w": "fecham",
+     "start": 37.7,
+     "end": 38.26
+    },
+    {
+     "w": "quando",
+     "start": 38.26,
+     "end": 38.48
+    },
+    {
+     "w": "eles",
+     "start": 38.48,
+     "end": 38.68
+    },
+    {
+     "w": "mergulham.",
+     "start": 38.68,
+     "end": 39.26
+    },
+    {
+     "w": "Mas",
+     "start": 39.72,
+     "end": 39.88
+    },
+    {
+     "w": "a",
+     "start": 39.88,
+     "end": 40.02
+    },
+    {
+     "w": "parte",
+     "start": 40.02,
+     "end": 40.22
+    },
+    {
+     "w": "mais",
+     "start": 40.22,
+     "end": 40.7
+    },
+    {
+     "w": "louca",
+     "start": 40.7,
+     "end": 41.18
+    },
+    {
+     "w": "é",
+     "start": 41.18,
+     "end": 41.32
+    },
+    {
+     "w": "esta,",
+     "start": 41.32,
+     "end": 41.62
+    },
+    {
+     "w": "hipopótamos",
+     "start": 42.16,
+     "end": 42.86
+    },
+    {
+     "w": "dormem",
+     "start": 42.86,
+     "end": 43.68
+    },
+    {
+     "w": "debaixo",
+     "start": 43.68,
+     "end": 44.14
+    },
+    {
+     "w": "d'água.",
+     "start": 44.14,
+     "end": 44.96
+    },
+    {
+     "w": "Como",
+     "start": 44.96,
+     "end": 45.2
+    },
+    {
+     "w": "eles",
+     "start": 45.2,
+     "end": 45.4
+    },
+    {
+     "w": "fazem",
+     "start": 45.4,
+     "end": 45.66
+    },
+    {
+     "w": "isso?",
+     "start": 45.66,
+     "end": 46.04
+    },
+    {
+     "w": "A",
+     "start": 46.58,
+     "end": 46.68
+    },
+    {
+     "w": "cada",
+     "start": 46.68,
+     "end": 46.86
+    },
+    {
+     "w": "poucos",
+     "start": 46.86,
+     "end": 47.34
+    },
+    {
+     "w": "minutos,",
+     "start": 47.34,
+     "end": 47.78
+    },
+    {
+     "w": "sem",
+     "start": 47.98,
+     "end": 48.3
+    },
+    {
+     "w": "acordar,",
+     "start": 48.3,
+     "end": 48.9
+    },
+    {
+     "w": "eles",
+     "start": 49.28,
+     "end": 49.32
+    },
+    {
+     "w": "sobem,",
+     "start": 49.32,
+     "end": 49.9
+    },
+    {
+     "w": "respiram",
+     "start": 50.18,
+     "end": 50.7
+    },
+    {
+     "w": "e",
+     "start": 50.7,
+     "end": 51.04
+    },
+    {
+     "w": "afundam",
+     "start": 51.04,
+     "end": 51.6
+    },
+    {
+     "w": "de",
+     "start": 51.6,
+     "end": 51.74
+    },
+    {
+     "w": "novo,",
+     "start": 51.74,
+     "end": 52.02
+    },
+    {
+     "w": "e",
+     "start": 52.48,
+     "end": 52.62
+    },
+    {
+     "w": "não",
+     "start": 52.62,
+     "end": 52.74
+    },
+    {
+     "w": "para",
+     "start": 52.74,
+     "end": 53.04
+    },
+    {
+     "w": "por",
+     "start": 53.04,
+     "end": 53.26
+    },
+    {
+     "w": "aí.",
+     "start": 53.26,
+     "end": 53.5
+    },
+    {
+     "w": "Em",
+     "start": 53.5,
+     "end": 54.06
+    },
+    {
+     "w": "terra,",
+     "start": 54.06,
+     "end": 54.44
+    },
+    {
+     "w": "eles",
+     "start": 54.64,
+     "end": 54.78
+    },
+    {
+     "w": "são",
+     "start": 54.78,
+     "end": 55.02
+    },
+    {
+     "w": "incrivelmente",
+     "start": 55.02,
+     "end": 56.02
+    },
+    {
+     "w": "rápidos",
+     "start": 56.02,
+     "end": 56.76
+    },
+    {
+     "w": "para",
+     "start": 56.76,
+     "end": 56.98
+    },
+    {
+     "w": "o",
+     "start": 56.98,
+     "end": 57.1
+    },
+    {
+     "w": "tamanho",
+     "start": 57.1,
+     "end": 57.3
+    },
+    {
+     "w": "que",
+     "start": 57.3,
+     "end": 57.5
+    },
+    {
+     "w": "tem.",
+     "start": 57.5,
+     "end": 57.74
+    },
+    {
+     "w": "Correm",
+     "start": 58.12,
+     "end": 58.48
+    },
+    {
+     "w": "a",
+     "start": 58.48,
+     "end": 58.58
+    },
+    {
+     "w": "uns",
+     "start": 58.58,
+     "end": 58.76
+    },
+    {
+     "w": "trinta",
+     "start": 58.76,
+     "end": 58.995
+    },
+    {
+     "w": "e",
+     "start": 58.995,
+     "end": 59.23
+    },
+    {
+     "w": "dois",
+     "start": 59.23,
+     "end": 59.465
+    },
+    {
+     "w": "quilômetros",
+     "start": 59.465,
+     "end": 59.7
+    },
+    {
+     "w": "por",
+     "start": 59.7,
+     "end": 60.32
+    },
+    {
+     "w": "hora,",
+     "start": 60.32,
+     "end": 60.56
+    },
+    {
+     "w": "mais",
+     "start": 60.82,
+     "end": 61.18
+    },
+    {
+     "w": "rápido",
+     "start": 61.18,
+     "end": 61.62
+    },
+    {
+     "w": "do",
+     "start": 61.62,
+     "end": 61.8
+    },
+    {
+     "w": "que",
+     "start": 61.8,
+     "end": 61.94
+    },
+    {
+     "w": "a",
+     "start": 61.94,
+     "end": 62.0
+    },
+    {
+     "w": "maioria",
+     "start": 62.0,
+     "end": 62.42
+    },
+    {
+     "w": "das",
+     "start": 62.42,
+     "end": 62.66
+    },
+    {
+     "w": "pessoas",
+     "start": 62.66,
+     "end": 63.06
+    },
+    {
+     "w": "conseguem",
+     "start": 63.06,
+     "end": 63.56
+    },
+    {
+     "w": "correr.",
+     "start": 63.56,
+     "end": 63.88
+    },
+    {
+     "w": "Na",
+     "start": 64.32,
+     "end": 64.44
+    },
+    {
+     "w": "velocidade",
+     "start": 64.44,
+     "end": 64.76
+    },
+    {
+     "w": "máxima,",
+     "start": 64.76,
+     "end": 65.66
+    },
+    {
+     "w": "por",
+     "start": 65.7,
+     "end": 65.78
+    },
+    {
+     "w": "uma",
+     "start": 65.78,
+     "end": 65.92
+    },
+    {
+     "w": "fração",
+     "start": 65.92,
+     "end": 66.48
+    },
+    {
+     "w": "de",
+     "start": 66.48,
+     "end": 66.64
+    },
+    {
+     "w": "segundo,",
+     "start": 66.64,
+     "end": 67.04
+    },
+    {
+     "w": "as",
+     "start": 67.42,
+     "end": 67.58
+    },
+    {
+     "w": "quatro",
+     "start": 67.58,
+     "end": 67.94
+    },
+    {
+     "w": "patas",
+     "start": 67.94,
+     "end": 68.5
+    },
+    {
+     "w": "saem",
+     "start": 68.5,
+     "end": 68.92
+    },
+    {
+     "w": "do",
+     "start": 68.92,
+     "end": 69.04
+    },
+    {
+     "w": "chão.",
+     "start": 69.04,
+     "end": 69.38
+    },
+    {
+     "w": "Ou",
+     "start": 69.7,
+     "end": 69.84
+    },
+    {
+     "w": "seja,",
+     "start": 69.84,
+     "end": 70.18
+    },
+    {
+     "w": "hipopótamos",
+     "start": 70.54,
+     "end": 71.1
+    },
+    {
+     "w": "não",
+     "start": 71.1,
+     "end": 71.44
+    },
+    {
+     "w": "sabem",
+     "start": 71.44,
+     "end": 71.86
+    },
+    {
+     "w": "nadar,",
+     "start": 71.86,
+     "end": 72.32
+    },
+    {
+     "w": "mas,",
+     "start": 72.68,
+     "end": 72.88
+    },
+    {
+     "w": "tecnicamente,",
+     "start": 73.18,
+     "end": 73.94
+    },
+    {
+     "w": "por",
+     "start": 74.16,
+     "end": 74.28
+    },
+    {
+     "w": "uma",
+     "start": 74.28,
+     "end": 74.42
+    },
+    {
+     "w": "fração",
+     "start": 74.42,
+     "end": 75.02
+    },
+    {
+     "w": "de",
+     "start": 75.02,
+     "end": 75.18
+    },
+    {
+     "w": "segundo",
+     "start": 75.18,
+     "end": 75.6
+    },
+    {
+     "w": "de",
+     "start": 75.6,
+     "end": 75.76
+    },
+    {
+     "w": "cada",
+     "start": 75.76,
+     "end": 76.0
+    },
+    {
+     "w": "vez,",
+     "start": 76.0,
+     "end": 76.44
+    },
+    {
+     "w": "eles",
+     "start": 76.8,
+     "end": 76.9
+    },
+    {
+     "w": "conseguem",
+     "start": 76.9,
+     "end": 77.6
+    },
+    {
+     "w": "voar.",
+     "start": 77.6,
+     "end": 78.16
+    }
+   ]
+  }
+ ]
+}

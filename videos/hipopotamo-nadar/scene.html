@@ -1,0 +1,271 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,'Noto Color Emoji',sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:250px;text-align:center;font-weight:900;font-size:80px;line-height:1.06}
+#hook b{color:#FFD21F;display:block;font-size:96px}
+#cap{width:1080px;top:1380px;text-align:center;font-weight:900;font-size:112px}
+#cap.hl{color:#FFD21F}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:60px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.white{background:#fff;color:#111}
+.small{font-size:46px;padding:6px 22px;border-radius:18px;border-width:6px;box-shadow:0 6px 0 #111}
+#mark{font-weight:900;font-size:220px;line-height:1;-webkit-text-stroke:12px #fff;paint-order:stroke fill}
+#big{font-weight:900;font-size:230px;line-height:1;color:#FFD21F;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 14px 0 rgba(0,0,0,.4);white-space:nowrap}
+#big small{font-size:110px}
+#final{left:50px;width:980px;top:1290px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:66px;line-height:1.1;padding:28px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#22A04A}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.85;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">O HIPOPÓTAMO<br>NÃO SABE NADAR…<b>MAS SABE VOAR 🦛</b></div>
+<div id="mark" class="o"></div><div id="big" class="o"></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag small"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Sabia dessa?<br><em>Segue aí 👉 @olhaso_3D</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, rr } from '/_kit/kit.js';
+import { buildPerson, PP, poseP, face } from '/_kit/pessoas.js';
+await document.fonts.load('900 60px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; window.DURATION = TP.duration;
+const ALL = SN.flatMap(s => s.words);
+const WA = (re, n = 0, after = 0) => { const ws = ALL.filter(w => w.start >= after && re.test(w.w)); if (!ws[n]) { console.log('WA MISS', re); return after; } return ws[n].start; };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .03, 300);
+scene.background = new THREE.Color(0x2E86B0); scene.fog = new THREE.Fog(0x2E86B0, 4, 16);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const MAT = (c, r = .8, ex = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: r }, ex));
+const add = (geo, mat, x, y, z, par) => { const m = new THREE.Mesh(geo, typeof mat === 'number' ? MAT(mat) : mat); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; par.add(m); return m; };
+const box = (w, h, d, c, x, y, z, par = scene) => add(new THREE.BoxGeometry(w, h, d), c, x, y, z, par);
+const cyl = (rt, rb, h, c, x, y, z, par = scene, seg = 16) => add(new THREE.CylinderGeometry(rt, rb, h, seg), c, x, y, z, par);
+const sph = (r, c, x, y, z, par = scene, a = 18, b = 12) => add(new THREE.SphereGeometry(r, a, b), c, x, y, z, par);
+const BASIC = c => new THREE.MeshBasicMaterial({ color: c, toneMapped: false });
+const sprite = (t, s) => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthWrite: false })); sp.scale.setScalar(s); return sp; };
+const canvasTex = (w, h, paint) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); paint(g, w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; };
+
+// ---------- tempos ----------
+const T_ISSO = WA(/^isso$/), T_PESAM = WA(/pesam/), T_SAO = WA(/^são$/), T_ENTAO = WA(/Então/), T_ANDAM = WA(/andam/), T_QUANDO = WA(/^quando$/), T_QUICAM = WA(/quicam/), T_SOBEM = WA(/^sobem$/), T_DESCEM = WA(/descem/);
+const T_COMO = WA(/^como$/), T_HIPO2 = WA(/^Hipopótamos$/, 0, 27), T_CINCO = WA(/cinco/), T_DEPOIS = WA(/^depois$/, 0, 32), T_ORELHAS = WA(/orelhas/), T_NARINAS = WA(/narinas/), T_FECHAM = WA(/fecham/);
+const T_MAS = WA(/^Mas$/), T_DORMEM = WA(/dormem/), T_COMO2 = WA(/^Como$/, 0, 44), T_ACADA = WA(/^A$/, 0, 46), T_SOBEM2 = WA(/^sobem,$/), T_RESP = WA(/respiram/), T_AFUND = WA(/afundam/), T_NAOPARA = WA(/^e$/, 0, 52.3);
+const T_TERRA = WA(/^Em$/, 0, 53), T_CORREM = WA(/Correm/), T_MAIS = WA(/^mais$/, 0, 60.5), T_NA = WA(/^Na$/, 0, 64), T_QUATRO = WA(/quatro/), T_SAEM = WA(/saem/), T_OUSEJA = WA(/^Ou$/), T_TECN = WA(/tecnicamente/), T_VOAR = WA(/voar/);
+const HL = /nadar|carro|densos|boiar|fundo|quicam|flutuando|astronauta|lua|cinco|minutos|respirar|orelhas|narinas|fecham|dormem|acordar|rápidos|trinta|dois|quilômetros|quatro|patas|chão|voar/i;
+
+// ---------- luz ----------
+const hemi = new THREE.HemisphereLight(0xDFF4FF, 0x40606A, 1.0); scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xFFFFFF, 2.0); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -6, right: 6, top: 6, bottom: -6, near: .5, far: 40 }); sun.shadow.bias = -.0004; scene.add(sun); scene.add(sun.target);
+
+// ---------- hipopótamo ----------
+function buildHippo() {
+  const mB = MAT(0x8A7590, .7), mBe = MAT(0xD9A0AE, .7), mDk = MAT(0x2A1A24, .4), mT = MAT(0xF4F1E8, .4);
+  const root = new THREE.Group(); const body = grp(root); body.position.y = .55;
+  const torso = sph(.5, mB, 0, 0, 0, body, 22, 16); torso.scale.set(1.0, .9, 1.55);
+  const belly = sph(.47, mBe, 0, -.12, .05, body, 20, 14); belly.scale.set(.92, .7, 1.4);
+  const neck = sph(.38, mB, 0, .08, .62, body, 18, 12); neck.scale.set(1, .95, .8);
+  const headP = grp(body); headP.position.set(0, .14, .82); const head = grp(headP);
+  const skull = sph(.3, mB, 0, .05, .02, head, 18, 12); skull.scale.set(1.05, .85, 1.0);
+  const snout = sph(.3, mB, 0, -.05, .32, head, 18, 12); snout.scale.set(1.25, .85, .9);
+  const jaw = grp(head); jaw.position.set(0, -.12, .2); const lj = sph(.27, mBe, 0, -.04, .12, jaw, 16, 10); lj.scale.set(1.2, .5, .95);
+  [-1, 1].forEach(s => { const tk = add(new THREE.ConeGeometry(.035, .1, 6), mT, s * .2, .06, .3, jaw); });
+  const nostrils = [-1, 1].map(s => { const n = sph(.05, mDk, s * .11, .17, .48, head, 10, 8); n.scale.set(1, .5, .8); return n; });
+  const nbumps = [-1, 1].map(s => { const n = sph(.075, mB, s * .11, .14, .45, head, 10, 8); n.scale.set(1, .6, .9); return n; });
+  const eyeB = [-1, 1].map(s => sph(.085, mB, s * .17, .24, .02, head, 12, 8));
+  const eyes = [-1, 1].map(s => { const e = sph(.045, MAT(0x1A1014, .2), s * .19, .28, .07, head, 12, 8); sph(.013, BASIC(0xFFFFFF), s * .01, .015, .035, e, 6, 4); return e; });
+  const lids = [-1, 1].map(s => { const l = sph(.05, mB, s * .19, .29, .075, head, 12, 8); l.scale.set(1.05, .2, 1.05); return l; });
+  const ears = [-1, 1].map(s => { const g = grp(head); g.position.set(s * .16, .3, -.12); const e = sph(.06, mB, 0, .04, 0, g, 10, 8); e.scale.set(.7, 1.2, .5); sph(.035, mBe, 0, .04, .02, g, 8, 6).scale.set(.6, 1, .4); return g; });
+  const legs = []; [[.3, .55], [-.3, .55], [.3, -.5], [-.3, -.5]].forEach(([x, z], i) => { const hip = grp(body); hip.position.set(x, -.2, z); const l = cyl(.15, .14, .42, mB, 0, -.22, 0, hip, 12); const f = cyl(.15, .16, .08, mDk, 0, -.43, 0, hip, 12); legs.push({ hip, front: i < 2 }); });
+  const tail = grp(body); tail.position.set(0, .15, -.76); const tl = cyl(.03, .015, .22, mB, 0, -.1, 0, tail, 6); tail.rotation.x = .5;
+  const wings = [-1, 1].map(s => { const g = grp(body); g.position.set(s * .45, .3, .1); const w = add(new THREE.SphereGeometry(.42, 12, 8), MAT(0xFFFFFF, .6), s * .25, .05, 0, g); w.scale.set(1, .25, .55); g.scale.setScalar(.001); return g; });
+  return { root, body, head, headP, jaw, nostrils, ears, eyes, lids, legs, tail, wings };
+}
+function poseHippo(h, t, o = {}) {
+  const { walk = 0, run = 0, air = 0, sleep = 0, close = 0, swimPanic = 0, open = 0, wing = 0, ph = 0, tilt = 0, lookUp = 0 } = o;
+  const f = run ? 11 : 5; const tt = t * f + ph; const amp = .35 * walk + .9 * run;
+  h.legs.forEach((L, i) => { const p = (i === 0 || i === 3) ? 0 : Math.PI; let r = Math.sin(tt + p) * amp; if (swimPanic) r = Math.sin(t * 16 + i * 1.7) * .7 * swimPanic; if (air) r = lerp(r, L.front ? .8 : -.8, air); L.hip.rotation.x = r; });
+  h.body.position.y = .55 + Math.abs(Math.sin(tt)) * (.015 * walk + .06 * run) + air * .35; h.body.rotation.x = Math.sin(tt * 2) * .03 * run;
+  h.headP.rotation.x = -lookUp + Math.sin(tt * 2) * .03 * (walk + run); h.headP.rotation.z = tilt; h.jaw.rotation.x = open * .6;
+  const ec = clamp(close); h.ears.forEach(e => e.scale.set(1, 1 - ec * .75, 1)); h.nostrils.forEach(n => n.scale.set(1 - ec * .8, .5, .8 - ec * .6));
+  const blink = ((t + ph) % 4.1) > 3.98; const sl = Math.max(sleep, blink ? 1 : 0); h.lids.forEach(l => { l.scale.set(1.05, lerp(.2, 1.05, sl), 1.05); l.position.y = .29 - sl * .01; });
+  h.tail.rotation.z = Math.sin(t * 6) * .3; h.wings.forEach((w, i) => { w.scale.setScalar(Math.max(.001, wing)); w.rotation.z = (i ? -1 : 1) * Math.sin(t * 20) * .5 * wing; });
+}
+
+// ================= RIO (x=0), corte lateral =================
+const river = grp(); const SURF = 3.0;
+const sandT = canvasTex(256, 256, g => { g.fillStyle = '#C9B07A'; g.fillRect(0, 0, 256, 256); for (let i = 0; i < 500; i++) { g.fillStyle = Math.random() < .5 ? '#B89E68' : '#D8C08A'; g.fillRect(Math.random() * 256, Math.random() * 256, 3, 3); } }); sandT.wrapS = sandT.wrapT = THREE.RepeatWrapping; sandT.repeat.set(6, 6);
+const bed = add(new THREE.PlaneGeometry(40, 20, 40, 20), new THREE.MeshStandardMaterial({ map: sandT, roughness: 1 }), 0, 0, 0, river); bed.rotation.x = -Math.PI / 2;
+{ const p = bed.geometry.attributes.position; for (let i = 0; i < p.count; i++) p.setZ(i, Math.sin(p.getX(i) * .7) * .05 + Math.cos(p.getY(i) * .9) * .05); bed.geometry.computeVertexNormals(); }
+const surfT = canvasTex(256, 256, g => { g.fillStyle = '#7FD0F0'; g.fillRect(0, 0, 256, 256); g.strokeStyle = 'rgba(255,255,255,.55)'; g.lineWidth = 3; for (let i = 0; i < 40; i++) { g.beginPath(); const x = Math.random() * 256, y = Math.random() * 256; g.ellipse(x, y, 18, 6, Math.random(), 0, 7); g.stroke(); } }); surfT.wrapS = surfT.wrapT = THREE.RepeatWrapping; surfT.repeat.set(6, 3);
+const surface = add(new THREE.PlaneGeometry(40, 20), new THREE.MeshStandardMaterial({ map: surfT, transparent: true, opacity: .75, side: THREE.DoubleSide, roughness: .1, metalness: .1, depthWrite: false }), 0, SURF, 0, river); surface.rotation.x = -Math.PI / 2; surface.castShadow = false;
+const rocks = [[-2.2, -1.2, .4], [2.6, -1.6, .55], [-3.4, .8, .35], [1.6, 1.4, .3], [3.8, -.2, .45], [-1.0, -2.6, .5]].map(([x, z, s]) => { const r = add(new THREE.DodecahedronGeometry(s, 0), 0x6A7A80, x, s * .5, z, river); r.scale.y = .6; return r; });
+const weeds = []; for (let i = 0; i < 26; i++) { const g = grp(river); g.position.set(rr(-5, 5), 0, rr(-3.5, -.6)); const n = 3 + Math.floor(rr(0, 3)); for (let j = 0; j < n; j++) { const b = add(new THREE.ConeGeometry(.04, rr(.5, 1.3), 5), [0x3A9A5A, 0x2F8A4A, 0x5AB06A][j % 3], rr(-.1, .1), .4, rr(-.1, .1), g); b.position.y = b.geometry.parameters.height / 2; } weeds.push(g); }
+const fish = []; for (let i = 0; i < 6; i++) { const g = grp(river); const b = sph(.12, [0xF2A03A, 0xF2C14E, 0x3BA0FF][i % 3], 0, 0, 0, g, 10, 8); b.scale.set(.5, .8, 1.4); const tl = add(new THREE.ConeGeometry(.08, .14, 4), [0xF2A03A, 0xF2C14E, 0x3BA0FF][i % 3], 0, 0, -.2, g); tl.rotation.x = Math.PI / 2; g.userData = { y: rr(.8, 2.6), z: rr(-2.5, .5), p: rr(0, 1), s: rr(.05, .1) }; fish.push(g); }
+const rayT = canvasTex(64, 256, g => { const gr = g.createLinearGradient(0, 0, 0, 256); gr.addColorStop(0, 'rgba(255,255,255,.35)'); gr.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = gr; g.fillRect(0, 0, 64, 256); });
+const rays = []; for (let i = 0; i < 7; i++) { const m = add(new THREE.PlaneGeometry(.8, 4), new THREE.MeshBasicMaterial({ map: rayT, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide }), -4 + i * 1.4, SURF - 2, -2.0, river); m.rotation.z = .25; m.castShadow = false; rays.push(m); }
+const bubT = canvasTex(64, 64, g => { g.strokeStyle = 'rgba(255,255,255,.95)'; g.lineWidth = 5; g.beginPath(); g.arc(32, 32, 24, 0, 7); g.stroke(); g.fillStyle = 'rgba(255,255,255,.25)'; g.fill(); g.fillStyle = '#fff'; g.beginPath(); g.arc(24, 22, 6, 0, 7); g.fill(); });
+const bubbles = []; for (let i = 0; i < 30; i++) { const s = sprite(bubT, .1); s.userData = { x: rr(-.3, .3), z: rr(-.2, .2), p: rr(0, 1), s: rr(.06, .14) }; s.visible = false; scene.add(s); bubbles.push(s); }
+const zT = canvasTex(128, 128, g => { g.font = '900 100px P'; g.fillStyle = '#fff'; g.strokeStyle = '#111'; g.lineWidth = 10; g.textAlign = 'center'; g.textBaseline = 'middle'; g.strokeText('Z', 64, 68); g.fillText('Z', 64, 68); });
+const zs = []; for (let i = 0; i < 3; i++) { const s = sprite(zT, .3); s.visible = false; scene.add(s); zs.push(s); }
+const sprayT = canvasTex(64, 64, g => { const r = g.createRadialGradient(32, 32, 0, 32, 32, 32); r.addColorStop(0, 'rgba(255,255,255,.95)'); r.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = r; g.fillRect(0, 0, 64, 64); });
+const spray = []; for (let i = 0; i < 16; i++) { const s = sprite(sprayT, .15); s.userData = { a: rr(0, 6.28), p: rr(0, 1), r: rr(.05, .2) }; s.visible = false; scene.add(s); spray.push(s); }
+const hippo = buildHippo(); scene.add(hippo.root);
+// fantasma astronauta no rio? não: cena da lua separada
+// ================= SAVANA (x=60) =================
+const sav = grp(); sav.position.set(60, 0, 0);
+const grassT = canvasTex(256, 256, g => { g.fillStyle = '#C9B45A'; g.fillRect(0, 0, 256, 256); for (let i = 0; i < 700; i++) { g.fillStyle = ['#B8A04A', '#D8C46A', '#A8B050'][i % 3]; g.fillRect(Math.random() * 256, Math.random() * 256, 2, 6); } }); grassT.wrapS = grassT.wrapT = THREE.RepeatWrapping; grassT.repeat.set(20, 20);
+const land = add(new THREE.PlaneGeometry(200, 200), new THREE.MeshStandardMaterial({ map: grassT, roughness: 1 }), 0, 0, 0, sav); land.rotation.x = -Math.PI / 2;
+const track = add(new THREE.PlaneGeometry(200, 1.6), MAT(0xB89A60, 1), 0, .005, 0, sav); track.rotation.x = -Math.PI / 2;
+const acacia = (x, z, s = 1) => { const g = grp(sav); g.position.set(x, 0, z); g.scale.setScalar(s); const tr = cyl(.1, .16, 2, 0x6A4A2A, 0, 1, 0, g, 7); const c = add(new THREE.CylinderGeometry(1.4, 1.1, .35, 9), 0x5A8A3A, 0, 2.15, 0, g); add(new THREE.CylinderGeometry(.9, .8, .3, 8), 0x6A9A45, .6, 2.4, .2, g); return g; };
+for (let i = -6; i <= 6; i++) acacia(i * 7 + rr(-2, 2), rr(-14, -6), rr(.8, 1.3)); acacia(-3, 6, 1); acacia(9, 7, 1.1);
+const bushes = []; for (let i = 0; i < 40; i++) { const b = add(new THREE.IcosahedronGeometry(rr(.2, .45), 0), [0x7A9A40, 0x8AA848, 0x6A8A38][i % 3], rr(-40, 40), .15, rr(-5, -1.4) * (i % 2 ? 1 : -1) - (i % 2 ? 0 : 0), sav); }
+const sunSp = sprite(canvasTex(256, 256, g => { const r = g.createRadialGradient(128, 128, 30, 128, 128, 128); r.addColorStop(0, 'rgba(255,250,210,1)'); r.addColorStop(.4, 'rgba(255,210,110,.9)'); r.addColorStop(1, 'rgba(255,200,80,0)'); g.fillStyle = r; g.fillRect(0, 0, 256, 256); }), 6); sunSp.position.set(-6, 9, -30); sav.add(sunSp);
+const runner = buildPerson({ skin: 0xD9A27A, shirt: 0x3B82F6, pants: 0x2A3A5A, hair: 0x2B1A10 }); sav.add(runner.root);
+const dustT = sprayT; const dusts = []; for (let i = 0; i < 14; i++) { const s = sprite(dustT, .3); s.material = s.material.clone(); s.material.color.setHex(0xD8C08A); s.userData = { p: rr(0, 1), z: rr(-.3, .3) }; s.visible = false; sav.add(s); dusts.push(s); }
+const speedLines = []; for (let i = 0; i < 8; i++) { const m = box(rr(.6, 1.2), .02, .02, BASIC(0xFFFFFF), 0, 0, 0, sav); m.castShadow = false; m.userData = { y: rr(.3, 1.3), z: rr(-.4, .4), p: rr(0, 1) }; m.visible = false; speedLines.push(m); }
+// gangorra hipopótamo × carro
+const seesaw = grp(sav); seesaw.position.set(0, 0, -30); seesaw.rotation.y = -.95;
+const fulcrum = add(new THREE.ConeGeometry(.6, 1.1, 4), 0x8A94A8, 0, .55, 0, seesaw); fulcrum.rotation.y = Math.PI / 4;
+const beam = grp(seesaw); beam.position.y = 1.15; box(5.4, .16, 1.2, 0xC2533A, 0, 0, 0, beam);
+const car = grp(beam); car.position.set(1.75, .1, 0); car.rotation.y = Math.PI; { box(1.9, .5, .95, 0x3B82F6, 0, .38, 0, car); box(1.0, .42, .88, 0x3B82F6, -.1, .82, 0, car); box(1.02, .32, .9, 0x9FD3F0, -.1, .84, 0, car); [[-.6, .45], [.6, .45], [-.6, -.45], [.6, -.45]].forEach(([x, z]) => { const w = cyl(.2, .2, .14, 0x1E1E22, x, .2, z, car, 14); w.rotation.x = Math.PI / 2; }); }
+const hippo2 = buildHippo(); beam.add(hippo2.root); hippo2.root.position.set(-1.75, .08, 0); hippo2.root.rotation.y = Math.PI / 2; hippo2.root.scale.setScalar(1.05);
+// ================= LUA (x=-60) =================
+const moon = grp(); moon.position.set(-60, 0, 0);
+const moonG = add(new THREE.PlaneGeometry(60, 60, 30, 30), MAT(0xB8B8C0, 1, { flatShading: true }), 0, 0, 0, moon); moonG.rotation.x = -Math.PI / 2; { const p = moonG.geometry.attributes.position; for (let i = 0; i < p.count; i++) p.setZ(i, Math.random() * .12); moonG.geometry.computeVertexNormals(); }
+[[-2, -3, 1.2], [2.5, -5, 1.6], [-4, 1, .8], [1.5, 1.5, .6]].forEach(([x, z, r]) => { const c = add(new THREE.TorusGeometry(r, .15, 6, 18), MAT(0xA0A0A8, 1, { flatShading: true }), x, .05, z, moon); c.rotation.x = Math.PI / 2; });
+const stars = []; for (let i = 0; i < 80; i++) { const s = sph(.04, BASIC(0xFFFFFF), rr(-20, 20), rr(2, 16), rr(-25, -15), moon, 4, 3); s.castShadow = false; }
+const earth = sph(1.2, MAT(0x3B82F6, .6, { emissive: 0x0A2A5A, emissiveIntensity: .4 }), 5, 8, -18, moon, 24, 16); add(new THREE.IcosahedronGeometry(.7, 0), MAT(0x4AA85A, .8), 5.4, 8.3, -17.2, moon).scale.set(1, .6, .3);
+const astro = buildPerson({ skin: 0xEDEDED, shirt: 0xF4F4F4, pants: 0xEDEDED, hair: 0xF4F4F4, shoes: 0xBDBDBD, hairStyle: 'bald' }); moon.add(astro.root);
+add(new THREE.SphereGeometry(.22, 18, 12), MAT(0xFFFFFF, .3), 0, .02, -.01, astro.head); add(new THREE.SphereGeometry(.17, 16, 10, 0, Math.PI * 2, 0, Math.PI * .5), MAT(0xF2A03A, .1, { metalness: .6 }), 0, .02, .07, astro.head).rotation.x = Math.PI / 2;
+box(.32, .4, .18, 0xDADADA, 0, .38, -.2, astro.hips);
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [.6, 'gulp'], [T_ISSO, 'buzz'], [T_PESAM, 'clang'], [T_SAO, 'gulp'], [T_ENTAO, 'whoosh'], [T_ANDAM, 'pop'], [T_QUICAM, 'boing'], [T_QUICAM + 1.6, 'boing'], [T_COMO, 'whoosh'], [T_HIPO2, 'whoosh'], [T_CINCO, 'ding'], [T_DEPOIS, 'gulp'],
+ [T_FECHAM, 'pop'], [T_MAS, 'whoosh'], [T_DORMEM, 'ding'], [T_SOBEM2, 'gulp'], [T_AFUND, 'gulp'], [T_TERRA, 'whoosh'], [T_CORREM, 'zap'], [T_MAIS, 'pop'], [T_NA, 'whoosh'], [T_SAEM, 'ding'], [T_OUSEJA, 'whoosh'], [T_VOAR, 'win']].forEach(([t, k]) => ev(t, k));
+
+function setWorld(w, t) {
+  river.visible = w === 'river'; sav.visible = w === 'sav'; moon.visible = w === 'moon'; hippo.root.visible = w === 'river'; [...bubbles, ...zs, ...spray].forEach(s => s.visible = false);
+  if (w === 'river' && hippo.root.parent !== scene) scene.add(hippo.root);
+  if (w === 'river') { scene.background.setHex(0x2E86B0); scene.fog.color.setHex(0x2E86B0); scene.fog.near = 4; scene.fog.far = 16; hemi.color.setHex(0xCFF0FF); hemi.intensity = 1.1; sun.intensity = 1.7; sun.color.setHex(0xE0F6FF); renderer.toneMappingExposure = 1.05;
+    fish.forEach((f, i) => { const u = f.userData; const x = ((t * u.s * 6 + u.p * 12) % 12) - 6; f.position.set(i % 2 ? x : -x, u.y + Math.sin(t * 2 + i) * .08, u.z); f.rotation.y = i % 2 ? Math.PI / 2 : -Math.PI / 2; });
+    weeds.forEach((g, i) => g.rotation.z = Math.sin(t * 1.3 + i) * .08); rays.forEach((r, i) => r.material.opacity = .6 + Math.sin(t * 1.5 + i) * .3); surfT.offset.x = t * .02; }
+  if (w === 'sav') { scene.background.setHex(0x9FD8F0); scene.fog.color.setHex(0xCFE8F0); scene.fog.near = 20; scene.fog.far = 90; hemi.color.setHex(0xFFF4E0); hemi.intensity = 1.0; sun.intensity = 2.6; sun.color.setHex(0xFFE6B8); renderer.toneMappingExposure = 1.05; }
+  if (w === 'moon') { scene.background.setHex(0x05060C); scene.fog.color.setHex(0x05060C); scene.fog.near = 30; scene.fog.far = 80; hemi.color.setHex(0xFFFFFF); hemi.intensity = .5; sun.intensity = 2.8; sun.color.setHex(0xFFFFFF); renderer.toneMappingExposure = 1.0; }
+}
+function hippoAt(x, y, z, ry, o, t) { hippo.root.position.set(x, y, z); hippo.root.rotation.set(0, ry, 0); poseHippo(hippo, t, o); }
+function doBubbles(t, c, n = 30, spread = 1) { bubbles.forEach((b, i) => { if (i >= n) return; b.visible = true; const u = (t * .6 + b.userData.p) % 1; b.position.set(c.x + b.userData.x * spread + Math.sin(u * 8 + i) * .05, c.y + u * (SURF - c.y), c.z + b.userData.z); b.scale.setScalar(b.userData.s * (1 + u * .5)); }); }
+function doZ(t, c) { zs.forEach((z, i) => { z.visible = true; const u = (t * .4 + i / 3) % 1; z.position.set(c.x + u * .4, c.y + u * .8, c.z); z.scale.setScalar(.12 + u * .2); z.material.opacity = Math.sin(u * Math.PI); }); }
+function doSpray(t, c, k) { spray.forEach((s, i) => { s.visible = k > 0; const u = (t * 1.5 + s.userData.p) % 1; s.position.set(c.x + Math.cos(s.userData.a) * s.userData.r * u * 2, c.y + Math.sin(u * Math.PI) * .45, c.z + Math.sin(s.userData.a) * s.userData.r * u * 2); s.scale.setScalar(.1 + u * .15); s.material.opacity = (1 - u) * k; }); }
+function noseWorld() { scene.updateMatrixWorld(true); return hippo.head.localToWorld(V(0, .17, .48)); }
+// pulo no fundo: altura em função do tempo (sobe rápido, desce devagar)
+const hop = u => { u = ((u % 1) + 1) % 1; return u < .3 ? Math.sin(u / .3 * Math.PI / 2) * 1.4 : 1.4 * (1 - ease((u - .3) / .7)); };
+
+// ---------- planos ----------
+const SHOTS = [
+  // 0 gancho: cai na água e afunda como pedra
+  [0, (t, k) => { setWorld('river', t); const y = Math.max(0, SURF + .8 - easeOut(k / 2.2) * (SURF + .8)); hippoAt(0, y, 0, Math.PI / 2 - .3, { swimPanic: 1, open: .4 }, t); doBubbles(t, V(0, y + .7, 0), 20); return [V(.4, 1.9, 5.6), V(0, 1.4, 0)]; }],
+  // 1 isso não é exagero / nem um pouquinho
+  [T_ISSO - .1, (t, k) => { setWorld('river', t); hippoAt(0, 0, 0, Math.PI / 2 - .5, { swimPanic: lerp(1, .3, clamp(k / 3)), open: .3, lookUp: .3 }, t); doBubbles(t, V(.4, 1.0, 0), 14); return [V(1.9, 1.4, 4.8 - k * .1), V(0, .9, 0)]; }],
+  // 2 pesam ~ um carro (gangorra)
+  [T_PESAM - .1, (t, k) => { setWorld('sav', t); hippo.root.visible = false; beam.rotation.z = lerp(.18, 0, ease((t - T_PESAM - .9) / 1.0)) + Math.sin(t * 3) * .015 * clamp((t - T_PESAM - .9)); poseHippo(hippo2, t, {}); runner.root.visible = false; return [V(.7, 2.6, -20.5 - k * .2), V(.5, 1.5, -30)]; }],
+  // 3 densos demais para boiar
+  [T_SAO - .1, (t, k) => { setWorld('river', t); const y = Math.max(0, SURF - .3 - ease(k / 2.0) * (SURF - .3)); hippoAt(0, y, 0, Math.PI / 2, { open: .1 }, t); doBubbles(t, V(0, y + .6, 0), 18); return [V(-.4, 1.6, 5.2), V(0, 1.5, 0)]; }],
+  // 4 então o que eles fazem?
+  [T_ENTAO - .1, (t, k) => { setWorld('river', t); hippoAt(0, 0, 0, .5, { tilt: Math.sin(t * 2) * .15, lookUp: .2 }, t); return [V(2.0, 1.5, 3.8), V(0, .8, 0)]; }],
+  // 5 andam pelo fundo do rio
+  [T_ANDAM - .1, (t, k) => { setWorld('river', t); const x = -2.2 + k * .55; hippoAt(x, 0, 0, Math.PI / 2, { walk: 1 }, t); return [V(x + .4, 1.4, 5.8), V(x, .9, 0)]; }],
+  // 6 quicam: impulso, sobem flutuando, descem devagar
+  [T_QUANDO - .1, (t, k) => { setWorld('river', t); const u = (t - T_QUICAM + .2) / 3.2; const y = u > 0 ? hop(u) : 0; const x = -.5 + Math.max(0, u) * 1.6; hippoAt(x, y, 0, Math.PI / 2, { walk: y < .05 ? 1 : 0, air: clamp(y / .3) * .6 }, t); if (u > 0 && u % 1 < .12) doBubbles(t, V(x, .2, 0), 12, 2);
+    return [V(x + .3, 1.8, 7.2), V(x + .2, 1.4, 0)]; }],
+  // 7 como um astronauta na lua
+  [T_COMO - .1, (t, k) => { setWorld('moon', t); const u = k / 1.9; const y = hop(u * .9 + .05) * .9; astro.root.position.set(-.6 + u * 1.2, y, 0); astro.root.rotation.y = Math.PI / 2; poseP(astro, { ...PP.stand, lx: -.5, rx: .4, hl: -.25, hr: .15, kl: .35, kr: .15 }, 0, t); face(astro, 'happy', t); return [V(.2, 1.6 + y, 4.6), V(0, 1.5 + y, 0)]; }],
+  // 8 prender a respiração ~5 minutos
+  [T_HIPO2 - .1, (t, k) => { setWorld('river', t); hippoAt(0, 0, 0, .35, { close: 1 }, t); return [V(1.2, 1.4, 3.6 - k * .08), V(0, 1.0, 0)]; }],
+  // 9 sobe pra respirar
+  [T_DEPOIS - .1, (t, k) => { setWorld('river', t); const a = ease((t - T_DEPOIS - .2) / 1.2); const y = a * (SURF - .78); hippoAt(0, y, 0, .35, { close: 1 - a, lookUp: .25 * a }, t); const n = noseWorld(); if (a > .95) doSpray(t, n, clamp((t - T_DEPOIS - 1.4) / .3));
+    return [V(1.4, SURF + .35, 3.6), V(0, SURF - .25, .4)]; }],
+  // 10 orelhas e narinas se fecham (close)
+  [T_ORELHAS - .2, (t, k) => { setWorld('river', t); const c = t < T_FECHAM ? 0 : ease((t - T_FECHAM) / .4); hippoAt(0, .6, 0, 0, { close: c }, t); return [V(.8, 2.05, 2.7), V(0, 1.45, 1.0)]; }],
+  // 11 a parte mais louca: dormem debaixo d'água
+  [T_MAS - .1, (t, k) => { setWorld('river', t); scene.background.setHex(0x14406A); scene.fog.color.setHex(0x14406A); hemi.intensity = .55; sun.intensity = .6; renderer.toneMappingExposure = .85; hippoAt(0, 0, 0, Math.PI / 2 - .4, { sleep: t > T_DORMEM - .3 ? 1 : 0, close: 1 }, t); if (t > T_DORMEM) doZ(t, noseWorld().add(V(0, .3, 0)));
+    renderer.toneMappingExposure = .95; return [V(-.7, 1.5, 5.0 - k * .1), V(.35, .8, 0)]; }],
+  // 12 a cada poucos minutos sobem, respiram e afundam, sem acordar
+  [T_ACADA - .1, (t, k) => { setWorld('river', t); scene.background.setHex(0x14406A); scene.fog.color.setHex(0x14406A); hemi.intensity = .55; sun.intensity = .6; renderer.toneMappingExposure = .85;
+    const up = ease((t - T_SOBEM2 + .5) / 1.0), down = ease((t - T_AFUND) / 1.2); const y = (up - down) * (SURF - .78); hippoAt(0, y, 0, .5, { sleep: 1, close: y > SURF - .95 ? 0 : 1, lookUp: .25 * (up - down) }, t);
+    if (y > SURF - .9) doSpray(t, noseWorld(), 1); doZ(t, noseWorld().add(V(0, .3, 0))); renderer.toneMappingExposure = .95; return [V(2.0, 2.1, 7.0), V(0, 1.85, 0)]; }],
+  // 13 em terra: rápidos para o tamanho
+  [T_TERRA - .1, (t, k) => { setWorld('sav', t); hippo.root.visible = true; sav.add(hippo.root); hippoAt(-1 + k * .4, 0, 0, Math.PI / 2, { walk: 1 }, t); runner.root.visible = false; return [V(1.6, 1.2, 4.6), V(0, .8, 0)]; }],
+  // 14 32 km/h — mais rápido que a maioria das pessoas
+  [T_CORREM - .1, (t, k) => { setWorld('sav', t); hippo.root.visible = true; sav.add(hippo.root); const x = k * 8.8; hippoAt(x, 0, 0, Math.PI / 2, { run: 1 }, t);
+    runner.root.visible = true; runner.root.position.set(x - 2.0 - k * .2, 0, -.5); runner.root.rotation.y = Math.PI / 2; poseP(runner, { ...PP.stand, lx: -.6, rx: .6, le: -1.2, re: -1.2, lean: .15 }, 1.4, t * 1.5); face(runner, 'shock', t);
+    dusts.forEach((d, i) => { d.visible = true; const u = (t * 2 + d.userData.p) % 1; d.position.set(x - .8 - u * 1.5, .1 + u * .4, d.userData.z); d.scale.setScalar(.2 + u * .5); d.material.opacity = 1 - u; });
+    return t < T_MAIS - .1 ? [V(x + 1.6, 1.0, 4.0), V(x, .7, 0)] : [V(x - 1.0, 1.4, 8.5), V(x - 1.0, .8, -.2)]; }],
+  // 15 câmera lenta: 4 patas fora do chão
+  [T_NA - .1, (t, k) => { setWorld('sav', t); hippo.root.visible = true; sav.add(hippo.root); runner.root.visible = false; const slow = .18; const x = 30 + k * 1.2; const air = clamp((t - T_SAEM + .3) / .4) * (1 - clamp((t - T_OUSEJA + .2) / .3));
+    hippoAt(x, 0, 0, Math.PI / 2, { run: air > 0 ? 0 : 1, air }, (t - T_NA) * slow + T_NA);
+    speedLines.forEach(m => { m.visible = true; const u = (t * .4 + m.userData.p) % 1; m.position.set(x - .9 - u * 2, m.userData.y, m.userData.z); });
+    return t < T_QUATRO - .1 ? [V(x + 1.4, .6, 3.6), V(x, .7, 0)] : [V(x + .3, .35, 4.8), V(x, .6, 0)]; }],
+  // 16 ou seja... tecnicamente, eles conseguem voar
+  [T_OUSEJA - .1, (t, k) => { setWorld('sav', t); hippo.root.visible = true; sav.add(hippo.root); runner.root.visible = false; const x = 36 + k * .8; const fly = t > T_VOAR - .2 ? ease((t - T_VOAR + .2) / .6) : 0; const air = t > T_TECN ? clamp((t - T_TECN) / .4) : 0;
+    hippoAt(x, fly * .6 + Math.sin(t * 3) * .05 * fly, 0, Math.PI / 2, { run: air > 0 ? 0 : 1, air, wing: fly }, (t - T_OUSEJA) * (air ? .2 : 1) + T_OUSEJA);
+    speedLines.forEach(m => { m.visible = air > 0; const u = (t * .4 + m.userData.p) % 1; m.position.set(x - .9 - u * 2, m.userData.y + fly * .6, m.userData.z); });
+    return [V(x + 1.3, 1.3 + fly * .4, 6.2 - k * .08), V(x, 1.0 + fly * .55, 0)]; }],
+];
+window.draw = function (t) {
+  speedLines.forEach(m => m.visible = false); dusts.forEach(d => d.visible = false); if (hippo.root.parent !== scene && t < T_TERRA - .1) scene.add(hippo.root);
+  let i = 0; while (i + 1 < SHOTS.length && SHOTS[i + 1][0] <= t) i++;
+  const [cp, tg] = SHOTS[i][1](t, t - SHOTS[i][0]);
+  const off = sav.visible ? sav.position : moon.visible ? moon.position : V(0, 0, 0); cp.add(off); tg.add(off);
+  cp.x += Math.sin(t * .35) * .015; cp.y += Math.sin(t * .27) * .01;
+  cam.position.copy(cp); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  if (river.visible && cp.y > SURF) { scene.background.setHex(0xA8DDF5); scene.fog.color.setHex(0xA8DDF5); scene.fog.near = 12; scene.fog.far = 40; }
+  sun.position.copy(tg).add(V(3, 8, 5)); sun.target.position.copy(tg);
+  fixed($('hook'), t < T_ISSO - .1 ? pop(t - .02, .3) * (1 - clamp((t - T_ISSO + .25) / .15)) : 0);
+  const tg2 = [$('t1'), $('t2')]; tg2.forEach(e => e.style.opacity = 0);
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  tag(tg2[0], '❌ NÃO NADA', 'red', win(t, T_ISSO + .3, T_PESAM - .1), 540, 420, T_ISSO + .3, 3);
+  tag(tg2[0], '🦛 ≈ 🚗', 'white', win(t, T_PESAM + .7, T_SAO - .1), 540, 420, T_PESAM + .7, -3);
+  tag(tg2[0], 'DENSO DEMAIS PRA BOIAR', 'blue', win(t, T_SAO + .4, T_ENTAO - .1), 540, 420, T_SAO + .4, 3);
+  tag(tg2[0], '🚶 ANDA NO FUNDO', 'green', win(t, T_ANDAM, T_QUANDO - .1), 540, 420, T_ANDAM, -3);
+  tag(tg2[0], 'BOING! 🦘', '', win(t, T_QUICAM, T_COMO - .1), 540, 420, T_QUICAM, 3);
+  tag(tg2[0], '🧑‍🚀 COMO NA LUA', 'white', win(t, T_COMO + .3, T_HIPO2 - .1), 540, 420, T_COMO + .3, -3);
+  tag(tg2[0], '⬆️ SOBE PRA RESPIRAR', 'blue', win(t, T_DEPOIS + .3, T_ORELHAS - .2), 540, 420, T_DEPOIS + .3, 3);
+  tag(tg2[0], '👂👃 FECHAM', 'green', win(t, T_FECHAM, T_MAS - .1), 540, 420, T_FECHAM, -3);
+  tag(tg2[0], '😴 DORME DEBAIXO D’ÁGUA', '', win(t, T_DORMEM, T_ACADA - .1), 540, 420, T_DORMEM, 3);
+  tag(tg2[0], 'SOBE SEM ACORDAR', 'blue', win(t, T_ACADA + .2, T_TERRA - .1), 540, 420, T_ACADA + .2, -3);
+  tag(tg2[0], '🏃 MAIS RÁPIDO QUE VOCÊ', 'red', win(t, T_MAIS, T_NA - .1), 540, 420, T_MAIS, 3);
+  tag(tg2[0], '4 PATAS NO AR', 'green', win(t, T_SAEM, T_OUSEJA - .1), 540, 420, T_SAEM, -3);
+  tag(tg2[0], '✈️ TECNICAMENTE… VOA', '', win(t, T_VOAR - .2, DURATION), 540, 420, T_VOAR - .2, -3);
+  // números grandes
+  const big = $('big'); let B = null;
+  [[T_CINCO - .1, T_DEPOIS - .1, '5 <small>MIN</small>'], [T_CORREM + .6, T_MAIS - .1, '32 <small>KM/H</small>']].forEach(([a, b, h]) => { if (win(t, a, b)) B = [h, a]; });
+  if (B) { big.innerHTML = B[0]; place(big, true, 540, 700, pop(t - B[1], .3), -3); } else big.style.opacity = 0;
+  let mk = null; if (win(t, T_ENTAO + .2, T_ANDAM - .1)) mk = ['❓', T_ENTAO + .2]; if (win(t, .2, T_ISSO - .1)) mk = null;
+  if (mk) { $('mark').textContent = mk[0]; place($('mark'), true, 840, 650, pop(t - mk[1], .3), 8); } else $('mark').style.opacity = 0;
+  fixed($('final'), t >= T_VOAR + .6 ? pop(t - T_VOAR - .6, .35) : 0);
+  $('wm').style.opacity = .85;
+  let wTxt = null, wSt = 0;
+  for (const w2 of ALL) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap2 = $('cap'); const capOff = t < T_ISSO - .1 || t >= T_VOAR + .6;
+  if (wTxt && !capOff) { cap2.textContent = wTxt.toUpperCase().replace(/[.,!?:…]/g, ''); cap2.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap2, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap2, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>
