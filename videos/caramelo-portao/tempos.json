@@ -1,0 +1,1057 @@
+{
+ "duration": 92.6,
+ "sentences": [
+  {
+   "text": "Durante meses, esse cachorro sentou no mesmo portão. Todo dia. Na mesma hora. E ninguém sabia por quê.  Era um caramelo magrinho, de orelha caída. Às cinco da tarde, ele chegava, sentava… e esperava.  O padeiro passava e dizia: lá está ele de novo. Os carros passavam rápido. As pessoas, com pressa, nem olhavam.  Cada vez que alguém se aproximava, o rabo abanava. E quando a pessoa passava reto… a cabeça baixava.  Fazia sol, ele esperava. Chovia, ele se encolhia perto do muro… e esperava.  Até que numa terça-feira, uma menina de mochila azul parou. Ela olhou pra ele. Ele olhou pra ela. Ela abriu a garrafinha, fez uma conchinha com a mão… e ofereceu água.  Ele bebeu devagar. Como quem não acreditava.  No dia seguinte, ela voltou. Trouxe um potinho. No outro, trouxe um biscoito… e um nome: Caramelo.  E foi aí que a rua inteira entendeu. Ele nunca esteve esperando alguém voltar. Ele estava esperando alguém parar.  Hoje, às cinco da tarde, aquele portão se abre. E o Caramelo não espera mais do lado de fora.  Às vezes, um gole de água muda uma vida inteira. Se você também para pra todo caramelo que vê, comenta aqui. E manda esse vídeo pra quem tem o coração mole. ",
+   "start": 0.0,
+   "end": 89.74,
+   "words": [
+    {
+     "w": "Durante",
+     "start": 0.0,
+     "end": 0.42
+    },
+    {
+     "w": "meses,",
+     "start": 0.42,
+     "end": 1.06
+    },
+    {
+     "w": "esse",
+     "start": 1.38,
+     "end": 1.6
+    },
+    {
+     "w": "cachorro",
+     "start": 1.6,
+     "end": 2.04
+    },
+    {
+     "w": "sentou",
+     "start": 2.04,
+     "end": 2.5
+    },
+    {
+     "w": "no",
+     "start": 2.5,
+     "end": 2.66
+    },
+    {
+     "w": "mesmo",
+     "start": 2.66,
+     "end": 3.08
+    },
+    {
+     "w": "portão.",
+     "start": 3.08,
+     "end": 3.72
+    },
+    {
+     "w": "Todo",
+     "start": 4.08,
+     "end": 4.38
+    },
+    {
+     "w": "dia.",
+     "start": 4.38,
+     "end": 4.94
+    },
+    {
+     "w": "Na",
+     "start": 5.34,
+     "end": 5.52
+    },
+    {
+     "w": "mesma",
+     "start": 5.52,
+     "end": 5.92
+    },
+    {
+     "w": "hora.",
+     "start": 5.92,
+     "end": 6.34
+    },
+    {
+     "w": "E",
+     "start": 6.78,
+     "end": 6.98
+    },
+    {
+     "w": "ninguém",
+     "start": 6.98,
+     "end": 7.26
+    },
+    {
+     "w": "sabia",
+     "start": 7.26,
+     "end": 7.64
+    },
+    {
+     "w": "por",
+     "start": 7.64,
+     "end": 7.98
+    },
+    {
+     "w": "quê.",
+     "start": 7.98,
+     "end": 8.18
+    },
+    {
+     "w": "Era",
+     "start": 8.88,
+     "end": 9.04
+    },
+    {
+     "w": "um",
+     "start": 9.04,
+     "end": 9.16
+    },
+    {
+     "w": "caramelo",
+     "start": 9.16,
+     "end": 9.52
+    },
+    {
+     "w": "magrinho,",
+     "start": 9.52,
+     "end": 10.16
+    },
+    {
+     "w": "de",
+     "start": 10.16,
+     "end": 10.48
+    },
+    {
+     "w": "orelha",
+     "start": 10.48,
+     "end": 10.72
+    },
+    {
+     "w": "caída.",
+     "start": 10.72,
+     "end": 11.22
+    },
+    {
+     "w": "Às",
+     "start": 11.22,
+     "end": 12.0
+    },
+    {
+     "w": "cinco",
+     "start": 12.0,
+     "end": 12.28
+    },
+    {
+     "w": "da",
+     "start": 12.28,
+     "end": 12.46
+    },
+    {
+     "w": "tarde,",
+     "start": 12.46,
+     "end": 12.94
+    },
+    {
+     "w": "ele",
+     "start": 13.24,
+     "end": 13.28
+    },
+    {
+     "w": "chegava,",
+     "start": 13.28,
+     "end": 13.92
+    },
+    {
+     "w": "sentava…",
+     "start": 14.48,
+     "end": 15.08
+    },
+    {
+     "w": "e",
+     "start": 15.08,
+     "end": 15.74
+    },
+    {
+     "w": "esperava.",
+     "start": 15.74,
+     "end": 16.36
+    },
+    {
+     "w": "O",
+     "start": 17.04,
+     "end": 17.2
+    },
+    {
+     "w": "padeiro",
+     "start": 17.2,
+     "end": 17.48
+    },
+    {
+     "w": "passava",
+     "start": 17.48,
+     "end": 18.06
+    },
+    {
+     "w": "e",
+     "start": 18.06,
+     "end": 18.22
+    },
+    {
+     "w": "dizia:",
+     "start": 18.22,
+     "end": 18.7
+    },
+    {
+     "w": "lá",
+     "start": 19.1,
+     "end": 19.4
+    },
+    {
+     "w": "está",
+     "start": 19.4,
+     "end": 19.66
+    },
+    {
+     "w": "ele",
+     "start": 19.66,
+     "end": 19.9
+    },
+    {
+     "w": "de",
+     "start": 19.9,
+     "end": 20.06
+    },
+    {
+     "w": "novo.",
+     "start": 20.06,
+     "end": 20.4
+    },
+    {
+     "w": "Os",
+     "start": 20.98,
+     "end": 21.2
+    },
+    {
+     "w": "carros",
+     "start": 21.2,
+     "end": 21.58
+    },
+    {
+     "w": "passavam",
+     "start": 21.58,
+     "end": 22.02
+    },
+    {
+     "w": "rápido.",
+     "start": 22.02,
+     "end": 22.52
+    },
+    {
+     "w": "As",
+     "start": 22.98,
+     "end": 23.14
+    },
+    {
+     "w": "pessoas,",
+     "start": 23.14,
+     "end": 23.56
+    },
+    {
+     "w": "com",
+     "start": 23.56,
+     "end": 23.9
+    },
+    {
+     "w": "pressa,",
+     "start": 23.9,
+     "end": 24.52
+    },
+    {
+     "w": "nem",
+     "start": 24.52,
+     "end": 24.86
+    },
+    {
+     "w": "olhavam.",
+     "start": 24.86,
+     "end": 25.4
+    },
+    {
+     "w": "Cada",
+     "start": 25.84,
+     "end": 26.16
+    },
+    {
+     "w": "vez",
+     "start": 26.16,
+     "end": 26.46
+    },
+    {
+     "w": "que",
+     "start": 26.46,
+     "end": 26.62
+    },
+    {
+     "w": "alguém",
+     "start": 26.62,
+     "end": 26.9
+    },
+    {
+     "w": "se",
+     "start": 26.9,
+     "end": 27.02
+    },
+    {
+     "w": "aproximava,",
+     "start": 27.02,
+     "end": 27.74
+    },
+    {
+     "w": "o",
+     "start": 28.04,
+     "end": 28.12
+    },
+    {
+     "w": "rabo",
+     "start": 28.12,
+     "end": 28.42
+    },
+    {
+     "w": "abanava.",
+     "start": 28.42,
+     "end": 29.0
+    },
+    {
+     "w": "E",
+     "start": 29.46,
+     "end": 29.56
+    },
+    {
+     "w": "quando",
+     "start": 29.56,
+     "end": 29.7
+    },
+    {
+     "w": "a",
+     "start": 29.7,
+     "end": 29.82
+    },
+    {
+     "w": "pessoa",
+     "start": 29.82,
+     "end": 30.08
+    },
+    {
+     "w": "passava",
+     "start": 30.08,
+     "end": 30.52
+    },
+    {
+     "w": "reto…",
+     "start": 30.52,
+     "end": 31.02
+    },
+    {
+     "w": "a",
+     "start": 31.46,
+     "end": 31.66
+    },
+    {
+     "w": "cabeça",
+     "start": 31.66,
+     "end": 31.96
+    },
+    {
+     "w": "baixava.",
+     "start": 31.96,
+     "end": 32.62
+    },
+    {
+     "w": "Fazia",
+     "start": 33.16,
+     "end": 33.66
+    },
+    {
+     "w": "sol,",
+     "start": 33.66,
+     "end": 34.06
+    },
+    {
+     "w": "ele",
+     "start": 34.48,
+     "end": 34.68
+    },
+    {
+     "w": "esperava.",
+     "start": 34.68,
+     "end": 35.24
+    },
+    {
+     "w": "Chovia,",
+     "start": 35.82,
+     "end": 36.32
+    },
+    {
+     "w": "ele",
+     "start": 36.78,
+     "end": 36.82
+    },
+    {
+     "w": "se",
+     "start": 36.82,
+     "end": 36.98
+    },
+    {
+     "w": "encolhia",
+     "start": 36.98,
+     "end": 37.52
+    },
+    {
+     "w": "perto",
+     "start": 37.52,
+     "end": 37.74
+    },
+    {
+     "w": "do",
+     "start": 37.74,
+     "end": 37.98
+    },
+    {
+     "w": "muro…",
+     "start": 37.98,
+     "end": 38.38
+    },
+    {
+     "w": "e",
+     "start": 38.38,
+     "end": 38.94
+    },
+    {
+     "w": "esperava.",
+     "start": 38.94,
+     "end": 39.58
+    },
+    {
+     "w": "Até",
+     "start": 40.24,
+     "end": 40.48
+    },
+    {
+     "w": "que",
+     "start": 40.48,
+     "end": 40.6
+    },
+    {
+     "w": "numa",
+     "start": 40.6,
+     "end": 40.78
+    },
+    {
+     "w": "terça-feira,",
+     "start": 40.78,
+     "end": 41.92
+    },
+    {
+     "w": "uma",
+     "start": 41.92,
+     "end": 42.1
+    },
+    {
+     "w": "menina",
+     "start": 42.1,
+     "end": 42.5
+    },
+    {
+     "w": "de",
+     "start": 42.5,
+     "end": 42.64
+    },
+    {
+     "w": "mochila",
+     "start": 42.64,
+     "end": 43.0
+    },
+    {
+     "w": "azul",
+     "start": 43.0,
+     "end": 43.36
+    },
+    {
+     "w": "parou.",
+     "start": 43.36,
+     "end": 43.82
+    },
+    {
+     "w": "Ela",
+     "start": 44.36,
+     "end": 44.5
+    },
+    {
+     "w": "olhou",
+     "start": 44.5,
+     "end": 44.74
+    },
+    {
+     "w": "pra",
+     "start": 44.74,
+     "end": 44.94
+    },
+    {
+     "w": "ele.",
+     "start": 44.94,
+     "end": 45.3
+    },
+    {
+     "w": "Ele",
+     "start": 45.74,
+     "end": 45.9
+    },
+    {
+     "w": "olhou",
+     "start": 45.9,
+     "end": 46.08
+    },
+    {
+     "w": "pra",
+     "start": 46.08,
+     "end": 46.28
+    },
+    {
+     "w": "ela.",
+     "start": 46.28,
+     "end": 46.58
+    },
+    {
+     "w": "Ela",
+     "start": 47.2,
+     "end": 47.36
+    },
+    {
+     "w": "abriu",
+     "start": 47.36,
+     "end": 47.68
+    },
+    {
+     "w": "a",
+     "start": 47.68,
+     "end": 47.78
+    },
+    {
+     "w": "garrafinha,",
+     "start": 47.78,
+     "end": 48.42
+    },
+    {
+     "w": "fez",
+     "start": 48.74,
+     "end": 48.86
+    },
+    {
+     "w": "uma",
+     "start": 48.86,
+     "end": 49.06
+    },
+    {
+     "w": "conchinha",
+     "start": 49.06,
+     "end": 49.58
+    },
+    {
+     "w": "com",
+     "start": 49.58,
+     "end": 49.82
+    },
+    {
+     "w": "a",
+     "start": 49.82,
+     "end": 49.9
+    },
+    {
+     "w": "mão…",
+     "start": 49.9,
+     "end": 50.18
+    },
+    {
+     "w": "e",
+     "start": 50.18,
+     "end": 50.64
+    },
+    {
+     "w": "ofereceu",
+     "start": 50.64,
+     "end": 51.08
+    },
+    {
+     "w": "água.",
+     "start": 51.08,
+     "end": 51.5
+    },
+    {
+     "w": "Ele",
+     "start": 51.96,
+     "end": 52.28
+    },
+    {
+     "w": "bebeu",
+     "start": 52.28,
+     "end": 52.7
+    },
+    {
+     "w": "devagar.",
+     "start": 52.7,
+     "end": 53.3
+    },
+    {
+     "w": "Como",
+     "start": 53.68,
+     "end": 53.98
+    },
+    {
+     "w": "quem",
+     "start": 53.98,
+     "end": 54.2
+    },
+    {
+     "w": "não",
+     "start": 54.2,
+     "end": 54.36
+    },
+    {
+     "w": "acreditava.",
+     "start": 54.36,
+     "end": 55.16
+    },
+    {
+     "w": "No",
+     "start": 55.76,
+     "end": 55.92
+    },
+    {
+     "w": "dia",
+     "start": 55.92,
+     "end": 56.14
+    },
+    {
+     "w": "seguinte,",
+     "start": 56.14,
+     "end": 56.5
+    },
+    {
+     "w": "ela",
+     "start": 56.94,
+     "end": 57.1
+    },
+    {
+     "w": "voltou.",
+     "start": 57.1,
+     "end": 57.62
+    },
+    {
+     "w": "Trouxe",
+     "start": 58.08,
+     "end": 58.34
+    },
+    {
+     "w": "um",
+     "start": 58.34,
+     "end": 58.48
+    },
+    {
+     "w": "potinho.",
+     "start": 58.48,
+     "end": 59.54
+    },
+    {
+     "w": "No",
+     "start": 59.54,
+     "end": 59.68
+    },
+    {
+     "w": "outro,",
+     "start": 59.68,
+     "end": 60.06
+    },
+    {
+     "w": "trouxe",
+     "start": 60.3,
+     "end": 60.52
+    },
+    {
+     "w": "um",
+     "start": 60.52,
+     "end": 60.66
+    },
+    {
+     "w": "biscoito…",
+     "start": 60.66,
+     "end": 61.26
+    },
+    {
+     "w": "e",
+     "start": 61.76,
+     "end": 61.82
+    },
+    {
+     "w": "um",
+     "start": 61.82,
+     "end": 61.94
+    },
+    {
+     "w": "nome:",
+     "start": 61.94,
+     "end": 62.22
+    },
+    {
+     "w": "Caramelo.",
+     "start": 62.82,
+     "end": 63.48
+    },
+    {
+     "w": "E",
+     "start": 64.08,
+     "end": 64.28
+    },
+    {
+     "w": "foi",
+     "start": 64.28,
+     "end": 64.42
+    },
+    {
+     "w": "aí",
+     "start": 64.42,
+     "end": 64.7
+    },
+    {
+     "w": "que",
+     "start": 64.7,
+     "end": 64.88
+    },
+    {
+     "w": "a",
+     "start": 64.88,
+     "end": 65.0
+    },
+    {
+     "w": "rua",
+     "start": 65.0,
+     "end": 65.2
+    },
+    {
+     "w": "inteira",
+     "start": 65.2,
+     "end": 65.9
+    },
+    {
+     "w": "entendeu.",
+     "start": 65.9,
+     "end": 66.32
+    },
+    {
+     "w": "Ele",
+     "start": 66.9,
+     "end": 67.14
+    },
+    {
+     "w": "nunca",
+     "start": 67.14,
+     "end": 67.48
+    },
+    {
+     "w": "esteve",
+     "start": 67.48,
+     "end": 67.98
+    },
+    {
+     "w": "esperando",
+     "start": 67.98,
+     "end": 68.36
+    },
+    {
+     "w": "alguém",
+     "start": 68.36,
+     "end": 68.7
+    },
+    {
+     "w": "voltar.",
+     "start": 68.7,
+     "end": 69.1
+    },
+    {
+     "w": "Ele",
+     "start": 69.68,
+     "end": 69.84
+    },
+    {
+     "w": "estava",
+     "start": 69.84,
+     "end": 70.1
+    },
+    {
+     "w": "esperando",
+     "start": 70.1,
+     "end": 70.56
+    },
+    {
+     "w": "alguém",
+     "start": 70.56,
+     "end": 71.0
+    },
+    {
+     "w": "parar.",
+     "start": 71.0,
+     "end": 71.56
+    },
+    {
+     "w": "Hoje,",
+     "start": 72.42,
+     "end": 72.8
+    },
+    {
+     "w": "às",
+     "start": 73.04,
+     "end": 73.12
+    },
+    {
+     "w": "cinco",
+     "start": 73.12,
+     "end": 73.44
+    },
+    {
+     "w": "da",
+     "start": 73.44,
+     "end": 73.64
+    },
+    {
+     "w": "tarde,",
+     "start": 73.64,
+     "end": 74.04
+    },
+    {
+     "w": "aquele",
+     "start": 74.34,
+     "end": 74.5
+    },
+    {
+     "w": "portão",
+     "start": 74.5,
+     "end": 74.94
+    },
+    {
+     "w": "se",
+     "start": 74.94,
+     "end": 75.18
+    },
+    {
+     "w": "abre.",
+     "start": 75.18,
+     "end": 75.5
+    },
+    {
+     "w": "E",
+     "start": 75.88,
+     "end": 76.02
+    },
+    {
+     "w": "o",
+     "start": 76.02,
+     "end": 76.1
+    },
+    {
+     "w": "Caramelo",
+     "start": 76.1,
+     "end": 76.54
+    },
+    {
+     "w": "não",
+     "start": 76.54,
+     "end": 76.74
+    },
+    {
+     "w": "espera",
+     "start": 76.74,
+     "end": 77.14
+    },
+    {
+     "w": "mais",
+     "start": 77.14,
+     "end": 77.42
+    },
+    {
+     "w": "do",
+     "start": 77.42,
+     "end": 77.58
+    },
+    {
+     "w": "lado",
+     "start": 77.58,
+     "end": 77.76
+    },
+    {
+     "w": "de",
+     "start": 77.76,
+     "end": 77.94
+    },
+    {
+     "w": "fora.",
+     "start": 77.94,
+     "end": 78.24
+    },
+    {
+     "w": "Às",
+     "start": 78.8,
+     "end": 79.16
+    },
+    {
+     "w": "vezes,",
+     "start": 79.16,
+     "end": 79.44
+    },
+    {
+     "w": "um",
+     "start": 79.8,
+     "end": 79.92
+    },
+    {
+     "w": "gole",
+     "start": 79.92,
+     "end": 80.22
+    },
+    {
+     "w": "de",
+     "start": 80.22,
+     "end": 80.42
+    },
+    {
+     "w": "água",
+     "start": 80.42,
+     "end": 80.76
+    },
+    {
+     "w": "muda",
+     "start": 80.76,
+     "end": 81.22
+    },
+    {
+     "w": "uma",
+     "start": 81.22,
+     "end": 81.36
+    },
+    {
+     "w": "vida",
+     "start": 81.36,
+     "end": 81.68
+    },
+    {
+     "w": "inteira.",
+     "start": 81.68,
+     "end": 82.58
+    },
+    {
+     "w": "Se",
+     "start": 83.06,
+     "end": 83.34
+    },
+    {
+     "w": "você",
+     "start": 83.34,
+     "end": 83.52
+    },
+    {
+     "w": "também",
+     "start": 83.52,
+     "end": 83.86
+    },
+    {
+     "w": "para",
+     "start": 83.86,
+     "end": 84.28
+    },
+    {
+     "w": "pra",
+     "start": 84.28,
+     "end": 84.48
+    },
+    {
+     "w": "todo",
+     "start": 84.48,
+     "end": 84.82
+    },
+    {
+     "w": "caramelo",
+     "start": 84.98,
+     "end": 85.4
+    },
+    {
+     "w": "que",
+     "start": 85.4,
+     "end": 85.58
+    },
+    {
+     "w": "vê,",
+     "start": 85.58,
+     "end": 85.84
+    },
+    {
+     "w": "comenta",
+     "start": 86.22,
+     "end": 86.5
+    },
+    {
+     "w": "aqui.",
+     "start": 86.5,
+     "end": 86.82
+    },
+    {
+     "w": "E",
+     "start": 87.36,
+     "end": 87.42
+    },
+    {
+     "w": "manda",
+     "start": 87.42,
+     "end": 87.72
+    },
+    {
+     "w": "esse",
+     "start": 87.72,
+     "end": 87.9
+    },
+    {
+     "w": "vídeo",
+     "start": 87.9,
+     "end": 88.22
+    },
+    {
+     "w": "pra",
+     "start": 88.22,
+     "end": 88.4
+    },
+    {
+     "w": "quem",
+     "start": 88.4,
+     "end": 88.56
+    },
+    {
+     "w": "tem",
+     "start": 88.56,
+     "end": 88.78
+    },
+    {
+     "w": "o",
+     "start": 88.78,
+     "end": 88.88
+    },
+    {
+     "w": "coração",
+     "start": 88.88,
+     "end": 89.26
+    },
+    {
+     "w": "mole.",
+     "start": 89.26,
+     "end": 89.74
+    }
+   ]
+  }
+ ]
+}
