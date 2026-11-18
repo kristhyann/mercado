@@ -1,0 +1,1147 @@
+{
+ "duration": 101.0,
+ "sentences": [
+  {
+   "text": "Ele entrou numa máquina por dez segundos. E quando saiu… trinta anos tinham passado.  Dezoito de novembro de dois mil e vinte e seis. Três da manhã. Num laboratório escondido embaixo da cidade, Daniel, um engenheiro de trinta e dois anos, aceitou ser o primeiro a testar a Cápsula Zero. A promessa era simples: entrar… e sair dez segundos depois.  A porta fechou. As luzes ficaram azuis. O zumbido aumentou. Três… dois… um. Um clarão. E silêncio.  Quando a porta abriu, o laboratório estava escuro. Coberto de poeira. Os computadores, desligados. Os cientistas… tinham sumido. No chão, um jornal amarelado. A manchete dizia: \"Engenheiro desaparece em experimento secreto\".  Daniel subiu as escadas e empurrou a porta de saída. E a cidade que ele conhecia… não existia mais. Prédios de vidro tocando as nuvens. Carros flutuando em silêncio. Pessoas conversando com telas no ar.  Ele parou um garoto e perguntou: que dia é hoje? O garoto riu: dezoito de novembro… de dois mil e cinquenta e seis.  Trinta anos. Em dez segundos. Daniel olhou o próprio reflexo numa vitrine. Ele não tinha envelhecido nem um dia.  Foi aí que uma tela gigante acendeu no meio da praça. E nela… apareceu o rosto dele. Com uma única palavra embaixo: PROCURADO.  Por quê? Isso fica pro episódio dois. Se você quer a continuação, segue o perfil e comenta \"parte dois\". ",
+   "start": 0.0,
+   "end": 98.16,
+   "words": [
+    {
+     "w": "Ele",
+     "start": 0.0,
+     "end": 0.2
+    },
+    {
+     "w": "entrou",
+     "start": 0.2,
+     "end": 0.5
+    },
+    {
+     "w": "numa",
+     "start": 0.5,
+     "end": 0.68
+    },
+    {
+     "w": "máquina",
+     "start": 0.68,
+     "end": 1.14
+    },
+    {
+     "w": "por",
+     "start": 1.14,
+     "end": 1.42
+    },
+    {
+     "w": "dez",
+     "start": 1.42,
+     "end": 1.84
+    },
+    {
+     "w": "segundos.",
+     "start": 1.84,
+     "end": 2.28
+    },
+    {
+     "w": "E",
+     "start": 2.8,
+     "end": 3.06
+    },
+    {
+     "w": "quando",
+     "start": 3.06,
+     "end": 3.22
+    },
+    {
+     "w": "saiu…",
+     "start": 3.22,
+     "end": 3.72
+    },
+    {
+     "w": "trinta",
+     "start": 3.72,
+     "end": 4.6
+    },
+    {
+     "w": "anos",
+     "start": 4.6,
+     "end": 5.04
+    },
+    {
+     "w": "tinham",
+     "start": 5.04,
+     "end": 5.34
+    },
+    {
+     "w": "passado.",
+     "start": 5.34,
+     "end": 5.86
+    },
+    {
+     "w": "Dezoito",
+     "start": 5.86,
+     "end": 6.94
+    },
+    {
+     "w": "de",
+     "start": 6.94,
+     "end": 7.18
+    },
+    {
+     "w": "novembro",
+     "start": 7.18,
+     "end": 7.68
+    },
+    {
+     "w": "de",
+     "start": 7.68,
+     "end": 7.84
+    },
+    {
+     "w": "dois",
+     "start": 7.84,
+     "end": 8.114
+    },
+    {
+     "w": "mil",
+     "start": 8.114,
+     "end": 8.389
+    },
+    {
+     "w": "e",
+     "start": 8.389,
+     "end": 8.663
+    },
+    {
+     "w": "vinte",
+     "start": 8.663,
+     "end": 8.937
+    },
+    {
+     "w": "e",
+     "start": 8.937,
+     "end": 9.211
+    },
+    {
+     "w": "seis.",
+     "start": 9.211,
+     "end": 9.486
+    },
+    {
+     "w": "Três",
+     "start": 9.486,
+     "end": 9.76
+    },
+    {
+     "w": "da",
+     "start": 9.76,
+     "end": 9.98
+    },
+    {
+     "w": "manhã.",
+     "start": 9.98,
+     "end": 10.3
+    },
+    {
+     "w": "Num",
+     "start": 10.84,
+     "end": 10.96
+    },
+    {
+     "w": "laboratório",
+     "start": 10.96,
+     "end": 11.58
+    },
+    {
+     "w": "escondido",
+     "start": 11.58,
+     "end": 12.2
+    },
+    {
+     "w": "embaixo",
+     "start": 12.2,
+     "end": 12.64
+    },
+    {
+     "w": "da",
+     "start": 12.64,
+     "end": 12.86
+    },
+    {
+     "w": "cidade,",
+     "start": 12.86,
+     "end": 13.28
+    },
+    {
+     "w": "Daniel,",
+     "start": 13.68,
+     "end": 13.94
+    },
+    {
+     "w": "um",
+     "start": 14.32,
+     "end": 14.4
+    },
+    {
+     "w": "engenheiro",
+     "start": 14.4,
+     "end": 14.88
+    },
+    {
+     "w": "de",
+     "start": 14.88,
+     "end": 15.06
+    },
+    {
+     "w": "trinta",
+     "start": 15.06,
+     "end": 15.22
+    },
+    {
+     "w": "e",
+     "start": 15.22,
+     "end": 15.38
+    },
+    {
+     "w": "dois",
+     "start": 15.38,
+     "end": 15.54
+    },
+    {
+     "w": "anos,",
+     "start": 15.54,
+     "end": 16.02
+    },
+    {
+     "w": "aceitou",
+     "start": 16.38,
+     "end": 16.78
+    },
+    {
+     "w": "ser",
+     "start": 16.78,
+     "end": 17.02
+    },
+    {
+     "w": "o",
+     "start": 17.02,
+     "end": 17.08
+    },
+    {
+     "w": "primeiro",
+     "start": 17.08,
+     "end": 17.56
+    },
+    {
+     "w": "a",
+     "start": 17.56,
+     "end": 17.78
+    },
+    {
+     "w": "testar",
+     "start": 17.78,
+     "end": 18.22
+    },
+    {
+     "w": "a",
+     "start": 18.22,
+     "end": 18.32
+    },
+    {
+     "w": "Cápsula",
+     "start": 18.32,
+     "end": 18.78
+    },
+    {
+     "w": "Zero.",
+     "start": 18.78,
+     "end": 19.18
+    },
+    {
+     "w": "A",
+     "start": 19.62,
+     "end": 19.74
+    },
+    {
+     "w": "promessa",
+     "start": 19.74,
+     "end": 20.12
+    },
+    {
+     "w": "era",
+     "start": 20.12,
+     "end": 20.32
+    },
+    {
+     "w": "simples:",
+     "start": 20.32,
+     "end": 20.74
+    },
+    {
+     "w": "entrar…",
+     "start": 21.16,
+     "end": 21.62
+    },
+    {
+     "w": "e",
+     "start": 21.62,
+     "end": 22.22
+    },
+    {
+     "w": "sair",
+     "start": 22.22,
+     "end": 22.54
+    },
+    {
+     "w": "dez",
+     "start": 22.54,
+     "end": 23.0
+    },
+    {
+     "w": "segundos",
+     "start": 23.0,
+     "end": 23.42
+    },
+    {
+     "w": "depois.",
+     "start": 23.42,
+     "end": 23.76
+    },
+    {
+     "w": "A",
+     "start": 24.56,
+     "end": 24.76
+    },
+    {
+     "w": "porta",
+     "start": 24.76,
+     "end": 25.02
+    },
+    {
+     "w": "fechou.",
+     "start": 25.02,
+     "end": 25.54
+    },
+    {
+     "w": "As",
+     "start": 26.0,
+     "end": 26.22
+    },
+    {
+     "w": "luzes",
+     "start": 26.22,
+     "end": 26.6
+    },
+    {
+     "w": "ficaram",
+     "start": 26.6,
+     "end": 27.02
+    },
+    {
+     "w": "azuis.",
+     "start": 27.02,
+     "end": 27.36
+    },
+    {
+     "w": "O",
+     "start": 27.94,
+     "end": 28.08
+    },
+    {
+     "w": "zumbido",
+     "start": 28.08,
+     "end": 28.5
+    },
+    {
+     "w": "aumentou.",
+     "start": 28.5,
+     "end": 29.02
+    },
+    {
+     "w": "Três…",
+     "start": 29.02,
+     "end": 30.167
+    },
+    {
+     "w": "dois…",
+     "start": 30.167,
+     "end": 31.313
+    },
+    {
+     "w": "um.",
+     "start": 31.313,
+     "end": 32.46
+    },
+    {
+     "w": "Um",
+     "start": 32.46,
+     "end": 32.7
+    },
+    {
+     "w": "clarão.",
+     "start": 32.7,
+     "end": 33.16
+    },
+    {
+     "w": "E",
+     "start": 33.16,
+     "end": 33.8
+    },
+    {
+     "w": "silêncio.",
+     "start": 33.8,
+     "end": 34.38
+    },
+    {
+     "w": "Quando",
+     "start": 34.9,
+     "end": 35.06
+    },
+    {
+     "w": "a",
+     "start": 35.06,
+     "end": 35.24
+    },
+    {
+     "w": "porta",
+     "start": 35.24,
+     "end": 35.4
+    },
+    {
+     "w": "abriu,",
+     "start": 35.4,
+     "end": 36.0
+    },
+    {
+     "w": "o",
+     "start": 36.18,
+     "end": 36.2
+    },
+    {
+     "w": "laboratório",
+     "start": 36.2,
+     "end": 36.82
+    },
+    {
+     "w": "estava",
+     "start": 36.82,
+     "end": 37.04
+    },
+    {
+     "w": "escuro.",
+     "start": 37.04,
+     "end": 37.62
+    },
+    {
+     "w": "Coberto",
+     "start": 37.94,
+     "end": 38.52
+    },
+    {
+     "w": "de",
+     "start": 38.52,
+     "end": 38.64
+    },
+    {
+     "w": "poeira.",
+     "start": 38.64,
+     "end": 39.08
+    },
+    {
+     "w": "Os",
+     "start": 39.52,
+     "end": 39.64
+    },
+    {
+     "w": "computadores,",
+     "start": 39.64,
+     "end": 40.26
+    },
+    {
+     "w": "desligados.",
+     "start": 40.26,
+     "end": 41.24
+    },
+    {
+     "w": "Os",
+     "start": 41.74,
+     "end": 41.94
+    },
+    {
+     "w": "cientistas…",
+     "start": 41.94,
+     "end": 42.54
+    },
+    {
+     "w": "tinham",
+     "start": 42.54,
+     "end": 43.28
+    },
+    {
+     "w": "sumido.",
+     "start": 43.28,
+     "end": 43.88
+    },
+    {
+     "w": "No",
+     "start": 44.36,
+     "end": 44.52
+    },
+    {
+     "w": "chão,",
+     "start": 44.52,
+     "end": 44.84
+    },
+    {
+     "w": "um",
+     "start": 45.14,
+     "end": 45.26
+    },
+    {
+     "w": "jornal",
+     "start": 45.26,
+     "end": 45.66
+    },
+    {
+     "w": "amarelado.",
+     "start": 45.66,
+     "end": 46.32
+    },
+    {
+     "w": "A",
+     "start": 46.64,
+     "end": 46.8
+    },
+    {
+     "w": "manchete",
+     "start": 46.8,
+     "end": 47.18
+    },
+    {
+     "w": "dizia:",
+     "start": 47.18,
+     "end": 47.7
+    },
+    {
+     "w": "\"Engenheiro",
+     "start": 48.02,
+     "end": 48.7
+    },
+    {
+     "w": "desaparece",
+     "start": 48.7,
+     "end": 49.54
+    },
+    {
+     "w": "em",
+     "start": 49.54,
+     "end": 49.68
+    },
+    {
+     "w": "experimento",
+     "start": 49.68,
+     "end": 50.32
+    },
+    {
+     "w": "secreto\".",
+     "start": 50.32,
+     "end": 50.9
+    },
+    {
+     "w": "Daniel",
+     "start": 51.26,
+     "end": 51.6
+    },
+    {
+     "w": "subiu",
+     "start": 51.6,
+     "end": 52.06
+    },
+    {
+     "w": "as",
+     "start": 52.06,
+     "end": 52.18
+    },
+    {
+     "w": "escadas",
+     "start": 52.18,
+     "end": 52.6
+    },
+    {
+     "w": "e",
+     "start": 52.6,
+     "end": 52.94
+    },
+    {
+     "w": "empurrou",
+     "start": 52.94,
+     "end": 53.4
+    },
+    {
+     "w": "a",
+     "start": 53.4,
+     "end": 53.58
+    },
+    {
+     "w": "porta",
+     "start": 53.58,
+     "end": 53.84
+    },
+    {
+     "w": "de",
+     "start": 53.84,
+     "end": 54.04
+    },
+    {
+     "w": "saída.",
+     "start": 54.04,
+     "end": 54.4
+    },
+    {
+     "w": "E",
+     "start": 54.84,
+     "end": 54.94
+    },
+    {
+     "w": "a",
+     "start": 54.94,
+     "end": 55.02
+    },
+    {
+     "w": "cidade",
+     "start": 55.02,
+     "end": 55.34
+    },
+    {
+     "w": "que",
+     "start": 55.34,
+     "end": 55.58
+    },
+    {
+     "w": "ele",
+     "start": 55.58,
+     "end": 55.68
+    },
+    {
+     "w": "conhecia…",
+     "start": 55.68,
+     "end": 56.24
+    },
+    {
+     "w": "não",
+     "start": 56.24,
+     "end": 56.9
+    },
+    {
+     "w": "existia",
+     "start": 56.9,
+     "end": 57.48
+    },
+    {
+     "w": "mais.",
+     "start": 57.48,
+     "end": 57.76
+    },
+    {
+     "w": "Prédios",
+     "start": 57.76,
+     "end": 58.68
+    },
+    {
+     "w": "de",
+     "start": 58.68,
+     "end": 58.84
+    },
+    {
+     "w": "vidro",
+     "start": 58.84,
+     "end": 59.28
+    },
+    {
+     "w": "tocando",
+     "start": 59.28,
+     "end": 59.62
+    },
+    {
+     "w": "as",
+     "start": 59.62,
+     "end": 59.86
+    },
+    {
+     "w": "nuvens.",
+     "start": 59.86,
+     "end": 60.22
+    },
+    {
+     "w": "Carros",
+     "start": 60.68,
+     "end": 61.12
+    },
+    {
+     "w": "flutuando",
+     "start": 61.12,
+     "end": 61.68
+    },
+    {
+     "w": "em",
+     "start": 61.68,
+     "end": 61.9
+    },
+    {
+     "w": "silêncio.",
+     "start": 61.9,
+     "end": 62.46
+    },
+    {
+     "w": "Pessoas",
+     "start": 62.8,
+     "end": 63.24
+    },
+    {
+     "w": "conversando",
+     "start": 63.24,
+     "end": 63.98
+    },
+    {
+     "w": "com",
+     "start": 63.98,
+     "end": 64.16
+    },
+    {
+     "w": "telas",
+     "start": 64.16,
+     "end": 64.68
+    },
+    {
+     "w": "no",
+     "start": 64.68,
+     "end": 64.88
+    },
+    {
+     "w": "ar.",
+     "start": 64.88,
+     "end": 65.08
+    },
+    {
+     "w": "Ele",
+     "start": 65.44,
+     "end": 65.62
+    },
+    {
+     "w": "parou",
+     "start": 65.62,
+     "end": 65.92
+    },
+    {
+     "w": "um",
+     "start": 65.92,
+     "end": 66.06
+    },
+    {
+     "w": "garoto",
+     "start": 66.06,
+     "end": 66.38
+    },
+    {
+     "w": "e",
+     "start": 66.38,
+     "end": 66.58
+    },
+    {
+     "w": "perguntou:",
+     "start": 66.58,
+     "end": 67.1
+    },
+    {
+     "w": "que",
+     "start": 67.54,
+     "end": 67.68
+    },
+    {
+     "w": "dia",
+     "start": 67.68,
+     "end": 67.9
+    },
+    {
+     "w": "é",
+     "start": 67.9,
+     "end": 68.02
+    },
+    {
+     "w": "hoje?",
+     "start": 68.02,
+     "end": 68.28
+    },
+    {
+     "w": "O",
+     "start": 68.8,
+     "end": 68.9
+    },
+    {
+     "w": "garoto",
+     "start": 68.9,
+     "end": 69.18
+    },
+    {
+     "w": "riu:",
+     "start": 69.18,
+     "end": 69.5
+    },
+    {
+     "w": "dezoito",
+     "start": 69.5,
+     "end": 70.36
+    },
+    {
+     "w": "de",
+     "start": 70.36,
+     "end": 70.6
+    },
+    {
+     "w": "novembro…",
+     "start": 70.6,
+     "end": 71.12
+    },
+    {
+     "w": "de",
+     "start": 71.12,
+     "end": 71.56
+    },
+    {
+     "w": "dois",
+     "start": 71.56,
+     "end": 71.863
+    },
+    {
+     "w": "mil",
+     "start": 71.863,
+     "end": 72.166
+    },
+    {
+     "w": "e",
+     "start": 72.166,
+     "end": 72.469
+    },
+    {
+     "w": "cinquenta",
+     "start": 72.469,
+     "end": 72.771
+    },
+    {
+     "w": "e",
+     "start": 72.771,
+     "end": 73.074
+    },
+    {
+     "w": "seis.",
+     "start": 73.074,
+     "end": 73.377
+    },
+    {
+     "w": "Trinta",
+     "start": 73.377,
+     "end": 73.68
+    },
+    {
+     "w": "anos.",
+     "start": 73.68,
+     "end": 74.14
+    },
+    {
+     "w": "Em",
+     "start": 74.14,
+     "end": 74.68
+    },
+    {
+     "w": "dez",
+     "start": 74.68,
+     "end": 75.04
+    },
+    {
+     "w": "segundos.",
+     "start": 75.04,
+     "end": 75.52
+    },
+    {
+     "w": "Daniel",
+     "start": 76.22,
+     "end": 76.42
+    },
+    {
+     "w": "olhou",
+     "start": 76.42,
+     "end": 76.88
+    },
+    {
+     "w": "o",
+     "start": 76.88,
+     "end": 77.12
+    },
+    {
+     "w": "próprio",
+     "start": 77.12,
+     "end": 77.38
+    },
+    {
+     "w": "reflexo",
+     "start": 77.38,
+     "end": 78.06
+    },
+    {
+     "w": "numa",
+     "start": 78.06,
+     "end": 78.2
+    },
+    {
+     "w": "vitrine.",
+     "start": 78.2,
+     "end": 78.66
+    },
+    {
+     "w": "Ele",
+     "start": 79.0,
+     "end": 79.2
+    },
+    {
+     "w": "não",
+     "start": 79.2,
+     "end": 79.36
+    },
+    {
+     "w": "tinha",
+     "start": 79.36,
+     "end": 79.6
+    },
+    {
+     "w": "envelhecido",
+     "start": 79.6,
+     "end": 80.26
+    },
+    {
+     "w": "nem",
+     "start": 80.26,
+     "end": 80.64
+    },
+    {
+     "w": "um",
+     "start": 80.64,
+     "end": 80.88
+    },
+    {
+     "w": "dia.",
+     "start": 80.88,
+     "end": 81.2
+    },
+    {
+     "w": "Foi",
+     "start": 81.6,
+     "end": 81.86
+    },
+    {
+     "w": "aí",
+     "start": 81.86,
+     "end": 82.1
+    },
+    {
+     "w": "que",
+     "start": 82.1,
+     "end": 82.28
+    },
+    {
+     "w": "uma",
+     "start": 82.28,
+     "end": 82.44
+    },
+    {
+     "w": "tela",
+     "start": 82.44,
+     "end": 82.7
+    },
+    {
+     "w": "gigante",
+     "start": 82.7,
+     "end": 83.4
+    },
+    {
+     "w": "acendeu",
+     "start": 83.4,
+     "end": 83.84
+    },
+    {
+     "w": "no",
+     "start": 83.84,
+     "end": 84.06
+    },
+    {
+     "w": "meio",
+     "start": 84.06,
+     "end": 84.38
+    },
+    {
+     "w": "da",
+     "start": 84.38,
+     "end": 84.54
+    },
+    {
+     "w": "praça.",
+     "start": 84.54,
+     "end": 84.98
+    },
+    {
+     "w": "E",
+     "start": 84.98,
+     "end": 85.4
+    },
+    {
+     "w": "nela…",
+     "start": 85.4,
+     "end": 85.76
+    },
+    {
+     "w": "apareceu",
+     "start": 85.94,
+     "end": 86.58
+    },
+    {
+     "w": "o",
+     "start": 86.58,
+     "end": 86.72
+    },
+    {
+     "w": "rosto",
+     "start": 86.72,
+     "end": 87.08
+    },
+    {
+     "w": "dele.",
+     "start": 87.08,
+     "end": 87.42
+    },
+    {
+     "w": "Com",
+     "start": 87.62,
+     "end": 87.92
+    },
+    {
+     "w": "uma",
+     "start": 87.92,
+     "end": 88.14
+    },
+    {
+     "w": "única",
+     "start": 88.14,
+     "end": 88.52
+    },
+    {
+     "w": "palavra",
+     "start": 88.52,
+     "end": 89.06
+    },
+    {
+     "w": "embaixo:",
+     "start": 89.06,
+     "end": 89.36
+    },
+    {
+     "w": "PROCURADO.",
+     "start": 90.06,
+     "end": 90.74
+    },
+    {
+     "w": "Por",
+     "start": 91.34,
+     "end": 91.36
+    },
+    {
+     "w": "quê?",
+     "start": 91.36,
+     "end": 91.6
+    },
+    {
+     "w": "Isso",
+     "start": 92.08,
+     "end": 92.38
+    },
+    {
+     "w": "fica",
+     "start": 92.38,
+     "end": 92.8
+    },
+    {
+     "w": "pro",
+     "start": 92.8,
+     "end": 92.98
+    },
+    {
+     "w": "episódio",
+     "start": 92.98,
+     "end": 93.3
+    },
+    {
+     "w": "dois.",
+     "start": 93.3,
+     "end": 94.14
+    },
+    {
+     "w": "Se",
+     "start": 94.14,
+     "end": 94.24
+    },
+    {
+     "w": "você",
+     "start": 94.24,
+     "end": 94.44
+    },
+    {
+     "w": "quer",
+     "start": 94.44,
+     "end": 94.74
+    },
+    {
+     "w": "a",
+     "start": 94.74,
+     "end": 94.84
+    },
+    {
+     "w": "continuação,",
+     "start": 94.84,
+     "end": 95.42
+    },
+    {
+     "w": "segue",
+     "start": 95.86,
+     "end": 96.04
+    },
+    {
+     "w": "o",
+     "start": 96.04,
+     "end": 96.16
+    },
+    {
+     "w": "perfil",
+     "start": 96.16,
+     "end": 96.62
+    },
+    {
+     "w": "e",
+     "start": 96.62,
+     "end": 96.84
+    },
+    {
+     "w": "comenta",
+     "start": 96.84,
+     "end": 97.34
+    },
+    {
+     "w": "\"parte",
+     "start": 97.34,
+     "end": 97.76
+    },
+    {
+     "w": "dois\".",
+     "start": 97.76,
+     "end": 98.16
+    }
+   ]
+  }
+ ]
+}
