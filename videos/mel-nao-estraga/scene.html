@@ -197,7 +197,7 @@ const SHOTS = [
   [T_POR - .1, (t, k) => { world('tomb', t); torches.forEach((tc, i) => tc.f.scale.setScalar(.4 + Math.sin(t * 15 + i) * .05)); arch.root.position.set(.7, 0, .2); arch.root.rotation.y = -1.9; poseP(arch, { ...PP.stand, rx: -1.3, rz: .1, re: -.5, hx: .3 }); face(arch, 'shock', t);
     return [V(-.6 + k * .05, 1.5, 3.8 - k * .1), V(.25, .95, -.4)]; }],
   // 8 mel duro e esbranquiçado: só cristalizou → banho-maria morno
-  [T_ESE - .1, (t, k) => { world('bm', t); const liq = clamp((t - T_BANHO - .4) / 1.6); jarB.hm.map = liq < .99 ? crystT : null; jarB.hm.color.setHex(liq < .5 ? 0xFFFFFF : 0xF2A21A); jarB.hm.opacity = lerp(1, .92, liq); jarB.hm.emissiveIntensity = lerp(0, .35, liq); jarB.hm.needsUpdate = true;
+  [T_ESE - .1, (t, k) => { world('bm', t); const liq = clamp((t - T_BANHO) / 1.3); jarB.hm.map = liq < .99 ? crystT : null; jarB.hm.color.setHex(liq < .5 ? 0xFFFFFF : 0xF2A21A); jarB.hm.opacity = lerp(1, .92, liq); jarB.hm.emissiveIntensity = lerp(0, .35, liq); jarB.hm.needsUpdate = true;
     if (liq > 0 && liq < 1) { jarB.hm.color.lerpColors(new THREE.Color(0xF4E6C0), new THREE.Color(0xF2A21A), liq); }
     water.visible = t > T_BANHO - .2; burner.visible = t > T_BANHO - .2; steam.forEach(s => { s.visible = t > T_BANHO; const u = (t * .5 + s.userData.p) % 1; s.position.set(s.userData.x, 1.3 + u * .7, -.6); s.material.opacity = (1 - u) * .7; });
     return t < T_BANHO - .2 ? [V(.35, 1.95, .55), V(0, 1.15, -.6)] : [V(.6, 2.3, 1.3), V(0, 1.1, -.6)]; }],
