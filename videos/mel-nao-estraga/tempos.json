@@ -1,0 +1,772 @@
+{
+ "duration": 64.0,
+ "sentences": [
+  {
+   "text": "Esse pote de mel pode durar mais que a sua vida inteira.  Você já achou um mel esquecido no fundo do armário… e ficou com medo de comer?  Calma. O mel quase não estraga, e a explicação está na química dele.  O mel tem pouquíssima água e muito açúcar. Nesse ambiente, as bactérias perdem água pro mel… e não conseguem se multiplicar.  Além disso, ele é ácido, o que atrapalha ainda mais os micróbios. E as abelhas acrescentam uma enzima que, em contato com a umidade, produz um pouco de peróxido de hidrogênio, a mesma substância da água oxigenada.  Por isso, arqueólogos já encontraram mel conservado em tumbas muito antigas.  E se o seu mel ficou duro e esbranquiçado, ele não estragou: só cristalizou. Um banho-maria morno resolve. O único cuidado é manter o pote bem fechado, longe da umidade.  Comenta aí: você já jogou mel cristalizado fora achando que estava estragado? ",
+   "start": 0.0,
+   "end": 59.94,
+   "words": [
+    {
+     "w": "Esse",
+     "start": 0.0,
+     "end": 0.26
+    },
+    {
+     "w": "pote",
+     "start": 0.26,
+     "end": 0.62
+    },
+    {
+     "w": "de",
+     "start": 0.62,
+     "end": 0.82
+    },
+    {
+     "w": "mel",
+     "start": 0.82,
+     "end": 1.06
+    },
+    {
+     "w": "pode",
+     "start": 1.06,
+     "end": 1.36
+    },
+    {
+     "w": "durar",
+     "start": 1.36,
+     "end": 1.72
+    },
+    {
+     "w": "mais",
+     "start": 1.72,
+     "end": 2.14
+    },
+    {
+     "w": "que",
+     "start": 2.14,
+     "end": 2.3
+    },
+    {
+     "w": "a",
+     "start": 2.3,
+     "end": 2.42
+    },
+    {
+     "w": "sua",
+     "start": 2.42,
+     "end": 2.54
+    },
+    {
+     "w": "vida",
+     "start": 2.54,
+     "end": 2.94
+    },
+    {
+     "w": "inteira.",
+     "start": 2.94,
+     "end": 3.58
+    },
+    {
+     "w": "Você",
+     "start": 4.04,
+     "end": 4.3
+    },
+    {
+     "w": "já",
+     "start": 4.3,
+     "end": 4.52
+    },
+    {
+     "w": "achou",
+     "start": 4.52,
+     "end": 4.8
+    },
+    {
+     "w": "um",
+     "start": 4.8,
+     "end": 4.96
+    },
+    {
+     "w": "mel",
+     "start": 4.96,
+     "end": 5.16
+    },
+    {
+     "w": "esquecido",
+     "start": 5.16,
+     "end": 5.72
+    },
+    {
+     "w": "no",
+     "start": 5.72,
+     "end": 5.92
+    },
+    {
+     "w": "fundo",
+     "start": 5.92,
+     "end": 6.26
+    },
+    {
+     "w": "do",
+     "start": 6.26,
+     "end": 6.42
+    },
+    {
+     "w": "armário…",
+     "start": 6.42,
+     "end": 6.8
+    },
+    {
+     "w": "e",
+     "start": 6.8,
+     "end": 7.42
+    },
+    {
+     "w": "ficou",
+     "start": 7.42,
+     "end": 7.78
+    },
+    {
+     "w": "com",
+     "start": 7.78,
+     "end": 7.94
+    },
+    {
+     "w": "medo",
+     "start": 7.94,
+     "end": 8.3
+    },
+    {
+     "w": "de",
+     "start": 8.3,
+     "end": 8.48
+    },
+    {
+     "w": "comer?",
+     "start": 8.48,
+     "end": 8.74
+    },
+    {
+     "w": "Calma.",
+     "start": 9.26,
+     "end": 9.82
+    },
+    {
+     "w": "O",
+     "start": 10.18,
+     "end": 10.28
+    },
+    {
+     "w": "mel",
+     "start": 10.28,
+     "end": 10.52
+    },
+    {
+     "w": "quase",
+     "start": 10.52,
+     "end": 11.02
+    },
+    {
+     "w": "não",
+     "start": 11.02,
+     "end": 11.3
+    },
+    {
+     "w": "estraga,",
+     "start": 11.3,
+     "end": 11.86
+    },
+    {
+     "w": "e",
+     "start": 11.86,
+     "end": 12.22
+    },
+    {
+     "w": "a",
+     "start": 12.22,
+     "end": 12.28
+    },
+    {
+     "w": "explicação",
+     "start": 12.28,
+     "end": 12.84
+    },
+    {
+     "w": "está",
+     "start": 12.84,
+     "end": 13.32
+    },
+    {
+     "w": "na",
+     "start": 13.32,
+     "end": 13.48
+    },
+    {
+     "w": "química",
+     "start": 13.48,
+     "end": 14.02
+    },
+    {
+     "w": "dele.",
+     "start": 14.02,
+     "end": 14.3
+    },
+    {
+     "w": "O",
+     "start": 14.7,
+     "end": 14.84
+    },
+    {
+     "w": "mel",
+     "start": 14.84,
+     "end": 15.08
+    },
+    {
+     "w": "tem",
+     "start": 15.08,
+     "end": 15.34
+    },
+    {
+     "w": "pouquíssima",
+     "start": 15.34,
+     "end": 16.26
+    },
+    {
+     "w": "água",
+     "start": 16.26,
+     "end": 16.64
+    },
+    {
+     "w": "e",
+     "start": 16.64,
+     "end": 16.98
+    },
+    {
+     "w": "muito",
+     "start": 16.98,
+     "end": 17.5
+    },
+    {
+     "w": "açúcar.",
+     "start": 17.5,
+     "end": 18.06
+    },
+    {
+     "w": "Nesse",
+     "start": 18.36,
+     "end": 18.64
+    },
+    {
+     "w": "ambiente,",
+     "start": 18.64,
+     "end": 18.94
+    },
+    {
+     "w": "as",
+     "start": 19.46,
+     "end": 19.52
+    },
+    {
+     "w": "bactérias",
+     "start": 19.52,
+     "end": 20.06
+    },
+    {
+     "w": "perdem",
+     "start": 20.06,
+     "end": 20.54
+    },
+    {
+     "w": "água",
+     "start": 20.54,
+     "end": 20.9
+    },
+    {
+     "w": "pro",
+     "start": 20.9,
+     "end": 21.16
+    },
+    {
+     "w": "mel…",
+     "start": 21.16,
+     "end": 21.36
+    },
+    {
+     "w": "e",
+     "start": 21.36,
+     "end": 21.82
+    },
+    {
+     "w": "não",
+     "start": 21.82,
+     "end": 22.08
+    },
+    {
+     "w": "conseguem",
+     "start": 22.08,
+     "end": 22.66
+    },
+    {
+     "w": "se",
+     "start": 22.66,
+     "end": 22.82
+    },
+    {
+     "w": "multiplicar.",
+     "start": 22.82,
+     "end": 23.48
+    },
+    {
+     "w": "Além",
+     "start": 23.72,
+     "end": 23.94
+    },
+    {
+     "w": "disso,",
+     "start": 23.94,
+     "end": 24.34
+    },
+    {
+     "w": "ele",
+     "start": 24.58,
+     "end": 24.76
+    },
+    {
+     "w": "é",
+     "start": 24.76,
+     "end": 24.88
+    },
+    {
+     "w": "ácido,",
+     "start": 24.88,
+     "end": 25.28
+    },
+    {
+     "w": "o",
+     "start": 25.62,
+     "end": 25.68
+    },
+    {
+     "w": "que",
+     "start": 25.68,
+     "end": 25.74
+    },
+    {
+     "w": "atrapalha",
+     "start": 25.74,
+     "end": 26.22
+    },
+    {
+     "w": "ainda",
+     "start": 26.22,
+     "end": 26.52
+    },
+    {
+     "w": "mais",
+     "start": 26.52,
+     "end": 27.02
+    },
+    {
+     "w": "os",
+     "start": 27.02,
+     "end": 27.16
+    },
+    {
+     "w": "micróbios.",
+     "start": 27.16,
+     "end": 27.78
+    },
+    {
+     "w": "E",
+     "start": 27.78,
+     "end": 28.24
+    },
+    {
+     "w": "as",
+     "start": 28.24,
+     "end": 28.34
+    },
+    {
+     "w": "abelhas",
+     "start": 28.34,
+     "end": 28.78
+    },
+    {
+     "w": "acrescentam",
+     "start": 28.78,
+     "end": 29.44
+    },
+    {
+     "w": "uma",
+     "start": 29.44,
+     "end": 29.66
+    },
+    {
+     "w": "enzima",
+     "start": 29.66,
+     "end": 30.18
+    },
+    {
+     "w": "que,",
+     "start": 30.32,
+     "end": 30.54
+    },
+    {
+     "w": "em",
+     "start": 30.54,
+     "end": 30.78
+    },
+    {
+     "w": "contato",
+     "start": 30.78,
+     "end": 31.28
+    },
+    {
+     "w": "com",
+     "start": 31.28,
+     "end": 31.46
+    },
+    {
+     "w": "a",
+     "start": 31.46,
+     "end": 31.58
+    },
+    {
+     "w": "umidade,",
+     "start": 31.58,
+     "end": 32.0
+    },
+    {
+     "w": "produz",
+     "start": 32.0,
+     "end": 32.56
+    },
+    {
+     "w": "um",
+     "start": 32.56,
+     "end": 32.84
+    },
+    {
+     "w": "pouco",
+     "start": 32.84,
+     "end": 33.12
+    },
+    {
+     "w": "de",
+     "start": 33.12,
+     "end": 33.36
+    },
+    {
+     "w": "peróxido",
+     "start": 33.36,
+     "end": 34.02
+    },
+    {
+     "w": "de",
+     "start": 34.02,
+     "end": 34.18
+    },
+    {
+     "w": "hidrogênio,",
+     "start": 34.18,
+     "end": 34.76
+    },
+    {
+     "w": "a",
+     "start": 35.08,
+     "end": 35.22
+    },
+    {
+     "w": "mesma",
+     "start": 35.22,
+     "end": 35.58
+    },
+    {
+     "w": "substância",
+     "start": 35.58,
+     "end": 36.32
+    },
+    {
+     "w": "da",
+     "start": 36.32,
+     "end": 36.5
+    },
+    {
+     "w": "água",
+     "start": 36.5,
+     "end": 36.76
+    },
+    {
+     "w": "oxigenada.",
+     "start": 36.76,
+     "end": 37.46
+    },
+    {
+     "w": "Por",
+     "start": 37.74,
+     "end": 37.96
+    },
+    {
+     "w": "isso,",
+     "start": 37.96,
+     "end": 38.2
+    },
+    {
+     "w": "arqueólogos",
+     "start": 38.56,
+     "end": 39.12
+    },
+    {
+     "w": "já",
+     "start": 39.12,
+     "end": 39.34
+    },
+    {
+     "w": "encontraram",
+     "start": 39.34,
+     "end": 40.0
+    },
+    {
+     "w": "mel",
+     "start": 40.14,
+     "end": 40.26
+    },
+    {
+     "w": "conservado",
+     "start": 40.26,
+     "end": 41.0
+    },
+    {
+     "w": "em",
+     "start": 41.0,
+     "end": 41.16
+    },
+    {
+     "w": "tumbas",
+     "start": 41.16,
+     "end": 41.58
+    },
+    {
+     "w": "muito",
+     "start": 41.58,
+     "end": 42.1
+    },
+    {
+     "w": "antigas.",
+     "start": 42.1,
+     "end": 42.8
+    },
+    {
+     "w": "E",
+     "start": 43.14,
+     "end": 43.32
+    },
+    {
+     "w": "se",
+     "start": 43.32,
+     "end": 43.38
+    },
+    {
+     "w": "o",
+     "start": 43.38,
+     "end": 43.5
+    },
+    {
+     "w": "seu",
+     "start": 43.5,
+     "end": 43.58
+    },
+    {
+     "w": "mel",
+     "start": 43.58,
+     "end": 43.84
+    },
+    {
+     "w": "ficou",
+     "start": 43.84,
+     "end": 44.08
+    },
+    {
+     "w": "duro",
+     "start": 44.08,
+     "end": 44.64
+    },
+    {
+     "w": "e",
+     "start": 44.64,
+     "end": 44.78
+    },
+    {
+     "w": "esbranquiçado,",
+     "start": 44.78,
+     "end": 45.56
+    },
+    {
+     "w": "ele",
+     "start": 45.86,
+     "end": 46.02
+    },
+    {
+     "w": "não",
+     "start": 46.02,
+     "end": 46.32
+    },
+    {
+     "w": "estragou:",
+     "start": 46.32,
+     "end": 46.88
+    },
+    {
+     "w": "só",
+     "start": 47.22,
+     "end": 47.52
+    },
+    {
+     "w": "cristalizou.",
+     "start": 47.52,
+     "end": 48.34
+    },
+    {
+     "w": "Um",
+     "start": 48.64,
+     "end": 48.8
+    },
+    {
+     "w": "banho-maria",
+     "start": 48.8,
+     "end": 49.5
+    },
+    {
+     "w": "morno",
+     "start": 49.5,
+     "end": 49.92
+    },
+    {
+     "w": "resolve.",
+     "start": 49.92,
+     "end": 50.32
+    },
+    {
+     "w": "O",
+     "start": 50.84,
+     "end": 51.02
+    },
+    {
+     "w": "único",
+     "start": 51.02,
+     "end": 51.26
+    },
+    {
+     "w": "cuidado",
+     "start": 51.26,
+     "end": 51.68
+    },
+    {
+     "w": "é",
+     "start": 51.68,
+     "end": 52.08
+    },
+    {
+     "w": "manter",
+     "start": 52.08,
+     "end": 52.4
+    },
+    {
+     "w": "o",
+     "start": 52.4,
+     "end": 52.54
+    },
+    {
+     "w": "pote",
+     "start": 52.54,
+     "end": 52.8
+    },
+    {
+     "w": "bem",
+     "start": 52.8,
+     "end": 53.22
+    },
+    {
+     "w": "fechado,",
+     "start": 53.22,
+     "end": 53.86
+    },
+    {
+     "w": "longe",
+     "start": 53.98,
+     "end": 54.44
+    },
+    {
+     "w": "da",
+     "start": 54.44,
+     "end": 54.64
+    },
+    {
+     "w": "umidade.",
+     "start": 54.64,
+     "end": 55.04
+    },
+    {
+     "w": "Comenta",
+     "start": 55.04,
+     "end": 55.82
+    },
+    {
+     "w": "aí:",
+     "start": 55.82,
+     "end": 56.04
+    },
+    {
+     "w": "você",
+     "start": 56.38,
+     "end": 56.54
+    },
+    {
+     "w": "já",
+     "start": 56.54,
+     "end": 56.72
+    },
+    {
+     "w": "jogou",
+     "start": 56.72,
+     "end": 57.02
+    },
+    {
+     "w": "mel",
+     "start": 57.14,
+     "end": 57.26
+    },
+    {
+     "w": "cristalizado",
+     "start": 57.26,
+     "end": 57.94
+    },
+    {
+     "w": "fora",
+     "start": 57.94,
+     "end": 58.42
+    },
+    {
+     "w": "achando",
+     "start": 58.42,
+     "end": 59.0
+    },
+    {
+     "w": "que",
+     "start": 59.0,
+     "end": 59.14
+    },
+    {
+     "w": "estava",
+     "start": 59.14,
+     "end": 59.36
+    },
+    {
+     "w": "estragado?",
+     "start": 59.36,
+     "end": 59.94
+    }
+   ]
+  }
+ ]
+}
