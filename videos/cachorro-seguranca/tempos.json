@@ -1,0 +1,997 @@
+{
+ "duration": 60.0,
+ "sentences": [
+  {
+   "text": "Seu cachorro acha que salva sua vida todo dia. Olha, pela cabeça dele, todo dia, no mesmo horário, um estranho de uniforme chega no portão, mexe na sua caixa de correio e fica olhando para sua casa. Ele late, late mais alto, late com o corpo inteiro. E o que acontece? O estranho vai embora, funcionou, de novo, todo santo dia. Ele não sabe que o carteiro ia embora de qualquer jeito, e não é birra. Na natureza, quem vigia o território protege a matilha, e alguém que volta todo dia e nunca entra, só pode estar testando a defesa. Por isso ele late para o motoboy, para o vizinho, para a sacola voando, e até para o próprio reflexo no vidro. Agora a parte que ninguém te conta, cada vez que o carteiro vai embora, o cérebro dele ganha um prêmio. Deu certo. E o que dá certo? Se repete. É por isso que a cada dia, o latido fica mais forte. Então quando ele volta do portão, de rabo para cima e peito estufado, ele não está pedindo carinho. Ele está esperando o seu obrigado. Marca aquele amigo que se acha o segurança da rua.",
+   "start": 0.0,
+   "end": 56.44,
+   "words": [
+    {
+     "w": "Seu",
+     "start": 0.0,
+     "end": 0.26
+    },
+    {
+     "w": "cachorro",
+     "start": 0.26,
+     "end": 0.58
+    },
+    {
+     "w": "acha",
+     "start": 0.58,
+     "end": 0.84
+    },
+    {
+     "w": "que",
+     "start": 0.84,
+     "end": 1.02
+    },
+    {
+     "w": "salva",
+     "start": 1.02,
+     "end": 1.44
+    },
+    {
+     "w": "sua",
+     "start": 1.44,
+     "end": 1.6
+    },
+    {
+     "w": "vida",
+     "start": 1.6,
+     "end": 1.88
+    },
+    {
+     "w": "todo",
+     "start": 1.88,
+     "end": 2.24
+    },
+    {
+     "w": "dia.",
+     "start": 2.24,
+     "end": 2.66
+    },
+    {
+     "w": "Olha,",
+     "start": 2.8,
+     "end": 3.02
+    },
+    {
+     "w": "pela",
+     "start": 3.02,
+     "end": 3.16
+    },
+    {
+     "w": "cabeça",
+     "start": 3.16,
+     "end": 3.5
+    },
+    {
+     "w": "dele,",
+     "start": 3.5,
+     "end": 3.78
+    },
+    {
+     "w": "todo",
+     "start": 3.92,
+     "end": 4.08
+    },
+    {
+     "w": "dia,",
+     "start": 4.08,
+     "end": 4.46
+    },
+    {
+     "w": "no",
+     "start": 4.64,
+     "end": 4.74
+    },
+    {
+     "w": "mesmo",
+     "start": 4.74,
+     "end": 5.08
+    },
+    {
+     "w": "horário,",
+     "start": 5.08,
+     "end": 5.54
+    },
+    {
+     "w": "um",
+     "start": 5.74,
+     "end": 5.84
+    },
+    {
+     "w": "estranho",
+     "start": 5.84,
+     "end": 6.24
+    },
+    {
+     "w": "de",
+     "start": 6.24,
+     "end": 6.38
+    },
+    {
+     "w": "uniforme",
+     "start": 6.38,
+     "end": 6.88
+    },
+    {
+     "w": "chega",
+     "start": 6.88,
+     "end": 7.12
+    },
+    {
+     "w": "no",
+     "start": 7.12,
+     "end": 7.28
+    },
+    {
+     "w": "portão,",
+     "start": 7.28,
+     "end": 7.68
+    },
+    {
+     "w": "mexe",
+     "start": 7.86,
+     "end": 8.16
+    },
+    {
+     "w": "na",
+     "start": 8.16,
+     "end": 8.24
+    },
+    {
+     "w": "sua",
+     "start": 8.24,
+     "end": 8.38
+    },
+    {
+     "w": "caixa",
+     "start": 8.38,
+     "end": 8.64
+    },
+    {
+     "w": "de",
+     "start": 8.64,
+     "end": 8.76
+    },
+    {
+     "w": "correio",
+     "start": 8.76,
+     "end": 9.18
+    },
+    {
+     "w": "e",
+     "start": 9.18,
+     "end": 9.38
+    },
+    {
+     "w": "fica",
+     "start": 9.38,
+     "end": 9.52
+    },
+    {
+     "w": "olhando",
+     "start": 9.52,
+     "end": 9.94
+    },
+    {
+     "w": "para",
+     "start": 9.94,
+     "end": 10.12
+    },
+    {
+     "w": "sua",
+     "start": 10.12,
+     "end": 10.28
+    },
+    {
+     "w": "casa.",
+     "start": 10.28,
+     "end": 10.6
+    },
+    {
+     "w": "Ele",
+     "start": 10.84,
+     "end": 11.0
+    },
+    {
+     "w": "late,",
+     "start": 11.0,
+     "end": 11.36
+    },
+    {
+     "w": "late",
+     "start": 11.58,
+     "end": 12.0
+    },
+    {
+     "w": "mais",
+     "start": 12.0,
+     "end": 12.18
+    },
+    {
+     "w": "alto,",
+     "start": 12.18,
+     "end": 12.54
+    },
+    {
+     "w": "late",
+     "start": 12.84,
+     "end": 13.04
+    },
+    {
+     "w": "com",
+     "start": 13.04,
+     "end": 13.2
+    },
+    {
+     "w": "o",
+     "start": 13.2,
+     "end": 13.34
+    },
+    {
+     "w": "corpo",
+     "start": 13.34,
+     "end": 13.52
+    },
+    {
+     "w": "inteiro.",
+     "start": 13.52,
+     "end": 13.94
+    },
+    {
+     "w": "E",
+     "start": 14.14,
+     "end": 14.22
+    },
+    {
+     "w": "o",
+     "start": 14.22,
+     "end": 14.28
+    },
+    {
+     "w": "que",
+     "start": 14.28,
+     "end": 14.3
+    },
+    {
+     "w": "acontece?",
+     "start": 14.3,
+     "end": 14.64
+    },
+    {
+     "w": "O",
+     "start": 15.12,
+     "end": 15.26
+    },
+    {
+     "w": "estranho",
+     "start": 15.26,
+     "end": 15.62
+    },
+    {
+     "w": "vai",
+     "start": 15.62,
+     "end": 15.72
+    },
+    {
+     "w": "embora,",
+     "start": 15.72,
+     "end": 15.96
+    },
+    {
+     "w": "funcionou,",
+     "start": 16.26,
+     "end": 16.96
+    },
+    {
+     "w": "de",
+     "start": 17.08,
+     "end": 17.26
+    },
+    {
+     "w": "novo,",
+     "start": 17.26,
+     "end": 17.64
+    },
+    {
+     "w": "todo",
+     "start": 17.98,
+     "end": 18.16
+    },
+    {
+     "w": "santo",
+     "start": 18.16,
+     "end": 18.72
+    },
+    {
+     "w": "dia.",
+     "start": 18.72,
+     "end": 19.1
+    },
+    {
+     "w": "Ele",
+     "start": 19.32,
+     "end": 19.44
+    },
+    {
+     "w": "não",
+     "start": 19.44,
+     "end": 19.6
+    },
+    {
+     "w": "sabe",
+     "start": 19.6,
+     "end": 19.92
+    },
+    {
+     "w": "que",
+     "start": 19.92,
+     "end": 20.04
+    },
+    {
+     "w": "o",
+     "start": 20.04,
+     "end": 20.1
+    },
+    {
+     "w": "carteiro",
+     "start": 20.1,
+     "end": 20.46
+    },
+    {
+     "w": "ia",
+     "start": 20.46,
+     "end": 20.54
+    },
+    {
+     "w": "embora",
+     "start": 20.54,
+     "end": 20.82
+    },
+    {
+     "w": "de",
+     "start": 20.82,
+     "end": 20.94
+    },
+    {
+     "w": "qualquer",
+     "start": 20.94,
+     "end": 21.18
+    },
+    {
+     "w": "jeito,",
+     "start": 21.18,
+     "end": 21.66
+    },
+    {
+     "w": "e",
+     "start": 21.84,
+     "end": 21.94
+    },
+    {
+     "w": "não",
+     "start": 21.94,
+     "end": 22.06
+    },
+    {
+     "w": "é",
+     "start": 22.06,
+     "end": 22.22
+    },
+    {
+     "w": "birra.",
+     "start": 22.22,
+     "end": 22.72
+    },
+    {
+     "w": "Na",
+     "start": 22.84,
+     "end": 22.96
+    },
+    {
+     "w": "natureza,",
+     "start": 22.96,
+     "end": 23.48
+    },
+    {
+     "w": "quem",
+     "start": 23.72,
+     "end": 23.78
+    },
+    {
+     "w": "vigia",
+     "start": 23.78,
+     "end": 24.2
+    },
+    {
+     "w": "o",
+     "start": 24.2,
+     "end": 24.3
+    },
+    {
+     "w": "território",
+     "start": 24.3,
+     "end": 24.78
+    },
+    {
+     "w": "protege",
+     "start": 24.78,
+     "end": 25.32
+    },
+    {
+     "w": "a",
+     "start": 25.32,
+     "end": 25.42
+    },
+    {
+     "w": "matilha,",
+     "start": 25.42,
+     "end": 25.84
+    },
+    {
+     "w": "e",
+     "start": 25.96,
+     "end": 26.02
+    },
+    {
+     "w": "alguém",
+     "start": 26.02,
+     "end": 26.22
+    },
+    {
+     "w": "que",
+     "start": 26.22,
+     "end": 26.38
+    },
+    {
+     "w": "volta",
+     "start": 26.38,
+     "end": 26.64
+    },
+    {
+     "w": "todo",
+     "start": 26.64,
+     "end": 26.98
+    },
+    {
+     "w": "dia",
+     "start": 26.98,
+     "end": 27.38
+    },
+    {
+     "w": "e",
+     "start": 27.38,
+     "end": 27.6
+    },
+    {
+     "w": "nunca",
+     "start": 27.6,
+     "end": 27.94
+    },
+    {
+     "w": "entra,",
+     "start": 27.94,
+     "end": 28.32
+    },
+    {
+     "w": "só",
+     "start": 28.64,
+     "end": 28.84
+    },
+    {
+     "w": "pode",
+     "start": 28.84,
+     "end": 29.12
+    },
+    {
+     "w": "estar",
+     "start": 29.12,
+     "end": 29.32
+    },
+    {
+     "w": "testando",
+     "start": 29.32,
+     "end": 29.78
+    },
+    {
+     "w": "a",
+     "start": 29.78,
+     "end": 29.86
+    },
+    {
+     "w": "defesa.",
+     "start": 29.86,
+     "end": 30.24
+    },
+    {
+     "w": "Por",
+     "start": 30.4,
+     "end": 30.52
+    },
+    {
+     "w": "isso",
+     "start": 30.52,
+     "end": 30.72
+    },
+    {
+     "w": "ele",
+     "start": 30.72,
+     "end": 30.86
+    },
+    {
+     "w": "late",
+     "start": 30.86,
+     "end": 31.12
+    },
+    {
+     "w": "para",
+     "start": 31.12,
+     "end": 31.3
+    },
+    {
+     "w": "o",
+     "start": 31.3,
+     "end": 31.34
+    },
+    {
+     "w": "motoboy,",
+     "start": 31.34,
+     "end": 31.8
+    },
+    {
+     "w": "para",
+     "start": 32.06,
+     "end": 32.08
+    },
+    {
+     "w": "o",
+     "start": 32.08,
+     "end": 32.1
+    },
+    {
+     "w": "vizinho,",
+     "start": 32.1,
+     "end": 32.58
+    },
+    {
+     "w": "para",
+     "start": 32.72,
+     "end": 32.84
+    },
+    {
+     "w": "a",
+     "start": 32.84,
+     "end": 32.92
+    },
+    {
+     "w": "sacola",
+     "start": 32.92,
+     "end": 33.22
+    },
+    {
+     "w": "voando,",
+     "start": 33.22,
+     "end": 33.68
+    },
+    {
+     "w": "e",
+     "start": 34.02,
+     "end": 34.04
+    },
+    {
+     "w": "até",
+     "start": 34.04,
+     "end": 34.24
+    },
+    {
+     "w": "para",
+     "start": 34.24,
+     "end": 34.38
+    },
+    {
+     "w": "o",
+     "start": 34.38,
+     "end": 34.48
+    },
+    {
+     "w": "próprio",
+     "start": 34.48,
+     "end": 34.8
+    },
+    {
+     "w": "reflexo",
+     "start": 34.8,
+     "end": 35.38
+    },
+    {
+     "w": "no",
+     "start": 35.38,
+     "end": 35.44
+    },
+    {
+     "w": "vidro.",
+     "start": 35.44,
+     "end": 35.76
+    },
+    {
+     "w": "Agora",
+     "start": 35.96,
+     "end": 36.18
+    },
+    {
+     "w": "a",
+     "start": 36.18,
+     "end": 36.38
+    },
+    {
+     "w": "parte",
+     "start": 36.38,
+     "end": 36.6
+    },
+    {
+     "w": "que",
+     "start": 36.6,
+     "end": 36.78
+    },
+    {
+     "w": "ninguém",
+     "start": 36.78,
+     "end": 37.06
+    },
+    {
+     "w": "te",
+     "start": 37.06,
+     "end": 37.32
+    },
+    {
+     "w": "conta,",
+     "start": 37.32,
+     "end": 37.6
+    },
+    {
+     "w": "cada",
+     "start": 37.82,
+     "end": 37.96
+    },
+    {
+     "w": "vez",
+     "start": 37.96,
+     "end": 38.3
+    },
+    {
+     "w": "que",
+     "start": 38.3,
+     "end": 38.42
+    },
+    {
+     "w": "o",
+     "start": 38.42,
+     "end": 38.5
+    },
+    {
+     "w": "carteiro",
+     "start": 38.5,
+     "end": 38.82
+    },
+    {
+     "w": "vai",
+     "start": 38.82,
+     "end": 38.98
+    },
+    {
+     "w": "embora,",
+     "start": 38.98,
+     "end": 39.28
+    },
+    {
+     "w": "o",
+     "start": 39.6,
+     "end": 39.64
+    },
+    {
+     "w": "cérebro",
+     "start": 39.64,
+     "end": 40.04
+    },
+    {
+     "w": "dele",
+     "start": 40.04,
+     "end": 40.3
+    },
+    {
+     "w": "ganha",
+     "start": 40.3,
+     "end": 40.54
+    },
+    {
+     "w": "um",
+     "start": 40.54,
+     "end": 40.64
+    },
+    {
+     "w": "prêmio.",
+     "start": 40.64,
+     "end": 41.04
+    },
+    {
+     "w": "Deu",
+     "start": 41.38,
+     "end": 41.6
+    },
+    {
+     "w": "certo.",
+     "start": 41.6,
+     "end": 41.96
+    },
+    {
+     "w": "E",
+     "start": 42.24,
+     "end": 42.28
+    },
+    {
+     "w": "o",
+     "start": 42.28,
+     "end": 42.34
+    },
+    {
+     "w": "que",
+     "start": 42.34,
+     "end": 42.42
+    },
+    {
+     "w": "dá",
+     "start": 42.42,
+     "end": 42.56
+    },
+    {
+     "w": "certo?",
+     "start": 42.56,
+     "end": 42.94
+    },
+    {
+     "w": "Se",
+     "start": 43.28,
+     "end": 43.34
+    },
+    {
+     "w": "repete.",
+     "start": 43.34,
+     "end": 43.76
+    },
+    {
+     "w": "É",
+     "start": 43.96,
+     "end": 44.04
+    },
+    {
+     "w": "por",
+     "start": 44.04,
+     "end": 44.2
+    },
+    {
+     "w": "isso",
+     "start": 44.2,
+     "end": 44.44
+    },
+    {
+     "w": "que",
+     "start": 44.44,
+     "end": 44.6
+    },
+    {
+     "w": "a",
+     "start": 44.6,
+     "end": 44.68
+    },
+    {
+     "w": "cada",
+     "start": 44.68,
+     "end": 44.94
+    },
+    {
+     "w": "dia,",
+     "start": 44.94,
+     "end": 45.28
+    },
+    {
+     "w": "o",
+     "start": 45.54,
+     "end": 45.58
+    },
+    {
+     "w": "latido",
+     "start": 45.58,
+     "end": 45.9
+    },
+    {
+     "w": "fica",
+     "start": 45.9,
+     "end": 46.12
+    },
+    {
+     "w": "mais",
+     "start": 46.12,
+     "end": 46.5
+    },
+    {
+     "w": "forte.",
+     "start": 46.5,
+     "end": 46.9
+    },
+    {
+     "w": "Então",
+     "start": 47.06,
+     "end": 47.28
+    },
+    {
+     "w": "quando",
+     "start": 47.28,
+     "end": 47.48
+    },
+    {
+     "w": "ele",
+     "start": 47.48,
+     "end": 47.64
+    },
+    {
+     "w": "volta",
+     "start": 47.64,
+     "end": 47.96
+    },
+    {
+     "w": "do",
+     "start": 47.96,
+     "end": 48.12
+    },
+    {
+     "w": "portão,",
+     "start": 48.12,
+     "end": 48.48
+    },
+    {
+     "w": "de",
+     "start": 48.68,
+     "end": 48.78
+    },
+    {
+     "w": "rabo",
+     "start": 48.78,
+     "end": 49.08
+    },
+    {
+     "w": "para",
+     "start": 49.08,
+     "end": 49.22
+    },
+    {
+     "w": "cima",
+     "start": 49.22,
+     "end": 49.5
+    },
+    {
+     "w": "e",
+     "start": 49.5,
+     "end": 49.68
+    },
+    {
+     "w": "peito",
+     "start": 49.68,
+     "end": 49.92
+    },
+    {
+     "w": "estufado,",
+     "start": 49.92,
+     "end": 50.44
+    },
+    {
+     "w": "ele",
+     "start": 50.64,
+     "end": 50.74
+    },
+    {
+     "w": "não",
+     "start": 50.74,
+     "end": 50.88
+    },
+    {
+     "w": "está",
+     "start": 50.88,
+     "end": 51.08
+    },
+    {
+     "w": "pedindo",
+     "start": 51.08,
+     "end": 51.34
+    },
+    {
+     "w": "carinho.",
+     "start": 51.34,
+     "end": 51.8
+    },
+    {
+     "w": "Ele",
+     "start": 52.1,
+     "end": 52.26
+    },
+    {
+     "w": "está",
+     "start": 52.26,
+     "end": 52.38
+    },
+    {
+     "w": "esperando",
+     "start": 52.38,
+     "end": 52.8
+    },
+    {
+     "w": "o",
+     "start": 52.8,
+     "end": 53.02
+    },
+    {
+     "w": "seu",
+     "start": 53.02,
+     "end": 53.14
+    },
+    {
+     "w": "obrigado.",
+     "start": 53.14,
+     "end": 53.72
+    },
+    {
+     "w": "Marca",
+     "start": 53.72,
+     "end": 54.44
+    },
+    {
+     "w": "aquele",
+     "start": 54.44,
+     "end": 54.6
+    },
+    {
+     "w": "amigo",
+     "start": 54.6,
+     "end": 54.88
+    },
+    {
+     "w": "que",
+     "start": 54.88,
+     "end": 55.06
+    },
+    {
+     "w": "se",
+     "start": 55.06,
+     "end": 55.22
+    },
+    {
+     "w": "acha",
+     "start": 55.22,
+     "end": 55.42
+    },
+    {
+     "w": "o",
+     "start": 55.42,
+     "end": 55.56
+    },
+    {
+     "w": "segurança",
+     "start": 55.56,
+     "end": 56.04
+    },
+    {
+     "w": "da",
+     "start": 56.04,
+     "end": 56.26
+    },
+    {
+     "w": "rua.",
+     "start": 56.26,
+     "end": 56.44
+    }
+   ]
+  }
+ ]
+}

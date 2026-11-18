@@ -1,0 +1,329 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,'Noto Color Emoji',sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:250px;text-align:center;font-weight:900;font-size:80px;line-height:1.06}
+#hook b{color:#FFD21F;display:block;font-size:92px}
+#cap{width:1080px;top:1380px;text-align:center;font-weight:900;font-size:112px}
+#cap.hl{color:#FFD21F}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:58px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.white{background:#fff;color:#111}.tag.purple{background:#8B5CF6;color:#fff}
+.small{font-size:44px;padding:6px 22px;border-radius:18px;border-width:6px;box-shadow:0 6px 0 #111}
+#mark{font-weight:900;font-size:220px;line-height:1;-webkit-text-stroke:12px #fff;paint-order:stroke fill}
+#final{left:50px;width:980px;top:1270px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:60px;line-height:1.12;padding:28px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#E07B2A}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.85;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">SEU CACHORRO ACHA<br>QUE SALVA SUA VIDA<b>TODO DIA 🦸</b></div>
+<div id="mark" class="o"></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag small"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Marca aquele amigo que<br>se acha o segurança da rua<br><em>🐕 Segue 👉 @olhaso_3D</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, rr } from '/_kit/kit.js';
+import { buildPerson, PP, poseP, face } from '/_kit/pessoas.js';
+await document.fonts.load('900 60px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; window.DURATION = TP.duration;
+const ALL = SN.flatMap(s => s.words);
+const WA = (re, n = 0, after = 0) => { const ws = ALL.filter(w => w.start >= after && re.test(w.w)); if (!ws[n]) { console.log('WA MISS', re); return after; } return ws[n].start; };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .03, 300);
+scene.background = new THREE.Color(0xA8D8F0); scene.fog = new THREE.Fog(0xA8D8F0, 14, 40);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const MAT = (c, r = .8, ex = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: r }, ex));
+const add = (geo, mat, x, y, z, par) => { const m = new THREE.Mesh(geo, typeof mat === 'number' ? MAT(mat) : mat); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; par.add(m); return m; };
+const box = (w, h, d, c, x, y, z, par = scene) => add(new THREE.BoxGeometry(w, h, d), c, x, y, z, par);
+const cyl = (rt, rb, h, c, x, y, z, par = scene, seg = 16) => add(new THREE.CylinderGeometry(rt, rb, h, seg), c, x, y, z, par);
+const sph = (r, c, x, y, z, par = scene, a = 18, b = 12) => add(new THREE.SphereGeometry(r, a, b), c, x, y, z, par);
+const cap = (r, l, c, x, y, z, par = scene) => add(new THREE.CapsuleGeometry(r, l, 8, 16), c, x, y, z, par);
+const BASIC = c => new THREE.MeshBasicMaterial({ color: c, toneMapped: false });
+const GREEN = 0x2F7A45, ORANGE = 0xE07B2A;
+const sprite = (t, s) => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthWrite: false })); sp.scale.setScalar(s); return sp; };
+const canvasTex = (w, h, paint) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); paint(g, w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; };
+
+// ---------- cachorro ----------
+function buildDog(o) {
+  const C = Object.assign({ base: 0xC98A4A, belly: 0xF2E2C4, back: null, points: null, muzzle: null, size: 1, leg: .3, body: .42, snout: .11, ear: 'floppy', earC: null, collar: GREEN, socks: false, fluff: false, tailCurl: .9 }, o);
+  const mB = MAT(C.base), mBe = MAT(C.belly), mP = MAT(C.points ?? C.base), mM = MAT(C.muzzle ?? C.points ?? C.belly), mE = MAT(C.earC ?? C.back ?? C.base), mK = C.back != null ? MAT(C.back) : mB;
+  const root = new THREE.Group(); const hipY = C.leg + .13;
+  const body = grp(root); body.position.y = hipY;
+  const torso = cap(.16, C.body, mB, 0, 0, 0, body); torso.rotation.x = Math.PI / 2; torso.scale.set(.92, 1, 1);
+  if (C.back != null) { const s = cap(.163, C.body, mK, 0, .035, -.01, body); s.rotation.x = Math.PI / 2; s.scale.set(.93, 1, .96); }
+  const chest = sph(.135, mBe, 0, -.03, C.body / 2 + .04, body); chest.scale.set(.92, 1.05, .75);
+  const haunch = [-1, 1].map(s => { const h = sph(.1, mK, s * .07, .0, -C.body / 2 + .02, body); h.scale.set(.8, 1.1, 1.1); return h; });
+  if (C.fluff) { for (let i = 0; i < 5; i++) { const f = sph(.07, mB, 0, -.12, C.body / 2 - i * .1, body); f.scale.set(1.2, .7, 1); } const r = sph(.16, mBe, 0, .02, C.body / 2 + .06, body); r.scale.set(1, 1.1, .8); }
+  const neck = cap(.085, .12, mK, 0, .1, C.body / 2 + .08, body); neck.rotation.x = -.7;
+  const headP = grp(body); headP.position.set(0, .23, C.body / 2 + .17);
+  const head = grp(headP);
+  const skull = sph(.125, mK, 0, 0, 0, head); skull.scale.set(1, .93, 1.05);
+  const cheeks = [-1, 1].map(s => { const c = sph(.07, C.points != null ? mP : mB, s * .06, -.045, .06, head); return c; });
+  const muz = cap(.062, C.snout, mM, 0, -.035, .1 + C.snout / 2, head); muz.rotation.x = Math.PI / 2;
+  const nose = sph(.033, MAT(0x1A1614, .3), 0, -.01, .1 + C.snout + .06, head); nose.scale.set(1.2, .85, .9);
+  const tongue = cap(.026, .05, MAT(0xE8788A, .5), 0, -.085, .1 + C.snout + .02, head); tongue.rotation.x = .4; tongue.scale.set(1.1, 1, .5);
+  const eyeM = MAT(0x2A1708, .15);
+  const eyes = [-1, 1].map(s => { const e = sph(.023, eyeM, s * .056, .028, .102, head, 14, 10); const hl = sph(.0065, BASIC(0xFFFFFF), .006, .009, .019, e, 8, 6); return e; });
+  if (C.points != null) [-1, 1].forEach(s => sph(.016, mP, s * .05, .07, .105, head, 10, 8));
+  const ears = [-1, 1].map(s => { const g = grp(head); g.position.set(s * .088, .075, -.015); const L = C.ear === 'long' ? 1.6 : C.ear === 'erect' ? .95 : 1.05; const e = sph(.07, mE, 0, 0, 0, g, 14, 10); e.scale.set(.32, L, .72);
+    if (C.ear === 'erect') { e.position.y = .07; g.rotation.z = -s * .25; } else if (C.ear === 'semi') { e.position.y = .05; g.rotation.z = -s * .2; g.userData.fold = 1; } else { e.position.y = -.06 * L; g.rotation.z = s * .5; g.rotation.x = .15; }
+    g.userData = Object.assign(g.userData || {}, { s, rz: g.rotation.z, rx: g.rotation.x, e }); return g; });
+  const legs = []; const mkLeg = (x, z, front) => { const hip = grp(body); hip.position.set(x, -.03, z); const L = C.leg;
+    cap(front ? .046 : .052, L * .4, front ? mK : mK, 0, -L * .25, 0, hip); const knee = grp(hip); knee.position.y = -L * .5;
+    cap(.037, L * .38, mP, 0, -L * .22, 0, knee); const paw = sph(.046, C.socks ? mBe : mP, 0, -L * .47, .02, knee, 12, 8); paw.scale.set(1, .6, 1.3);
+    legs.push({ hip, knee, front, x, z }); };
+  mkLeg(.085, C.body / 2 - .01, true); mkLeg(-.085, C.body / 2 - .01, true); mkLeg(.085, -C.body / 2 + .03, false); mkLeg(-.085, -C.body / 2 + .03, false);
+  const tail = grp(body); tail.position.set(0, .07, -C.body / 2 - .13); const tsegs = []; let par = tail; for (let i = 0; i < 4; i++) { const g = grp(par); if (i) g.position.y = .075; const c = cap(C.fluff ? .038 - i * .004 : .028 - i * .004, .06, i === 3 && C.socks ? mBe : mK, 0, .04, 0, g); tsegs.push(g); par = g; }
+  tail.rotation.x = -.7;
+  const col = add(new THREE.TorusGeometry(.09, .016, 8, 24), MAT(C.collar, .5), 0, .13, C.body / 2 + .1, body); col.rotation.x = Math.PI / 2 - .7;
+  const tag = add(new THREE.CylinderGeometry(.022, .022, .006, 14), MAT(0xF2C14E, .3, { metalness: .6 }), 0, .065, C.body / 2 + .175, body); tag.rotation.x = Math.PI / 2 - .3;
+  root.scale.setScalar(C.size);
+  return { root, body, head, headP, tongue, eyes, ears, legs, tail, tsegs, hipY, C };
+}
+function poseDog(d, t, o = {}) {
+  const { walk = 0, run = 0, sit = 0, tilt = 0, look = 0, lookUp = 0, wag = 1, pant = 0, eat = 0, ph = 0, lie = 0 } = o;
+  const g = walk + run; const f = run ? 11 : 7; const tt = t * f + ph; const amp = .45 * walk + .8 * run;
+  d.legs.forEach((L, i) => { const p = (i === 0 || i === 3) ? 0 : Math.PI; const s = Math.sin(tt + p);
+    L.hip.rotation.set(s * amp, 0, 0); L.knee.rotation.x = (L.front ? -1 : 1) * Math.max(0, L.front ? s : -s) * amp * 1.1; L.hip.scale.y = 1; });
+  d.body.position.y = d.hipY + Math.abs(Math.sin(tt)) * (.012 * walk + .04 * run); d.body.rotation.x = Math.sin(tt * 2) * .02 * run;
+  if (sit > 0) { const s = ease(sit); d.body.rotation.x = -.52 * s; d.body.position.y = d.hipY - .07 * s;
+    d.legs.forEach(L => { if (L.front) { L.hip.rotation.x = .52 * s; L.hip.scale.y = 1 + .3 * s; } else { L.hip.rotation.x = -1.25 * s + .52 * s; L.knee.rotation.x = 1.9 * s; } }); }
+  if (lie > 0) { const s = ease(lie); d.body.position.y = lerp(d.body.position.y, .16, s); d.legs.forEach(L => { if (L.front) { L.hip.rotation.x = lerp(L.hip.rotation.x, -1.45, s); L.knee.rotation.x = lerp(L.knee.rotation.x, 0, s); } else { L.hip.rotation.x = lerp(L.hip.rotation.x, -1.4, s); L.knee.rotation.x = lerp(L.knee.rotation.x, 2.4, s); } }); }
+  const breathe = 1 + Math.sin(t * (pant ? 9 : 2.2)) * (pant ? .012 : .006);
+  d.body.children[0].scale.set(.92 * breathe, 1, 1 * breathe);
+  d.headP.position.y = .23 - .2 * eat; d.headP.position.z = d.C.body / 2 + .17 + .06 * eat;
+  d.head.rotation.set(-lookUp + .9 * eat + .52 * ease(sit) * (1 - eat) + Math.sin(tt * 2) * .03 * g, look + Math.sin(t * .7 + ph) * .08, tilt);
+  d.tongue.visible = pant > 0; if (pant > 0) d.tongue.scale.set(1.1, 1 + Math.sin(t * 9) * .15, .5);
+  const wg = Math.sin(t * 13 + ph) * .55 * wag; d.tail.rotation.set(-.7 + .25 * ease(sit), wg, 0); d.tsegs.forEach((s, i) => { s.rotation.x = i ? -d.C.tailCurl * .25 : 0; s.rotation.z = wg * .2 * i; });
+  const blink = ((t + ph) % 3.9) > 3.78; d.eyes.forEach(e => e.scale.y = blink ? .15 : 1);
+  d.ears.forEach(e => { e.rotation.z = e.userData.rz + Math.sin(tt * 2) * .06 * g * e.userData.s + tilt * .3; });
+}
+const BREEDS = {
+  caramelo: { base: 0xD39552, belly: 0xF4DEC0, muzzle: 0xE7B47A, ear: 'floppy', earC: 0xC07F40, size: 1.0 },
+  pretoTan: { base: 0xC98A4A, back: 0x1E1A18, points: 0xC98A4A, belly: 0xF2E8DA, muzzle: 0xC98A4A, ear: 'semi', earC: 0x1E1A18, collar: ORANGE },
+  salsicha: { base: 0xB8743A, back: 0x18140F, points: 0xB8743A, belly: 0xB8743A, muzzle: 0xB8743A, earC: 0x18140F, ear: 'long', leg: .17, body: .55, snout: .13, size: .9, collar: 0xD94C6A },
+  salsichaRuivo: { base: 0xC9783A, belly: 0xD99A5A, muzzle: 0xC9783A, earC: 0x9A5426, ear: 'long', leg: .17, body: .55, snout: .13, size: .9, fluff: true, collar: 0x3B82F6 },
+  golden: { base: 0xD9A24E, belly: 0xF0CC8A, muzzle: 0xE5B66A, ear: 'floppy', size: 1.25, fluff: true, collar: 0xD94C6A },
+  collie: { base: 0x1C1A1A, belly: 0xFFFFFF, muzzle: 0xFFFFFF, ear: 'semi', socks: true, size: 1.05, collar: 0xF2C14E },
+};
+
+
+// ---------- tempos ----------
+const T_OLHA = WA(/^Olha,$/), T_HOR = WA(/horário/), T_ESTR = WA(/estranho/), T_PORTAO = WA(/portão/), T_MEXE = WA(/mexe/), T_FICA = WA(/fica/), T_LATE = WA(/^late,$/), T_ALTO = WA(/alto/), T_CORPO = WA(/corpo/), T_EOQ = WA(/^E$/, 0, 13.9);
+const T_VAI = WA(/^vai$/), T_FUNC = WA(/funcionou/), T_NOVO = WA(/novo/), T_NAOSABE = WA(/^não$/, 0, 19), T_CARTEIRO = WA(/carteiro/), T_BIRRA = WA(/birra/), T_NAT = WA(/natureza/), T_MATILHA = WA(/matilha/), T_ALGUEM = WA(/alguém/), T_TEST = WA(/testando/);
+const T_MOTO = WA(/motoboy/), T_VIZ = WA(/vizinho/), T_SACOLA = WA(/sacola/), T_REFL = WA(/reflexo/), T_AGORA = WA(/Agora/), T_CADA = WA(/^cada$/), T_CEREBRO = WA(/cérebro/), T_PREMIO = WA(/prêmio/), T_DEU = WA(/^Deu$/), T_REPETE = WA(/repete/);
+const T_EPOR = WA(/^É$/), T_LATIDO = WA(/latido/), T_ENTAO = WA(/Então/), T_RABO = WA(/rabo/), T_PEITO = WA(/peito/), T_NAOPEDE = WA(/^não$/, 0, 50.5), T_ESPERA = WA(/esperando/, 0, 52), T_OBRIG = WA(/obrigado/), T_MARCA = WA(/Marca/);
+const HL = /cachorro|vida|estranho|uniforme|portão|correio|late|alto|inteiro|funcionou|carteiro|birra|território|matilha|defesa|motoboy|vizinho|sacola|reflexo|cérebro|prêmio|certo|repete|forte|rabo|estufado|carinho|obrigado|segurança/i;
+
+// ---------- luz ----------
+const hemi = new THREE.HemisphereLight(0xFFF1DE, 0x7A6A55, 1.05); scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xFFF2DA, 2.5); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -6, right: 6, top: 6, bottom: -6, near: .5, far: 40 }); sun.shadow.bias = -.0004; scene.add(sun); scene.add(sun.target);
+
+// ================= RUA/CASA (x=0) =================
+const street = grp();
+box(40, .1, 40, 0x8FB86A, 0, -.05, 0, street); box(40, .06, 2.0, 0xD9D2C4, 0, 0, 0, street); box(40, .02, 3.2, 0x4A4D55, 0, -.01, 2.6, street); box(40, .1, .14, 0xBDB5A6, 0, .03, 1.02, street);
+for (let i = -20; i < 20; i += 1.2) box(.6, .022, .08, 0xF2F2F2, i, .005, 2.6, street);
+const wallM = MAT(0xF0E2C8), wallTop = MAT(0xC98A5A);
+box(5, 1.1, .18, wallM, -3.1, .55, -1.05, street); box(5, .08, .26, wallTop, -3.1, 1.14, -1.05, street); box(5, 1.1, .18, wallM, 3.1, .55, -1.05, street); box(5, .08, .26, wallTop, 3.1, 1.14, -1.05, street);
+[-.64, .64].forEach(x => { box(.2, 1.35, .26, 0xE6D2B0, x, .67, -1.05, street); box(.26, .08, .32, wallTop, x, 1.37, -1.05, street); });
+const gate = grp(street); gate.position.set(-.54, 0, -1.05); const gateM = MAT(0x2F5A7A, .5, { metalness: .3 });
+box(1.08, .06, .05, gateM, .54, .12, 0, gate); box(1.08, .06, .05, gateM, .54, 1.0, 0, gate); box(1.08, .05, .05, gateM, .54, .56, 0, gate); for (let i = 0; i < 10; i++) cyl(.016, .016, .98, gateM, .06 + i * .107, .56, 0, gate, 6);
+// caixa de correio
+const mailbox = grp(street); mailbox.position.set(1.05, .78, -.9); box(.3, .22, .16, 0xD9283A, 0, 0, 0, mailbox); box(.32, .03, .18, 0xB01E2E, 0, .12, 0, mailbox); const mflap = grp(mailbox); mflap.position.set(0, .1, .085); box(.26, .04, .01, 0x8A1420, 0, -.02, 0, mflap);
+const letter = box(.16, .1, .005, 0xFFFFFF, 0, 0, 0, scene); letter.visible = false;
+// quintal e casa
+box(10, .03, 4, 0x7FB35A, 0, .01, -3.1, street); box(.8, .035, 3, 0xCDB89A, 0, .02, -2.6, street);
+const house = grp(street); house.position.set(0, 0, -5.2); box(4.2, 2.3, 2.6, 0xF7F0E2, 0, 1.15, 0, house); const roof = add(new THREE.ConeGeometry(3.2, 1.3, 4), 0x3A6A9A, 0, 2.95, 0, house); roof.rotation.y = Math.PI / 4; roof.scale.set(1, 1, .82);
+box(.8, 1.5, .08, 0x8B5A2B, 0, .75, 1.31, house); box(2.0, .1, .9, 0xBFA88A, 0, .05, 1.75, house);
+const glassDoor = add(new THREE.PlaneGeometry(1.0, 1.4), new THREE.MeshStandardMaterial({ color: 0x9FC8E8, transparent: true, opacity: .45, roughness: .02, metalness: .6, depthWrite: false }), 1.35, .9, 1.32, house); glassDoor.castShadow = false; box(1.1, 1.5, .05, 0xFFFFFF, 1.35, .9, 1.29, house);
+box(.8, .7, .06, 0x9FD3F0, -1.35, 1.3, 1.31, house);
+const tree = (x, z, s = 1, par = street) => { const g = grp(par); g.position.set(x, 0, z); g.scale.setScalar(s); cyl(.08, .11, 1.2, 0x7A5030, 0, .6, 0, g, 7); add(new THREE.IcosahedronGeometry(.6, 0), 0x5FA845, 0, 1.55, 0, g); add(new THREE.IcosahedronGeometry(.45, 0), 0x6FBA50, .3, 1.9, .1, g); return g; };
+tree(-2.1, -2.0, .9); tree(2.6, -2.4, 1.1); tree(-5.5, 5.4, 1.1); tree(5.2, 5.4, 1);
+[-7, -3.5, 0, 3.5, 7].forEach((x, i) => { const g = grp(street); g.position.set(x, 0, 7.4); box(3.2, 2.2, 2.4, [0xF2D0A8, 0xC8E0B8, 0xF6E6B0, 0xD8C8E8, 0xF0C0B0][i], 0, 1.1, 0, g); const rf = add(new THREE.ConeGeometry(2.4, 1.0, 4), [0xA04A3A, 0x5A6A8A, 0xB0603A, 0x6A4A7A, 0x8A5A3A][i], 0, 2.7, 0, g); rf.rotation.y = Math.PI / 4; box(.7, 1.3, .06, 0x7A4A2A, 0, .65, -1.21, g); });
+// pessoas
+const postman = buildPerson({ skin: 0xC98E66, shirt: 0xF2C14E, pants: 0x2A4A8A, hair: 0x2B1A10 }); street.add(postman.root);
+cyl(.17, .17, .08, 0x2A4A8A, 0, .17, 0, postman.head, 12); box(.2, .03, .1, 0x2A4A8A, 0, .14, .14, postman.head); const pbag = box(.3, .25, .12, 0x7A4A2A, .25, .25, 0, postman.hips);
+const owner = buildPerson({ skin: 0xD9A27A, shirt: 0x22A06A, pants: 0x3B4B6A, hair: 0x3A2414 }); street.add(owner.root);
+const neighbor = buildPerson({ skin: 0xE8B98F, shirt: 0xC23B3B, pants: 0x3B3B3B, hair: 0x9A9A9A, glasses: true }); street.add(neighbor.root);
+const rider = buildPerson({ skin: 0xA8704A, shirt: 0xE84A4A, pants: 0x2A2A33, hair: 0x111111 }); street.add(rider.root); sph(.19, MAT(0xE84A4A, .3), 0, .03, 0, rider.head, 14, 10);
+const moto = grp(street); { [-.5, .5].forEach(x => { const w = cyl(.22, .22, .08, 0x1E1E22, x, .22, 0, moto, 16); w.rotation.x = Math.PI / 2; }); box(.8, .22, .2, 0x2A2F3A, 0, .45, 0, moto); box(.3, .1, .22, 0x1A1A1A, -.1, .6, 0, moto); cyl(.02, .02, .4, 0x8A94A8, .45, .65, 0, moto, 6).rotation.z = .4; box(.36, .3, .32, 0xE84A4A, -.45, .75, 0, moto); }
+const bag = grp(street); { const m = add(new THREE.SphereGeometry(.15, 10, 8), MAT(0xF4F4F4, .6, { transparent: true, opacity: .9 }), 0, 0, 0, bag); m.scale.set(1, 1.2, .6); [-1, 1].forEach(s => { const h = add(new THREE.TorusGeometry(.05, .012, 6, 12, Math.PI), MAT(0xF4F4F4, .6), s * .06, .18, 0, bag); }); }
+// cachorro principal
+const dog = buildDog({ base: 0xD39552, belly: 0xF4DEC0, muzzle: 0xE7B47A, ear: 'semi', earC: 0xB87538, size: 1.0, collar: 0xD9283A });
+scene.add(dog.root);
+const cape = grp(dog.body); cape.position.set(0, .14, .1); const capeM = add(new THREE.PlaneGeometry(.36, .5, 1, 4), new THREE.MeshStandardMaterial({ color: 0xD9283A, side: THREE.DoubleSide, roughness: .6 }), 0, 0, -.25, cape); capeM.rotation.x = -Math.PI / 2 + .25;
+const medal = grp(dog.body); medal.position.set(0, .03, .3); { cyl(.05, .05, .012, MAT(0xF2C14E, .3, { metalness: .7 }), 0, 0, 0, medal, 20).rotation.x = Math.PI / 2 - .3; const r = box(.04, .06, .005, 0x3B82F6, 0, .06, -.01, medal); }
+const mirrorDog = buildDog({ base: 0xD39552, belly: 0xF4DEC0, muzzle: 0xE7B47A, ear: 'semi', earC: 0xB87538, size: 1.0, collar: 0xD9283A }); scene.add(mirrorDog.root);
+mirrorDog.root.traverse(o => { if (o.material) { o.material = o.material.clone(); o.material.transparent = true; o.material.opacity = .5; o.material.depthTest = false; o.renderOrder = 5; } });
+// ================= FLORESTA (x=60) =================
+const forest = grp(); forest.position.set(60, 0, 0);
+box(60, .1, 60, 0x4A7A3A, 0, -.05, 0, forest);
+for (let i = 0; i < 40; i++) { const g = grp(forest); const a = rr(0, 6.28), r = rr(3.5, 12); g.position.set(Math.cos(a) * r, 0, Math.sin(a) * r - 2); const s = rr(.8, 1.6); g.scale.setScalar(s); cyl(.08, .1, .6, 0x5A3A2A, 0, .3, 0, g, 6); for (let k = 0; k < 3; k++) add(new THREE.ConeGeometry(.55 - k * .12, .8, 7), [0x2F6A3A, 0x3A7A44, 0x2A5A34][k], 0, .8 + k * .45, 0, g); }
+const rock = add(new THREE.DodecahedronGeometry(.8, 0), 0x7A8088, 0, .35, 0, forest); rock.scale.set(1.3, .6, 1);
+const wolf = buildDog({ base: 0x8A8F9A, belly: 0xDADDE2, muzzle: 0xDADDE2, ear: 'erect', earC: 0x6A6F7A, size: 1.25, collar: 0x8A8F9A, fluff: true }); forest.add(wolf.root);
+const pack = [0, 1, 2].map(i => { const w = buildDog({ base: [0x7A7F8A, 0x9A9FA8, 0x6A6F78][i], belly: 0xD0D4DA, muzzle: 0xD0D4DA, ear: 'erect', size: [1.1, .7, .65][i], collar: [0x7A7F8A, 0x9A9FA8, 0x6A6F78][i], fluff: true }); forest.add(w.root); return w; });
+const stranger = buildDog({ base: 0x5A4A3A, belly: 0x8A7A6A, muzzle: 0x8A7A6A, ear: 'erect', size: 1.1, collar: 0x5A4A3A }); forest.add(stranger.root);
+// ================= CÉREBRO (x=-60) =================
+const brainSet = grp(); brainSet.position.set(-60, 0, 0);
+const brain = grp(brainSet); brain.position.set(0, 1.6, 0); const bM = MAT(0xF2A0B8, .5);
+for (let i = 0; i < 46; i++) { const a = rr(0, 6.28), b = rr(-1, 1), r = .55; const p = V(Math.cos(a) * Math.sqrt(1 - b * b) * r * 1.15, b * r * .75, Math.sin(a) * Math.sqrt(1 - b * b) * r * .9); if (p.y < -.25) continue; const s = add(new THREE.CapsuleGeometry(.11, .16, 4, 8), bM, p.x, p.y, p.z, brain); s.rotation.set(rr(0, 3), rr(0, 3), rr(0, 3)); }
+sph(.5, bM, 0, 0, 0, brain, 20, 14).scale.set(1.1, .75, .85); box(.03, .6, 1.0, MAT(0xD9809A), 0, .15, 0, brain);
+const stem = cap(.14, .3, 0xE890A8, 0, 1.05, -.1, brainSet); stem.rotation.x = .3;
+const glowT = canvasTex(128, 128, g => { const r = g.createRadialGradient(64, 64, 0, 64, 64, 64); r.addColorStop(0, 'rgba(255,230,120,1)'); r.addColorStop(1, 'rgba(255,200,60,0)'); g.fillStyle = r; g.fillRect(0, 0, 128, 128); });
+const glow = sprite(glowT, 3); glow.position.set(0, 1.6, -.3); brainSet.add(glow);
+const emo = (e, px = 110) => canvasTex(160, 160, g => { g.font = `${px}px 'Noto Color Emoji'`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(e, 80, 88); });
+const trophyT = emo('🏆'), boneT = emo('🦴'), heartT = emo('❤️');
+const prizes = []; for (let i = 0; i < 6; i++) { const s = sprite(i % 2 ? boneT : trophyT, .35); s.userData = { a: i / 6 * 6.28 }; brainSet.add(s); prizes.push(s); }
+const loopRing = add(new THREE.TorusGeometry(1.05, .04, 8, 48, Math.PI * 1.7), BASIC(0x22C55E), 0, 1.6, .2, brainSet); const loopHead = add(new THREE.ConeGeometry(.1, .22, 10), BASIC(0x22C55E), 0, 0, 0, brainSet);
+const bars = []; for (let i = 0; i < 6; i++) { const b = box(.18, 1, .18, BASIC([0x22C55E, 0x7AD03A, 0xF2C14E, 0xF29A3A, 0xF2603A, 0xE83A3A][i]), -.6 + i * .24, 0, .6, brainSet); b.userData.i = i; bars.push(b); }
+// latidos (AU!)
+const auT = canvasTex(256, 160, g => { g.font = '900 120px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineWidth = 16; g.strokeStyle = '#111'; g.strokeText('AU!', 128, 84); g.fillStyle = '#FFD21F'; g.fillText('AU!', 128, 84); });
+const aus = []; for (let i = 0; i < 4; i++) { const s = sprite(auT, .3); s.visible = false; scene.add(s); aus.push(s); }
+const lineT = canvasTex(64, 64, g => { g.strokeStyle = '#fff'; g.lineWidth = 8; g.beginPath(); g.arc(0, 32, 26, -.8, .8); g.stroke(); g.beginPath(); g.arc(0, 32, 44, -.7, .7); g.stroke(); });
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [T_OLHA, 'whoosh'], [T_ESTR, 'buzz'], [T_MEXE, 'pop'], [T_LATE, 'pop'], [T_ALTO, 'pop'], [T_CORPO, 'boing'], [T_VAI, 'whoosh'], [T_FUNC, 'win'], [T_CARTEIRO, 'ding'], [T_BIRRA, 'buzzx'], [T_NAT, 'whoosh'], [T_TEST, 'buzz'],
+ [T_MOTO, 'zap'], [T_VIZ, 'pop'], [T_SACOLA, 'whoosh'], [T_REFL, 'boing'], [T_AGORA, 'whoosh'], [T_PREMIO, 'win'], [T_REPETE, 'ding'], [T_LATIDO, 'pop'], [T_ENTAO, 'whoosh'], [T_PEITO, 'boing'], [T_OBRIG, 'win']].forEach(([t, k]) => ev(t, k));
+
+const D0 = V(.12, 0, -2.4);
+function setWorld(w) { street.visible = w === 'street'; forest.visible = w === 'forest'; brainSet.visible = w === 'brain'; dog.root.visible = w === 'street'; mirrorDog.root.visible = false;
+  [postman, owner, neighbor, rider].forEach(p => p.root.visible = false); moto.visible = false; bag.visible = false; letter.visible = false; cape.visible = false; medal.visible = false; aus.forEach(a => a.visible = false); gate.rotation.y = 0; mflap.rotation.x = 0;
+  if (w === 'street') { scene.background.setHex(0xA8D8F0); scene.fog.color.setHex(0xA8D8F0); scene.fog.near = 14; scene.fog.far = 40; hemi.intensity = 1.05; sun.intensity = 2.5; renderer.toneMappingExposure = 1.05; }
+  if (w === 'forest') { scene.background.setHex(0xF0B080); scene.fog.color.setHex(0xE8A878); scene.fog.near = 6; scene.fog.far = 22; hemi.intensity = .9; sun.intensity = 2.0; renderer.toneMappingExposure = 1.05; }
+  if (w === 'brain') { scene.background.setHex(0x1A1F3A); scene.fog.color.setHex(0x1A1F3A); scene.fog.near = 10; scene.fog.far = 30; hemi.intensity = .9; sun.intensity = 1.6; renderer.toneMappingExposure = 1.05; } }
+function dogAt(t, x, z, ry, o) { dog.root.position.set(x, 0, z); dog.root.rotation.y = ry; poseDog(dog, t, o); }
+function bark(t, d, k = 1, t0 = 0) { const ph = ((t - t0) * 3.2) % 1; d.head.rotation.x -= Math.max(0, Math.sin(ph * Math.PI * 2)) * .35 * k; d.tongue.visible = true; scene.updateMatrixWorld(true); const m = d.head.localToWorld(V(0, .02, .3));
+  aus.forEach((a, i) => { const u = ((t - t0) * 1.6 + i / 4) % 1; a.visible = k > 0; a.position.copy(m).add(V(Math.sin(i * 2.3) * .25 * u, .12 + u * .35, .2 * u)); a.scale.setScalar((.14 + u * .12) * (.7 + k * .5)); a.material.opacity = 1 - u; }); }
+function walker(p, t, x0, x1, t0, t1, z, o = {}) { const k = clamp((t - t0) / (t1 - t0)); p.root.visible = true; p.root.position.set(lerp(x0, x1, k), 0, z); p.root.rotation.y = x1 > x0 ? Math.PI / 2 : -Math.PI / 2; poseP(p, o.P || PP.stand, k > 0 && k < 1 ? 1 : 0, t); face(p, o.face || 'neutral', t); return k; }
+
+// ---------- planos ----------
+const SHOTS = [
+  // 0 gancho: cachorro herói de capa
+  [0, (t, k) => { setWorld('street'); cape.visible = true; capeM.rotation.x = -Math.PI / 2 + .25 + Math.sin(t * 6) * .12; dogAt(t, D0.x, D0.z - .2, Math.PI - 1.0, { sit: 1, lookUp: .3, wag: 1.2 }); dog.body.scale.set(1.08, 1.08, 1.0);
+    return [V(1.5 - k * .05, .95, -3.6), V(.1, .62, -2.6)]; }],
+  // 1 na cabeça dele: visão dele pelo portão
+  [T_OLHA - .1, (t, k) => { setWorld('street'); dogAt(t, D0.x, D0.z, 0, { sit: 1, lookUp: .1, wag: .4 }); return [V(.3, .6, -2.6), V(.4, .7, -.3)]; }],
+  // 2 todo dia mesmo horário: carteiro chega, mexe na caixa, olha a casa
+  [T_HOR - .1, (t, k) => { setWorld('street'); dogAt(t, D0.x, D0.z, 0, { sit: 1, lookUp: .1, wag: .1, look: .2 }); const a = walker(postman, t, 3.5, 1.15, T_HOR - .3, T_PORTAO + .2, -.35);
+    if (a >= 1) { postman.root.rotation.y = Math.PI; poseP(postman, t > T_MEXE && t < T_FICA ? { ...PP.stand, rx: -1.5, rz: -.1, re: -.3 } : { ...PP.stand, hy: t > T_FICA ? .2 : 0 }); face(postman, 'neutral', t); mflap.rotation.x = t > T_MEXE && t < T_FICA ? -1 : 0; }
+    return t < T_FICA ? [V(1.6, 1.4, 3.2), V(.9, .9, -.6)] : [V(.3, .6, -2.6), V(.7, .85, -.4)]; }],
+  // 3 late, late mais alto, late com o corpo inteiro
+  [T_LATE - .2, (t, k) => { setWorld('street'); const lv = t < T_ALTO ? .6 : t < T_CORPO ? 1 : 1.5; dogAt(t, D0.x + Math.sin(t * 20) * .01 * lv, D0.z + .2, 0, { sit: 0, wag: 1.5, pant: 1, lookUp: .1 }); bark(t, dog, lv, T_LATE);
+    if (lv > 1.2) { dog.body.position.y += Math.abs(Math.sin(t * 9)) * .07; } postman.root.visible = true; postman.root.position.set(1.15, 0, -.35); postman.root.rotation.y = Math.PI - .4; poseP(postman, { ...PP.stand, hx: .1 }); face(postman, 'neutral', t);
+    return t < T_CORPO - .1 ? [V(-1.9, 1.45, -3.75), V(.35, .7, -1.5)] : [V(2.5, 1.2, -4.0), V(.3, .65, -1.6)]; }],
+  // 4 e o que acontece? o estranho vai embora → funcionou
+  [T_EOQ - .1, (t, k) => { setWorld('street'); dogAt(t, D0.x, D0.z + .2, 0, { sit: t > T_FUNC ? 1 : 0, wag: t > T_FUNC ? 2 : .8, pant: 1, lookUp: t > T_FUNC ? .25 : 0 }); if (t < T_FUNC) bark(t, dog, .7, T_EOQ);
+    walker(postman, t, 1.15, -4, T_VAI - .3, T_NOVO + .6, -.3); return [V(.5, 1.0, 3.2), V(.1, .6, -.8)]; }],
+  // 5 de novo, todo santo dia (repetição rápida)
+  [T_NOVO - .1, (t, k) => { setWorld('street'); const cyc = ((t - T_NOVO) / .9) % 1; dogAt(t, D0.x, D0.z + .2, 0, { sit: 0, wag: 1.5, pant: 1 }); bark(t, dog, .9, T_NOVO); walker(postman, t, 2.4, -2.4, T_NOVO + Math.floor((t - T_NOVO) / .9) * .9, T_NOVO + Math.floor((t - T_NOVO) / .9) * .9 + .9, -.3);
+    return [V(-.2, 1.6, 3.4), V(.1, .6, -.8)]; }],
+  // 6 não sabe que era só o carteiro / não é birra
+  [T_NAOSABE - .1, (t, k) => { setWorld('street'); dogAt(t, D0.x, D0.z, 0, { sit: 1, wag: 1.2, lookUp: .2, tilt: .2 }); postman.root.visible = true; postman.root.position.set(1.15, 0, -.35); postman.root.rotation.y = 0; poseP(postman, { ...PP.stand, rx: -2.6, rz: -.4, re: -.3 }); face(postman, 'happy', t); letter.visible = true; letter.position.set(1.05, .9, -.78);
+    return t < T_BIRRA - .3 ? [V(2.4, 1.5, 3.0), V(.9, .9, -.5)] : (dog.root.rotation.y = Math.PI - .9, [V(1.5, .95, -3.6), V(.12, .62, -2.4)]); }],
+  // 7 na natureza: vigia o território, protege a matilha
+  [T_NAT - .1, (t, k) => { setWorld('forest'); wolf.root.position.set(0, .5, 0); wolf.root.rotation.y = .2; poseDog(wolf, t, { sit: 1, lookUp: .15, look: Math.sin(t * .8) * .3 });
+    pack.forEach((w, i) => { w.root.position.set([-1.0, -.4, .2][i], 0, [-1.4, -1.8, -1.6][i]); w.root.rotation.y = [.6, -.3, .2][i]; poseDog(w, t, { lie: 1, wag: .2, ph: i }); }); stranger.root.visible = false;
+    return [V(1.2 - k * .1, 1.5, 4.0), V(-.2, .7, -.6)]; }],
+  // 8 alguém que volta todo dia e nunca entra = testando a defesa
+  [T_ALGUEM - .1, (t, k) => { setWorld('forest'); wolf.root.position.set(0, .5, 0); const tense = t > T_TEST - .2; wolf.root.rotation.y = .9; poseDog(wolf, t, { sit: tense ? 0 : 1, lookUp: .1, look: .2 }); if (tense) bark(t, wolf, .8, T_TEST);
+    pack.forEach((w, i) => { w.root.position.set([-1.0, -.4, .2][i], 0, [-1.4, -1.8, -1.6][i]); poseDog(w, t, { lie: 1, wag: .2, ph: i }); });
+    stranger.root.visible = true; const u = ((t - T_ALGUEM) * .35) % 1; stranger.root.position.set(lerp(4.5, 2.0, Math.sin(u * Math.PI)), 0, -1.0 + Math.cos(u * Math.PI) * .8); stranger.root.rotation.y = u < .5 ? -2.2 : .9; poseDog(stranger, t, { walk: 1 });
+    return [V(1.4, 1.6, 4.6), V(1.0, .6, -.6)]; }],
+  // 9 late para o motoboy
+  [T_MOTO - .4, (t, k) => { setWorld('street'); dogAt(t, D0.x, D0.z + .2, .4, { wag: 1.4, pant: 1, look: .3 }); bark(t, dog, 1, T_MOTO); moto.visible = true; rider.root.visible = true; const x = lerp(-2.6, 2.6, clamp((t - T_MOTO + .45) / 1.4)); moto.position.set(x, 0, 1.8); rider.root.position.set(x - .1, .25, 1.8); rider.root.rotation.y = Math.PI / 2; poseP(rider, { ...PP.sit, lx: -1.3, rx: -1.3, le: 0, re: 0 }); face(rider, 'neutral', t);
+    return [V(.4, 1.0, 4.6), V(.2, .6, -1.4)]; }],
+  // 10 para o vizinho
+  [T_VIZ - .05, (t, k) => { setWorld('street'); dogAt(t, 1.6, -1.4, -.7, { wag: 1.4, pant: 1, lookUp: .4 }); bark(t, dog, 1, T_VIZ); neighbor.root.visible = true; neighbor.root.position.set(2.6, 0, -.55); neighbor.root.rotation.y = -2.4; poseP(neighbor, { ...PP.stand, rx: -2.8, rz: -.3, re: -.3 }); face(neighbor, 'happy', t);
+    return [V(.9, .9, -2.6), V(2.0, .8, -.9)]; }],
+  // 11 para a sacola voando
+  [T_SACOLA - .2, (t, k) => { setWorld('street'); dogAt(t, -.6, -2.4, Math.PI / 2 - .3, { wag: 1.4, pant: 1, lookUp: .5 }); bark(t, dog, 1, T_SACOLA); bag.visible = true; const u = (t - T_SACOLA + .2) / 1.4; bag.position.set(lerp(-1.4, 1.0, u), .85 + Math.sin(u * 7) * .2 + u * .3, -2.3 + Math.sin(u * 4) * .15); bag.rotation.set(t * 2, t * 3, t);
+    cam.fov = 50; return [V(.7, .9, -1.25), V(-.35, .8, -2.35)]; }],
+  // 12 e até para o próprio reflexo no vidro
+  [T_REFL - .5, (t, k) => { setWorld('street'); const gx = 1.35, gz = -5.2 + 1.32; dogAt(t, gx, gz + .55, Math.PI, { wag: 1.2, pant: 1, tilt: .25 }); bark(t, dog, .5, T_REFL);
+    mirrorDog.root.visible = true; mirrorDog.root.position.set(gx, 0, gz - .55); mirrorDog.root.rotation.y = 0; poseDog(mirrorDog, t, { wag: 1.2, pant: 1, tilt: -.25 }); mirrorDog.tongue.visible = true;
+    return [V(gx + .9, .7, gz + 1.5), V(gx, .5, gz)]; }],
+  // 13 o cérebro ganha um prêmio
+  [T_AGORA - .1, (t, k) => { setWorld('brain'); brain.rotation.y = t * .4; const pr = t > T_PREMIO - .1 ? ease((t - T_PREMIO + .1) / .5) : 0; glow.material.opacity = pr * (.7 + Math.sin(t * 6) * .2); loopRing.visible = false; loopHead.visible = false; bars.forEach(b => b.visible = false);
+    prizes.forEach((p, i) => { p.visible = pr > 0; const a = p.userData.a + t * 1.2; p.position.set(Math.cos(a) * 1.0, 1.6 + Math.sin(a * 2) * .2, Math.sin(a) * .6 + .3); p.scale.setScalar(.35 * pr); });
+    return [V(0, 1.7, 3.6 - k * .1), V(0, 1.6, 0)]; }],
+  // 14 deu certo → se repete (loop)
+  [T_DEU - .1, (t, k) => { setWorld('brain'); brain.rotation.y = t * .4; glow.material.opacity = .6; bars.forEach(b => b.visible = false); prizes.forEach(p => p.visible = false);
+    loopRing.visible = true; loopRing.rotation.z = -t * 3; const a = -t * 3 + Math.PI * 1.7; loopHead.visible = true; loopHead.position.set(Math.cos(a) * 1.05, 1.6 + Math.sin(a) * 1.05, .2); loopHead.rotation.z = a; return [V(0, 1.6, 3.8), V(0, 1.6, 0)]; }],
+  // 15 a cada dia o latido fica mais forte (medidor)
+  [T_EPOR - .1, (t, k) => { setWorld('brain'); brain.rotation.y = t * .4; glow.material.opacity = .4; loopRing.visible = false; loopHead.visible = false; prizes.forEach(p => p.visible = false);
+    const lv = clamp((t - T_LATIDO + .3) / 1.4) * 6; bars.forEach(b => { b.visible = true; const h = .15 + b.userData.i * .12; const s = clamp(lv - b.userData.i); b.scale.y = Math.max(.001, h * s); b.position.y = .55 + h * s / 2; });
+    return [V(.3, 1.2, 3.8), V(0, .95, .3)]; }],
+  // 16 volta do portão: rabo pra cima, peito estufado
+  [T_ENTAO - .1, (t, k) => { setWorld('street'); const a = clamp((t - T_ENTAO) / 2.4); dogAt(t, lerp(D0.x, .1, a), lerp(D0.z, -2.7, a), Math.PI, { walk: a < 1 ? 1 : 0, wag: 1.6, lookUp: .2 }); dog.body.scale.set(1 + .12 * clamp((t - T_PEITO) / .4), 1 + .12 * clamp((t - T_PEITO) / .4), 1); dog.tail.rotation.x = -1.3;
+    owner.root.visible = true; owner.root.position.set(-.5, 0, -3.05); owner.root.rotation.y = .3; poseP(owner, PP.stand); face(owner, 'neutral', t);
+    return [V(1.5, 1.0, -3.7), V(0, .55, -2.4)]; }],
+  // 17 não está pedindo carinho: esperando o seu obrigado (medalha)
+  [T_NAOPEDE - .1, (t, k) => { setWorld('street'); dogAt(t, .1, -2.7, Math.PI, { sit: 1, wag: 1.8, lookUp: .45 }); dog.body.scale.set(1.12, 1.12, 1); owner.root.visible = true; owner.root.position.set(-.5, 0, -3.05); owner.root.rotation.y = .3;
+    const thx = t > T_OBRIG - .1; poseP(owner, thx ? { ...PP.stand, rx: -1.2, rz: -.2, re: -.6 } : { ...PP.stand, hx: .3 }); face(owner, thx ? 'happy' : 'neutral', t); medal.visible = thx; medal.scale.setScalar(thx ? pop(t - T_OBRIG + .1, .35) : 1); cape.visible = thx; capeM.rotation.x = -Math.PI / 2 + .25 + Math.sin(t * 6) * .12;
+    return [V(.8, .8, -3.75), V(-.1, .6, -2.8)]; }],
+  // 18 CTA
+  [T_MARCA - .1, (t, k) => { setWorld('street'); dogAt(t, .1, -2.7, Math.PI, { sit: 1, wag: 1.8, lookUp: .45, pant: 1 }); dog.body.scale.set(1.12, 1.12, 1); medal.visible = true; cape.visible = true; capeM.rotation.x = -Math.PI / 2 + .25 + Math.sin(t * 6) * .12;
+    owner.root.visible = true; owner.root.position.set(-.5, 0, -3.05); owner.root.rotation.y = .3; poseP(owner, { ...PP.stand, rx: -1.2, rz: -.2, re: -.6 }); face(owner, 'happy', t);
+    return [V(.85 + k * .05, .95, -3.8), V(-.15, .65, -2.85)]; }],
+];
+window.draw = function (t) {
+  dog.body.scale.set(1, 1, 1); dog.tail.rotation.x = 0; cam.fov = 40;
+  let i = 0; while (i + 1 < SHOTS.length && SHOTS[i + 1][0] <= t) i++;
+  const [cp, tg] = SHOTS[i][1](t, t - SHOTS[i][0]);
+  const off = forest.visible ? forest.position : brainSet.visible ? brainSet.position : V(0, 0, 0); cp.add(off); tg.add(off);
+  cp.x += Math.sin(t * .35) * .012; cp.y += Math.sin(t * .27) * .008;
+  cam.position.copy(cp); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  sun.position.copy(tg).add(V(3, 6, 4)); sun.target.position.copy(tg);
+  fixed($('hook'), t < T_OLHA - .1 ? pop(t - .02, .3) * (1 - clamp((t - T_OLHA + .25) / .15)) : 0);
+  const tg2 = [$('t1'), $('t2')]; tg2.forEach(e => e.style.opacity = 0);
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  tag(tg2[0], '🧠 NA CABEÇA DELE…', 'purple', win(t, T_OLHA, T_HOR - .1), 540, 420, T_OLHA, -3);
+  tag(tg2[0], '🕘 TODO DIA, MESMO HORÁRIO', 'white small', win(t, T_HOR, T_ESTR - .1), 540, 420, T_HOR, 3);
+  tag(tg2[0], '⚠️ ESTRANHO DE UNIFORME!', 'red', win(t, T_ESTR, T_LATE - .2), 540, 420, T_ESTR, -3);
+  tag(tg2[0], '🔊 NÍVEL MÁXIMO', 'red', win(t, T_CORPO, T_EOQ - .1), 540, 420, T_CORPO, 3);
+  tag(tg2[0], '✅ FUNCIONOU!', 'green', win(t, T_FUNC, T_NOVO - .1), 540, 420, T_FUNC, -3);
+  tag(tg2[0], '🔁 TODO SANTO DIA', 'white', win(t, T_NOVO, T_NAOSABE - .1), 540, 420, T_NOVO, 3);
+  tag(tg2[0], '📮 ERA SÓ O CARTEIRO', 'blue', win(t, T_CARTEIRO - .1, T_BIRRA - .3), 540, 420, T_CARTEIRO - .1, -3);
+  tag(tg2[0], '🐺 PROTEGE A MATILHA', '', win(t, T_MATILHA - .3, T_ALGUEM - .1), 540, 420, T_MATILHA - .3, -3);
+  tag(tg2[0], '🛡️ TESTANDO A DEFESA', 'red', win(t, T_TEST - .2, T_MOTO - .4), 540, 420, T_TEST - .2, 3);
+  tag(tg2[0], '🏍️ MOTOBOY', 'white', win(t, T_MOTO - .3, T_VIZ - .05), 540, 420, T_MOTO - .3, -3);
+  tag(tg2[0], '👋 VIZINHO', 'white', win(t, T_VIZ, T_SACOLA - .2), 540, 420, T_VIZ, 3);
+  tag(tg2[0], '🛍️ SACOLA VOANDO', 'white', win(t, T_SACOLA - .1, T_REFL - .5), 540, 420, T_SACOLA - .1, -3);
+  tag(tg2[0], '🪞 O PRÓPRIO REFLEXO', '', win(t, T_REFL - .4, T_AGORA - .1), 540, 420, T_REFL - .4, 3);
+  tag(tg2[0], '🏆 O CÉREBRO GANHA UM PRÊMIO', 'green small', win(t, T_PREMIO - .2, T_DEU - .1), 540, 420, T_PREMIO - .2, -3);
+  tag(tg2[0], '🔁 DEU CERTO? SE REPETE', 'green', win(t, T_DEU, T_EPOR - .1), 540, 420, T_DEU, 3);
+  tag(tg2[0], '📈 LATIDO MAIS FORTE', 'red', win(t, T_LATIDO - .2, T_ENTAO - .1), 540, 420, T_LATIDO - .2, -3);
+  tag(tg2[0], '🐕 RABO EM PÉ, PEITO ESTUFADO', 'white small', win(t, T_RABO, T_NAOPEDE - .1), 540, 420, T_RABO, 3);
+  tag(tg2[0], '🏅 ESPERANDO SEU OBRIGADO', '', win(t, T_ESPERA, T_MARCA - .1), 540, 420, T_ESPERA, -3);
+  let mk = null; if (win(t, T_BIRRA - .1, T_NAT - .1)) mk = ['❌', T_BIRRA - .1]; if (win(t, T_NAOPEDE, T_ESPERA - .1)) mk = ['❌', T_NAOPEDE];
+  if (mk) { $('mark').textContent = mk[0]; place($('mark'), true, 850, 650, pop(t - mk[1], .3), 8); } else $('mark').style.opacity = 0;
+  fixed($('final'), t >= T_MARCA - .1 ? pop(t - T_MARCA + .1, .35) : 0);
+  $('wm').style.opacity = .85;
+  let wTxt = null, wSt = 0;
+  for (const w2 of ALL) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap2 = $('cap'); const capOff = t < T_OLHA - .1 || t >= T_MARCA - .1;
+  if (wTxt && !capOff) { cap2.textContent = wTxt.toUpperCase().replace(/[.,!?:…]/g, ''); cap2.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap2, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap2, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>
