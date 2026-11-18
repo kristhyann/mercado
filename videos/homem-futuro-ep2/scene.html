@@ -336,7 +336,7 @@ const SHOTS = [
   [T_ERA - .1, (t, k) => { world('mem', t); paintNote(0); photoGlow.material.opacity = 0; P_DAN(daniel, 0, 2.0 - Math.min(k, 4) * .15, Math.PI, PP.stand, 'neutral', k < 4 ? .6 : 0, t, mem); return [V(.8, 2.2 - k * .08, 7.0 - k * .3), V(0, 1.2, -1.2)]; }],
   // 15 bem no meio... estava ele. Daniel Rocha 1994–2026
   [T_ELA - .1, (t, k) => { world('mem', t); paintNote(0); photoGlow.material.opacity = t > T_ESTAVA - .2 ? .5 + Math.sin(t * 4) * .2 : 0; P_DAN(daniel, 0, .9, Math.PI, PP.stand, t > T_COMO ? 'sad' : 'shock', 0, t, mem);
-    return t < T_DR2 - .2 ? [V(.0, 1.6, 1.6 - k * .15), V(0, 1.55, -1.6)] : [V(.1, 1.35, -.1), V(0, 1.32, -1.6)]; }],
+    return t < T_DR2 - .2 ? [V(.75, 1.95, 2.4 - k * .2), V(0, 1.5, -1.6)] : [V(.1, 1.35, -.1), V(0, 1.32, -1.6)]; }],
   // 16 flores frescas logo embaixo e um bilhete
   [T_MAS2 - .1, (t, k) => { world('mem', t); paintNote(0); photoGlow.material.opacity = .4; P_DAN(daniel, 0, .9, Math.PI, t > T_FORAM ? { ...PP.stand, hx: .6, lean: .25 } : PP.stand, 'shock', 0, t, mem);
     return t < T_FORAM - .1 ? [V(-.3, 1.6, -.25), V(0, 1.6, .9)] : [V(.25, .75, -.45), V(.1, .2, -1.2)]; }],
