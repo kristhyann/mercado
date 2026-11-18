@@ -221,11 +221,11 @@ const SHOTS = [
   [0, (t, k) => { setWorld('street'); cape.visible = true; capeM.rotation.x = -Math.PI / 2 + .25 + Math.sin(t * 6) * .12; dogAt(t, D0.x, D0.z - .2, Math.PI - 1.0, { sit: 1, lookUp: .3, wag: 1.2 }); dog.body.scale.set(1.08, 1.08, 1.0);
     return [V(1.5 - k * .05, .95, -3.6), V(.1, .62, -2.6)]; }],
   // 1 na cabeça dele: visão dele pelo portão
-  [T_OLHA - .1, (t, k) => { setWorld('street'); dogAt(t, D0.x, D0.z, 0, { sit: 1, lookUp: .1, wag: .4 }); return [V(.3, .6, -2.6), V(.4, .7, -.3)]; }],
+  [T_OLHA - .1, (t, k) => { setWorld('street'); dogAt(t, D0.x, D0.z, 0, { sit: 1, lookUp: .1, wag: .4 }); return [V(.55, .8, -3.3), V(-.05, .7, -.3)]; }],
   // 2 todo dia mesmo horário: carteiro chega, mexe na caixa, olha a casa
   [T_HOR - .1, (t, k) => { setWorld('street'); dogAt(t, D0.x, D0.z, 0, { sit: 1, lookUp: .1, wag: .1, look: .2 }); const a = walker(postman, t, 3.5, 1.15, T_HOR - .3, T_PORTAO + .2, -.35);
     if (a >= 1) { postman.root.rotation.y = Math.PI; poseP(postman, t > T_MEXE && t < T_FICA ? { ...PP.stand, rx: -1.5, rz: -.1, re: -.3 } : { ...PP.stand, hy: t > T_FICA ? .2 : 0 }); face(postman, 'neutral', t); mflap.rotation.x = t > T_MEXE && t < T_FICA ? -1 : 0; }
-    return t < T_FICA ? [V(1.6, 1.4, 3.2), V(.9, .9, -.6)] : [V(.3, .6, -2.6), V(.7, .85, -.4)]; }],
+    return t < T_FICA ? [V(1.6, 1.4, 3.2), V(.9, .9, -.6)] : [V(-.2, .8, -3.3), V(1.15, 1.45, -.35)]; }],
   // 3 late, late mais alto, late com o corpo inteiro
   [T_LATE - .2, (t, k) => { setWorld('street'); const lv = t < T_ALTO ? .6 : t < T_CORPO ? 1 : 1.5; dogAt(t, D0.x + Math.sin(t * 20) * .01 * lv, D0.z + .2, 0, { sit: 0, wag: 1.5, pant: 1, lookUp: .1 }); bark(t, dog, lv, T_LATE);
     if (lv > 1.2) { dog.body.position.y += Math.abs(Math.sin(t * 9)) * .07; } postman.root.visible = true; postman.root.position.set(1.15, 0, -.35); postman.root.rotation.y = Math.PI - .4; poseP(postman, { ...PP.stand, hx: .1 }); face(postman, 'neutral', t);
@@ -250,7 +250,7 @@ const SHOTS = [
     return [V(1.4, 1.6, 4.6), V(1.0, .6, -.6)]; }],
   // 9 late para o motoboy
   [T_MOTO - .4, (t, k) => { setWorld('street'); dogAt(t, D0.x, D0.z + .2, .4, { wag: 1.4, pant: 1, look: .3 }); bark(t, dog, 1, T_MOTO); moto.visible = true; rider.root.visible = true; const x = lerp(-2.6, 2.6, clamp((t - T_MOTO + .45) / 1.4)); moto.position.set(x, 0, 1.8); rider.root.position.set(x - .1, .25, 1.8); rider.root.rotation.y = Math.PI / 2; poseP(rider, { ...PP.sit, lx: -1.3, rx: -1.3, le: 0, re: 0 }); face(rider, 'neutral', t);
-    return [V(.4, 1.0, 4.6), V(.2, .6, -1.4)]; }],
+    return [V(.4, 1.2, 5.9), V(.2, .6, -1.4)]; }],
   // 10 para o vizinho
   [T_VIZ - .05, (t, k) => { setWorld('street'); dogAt(t, 1.6, -1.4, -.7, { wag: 1.4, pant: 1, lookUp: .4 }); bark(t, dog, 1, T_VIZ); neighbor.root.visible = true; neighbor.root.position.set(2.6, 0, -.55); neighbor.root.rotation.y = -2.4; poseP(neighbor, { ...PP.stand, rx: -2.8, rz: -.3, re: -.3 }); face(neighbor, 'happy', t);
     return [V(.9, .9, -2.6), V(2.0, .8, -.9)]; }],
