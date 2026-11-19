@@ -1,0 +1,335 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,'Noto Color Emoji',sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:250px;text-align:center;font-weight:900;font-size:76px;line-height:1.06}
+#hook b{color:#FFD21F;display:block;font-size:84px}
+#cap{width:1080px;top:1380px;text-align:center;font-weight:900;font-size:108px}
+#cap.hl{color:#FFD21F}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:56px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.white{background:#fff;color:#111}.tag.purple{background:#8B5CF6;color:#fff}
+.small{font-size:42px;padding:6px 22px;border-radius:18px;border-width:6px;box-shadow:0 6px 0 #111}
+#mark{font-weight:900;font-size:200px;line-height:1;-webkit-text-stroke:12px #fff;paint-order:stroke fill}
+#big{font-weight:900;font-size:190px;line-height:1;color:#FFD21F;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 14px 0 rgba(0,0,0,.4);white-space:nowrap}
+#cta{left:140px;width:800px;top:1600px;text-align:center}
+#cta .row{display:flex;gap:26px;justify-content:center}
+#cta .btn{font-weight:900;font-size:54px;padding:16px 34px;border-radius:60px;border:7px solid #111;box-shadow:0 10px 0 #111;white-space:nowrap}
+#cta .seg{background:#FF2D55;color:#fff}#cta .com{background:#fff;color:#111}
+#cta .hand{position:absolute;font-size:90px;left:520px;top:60px}
+.panel{background:rgba(255,255,255,.96);border:8px solid #111;border-radius:34px;box-shadow:0 12px 0 #111;padding:18px 22px;font-weight:900;color:#111}
+.panel h3{margin:0 0 10px;font-size:40px;line-height:1.05}.panel div{font-size:33px;line-height:1.3;margin:6px 0;opacity:0}
+#list{left:70px;width:860px;top:1530px}
+#pL{left:30px;width:470px;top:330px}#pR{left:540px;width:470px;top:330px}
+#pL h3{color:#2F6FE0}#pR h3{color:#E11D48}
+#vol{left:930px;top:520px;width:90px;height:560px}
+#vol i{position:absolute;left:10px;width:70px;border:5px solid #111;border-radius:10px}
+#aura{left:0;top:0;width:1080px;height:1920px}
+#veil{left:0;top:0;width:1080px;height:1920px;background:#fff}
+#final{left:50px;width:980px;top:1250px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:56px;line-height:1.12;padding:28px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#E11D48}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.85;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<canvas id="aura" class="o" width="1080" height="1920"></canvas>
+<div id="veil" class="o"></div>
+<div id="hook" class="o stroke">ENXAQUECA:<br>O QUE ACONTECE<b>DENTRO DA SUA CABEÇA? 🧠</b></div>
+<div id="mark" class="o"></div><div id="big" class="o"></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag small"></div>
+<div id="list" class="o panel"><h3>😣 CEFALEIA TENSIONAL</h3><div>🤕 Aperto ou pressão, como uma faixa</div><div>↔️ Muitas vezes dos dois lados</div><div>📉 Geralmente leve ou moderada</div><div>🚶 Não piora muito com o dia a dia</div><div>🙂 Normalmente sem náusea forte</div></div>
+<div id="pL" class="o panel"><h3>😣 TENSIONAL</h3><div>🤕 Aperto / pressão</div><div>↔️ Dos dois lados</div><div>📉 Leve ou moderada</div><div>🙂 Sem náusea importante</div></div>
+<div id="pR" class="o panel"><h3>⚡ ENXAQUECA</h3><div>💓 Pode latejar</div><div>👈 Muitas vezes um lado</div><div>📈 Pode ser muito intensa</div><div>🤢 Náusea e vômito</div><div>💡🔊👃 Luz, som, cheiros</div><div>🏃 Piora com movimento</div></div>
+<div id="vol" class="o"></div>
+<div id="lbls" style="position:absolute;left:0;top:375px;width:1080px;display:flex;flex-direction:column;align-items:center;gap:16px"></div>
+<div id="cap" class="o stroke"></div>
+<div id="cta" class="o"><div class="row"><span class="btn seg">➕ SEGUE</span><span class="btn com">💬 COMENTA</span></div><span class="hand">👆</span></div>
+<div id="final" class="o"><span>Você já sentiu<br>uma dor assim? 🧠⚡<br><em>Comenta 👇 · Segue @olhaso_3D</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, rr } from '/_kit/kit.js';
+import { buildPerson, PP, poseP, face } from '/_kit/pessoas.js';
+await document.fonts.load('900 60px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; window.DURATION = TP.duration;
+const ALL = SN.flatMap(s => s.words);
+const WA = (re, n = 0, after = 0) => { const ws = ALL.filter(w => w.start >= after && re.test(w.w)); if (!ws[n]) { console.log('WA MISS', re); return after; } return ws[n].start; };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .03, 300);
+scene.background = new THREE.Color(0xEDE4D8); scene.fog = new THREE.Fog(0xEDE4D8, 14, 50);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const MAT = (c, r = .8, ex = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: r }, ex));
+const add = (geo, mat, x, y, z, par) => { const m = new THREE.Mesh(geo, typeof mat === 'number' ? MAT(mat) : mat); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; par.add(m); return m; };
+const box = (w, h, d, c, x, y, z, par = scene) => add(new THREE.BoxGeometry(w, h, d), c, x, y, z, par);
+const cyl = (rt, rb, h, c, x, y, z, par = scene, seg = 16) => add(new THREE.CylinderGeometry(rt, rb, h, seg), c, x, y, z, par);
+const sph = (r, c, x, y, z, par = scene, a = 18, b = 12) => add(new THREE.SphereGeometry(r, a, b), c, x, y, z, par);
+const BASIC = c => new THREE.MeshBasicMaterial({ color: c, toneMapped: false });
+const sprite = (t, s) => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthWrite: false, depthTest: false })); sp.scale.setScalar(s); sp.renderOrder = 10; return sp; };
+const canvasTex = (w, h, paint) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); paint(g, w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.userData = { c, g }; return t; };
+const emo = (e, px = 110) => canvasTex(160, 160, g => { g.font = `${px}px 'Noto Color Emoji'`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(e, 80, 88); });
+const glowT = (r, gC, b) => canvasTex(128, 128, g => { const gr = g.createRadialGradient(64, 64, 0, 64, 64, 64); gr.addColorStop(0, `rgba(${r},${gC},${b},1)`); gr.addColorStop(1, `rgba(${r},${gC},${b},0)`); g.fillStyle = gr; g.fillRect(0, 0, 128, 128); });
+function label(txt, col = '#111', bg = '#FFFFFF') { const meta = { txt, col }; const r0 = _label(txt, col, bg); r0.userData.meta = meta; return r0; }
+function _label(txt, col = '#111', bg = '#FFFFFF') { const t = canvasTex(640, 150, g => { g.fillStyle = bg; g.strokeStyle = '#111'; g.lineWidth = 12; const r = 40; g.beginPath(); g.roundRect(8, 8, 624, 134, r); g.fill(); g.stroke(); g.fillStyle = col; g.font = '900 64px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(txt, 320, 80); }); const s = sprite(t, 1); s.scale.set(.8, .19, 1); s.userData.base = .8; return s; }
+
+// ---------- tempos ----------
+const T_SERA = WA(/^Será$/), T_EOMAIS = WA(/^E$/, 0, 10), T_CEREBRO1 = WA(/cérebro/), T_VAMOS = WA(/Vamos/), T_ATRAV = WA(/Atravessando/), T_MENINGES = WA(/meninges/), T_DURA = WA(/dura-máter/), T_VASOS = WA(/vasos/), T_TRIG = WA(/trigêmeo/);
+const T_TECIDO = WA(/tecido/), T_MAS = WA(/^Mas$/, 0, 36), T_MUSC = WA(/músculos/), T_TERM = WA(/terminações/), T_QUANDO = WA(/^Quando$/), T_MANDAM = WA(/mandam/), T_DOR1 = WA(/^dor\.$/, 0, 47.5);
+const T_AGORA = WA(/^Agora,$/), T_CEF = WA(/cefaleia/), T_APERTO = WA(/aperto/), T_DOIS = WA(/^dois$/), T_LEVE = WA(/^leve$/), T_NAOPIORA = WA(/^não$/, 0, 62.5), T_NAUSEA = WA(/náusea/), T_MUSC2 = WA(/músculos/, 0, 69), T_CIENCIA = WA(/ciência/), T_SENSIB = WA(/sensibilidade/), T_VARIOS = WA(/vários/);
+const T_JA = WA(/^Já$/), T_NEURO = WA(/neurológica/), T_REAGIR = WA(/reagir/), T_EAQUI = WA(/^E$/, 0, 98.5), T_TRIGV = WA(/trigeminovascular/), T_TRES = WA(/^três$/), T_CONECTA = WA(/conecta/);
+const T_DURANTE = WA(/Durante/), T_ATIVADO = WA(/ativado/), T_LIBERAM = WA(/liberam/), T_CGRP = WA(/^CGRP,/), T_SENSIBIL = WA(/sensibilizar/), T_VOLUME = WA(/volume/), T_REMEDIOS = WA(/remédios/), T_BLOQ = WA(/bloquear/);
+const T_COM = WA(/^Com$/, 0, 137.5), T_LUZ = WA(/^luz$/, 0, 142), T_FOTO = WA(/fotofobia/), T_BARULHO = WA(/barulho/), T_FONO = WA(/fonofobia/), T_SENTIDOS = WA(/sentidos/), T_NAUSEA2 = WA(/náusea,/), T_CHEIROS = WA(/cheiros\./);
+const T_ALGUMAS = WA(/Algumas/), T_PONTOS = WA(/pontos/), T_ZIG = WA(/zigue/), T_OSCI = WA(/^Os$/, 0, 165), T_DEPR = WA(/depressão/), T_ONDA = WA(/onda/), T_ATENCAO = WA(/atenção/), T_MAIORIA = WA(/maioria/);
+const T_FASES = WA(/fases/), T_PROD = WA(/pródromo/), T_AURA2 = WA(/^aura,$/), T_DOR3 = WA(/^dor,$/, 0, 189), T_POS = WA(/pósdromo/), T_UMACRISE = WA(/^Uma$/, 0, 200), T_QUATRO = WA(/quatro/);
+const T_RESUM = WA(/Resumindo/), T_AENX = WA(/^A$/, 0, 212.5), T_ENXFIM = WA(/^Enxaqueca$/, 0, 224), T_REAL = WA(/real/), T_SEVOCE = WA(/^Se$/, 0, 232), T_AGORA2 = WA(/^Agora$/, 0, 235);
+const HL = /dor|cabeça|enxaqueca|cérebro|meninges|dura-máter|vasos|trigêmeo|receptores|terminações|cefaleia|tensional|aperto|lados|náusea|neurológica|trigeminovascular|ramos|CGRP|volume|fotofobia|fonofobia|aura|zigue-zague|córtex|pródromo|pósdromo|setenta|horas|frescura|médico/i;
+
+// ---------- luz ----------
+const hemi = new THREE.HemisphereLight(0xFFF4E6, 0x7A6A66, 1.05); scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xFFF0E0, 2.0); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -5, right: 5, top: 5, bottom: -5, near: .5, far: 30 }); sun.shadow.bias = -.0004; scene.add(sun); scene.add(sun.target);
+const lampL = new THREE.PointLight(0xFFF2D0, 0, 6); scene.add(lampL);
+
+// ================= QUARTO (x=0) =================
+const room = grp();
+const woodT = canvasTex(256, 256, g => { g.fillStyle = '#B8885A'; g.fillRect(0, 0, 256, 256); for (let i = 0; i < 256; i += 32) { g.fillStyle = i % 64 ? '#AC7C4E' : '#C49464'; g.fillRect(0, i, 256, 30); } }); woodT.wrapS = woodT.wrapT = THREE.RepeatWrapping; woodT.repeat.set(4, 4);
+add(new THREE.PlaneGeometry(8, 8), new THREE.MeshStandardMaterial({ map: woodT }), 0, 0, 0, room).rotation.x = -Math.PI / 2;
+box(8, 3, .1, 0xC8D8E0, 0, 1.5, -1.6, room); box(.1, 3, 8, 0xE8D8C8, -2.4, 1.5, 2, room);
+const win = grp(room); win.position.set(1.2, 1.7, -1.54); box(1.1, 1.0, .05, 0xFFFFFF, 0, 0, 0, win); const winGlass = box(.98, .88, .02, BASIC(0xBFE8FF), 0, 0, .03, win);
+const desk = grp(room); desk.position.set(0, 0, -.9); box(1.5, .05, .7, 0xE8D2B0, 0, .74, 0, desk); [[-.7, -.3], [.7, -.3], [-.7, .3], [.7, .3]].forEach(([x, z]) => box(.05, .72, .05, 0x5A4A3A, x, .36, z, desk));
+const laptop = grp(desk); laptop.position.set(-.1, .765, -.05); box(.46, .02, .32, 0x9AA2AE, 0, 0, 0, laptop); const lid = grp(laptop); lid.position.set(0, .01, -.16); box(.46, .3, .015, 0x9AA2AE, 0, .15, 0, lid); const scr = box(.42, .26, .005, BASIC(0x8FD0FF), 0, .15, .01, lid); lid.rotation.x = -.25;
+const cup = grp(room); cyl(.045, .04, .11, 0xFFFFFF, 0, .055, 0, cup, 14); cup.position.set(.5, .765, -.75);
+const ceilLamp = grp(room); ceilLamp.position.set(0, 2.9, 0); cyl(.01, .01, .3, 0x333333, 0, -.15, 0, ceilLamp, 6); const bulbR = sph(.12, new THREE.MeshStandardMaterial({ color: 0xFFF6D8, emissive: 0xFFE8A0, emissiveIntensity: 0 }), 0, -.35, 0, ceilLamp, 14, 10); bulbR.castShadow = false;
+const chair = grp(room); chair.position.set(0, 0, -.2); cyl(.24, .24, .07, 0x2A2F3A, 0, .48, 0, chair, 14); box(.45, .5, .06, 0x2A2F3A, 0, .8, .22, chair); cyl(.03, .03, .45, 0x8A94A8, 0, .24, 0, chair, 6);
+const bed = grp(room); bed.position.set(-1.4, 0, 1.2); box(1.0, .4, 2.0, 0x6A7AA8, 0, .2, 0, bed); box(1.0, .12, 1.95, 0xF4F1E8, 0, .46, 0, bed); box(.8, .12, .35, 0xFFFFFF, 0, .58, -.75, bed);
+const me = buildPerson({ skin: 0xD9A27A, shirt: 0x8B5CF6, pants: 0x3B4B6A, hair: 0x3A2414, hairStyle: 'bun' }); room.add(me.root);
+const soundT = canvasTex(128, 128, g => { g.strokeStyle = '#FF4D6D'; g.lineWidth = 10; g.lineCap = 'round'; for (let i = 0; i < 3; i++) { g.beginPath(); g.arc(20, 64, 28 + i * 26, -.7, .7); g.stroke(); } });
+const sounds = [0, 1, 2].map(() => { const s = sprite(soundT, .35); scene.add(s); return s; });
+const flashS = sprite(glowT(255, 250, 220), 2.5); scene.add(flashS);
+const painT = glowT(255, 60, 80); const painS = sprite(painT, .5); scene.add(painS);
+const icons = ['🤢', '😵‍💫', '👃'].map(e => { const s = sprite(emo(e), .3); scene.add(s); return s; });
+// ================= CABEÇA EM CORTE (x=60) =================
+const headSet = grp(); headSet.position.set(60, 0, 0);
+const hsBg = add(new THREE.SphereGeometry(30, 24, 16), new THREE.MeshBasicMaterial({ color: 0x141A33, side: THREE.BackSide, fog: false }), 0, 0, 0, headSet); hsBg.castShadow = false;
+const head = grp(headSet); head.position.set(0, 1.6, 0);
+const CUT = .8; const cutGeo = (r) => new THREE.SphereGeometry(r, 48, 32, Math.PI + CUT, Math.PI * 2 - 2 * CUT);
+const skinM = new THREE.MeshStandardMaterial({ color: 0xE0A880, roughness: .6, side: THREE.DoubleSide });
+const skin = add(cutGeo(1.06), skinM, 0, 0, 0, head); skin.scale.set(1, 1.18, 1.12);
+const boneM = new THREE.MeshStandardMaterial({ color: 0xF4ECD8, roughness: .5, side: THREE.DoubleSide }); const bone = add(cutGeo(1.0), boneM, 0, 0, 0, head); bone.scale.set(1, 1.16, 1.1);
+const duraM = new THREE.MeshStandardMaterial({ color: 0x8FB0D8, roughness: .4, side: THREE.DoubleSide, emissive: 0x000000 }); const dura = add(cutGeo(.94), duraM, 0, 0, 0, head); dura.scale.set(1, 1.14, 1.08);
+const arachM = new THREE.MeshStandardMaterial({ color: 0xE8D8F0, roughness: .5, side: THREE.DoubleSide, transparent: true, opacity: .7 }); const arach = add(cutGeo(.91), arachM, 0, 0, 0, head); arach.scale.set(1, 1.13, 1.07);
+const brainG = grp(head); const brainM = new THREE.MeshStandardMaterial({ color: 0xF2A0B8, roughness: .5, emissive: 0x000000 });
+for (let i = 0; i < 90; i++) { const a = rr(0, 6.28), b = rr(-.9, 1), r = .78; const p = V(Math.cos(a) * Math.sqrt(1 - b * b) * r, b * r * 1.05, Math.sin(a) * Math.sqrt(1 - b * b) * r * 1.05); if (p.y < -.45) continue; const s = add(new THREE.CapsuleGeometry(.11, .2, 4, 8), brainM, p.x, p.y, p.z, brainG); s.rotation.set(rr(0, 3), rr(0, 3), rr(0, 3)); }
+sph(.76, brainM, 0, 0, 0, brainG, 32, 24).scale.set(1, 1.05, 1.08); const stem = add(new THREE.CapsuleGeometry(.14, .4, 6, 12), MAT(0xE890A8, .5), 0, -.75, -.15, head); stem.rotation.x = .25;
+// face (nariz, olhos, orelha) do lado de fora
+const faceParts = [-1, 1].map(s => { const e = sph(.07, MAT(0xFFFFFF, .3), s * .32, .18, 1.12, head, 12, 8); sph(.04, MAT(0x2A1A10, .2), 0, 0, .04, e, 8, 6); return e; });
+const nose = add(new THREE.ConeGeometry(.1, .3, 8), skinM, 0, -.05, 1.22, head); nose.rotation.x = Math.PI / 2;
+const ear = sph(.16, skinM, -1.04, 0, 0, head, 12, 8); ear.scale.set(.35, 1, .6); faceParts.push(nose, ear);
+// vasos sanguíneos (na dura-máter)
+const vesselM = new THREE.MeshStandardMaterial({ color: 0xD8283A, roughness: .4, emissive: 0x3A0000 }); const vessels = [];
+for (let i = 0; i < 9; i++) { const pts = []; const a0 = rr(0, 6.28), b0 = rr(-.3, .9); for (let k = 0; k < 6; k++) { const a = a0 + k * .25, b = b0 - k * .12; const r = .955; pts.push(V(Math.cos(a) * Math.sqrt(1 - b * b) * r, b * r * 1.14, Math.sin(a) * Math.sqrt(1 - b * b) * r * 1.08)); } const v = add(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 30, .018, 6), vesselM, 0, 0, 0, head); vessels.push(v); }
+// nervo trigêmeo (gânglio + 3 ramos V1, V2, V3)
+const nerveM = new THREE.MeshStandardMaterial({ color: 0xFFD21F, roughness: .4, emissive: 0x6A5000, emissiveIntensity: .4 });
+const GANG = V(.55, -.35, .45); const ganglion = sph(.09, nerveM, GANG.x, GANG.y, GANG.z, head, 14, 10); ganglion.scale.set(1.4, .8, 1);
+const branchPts = [[GANG, V(.62, .05, .8), V(.45, .45, 1.05), V(.25, .6, 1.08)], [GANG, V(.7, -.25, .85), V(.55, -.2, 1.1), V(.35, -.15, 1.18)], [GANG, V(.7, -.6, .75), V(.55, -.85, .95), V(.3, -.95, 1.0)]];
+const branches = branchPts.map(pts => { const c = new THREE.CatmullRomCurve3(pts); add(new THREE.TubeGeometry(c, 40, .028, 8), nerveM, 0, 0, 0, head); return c; });
+const rootCurve = new THREE.CatmullRomCurve3([GANG, V(.35, -.5, .2), V(.1, -.6, -.05)]); add(new THREE.TubeGeometry(rootCurve, 30, .035, 8), nerveM, 0, 0, 0, head);
+const toDura = new THREE.CatmullRomCurve3([GANG, V(.7, -.1, .35), V(.85, .3, .2), V(.8, .6, -.1)]); add(new THREE.TubeGeometry(toDura, 30, .018, 6), nerveM, 0, 0, 0, head);
+const toBrain = new THREE.CatmullRomCurve3([V(.1, -.6, -.05), V(0, -.35, -.1), V(0, .05, -.05), V(-.1, .5, .0)]);
+const pulseT = glowT(255, 240, 120); const pulses = []; for (let i = 0; i < 14; i++) { const s = sprite(pulseT, .14); head.add(s); s.userData = { c: i % 5, p: i / 14 }; pulses.push(s); }
+const recepT = glowT(255, 220, 60); const receptors = []; for (let i = 0; i < 40; i++) { const a = rr(Math.PI + CUT + .1, Math.PI * 3 - CUT - .1), b = rr(-.5, .95), r = .935; const s = sprite(recepT, .08); s.position.set(-Math.cos(a) * Math.sqrt(1 - b * b) * r, b * r * 1.14, Math.sin(a) * Math.sqrt(1 - b * b) * r * 1.08); head.add(s); receptors.push(s); }
+const sparks = []; for (let i = 0; i < 30; i++) { const s = sprite(glowT(120, 220, 255), .1); s.userData = { a: rr(0, 6.28), b: rr(-.4, .9), p: rr(0, 1) }; head.add(s); sparks.push(s); }
+const wave = add(new THREE.RingGeometry(.1, .16, 48), new THREE.MeshBasicMaterial({ color: 0x5AF0FF, transparent: true, opacity: .9, side: THREE.DoubleSide, toneMapped: false, depthWrite: false }), 0, 0, 0, head); wave.castShadow = false;
+const labels = { skin: label('PELE'), bone: label('CRÂNIO (OSSO)'), mening: label('MENINGES', '#2F6FE0'), dura: label('DURA-MÁTER', '#2F6FE0'), vaso: label('VASOS SANGUÍNEOS', '#D8283A'), trig: label('NERVO TRIGÊMEO', '#B08A00'), brain: label('CÉREBRO', '#C0306A'),
+  v1: label('V1 · OFTÁLMICO', '#B08A00'), v2: label('V2 · MAXILAR', '#B08A00'), v3: label('V3 · MANDIBULAR', '#B08A00'), noPain: label('❌ SEM RECEPTORES DE DOR', '#E11D48'), yesPain: label('✅ TERMINAÇÕES NERVOSAS', '#16A34A'), cortex: label('CÓRTEX', '#0E7490') };
+Object.values(labels).forEach(l => headSet.add(l));
+// ================= TENSIONAL (x=120) =================
+const tens = grp(); tens.position.set(120, 0, 0);
+const tBg = add(new THREE.SphereGeometry(30, 24, 16), new THREE.MeshBasicMaterial({ color: 0xE8E0F4, side: THREE.BackSide, fog: false }), 0, 0, 0, tens); tBg.castShadow = false;
+const tp = buildPerson({ skin: 0xD9A27A, shirt: 0x3B82F6, pants: 0x2A3A5A, hair: 0x2B1A10 }); tens.add(tp.root); tp.root.scale.setScalar(1.4);
+const band = add(new THREE.TorusGeometry(.2, .03, 10, 32), new THREE.MeshStandardMaterial({ color: 0xFF4D6D, emissive: 0x6A0010, roughness: .4 }), 0, 0, 0, scene); band.visible = false;
+const arrows = [0, 1, 2, 3, 4, 5].map(i => { const a = add(new THREE.ConeGeometry(.04, .12, 8), MAT(0xFF4D6D, .5, { emissive: 0x5A0010 }), 0, 0, 0, scene); a.visible = false; return a; });
+const muscleM = new THREE.MeshStandardMaterial({ color: 0xE84A4A, transparent: true, opacity: .75, emissive: 0x5A0000 });
+const trap = [-1, 1].map(s => { const m = add(new THREE.CapsuleGeometry(.07, .22, 6, 10), muscleM, 0, 0, 0, scene); m.visible = false; return m; }); const neckM = add(new THREE.CapsuleGeometry(.065, .12, 6, 10), muscleM, 0, 0, 0, scene); neckM.visible = false;
+const nervGlow = sprite(glowT(140, 120, 255), .8); scene.add(nervGlow);
+// ================= DURA-MÁTER MICRO (x=180) =================
+const micro = grp(); micro.position.set(180, 0, 0);
+const mBg = add(new THREE.SphereGeometry(30, 24, 16), new THREE.MeshBasicMaterial({ color: 0x2A1030, side: THREE.BackSide, fog: false }), 0, 0, 0, micro); mBg.castShadow = false;
+const memT = canvasTex(512, 512, g => { g.fillStyle = '#9FB8D8'; g.fillRect(0, 0, 512, 512); g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineWidth = 3; for (let i = 0; i < 60; i++) { g.beginPath(); g.moveTo(rr(0, 512), rr(0, 512)); g.bezierCurveTo(rr(0, 512), rr(0, 512), rr(0, 512), rr(0, 512), rr(0, 512), rr(0, 512)); g.stroke(); } }); memT.wrapS = memT.wrapT = THREE.RepeatWrapping; memT.repeat.set(2, 2);
+const membrane = add(new THREE.PlaneGeometry(10, 10, 40, 40), new THREE.MeshStandardMaterial({ map: memT, roughness: .5 }), 0, 0, 0, micro); membrane.rotation.x = -Math.PI / 2;
+{ const p = membrane.geometry.attributes.position; for (let i = 0; i < p.count; i++) p.setZ(i, Math.sin(p.getX(i) * 1.3) * .08 + Math.cos(p.getY(i)) * .08); membrane.geometry.computeVertexNormals(); }
+const bigVessel = add(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([V(-5, .25, -1), V(-1, .3, -.6), V(1.5, .25, -1.2), V(5, .3, -.8)]), 60, .22, 16), vesselM, 0, 0, 0, micro);
+const fiberM = new THREE.MeshStandardMaterial({ color: 0xFFD21F, emissive: 0x6A5000, emissiveIntensity: .5, roughness: .4 });
+const fiberMain = new THREE.CatmullRomCurve3([V(-3, .18, 2.5), V(-1.5, .2, 1.2), V(0, .2, .4), V(.8, .22, -.3)]); add(new THREE.TubeGeometry(fiberMain, 60, .05, 8), fiberM, 0, 0, 0, micro);
+const endings = []; for (let i = 0; i < 7; i++) { const st = fiberMain.getPoint(.55 + i * .06); const en = st.clone().add(V(rr(-.5, .6), rr(.0, .05), rr(-.8, -.3))); const c = new THREE.CatmullRomCurve3([st, st.clone().lerp(en, .5).add(V(0, .06, 0)), en]); add(new THREE.TubeGeometry(c, 16, .02, 6), fiberM, 0, 0, 0, micro); const knob = sph(.045, fiberM, en.x, en.y, en.z, micro, 10, 8); endings.push(en); }
+const cgrp = []; for (let i = 0; i < 70; i++) { const s = sph(.035, new THREE.MeshStandardMaterial({ color: 0xB06BFF, emissive: 0x6A2ACA, emissiveIntensity: .9 }), 0, 0, 0, micro, 8, 6); s.userData = { e: i % endings.length, p: rr(0, 1), d: V(rr(-.6, .6), rr(.1, .7), rr(-.6, .3)) }; cgrp.push(s); }
+const pill = grp(micro); { const a = add(new THREE.CapsuleGeometry(.12, .2, 8, 14), MAT(0xFFFFFF, .3), 0, .1, 0, pill); a.rotation.z = Math.PI / 2; const b = add(new THREE.CapsuleGeometry(.122, .1, 8, 14), MAT(0x3B82F6, .3), .1, .1, 0, pill); b.rotation.z = Math.PI / 2; }
+const shield = sprite(emo('🛡️'), .5); micro.add(shield); const cgrpLab = label('CGRP', '#7C3AED'); micro.add(cgrpLab); const nLab = label('TERMINAÇÃO NERVOSA', '#B08A00'); micro.add(nLab); const vLab = label('VASO', '#D8283A'); micro.add(vLab); const dLab = label('DURA-MÁTER', '#2F6FE0'); micro.add(dLab);
+// ================= LINHA DO TEMPO (x=240) =================
+const tl = grp(); tl.position.set(240, 0, 0);
+const tlBg = add(new THREE.SphereGeometry(30, 24, 16), new THREE.MeshBasicMaterial({ color: 0xFFF1E0, side: THREE.BackSide, fog: false }), 0, 0, 0, tl); tlBg.castShadow = false;
+const phases = [['PRÓDROMO', '🥱', 0xF2C14E], ['AURA', '✨', 0x22D3EE], ['DOR', '⚡', 0xFF4D6D], ['PÓSDROMO', '😴', 0x8B5CF6]].map(([n, e, c], i) => { const g = grp(tl); g.position.set(0, 3.0 - i * .55, 0); box(1.9, .5, .25, c, 0, 0, 0, g); const t = canvasTex(512, 128, gg => { gg.fillStyle = '#fff'; gg.font = '900 70px P'; gg.textAlign = 'center'; gg.textBaseline = 'middle'; gg.lineWidth = 10; gg.strokeStyle = '#111'; gg.strokeText(n, 300, 68); gg.fillText(n, 300, 68); });
+  const lp = add(new THREE.PlaneGeometry(1.6, .4), new THREE.MeshBasicMaterial({ map: t, transparent: true }), .1, 0, .13, g); lp.castShadow = false; const ic = sprite(emo(e), .45); ic.position.set(-.78, 0, .3); g.add(ic); return g; });
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win2 = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [1.5, 'buzz'], [3.3, 'zap'], [T_CEREBRO1, 'ding'], [T_VAMOS, 'whoosh'], [T_ATRAV, 'whoosh'], [T_MENINGES, 'pop'], [T_DURA, 'pop'], [T_VASOS, 'pop'], [T_TRIG, 'ding'], [T_TECIDO, 'buzzx'], [T_TERM, 'ding'], [T_MANDAM, 'zap'], [T_DOR1, 'buzz'],
+ [T_AGORA, 'whoosh'], [T_APERTO, 'clang'], [T_MUSC2, 'pop'], [T_CIENCIA, 'ding'], [T_JA, 'whoosh'], [T_NEURO, 'zap'], [T_EAQUI, 'whoosh'], [T_TRES, 'ding'], [T_DURANTE, 'whoosh'], [T_LIBERAM, 'pop'], [T_CGRP, 'ding'], [T_VOLUME, 'buzz'], [T_REMEDIOS, 'win'],
+ [T_COM, 'whoosh'], [T_LUZ, 'zap'], [T_BARULHO, 'clang'], [T_SENTIDOS, 'whoosh'], [T_ALGUMAS, 'whoosh'], [T_OSCI, 'whoosh'], [T_MAIORIA, 'ding'], [T_FASES, 'whoosh'], [T_PROD, 'pop'], [T_AURA2, 'pop'], [T_DOR3, 'pop'], [T_POS, 'pop'], [T_QUATRO, 'ding'],
+ [T_RESUM, 'whoosh'], [T_ENXFIM, 'whoosh'], [T_REAL, 'ding'], [T_AGORA2, 'win']].forEach(([t, k]) => ev(t, k));
+function world(w) { room.visible = w === 'room'; headSet.visible = w === 'head'; tens.visible = w === 'tens'; micro.visible = w === 'micro'; tl.visible = w === 'tl'; me.root.visible = w === 'room';
+  [band, ...arrows, ...trap, neckM, nervGlow, flashS, painS, ...sounds, ...icons].forEach(o => o.visible = false); Object.values(labels).forEach(l => l.visible = false); pulses.forEach(p => p.visible = false); receptors.forEach(r => r.visible = false); sparks.forEach(s => s.visible = false); wave.visible = false;
+  const bg = { room: 0xEDE4D8, head: 0x141A33, tens: 0xE8E0F4, micro: 0x2A1030, tl: 0xFFF1E0 }[w]; scene.background.setHex(bg); scene.fog.color.setHex(bg); scene.fog.near = w === 'room' ? 14 : 30; hemi.intensity = 1.05; sun.intensity = w === 'head' || w === 'micro' ? 1.6 : 2.0; renderer.toneMappingExposure = 1.05; lampL.intensity = 0;
+  skin.visible = bone.visible = dura.visible = arach.visible = brainG.visible = true; skinM.opacity = 1; brainM.emissive.setHex(0); brainM.color.setHex(0xF2A0B8); duraM.emissive.setHex(0); nerveM.emissiveIntensity = .4; }
+let activeL = []; const LBL = (k, on, p, t0, s = 1) => { const l = labels[k]; l.visible = false; if (on) activeL.push([l.userData.meta, t0]); };
+let t = 0;
+function headPulses(t, which, n = 14, speed = .5) { pulses.forEach((p, i) => { if (i >= n) { p.visible = false; return; } p.visible = true; const u = (t * speed + p.userData.p) % 1; const curve = which === 'branches' ? branches[i % 3] : which === 'brain' ? (u < .5 ? rootCurve : toBrain) : which === 'dura' ? toDura : rootCurve;
+  const uu = which === 'brain' ? (u < .5 ? 1 - u * 2 : (u - .5) * 2) : which === 'branches' ? 1 - u : u; p.position.copy(curve.getPoint(clamp(uu))); p.scale.setScalar(.12 + Math.sin(u * Math.PI) * .06); }); }
+function headSparks(t, k = 1) { sparks.forEach((s, i) => { s.visible = k > 0; const u = (t * .8 + s.userData.p) % 1; const a = s.userData.a + t * .2, b = s.userData.b, r = .8; s.position.set(Math.cos(a) * Math.sqrt(1 - b * b) * r, b * r * 1.05, Math.sin(a) * Math.sqrt(1 - b * b) * r * 1.05); s.material.opacity = Math.sin(u * Math.PI) * k; s.scale.setScalar(.06 + u * .1); }); }
+const HC = V(60, 1.6, 0); // centro da cabeça (mundo)
+function hcam(dx, dy, dz, tx = 0, ty = 0, tz = 0) { const F = 1.85; return [V(tx + (dx - tx) * F, 1.6 + ty + (dy - ty) * F, tz + (dz - tz) * F), V(tx, 1.6 + ty, tz)]; }
+
+// ---------- planos ----------
+const SHOTS = [
+  // 0 a dor começa: no quarto trabalhando, mão na testa, luz e sons incomodam
+  [0, (t, k) => { world('room'); me.root.position.set(0, 0, -.25); me.root.rotation.y = Math.PI; const pain = clamp((t - 1.3) / .6);
+    poseP(me, pain > 0 ? { ...PP.sitHead, hl: -1.5, kl: 1.5, hr: -1.5, kr: 1.5, rx: -2.6, rz: .4, re: -2.2, lx: -.3, lz: .1, le: -1.0, y: -.42, hx: .25 } : PP.type, 0, t); face(me, pain > 0 ? 'sad' : 'calm', t);
+    hemi.intensity = lerp(1.05, .55, clamp((t - 3) / 1)); renderer.toneMappingExposure = lerp(1.05, .9, clamp((t - 3) / 1)); scr.material.color.setHex(t > 3.3 ? 0xFFFFFF : 0x8FD0FF);
+    if (t > 3.3) { flashS.visible = true; flashS.position.set(-.1, 1.0, -.95); flashS.scale.setScalar(1.2 + Math.sin(t * 8) * .1); }
+    if (pain > 0) { scene.updateMatrixWorld(true); const hp = me.head.localToWorld(V(0, .12, .12)); painS.visible = true; painS.position.copy(hp); painS.scale.setScalar(.35 + Math.sin(t * 6) * .08); }
+    return [V(1.4, 1.5, 1.6 - k * .05), V(-.05, 1.05, -.5)]; }],
+  // 1 será só uma dor de cabeça? sons incomodam, close no rosto
+  [T_SERA - .1, (t, k) => { world('room'); me.root.position.set(0, 0, -.25); me.root.rotation.y = Math.PI; poseP(me, { ...PP.sit, rx: -2.2, rz: .5, re: -2.0, lx: -.5, lz: .1, le: -1.0, y: -.42, hx: .05 }, 0, t); face(me, 'sad', t);
+    hemi.intensity = .55; renderer.toneMappingExposure = .9; scene.updateMatrixWorld(true); const hp = me.head.localToWorld(V(0, .05, 0));
+    sounds.forEach((s, i) => { s.visible = true; const u = (t * .9 + i / 3) % 1; s.position.copy(hp).add(V(.35 + u * .3, .1 - i * .12, .1)); s.material.opacity = 1 - u; s.scale.setScalar(.25 + u * .15); });
+    painS.visible = true; painS.position.copy(me.head.localToWorld(V(0, .12, .12))); painS.scale.setScalar(.4 + Math.sin(t * 6) * .1);
+    const z = ease(clamp((t - T_EOMAIS) / 4)); return [hp.clone().add(V(lerp(.55, .28, z), lerp(.05, .02, z), lerp(-.8, -.45, z))), hp.clone()]; }],
+  // 2 viagem para dentro: o cérebro não sente dor → cabeça em corte
+  [T_CEREBRO1 - .3, (t, k) => { world('head'); head.rotation.y = -.5 + t * .05; brainM.emissive.setHex(0x222222); 
+    const z = ease(clamp(k / 2.5)); return hcam(lerp(2.2, 3.2, z), lerp(.3, .5, z), lerp(2.6, 4.6, z)); }],
+  // 3 vamos entrar: atravessa o crânio — pele, osso, meninges, dura-máter, vasos, trigêmeo
+  [T_VAMOS - .1, (t, k) => { world('head'); head.rotation.y = -.6; const L = [['skin', T_VAMOS + .3, V(.9, 3.55, 1.0)], ['bone', T_ATRAV + .3, V(.9, 3.15, 1.0)], ['mening', T_MENINGES, V(.9, 3.55, 1.0)], ['dura', T_DURA - .1, V(.9, 3.15, 1.0)], ['vaso', T_VASOS, V(.9, .25, 1.0)], ['trig', T_TRIG - .3, V(.9, -.1, 1.0)], ['brain', T_ATRAV + 1.4, V(.9, 2.75, 1.0)]];
+    const ON = { skin: [T_VAMOS + .3, T_MENINGES], bone: [T_ATRAV + .3, T_DURA - .1], mening: [T_MENINGES, 99999], dura: [T_DURA - .1, 99999], vaso: [T_VASOS, 99999], trig: [T_TRIG - .3, 99999], brain: [T_ATRAV + 1.4, T_VASOS] }; L.forEach(([k2, t0, p]) => LBL(k2, t > ON[k2][0] && t < ON[k2][1], p, t0, .85));
+    duraM.emissive.setHex(t > T_DURA - .1 && t < T_VASOS ? 0x203060 : 0); vesselM.emissiveIntensity = 1; nerveM.emissiveIntensity = t > T_TRIG - .3 ? .4 + Math.sin(t * 6) * .3 : .4;
+    const cams = [[T_VAMOS, 3.4, .6, 4.4, 0, .2, 0], [T_MENINGES - .2, 2.6, .5, 2.2, .3, .3, 0], [T_VASOS - .2, 2.8, .2, 1.4, .3, .1, -.2], [T_TRIG - .4, 2.4, -.2, 2.8, .4, -.3, .6]]; let c = cams[0]; cams.forEach(x => { if (t >= x[0]) c = x; });
+    return hcam(c[1], c[2], c[3], c[4], c[5], c[6]); }],
+  // 4 o tecido do cérebro não tem receptores; meninges/vasos/músculos têm; sinais → dor
+  [T_TECIDO - .1, (t, k) => { world('head'); head.rotation.y = -.6 + k * .02; brainM.color.setHex(t < T_MAS ? 0xB8A8B0 : 0xF2A0B8); LBL('noPain', win2(t, T_TECIDO, T_MAS + .2), V(.2, 2.95, 0), T_TECIDO); LBL('yesPain', t > T_MAS + .3, V(.2, 2.95, 0), T_MAS + .3);
+    if (t > T_TERM - .3) receptors.forEach((r, i) => { r.visible = true; r.material.opacity = .6 + Math.sin(t * 6 + i) * .4; r.scale.setScalar(.07 + Math.sin(t * 6 + i) * .02); });
+    if (t > T_MANDAM - .2) headPulses(t, 'brain', 10, .6); if (t > T_DOR1 - .2) brainM.emissive.setHex(0x5A0010);
+    return hcam(3.2, .5, 3.4); }],
+  // 5 cefaleia tensional: faixa apertando, lista de características
+  [T_AGORA - .1, (t, k) => { world('tens'); tp.root.position.set(0, -.6, 0); tp.root.rotation.y = .3; poseP(tp, { ...PP.stand, hx: .15 }); face(tp, t > T_APERTO ? 'sad' : 'neutral', t);
+    scene.updateMatrixWorld(true); const hp = tp.head.localToWorld(V(0, .05, 0)); const sq = t > T_APERTO - .2 ? .5 + .5 * Math.sin(t * 3) : 0;
+    band.visible = t > T_APERTO - .2; band.position.copy(hp).add(V(0, .03, 0)); band.rotation.x = Math.PI / 2; band.scale.setScalar(1.4 * (1.15 - sq * .06) * pop(t - T_APERTO + .2, .3));
+    arrows.forEach((a, i) => { a.visible = band.visible; const an = i / 6 * Math.PI * 2; const r = .42 + sq * .05; a.position.copy(hp).add(V(Math.cos(an) * r, .04, Math.sin(an) * r)); a.lookAt(hp.clone().add(V(0, .04, 0))); a.rotateX(Math.PI / 2); a.scale.setScalar(1.4); });
+    const musc = t > T_MUSC2 - .2; [neckM, ...trap].forEach(m => m.visible = musc); if (musc) { neckM.position.copy(tp.hips.localToWorld(V(0, .66, -.03))); neckM.scale.setScalar(1.4); trap.forEach((m, i) => { m.position.copy(tp.hips.localToWorld(V((i ? 1 : -1) * .13, .56, -.04))); m.rotation.set(0, tp.root.rotation.y, (i ? 1 : -1) * 1.2); m.scale.setScalar(1.4); }); muscleM.opacity = .55 + Math.sin(t * 4) * .2; }
+    nervGlow.visible = t > T_SENSIB - .3; nervGlow.position.copy(hp); nervGlow.scale.setScalar(1.3 + Math.sin(t * 5) * .15);
+    return t < T_MUSC2 - .3 ? [V(121.0, 2.3, 2.8), V(120.0, 1.9, 0)] : [V(121.3, 2.2, 3.2), V(120.0, 1.7, 0)]; }],
+  // 6 enxaqueca: condição neurológica, cérebro hiperativo
+  [T_JA - .1, (t, k) => { world('head'); head.rotation.y = -.4 + k * .04; skin.visible = false; bone.visible = false; arachM.opacity = .3; headSparks(t, 1); brainM.emissive.setHex(t > T_REAGIR ? 0x3A1030 : 0x1A0820);
+    headPulses(t, 'brain', 8, .9); LBL('brain', t > T_NEURO - .2, V(0, 2.85, 0), T_NEURO - .2); return hcam(2.6 - k * .05, .4, 3.2); }],
+  // 7 sistema trigeminovascular: 3 ramos, conexão com meninges e vasos
+  [T_EAQUI - .1, (t, k) => { world('head'); head.rotation.y = -.75; nerveM.emissiveIntensity = .7 + Math.sin(t * 6) * .3; headPulses(t, t > T_CONECTA - .2 ? 'dura' : 'branches', 12, .6); vesselM.emissiveIntensity = t > T_CONECTA ? 1.5 : 1;
+    LBL('trig', t > T_TRIGV - .2 && t < T_TRES, V(.9, -.1, 1.2), T_TRIGV - .2); LBL('v1', t > T_TRES, V(.9, 3.35, 1.4), T_TRES, .75); LBL('v2', t > T_TRES + .4, V(.9, 1.35, 2.2), T_TRES + .4, .75); LBL('v3', t > T_TRES + .8, V(.9, -.1, 1.4), T_TRES + .8, .75);
+    duraM.emissive.setHex(t > T_CONECTA ? 0x203060 : 0); return t < T_CONECTA - .2 ? hcam(2.5, -.1, 3.4, .4, -.15, .7) : hcam(3.0, .4, 2.0, .3, .2, 0); }],
+  // 8 durante a crise: dura-máter libera CGRP, sensibiliza, remédios bloqueiam
+  [T_DURANTE - .1, (t, k) => { world('micro'); const rel = t > T_LIBERAM - .2; const blk = t > T_BLOQ - .3;
+    cgrp.forEach((s, i) => { s.visible = rel; if (!rel) return; const u = ((t - T_LIBERAM) * .4 + s.userData.p) % 1; const e = endings[s.userData.e]; s.position.copy(e).add(s.userData.d.clone().multiplyScalar(u)); s.scale.setScalar(blk ? Math.max(.001, 1 - (t - T_BLOQ + .3) * 1.5) : 1); });
+    pill.visible = t > T_REMEDIOS - .2; pill.position.set(lerp(2.5, .6, ease((t - T_REMEDIOS + .2) / .8)), .45, -.2); pill.rotation.y = t; shield.visible = blk; shield.position.set(.3, .9, -.3); shield.scale.setScalar(.6 * pop(t - T_BLOQ + .3, .3));
+    cgrpLab.visible = t > T_CGRP - .1; cgrpLab.position.set(.4, 1.25, -.4); cgrpLab.scale.set(.75 * pop(t - T_CGRP + .1, .3), .18 * pop(t - T_CGRP + .1, .3), 1);
+    nLab.visible = win2(t, T_DURANTE, T_CGRP - .1); nLab.position.set(-1.0, .9, 1.0); nLab.scale.set(.9, .21, 1); vLab.visible = win2(t, T_DURANTE, T_CGRP - .1); vLab.position.set(1.2, .95, -1.0); vLab.scale.set(.5, .19, 1); dLab.visible = win2(t, T_DURANTE, T_LIBERAM); dLab.position.set(-.3, .5, 1.9); dLab.scale.set(.7, .19, 1);
+    fiberM.emissiveIntensity = t > T_ATIVADO - .1 ? .6 + Math.sin(t * 8) * .4 : .5;
+    return [V(.9 + Math.sin(t * .2) * .2, 1.8, 3.3 - k * .03), V(.1, .45, -.3)]; }],
+  // 9 luz e barulho incomodam: fotofobia e fonofobia; náusea, tontura, cheiros
+  [T_COM - .1, (t, k) => { world('room'); me.root.position.set(-1.4, .36, 1.2); me.root.rotation.y = Math.PI / 2; const lightOn = t > T_LUZ - .2; hemi.intensity = lightOn ? 1.2 : .45; renderer.toneMappingExposure = lightOn ? 1.15 : .85; bulbR.material.emissiveIntensity = lightOn ? 3 : 0; lampL.intensity = lightOn ? 4 : 0; lampL.position.set(0, 2.5, 0);
+    poseP(me, t > T_LUZ - .1 ? { ...PP.sitHead, hl: -1.5, kl: 1.5, hr: -1.5, kr: 1.5, y: -.45 } : { ...PP.sitSlump, y: -.45 }, 0, t); face(me, t > T_LUZ - .1 ? 'sad' : 'neutral', t);
+    const fall = clamp((t - T_BARULHO + .3) / .5); cup.position.set(.5 + fall * .15, Math.max(0, .765 - fall * fall * .77), -.75 + fall * .2); cup.rotation.z = fall * 1.5;
+    if (t > T_BARULHO) sounds.forEach((s, i) => { s.visible = true; const u = (t * 1.2 + i / 3) % 1; s.position.set(.65 - u * .4, .1 + u * .3, -.5 + i * .1); s.material.opacity = 1 - u; s.scale.setScalar(.25 + u * .25); });
+    if (lightOn) { flashS.visible = true; flashS.position.set(0, 2.5, 0); flashS.scale.setScalar(2.4 + Math.sin(t * 10) * .2); }
+    if (t > T_NAUSEA2 - .2) icons.forEach((s, i) => { s.visible = true; scene.updateMatrixWorld(true); s.position.copy(me.head.localToWorld(V(0, .35, 0))).add(V(-.3 + i * .3, .1 + Math.sin(t * 3 + i) * .04, 0)); s.scale.setScalar(.25 * pop(t - T_NAUSEA2 + .2 - i * .4, .3)); });
+    return t < T_SENTIDOS - .2 ? [V(.4, 1.6, 4.2), V(-1.2, .95, 1.1)] : [V(.2, 1.6, 3.6), V(-1.2, 1.0, 1.1)]; }],
+  // 10 aura: visão com zigue-zague (POV) → onda pelo córtex
+  [T_ALGUMAS - .1, (t, k) => { if (t < T_OSCI - .1) { world('room'); me.root.visible = false; hemi.intensity = .8; return [V(0, 1.2, .8), V(0, 1.0, -1.6)]; }
+    world('head'); head.rotation.y = .4; skin.visible = false; bone.visible = false; dura.visible = false; arach.visible = false; wave.visible = true; const u = clamp((t - T_ONDA) / 6); const back = V(0, .2, -.84); wave.position.copy(back); wave.lookAt(V(0, .2, -3)); wave.scale.setScalar(1 + u * 3.5); wave.material.opacity = .9 * (1 - u * .4);
+    LBL('cortex', t > T_ONDA, V(-.3, 2.95, -.4), T_ONDA, .7); return hcam(-1.2, .5, -3.4, 0, .1, -.5); }],
+  // 11 fases da crise: linha do tempo
+  [T_FASES - .1, (t, k) => { world('tl'); phases.forEach((g, i) => { const t0 = [T_PROD, T_AURA2, T_DOR3, T_POS][i] - .2; g.visible = t > t0; g.scale.setScalar(Math.max(.001, pop(t - t0, .35))); }); return [V(0, 2.2, 7.5), V(0, 2.05, 0)]; }],
+  // 12 resumo: comparação lado a lado
+  [T_RESUM - .1, (t, k) => { world('head'); head.rotation.y = -.3 + t * .05; brainM.emissive.setHex(0x1A0820); hemi.intensity = .5; return hcam(0, .4, 6.5, 0, .9, 0); }],
+  // 13 enxaqueca não é frescura: pessoa descansando, depois melhor
+  [T_ENXFIM - .1, (t, k) => { world('room'); me.root.position.set(-1.4, .36, 1.2); me.root.rotation.y = Math.PI / 2; poseP(me, t > T_SEVOCE ? { ...PP.sitBench, y: -.45 } : { ...PP.sitSlump, y: -.45 }, 0, t); face(me, t > T_SEVOCE ? 'calm' : 'sad', t); hemi.intensity = .9;
+    return [V(.6, 1.5, 3.4 - k * .05), V(-1.2, .95, 1.2)]; }],
+  // 14 CTA final
+  [T_AGORA2 - .1, (t, k) => { world('head'); head.rotation.y = -.5 + t * .1; headSparks(t, .6); brainM.emissive.setHex(0x1A0820); return hcam(2.4, .6, 4.6, 0, .9, 0); }],
+];
+function drawAura(t) { const c = $('aura'), g = c.getContext('2d'); g.clearRect(0, 0, 1080, 1920); const on = win2(t, T_PONTOS - .3, T_OSCI - .1); c.style.opacity = on ? 1 : 0; if (!on) return; const u = clamp((t - T_PONTOS + .3) / 4);
+  const cx = 600, cy = 760, R = 160 + u * 380; g.lineWidth = 14; for (let k = 0; k < 2; k++) { g.beginPath(); for (let i = 0; i <= 40; i++) { const a = -1.9 + i / 40 * 2.2; const rr2 = R + (i % 2 ? 40 : -10) + k * 26; const x = cx + Math.cos(a) * rr2, y = cy + Math.sin(a) * rr2; i ? g.lineTo(x, y) : g.moveTo(x, y); } g.strokeStyle = k ? `rgba(255,80,200,${.6 + .4 * Math.sin(t * 20)})` : `rgba(80,240,255,${.7 + .3 * Math.sin(t * 17)})`; g.stroke(); }
+  for (let i = 0; i < 18; i++) { const a = rr(-2, .5), rr2 = R * rr(.4, .95); g.fillStyle = `rgba(255,255,255,${rr(.3, .9)})`; g.beginPath(); g.arc(cx + Math.cos(a) * rr2, cy + Math.sin(a) * rr2, rr(4, 12), 0, 7); g.fill(); }
+  const gr = g.createRadialGradient(cx, cy, 0, cx, cy, R * .8); gr.addColorStop(0, 'rgba(230,230,230,.85)'); gr.addColorStop(1, 'rgba(230,230,230,0)'); g.fillStyle = gr; g.beginPath(); g.arc(cx, cy, R * .8, 0, 7); g.fill(); }
+window.draw = function (tt) {
+  t = tt; activeL = [];
+  let i = 0; while (i + 1 < SHOTS.length && SHOTS[i + 1][0] <= t) i++;
+  const [cp, tg] = SHOTS[i][1](t, t - SHOTS[i][0]);
+  const off = headSet.visible ? headSet.position : micro.visible ? micro.position : tl.visible ? tl.position : V(0, 0, 0); if (!tens.visible) { cp.add(off); tg.add(off); }
+  cp.x += Math.sin(t * .35) * .01; cp.y += Math.sin(t * .27) * .008;
+  cam.position.copy(cp); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  sun.position.copy(tg).add(V(2.5, 6, 4)); sun.target.position.copy(tg);
+  drawAura(t);
+  // flash de transição para dentro da cabeça
+  const vt = t - (T_CEREBRO1 - .3); $('veil').style.opacity = vt > -.35 && vt < .35 ? 1 - Math.abs(vt) / .35 : 0; $('veil').style.transform = 'none';
+  fixed($('hook'), t < T_SERA - .1 ? pop(t - .02, .3) * (1 - clamp((t - T_SERA + .25) / .15)) : 0);
+  // botão CTA no começo
+  const ctaOn = win2(t, .8, 9.6); const cta = $('cta'); cta.style.opacity = ctaOn ? 1 : 0; cta.style.transform = ctaOn ? `scale(${pop(t - .8, .35) * (1 + Math.max(0, Math.sin(t * 6)) * .04)})` : 'scale(.001)'; cta.querySelector('.hand').style.transform = `translate(${Math.sin(t * 3) * 120 - 40}px, ${Math.abs(Math.sin(t * 6)) * -18}px)`;
+  const tg2 = [$('t1'), $('t2')]; tg2.forEach(e => e.style.opacity = 0);
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  tag(tg2[0], '🧠 O CÉREBRO NÃO SENTE DOR', 'red small', win2(t, T_CEREBRO1 + .3, T_VAMOS - .1), 540, 300, T_CEREBRO1 + .3, -3);
+  tag(tg2[0], '⚡ SINAL → SISTEMA NERVOSO → DOR', 'white small', win2(t, T_MANDAM, T_AGORA - .1), 540, 300, T_MANDAM, 3);
+  tag(tg2[0], '🌀 ENXAQUECA = CONDIÇÃO NEUROLÓGICA', 'purple small', win2(t, T_NEURO - .2, T_EAQUI - .1), 540, 300, T_NEURO - .2, -3);
+  tag(tg2[0], '⭐ SISTEMA TRIGEMINOVASCULAR', '', win2(t, T_TRIGV - .3, T_TRES - .1), 540, 300, T_TRIGV - .3, 3);
+  tag(tg2[0], '🔊 AUMENTA O VOLUME DA DOR', 'red small', win2(t, T_VOLUME - .3, T_REMEDIOS - .2), 540, 300, T_VOLUME - .3, -3);
+  tag(tg2[0], '💊 REMÉDIOS ANTI-CGRP', 'green', win2(t, T_REMEDIOS - .2, T_COM - .1), 540, 300, T_REMEDIOS - .2, 3);
+  tag(tg2[0], '💡 FOTOFOBIA', '', win2(t, T_FOTO - .2, T_BARULHO - .1), 540, 300, T_FOTO - .2, -3);
+  tag(tg2[0], '🔊 FONOFOBIA', 'red', win2(t, T_FONO - .2, T_SENTIDOS - .1), 540, 300, T_FONO - .2, 3);
+  tag(tg2[0], '✨ AURA', 'blue', win2(t, T_ALGUMAS + .5, T_OSCI - .1), 540, 300, T_ALGUMAS + .5, -3);
+  tag(tg2[0], '🌊 DEPRESSÃO ALASTRANTE CORTICAL', 'white small', win2(t, T_DEPR - .2, T_ATENCAO - .1), 540, 300, T_DEPR - .2, 3);
+  tag(tg2[0], '⚠️ A MAIORIA NÃO TEM AURA', 'red small', win2(t, T_MAIORIA - .2, T_FASES - .1), 540, 300, T_MAIORIA - .2, -3);
+  tag(tg2[0], '🚫 NÃO É FRESCURA', 'red', win2(t, T_ENXFIM, T_SEVOCE - .1), 540, 300, T_ENXFIM, -3);
+  tag(tg2[0], '🩺 PROCURE UM MÉDICO', 'green', win2(t, T_SEVOCE, T_AGORA2 - .1), 540, 300, T_SEVOCE, 3);
+  // lista tensional
+  { const el = $('list'); const on = win2(t, T_APERTO - .2, T_MUSC2 - .3); el.style.opacity = on ? 1 : 0; el.style.transform = `scale(${on ? pop(t - T_APERTO + .2, .35) : .001})`; [T_APERTO, T_DOIS, T_LEVE, T_NAOPIORA, T_NAUSEA].forEach((tt2, j) => el.children[j + 1].style.opacity = t > tt2 - .2 ? 1 : 0); }
+  // comparação
+  { const on = win2(t, T_RESUM, T_ENXFIM - .1); ['pL', 'pR'].forEach(id => { const el = $(id); el.style.opacity = on ? 1 : 0; el.style.transform = `scale(${on ? pop(t - T_RESUM, .35) : .001})`; });
+    const tl2 = [T_RESUM + .6, WA(/aperto/, 0, 207), WA(/^dois$/, 0, 208), WA(/^leve$/, 0, 208.8), WA(/^sem$/, 0, 210.5)]; [...$('pL').children].slice(1).forEach((c, j) => c.style.opacity = t > tl2[j + 1] - .2 ? 1 : 0);
+    const tr2 = [WA(/latejar/), WA(/atingir/, 0, 214), WA(/muito/, 0, 216), WA(/causar/), WA(/sensibilidade/, 0, 219), WA(/piorar/)]; [...$('pR').children].slice(1).forEach((c, j) => c.style.opacity = t > tr2[j] - .2 ? 1 : 0); }
+  // medidor de volume da dor
+  { const el = $('vol'); const on = win2(t, T_SENSIBIL - .3, T_REMEDIOS + 1.5); el.style.opacity = on ? 1 : 0; el.style.transform = 'none'; const lv = clamp((t - T_SENSIBIL) / 3) * (t > T_BLOQ ? Math.max(.25, 1 - (t - T_BLOQ) * .6) : 1); el.innerHTML = '';
+    for (let j = 0; j < 8; j++) { const b = document.createElement('i'); b.style.bottom = (j * 66) + 'px'; b.style.height = '54px'; b.style.background = j / 8 < lv ? ['#22C55E', '#7AD03A', '#C8D83A', '#F2C14E', '#F29A3A', '#F2603A', '#E83A3A', '#C81E3A'][j] : 'rgba(255,255,255,.25)'; el.appendChild(b); } }
+  // números grandes
+  const big = $('big'); let B = null; if (win2(t, T_QUATRO - .1, T_RESUM - .1)) B = ['4–72 h', T_QUATRO - .1]; if (B) { big.textContent = B[0]; place(big, true, 540, 1150, pop(t - B[1], .3), -3); } else big.style.opacity = 0;
+  let mk = null; if (win2(t, T_NAOPIORA - .2, T_NAUSEA + 1)) mk = null; if (mk) { $('mark').textContent = mk[0]; place($('mark'), true, 850, 650, pop(t - mk[1], .3), 8); } else $('mark').style.opacity = 0;
+  fixed($('final'), t >= T_AGORA2 - .1 ? pop(t - T_AGORA2 + .1, .35) : 0);
+  $('wm').style.opacity = .85;
+  let wTxt = null, wSt = 0;
+  for (const w2 of ALL) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap2 = $('cap'); const capOff = t < T_SERA - .1 || t >= T_AGORA2 - .1 || win2(t, T_RESUM, T_ENXFIM - .1);
+  if (wTxt && !capOff) { cap2.textContent = wTxt.toUpperCase().replace(/[.,!?:…"“”]/g, ''); cap2.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap2, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap2, 0);
+  { const box2 = $('lbls'); box2.innerHTML = ''; activeL.slice(-4).forEach(([m, t0]) => { const d = document.createElement('div'); d.textContent = m.txt; d.style.cssText = `background:#fff;color:${m.col};font-weight:900;font-size:50px;padding:6px 28px;border-radius:20px;border:7px solid #111;box-shadow:0 7px 0 #111;white-space:nowrap;transform:scale(${Math.max(.001, pop(t - t0, .3))})`; box2.appendChild(d); }); }
+  faceParts.forEach(f => f.visible = skin.visible); renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>
