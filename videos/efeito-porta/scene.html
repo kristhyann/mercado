@@ -157,7 +157,7 @@ const SHOTS = [
     return [V(1.0, 4.4, 1.2), V(-.2, 1.1, -1.8)]; }],
   // 3 gráfico: passou pela porta esquece mais
   [T_EXP - .1, (t, k) => { world('chart'); const a = ease(clamp((t - T_EXP) / 1.2)), b = ease(clamp((t - T_PORTA2 + .3) / 1.4)); barA.scale.y = Math.max(.001, .9 * a); barA.position.y = .9 * a / 2; barB.scale.y = Math.max(.001, 1.9 * b); barB.position.y = 1.9 * b / 2;
-    brainEmo.position.set(.6, 1.9 * b + .35, 0); brainEmo.visible = b > .9; return [V(0, 1.9, 6.6), V(0, 1.15, 0)]; }],
+    brainEmo.position.set(.6, 1.9 * b + .35, 0); brainEmo.visible = b > .9; chartTitle.visible = false; return [V(0, 1.7, 6.6), V(0, .7, 0)]; }],
   // 4 cérebro organiza a memória em episódios (cenas de filme)
   [T_UMA - .1, (t, k) => { world('mind'); brain.rotation.y = t * .4; mDoor.visible = false; lockS.visible = false; cardCookie.visible = false; clap.visible = t > T_CENAS - .2; clap.position.set(.75, 3.2, -.3); clap.scale.setScalar(.5 * pop(t - T_CENAS + .2, .3));
     [cardSala, cardCoz].forEach((c, i) => { const s = pop(t - T_EPIS + .2 - i * .3, .35); c.visible = s > 0; c.scale.setScalar(Math.max(.001, s)); c.position.set(-.6 + i * 1.2, 1.0, 0); c.rotation.set(0, (i ? -1 : 1) * .2, 0); }); return [V(0, 1.9, 5.8), V(0, 1.5, 0)]; }],
@@ -179,8 +179,8 @@ const SHOTS = [
   [T_DICA - .3, (t, k) => { world('house'); const w = walkPath(t, T_DICA, T_COMENTA - .2); me.root.position.copy(w.p); me.root.rotation.y = w.ry; poseP(me, PP.stand, w.u > 0 && w.u < 1 ? 1 : 0, t); face(me, t > T_REPITA ? 'talk' : 'happy', t); setBulb(true, t); setThought(true, t); door.rotation.y = 1.6;
     return [V(1.4, 5.6, 8.0), V(-.2, .8, .3)]; }],
   // 10 CTA: porta abrindo
-  [T_COMENTA - .1, (t, k) => { world('house'); me.root.position.copy(P_KIT); me.root.rotation.y = 0; poseP(me, { ...PP.stand, rx: -2.8, rz: -.4, re: -.3 }); face(me, 'happy', t); setBulb(true, t); door.rotation.y = 1.6 * ease((t - T_COMENTA) / .8);
-    return [V(1.6, 4.4, 5.6), V(0, 1.0, -.9)]; }],
+  [T_COMENTA - .1, (t, k) => { world('house'); me.root.position.set(-.9, 0, .2); me.root.rotation.y = -Math.PI / 2; poseP(me, { ...PP.stand, rx: -2.8, rz: -.4, re: -.3 }); face(me, 'happy', t); setBulb(true, t); door.rotation.y = 1.6 * ease((t - T_COMENTA) / .8);
+    return [V(.6, 3.6, 5.6), V(0, 1.2, .2)]; }],
 ];
 window.draw = function (t) {
   let i = 0; while (i + 1 < SHOTS.length && SHOTS[i + 1][0] <= t) i++;
@@ -193,7 +193,7 @@ window.draw = function (t) {
   const tg2 = [$('t1'), $('t2')]; tg2.forEach(e => e.style.opacity = 0);
   const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
   tag(tg2[0], '🚪 EFEITO DA PORTA', '', win(t, T_EFEITO - .1, T_EXP - .1), 540, 300, T_EFEITO - .1, -3);
-  tag(tg2[0], '🔬 EXPERIMENTOS', 'purple', win(t, T_EXP, T_UMA - .1), 540, 330, T_EXP, 3);
+  tag(tg2[0], '🔬 EXPERIMENTOS', 'purple', win(t, T_EXP, T_UMA - .1), 540, 250, T_EXP, 3);
   tag(tg2[0], '🎬 MEMÓRIA EM EPISÓDIOS', 'white small', win(t, T_EPIS - .2, T_APORTA - .1), 540, 420, T_EPIS - .2, -3);
   tag(tg2[0], '🚪 = FIM DE CENA', '', win(t, T_APORTA, T_INT - .1), 540, 420, T_APORTA, 3);
   tag(tg2[0], '🔒 FICOU NA CENA ANTERIOR', 'red small', win(t, T_ACABOU - .2, T_POR - .1), 540, 420, T_ACABOU - .2, -3);
