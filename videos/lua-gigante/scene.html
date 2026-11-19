@@ -99,7 +99,7 @@ const bigPhone = grp(scene); { box(.36, .7, .03, 0x111111, 0, 0, 0, bigPhone); a
 // mão/dedo POV (filho da câmera)
 const skinM = MAT(0xD9A27A, .7);
 function mkHand() { const g = grp(); const arm = add(new THREE.CapsuleGeometry(.035, .32, 6, 10), MAT(0x3B82F6, .8), 0, -.22, .12, g); arm.rotation.x = 1.25; const fist = sph(.045, skinM, 0, -.08, 0, g, 14, 10); fist.scale.set(1.1, 1, 1);
-  const idx = add(new THREE.CapsuleGeometry(.0105, .06, 6, 10), skinM, 0, -.012, -.005, g); const thumb = add(new THREE.CapsuleGeometry(.012, .03, 6, 8), skinM, .038, -.06, .01, g); thumb.rotation.z = -.7; return g; }
+  const idx = add(new THREE.CapsuleGeometry(.0135, .06, 6, 10), skinM, 0, -.012, -.005, g); const thumb = add(new THREE.CapsuleGeometry(.012, .03, 6, 8), skinM, .038, -.06, .01, g); thumb.rotation.z = -.7; return g; }
 const hand = mkHand(); cam.add(hand); const handS = mkHand(); camS.add(handS); hand.visible = false; handS.visible = false;
 // ================= CÉREBRO (x=-80) =================
 const bset = grp(); bset.position.set(-80, 0, 0);
@@ -156,7 +156,7 @@ const SHOTS = [
   // 8 lá no alto, sem nada pra comparar, parece menor
   [T_LA - .1, (t, k) => { world('city'); placeMoon(moon, HIGH, 1.0 - ease(clamp((t - T_MENOR + .3) / .6)) * .25); halo.position.copy(moon.position); halo.scale.setScalar(moonR * 3.5); return [V(0, 1.6, 4), look(HIGH, 10)]; }],
   // 9 teste do dedo: tela dividida (horizonte em cima, alto embaixo)
-  [T_FACA - .1, (t, k) => { world('city'); placeMoon(moon, LOW, 1); placeMoon(ghost, HIGH, 1); ghost.visible = true; ghost.material.opacity = 1; halo.position.copy(moon.position); halo.scale.setScalar(moonR * 4); if (t > T_CUBRA - .2) { handAim(hand, cam, (t - T_CUBRA + .2) / .6); } if (t > T_DEPOIS + .4) handAim(handS, camS, (t - T_DEPOIS - .4) / .6); return [EYE.clone(), look(LOW, 10), 'split']; }],
+  [T_FACA - .1, (t, k) => { world('city'); placeMoon(moon, LOW, 1); placeMoon(ghost, HIGH, 1); ghost.visible = true; ghost.material.opacity = 1; halo.position.copy(moon.position); halo.scale.setScalar(moonR * 4); if (t > T_CUBRA - .2) { handAim(hand, cam, (t - T_CUBRA + .2) / .6); } if (t > T_DEPOIS + .4) { handAim(handS, camS, (t - T_DEPOIS - .4) / .6); handS.position.y += .7 * Math.tan(.12); } return [EYE.clone(), look(LOW, 10), 'split']; }],
   // 10 CTA
   [T_COMENTA - .1, (t, k) => { world('city'); placeMoon(moon, dirAt(.22), 1.6); halo.position.copy(moon.position); halo.scale.setScalar(moonR * 1.6 * 4); return [V(0, 1.4, 8 - k * .2), look(dirAt(.2), 40)]; }],
 ];
@@ -195,7 +195,7 @@ window.draw = function (t) {
   if (split) {
     renderer.setScissorTest(true);
     cam.aspect = W / (H / 2); cam.updateProjectionMatrix(); renderer.setViewport(0, H / 2, W, H / 2); renderer.setScissor(0, H / 2, W, H / 2); handS.visible = false; const hv = hand.visible; renderer.render(scene, cam);
-    camS.position.copy(EYE); camS.lookAt(look(HIGH, 10)); camS.updateMatrixWorld(true); hand.visible = false; handS.visible = t > T_DEPOIS + .4; renderer.setViewport(0, 0, W, H / 2); renderer.setScissor(0, 0, W, H / 2); renderer.render(scene, camS); hand.visible = hv;
+    camS.position.copy(EYE); camS.lookAt(look(dirAt(.83), 10)); camS.updateMatrixWorld(true); hand.visible = false; handS.visible = t > T_DEPOIS + .4; renderer.setViewport(0, 0, W, H / 2); renderer.setScissor(0, 0, W, H / 2); renderer.render(scene, camS); hand.visible = hv;
     renderer.setScissorTest(false); renderer.setViewport(0, 0, W, H);
   } else renderer.render(scene, cam);
   return 1;
