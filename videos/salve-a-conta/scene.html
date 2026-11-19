@@ -1,0 +1,179 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,'Noto Color Emoji',sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:250px;text-align:center;font-weight:900;font-size:84px;line-height:1.06}
+#hook b{color:#FFD21F;display:block;font-size:96px}
+#cap{width:1080px;top:1380px;text-align:center;font-weight:900;font-size:112px}
+#cap.hl{color:#FFD21F}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:58px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.white{background:#fff;color:#111}
+.small{font-size:44px;padding:6px 22px;border-radius:18px;border-width:6px;box-shadow:0 6px 0 #111}
+#big{font-weight:900;font-size:340px;line-height:1;color:#FF4D6D;-webkit-text-stroke:18px #111;paint-order:stroke fill;text-shadow:0 16px 0 rgba(0,0,0,.4);white-space:nowrap}
+#big.g{color:#22C55E}
+#goal{left:110px;width:860px;top:300px}
+#goal div{background:#fff;border:8px solid #111;border-radius:30px;box-shadow:0 10px 0 #111;font-weight:900;font-size:58px;color:#111;padding:12px 24px;margin-bottom:22px;opacity:0;display:flex;justify-content:space-between}
+#goal b{color:#E11D48}
+#final{left:50px;width:980px;top:1270px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:62px;line-height:1.12;padding:28px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#E11D48}
+#alarm{left:0;top:0;width:1080px;height:1920px;box-shadow:inset 0 0 220px 60px rgba(255,0,40,.7)}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.85;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="alarm" class="o"></div>
+<div id="hook" class="o stroke">⚠️ ATENÇÃO!<br>VOCÊ TEM 40 SEGUNDOS<b>PRA SALVAR ESSA CONTA</b></div>
+<div id="big" class="o"></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag small"></div>
+<div id="goal" class="o"><div><span>👥 Seguidores</span><b>500</b></div><div><span>❤️ Curtidas</span><b>200</b></div><div><span>↗️ Compartilhamentos</span><b>100</b></div></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Bora bater a meta? 😅<br><em>Segue 👉 @olhaso_3D</em><br>e manda pra 3 amigos</span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, rr } from '/_kit/kit.js';
+import { buildPerson, PP, poseP, face } from '/_kit/pessoas.js';
+await document.fonts.load('900 60px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; window.DURATION = TP.duration;
+const ALL = SN.flatMap(s => s.words);
+const WA = (re, n = 0, after = 0) => { const ws = ALL.filter(w => w.start >= after && re.test(w.w)); if (!ws[n]) { console.log('WA MISS', re); return after; } return ws[n].start; };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .03, 300);
+scene.background = new THREE.Color(0x2A2050); scene.fog = new THREE.Fog(0x2A2050, 12, 40);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const MAT = (c, r = .8, ex = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: r }, ex));
+const add = (geo, mat, x, y, z, par) => { const m = new THREE.Mesh(geo, typeof mat === 'number' ? MAT(mat) : mat); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; par.add(m); return m; };
+const box = (w, h, d, c, x, y, z, par = scene) => add(new THREE.BoxGeometry(w, h, d), c, x, y, z, par);
+const cyl = (rt, rb, h, c, x, y, z, par = scene, seg = 16) => add(new THREE.CylinderGeometry(rt, rb, h, seg), c, x, y, z, par);
+const sph = (r, c, x, y, z, par = scene, a = 18, b = 12) => add(new THREE.SphereGeometry(r, a, b), c, x, y, z, par);
+const BASIC = c => new THREE.MeshBasicMaterial({ color: c, toneMapped: false });
+const sprite = (t, s) => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthWrite: false })); sp.scale.setScalar(s); return sp; };
+const canvasTex = (w, h, paint) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); paint(g, w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.userData = { c, g }; return t; };
+const emo = (e, px = 110) => canvasTex(160, 160, g => { g.font = `${px}px 'Noto Color Emoji'`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(e, 80, 88); });
+
+// ---------- tempos ----------
+const T_E = WA(/^É$/), T_SE = WA(/^Se$/), T_500 = WA(/quinhentos/), T_200 = WA(/duzentas/), T_100 = WA(/^cem$/), T_BOTAO = WA(/botão/), T_EU = WA(/^Eu$/), T_HORAS = WA(/horas/), T_ESCOND = WA(/escondido/), T_CURTIDA = WA(/curtida\./);
+const T_ENTAO = WA(/Então/), T_SEGUE = WA(/^segue$/), T_CURTE = WA(/curte/), T_MANDA = WA(/manda/), T_TRES = WA(/três/), T_EOLHA = WA(/^E$/, 0, 28.5), T_BATEU = WA(/Bateu/), T_SALVA = WA(/^salva!$/), T_NAO = WA(/^Não$/), T_BAN = WA(/Banimen/), T_TABOM = WA(/^Tá$/, 0, 35), T_BRINC = WA(/brincadeira/), T_MAS = WA(/^Mas$/, 0, 39), T_FUT = WA(/futuro/);
+const HL = /atenção|quarenta|salvar|conta|quinhentos|duzentas|cem|banir|3D|escondido|curtida|segue|curte|três|meta|salva|banimen|brincadeira|mãos/i;
+
+// ---------- luz ----------
+const hemi = new THREE.HemisphereLight(0xF0E8FF, 0x403060, 1.0); scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xFFF0E0, 2.0); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, { left: -4, right: 4, top: 4, bottom: -4, near: .5, far: 30 }); sun.shadow.bias = -.0004; scene.add(sun); scene.add(sun.target);
+const redL = new THREE.PointLight(0xFF1030, 0, 10); redL.position.set(1.6, 3.0, 1.0); scene.add(redL);
+
+// ---------- estúdio ----------
+const studio = grp();
+add(new THREE.PlaneGeometry(20, 20), MAT(0x3A2E66, .8), 0, 0, 0, studio).rotation.x = -Math.PI / 2;
+box(14, 6, .1, 0x2E2458, 0, 3, -2.5, studio);
+const siren = grp(studio); siren.position.set(1.7, 2.9, -1.6); cyl(.2, .25, .1, 0x333333, 0, 0, 0, siren, 16); const sirenB = sph(.2, new THREE.MeshStandardMaterial({ color: 0xFF2040, emissive: 0xFF0020, emissiveIntensity: 1 }), 0, .12, 0, siren, 16, 12);
+const siren2 = siren.clone(); siren2.position.x = -1.7; studio.add(siren2);
+// telão contador
+const screenT = canvasTex(800, 480, () => {});
+const scr = grp(studio); scr.position.set(0, 2.2, -2.35); box(3.2, 2.0, .1, 0x111111, 0, 0, 0, scr); add(new THREE.PlaneGeometry(3.0, 1.8), new THREE.MeshBasicMaterial({ map: screenT, toneMapped: false }), 0, 0, .06, scr).castShadow = false;
+function paintScreen(n, col = '#FF4D6D', sub = 'SEGUIDORES') { const g = screenT.userData.g; g.fillStyle = '#0B0820'; g.fillRect(0, 0, 800, 480); g.strokeStyle = col; g.lineWidth = 14; g.strokeRect(10, 10, 780, 460); g.fillStyle = col; g.font = '900 200px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(String(n), 400, 210); g.fillStyle = '#fff'; g.font = '900 60px P'; g.fillText(sub, 400, 380); screenT.needsUpdate = true; }
+// mascote (boné verde, óculos, jardineira)
+const mc = buildPerson({ skin: 0xE8B98F, shirt: 0xFFD21F, pants: 0x2F6FE0, hair: 0x2B1A10, glasses: true, shoes: 0x5A3A1A }); studio.add(mc.root);
+{ const capG = grp(mc.head); cyl(.175, .175, .1, 0x2F9A4A, 0, .16, 0, capG, 18); const brim = box(.22, .02, .14, 0x2F9A4A, 0, .12, .16, capG); box(.34, .3, .06, 0x2F6FE0, 0, .4, .14, mc.hips); [-1, 1].forEach(s => box(.05, .3, .04, 0x2F6FE0, s * .12, .6, .14, mc.hips)); }
+// placas
+const signTex = (txt, bg, fg = '#111') => canvasTex(600, 380, g => { g.fillStyle = bg; g.fillRect(0, 0, 600, 380); g.strokeStyle = '#111'; g.lineWidth = 22; g.strokeRect(11, 11, 578, 358); g.fillStyle = fg; g.textAlign = 'center'; g.textBaseline = 'middle'; const lines = txt.split('|'); g.font = `900 ${lines.length > 2 ? 72 : lines.length > 1 ? 82 : 110}px P`; lines.forEach((l, i) => g.fillText(l, 300, 190 + (i - (lines.length - 1) / 2) * (lines.length > 2 ? 84 : 96))); });
+function mkSign(tex) { const g = grp(scene); cyl(.02, .02, .8, 0x8B5A2B, 0, -.4, 0, g, 6); add(new THREE.BoxGeometry(.75, .48, .02), new THREE.MeshStandardMaterial({ map: tex }), 0, .2, 0, g); g.visible = false; return g; }
+const sSave = mkSign(signTex('SALVE|ESTA CONTA!', '#FFD21F')), sFollow = mkSign(signTex('➕ SEGUE', '#FF2D55', '#fff')), sLike = mkSign(signTex('❤️ CURTE', '#fff')), sShare = mkSign(signTex('↗️ MANDA|PRA 3', '#22C55E', '#fff')), sJoke = mkSign(signTex('É|BRINCADEIRA|😅', '#fff'));
+// botão BANIR
+const btn = grp(studio); btn.position.set(.9, 0, .6); { cyl(.25, .3, .9, 0x2A2A33, 0, .45, 0, btn, 20); const t = canvasTex(512, 128, g => { g.fillStyle = '#111'; g.fillRect(0, 0, 512, 128); g.fillStyle = '#FF2040'; g.font = '900 64px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('BANIR CONTA', 256, 68); }); add(new THREE.PlaneGeometry(.5, .125), new THREE.MeshBasicMaterial({ map: t, toneMapped: false }), 0, .6, .29, btn).castShadow = false; }
+const btnTop = cyl(.18, .2, .1, new THREE.MeshStandardMaterial({ color: 0xFF2040, emissive: 0xAA0010, emissiveIntensity: .6 }), 0, .95, 0, btn, 24);
+const hand = grp(scene); { sph(.07, 0xE8B98F, 0, 0, 0, hand, 14, 10); const f = add(new THREE.CapsuleGeometry(.022, .08, 6, 8), MAT(0xE8B98F), 0, -.09, .02, hand); cyl(.05, .06, .5, 0xFFD21F, 0, .3, 0, hand, 10); } hand.visible = false;
+// olhos espiando
+const peeks = [0, 1, 2, 3].map(i => { const s = sprite(emo('👀'), .4); s.visible = false; scene.add(s); return s; });
+const hearts = []; for (let i = 0; i < 12; i++) { const s = sprite(emo(i % 2 ? '❤️' : '💛'), .2); s.userData = { x: rr(-.8, .8), p: rr(0, 1) }; s.visible = false; scene.add(s); hearts.push(s); }
+// computador (criando vídeo 3D)
+const desk = grp(studio); desk.position.set(-.2, 0, .4); box(1.2, .05, .6, 0xC89A5A, 0, .74, 0, desk); [[-.55, -.25], [.55, -.25], [-.55, .25], [.55, .25]].forEach(([x, z]) => box(.05, .72, .05, 0x5A4A3A, x, .36, z, desk));
+const monT = canvasTex(400, 250, g => { g.fillStyle = '#1A1D24'; g.fillRect(0, 0, 400, 250); g.fillStyle = '#E8954A'; g.beginPath(); g.arc(200, 120, 60, 0, 7); g.fill(); g.fillStyle = '#7FD0FF'; g.font = '700 26px monospace'; g.fillText('render 99%…', 20, 230); });
+const mon = grp(desk); mon.position.set(0, 1.05, -.15); box(.6, .38, .03, 0x111111, 0, 0, 0, mon); add(new THREE.PlaneGeometry(.56, .34), new THREE.MeshBasicMaterial({ map: monT, toneMapped: false }), 0, 0, .02, mon).castShadow = false; desk.visible = false;
+const chair = grp(studio); chair.position.set(-.2, 0, 1.0); cyl(.22, .22, .06, 0x2A2F3A, 0, .48, 0, chair, 14); box(.4, .45, .05, 0x2A2F3A, 0, .78, .2, chair); chair.visible = false;
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win2 = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'buzz'], [1.5, 'buzzx'], [T_E, 'whoosh'], [T_500, 'pop'], [T_200, 'pop'], [T_100, 'pop'], [T_BOTAO, 'buzz'], [T_EU, 'whoosh'], [T_ESCOND, 'boing'], [T_ENTAO, 'whoosh'], [T_SEGUE, 'pop'], [T_CURTE, 'pop'], [T_MANDA, 'pop'], [T_EOLHA, 'whoosh'],
+ [T_BATEU, 'ding'], [T_SALVA, 'win'], [T_NAO, 'buzzx'], [T_BAN, 'buzz'], [T_TABOM, 'boing'], [T_BRINC, 'pop'], [T_MAS, 'whoosh'], [T_FUT, 'win']].forEach(([t, k]) => ev(t, k));
+function hideAll() { [sSave, sFollow, sLike, sShare, sJoke, hand].forEach(s => s.visible = false); peeks.forEach(p => p.visible = false); hearts.forEach(h => h.visible = false); desk.visible = false; chair.visible = false; btn.visible = true; mc.root.visible = true; redL.intensity = 0; sirenB.material.emissiveIntensity = .3; }
+function alarm(t, k = 1) { const f = (Math.sin(t * 10) > 0) ? 1 : 0; redL.intensity = 8 * f * k; sirenB.material.emissiveIntensity = .3 + f * 1.5 * k; return f * k; }
+function signAt(s, t, t0, side = 1) { s.visible = true; scene.updateMatrixWorld(true); const hp = (side > 0 ? mc.armR : mc.armL).hand.getWorldPosition(V(0, 0, 0)); s.position.copy(hp).add(V(0, .3, .05)); s.scale.setScalar(Math.max(.001, pop(t - t0, .35))); s.rotation.set(0, 0, Math.sin(t * 6) * .05); }
+const P_POINT = { ...PP.stand, rx: -1.5, rz: -.1, re: -.1, lx: -2.6, lz: .3, le: -.4, hx: -.1 };
+const P_UP2 = { ...PP.stand, rx: -2.7, rz: -.2, re: -.3, lx: -2.7, lz: .2, le: -.3 };
+const P_SIGN = { ...PP.stand, rx: -1.9, rz: -.45, re: -.3, lx: .05, lz: .12, le: -.15 };
+const P_SIGNL = { ...PP.stand, lx: -1.9, lz: .45, le: -.3, rx: -1.5, rz: -.1, re: -.1 };
+
+// ---------- planos ----------
+const SHOTS = [
+  // 0 gancho: desesperado, placa SALVE ESTA CONTA, sirene
+  [0, (t, k) => { hideAll(); alarm(t); mc.root.position.set(-.1, 0, .2); mc.root.rotation.y = .15; poseP(mc, P_SIGNL, 0, t); mc.root.position.y = Math.abs(Math.sin(t * 8)) * .04; face(mc, 'shock', t); signAt(sSave, t, .2, -1); paintScreen(296);
+    return [V(.5, 1.5, 4.8 - k * .15), V(0, 1.3, 0)]; }],
+  // 1 meta: 500 seguidores, 200 curtidas, 100 compartilhamentos — telão caindo
+  [T_E - .1, (t, k) => { hideAll(); alarm(t, .5); mc.root.position.set(-.9, 0, .4); mc.root.rotation.y = .5; poseP(mc, P_POINT, 0, t); face(mc, 'angry', t); const n = Math.max(280, Math.round(296 - (t - T_E) * 2)); paintScreen(n);
+    return t < T_BOTAO - .2 ? [V(.0, 2.0, 4.6), V(0, 2.0, -2)] : [V(1.6, 1.4, 2.2), V(.9, .9, .6)]; }],
+  // 2 horas criando vídeos 3D… e você assistindo escondido
+  [T_EU - .1, (t, k) => { hideAll(); desk.visible = true; chair.visible = true; mc.root.position.set(-.2, 0, 1.0); mc.root.rotation.y = Math.PI; poseP(mc, t < T_ESCOND - .4 ? PP.type : { ...PP.sitThink }, 0, t); face(mc, 'sad', t); paintScreen(288);
+    if (t > T_ESCOND - .4) { mc.root.rotation.y = .2; peeks.forEach((p, i) => { p.visible = true; p.position.set([-1.6, 1.4, -1.2, 1.8][i], [1.2, 1.6, 2.4, .7][i] + Math.sin(t * 3 + i) * .05, -1.0); p.scale.setScalar(.4 * pop(t - T_ESCOND + .4 - i * .2, .3)); }); }
+    return [V(1.0, 1.8, 4.3), V(-.1, 1.15, .2)]; }],
+  // 3 acordo: segue, curte, manda pra 3 amigos
+  [T_ENTAO - .1, (t, k) => { hideAll(); mc.root.position.set(.4, 0, .3); mc.root.rotation.y = -.15; const s = t < T_CURTE - .1 ? sFollow : t < T_MANDA - .1 ? sLike : sShare; const st = t < T_CURTE - .1 ? T_SEGUE - .2 : t < T_MANDA - .1 ? T_CURTE - .1 : T_MANDA - .1;
+    poseP(mc, t > T_SEGUE - .3 ? P_SIGN : { ...PP.stand, rx: -1.0, rz: -.3, re: -1.2, lx: -1.0, lz: .3, le: -1.2 }, 0, t); face(mc, 'happy', t); if (t > T_SEGUE - .3) signAt(s, t, st, 1); paintScreen(288);
+    return [V(.3, 1.6, 4.4), V(0, 1.45, 0)]; }],
+  // 4 contagem regressiva: bateu a meta? conta salva!
+  [T_EOLHA - .1, (t, k) => { hideAll(); mc.root.position.set(-.6, 0, .4); mc.root.rotation.y = .3; const saved = t > T_SALVA - .2; poseP(mc, saved ? P_UP2 : PP.arms, 0, t); face(mc, saved ? 'happy' : 'angry', t); paintScreen(saved ? 500 : Math.max(0, 10 - Math.floor((t - T_EOLHA) * 2.5)), saved ? '#22C55E' : '#FF4D6D', saved ? 'META BATIDA' : 'SEGUNDOS');
+    if (saved) hearts.forEach(h => { h.visible = true; const u = (t * .5 + h.userData.p) % 1; h.position.set(-.6 + h.userData.x + Math.sign(h.userData.x || 1) * .5, 1.2 + u * 1.4, -.2); h.scale.setScalar(.22 * Math.sin(u * Math.PI)); });
+    return [V(.4, 1.9, 4.6), V(-.2, 1.7, -.5)]; }],
+  // 5 não bateu? BANIMEN… — mão para antes de apertar
+  [T_NAO - .1, (t, k) => { hideAll(); alarm(t, 1); mc.root.position.set(.35, 0, .55); mc.root.rotation.y = Math.PI / 2 + .3; poseP(mc, { ...PP.stand, rx: -1.0, rz: .1, re: -.6, hx: .35 }, 0, t); face(mc, 'angry', t); hand.visible = true;
+    const d = ease(clamp((t - T_NAO) / (T_BAN + .3 - T_NAO))); hand.position.set(.9, lerp(1.5, 1.1, d) + (t > T_BAN + .3 ? Math.sin(t * 40) * .004 : 0), .6); paintScreen('⚠️', '#FF4D6D', 'BANIR?');
+    return [V(1.55, 1.25, 1.5), V(.9, 1.0, .6)]; }],
+  // 6 tá bom, é brincadeira — segue aí
+  [T_TABOM - .1, (t, k) => { hideAll(); mc.root.position.set(.4, 0, .3); mc.root.rotation.y = -.15; poseP(mc, t < T_MAS ? P_SIGN : { ...PP.stand, rx: -1.5, rz: -.1, re: -.1, hx: -.05 }, 0, t); face(mc, 'happy', t); if (t < T_MAS) signAt(sJoke, t, T_BRINC - .3, 1); paintScreen('❤️', '#FF8AB0', 'VALEU!');
+    hearts.forEach(h => { h.visible = true; const u = (t * .5 + h.userData.p) % 1; h.position.set(h.userData.x + Math.sign(h.userData.x || 1) * .5, 1.2 + u * 1.5, -.3); h.scale.setScalar(.2 * Math.sin(u * Math.PI)); });
+    return [V(.3, 1.6, 4.4), V(0, 1.45, 0)]; }],
+];
+window.draw = function (t) {
+  let i = 0; while (i + 1 < SHOTS.length && SHOTS[i + 1][0] <= t) i++;
+  const [cp, tg] = SHOTS[i][1](t, t - SHOTS[i][0]);
+  cp.x += Math.sin(t * .35) * .01; cp.y += Math.sin(t * .27) * .008;
+  cam.position.copy(cp); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  sun.position.copy(tg).add(V(2.5, 6, 4)); sun.target.position.copy(tg);
+  const al = (t < T_EU - .1 || win2(t, T_NAO - .1, T_TABOM - .1)) && Math.sin(t * 10) > 0; $('alarm').style.opacity = al ? .8 : 0; $('alarm').style.transform = 'none';
+  fixed($('hook'), t < T_E - .1 ? pop(t - .02, .3) * (1 - clamp((t - T_E + .25) / .15)) : 0);
+  const tg2 = [$('t1'), $('t2')]; tg2.forEach(e => e.style.opacity = 0);
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  tag(tg2[0], '🔴 BOTÃO DE BANIR', 'red', win2(t, T_BOTAO - .2, T_EU - .1), 540, 330, T_BOTAO - .2, 3);
+  tag(tg2[0], '⏳ HORAS EM CADA VÍDEO', 'white small', win2(t, T_HORAS - .2, T_ESCOND - .4), 540, 330, T_HORAS - .2, -3);
+  tag(tg2[0], '👀 ASSISTINDO ESCONDIDO', '', win2(t, T_ESCOND - .4, T_ENTAO - .1), 540, 330, T_ESCOND - .4, 3);
+  tag(tg2[0], '🤝 O ACORDO', 'white', win2(t, T_ENTAO, T_SEGUE - .3), 540, 330, T_ENTAO, -3);
+  tag(tg2[0], '✅ CONTA SALVA!', 'green', win2(t, T_SALVA - .2, T_NAO - .1), 540, 330, T_SALVA - .2, -3);
+  { const el = $('goal'); const on = win2(t, T_500 - .2, T_BOTAO - .2); el.style.opacity = on ? 1 : 0; el.style.transform = 'none'; [T_500, T_200, T_100].forEach((tt, j) => { const c = el.children[j]; c.style.opacity = t > tt - .2 ? 1 : 0; c.style.transform = `scale(${t > tt - .2 ? pop(t - tt + .2, .3) : .001})`; }); }
+  const big = $('big'); let B = null; 
+  if (win2(t, T_BAN - .1, T_TABOM - .1)) B = ['BANIMEN…', '', T_BAN - .1];
+  if (B) { big.textContent = B[0]; big.className = 'o ' + B[1]; big.style.fontSize = B[0].length > 3 ? '150px' : '340px'; place(big, true, 540, 700, pop(t - B[2], .25), -3); } else big.style.opacity = 0;
+  fixed($('final'), t >= T_MAS - .1 ? pop(t - T_MAS + .1, .35) : 0);
+  $('wm').style.opacity = .85;
+  let wTxt = null, wSt = 0;
+  for (const w2 of ALL) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap2 = $('cap'); const capOff = t < T_E - .1 || t >= T_MAS - .1 || win2(t, T_BAN - .1, T_TABOM - .1);
+  if (wTxt && !capOff) { cap2.textContent = wTxt.toUpperCase().replace(/[.,!?:…]/g, ''); cap2.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap2, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap2, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>

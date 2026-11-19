@@ -1,0 +1,577 @@
+{
+ "duration": 47.3,
+ "sentences": [
+  {
+   "text": "Atenção! Você tem quarenta segundos pra salvar essa conta!  É isso mesmo. Se essa página não chegar a quinhentos seguidores, duzentas curtidas e cem compartilhamentos… eu vou apertar o botão de banir!  Eu passo horas criando cada vídeo em 3D… e você aí, assistindo escondido, sem nem deixar uma curtida.  Então vamos fazer um acordo: se você chegou até aqui, segue a página, curte esse vídeo e manda pra pelo menos três amigos.  E olha que eu tô falando sério…  Bateu a meta? A conta tá salva!  Não bateu?  Banimen…  Tá bom, tá bom, é brincadeira. Eu nunca ia apagar vocês. Mas segue aí, vai… o futuro dessa página tá nas suas mãos! ",
+   "start": 0.0,
+   "end": 43.32,
+   "words": [
+    {
+     "w": "Atenção!",
+     "start": 0.0,
+     "end": 0.52
+    },
+    {
+     "w": "Você",
+     "start": 0.9,
+     "end": 1.14
+    },
+    {
+     "w": "tem",
+     "start": 1.14,
+     "end": 1.32
+    },
+    {
+     "w": "quarenta",
+     "start": 1.32,
+     "end": 1.76
+    },
+    {
+     "w": "segundos",
+     "start": 1.76,
+     "end": 2.34
+    },
+    {
+     "w": "pra",
+     "start": 2.34,
+     "end": 2.62
+    },
+    {
+     "w": "salvar",
+     "start": 2.62,
+     "end": 3.02
+    },
+    {
+     "w": "essa",
+     "start": 3.02,
+     "end": 3.24
+    },
+    {
+     "w": "conta!",
+     "start": 3.24,
+     "end": 3.6
+    },
+    {
+     "w": "É",
+     "start": 4.02,
+     "end": 4.16
+    },
+    {
+     "w": "isso",
+     "start": 4.16,
+     "end": 4.34
+    },
+    {
+     "w": "mesmo.",
+     "start": 4.34,
+     "end": 4.6
+    },
+    {
+     "w": "Se",
+     "start": 5.04,
+     "end": 5.18
+    },
+    {
+     "w": "essa",
+     "start": 5.18,
+     "end": 5.38
+    },
+    {
+     "w": "página",
+     "start": 5.38,
+     "end": 5.74
+    },
+    {
+     "w": "não",
+     "start": 5.74,
+     "end": 6.08
+    },
+    {
+     "w": "chegar",
+     "start": 6.08,
+     "end": 6.44
+    },
+    {
+     "w": "a",
+     "start": 6.44,
+     "end": 6.62
+    },
+    {
+     "w": "quinhentos",
+     "start": 6.62,
+     "end": 7.02
+    },
+    {
+     "w": "seguidores,",
+     "start": 7.02,
+     "end": 7.64
+    },
+    {
+     "w": "duzentas",
+     "start": 7.64,
+     "end": 8.22
+    },
+    {
+     "w": "curtidas",
+     "start": 8.22,
+     "end": 9.02
+    },
+    {
+     "w": "e",
+     "start": 9.02,
+     "end": 9.32
+    },
+    {
+     "w": "cem",
+     "start": 9.32,
+     "end": 9.6
+    },
+    {
+     "w": "compartilhamentos…",
+     "start": 9.6,
+     "end": 10.48
+    },
+    {
+     "w": "eu",
+     "start": 10.88,
+     "end": 11.08
+    },
+    {
+     "w": "vou",
+     "start": 11.08,
+     "end": 11.24
+    },
+    {
+     "w": "apertar",
+     "start": 11.24,
+     "end": 11.66
+    },
+    {
+     "w": "o",
+     "start": 11.66,
+     "end": 11.78
+    },
+    {
+     "w": "botão",
+     "start": 11.78,
+     "end": 12.08
+    },
+    {
+     "w": "de",
+     "start": 12.08,
+     "end": 12.22
+    },
+    {
+     "w": "banir!",
+     "start": 12.22,
+     "end": 12.7
+    },
+    {
+     "w": "Eu",
+     "start": 13.14,
+     "end": 13.28
+    },
+    {
+     "w": "passo",
+     "start": 13.28,
+     "end": 13.54
+    },
+    {
+     "w": "horas",
+     "start": 13.54,
+     "end": 14.0
+    },
+    {
+     "w": "criando",
+     "start": 14.0,
+     "end": 14.42
+    },
+    {
+     "w": "cada",
+     "start": 14.42,
+     "end": 14.76
+    },
+    {
+     "w": "vídeo",
+     "start": 14.76,
+     "end": 15.22
+    },
+    {
+     "w": "em",
+     "start": 15.22,
+     "end": 15.38
+    },
+    {
+     "w": "3D…",
+     "start": 15.38,
+     "end": 16.12
+    },
+    {
+     "w": "e",
+     "start": 16.56,
+     "end": 16.72
+    },
+    {
+     "w": "você",
+     "start": 16.72,
+     "end": 17.04
+    },
+    {
+     "w": "aí,",
+     "start": 17.04,
+     "end": 17.38
+    },
+    {
+     "w": "assistindo",
+     "start": 17.64,
+     "end": 18.16
+    },
+    {
+     "w": "escondido,",
+     "start": 18.16,
+     "end": 18.88
+    },
+    {
+     "w": "sem",
+     "start": 19.1,
+     "end": 19.3
+    },
+    {
+     "w": "nem",
+     "start": 19.3,
+     "end": 19.54
+    },
+    {
+     "w": "deixar",
+     "start": 19.54,
+     "end": 20.02
+    },
+    {
+     "w": "uma",
+     "start": 20.02,
+     "end": 20.22
+    },
+    {
+     "w": "curtida.",
+     "start": 20.22,
+     "end": 20.8
+    },
+    {
+     "w": "Então",
+     "start": 21.18,
+     "end": 21.44
+    },
+    {
+     "w": "vamos",
+     "start": 21.58,
+     "end": 21.78
+    },
+    {
+     "w": "fazer",
+     "start": 21.78,
+     "end": 22.1
+    },
+    {
+     "w": "um",
+     "start": 22.1,
+     "end": 22.22
+    },
+    {
+     "w": "acordo:",
+     "start": 22.22,
+     "end": 22.56
+    },
+    {
+     "w": "se",
+     "start": 23.04,
+     "end": 23.16
+    },
+    {
+     "w": "você",
+     "start": 23.16,
+     "end": 23.44
+    },
+    {
+     "w": "chegou",
+     "start": 23.44,
+     "end": 23.78
+    },
+    {
+     "w": "até",
+     "start": 23.78,
+     "end": 24.02
+    },
+    {
+     "w": "aqui,",
+     "start": 24.02,
+     "end": 24.32
+    },
+    {
+     "w": "segue",
+     "start": 24.68,
+     "end": 24.96
+    },
+    {
+     "w": "a",
+     "start": 24.96,
+     "end": 25.12
+    },
+    {
+     "w": "página,",
+     "start": 25.12,
+     "end": 25.46
+    },
+    {
+     "w": "curte",
+     "start": 25.86,
+     "end": 26.1
+    },
+    {
+     "w": "esse",
+     "start": 26.1,
+     "end": 26.24
+    },
+    {
+     "w": "vídeo",
+     "start": 26.24,
+     "end": 26.58
+    },
+    {
+     "w": "e",
+     "start": 26.58,
+     "end": 26.94
+    },
+    {
+     "w": "manda",
+     "start": 26.94,
+     "end": 27.26
+    },
+    {
+     "w": "pra",
+     "start": 27.26,
+     "end": 27.38
+    },
+    {
+     "w": "pelo",
+     "start": 27.38,
+     "end": 27.7
+    },
+    {
+     "w": "menos",
+     "start": 27.7,
+     "end": 28.0
+    },
+    {
+     "w": "três",
+     "start": 28.0,
+     "end": 28.4
+    },
+    {
+     "w": "amigos.",
+     "start": 28.4,
+     "end": 28.82
+    },
+    {
+     "w": "E",
+     "start": 28.82,
+     "end": 29.48
+    },
+    {
+     "w": "olha",
+     "start": 29.48,
+     "end": 29.68
+    },
+    {
+     "w": "que",
+     "start": 29.68,
+     "end": 29.82
+    },
+    {
+     "w": "eu",
+     "start": 29.82,
+     "end": 29.9
+    },
+    {
+     "w": "tô",
+     "start": 29.9,
+     "end": 29.96
+    },
+    {
+     "w": "falando",
+     "start": 29.96,
+     "end": 30.22
+    },
+    {
+     "w": "sério…",
+     "start": 30.22,
+     "end": 30.74
+    },
+    {
+     "w": "Bateu",
+     "start": 31.16,
+     "end": 31.54
+    },
+    {
+     "w": "a",
+     "start": 31.54,
+     "end": 31.6
+    },
+    {
+     "w": "meta?",
+     "start": 31.6,
+     "end": 31.8
+    },
+    {
+     "w": "A",
+     "start": 32.2,
+     "end": 32.32
+    },
+    {
+     "w": "conta",
+     "start": 32.32,
+     "end": 32.54
+    },
+    {
+     "w": "tá",
+     "start": 32.54,
+     "end": 32.68
+    },
+    {
+     "w": "salva!",
+     "start": 32.68,
+     "end": 33.14
+    },
+    {
+     "w": "Não",
+     "start": 33.52,
+     "end": 33.66
+    },
+    {
+     "w": "bateu?",
+     "start": 33.66,
+     "end": 34.1
+    },
+    {
+     "w": "Banimen…",
+     "start": 34.1,
+     "end": 35.66
+    },
+    {
+     "w": "Tá",
+     "start": 35.66,
+     "end": 35.92
+    },
+    {
+     "w": "bom,",
+     "start": 35.92,
+     "end": 36.18
+    },
+    {
+     "w": "tá",
+     "start": 36.36,
+     "end": 36.42
+    },
+    {
+     "w": "bom,",
+     "start": 36.42,
+     "end": 36.72
+    },
+    {
+     "w": "é",
+     "start": 36.94,
+     "end": 36.94
+    },
+    {
+     "w": "brincadeira.",
+     "start": 36.94,
+     "end": 37.58
+    },
+    {
+     "w": "Eu",
+     "start": 37.86,
+     "end": 37.98
+    },
+    {
+     "w": "nunca",
+     "start": 37.98,
+     "end": 38.24
+    },
+    {
+     "w": "ia",
+     "start": 38.24,
+     "end": 38.46
+    },
+    {
+     "w": "apagar",
+     "start": 38.46,
+     "end": 38.68
+    },
+    {
+     "w": "vocês.",
+     "start": 38.68,
+     "end": 39.12
+    },
+    {
+     "w": "Mas",
+     "start": 39.72,
+     "end": 39.92
+    },
+    {
+     "w": "segue",
+     "start": 39.92,
+     "end": 40.22
+    },
+    {
+     "w": "aí,",
+     "start": 40.22,
+     "end": 40.48
+    },
+    {
+     "w": "vai…",
+     "start": 40.58,
+     "end": 40.64
+    },
+    {
+     "w": "o",
+     "start": 41.02,
+     "end": 41.1
+    },
+    {
+     "w": "futuro",
+     "start": 41.1,
+     "end": 41.48
+    },
+    {
+     "w": "dessa",
+     "start": 41.48,
+     "end": 41.76
+    },
+    {
+     "w": "página",
+     "start": 41.76,
+     "end": 42.2
+    },
+    {
+     "w": "tá",
+     "start": 42.2,
+     "end": 42.44
+    },
+    {
+     "w": "nas",
+     "start": 42.44,
+     "end": 42.56
+    },
+    {
+     "w": "suas",
+     "start": 42.56,
+     "end": 42.88
+    },
+    {
+     "w": "mãos!",
+     "start": 42.88,
+     "end": 43.32
+    }
+   ]
+  }
+ ]
+}
