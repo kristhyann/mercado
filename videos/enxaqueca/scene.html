@@ -263,7 +263,7 @@ const SHOTS = [
     if (t > T_NAUSEA2 - .2) icons.forEach((s, i) => { s.visible = true; scene.updateMatrixWorld(true); s.position.copy(me.head.localToWorld(V(0, .35, 0))).add(V(-.3 + i * .3, .1 + Math.sin(t * 3 + i) * .04, 0)); s.scale.setScalar(.25 * pop(t - T_NAUSEA2 + .2 - i * .4, .3)); });
     return t < T_SENTIDOS - .2 ? [V(.4, 1.6, 4.2), V(-1.2, .95, 1.1)] : [V(.2, 1.6, 3.6), V(-1.2, 1.0, 1.1)]; }],
   // 10 aura: visão com zigue-zague (POV) → onda pelo córtex
-  [T_ALGUMAS - .1, (t, k) => { if (t < T_OSCI - .1) { world('room'); me.root.visible = false; hemi.intensity = .8; return [V(0, 1.2, .8), V(0, 1.0, -1.6)]; }
+  [T_ALGUMAS - .1, (t, k) => { if (t < T_OSCI - .1) { world('room'); me.root.visible = false; hemi.intensity = .9; return [V(-.2, 1.55, 1.4), V(1.0, 1.55, -1.6)]; }
     world('head'); head.rotation.y = .4; skin.visible = false; bone.visible = false; dura.visible = false; arach.visible = false; wave.visible = true; const u = clamp((t - T_ONDA) / 6); const back = V(0, .2, -.84); wave.position.copy(back); wave.lookAt(V(0, .2, -3)); wave.scale.setScalar(1 + u * 3.5); wave.material.opacity = .9 * (1 - u * .4);
     LBL('cortex', t > T_ONDA, V(-.3, 2.95, -.4), T_ONDA, .7); return hcam(-1.2, .5, -3.4, 0, .1, -.5); }],
   // 11 fases da crise: linha do tempo
@@ -277,7 +277,7 @@ const SHOTS = [
   [T_AGORA2 - .1, (t, k) => { world('head'); head.rotation.y = -.5 + t * .1; headSparks(t, .6); brainM.emissive.setHex(0x1A0820); return hcam(2.4, .6, 4.6, 0, .9, 0); }],
 ];
 function drawAura(t) { const c = $('aura'), g = c.getContext('2d'); g.clearRect(0, 0, 1080, 1920); const on = win2(t, T_PONTOS - .3, T_OSCI - .1); c.style.opacity = on ? 1 : 0; if (!on) return; const u = clamp((t - T_PONTOS + .3) / 4);
-  const cx = 600, cy = 760, R = 160 + u * 380; g.lineWidth = 14; for (let k = 0; k < 2; k++) { g.beginPath(); for (let i = 0; i <= 40; i++) { const a = -1.9 + i / 40 * 2.2; const rr2 = R + (i % 2 ? 40 : -10) + k * 26; const x = cx + Math.cos(a) * rr2, y = cy + Math.sin(a) * rr2; i ? g.lineTo(x, y) : g.moveTo(x, y); } g.strokeStyle = k ? `rgba(255,80,200,${.6 + .4 * Math.sin(t * 20)})` : `rgba(80,240,255,${.7 + .3 * Math.sin(t * 17)})`; g.stroke(); }
+  const cx = 540, cy = 820, R = 140 + u * 300; g.lineWidth = 14; for (let k = 0; k < 2; k++) { g.beginPath(); for (let i = 0; i <= 40; i++) { const a = -1.9 + i / 40 * 2.2; const rr2 = R + (i % 2 ? 40 : -10) + k * 26; const x = cx + Math.cos(a) * rr2, y = cy + Math.sin(a) * rr2; i ? g.lineTo(x, y) : g.moveTo(x, y); } g.strokeStyle = k ? `rgba(255,80,200,${.6 + .4 * Math.sin(t * 20)})` : `rgba(80,240,255,${.7 + .3 * Math.sin(t * 17)})`; g.stroke(); }
   for (let i = 0; i < 18; i++) { const a = rr(-2, .5), rr2 = R * rr(.4, .95); g.fillStyle = `rgba(255,255,255,${rr(.3, .9)})`; g.beginPath(); g.arc(cx + Math.cos(a) * rr2, cy + Math.sin(a) * rr2, rr(4, 12), 0, 7); g.fill(); }
   const gr = g.createRadialGradient(cx, cy, 0, cx, cy, R * .8); gr.addColorStop(0, 'rgba(230,230,230,.85)'); gr.addColorStop(1, 'rgba(230,230,230,0)'); g.fillStyle = gr; g.beginPath(); g.arc(cx, cy, R * .8, 0, 7); g.fill(); }
 window.draw = function (tt) {
