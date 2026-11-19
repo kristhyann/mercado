@@ -1,0 +1,682 @@
+{
+ "duration": 46.9,
+ "sentences": [
+  {
+   "text": "Engasgou e não tem ninguém em casa? Corre para uma cadeira, gritar não adianta, sem ar passando, a voz não sai. Se você ainda consegue tossir, tosse com toda a força, mas se não sai nem tosse nem ar, a comida tampou a traqueia e o seu cérebro aguenta só uns quatro minutos sem o oxigênio. Então faz a manobra de Heimlich em você mesmo, mão fechada um pouco acima do umbigo, a outra mão por cima e puxa com força para dentro e para cima. Sem força nos braços, apoia a barriga no encosto da cadeira e joga o peso do corpo. Várias vezes, o ar preso nos pulmões sai de uma vez só e empurra a comida para fora, igual uma bolinha soprada num canudo. Manda isso para quem come rápido demais.",
+   "start": 0.0,
+   "end": 41.32,
+   "words": [
+    {
+     "w": "Engasgou",
+     "start": 0.0,
+     "end": 0.58
+    },
+    {
+     "w": "e",
+     "start": 0.58,
+     "end": 0.98
+    },
+    {
+     "w": "não",
+     "start": 0.98,
+     "end": 1.08
+    },
+    {
+     "w": "tem",
+     "start": 1.08,
+     "end": 1.22
+    },
+    {
+     "w": "ninguém",
+     "start": 1.22,
+     "end": 1.5
+    },
+    {
+     "w": "em",
+     "start": 1.5,
+     "end": 1.66
+    },
+    {
+     "w": "casa?",
+     "start": 1.66,
+     "end": 1.88
+    },
+    {
+     "w": "Corre",
+     "start": 2.38,
+     "end": 2.64
+    },
+    {
+     "w": "para",
+     "start": 2.64,
+     "end": 2.76
+    },
+    {
+     "w": "uma",
+     "start": 2.76,
+     "end": 2.88
+    },
+    {
+     "w": "cadeira,",
+     "start": 2.88,
+     "end": 3.36
+    },
+    {
+     "w": "gritar",
+     "start": 3.66,
+     "end": 4.1
+    },
+    {
+     "w": "não",
+     "start": 4.1,
+     "end": 4.28
+    },
+    {
+     "w": "adianta,",
+     "start": 4.28,
+     "end": 4.8
+    },
+    {
+     "w": "sem",
+     "start": 5.08,
+     "end": 5.28
+    },
+    {
+     "w": "ar",
+     "start": 5.28,
+     "end": 5.4
+    },
+    {
+     "w": "passando,",
+     "start": 5.4,
+     "end": 6.0
+    },
+    {
+     "w": "a",
+     "start": 6.24,
+     "end": 6.28
+    },
+    {
+     "w": "voz",
+     "start": 6.28,
+     "end": 6.44
+    },
+    {
+     "w": "não",
+     "start": 6.44,
+     "end": 6.6
+    },
+    {
+     "w": "sai.",
+     "start": 6.6,
+     "end": 6.88
+    },
+    {
+     "w": "Se",
+     "start": 7.34,
+     "end": 7.48
+    },
+    {
+     "w": "você",
+     "start": 7.48,
+     "end": 7.66
+    },
+    {
+     "w": "ainda",
+     "start": 7.66,
+     "end": 7.9
+    },
+    {
+     "w": "consegue",
+     "start": 7.9,
+     "end": 8.32
+    },
+    {
+     "w": "tossir,",
+     "start": 8.32,
+     "end": 8.84
+    },
+    {
+     "w": "tosse",
+     "start": 8.84,
+     "end": 9.36
+    },
+    {
+     "w": "com",
+     "start": 9.36,
+     "end": 9.56
+    },
+    {
+     "w": "toda",
+     "start": 9.56,
+     "end": 9.86
+    },
+    {
+     "w": "a",
+     "start": 9.86,
+     "end": 10.06
+    },
+    {
+     "w": "força,",
+     "start": 10.06,
+     "end": 10.36
+    },
+    {
+     "w": "mas",
+     "start": 10.78,
+     "end": 10.9
+    },
+    {
+     "w": "se",
+     "start": 10.9,
+     "end": 11.04
+    },
+    {
+     "w": "não",
+     "start": 11.04,
+     "end": 11.12
+    },
+    {
+     "w": "sai",
+     "start": 11.12,
+     "end": 11.36
+    },
+    {
+     "w": "nem",
+     "start": 11.36,
+     "end": 11.56
+    },
+    {
+     "w": "tosse",
+     "start": 11.56,
+     "end": 12.08
+    },
+    {
+     "w": "nem",
+     "start": 12.08,
+     "end": 12.28
+    },
+    {
+     "w": "ar,",
+     "start": 12.28,
+     "end": 12.62
+    },
+    {
+     "w": "a",
+     "start": 12.98,
+     "end": 13.02
+    },
+    {
+     "w": "comida",
+     "start": 13.02,
+     "end": 13.22
+    },
+    {
+     "w": "tampou",
+     "start": 13.22,
+     "end": 13.7
+    },
+    {
+     "w": "a",
+     "start": 13.7,
+     "end": 13.78
+    },
+    {
+     "w": "traqueia",
+     "start": 13.78,
+     "end": 14.3
+    },
+    {
+     "w": "e",
+     "start": 14.3,
+     "end": 14.68
+    },
+    {
+     "w": "o",
+     "start": 14.68,
+     "end": 14.78
+    },
+    {
+     "w": "seu",
+     "start": 14.78,
+     "end": 14.86
+    },
+    {
+     "w": "cérebro",
+     "start": 14.86,
+     "end": 15.34
+    },
+    {
+     "w": "aguenta",
+     "start": 15.34,
+     "end": 15.64
+    },
+    {
+     "w": "só",
+     "start": 15.64,
+     "end": 15.9
+    },
+    {
+     "w": "uns",
+     "start": 15.9,
+     "end": 16.02
+    },
+    {
+     "w": "quatro",
+     "start": 16.02,
+     "end": 16.38
+    },
+    {
+     "w": "minutos",
+     "start": 16.38,
+     "end": 16.78
+    },
+    {
+     "w": "sem",
+     "start": 16.78,
+     "end": 17.06
+    },
+    {
+     "w": "o",
+     "start": 17.06,
+     "end": 17.12
+    },
+    {
+     "w": "oxigênio.",
+     "start": 17.12,
+     "end": 17.62
+    },
+    {
+     "w": "Então",
+     "start": 17.94,
+     "end": 18.24
+    },
+    {
+     "w": "faz",
+     "start": 18.24,
+     "end": 18.56
+    },
+    {
+     "w": "a",
+     "start": 18.56,
+     "end": 18.7
+    },
+    {
+     "w": "manobra",
+     "start": 18.7,
+     "end": 18.96
+    },
+    {
+     "w": "de",
+     "start": 18.96,
+     "end": 19.14
+    },
+    {
+     "w": "Heimlich",
+     "start": 19.14,
+     "end": 19.56
+    },
+    {
+     "w": "em",
+     "start": 19.56,
+     "end": 19.7
+    },
+    {
+     "w": "você",
+     "start": 19.7,
+     "end": 19.98
+    },
+    {
+     "w": "mesmo,",
+     "start": 19.98,
+     "end": 20.38
+    },
+    {
+     "w": "mão",
+     "start": 20.74,
+     "end": 20.88
+    },
+    {
+     "w": "fechada",
+     "start": 20.88,
+     "end": 21.36
+    },
+    {
+     "w": "um",
+     "start": 21.36,
+     "end": 21.52
+    },
+    {
+     "w": "pouco",
+     "start": 21.52,
+     "end": 21.74
+    },
+    {
+     "w": "acima",
+     "start": 21.74,
+     "end": 22.08
+    },
+    {
+     "w": "do",
+     "start": 22.08,
+     "end": 22.22
+    },
+    {
+     "w": "umbigo,",
+     "start": 22.22,
+     "end": 22.62
+    },
+    {
+     "w": "a",
+     "start": 22.96,
+     "end": 23.04
+    },
+    {
+     "w": "outra",
+     "start": 23.04,
+     "end": 23.22
+    },
+    {
+     "w": "mão",
+     "start": 23.22,
+     "end": 23.4
+    },
+    {
+     "w": "por",
+     "start": 23.4,
+     "end": 23.6
+    },
+    {
+     "w": "cima",
+     "start": 23.6,
+     "end": 23.94
+    },
+    {
+     "w": "e",
+     "start": 23.94,
+     "end": 24.38
+    },
+    {
+     "w": "puxa",
+     "start": 24.38,
+     "end": 24.78
+    },
+    {
+     "w": "com",
+     "start": 24.78,
+     "end": 24.92
+    },
+    {
+     "w": "força",
+     "start": 24.92,
+     "end": 25.42
+    },
+    {
+     "w": "para",
+     "start": 25.42,
+     "end": 25.78
+    },
+    {
+     "w": "dentro",
+     "start": 25.78,
+     "end": 26.22
+    },
+    {
+     "w": "e",
+     "start": 26.22,
+     "end": 26.46
+    },
+    {
+     "w": "para",
+     "start": 26.46,
+     "end": 26.58
+    },
+    {
+     "w": "cima.",
+     "start": 26.58,
+     "end": 26.94
+    },
+    {
+     "w": "Sem",
+     "start": 26.94,
+     "end": 27.52
+    },
+    {
+     "w": "força",
+     "start": 27.52,
+     "end": 27.78
+    },
+    {
+     "w": "nos",
+     "start": 27.78,
+     "end": 27.94
+    },
+    {
+     "w": "braços,",
+     "start": 27.94,
+     "end": 28.4
+    },
+    {
+     "w": "apoia",
+     "start": 28.76,
+     "end": 29.16
+    },
+    {
+     "w": "a",
+     "start": 29.16,
+     "end": 29.26
+    },
+    {
+     "w": "barriga",
+     "start": 29.26,
+     "end": 29.62
+    },
+    {
+     "w": "no",
+     "start": 29.62,
+     "end": 29.7
+    },
+    {
+     "w": "encosto",
+     "start": 29.7,
+     "end": 30.12
+    },
+    {
+     "w": "da",
+     "start": 30.12,
+     "end": 30.26
+    },
+    {
+     "w": "cadeira",
+     "start": 30.26,
+     "end": 30.76
+    },
+    {
+     "w": "e",
+     "start": 30.76,
+     "end": 30.92
+    },
+    {
+     "w": "joga",
+     "start": 30.92,
+     "end": 31.38
+    },
+    {
+     "w": "o",
+     "start": 31.38,
+     "end": 31.38
+    },
+    {
+     "w": "peso",
+     "start": 31.38,
+     "end": 31.6
+    },
+    {
+     "w": "do",
+     "start": 31.6,
+     "end": 31.76
+    },
+    {
+     "w": "corpo.",
+     "start": 31.76,
+     "end": 32.18
+    },
+    {
+     "w": "Várias",
+     "start": 32.46,
+     "end": 32.8
+    },
+    {
+     "w": "vezes,",
+     "start": 32.8,
+     "end": 33.12
+    },
+    {
+     "w": "o",
+     "start": 33.6,
+     "end": 33.74
+    },
+    {
+     "w": "ar",
+     "start": 33.74,
+     "end": 33.88
+    },
+    {
+     "w": "preso",
+     "start": 33.88,
+     "end": 34.24
+    },
+    {
+     "w": "nos",
+     "start": 34.24,
+     "end": 34.32
+    },
+    {
+     "w": "pulmões",
+     "start": 34.32,
+     "end": 34.78
+    },
+    {
+     "w": "sai",
+     "start": 34.78,
+     "end": 35.04
+    },
+    {
+     "w": "de",
+     "start": 35.04,
+     "end": 35.14
+    },
+    {
+     "w": "uma",
+     "start": 35.14,
+     "end": 35.24
+    },
+    {
+     "w": "vez",
+     "start": 35.24,
+     "end": 35.48
+    },
+    {
+     "w": "só",
+     "start": 35.48,
+     "end": 35.8
+    },
+    {
+     "w": "e",
+     "start": 35.8,
+     "end": 36.02
+    },
+    {
+     "w": "empurra",
+     "start": 36.02,
+     "end": 36.5
+    },
+    {
+     "w": "a",
+     "start": 36.5,
+     "end": 36.54
+    },
+    {
+     "w": "comida",
+     "start": 36.54,
+     "end": 36.74
+    },
+    {
+     "w": "para",
+     "start": 36.74,
+     "end": 36.92
+    },
+    {
+     "w": "fora,",
+     "start": 36.92,
+     "end": 37.32
+    },
+    {
+     "w": "igual",
+     "start": 37.56,
+     "end": 37.74
+    },
+    {
+     "w": "uma",
+     "start": 37.74,
+     "end": 37.92
+    },
+    {
+     "w": "bolinha",
+     "start": 37.92,
+     "end": 38.3
+    },
+    {
+     "w": "soprada",
+     "start": 38.3,
+     "end": 38.8
+    },
+    {
+     "w": "num",
+     "start": 38.8,
+     "end": 38.88
+    },
+    {
+     "w": "canudo.",
+     "start": 38.88,
+     "end": 39.3
+    },
+    {
+     "w": "Manda",
+     "start": 39.6,
+     "end": 39.86
+    },
+    {
+     "w": "isso",
+     "start": 39.86,
+     "end": 40.12
+    },
+    {
+     "w": "para",
+     "start": 40.12,
+     "end": 40.28
+    },
+    {
+     "w": "quem",
+     "start": 40.28,
+     "end": 40.42
+    },
+    {
+     "w": "come",
+     "start": 40.42,
+     "end": 40.64
+    },
+    {
+     "w": "rápido",
+     "start": 40.64,
+     "end": 41.0
+    },
+    {
+     "w": "demais.",
+     "start": 41.0,
+     "end": 41.32
+    }
+   ]
+  }
+ ]
+}
