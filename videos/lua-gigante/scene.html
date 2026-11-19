@@ -1,0 +1,205 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,'Noto Color Emoji',sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:250px;text-align:center;font-weight:900;font-size:80px;line-height:1.06}
+#hook b{color:#FFD21F;display:block;font-size:92px}
+#cap{width:1080px;top:1380px;text-align:center;font-weight:900;font-size:112px}
+#cap.hl{color:#FFD21F}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:58px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.white{background:#fff;color:#111}.tag.purple{background:#8B5CF6;color:#fff}
+.small{font-size:44px;padding:6px 22px;border-radius:18px;border-width:6px;box-shadow:0 6px 0 #111}
+#mark{font-weight:900;font-size:220px;line-height:1;-webkit-text-stroke:12px #fff;paint-order:stroke fill}
+#split{left:0;top:954px;width:1080px;height:12px;background:#fff;box-shadow:0 0 0 5px #111}
+#final{left:50px;width:980px;top:1270px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:58px;line-height:1.12;padding:28px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#3B82F6}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.85;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">A LUA NÃO FICA<br>MAIOR QUANDO NASCE<b>É SEU CÉREBRO 🌕</b></div>
+<div id="mark" class="o"></div><div id="split" class="o"></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag small"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Vai fazer o teste do dedo<br>na próxima Lua cheia? 👆🌕<br><em>Comenta 👇 · Segue @olhaso_3D</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, rr } from '/_kit/kit.js';
+import { buildPerson, PP, poseP, face } from '/_kit/pessoas.js';
+await document.fonts.load('900 60px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; window.DURATION = TP.duration;
+const ALL = SN.flatMap(s => s.words);
+const WA = (re, n = 0, after = 0) => { const ws = ALL.filter(w => w.start >= after && re.test(w.w)); if (!ws[n]) { console.log('WA MISS', re); return after; } return ws[n].start; };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .03, 400); scene.add(cam);
+const camS = new THREE.PerspectiveCamera(40, W / (H / 2), .03, 400); scene.add(camS);
+scene.background = new THREE.Color(0x0B1430);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const MAT = (c, r = .8, ex = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: r }, ex));
+const add = (geo, mat, x, y, z, par) => { const m = new THREE.Mesh(geo, typeof mat === 'number' ? MAT(mat) : mat); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; par.add(m); return m; };
+const box = (w, h, d, c, x, y, z, par = scene) => add(new THREE.BoxGeometry(w, h, d), c, x, y, z, par);
+const cyl = (rt, rb, h, c, x, y, z, par = scene, seg = 16) => add(new THREE.CylinderGeometry(rt, rb, h, seg), c, x, y, z, par);
+const sph = (r, c, x, y, z, par = scene, a = 18, b = 12) => add(new THREE.SphereGeometry(r, a, b), c, x, y, z, par);
+const BASIC = c => new THREE.MeshBasicMaterial({ color: c, toneMapped: false });
+const sprite = (t, s) => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthWrite: false })); sp.scale.setScalar(s); return sp; };
+const canvasTex = (w, h, paint) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); paint(g, w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.userData = { c, g }; return t; };
+
+// ---------- tempos ----------
+const T_E = WA(/^É$/), T_VOCE = WA(/^Você$/), T_TENTOU = WA(/tentou/), T_FOTO = WA(/^foto$/), T_PEQ = WA(/pequenininha/), T_ISSO = WA(/^Isso$/), T_ILUSAO = WA(/ilusão/), T_ELA = WA(/^Ela$/), T_MESMO = WA(/mesmo/), T_SE = WA(/^Se$/), T_DEDO = WA(/dedo/), T_HORIZ = WA(/horizonte/), T_ALTO = WA(/alto\./), T_CAMERA = WA(/câmera/), T_IGUAL = WA(/igual\./);
+const T_OS = WA(/^Os$/), T_UMA = WA(/^Uma$/), T_COMPARA = WA(/compara/), T_PREDIOS = WA(/prédios/), T_ARVORES = WA(/árvores/), T_MONT = WA(/montanhas/), T_CONCLUI = WA(/conclui/), T_ENORME = WA(/enorme\./), T_LA = WA(/^Lá$/), T_MENOR = WA(/menor/);
+const T_FACA = WA(/Faça/), T_CUBRA = WA(/cubra/), T_HORIZ2 = WA(/horizonte/, 0, 52), T_DEPOIS = WA(/depois/), T_ODEDO = WA(/^O$/, 0, 55), T_COMENTA = WA(/Comenta/);
+const HL = /Lua|cérebro|engana|enorme|fotografar|pequenininha|ilusão|tamanho|dedo|horizonte|alto|câmera|igual|cientistas|prédios|árvores|montanhas|longe|menor|cheia|teste/i;
+
+// ---------- luz ----------
+const hemi = new THREE.HemisphereLight(0x8AA0D8, 0x1A2030, .8); scene.add(hemi);
+const moonL = new THREE.DirectionalLight(0xDDE8FF, 1.2); moonL.castShadow = true; moonL.shadow.mapSize.set(2048, 2048); Object.assign(moonL.shadow.camera, { left: -10, right: 10, top: 10, bottom: -10, near: .5, far: 80 }); scene.add(moonL); scene.add(moonL.target);
+
+// ================= CIDADE À NOITE (x=0) =================
+const city = grp();
+const sky = add(new THREE.SphereGeometry(150, 32, 16), new THREE.MeshBasicMaterial({ side: THREE.BackSide, map: canvasTex(16, 256, g => { const gr = g.createLinearGradient(0, 0, 0, 256); gr.addColorStop(0, '#050A1E'); gr.addColorStop(.45, '#0E1C48'); gr.addColorStop(.5, '#2A3A7A'); gr.addColorStop(.53, '#4A3A6A'); gr.addColorStop(1, '#0A0E1A'); g.fillStyle = gr; g.fillRect(0, 0, 16, 256); }), fog: false }), 0, 0, 0, city); sky.castShadow = false;
+for (let i = 0; i < 260; i++) { const a = rr(0, 6.28), e = rr(.12, 1.4); const s = sph(rr(.15, .35), BASIC(0xFFFFFF), Math.cos(a) * Math.cos(e) * 140, Math.sin(e) * 140, Math.sin(a) * Math.cos(e) * 140, city, 4, 3); s.castShadow = false; }
+add(new THREE.PlaneGeometry(300, 300), MAT(0x1A2230, .9), 0, 0, 0, city).rotation.x = -Math.PI / 2;
+box(300, .02, 3, 0x2A3040, 0, .01, 1.5, city);
+const winT = (lit) => { const t = canvasTex(64, 128, g => { g.fillStyle = '#1A2238'; g.fillRect(0, 0, 64, 128); for (let y = 6; y < 128; y += 14) for (let x = 6; x < 64; x += 14) { g.fillStyle = Math.random() < lit ? '#FFD27A' : '#2A3450'; g.fillRect(x, y, 8, 8); } }); t.wrapS = t.wrapT = THREE.RepeatWrapping; return t; };
+const bldgs = []; for (let i = 0; i < 22; i++) { const w = rr(2.5, 4.5), h = rr(1.5, 5.5), d = rr(2, 4); const t = winT(.35); t.repeat.set(w / 2, h / 4); const b = add(new THREE.BoxGeometry(w, h, d), new THREE.MeshStandardMaterial({ map: t, emissive: 0xFFFFFF, emissiveMap: t, emissiveIntensity: .6, roughness: .8 }), -42 + i * 4 + rr(-.5, .5), h / 2, -30 - rr(0, 6), city); bldgs.push(b); }
+const mtns = []; for (let i = 0; i < 9; i++) { const m = add(new THREE.ConeGeometry(rr(8, 14), rr(6, 12), 5), MAT(0x1A2440, 1, { flatShading: true }), -48 + i * 12, 3, -45 - rr(0, 8), city); mtns.push(m); }
+const trees = []; for (let i = 0; i < 14; i++) { const g = grp(city); g.position.set(-18 + i * 2.8 + rr(-.3, .3), 0, -22 - rr(0, 2)); cyl(.1, .14, 1.2, 0x2A1E14, 0, .6, 0, g, 6); add(new THREE.IcosahedronGeometry(.8, 0), 0x1E3A2A, 0, 1.7, 0, g); trees.push(g); }
+// a Lua
+const moonT = canvasTex(512, 512, g => { const r = g.createRadialGradient(220, 200, 40, 256, 256, 256); r.addColorStop(0, '#FFFCEA'); r.addColorStop(1, '#D8D4C0'); g.fillStyle = r; g.fillRect(0, 0, 512, 512); for (let i = 0; i < 26; i++) { const x = rr(40, 470), y = rr(40, 470), rad = rr(10, 50); g.fillStyle = `rgba(150,145,130,${rr(.2, .45)})`; g.beginPath(); g.arc(x, y, rad, 0, 7); g.fill(); g.strokeStyle = 'rgba(255,255,240,.35)'; g.lineWidth = 3; g.beginPath(); g.arc(x - 2, y - 2, rad, Math.PI, Math.PI * 1.6); g.stroke(); } });
+const moonR = 1.3, moonD = 70;
+const moon = add(new THREE.SphereGeometry(moonR, 32, 24), new THREE.MeshBasicMaterial({ map: moonT, fog: false, toneMapped: false }), 0, 0, 0, city); moon.castShadow = false;
+const halo = sprite(canvasTex(128, 128, g => { const r = g.createRadialGradient(64, 64, 20, 64, 64, 64); r.addColorStop(0, 'rgba(255,250,220,.6)'); r.addColorStop(1, 'rgba(255,250,220,0)'); g.fillStyle = r; g.fillRect(0, 0, 128, 128); }), moonR * 5); halo.material.fog = false; city.add(halo);
+const ghost = add(new THREE.SphereGeometry(moonR, 32, 24), new THREE.MeshBasicMaterial({ map: moonT, transparent: true, opacity: .5, fog: false, toneMapped: false }), 0, 0, 0, city); ghost.castShadow = false;
+const EYE = V(0, 1.6, 4);
+const dirAt = (elev, az = 0) => V(Math.sin(az) * Math.cos(elev), Math.sin(elev), -Math.cos(az) * Math.cos(elev));
+const LOW = dirAt(.15), HIGH = dirAt(.95);
+const placeMoon = (m, d, s = 1) => { m.position.copy(EYE).add(d.clone().multiplyScalar(moonD)); m.scale.setScalar(s); };
+const arcPts = []; for (let i = 0; i <= 40; i++) { const e = lerp(.15, .95, i / 40); arcPts.push(EYE.clone().add(dirAt(e).multiplyScalar(moonD))); }
+const arc = new THREE.Line(new THREE.BufferGeometry().setFromPoints(arcPts), new THREE.LineDashedMaterial({ color: 0xFFFFFF, dashSize: 1.2, gapSize: .8, transparent: true, opacity: .7, fog: false })); arc.computeLineDistances(); city.add(arc);
+// pessoa com celular
+const fotog = buildPerson({ skin: 0xD9A27A, shirt: 0x3B82F6, pants: 0x2A3A5A, hair: 0x2B1A10 }); city.add(fotog.root);
+const phone = box(.08, .15, .012, 0x111111, 0, -.06, .05, fotog.armR.hand);
+const phoneT = canvasTex(360, 640, () => {});
+function paintPhone(flash = 0) { const g = phoneT.userData.g; const gr = g.createLinearGradient(0, 0, 0, 640); gr.addColorStop(0, '#0B1430'); gr.addColorStop(.7, '#1A2850'); gr.addColorStop(1, '#0A0E1A'); g.fillStyle = gr; g.fillRect(0, 0, 360, 640);
+  g.fillStyle = '#121A2A'; for (let i = 0; i < 9; i++) { const h = 60 + (i * 37) % 120; g.fillRect(i * 42, 640 - 120 - h, 38, h + 120); } g.fillStyle = '#FFD27A'; for (let i = 0; i < 40; i++) g.fillRect((i * 53) % 350, 470 + (i * 29) % 140, 4, 4);
+  g.fillStyle = '#FFFCEA'; g.beginPath(); g.arc(200, 440, 7, 0, 7); g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 6; g.strokeRect(3, 3, 354, 634); if (flash > 0) { g.fillStyle = `rgba(255,255,255,${flash})`; g.fillRect(0, 0, 360, 640); } phoneT.needsUpdate = true; }
+const bigPhone = grp(scene); { box(.36, .7, .03, 0x111111, 0, 0, 0, bigPhone); add(new THREE.PlaneGeometry(.33, .62), new THREE.MeshBasicMaterial({ map: phoneT, toneMapped: false }), 0, 0, .017, bigPhone).castShadow = false; } bigPhone.visible = false;
+// mão/dedo POV (filho da câmera)
+const skinM = MAT(0xD9A27A, .7);
+function mkHand() { const g = grp(); const arm = add(new THREE.CapsuleGeometry(.035, .32, 6, 10), MAT(0x3B82F6, .8), 0, -.22, .12, g); arm.rotation.x = 1.25; const fist = sph(.045, skinM, 0, -.08, 0, g, 14, 10); fist.scale.set(1.1, 1, 1);
+  const idx = add(new THREE.CapsuleGeometry(.0105, .06, 6, 10), skinM, 0, -.012, -.005, g); const thumb = add(new THREE.CapsuleGeometry(.012, .03, 6, 8), skinM, .038, -.06, .01, g); thumb.rotation.z = -.7; return g; }
+const hand = mkHand(); cam.add(hand); const handS = mkHand(); camS.add(handS); hand.visible = false; handS.visible = false;
+// ================= CÉREBRO (x=-80) =================
+const bset = grp(); bset.position.set(-80, 0, 0);
+const bsky = add(new THREE.SphereGeometry(40, 24, 16), new THREE.MeshBasicMaterial({ color: 0x141A3A, side: THREE.BackSide, fog: false }), 0, 0, 0, bset); bsky.castShadow = false;
+const brain = grp(bset); brain.position.set(0, 1.6, 0); const bM = MAT(0xF2A0B8, .5);
+for (let i = 0; i < 46; i++) { const a = rr(0, 6.28), b = rr(-1, 1), r = .55; const p = V(Math.cos(a) * Math.sqrt(1 - b * b) * r * 1.15, b * r * .75, Math.sin(a) * Math.sqrt(1 - b * b) * r * .9); if (p.y < -.25) continue; const s = add(new THREE.CapsuleGeometry(.11, .16, 4, 8), bM, p.x, p.y, p.z, brain); s.rotation.set(rr(0, 3), rr(0, 3), rr(0, 3)); }
+sph(.5, bM, 0, 0, 0, brain, 20, 14).scale.set(1.1, .75, .85); box(.03, .6, 1.0, MAT(0xD9809A), 0, .15, 0, brain);
+const bMoon = add(new THREE.SphereGeometry(.3, 28, 20), new THREE.MeshBasicMaterial({ map: moonT, toneMapped: false }), 0, 0, 0, bset); bMoon.castShadow = false;
+const mini = grp(bset); { const t = winT(.4); t.repeat.set(1, 2); add(new THREE.BoxGeometry(.3, .7, .3), new THREE.MeshStandardMaterial({ map: t, emissive: 0xFFFFFF, emissiveMap: t, emissiveIntensity: .6 }), -.55, .35, 0, mini); const tr = grp(mini); tr.position.set(0, 0, 0); cyl(.03, .04, .3, 0x5A3A2A, 0, .15, 0, tr, 6); add(new THREE.IcosahedronGeometry(.18, 0), 0x3A8A4A, 0, .4, 0, tr);
+  add(new THREE.ConeGeometry(.35, .55, 5), MAT(0x5A6A9A, 1, { flatShading: true }), .55, .27, 0, mini); }
+const rulerT = canvasTex(512, 64, g => { g.fillStyle = '#FFD21F'; g.fillRect(0, 0, 512, 64); g.fillStyle = '#111'; for (let i = 0; i <= 50; i++) g.fillRect(i * 10 + 4, 0, 3, i % 5 ? 18 : 34); g.font = '900 22px P'; for (let i = 0; i <= 5; i++) g.fillText(String(i), i * 100 + 8, 58); });
+const ruler = add(new THREE.BoxGeometry(1.8, .12, .03), new THREE.MeshStandardMaterial({ map: rulerT }), 0, 0, 0, bset);
+const thinkT = canvasTex(128, 128, g => { g.font = '900 110px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineWidth = 12; g.strokeStyle = '#111'; g.strokeText('?', 64, 70); g.fillStyle = '#FFD21F'; g.fillText('?', 64, 70); });
+const qm = sprite(thinkT, .5); bset.add(qm);
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [T_E, 'ding'], [T_VOCE, 'whoosh'], [T_FOTO - .3, 'pop'], [T_PEQ, 'buzzx'], [T_ILUSAO, 'ding'], [T_SE, 'whoosh'], [T_HORIZ, 'pop'], [T_ALTO, 'pop'], [T_CAMERA, 'whoosh'], [T_IGUAL, 'ding'], [T_OS, 'whoosh'], [T_COMPARA, 'pop'], [T_PREDIOS, 'pop'], [T_ARVORES, 'pop'], [T_MONT, 'pop'],
+ [T_ENORME, 'boing'], [T_LA, 'whoosh'], [T_MENOR, 'buzzx'], [T_FACA, 'whoosh'], [T_HORIZ2, 'pop'], [T_DEPOIS + .6, 'pop'], [T_ODEDO, 'win'], [T_COMENTA, 'win']].forEach(([t, k]) => ev(t, k));
+function world(w) { city.visible = w === 'city'; bset.visible = w === 'brain'; hand.visible = false; handS.visible = false; bigPhone.visible = false; fotog.root.visible = false; ghost.visible = false; arc.visible = false; scene.fog = w === 'city' ? new THREE.Fog(0x0B1430, 30, 120) : null; }
+const look = (d, dist = 1) => EYE.clone().add(d.clone().multiplyScalar(dist));
+function handAim(h, c, u = 1) { h.visible = true; h.position.set(0, -.35 * (1 - ease(u)), -.7); h.rotation.set(0, 0, 0); }
+
+// ---------- planos ----------
+const SHOTS = [
+  // 0 gancho: Lua "gigante" nascendo atrás dos prédios (ilusão exagerada)
+  [0, (t, k) => { world('city'); const e = lerp(.02, .11, clamp(k / 4.5)); placeMoon(moon, dirAt(e), 4.2); halo.position.copy(moon.position); halo.scale.setScalar(moonR * 4.2 * 4.5); return [V(0, 1.2, 6 - k * .1), look(dirAt(.13), 50)]; }],
+  // 1 você viu aquela Lua enorme e tentou fotografar
+  [T_VOCE - .1, (t, k) => { world('city'); placeMoon(moon, dirAt(.12), 4.2); halo.position.copy(moon.position); halo.scale.setScalar(moonR * 4.2 * 4.5); fotog.root.visible = true; fotog.root.position.set(.28, 0, 3.0); fotog.root.rotation.y = Math.PI; poseP(fotog, t > T_TENTOU - .2 ? { ...PP.stand, rx: -1.7, rz: .2, re: -.6, hx: -.1 } : { ...PP.stand, hx: -.15 }); face(fotog, 'happy', t);
+    return [V(-.1, 1.75, 5.0), look(dirAt(.1), 40)]; }],
+  // 2 na foto ela saiu pequenininha
+  [T_FOTO - .3, (t, k) => { world('city'); placeMoon(moon, dirAt(.06), 4.2); bigPhone.visible = true; paintPhone(Math.max(0, 1 - (t - T_FOTO + .3) / .4)); bigPhone.position.set(0, 1.58, 3.55); bigPhone.rotation.set(0, 0, 0); return [V(0, 1.6, 4.6), V(0, 1.58, 3.55)]; }],
+  // 3 ilusão da Lua: mesmo tamanho a noite toda (arco)
+  [T_ISSO - .1, (t, k) => { world('city'); arc.visible = t > T_ELA - .3; const u = ease(clamp((t - T_ELA) / 3)); placeMoon(moon, dirAt(lerp(.15, .95, u)), 2.2); halo.position.copy(moon.position); halo.scale.setScalar(moonR * 2.2 * 4); ghost.visible = t > T_MESMO - .2; placeMoon(ghost, LOW, 2.2);
+    return [V(0, 1.4, 30), V(0, 30, -40)]; }],
+  // 4 dedo esticado: horizonte e lá no alto
+  [T_SE - .1, (t, k) => { world('city'); placeMoon(moon, LOW, 1); placeMoon(ghost, HIGH, 1); ghost.visible = true; ghost.material.opacity = 1; halo.position.copy(moon.position); halo.scale.setScalar(moonR * 4);
+    const up = ease(clamp((t - T_ALTO + .6) / .8)); const d = LOW.clone().lerp(HIGH, up).normalize(); const show = t > T_DEDO - .2; if (show) handAim(hand, cam, (t - T_DEDO + .2) / .6);
+    return [EYE.clone(), look(d, 10)]; }],
+  // 5 a câmera confirma: tamanho igual na foto
+  [T_CAMERA - .1, (t, k) => { world('city'); placeMoon(moon, LOW, 1); placeMoon(ghost, HIGH, 1); ghost.visible = true; halo.position.copy(moon.position); halo.scale.setScalar(moonR * 4); return [V(0, 1.4, 30), V(0, 30, -40)]; }],
+  // 6 cientistas ainda discutem
+  [T_OS - .1, (t, k) => { world('brain'); brain.rotation.y = t * .4; bMoon.visible = false; mini.visible = false; ruler.visible = false; qm.visible = true; qm.position.set(.7, 2.4, 0); qm.scale.setScalar(.5 * pop(t - T_OS, .3)); return [V(0, 2.0, 4.0), V(0, 1.75, 0)]; }],
+  // 7 cérebro compara com prédios, árvores e montanhas → longe e enorme
+  [T_UMA - .1, (t, k) => { world('brain'); brain.rotation.y = t * .3; qm.visible = false; brain.position.set(0, 2.4, -.4); brain.scale.setScalar(.75);
+    mini.visible = true; mini.position.set(0, .4, .3); mini.children.forEach((c, i) => c.scale.setScalar(Math.max(.001, pop(t - [T_PREDIOS, T_ARVORES, T_MONT][Math.min(i, 2)] + .1, .3))));
+    bMoon.visible = true; const g = 1 + ease(clamp((t - T_CONCLUI) / 1.2)) * 1.3; bMoon.position.set(0, 1.35, .3); bMoon.scale.setScalar(g);
+    ruler.visible = t > T_COMPARA - .2; ruler.position.set(0, .95 - (g - 1) * .05, .7); ruler.scale.set(Math.max(.001, pop(t - T_COMPARA + .2, .3)) * (.6 + (g - 1) * .4), 1, 1);
+    return [V(.2, 1.8, 4.6), V(0, 1.6, 0)]; }],
+  // 8 lá no alto, sem nada pra comparar, parece menor
+  [T_LA - .1, (t, k) => { world('city'); placeMoon(moon, HIGH, 1.0 - ease(clamp((t - T_MENOR + .3) / .6)) * .25); halo.position.copy(moon.position); halo.scale.setScalar(moonR * 3.5); return [V(0, 1.6, 4), look(HIGH, 10)]; }],
+  // 9 teste do dedo: tela dividida (horizonte em cima, alto embaixo)
+  [T_FACA - .1, (t, k) => { world('city'); placeMoon(moon, LOW, 1); placeMoon(ghost, HIGH, 1); ghost.visible = true; ghost.material.opacity = 1; halo.position.copy(moon.position); halo.scale.setScalar(moonR * 4); if (t > T_CUBRA - .2) { handAim(hand, cam, (t - T_CUBRA + .2) / .6); } if (t > T_DEPOIS + .4) handAim(handS, camS, (t - T_DEPOIS - .4) / .6); return [EYE.clone(), look(LOW, 10), 'split']; }],
+  // 10 CTA
+  [T_COMENTA - .1, (t, k) => { world('city'); placeMoon(moon, dirAt(.22), 1.6); halo.position.copy(moon.position); halo.scale.setScalar(moonR * 1.6 * 4); return [V(0, 1.4, 8 - k * .2), look(dirAt(.2), 40)]; }],
+];
+window.draw = function (t) {
+  ghost.material.opacity = .5;
+  let i = 0; while (i + 1 < SHOTS.length && SHOTS[i + 1][0] <= t) i++;
+  const r = SHOTS[i][1](t, t - SHOTS[i][0]); const [cp, tg, mode] = r;
+  const off = bset.visible ? bset.position : V(0, 0, 0); cp.add(off); tg.add(off);
+  if (!mode) { cp.x += Math.sin(t * .35) * .01; cp.y += Math.sin(t * .27) * .006; }
+  cam.position.copy(cp); cam.lookAt(tg); cam.aspect = W / H; cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  moonL.position.copy(tg).add(V(-6, 10, 4)); moonL.target.position.copy(tg);
+  const tg2 = [$('t1'), $('t2')]; tg2.forEach(e => e.style.opacity = 0);
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  fixed($('hook'), t < T_VOCE - .1 ? pop(t - .02, .3) * (1 - clamp((t - T_VOCE + .25) / .15)) : 0);
+  tag(tg2[0], '📸 NA FOTO: PEQUENININHA', 'red small', win(t, T_PEQ - .2, T_ISSO - .1), 540, 420, T_PEQ - .2, -3);
+  tag(tg2[0], '🌕 ILUSÃO DA LUA', '', win(t, T_ILUSAO - .1, T_MESMO - .1), 540, 420, T_ILUSAO - .1, 3);
+  tag(tg2[0], '📏 MESMO TAMANHO', 'blue', win(t, T_MESMO - .1, T_SE - .1), 540, 420, T_MESMO - .1, -3);
+  tag(tg2[0], '👆 HORIZONTE', 'white', win(t, T_HORIZ - .2, T_ALTO - .3), 540, 420, T_HORIZ - .2, -3);
+  tag(tg2[0], '👆 LÁ NO ALTO', 'white', win(t, T_ALTO - .3, T_CAMERA - .1), 540, 420, T_ALTO - .3, 3);
+  tag(tg2[0], '📷 NA FOTO: IGUAL', 'green', win(t, T_IGUAL - .3, T_OS - .1), 540, 420, T_IGUAL - .3, -3);
+  tag(tg2[0], '🔬 CIÊNCIA AINDA DISCUTE', 'purple small', win(t, T_OS + .2, T_UMA - .1), 540, 420, T_OS + .2, 3);
+  tag(tg2[0], '🏢🌳⛰️ O CÉREBRO COMPARA', 'white small', win(t, T_COMPARA - .2, T_CONCLUI - .1), 540, 420, T_COMPARA - .2, -3);
+  tag(tg2[0], '🧠 “LONGE E ENORME”', '', win(t, T_CONCLUI - .1, T_LA - .1), 540, 420, T_CONCLUI - .1, 3);
+  tag(tg2[0], 'SEM COMPARAÇÃO → MENOR', 'blue small', win(t, T_MENOR - .4, T_FACA - .1), 540, 420, T_MENOR - .4, -3);
+  const split = SHOTS[i][0] === T_FACA - .1 && t < T_COMENTA - .1;
+  tag(tg2[0], '👆 NO HORIZONTE', 'white small', split && t > T_HORIZ2 - .2, 540, 300, T_HORIZ2 - .2, -3);
+  tag(tg2[1], '👆 NO ALTO', 'white small', split && t > T_DEPOIS + .3, 540, 1060, T_DEPOIS + .3, 3);
+  if (split && t > T_ODEDO - .1) { $('mark').textContent = '✅'; place($('mark'), true, 880, 960, pop(t - T_ODEDO + .1, .3), -8); } else $('mark').style.opacity = 0;
+  fixed($('split'), split ? 1 : 0); $('split').style.transform = 'none';
+  fixed($('final'), t >= T_COMENTA - .1 ? pop(t - T_COMENTA + .1, .35) : 0);
+  $('wm').style.opacity = .85;
+  let wTxt = null, wSt = 0;
+  for (const w2 of ALL) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap2 = $('cap'); const capOff = t < T_VOCE - .1 || t >= T_COMENTA - .1;
+  if (wTxt && !capOff) { cap2.textContent = wTxt.toUpperCase().replace(/[.,!?:…]/g, ''); cap2.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap2, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap2, 0);
+  if (split) {
+    renderer.setScissorTest(true);
+    cam.aspect = W / (H / 2); cam.updateProjectionMatrix(); renderer.setViewport(0, H / 2, W, H / 2); renderer.setScissor(0, H / 2, W, H / 2); handS.visible = false; const hv = hand.visible; renderer.render(scene, cam);
+    camS.position.copy(EYE); camS.lookAt(look(HIGH, 10)); camS.updateMatrixWorld(true); hand.visible = false; handS.visible = t > T_DEPOIS + .4; renderer.setViewport(0, 0, W, H / 2); renderer.setScissor(0, 0, W, H / 2); renderer.render(scene, camS); hand.visible = hv;
+    renderer.setScissorTest(false); renderer.setViewport(0, 0, W, H);
+  } else renderer.render(scene, cam);
+  return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>

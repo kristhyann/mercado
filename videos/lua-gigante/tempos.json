@@ -1,0 +1,842 @@
+{
+ "duration": 65.0,
+ "sentences": [
+  {
+   "text": "A Lua não fica maior quando nasce. É o seu cérebro que te engana.  Você já viu aquela Lua enorme nascendo… tentou fotografar… e na foto ela saiu pequenininha?  Isso tem nome: ilusão da Lua. Ela tem praticamente o mesmo tamanho no céu a noite toda.  Se você medir a Lua com o dedo esticado, ela ocupa quase o mesmo espaço perto do horizonte e lá no alto. E a câmera confirma: na foto, o tamanho é praticamente igual.  Os cientistas ainda discutem a explicação exata. Uma das ideias mais aceitas é que, perto do horizonte, o cérebro compara a Lua com prédios, árvores e montanhas… e conclui que ela está longe e é enorme. Lá no alto, sem nada pra comparar, ela parece menor.  Faça o teste: na próxima Lua cheia, cubra a Lua com a ponta do dedo no horizonte… e depois no alto do céu. O dedo cobre igual.  Comenta aqui se você vai fazer o teste do dedo na próxima Lua cheia. ",
+   "start": 0.0,
+   "end": 60.9,
+   "words": [
+    {
+     "w": "A",
+     "start": 0.0,
+     "end": 0.24
+    },
+    {
+     "w": "Lua",
+     "start": 0.24,
+     "end": 0.52
+    },
+    {
+     "w": "não",
+     "start": 0.52,
+     "end": 0.76
+    },
+    {
+     "w": "fica",
+     "start": 0.76,
+     "end": 1.14
+    },
+    {
+     "w": "maior",
+     "start": 1.14,
+     "end": 1.56
+    },
+    {
+     "w": "quando",
+     "start": 1.56,
+     "end": 1.84
+    },
+    {
+     "w": "nasce.",
+     "start": 1.84,
+     "end": 2.36
+    },
+    {
+     "w": "É",
+     "start": 2.66,
+     "end": 2.78
+    },
+    {
+     "w": "o",
+     "start": 2.78,
+     "end": 2.92
+    },
+    {
+     "w": "seu",
+     "start": 2.92,
+     "end": 3.02
+    },
+    {
+     "w": "cérebro",
+     "start": 3.02,
+     "end": 3.72
+    },
+    {
+     "w": "que",
+     "start": 3.72,
+     "end": 3.92
+    },
+    {
+     "w": "te",
+     "start": 3.92,
+     "end": 4.04
+    },
+    {
+     "w": "engana.",
+     "start": 4.04,
+     "end": 4.46
+    },
+    {
+     "w": "Você",
+     "start": 4.8,
+     "end": 5.02
+    },
+    {
+     "w": "já",
+     "start": 5.02,
+     "end": 5.24
+    },
+    {
+     "w": "viu",
+     "start": 5.24,
+     "end": 5.38
+    },
+    {
+     "w": "aquela",
+     "start": 5.38,
+     "end": 5.62
+    },
+    {
+     "w": "Lua",
+     "start": 5.62,
+     "end": 6.0
+    },
+    {
+     "w": "enorme",
+     "start": 6.0,
+     "end": 6.64
+    },
+    {
+     "w": "nascendo…",
+     "start": 6.64,
+     "end": 7.34
+    },
+    {
+     "w": "tentou",
+     "start": 7.7,
+     "end": 8.04
+    },
+    {
+     "w": "fotografar…",
+     "start": 8.04,
+     "end": 8.84
+    },
+    {
+     "w": "e",
+     "start": 9.28,
+     "end": 9.34
+    },
+    {
+     "w": "na",
+     "start": 9.34,
+     "end": 9.42
+    },
+    {
+     "w": "foto",
+     "start": 9.42,
+     "end": 9.74
+    },
+    {
+     "w": "ela",
+     "start": 9.74,
+     "end": 9.92
+    },
+    {
+     "w": "saiu",
+     "start": 9.92,
+     "end": 10.22
+    },
+    {
+     "w": "pequenininha?",
+     "start": 10.22,
+     "end": 11.3
+    },
+    {
+     "w": "Isso",
+     "start": 11.82,
+     "end": 12.0
+    },
+    {
+     "w": "tem",
+     "start": 12.0,
+     "end": 12.2
+    },
+    {
+     "w": "nome:",
+     "start": 12.2,
+     "end": 12.5
+    },
+    {
+     "w": "ilusão",
+     "start": 12.96,
+     "end": 13.6
+    },
+    {
+     "w": "da",
+     "start": 13.6,
+     "end": 13.8
+    },
+    {
+     "w": "Lua.",
+     "start": 13.8,
+     "end": 14.12
+    },
+    {
+     "w": "Ela",
+     "start": 14.54,
+     "end": 14.72
+    },
+    {
+     "w": "tem",
+     "start": 14.72,
+     "end": 14.9
+    },
+    {
+     "w": "praticamente",
+     "start": 14.9,
+     "end": 15.46
+    },
+    {
+     "w": "o",
+     "start": 15.46,
+     "end": 15.88
+    },
+    {
+     "w": "mesmo",
+     "start": 15.88,
+     "end": 16.16
+    },
+    {
+     "w": "tamanho",
+     "start": 16.16,
+     "end": 16.56
+    },
+    {
+     "w": "no",
+     "start": 16.56,
+     "end": 16.82
+    },
+    {
+     "w": "céu",
+     "start": 16.82,
+     "end": 17.08
+    },
+    {
+     "w": "a",
+     "start": 17.08,
+     "end": 17.3
+    },
+    {
+     "w": "noite",
+     "start": 17.3,
+     "end": 17.62
+    },
+    {
+     "w": "toda.",
+     "start": 17.62,
+     "end": 17.96
+    },
+    {
+     "w": "Se",
+     "start": 18.48,
+     "end": 18.6
+    },
+    {
+     "w": "você",
+     "start": 18.6,
+     "end": 18.8
+    },
+    {
+     "w": "medir",
+     "start": 18.8,
+     "end": 19.12
+    },
+    {
+     "w": "a",
+     "start": 19.12,
+     "end": 19.26
+    },
+    {
+     "w": "Lua",
+     "start": 19.26,
+     "end": 19.5
+    },
+    {
+     "w": "com",
+     "start": 19.5,
+     "end": 19.72
+    },
+    {
+     "w": "o",
+     "start": 19.72,
+     "end": 19.86
+    },
+    {
+     "w": "dedo",
+     "start": 19.86,
+     "end": 20.18
+    },
+    {
+     "w": "esticado,",
+     "start": 20.18,
+     "end": 20.76
+    },
+    {
+     "w": "ela",
+     "start": 21.02,
+     "end": 21.14
+    },
+    {
+     "w": "ocupa",
+     "start": 21.14,
+     "end": 21.44
+    },
+    {
+     "w": "quase",
+     "start": 21.44,
+     "end": 21.92
+    },
+    {
+     "w": "o",
+     "start": 21.92,
+     "end": 22.1
+    },
+    {
+     "w": "mesmo",
+     "start": 22.1,
+     "end": 22.32
+    },
+    {
+     "w": "espaço",
+     "start": 22.32,
+     "end": 22.84
+    },
+    {
+     "w": "perto",
+     "start": 22.84,
+     "end": 23.26
+    },
+    {
+     "w": "do",
+     "start": 23.26,
+     "end": 23.48
+    },
+    {
+     "w": "horizonte",
+     "start": 23.48,
+     "end": 23.98
+    },
+    {
+     "w": "e",
+     "start": 23.98,
+     "end": 24.36
+    },
+    {
+     "w": "lá",
+     "start": 24.36,
+     "end": 24.6
+    },
+    {
+     "w": "no",
+     "start": 24.6,
+     "end": 24.76
+    },
+    {
+     "w": "alto.",
+     "start": 24.76,
+     "end": 25.04
+    },
+    {
+     "w": "E",
+     "start": 25.04,
+     "end": 25.56
+    },
+    {
+     "w": "a",
+     "start": 25.56,
+     "end": 25.64
+    },
+    {
+     "w": "câmera",
+     "start": 25.64,
+     "end": 26.0
+    },
+    {
+     "w": "confirma:",
+     "start": 26.0,
+     "end": 26.68
+    },
+    {
+     "w": "na",
+     "start": 26.96,
+     "end": 27.16
+    },
+    {
+     "w": "foto,",
+     "start": 27.16,
+     "end": 27.54
+    },
+    {
+     "w": "o",
+     "start": 27.54,
+     "end": 27.94
+    },
+    {
+     "w": "tamanho",
+     "start": 27.94,
+     "end": 28.16
+    },
+    {
+     "w": "é",
+     "start": 28.16,
+     "end": 28.48
+    },
+    {
+     "w": "praticamente",
+     "start": 28.48,
+     "end": 29.0
+    },
+    {
+     "w": "igual.",
+     "start": 29.0,
+     "end": 29.64
+    },
+    {
+     "w": "Os",
+     "start": 30.06,
+     "end": 30.22
+    },
+    {
+     "w": "cientistas",
+     "start": 30.22,
+     "end": 30.78
+    },
+    {
+     "w": "ainda",
+     "start": 30.78,
+     "end": 31.08
+    },
+    {
+     "w": "discutem",
+     "start": 31.08,
+     "end": 31.74
+    },
+    {
+     "w": "a",
+     "start": 31.74,
+     "end": 31.86
+    },
+    {
+     "w": "explicação",
+     "start": 31.86,
+     "end": 32.36
+    },
+    {
+     "w": "exata.",
+     "start": 32.36,
+     "end": 32.9
+    },
+    {
+     "w": "Uma",
+     "start": 33.26,
+     "end": 33.44
+    },
+    {
+     "w": "das",
+     "start": 33.44,
+     "end": 33.58
+    },
+    {
+     "w": "ideias",
+     "start": 33.58,
+     "end": 33.98
+    },
+    {
+     "w": "mais",
+     "start": 33.98,
+     "end": 34.34
+    },
+    {
+     "w": "aceitas",
+     "start": 34.34,
+     "end": 34.88
+    },
+    {
+     "w": "é",
+     "start": 34.88,
+     "end": 35.34
+    },
+    {
+     "w": "que,",
+     "start": 35.34,
+     "end": 35.46
+    },
+    {
+     "w": "perto",
+     "start": 35.52,
+     "end": 35.84
+    },
+    {
+     "w": "do",
+     "start": 35.84,
+     "end": 36.08
+    },
+    {
+     "w": "horizonte,",
+     "start": 36.08,
+     "end": 36.58
+    },
+    {
+     "w": "o",
+     "start": 36.92,
+     "end": 37.06
+    },
+    {
+     "w": "cérebro",
+     "start": 37.06,
+     "end": 37.46
+    },
+    {
+     "w": "compara",
+     "start": 37.46,
+     "end": 37.98
+    },
+    {
+     "w": "a",
+     "start": 37.98,
+     "end": 38.14
+    },
+    {
+     "w": "Lua",
+     "start": 38.14,
+     "end": 38.46
+    },
+    {
+     "w": "com",
+     "start": 38.46,
+     "end": 38.7
+    },
+    {
+     "w": "prédios,",
+     "start": 38.7,
+     "end": 39.4
+    },
+    {
+     "w": "árvores",
+     "start": 39.74,
+     "end": 40.18
+    },
+    {
+     "w": "e",
+     "start": 40.18,
+     "end": 40.42
+    },
+    {
+     "w": "montanhas…",
+     "start": 40.42,
+     "end": 40.96
+    },
+    {
+     "w": "e",
+     "start": 40.96,
+     "end": 41.42
+    },
+    {
+     "w": "conclui",
+     "start": 41.42,
+     "end": 41.92
+    },
+    {
+     "w": "que",
+     "start": 41.92,
+     "end": 42.06
+    },
+    {
+     "w": "ela",
+     "start": 42.06,
+     "end": 42.14
+    },
+    {
+     "w": "está",
+     "start": 42.14,
+     "end": 42.38
+    },
+    {
+     "w": "longe",
+     "start": 42.38,
+     "end": 42.82
+    },
+    {
+     "w": "e",
+     "start": 42.82,
+     "end": 43.16
+    },
+    {
+     "w": "é",
+     "start": 43.16,
+     "end": 43.26
+    },
+    {
+     "w": "enorme.",
+     "start": 43.26,
+     "end": 43.66
+    },
+    {
+     "w": "Lá",
+     "start": 44.12,
+     "end": 44.34
+    },
+    {
+     "w": "no",
+     "start": 44.34,
+     "end": 44.5
+    },
+    {
+     "w": "alto,",
+     "start": 44.5,
+     "end": 44.84
+    },
+    {
+     "w": "sem",
+     "start": 45.08,
+     "end": 45.22
+    },
+    {
+     "w": "nada",
+     "start": 45.22,
+     "end": 45.6
+    },
+    {
+     "w": "pra",
+     "start": 45.6,
+     "end": 45.8
+    },
+    {
+     "w": "comparar,",
+     "start": 45.8,
+     "end": 46.44
+    },
+    {
+     "w": "ela",
+     "start": 46.68,
+     "end": 46.8
+    },
+    {
+     "w": "parece",
+     "start": 46.8,
+     "end": 47.14
+    },
+    {
+     "w": "menor.",
+     "start": 47.14,
+     "end": 47.5
+    },
+    {
+     "w": "Faça",
+     "start": 47.96,
+     "end": 48.22
+    },
+    {
+     "w": "o",
+     "start": 48.22,
+     "end": 48.36
+    },
+    {
+     "w": "teste:",
+     "start": 48.36,
+     "end": 48.52
+    },
+    {
+     "w": "na",
+     "start": 49.02,
+     "end": 49.16
+    },
+    {
+     "w": "próxima",
+     "start": 49.16,
+     "end": 49.52
+    },
+    {
+     "w": "Lua",
+     "start": 49.52,
+     "end": 49.8
+    },
+    {
+     "w": "cheia,",
+     "start": 49.8,
+     "end": 50.26
+    },
+    {
+     "w": "cubra",
+     "start": 50.44,
+     "end": 50.86
+    },
+    {
+     "w": "a",
+     "start": 50.86,
+     "end": 51.0
+    },
+    {
+     "w": "Lua",
+     "start": 51.0,
+     "end": 51.2
+    },
+    {
+     "w": "com",
+     "start": 51.2,
+     "end": 51.38
+    },
+    {
+     "w": "a",
+     "start": 51.38,
+     "end": 51.5
+    },
+    {
+     "w": "ponta",
+     "start": 51.5,
+     "end": 51.92
+    },
+    {
+     "w": "do",
+     "start": 51.92,
+     "end": 52.08
+    },
+    {
+     "w": "dedo",
+     "start": 52.08,
+     "end": 52.4
+    },
+    {
+     "w": "no",
+     "start": 52.4,
+     "end": 52.52
+    },
+    {
+     "w": "horizonte…",
+     "start": 52.52,
+     "end": 53.06
+    },
+    {
+     "w": "e",
+     "start": 53.06,
+     "end": 53.52
+    },
+    {
+     "w": "depois",
+     "start": 53.52,
+     "end": 53.84
+    },
+    {
+     "w": "no",
+     "start": 53.84,
+     "end": 54.26
+    },
+    {
+     "w": "alto",
+     "start": 54.26,
+     "end": 54.54
+    },
+    {
+     "w": "do",
+     "start": 54.54,
+     "end": 54.7
+    },
+    {
+     "w": "céu.",
+     "start": 54.7,
+     "end": 54.94
+    },
+    {
+     "w": "O",
+     "start": 55.4,
+     "end": 55.48
+    },
+    {
+     "w": "dedo",
+     "start": 55.48,
+     "end": 55.88
+    },
+    {
+     "w": "cobre",
+     "start": 55.88,
+     "end": 56.26
+    },
+    {
+     "w": "igual.",
+     "start": 56.26,
+     "end": 56.56
+    },
+    {
+     "w": "Comenta",
+     "start": 57.1,
+     "end": 57.48
+    },
+    {
+     "w": "aqui",
+     "start": 57.48,
+     "end": 57.68
+    },
+    {
+     "w": "se",
+     "start": 57.68,
+     "end": 57.84
+    },
+    {
+     "w": "você",
+     "start": 57.84,
+     "end": 58.08
+    },
+    {
+     "w": "vai",
+     "start": 58.08,
+     "end": 58.36
+    },
+    {
+     "w": "fazer",
+     "start": 58.36,
+     "end": 58.72
+    },
+    {
+     "w": "o",
+     "start": 58.72,
+     "end": 58.86
+    },
+    {
+     "w": "teste",
+     "start": 58.86,
+     "end": 59.1
+    },
+    {
+     "w": "do",
+     "start": 59.1,
+     "end": 59.34
+    },
+    {
+     "w": "dedo",
+     "start": 59.34,
+     "end": 59.7
+    },
+    {
+     "w": "na",
+     "start": 59.7,
+     "end": 59.8
+    },
+    {
+     "w": "próxima",
+     "start": 59.8,
+     "end": 60.26
+    },
+    {
+     "w": "Lua",
+     "start": 60.26,
+     "end": 60.54
+    },
+    {
+     "w": "cheia.",
+     "start": 60.54,
+     "end": 60.9
+    }
+   ]
+  }
+ ]
+}
