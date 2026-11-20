@@ -1,0 +1,614 @@
+{
+ "duration": 41.716,
+ "sentences": [
+  {
+   "text": "Não pisque!",
+   "start": 0.0,
+   "end": 0.7,
+   "words": [
+    {
+     "w": "Não",
+     "start": 0.0,
+     "end": 0.22
+    },
+    {
+     "w": "pisque!",
+     "start": 0.22,
+     "end": 0.7
+    }
+   ]
+  },
+  {
+   "text": "Seu desafio é ficar quinze segundos olhando pra tela sem piscar. Você consegue?",
+   "start": 1.04,
+   "end": 5.82,
+   "words": [
+    {
+     "w": "Seu",
+     "start": 1.04,
+     "end": 1.24
+    },
+    {
+     "w": "desafio",
+     "start": 1.24,
+     "end": 1.7
+    },
+    {
+     "w": "é",
+     "start": 1.7,
+     "end": 1.86
+    },
+    {
+     "w": "ficar",
+     "start": 1.86,
+     "end": 2.08
+    },
+    {
+     "w": "quinze",
+     "start": 2.08,
+     "end": 2.58
+    },
+    {
+     "w": "segundos",
+     "start": 2.58,
+     "end": 3.08
+    },
+    {
+     "w": "olhando",
+     "start": 3.08,
+     "end": 3.46
+    },
+    {
+     "w": "pra",
+     "start": 3.46,
+     "end": 3.82
+    },
+    {
+     "w": "tela",
+     "start": 3.82,
+     "end": 4.04
+    },
+    {
+     "w": "sem",
+     "start": 4.04,
+     "end": 4.42
+    },
+    {
+     "w": "piscar.",
+     "start": 4.42,
+     "end": 4.92
+    },
+    {
+     "w": "Você",
+     "start": 5.18,
+     "end": 5.4
+    },
+    {
+     "w": "consegue?",
+     "start": 5.4,
+     "end": 5.82
+    }
+   ]
+  },
+  {
+   "text": "Olho no centro da tela. Valendo!",
+   "start": 6.38,
+   "end": 8.54,
+   "words": [
+    {
+     "w": "Olho",
+     "start": 6.38,
+     "end": 6.64
+    },
+    {
+     "w": "no",
+     "start": 6.64,
+     "end": 6.78
+    },
+    {
+     "w": "centro",
+     "start": 6.78,
+     "end": 7.22
+    },
+    {
+     "w": "da",
+     "start": 7.22,
+     "end": 7.42
+    },
+    {
+     "w": "tela.",
+     "start": 7.42,
+     "end": 7.74
+    },
+    {
+     "w": "Valendo!",
+     "start": 8.18,
+     "end": 8.54
+    }
+   ]
+  },
+  {
+   "text": "Quinze.",
+   "start": 8.54,
+   "end": 9.364,
+   "words": [
+    {
+     "w": "Quinze.",
+     "start": 8.54,
+     "end": 9.364
+    }
+   ]
+  },
+  {
+   "text": "Catorze.",
+   "start": 9.364,
+   "end": 10.188,
+   "words": [
+    {
+     "w": "Catorze.",
+     "start": 9.364,
+     "end": 10.188
+    }
+   ]
+  },
+  {
+   "text": "Treze.",
+   "start": 10.188,
+   "end": 11.012,
+   "words": [
+    {
+     "w": "Treze.",
+     "start": 10.188,
+     "end": 11.012
+    }
+   ]
+  },
+  {
+   "text": "Doze.",
+   "start": 11.012,
+   "end": 11.836,
+   "words": [
+    {
+     "w": "Doze.",
+     "start": 11.012,
+     "end": 11.836
+    }
+   ]
+  },
+  {
+   "text": "Onze.",
+   "start": 11.836,
+   "end": 12.66,
+   "words": [
+    {
+     "w": "Onze.",
+     "start": 11.836,
+     "end": 12.66
+    }
+   ]
+  },
+  {
+   "text": "Dez.",
+   "start": 12.66,
+   "end": 13.484,
+   "words": [
+    {
+     "w": "Dez.",
+     "start": 12.66,
+     "end": 13.484
+    }
+   ]
+  },
+  {
+   "text": "Nove.",
+   "start": 13.484,
+   "end": 14.308,
+   "words": [
+    {
+     "w": "Nove.",
+     "start": 13.484,
+     "end": 14.308
+    }
+   ]
+  },
+  {
+   "text": "Oito.",
+   "start": 14.308,
+   "end": 15.132,
+   "words": [
+    {
+     "w": "Oito.",
+     "start": 14.308,
+     "end": 15.132
+    }
+   ]
+  },
+  {
+   "text": "Sete.",
+   "start": 15.132,
+   "end": 15.956,
+   "words": [
+    {
+     "w": "Sete.",
+     "start": 15.132,
+     "end": 15.956
+    }
+   ]
+  },
+  {
+   "text": "Seis.",
+   "start": 15.956,
+   "end": 16.78,
+   "words": [
+    {
+     "w": "Seis.",
+     "start": 15.956,
+     "end": 16.78
+    }
+   ]
+  },
+  {
+   "text": "Cinco.",
+   "start": 16.78,
+   "end": 17.604,
+   "words": [
+    {
+     "w": "Cinco.",
+     "start": 16.78,
+     "end": 17.604
+    }
+   ]
+  },
+  {
+   "text": "Quatro.",
+   "start": 17.604,
+   "end": 18.428,
+   "words": [
+    {
+     "w": "Quatro.",
+     "start": 17.604,
+     "end": 18.428
+    }
+   ]
+  },
+  {
+   "text": "Três.",
+   "start": 18.428,
+   "end": 19.252,
+   "words": [
+    {
+     "w": "Três.",
+     "start": 18.428,
+     "end": 19.252
+    }
+   ]
+  },
+  {
+   "text": "Dois.",
+   "start": 19.252,
+   "end": 20.076,
+   "words": [
+    {
+     "w": "Dois.",
+     "start": 19.252,
+     "end": 20.076
+    }
+   ]
+  },
+  {
+   "text": "Um.",
+   "start": 20.076,
+   "end": 20.9,
+   "words": [
+    {
+     "w": "Um.",
+     "start": 20.076,
+     "end": 20.9
+    }
+   ]
+  },
+  {
+   "text": "Pode piscar!",
+   "start": 20.9,
+   "end": 21.58,
+   "words": [
+    {
+     "w": "Pode",
+     "start": 20.9,
+     "end": 21.14
+    },
+    {
+     "w": "piscar!",
+     "start": 21.14,
+     "end": 21.58
+    }
+   ]
+  },
+  {
+   "text": "Sabia que a gente pisca de quinze a vinte vezes por minuto, sem perceber?",
+   "start": 22.08,
+   "end": 26.2,
+   "words": [
+    {
+     "w": "Sabia",
+     "start": 22.08,
+     "end": 22.34
+    },
+    {
+     "w": "que",
+     "start": 22.34,
+     "end": 22.5
+    },
+    {
+     "w": "a",
+     "start": 22.5,
+     "end": 22.56
+    },
+    {
+     "w": "gente",
+     "start": 22.56,
+     "end": 22.72
+    },
+    {
+     "w": "pisca",
+     "start": 22.72,
+     "end": 23.16
+    },
+    {
+     "w": "de",
+     "start": 23.16,
+     "end": 23.3
+    },
+    {
+     "w": "quinze",
+     "start": 23.3,
+     "end": 23.72
+    },
+    {
+     "w": "a",
+     "start": 23.72,
+     "end": 23.88
+    },
+    {
+     "w": "vinte",
+     "start": 23.88,
+     "end": 24.2
+    },
+    {
+     "w": "vezes",
+     "start": 24.2,
+     "end": 24.6
+    },
+    {
+     "w": "por",
+     "start": 24.6,
+     "end": 24.88
+    },
+    {
+     "w": "minuto,",
+     "start": 24.88,
+     "end": 25.44
+    },
+    {
+     "w": "sem",
+     "start": 25.44,
+     "end": 25.74
+    },
+    {
+     "w": "perceber?",
+     "start": 25.74,
+     "end": 26.2
+    }
+   ]
+  },
+  {
+   "text": "Cada piscada espalha uma camada de lágrima que protege e limpa o olho. Por isso, quando você segura, ele começa a arder.",
+   "start": 26.2,
+   "end": 33.94,
+   "words": [
+    {
+     "w": "Cada",
+     "start": 26.2,
+     "end": 26.78
+    },
+    {
+     "w": "piscada",
+     "start": 26.78,
+     "end": 27.38
+    },
+    {
+     "w": "espalha",
+     "start": 27.38,
+     "end": 27.84
+    },
+    {
+     "w": "uma",
+     "start": 27.84,
+     "end": 28.0
+    },
+    {
+     "w": "camada",
+     "start": 28.0,
+     "end": 28.5
+    },
+    {
+     "w": "de",
+     "start": 28.5,
+     "end": 28.64
+    },
+    {
+     "w": "lágrima",
+     "start": 28.64,
+     "end": 29.1
+    },
+    {
+     "w": "que",
+     "start": 29.1,
+     "end": 29.26
+    },
+    {
+     "w": "protege",
+     "start": 29.26,
+     "end": 29.88
+    },
+    {
+     "w": "e",
+     "start": 29.88,
+     "end": 30.06
+    },
+    {
+     "w": "limpa",
+     "start": 30.06,
+     "end": 30.42
+    },
+    {
+     "w": "o",
+     "start": 30.42,
+     "end": 30.58
+    },
+    {
+     "w": "olho.",
+     "start": 30.58,
+     "end": 30.82
+    },
+    {
+     "w": "Por",
+     "start": 31.12,
+     "end": 31.28
+    },
+    {
+     "w": "isso,",
+     "start": 31.28,
+     "end": 31.56
+    },
+    {
+     "w": "quando",
+     "start": 31.72,
+     "end": 31.96
+    },
+    {
+     "w": "você",
+     "start": 31.96,
+     "end": 32.24
+    },
+    {
+     "w": "segura,",
+     "start": 32.24,
+     "end": 32.74
+    },
+    {
+     "w": "ele",
+     "start": 32.98,
+     "end": 33.12
+    },
+    {
+     "w": "começa",
+     "start": 33.12,
+     "end": 33.46
+    },
+    {
+     "w": "a",
+     "start": 33.46,
+     "end": 33.7
+    },
+    {
+     "w": "arder.",
+     "start": 33.7,
+     "end": 33.94
+    }
+   ]
+  },
+  {
+   "text": "E aí, conseguiu ou piscou? Comenta aqui embaixo, e segue o olhaso três dê pra mais desafios!",
+   "start": 34.4,
+   "end": 40.22,
+   "words": [
+    {
+     "w": "E",
+     "start": 34.4,
+     "end": 34.46
+    },
+    {
+     "w": "aí,",
+     "start": 34.46,
+     "end": 34.64
+    },
+    {
+     "w": "conseguiu",
+     "start": 34.96,
+     "end": 35.52
+    },
+    {
+     "w": "ou",
+     "start": 35.52,
+     "end": 35.68
+    },
+    {
+     "w": "piscou?",
+     "start": 35.68,
+     "end": 36.08
+    },
+    {
+     "w": "Comenta",
+     "start": 36.4,
+     "end": 36.7
+    },
+    {
+     "w": "aqui",
+     "start": 36.7,
+     "end": 36.88
+    },
+    {
+     "w": "embaixo,",
+     "start": 36.88,
+     "end": 37.2
+    },
+    {
+     "w": "e",
+     "start": 37.2,
+     "end": 37.68
+    },
+    {
+     "w": "segue",
+     "start": 37.68,
+     "end": 38.0
+    },
+    {
+     "w": "o",
+     "start": 38.0,
+     "end": 38.14
+    },
+    {
+     "w": "olhaso",
+     "start": 38.14,
+     "end": 38.45
+    },
+    {
+     "w": "três",
+     "start": 38.45,
+     "end": 38.76
+    },
+    {
+     "w": "dê",
+     "start": 38.76,
+     "end": 39.0
+    },
+    {
+     "w": "pra",
+     "start": 39.0,
+     "end": 39.2
+    },
+    {
+     "w": "mais",
+     "start": 39.2,
+     "end": 39.58
+    },
+    {
+     "w": "desafios!",
+     "start": 39.58,
+     "end": 40.22
+    }
+   ]
+  }
+ ]
+}
