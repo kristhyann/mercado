@@ -9,7 +9,7 @@ Quiz prende porque o espectador participa: pensa na resposta, quer saber se acer
 - **Fundo/cenário DIFERENTE a cada quiz:** trocar a paleta do palco, das luzes neon e do fundo em todo vídeo novo, para nenhum ficar igual ao anterior. Usar cores vibrantes e atraentes (alto contraste, saturadas, degradês), sem usar verde puro nem vermelho puro no fundo para não confundir com acerto/erro. Registrar a paleta usada abaixo e não repetir a do vídeo anterior.
   - Paletas sugeridas: 1) roxo + rosa neon · 2) azul elétrico + ciano · 3) laranja pôr do sol + magenta · 4) turquesa + coral · 5) azul-marinho + dourado · 6) lilás + azul-bebê (pastel vibrante) · 7) índigo + amarelo limão · 8) pink + laranja (candy).
   - Usadas: `quiz-adulto-01` = 1 (roxo + rosa neon) · `quiz-escola-01` = 1 (roxo + rosa neon).
-- **Pausa para pensar:** toda pergunta tem 3 s de cronômetro (5 s nos desafios visuais), sem narração durante a pausa.
+- **Pausa para pensar:** toda pergunta tem **5 s de cronômetro** (contagem 5-4-3-2-1 com tique-taque), sem narração durante a pausa. No roteiro de voz a regra é "Você tem cinco segundos pra cada pergunta".
 - **Dificuldade crescente:** começa fácil e termina difícil; a última pode ser pegadinha que gere discussão.
 - **Chamada final:** "Quantas você acertou? Comenta aí!" + Segue @mentepega + corte que emenda no começo (loop).
 - **Séries:** tema que performar vira Parte 2, Parte 3… (manter numeração no título e na pasta, ex.: `quiz-adulto-02`).
