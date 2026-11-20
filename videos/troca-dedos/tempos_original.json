@@ -1,0 +1,718 @@
+{
+ "duration": 47.149,
+ "sentences": [
+  {
+   "text": "Duvido que você consiga fazer isso sem se confundir!",
+   "start": 0.0,
+   "end": 3.06,
+   "words": [
+    {
+     "w": "Duvido",
+     "start": 0.0,
+     "end": 0.58
+    },
+    {
+     "w": "que",
+     "start": 0.58,
+     "end": 0.72
+    },
+    {
+     "w": "você",
+     "start": 0.72,
+     "end": 0.92
+    },
+    {
+     "w": "consiga",
+     "start": 0.92,
+     "end": 1.32
+    },
+    {
+     "w": "fazer",
+     "start": 1.32,
+     "end": 1.58
+    },
+    {
+     "w": "isso",
+     "start": 1.58,
+     "end": 1.88
+    },
+    {
+     "w": "sem",
+     "start": 1.88,
+     "end": 2.24
+    },
+    {
+     "w": "se",
+     "start": 2.24,
+     "end": 2.42
+    },
+    {
+     "w": "confundir!",
+     "start": 2.42,
+     "end": 3.06
+    }
+   ]
+  },
+  {
+   "text": "Levanta o polegar da mão direita.",
+   "start": 3.4,
+   "end": 5.12,
+   "words": [
+    {
+     "w": "Levanta",
+     "start": 3.4,
+     "end": 3.82
+    },
+    {
+     "w": "o",
+     "start": 3.82,
+     "end": 3.9
+    },
+    {
+     "w": "polegar",
+     "start": 3.9,
+     "end": 4.28
+    },
+    {
+     "w": "da",
+     "start": 4.28,
+     "end": 4.44
+    },
+    {
+     "w": "mão",
+     "start": 4.44,
+     "end": 4.64
+    },
+    {
+     "w": "direita.",
+     "start": 4.64,
+     "end": 5.12
+    }
+   ]
+  },
+  {
+   "text": "Agora, com a outra mão, levanta o dedo mínimo.",
+   "start": 5.5,
+   "end": 8.56,
+   "words": [
+    {
+     "w": "Agora,",
+     "start": 5.5,
+     "end": 5.88
+    },
+    {
+     "w": "com",
+     "start": 6.14,
+     "end": 6.24
+    },
+    {
+     "w": "a",
+     "start": 6.24,
+     "end": 6.36
+    },
+    {
+     "w": "outra",
+     "start": 6.36,
+     "end": 6.62
+    },
+    {
+     "w": "mão,",
+     "start": 6.62,
+     "end": 6.92
+    },
+    {
+     "w": "levanta",
+     "start": 7.28,
+     "end": 7.78
+    },
+    {
+     "w": "o",
+     "start": 7.78,
+     "end": 7.9
+    },
+    {
+     "w": "dedo",
+     "start": 7.9,
+     "end": 8.12
+    },
+    {
+     "w": "mínimo.",
+     "start": 8.12,
+     "end": 8.56
+    }
+   ]
+  },
+  {
+   "text": "Sem abaixar nenhum dos dois, troca os dedos!",
+   "start": 9.06,
+   "end": 11.82,
+   "words": [
+    {
+     "w": "Sem",
+     "start": 9.06,
+     "end": 9.24
+    },
+    {
+     "w": "abaixar",
+     "start": 9.24,
+     "end": 9.68
+    },
+    {
+     "w": "nenhum",
+     "start": 9.68,
+     "end": 10.02
+    },
+    {
+     "w": "dos",
+     "start": 10.02,
+     "end": 10.34
+    },
+    {
+     "w": "dois,",
+     "start": 10.34,
+     "end": 10.62
+    },
+    {
+     "w": "troca",
+     "start": 11.06,
+     "end": 11.32
+    },
+    {
+     "w": "os",
+     "start": 11.32,
+     "end": 11.46
+    },
+    {
+     "w": "dedos!",
+     "start": 11.46,
+     "end": 11.82
+    }
+   ]
+  },
+  {
+   "text": "Troca!",
+   "start": 12.2,
+   "end": 12.5,
+   "words": [
+    {
+     "w": "Troca!",
+     "start": 12.2,
+     "end": 12.5
+    }
+   ]
+  },
+  {
+   "text": "Troca!",
+   "start": 12.74,
+   "end": 13.08,
+   "words": [
+    {
+     "w": "Troca!",
+     "start": 12.74,
+     "end": 13.08
+    }
+   ]
+  },
+  {
+   "text": "Troca!",
+   "start": 13.3,
+   "end": 13.64,
+   "words": [
+    {
+     "w": "Troca!",
+     "start": 13.3,
+     "end": 13.64
+    }
+   ]
+  },
+  {
+   "text": "Agora mais rápido!",
+   "start": 13.94,
+   "end": 14.72,
+   "words": [
+    {
+     "w": "Agora",
+     "start": 13.94,
+     "end": 14.16
+    },
+    {
+     "w": "mais",
+     "start": 14.26,
+     "end": 14.42
+    },
+    {
+     "w": "rápido!",
+     "start": 14.42,
+     "end": 14.72
+    }
+   ]
+  },
+  {
+   "text": "Troca!",
+   "start": 15.08,
+   "end": 15.32,
+   "words": [
+    {
+     "w": "Troca!",
+     "start": 15.08,
+     "end": 15.32
+    }
+   ]
+  },
+  {
+   "text": "Troca!",
+   "start": 15.46,
+   "end": 15.68,
+   "words": [
+    {
+     "w": "Troca!",
+     "start": 15.46,
+     "end": 15.68
+    }
+   ]
+  },
+  {
+   "text": "Troca!",
+   "start": 15.82,
+   "end": 16.04,
+   "words": [
+    {
+     "w": "Troca!",
+     "start": 15.82,
+     "end": 16.04
+    }
+   ]
+  },
+  {
+   "text": "Troca!",
+   "start": 16.14,
+   "end": 16.4,
+   "words": [
+    {
+     "w": "Troca!",
+     "start": 16.14,
+     "end": 16.4
+    }
+   ]
+  },
+  {
+   "text": "Troca!",
+   "start": 16.48,
+   "end": 16.74,
+   "words": [
+    {
+     "w": "Troca!",
+     "start": 16.48,
+     "end": 16.74
+    }
+   ]
+  },
+  {
+   "text": "Troca!",
+   "start": 16.84,
+   "end": 17.18,
+   "words": [
+    {
+     "w": "Troca!",
+     "start": 16.84,
+     "end": 17.18
+    }
+   ]
+  },
+  {
+   "text": "Travou? Você se confundiu?",
+   "start": 17.5,
+   "end": 19.38,
+   "words": [
+    {
+     "w": "Travou?",
+     "start": 17.5,
+     "end": 17.98
+    },
+    {
+     "w": "Você",
+     "start": 18.46,
+     "end": 18.7
+    },
+    {
+     "w": "se",
+     "start": 18.7,
+     "end": 18.84
+    },
+    {
+     "w": "confundiu?",
+     "start": 18.84,
+     "end": 19.38
+    }
+   ]
+  },
+  {
+   "text": "Isso acontece porque o seu cérebro precisa coordenar dois movimentos diferentes ao mesmo tempo.",
+   "start": 19.78,
+   "end": 25.2,
+   "words": [
+    {
+     "w": "Isso",
+     "start": 19.78,
+     "end": 19.96
+    },
+    {
+     "w": "acontece",
+     "start": 19.96,
+     "end": 20.46
+    },
+    {
+     "w": "porque",
+     "start": 20.46,
+     "end": 20.82
+    },
+    {
+     "w": "o",
+     "start": 20.82,
+     "end": 20.94
+    },
+    {
+     "w": "seu",
+     "start": 20.94,
+     "end": 21.06
+    },
+    {
+     "w": "cérebro",
+     "start": 21.06,
+     "end": 21.6
+    },
+    {
+     "w": "precisa",
+     "start": 21.6,
+     "end": 21.9
+    },
+    {
+     "w": "coordenar",
+     "start": 21.9,
+     "end": 22.58
+    },
+    {
+     "w": "dois",
+     "start": 22.58,
+     "end": 22.88
+    },
+    {
+     "w": "movimentos",
+     "start": 22.88,
+     "end": 23.5
+    },
+    {
+     "w": "diferentes",
+     "start": 23.5,
+     "end": 24.02
+    },
+    {
+     "w": "ao",
+     "start": 24.02,
+     "end": 24.38
+    },
+    {
+     "w": "mesmo",
+     "start": 24.38,
+     "end": 24.72
+    },
+    {
+     "w": "tempo.",
+     "start": 24.72,
+     "end": 25.2
+    }
+   ]
+  },
+  {
+   "text": "Uma área na frente do cérebro planeja os movimentos, o córtex motor manda cada dedo se mexer, e o cerebelo cuida do ritmo.",
+   "start": 25.54,
+   "end": 34.0,
+   "words": [
+    {
+     "w": "Uma",
+     "start": 25.54,
+     "end": 25.74
+    },
+    {
+     "w": "área",
+     "start": 25.74,
+     "end": 25.98
+    },
+    {
+     "w": "na",
+     "start": 25.98,
+     "end": 26.16
+    },
+    {
+     "w": "frente",
+     "start": 26.16,
+     "end": 26.46
+    },
+    {
+     "w": "do",
+     "start": 26.46,
+     "end": 26.68
+    },
+    {
+     "w": "cérebro",
+     "start": 26.68,
+     "end": 27.2
+    },
+    {
+     "w": "planeja",
+     "start": 27.2,
+     "end": 27.82
+    },
+    {
+     "w": "os",
+     "start": 27.82,
+     "end": 27.94
+    },
+    {
+     "w": "movimentos,",
+     "start": 27.94,
+     "end": 28.48
+    },
+    {
+     "w": "o",
+     "start": 28.48,
+     "end": 28.96
+    },
+    {
+     "w": "córtex",
+     "start": 28.96,
+     "end": 29.46
+    },
+    {
+     "w": "motor",
+     "start": 29.46,
+     "end": 29.82
+    },
+    {
+     "w": "manda",
+     "start": 29.82,
+     "end": 30.4
+    },
+    {
+     "w": "cada",
+     "start": 30.4,
+     "end": 30.74
+    },
+    {
+     "w": "dedo",
+     "start": 30.74,
+     "end": 31.2
+    },
+    {
+     "w": "se",
+     "start": 31.2,
+     "end": 31.32
+    },
+    {
+     "w": "mexer,",
+     "start": 31.32,
+     "end": 31.78
+    },
+    {
+     "w": "e",
+     "start": 32.02,
+     "end": 32.14
+    },
+    {
+     "w": "o",
+     "start": 32.14,
+     "end": 32.22
+    },
+    {
+     "w": "cerebelo",
+     "start": 32.22,
+     "end": 32.88
+    },
+    {
+     "w": "cuida",
+     "start": 32.88,
+     "end": 33.42
+    },
+    {
+     "w": "do",
+     "start": 33.42,
+     "end": 33.54
+    },
+    {
+     "w": "ritmo.",
+     "start": 33.54,
+     "end": 34.0
+    }
+   ]
+  },
+  {
+   "text": "Quando você acelera, a atenção não dá conta, e os comandos se embaralham.",
+   "start": 34.28,
+   "end": 38.76,
+   "words": [
+    {
+     "w": "Quando",
+     "start": 34.28,
+     "end": 34.4
+    },
+    {
+     "w": "você",
+     "start": 34.4,
+     "end": 34.7
+    },
+    {
+     "w": "acelera,",
+     "start": 34.7,
+     "end": 35.28
+    },
+    {
+     "w": "a",
+     "start": 35.54,
+     "end": 35.64
+    },
+    {
+     "w": "atenção",
+     "start": 35.64,
+     "end": 35.96
+    },
+    {
+     "w": "não",
+     "start": 35.96,
+     "end": 36.32
+    },
+    {
+     "w": "dá",
+     "start": 36.32,
+     "end": 36.48
+    },
+    {
+     "w": "conta,",
+     "start": 36.48,
+     "end": 36.92
+    },
+    {
+     "w": "e",
+     "start": 37.16,
+     "end": 37.26
+    },
+    {
+     "w": "os",
+     "start": 37.26,
+     "end": 37.36
+    },
+    {
+     "w": "comandos",
+     "start": 37.36,
+     "end": 37.96
+    },
+    {
+     "w": "se",
+     "start": 37.96,
+     "end": 38.22
+    },
+    {
+     "w": "embaralham.",
+     "start": 38.22,
+     "end": 38.76
+    }
+   ]
+  },
+  {
+   "text": "Quantas vezes você conseguiu sem errar? Comenta aqui embaixo, e segue o olhaso três dê pra mais desafios!",
+   "start": 39.08,
+   "end": 45.68,
+   "words": [
+    {
+     "w": "Quantas",
+     "start": 39.08,
+     "end": 39.44
+    },
+    {
+     "w": "vezes",
+     "start": 39.44,
+     "end": 39.74
+    },
+    {
+     "w": "você",
+     "start": 39.74,
+     "end": 40.06
+    },
+    {
+     "w": "conseguiu",
+     "start": 40.06,
+     "end": 40.58
+    },
+    {
+     "w": "sem",
+     "start": 40.58,
+     "end": 40.88
+    },
+    {
+     "w": "errar?",
+     "start": 40.88,
+     "end": 41.26
+    },
+    {
+     "w": "Comenta",
+     "start": 41.56,
+     "end": 41.96
+    },
+    {
+     "w": "aqui",
+     "start": 41.96,
+     "end": 42.12
+    },
+    {
+     "w": "embaixo,",
+     "start": 42.12,
+     "end": 42.44
+    },
+    {
+     "w": "e",
+     "start": 42.44,
+     "end": 42.9
+    },
+    {
+     "w": "segue",
+     "start": 42.9,
+     "end": 43.22
+    },
+    {
+     "w": "o",
+     "start": 43.22,
+     "end": 43.36
+    },
+    {
+     "w": "olhaso",
+     "start": 43.36,
+     "end": 43.67
+    },
+    {
+     "w": "três",
+     "start": 43.67,
+     "end": 43.98
+    },
+    {
+     "w": "dê",
+     "start": 43.98,
+     "end": 44.44
+    },
+    {
+     "w": "pra",
+     "start": 44.44,
+     "end": 44.64
+    },
+    {
+     "w": "mais",
+     "start": 44.64,
+     "end": 45.02
+    },
+    {
+     "w": "desafios!",
+     "start": 45.02,
+     "end": 45.68
+    }
+   ]
+  }
+ ]
+}

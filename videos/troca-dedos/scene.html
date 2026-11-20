@@ -1,0 +1,179 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,'Noto Color Emoji',sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:230px;text-align:center;font-weight:900;font-size:84px;line-height:1.06}
+#hook b{color:#FFD21F;display:block;font-size:100px}
+#cap{width:1080px;top:1420px;text-align:center;font-weight:900;font-size:110px}
+#cap.hl{color:#FFD21F}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:58px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.white{background:#fff;color:#111}.tag.purple{background:#8B5CF6;color:#fff}
+.small{font-size:46px;padding:6px 22px;border-radius:18px;border-width:6px;box-shadow:0 6px 0 #111}
+#big{font-weight:900;font-size:170px;line-height:1;color:#FFD21F;-webkit-text-stroke:16px #111;paint-order:stroke fill;text-shadow:0 12px 0 rgba(0,0,0,.35);white-space:nowrap}
+#ctr{font-weight:900;font-size:60px;color:#111;background:#fff;border:8px solid #111;border-radius:28px;box-shadow:0 9px 0 #111;padding:8px 28px;white-space:nowrap}
+#final{left:50px;width:980px;top:1240px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:58px;line-height:1.14;padding:28px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#8B5CF6}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.85;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">DUVIDO QUE VOCÊ<b>CONSIGA 😏</b></div>
+<div id="big" class="o"></div>
+<div id="ctr" class="o"></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag small"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Quantas vezes você<br>conseguiu sem errar? 🤔<br>Comenta aqui 👇<br><em>Segue 👉 @olhaso_3D</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, rr } from '/_kit/kit.js';
+import { buildPerson, PP, poseP, face } from '/_kit/pessoas.js';
+await document.fonts.load('900 60px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences, PL = TP.plan; window.DURATION = TP.duration;
+const ALL = SN.flatMap(s => s.words);
+const WA = (re, n = 0, after = 0) => { const ws = ALL.filter(w => w.start >= after && re.test(w.w)); if (!ws[n]) { console.log('WA MISS', re); return after; } return ws[n].start; };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .03, 300);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const MAT = (c, r = .6, ex = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: r, flatShading: true }, ex));
+const add = (geo, mat, x, y, z, par = scene) => { const m = new THREE.Mesh(geo, typeof mat === 'number' ? MAT(mat) : mat); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; par.add(m); return m; };
+const box = (w, h, d, c, x, y, z, par) => add(new THREE.BoxGeometry(w, h, d), c, x, y, z, par);
+const canvasTex = (w, h, paint) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); paint(g, w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; };
+const sprite = (t, s) => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthWrite: false, depthTest: false })); sp.scale.setScalar(s); sp.renderOrder = 5; return sp; };
+const emo = (e, px = 110) => canvasTex(160, 160, g => { g.font = `${px}px 'Noto Color Emoji'`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(e, 80, 88); });
+
+// ---------- tempos ----------
+const T_LEV = WA(/^Levanta$/), T_AGORA = WA(/^Agora,?$/), T_SEM = WA(/^Sem$/), T_TR = PL.trocas, T_RAPIDO = WA(/rápido/), T_TRAV = PL.travou, T_CONF = WA(/confundiu/), T_BR = PL.brain, T_UMA = WA(/^Uma$/), T_CORTEX = WA(/córtex/), T_CEREB = WA(/cerebelo/), T_QUANDO = WA(/^Quando$/), T_EMB = WA(/embaralham/), T_CTA = PL.cta;
+const HL = /duvido|confundir|polegar|direita|mínimo|troca|rápido|travou|confundiu|cérebro|coordenar|planeja|córtex|motor|cerebelo|ritmo|atenção|embaralham|comenta|desafios/i;
+
+// ---------- cenário (paleta: coral + turquesa) ----------
+const bgT = canvasTex(512, 1024, g => { const gr = g.createLinearGradient(0, 0, 0, 1024); gr.addColorStop(0, '#0F766E'); gr.addColorStop(.5, '#14B8A6'); gr.addColorStop(1, '#FB7185'); g.fillStyle = gr; g.fillRect(0, 0, 512, 1024); g.globalAlpha = .1; g.fillStyle = '#fff'; for (let i = 0; i < 70; i++) { g.beginPath(); g.arc(Math.random() * 512, Math.random() * 1024, 2 + Math.random() * 6, 0, 7); g.fill(); } });
+scene.background = bgT;
+scene.add(new THREE.HemisphereLight(0xFFFFFF, 0x305050, 1.0));
+const sun = new THREE.DirectionalLight(0xFFF2E6, 2.1); sun.position.set(2, 5, 5); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, { left: -3, right: 3, top: 3, bottom: -3 }); scene.add(sun);
+const deco = []; for (let i = 0; i < 12; i++) { const m = add(new THREE.IcosahedronGeometry(rr(.1, .22), 0), MAT([0xFFD21F, 0xFB7185, 0xFFFFFF, 0x0F766E][i % 4], .4), rr(-1.5, 1.5), rr(.2, 3.6), rr(-3, -1.6)); m.userData.s = rr(.3, 1); deco.push(m); }
+// ---------- personagem (gancho) ----------
+const pg = grp(); const me = buildPerson({ skin: 0xC88A5A, shirt: 0x7C3AED, pants: 0x1E293B, hair: 0x1A1008, glasses: true }); pg.add(me.root);
+add(new THREE.CylinderGeometry(1.3, 1.4, .12, 36), MAT(0x0F766E, .5), 0, -.06, 0, pg);
+// ---------- mãos 3D ----------
+const SKIN = MAT(0xE3A982, .6);
+function buildHand(side) { // side +1 = mão direita (lado direito da tela)
+  const g = grp(); g.position.set(side * .55, 1.55, 0);
+  box(.5, .5, .32, SKIN, 0, 0, 0, g); add(new THREE.CylinderGeometry(.17, .2, .9, 10), SKIN, 0, -.65, -.02, g);
+  const fingers = []; const xs = [-.18, -.06, .06, .18].map(x => x * side); // da parte interna (indicador) para fora (mínimo)
+  xs.forEach((x, i) => { const p = grp(g); p.position.set(x, .25, .02); const L = i === 3 ? .4 : .34; add(new THREE.BoxGeometry(.11, L, .12), SKIN, 0, L / 2, 0, p); add(new THREE.SphereGeometry(.058, 8, 6), SKIN, 0, L, 0, p); p.userData.L = L; fingers.push(p); });
+  const th = grp(g); th.position.set(-side * .25, .02, .08); add(new THREE.BoxGeometry(.14, .4, .15), SKIN, 0, .2, 0, th); add(new THREE.SphereGeometry(.075, 8, 6), SKIN, 0, .4, 0, th);
+  // unha decorativa
+  return { g, fingers, th, side }; }
+const hR = buildHand(1), hL = buildHand(-1);
+// fechado: dedos dobrados para frente/baixo; levantado: reto para cima
+function setHand(h, thumbUp, pinkyUp, t = 0, shake = 0) {
+  h.fingers.forEach((f, i) => { const up = i === 3 ? pinkyUp : 0; f.rotation.set(lerp(2.3, 0, up) + Math.sin(t * 30 + i) * shake * .3, 0, 0); });
+  h.th.rotation.set(lerp(1.0, 0, thumbUp), 0, lerp(-h.side * 1.45, h.side * .1, thumbUp) + Math.sin(t * 27) * shake * .3);
+  h.th.position.z = lerp(.18, .08, thumbUp); }
+const lbls = { R: sprite(emo('👍'), .3), L: sprite(emo('🤙'), .3) }; scene.add(lbls.R, lbls.L);
+const qmT = canvasTex(128, 128, g => { g.font = '900 110px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineWidth = 12; g.strokeStyle = '#111'; g.strokeText('?', 64, 70); g.fillStyle = '#FFD21F'; g.fillText('?', 64, 70); });
+const qms = [0, 1, 2].map(() => { const s = sprite(qmT, .3); scene.add(s); return s; });
+// ---------- cérebro lateral (x=40) ----------
+const bw = grp(); bw.position.set(40, 0, 0);
+const brain = grp(bw); brain.position.set(0, 1.9, 0); brain.scale.set(1.3, .92, .95);
+const pink = MAT(0xF4A6C0, .45);
+add(new THREE.SphereGeometry(.8, 32, 20), pink, 0, 0, 0, brain);
+for (let i = 0; i < 70; i++) { const a = rr(0, Math.PI * 2), b = rr(-.2, 1); const p = V(Math.cos(a) * Math.sqrt(1 - b * b), b, Math.sin(a) * Math.sqrt(1 - b * b)).multiplyScalar(.78); const k = add(new THREE.CapsuleGeometry(.07, .18, 4, 8), pink, p.x, p.y, p.z, brain); k.lookAt(p.clone().multiplyScalar(3).add(brain.position)); k.rotateZ(rr(0, 3)); }
+const glow = (c) => new THREE.MeshStandardMaterial({ color: c, emissive: c, emissiveIntensity: 0, transparent: true, opacity: 0, roughness: .3, depthWrite: false });
+const preM = glow(0xFFD21F), motM = glow(0xFF7A1A), cbM = glow(0x22D3EE);
+const pre = add(new THREE.SphereGeometry(.86, 24, 16, -0.95, 1.9, .25, 1.25), preM, 0, 0, 0, brain); pre.castShadow = false;
+const mot = add(new THREE.TorusGeometry(.84, .09, 8, 40, Math.PI * .9), motM, .12, 0, 0, brain); mot.rotation.set(0, Math.PI / 2, Math.PI * .05 + Math.PI * .05); mot.castShadow = false;
+const cbG = grp(bw); cbG.position.set(.78, 1.28, 0); const cb = add(new THREE.SphereGeometry(.36, 20, 14), MAT(0xE88FB0, .5), 0, 0, 0, cbG); cb.scale.set(1.15, .7, .9);
+for (let i = 0; i < 5; i++) { const r = add(new THREE.TorusGeometry(.3 - i * .02, .015, 6, 24), MAT(0xC06A8E), 0, .12 - i * .06, 0, cbG); r.rotation.x = Math.PI / 2; r.scale.set(1.15, .9, 1); }
+const cbGlow = add(new THREE.SphereGeometry(.4, 20, 14), cbM, 0, 0, 0, cbG); cbGlow.scale.set(1.15, .72, .92); cbGlow.castShadow = false;
+add(new THREE.CylinderGeometry(.13, .1, .6, 10), MAT(0xE88FB0), .35, 1.0, 0, bw).rotation.z = -.35;
+const lblTex = (txt, col) => canvasTex(420, 110, g => { g.fillStyle = col; g.beginPath(); g.roundRect(6, 6, 408, 98, 26); g.fill(); g.lineWidth = 8; g.strokeStyle = '#111'; g.stroke(); g.fillStyle = '#111'; g.font = '900 50px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(txt, 210, 58); });
+const mkLbl = (txt, col, x, y) => { const m = add(new THREE.PlaneGeometry(.8, .21), new THREE.MeshBasicMaterial({ map: lblTex(txt, col), transparent: true }), x, y, .9, bw); m.castShadow = false; return m; };
+const lPre = mkLbl('🧭 PLANEJA', '#FFD21F', -.55, 3.05), lMot = mkLbl('⚡ CÓRTEX MOTOR', '#FFB27A', .45, 3.35), lCb = mkLbl('🥁 CEREBELO', '#7DE8F7', .6, .75);
+const sigs = Array.from({ length: 8 }, () => { const m = add(new THREE.SphereGeometry(.045, 10, 8), new THREE.MeshBasicMaterial({ color: 0xFFFFFF }), 0, 0, 0, bw); m.castShadow = false; return m; });
+const handIcons = [sprite(emo('🤚'), .4), sprite(emo('✋'), .4)]; handIcons.forEach(s => bw.add(s));
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+ev(.05, 'whoosh'); ev(.4, 'boing'); ev(T_LEV + .4, 'pop'); ev(T_AGORA + 1.2, 'pop'); ev(T_SEM, 'whoosh'); T_TR.forEach(t => ev(t, 'pop')); ev(T_RAPIDO, 'zap'); ev(T_TRAV, 'buzzx'); ev(T_BR, 'whoosh'); ev(T_UMA, 'ding'); ev(T_CORTEX, 'ding'); ev(T_CEREB, 'ding'); ev(T_QUANDO, 'zap'); ev(T_CTA, 'win');
+// estado: A = polegar direito + mínimo esquerdo ; B = mínimo direito + polegar esquerdo
+function nSwaps(t) { let n = 0; T_TR.forEach(x => { if (t >= x) n++; }); if (t >= T_SEM + 1.4) n++; return n; }
+function handState(t) { // retorna [thR, piR, thL, piL]
+  const sw = (t0) => ease(clamp((t - t0) / .14));
+  if (t < T_LEV + .3) return [0, 0, 0, 0];
+  let thR = ease(clamp((t - T_LEV - .3) / .4)), piL = ease(clamp((t - T_AGORA - 1.0) / .4)), thL = 0, piR = 0;
+  const swaps = [T_SEM + 1.4, ...T_TR]; let st = 0; let k = 0;
+  for (const x of swaps) if (t >= x) { st = 1 - st; k = sw(x); }
+  if (t >= T_SEM + 1.4) { const from = 1 - st; const a = [1 - from, from], b = [1 - st, st]; const m = k; const A = lerp(a[0], b[0], m), B = lerp(a[1], b[1], m); thR = A; piL = A; piR = B; thL = B; }
+  return [thR, piR, thL, piL]; }
+
+window.draw = function (t) {
+  const inBrain = win(t, T_BR - .1, T_CTA - .1), inHook = t < T_LEV - .1;
+  pg.visible = inHook; bw.visible = inBrain; hR.g.visible = hL.g.visible = !inHook && !inBrain;
+  deco.forEach(m => { m.rotation.x = t * m.userData.s; m.rotation.y = t * .6; });
+  lbls.R.visible = lbls.L.visible = false; qms.forEach(q => q.visible = false);
+  let cp, tg;
+  if (inHook) { poseP(me, { ...PP.point, hy: 0, rz: -.05 }, 0, t); face(me, 'angry', t); me.head.rotation.z = Math.sin(t * 2) * .08; me.brows[0].position.y = .1; cp = V(Math.sin(t * .6) * .4, 1.55, lerp(3.8, 2.6, easeOut(t / 3))); tg = V(0, 1.45, 0); }
+  else if (!inBrain) {
+    let [thR, piR, thL, piL] = handState(t); let shake = 0;
+    if (win(t, T_TRAV, T_BR)) { shake = 1; thR = .5 + Math.sin(t * 9) * .3; piR = .5 + Math.cos(t * 8) * .3; thL = .5 + Math.cos(t * 10) * .3; piL = .5 + Math.sin(t * 7) * .3; }
+    if (t >= T_CTA - .1) { const n = Math.floor((t - T_CTA) / .6) % 2; const k = ease(clamp(((t - T_CTA) % .6) / .14)); const a = n ? k : 1 - k; thR = piL = a; piR = thL = 1 - a; }
+    setHand(hR, thR, piR, t, shake); setHand(hL, thL, piL, t, shake);
+    const bob = Math.sin(t * 2) * .02; hR.g.position.y = hL.g.position.y = 1.55 + bob; hR.g.rotation.z = -.08; hL.g.rotation.z = .08;
+    if (win(t, T_LEV + .3, T_SEM)) { lbls.R.visible = true; lbls.R.position.set(.75, 2.55, .3); lbls.R.scale.setScalar(.3 * pop(t - T_LEV - .3, .3)); }
+    if (win(t, T_AGORA + 1.0, T_SEM)) { lbls.L.visible = true; lbls.L.position.set(-.75, 2.55, .3); lbls.L.scale.setScalar(.3 * pop(t - T_AGORA - 1.0, .3)); }
+    if (win(t, T_TRAV, T_BR)) qms.forEach((q, i) => { q.visible = true; q.position.set(-.45 + i * .45, 2.5 + Math.sin(t * 4 + i) * .06, .3); q.scale.setScalar(.3 * pop(t - T_TRAV - i * .12, .3)); });
+    cp = V(Math.sin(t * .3) * .15, 2.0, 5.6); tg = V(0, 1.8, 0);
+    const lastFast = T_TR[6]; if (win(t, lastFast, T_TRAV + .6)) { cp.x += Math.sin(t * 60) * .03; cp.y += Math.cos(t * 50) * .03; }
+    if (t >= T_CTA - .1) { cp = V(0, 1.6, 6.2); tg = V(0, 2.0, 0); } }
+  else { const k = t - T_BR; brain.rotation.y = Math.sin(t * .4) * .12;
+    const on = (m, t0, base = .55) => { const a = clamp((t - t0) / .4); m.opacity = a * base; m.emissiveIntensity = a * (1.2 + Math.sin(t * 5) * .3); };
+    preM.opacity = motM.opacity = cbM.opacity = 0; preM.emissiveIntensity = motM.emissiveIntensity = cbM.emissiveIntensity = 0;
+    if (t > T_UMA) on(preM, T_UMA); if (t > T_CORTEX - .2) on(motM, T_CORTEX - .2, .8); if (t > T_CEREB - .2) on(cbM, T_CEREB - .2, .5);
+    const scr = t > T_QUANDO; if (scr) { [preM, motM, cbM].forEach((m, i) => { m.emissiveIntensity = Math.max(0, Math.sin(t * 17 + i * 2)) * 2; }); }
+    lPre.visible = t > T_UMA; lPre.scale.setScalar(pop(t - T_UMA, .3)); lMot.visible = t > T_CORTEX - .2; lMot.scale.setScalar(pop(t - T_CORTEX + .2, .3)); lCb.visible = t > T_CEREB - .2; lCb.scale.setScalar(pop(t - T_CEREB + .2, .3));
+    sigs.forEach((s, i) => { s.visible = t > T_CORTEX; const u = (t * .7 + i / 8) % 1; const side = i % 2 ? 1 : -1; const from = V(.1, 2.6, .3), to = V(side * .9, .45, .5); s.position.copy(from.lerp(to, u)); if (scr) s.position.x += Math.sin(t * 30 + i) * .15; });
+    handIcons.forEach((s, i) => { s.visible = t > T_CORTEX; s.position.set((i ? .9 : -.9), .4 + Math.sin(t * 3 + i) * .05, .5); s.material.rotation = scr ? Math.sin(t * 20 + i) * .3 : 0; });
+    cp = V(Math.sin(t * .3) * .4, 1.95, 8.2); tg = V(0, 1.75, 0); cp.add(bw.position); tg.add(bw.position); }
+  cam.position.copy(cp); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  // HTML
+  fixed($('hook'), inHook ? pop(t - .02, .3) * (1 - clamp((t - T_LEV + .25) / .15)) : 0);
+  const tg2 = [$('t1'), $('t2')]; tg2.forEach(e => e.style.opacity = 0);
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  tag(tg2[0], '👍 POLEGAR DIREITO', 'green', win(t, T_LEV, T_AGORA), 540, 330, T_LEV, -3);
+  tag(tg2[0], '🤙 MÍNIMO ESQUERDO', 'blue', win(t, T_AGORA, T_SEM), 540, 330, T_AGORA, 3);
+  tag(tg2[0], '🔄 TROCA OS DEDOS!', '', win(t, T_SEM, T_TR[0] - .1), 540, 330, T_SEM, -3);
+  tag(tg2[0], '⚡ MAIS RÁPIDO!', 'red', win(t, T_RAPIDO - .1, T_TR[3] + .2), 540, 330, T_RAPIDO - .1, 3);
+  tag(tg2[0], '😵 TRAVOU?', 'red', win(t, T_TRAV, T_CONF - .1), 540, 330, T_TRAV, -3);
+  tag(tg2[0], '🤯 VOCÊ SE CONFUNDIU?', 'white small', win(t, T_CONF - .1, T_BR - .1), 540, 330, T_CONF - .1, 3);
+  tag(tg2[0], '🧠 2 MOVIMENTOS AO MESMO TEMPO', 'white small', win(t, T_BR, T_UMA - .1), 540, 330, T_BR, -3);
+  tag(tg2[0], '🌀 ATENÇÃO SOBRECARREGADA', 'red small', win(t, T_QUANDO, T_CTA - .1), 540, 330, T_QUANDO, -3);
+  { const el = $('ctr'); const on = win(t, T_TR[0] - .05, T_TRAV); if (on) { el.textContent = '🔄 TROCAS: ' + T_TR.filter(x => t >= x).length; place(el, true, 540, 1230, 1); } else el.style.opacity = 0; }
+  { const big = $('big'); let last = null; T_TR.forEach(x => { if (t >= x && t < x + .35) last = x; }); if (last !== null && t < T_TRAV) { big.textContent = 'TROCA!'; place(big, true, 540, 560, pop(t - last, .18) * (1 - clamp((t - last - .25) / .1)), (T_TR.indexOf(last) % 2 ? 4 : -4)); } else big.style.opacity = 0; }
+  fixed($('final'), t >= T_CTA - .1 ? pop(t - T_CTA + .1, .35) : 0);
+  $('wm').style.opacity = .85;
+  let wTxt = null, wSt = 0;
+  for (const w2 of ALL) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap2 = $('cap'); const capOff = inHook || t >= T_CTA - .1 || win(t, T_TR[0] - .05, T_TRAV);
+  if (wTxt && !capOff) { cap2.textContent = wTxt.toUpperCase().replace(/[.,!?:…"“”]/g, ''); cap2.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap2, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap2, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>
