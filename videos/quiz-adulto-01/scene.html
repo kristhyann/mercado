@@ -1,0 +1,224 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,'Noto Color Emoji',sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:12px #111;paint-order:stroke fill;text-shadow:0 7px 0 rgba(0,0,0,.35)}
+/* área segura: conteúdo entre x 50 e x 910 (lado direito livre para os botões do app) */
+#top{left:50px;width:860px;top:130px;display:flex;gap:16px;justify-content:center;align-items:center}
+#top span{font-weight:900;font-size:46px;padding:8px 26px;border-radius:40px;border:6px solid #111;box-shadow:0 6px 0 #111;white-space:nowrap}
+#qn{background:#fff;color:#111}
+#lvl{color:#fff}
+#qcard{left:50px;width:860px;top:780px;text-align:center}
+#qcard div{background:#fff;color:#111;font-weight:900;font-size:60px;line-height:1.12;padding:24px 26px;border:8px solid #111;border-radius:34px;box-shadow:0 10px 0 #111}
+#opts{left:50px;width:860px;top:1010px}
+#opts .op{display:flex;align-items:center;gap:20px;background:#2A1A5E;color:#fff;font-weight:900;font-size:54px;height:96px;padding:0 22px;margin-bottom:18px;border:6px solid #111;border-radius:26px;box-shadow:0 8px 0 #111;transition:none}
+#opts .op i{font-style:normal;width:70px;height:70px;border-radius:50%;background:#FFD21F;color:#111;display:flex;align-items:center;justify-content:center;flex:none;font-size:46px;border:5px solid #111}
+#opts .op b{margin-left:auto;font-size:56px}
+#opts .op.ok{background:#16A34A}
+#opts .op.no{background:#DC2626;opacity:.75}
+#rule{left:50px;width:860px;top:820px;text-align:center}
+#rule div{background:#fff;color:#111;font-weight:900;font-size:62px;line-height:1.2;padding:28px;border:9px solid #111;border-radius:40px;box-shadow:0 12px 0 #111}
+#rule em{font-style:normal;color:#7C3AED}
+#ans{text-align:center;font-weight:900;font-size:96px;color:#3DFF8A;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.4);white-space:nowrap}
+#note{left:50px;width:860px;top:1470px;text-align:center}
+#note div{display:inline-block;background:#FFD21F;color:#111;font-weight:900;font-size:44px;padding:10px 26px;border:6px solid #111;border-radius:22px;box-shadow:0 7px 0 #111}
+#cap{left:50px;width:860px;top:1460px;text-align:center;font-weight:900;font-size:96px}
+#cap.hl{color:#FFD21F}
+#final{left:50px;width:860px;top:820px;text-align:center}
+#final div{background:#fff;color:#111;font-weight:900;font-size:72px;line-height:1.14;padding:34px;border:10px solid #111;border-radius:44px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#7C3AED}
+#flash{left:0;top:0;width:1080px;height:1920px;background:#fff}
+#wm{left:40px;top:60px;font-weight:900;font-size:40px;color:#fff;opacity:.85;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="top" class="o"><span id="qn">PERGUNTA 1/10</span><span id="lvl">FÁCIL</span></div>
+<div id="ans" class="o"></div>
+<div id="qcard" class="o"><div id="qtext"></div></div>
+<div id="opts" class="o"></div>
+<div id="rule" class="o"><div>⏱️ <em>3 segundos</em><br>por pergunta<br>✅ Conte seus pontos!</div></div>
+<div id="final" class="o"><div>Quantas você<br>acertou? 🤔<br><em>Comenta aí! 👇</em></div></div>
+<div id="note" class="o"><div></div></div>
+<div id="cap" class="o stroke"></div>
+<div id="flash" class="o"></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, rr } from '/_kit/kit.js';
+await document.fonts.load('900 60px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences, PL = TP.plan; window.DURATION = TP.duration;
+const ALL = SN.flatMap(s => s.words);
+const QZ = [
+  ['Qual é a capital do Brasil?', ['Salvador', 'Brasília', 'Rio de Janeiro', 'São Paulo'], 1, 'BRASÍLIA'],
+  ['Quantos dias tem um ano bissexto?', ['365', '364', '367', '366'], 3, '366 DIAS'],
+  ['Qual é o maior planeta do Sistema Solar?', ['Júpiter', 'Saturno', 'Terra', 'Netuno'], 0, 'JÚPITER'],
+  ['Qual é a fórmula da água?', ['CO₂', 'H₂O₂', 'H₂O', 'O₂'], 2, 'H₂O'],
+  ['Em que ano o Brasil ficou independente?', ['1500', '1822', '1889', '1888'], 1, '1822'],
+  ['Qual é o maior osso do corpo humano?', ['Úmero', 'Tíbia', 'Crânio', 'Fêmur'], 3, 'FÊMUR'],
+  ['Quantos estados tem o Brasil?', ['26', '27', '28', '25'], 0, '26 ESTADOS'],
+  ['Qual metal é o mais comum na crosta da Terra?', ['Ferro', 'Alumínio', 'Cobre', 'Ouro'], 1, 'ALUMÍNIO'],
+  ['Quantos ossos tem um adulto?', ['186', '212', '300', '206'], 3, '206 OSSOS'],
+  ['PEGADINHA: quantos meses têm 28 dias?', ['1', '2', '12', 'Nenhum'], 2, 'TODOS OS 12!'],
+];
+const LV = i => i < 3 ? ['FÁCIL', '#16A34A'] : i < 7 ? ['MÉDIA', '#EAB308'] : i < 9 ? ['DIFÍCIL', '#DC2626'] : ['PEGADINHA', '#9333EA'];
+const NOTE = ['Brasília é a capital desde 1960', 'Fevereiro ganha o dia 29', '', 'Dois hidrogênios + um oxigênio', '7 de setembro de 1822', 'Fica na coxa', 'Mais o Distrito Federal', 'Cerca de 8% da crosta', '', 'Todo mês tem pelo menos 28 dias 😅'];
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .03, 300);
+scene.background = new THREE.Color(0x120826); scene.fog = new THREE.Fog(0x120826, 10, 30);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const MAT = (c, r = .6, ex = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: r, flatShading: true }, ex));
+const NEON = c => new THREE.MeshStandardMaterial({ color: c, emissive: c, emissiveIntensity: 1.6, roughness: .4 });
+const add = (geo, mat, x, y, z, par = scene) => { const m = new THREE.Mesh(geo, typeof mat === 'number' ? MAT(mat) : mat); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; par.add(m); return m; };
+const box = (w, h, d, c, x, y, z, par) => add(new THREE.BoxGeometry(w, h, d), c, x, y, z, par);
+const cyl = (rt, rb, h, c, x, y, z, par, seg = 16) => add(new THREE.CylinderGeometry(rt, rb, h, seg), c, x, y, z, par);
+const sph = (r, c, x, y, z, par, a = 16, b = 12) => add(new THREE.SphereGeometry(r, a, b), c, x, y, z, par);
+const canvasTex = (w, h, paint) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); paint(g, w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.userData = { c, g }; return t; };
+
+// ---------- luz ----------
+scene.add(new THREE.HemisphereLight(0xE8DDFF, 0x2A1050, .9));
+const sun = new THREE.DirectionalLight(0xFFF0FF, 1.6); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, { left: -4, right: 4, top: 4, bottom: -4, near: .5, far: 30 }); sun.shadow.bias = -.0004; scene.add(sun); scene.add(sun.target);
+const pl1 = new THREE.PointLight(0xB04DFF, 18, 9); pl1.position.set(-2, 3, 1.5); scene.add(pl1);
+const pl2 = new THREE.PointLight(0xFF3DB8, 14, 9); pl2.position.set(2, 3, 1.5); scene.add(pl2);
+const okL = new THREE.PointLight(0x30FF80, 0, 6); okL.position.set(0, 2.6, 1.5); scene.add(okL);
+
+// ---------- palco game show ----------
+const stage = grp();
+add(new THREE.CylinderGeometry(2.6, 2.8, .25, 40), MAT(0x2A1460, .5), 0, .12, 0, stage);
+add(new THREE.CylinderGeometry(2.0, 2.0, .27, 40), MAT(0x1A0A40, .4), 0, .13, 0, stage);
+const ring1 = add(new THREE.TorusGeometry(2.62, .04, 8, 64), NEON(0xB04DFF), 0, .26, 0, stage); ring1.rotation.x = Math.PI / 2;
+const ring2 = add(new THREE.TorusGeometry(2.02, .03, 8, 64), NEON(0xFF3DB8), 0, .28, 0, stage); ring2.rotation.x = Math.PI / 2;
+add(new THREE.PlaneGeometry(30, 30), MAT(0x0E0620, .8), 0, 0, 0, stage).rotation.x = -Math.PI / 2;
+box(14, 8, .2, 0x1A0B38, 0, 4, -3.2, stage);
+const neonBars = []; for (let i = 0; i < 7; i++) { const b = box(.08, 5.5, .08, NEON(i % 2 ? 0xFF3DB8 : 0xB04DFF), -3 + i, 3, -3.05, stage); neonBars.push(b); }
+const arch = add(new THREE.TorusGeometry(2.4, .07, 8, 48, Math.PI), NEON(0xB04DFF), 0, 1.3, -2.6, stage);
+const arch2 = add(new THREE.TorusGeometry(2.7, .05, 8, 48, Math.PI), NEON(0xFF3DB8), 0, 1.3, -2.75, stage);
+const spotsG = grp(stage); for (const s of [-1, 1]) { const g = grp(spotsG); g.position.set(s * 2.4, .25, .8); cyl(.18, .22, .3, 0x222233, 0, .15, 0, g); const c = cyl(.13, .13, .02, NEON(0xFFFFFF), 0, .31, 0, g); }
+// cubo de pergunta flutuando
+const qT = canvasTex(256, 256, g => { const gr = g.createLinearGradient(0, 0, 256, 256); gr.addColorStop(0, '#9B5CFF'); gr.addColorStop(1, '#5B21B6'); g.fillStyle = gr; g.fillRect(0, 0, 256, 256); g.strokeStyle = '#E9D5FF'; g.lineWidth = 12; g.strokeRect(10, 10, 236, 236); g.fillStyle = '#fff'; g.font = '900 190px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('?', 128, 142); });
+const cube = add(new THREE.BoxGeometry(.62, .62, .62), new THREE.MeshStandardMaterial({ map: qT, emissive: 0x3A1080, emissiveIntensity: .5, roughness: .35 }), 0, 3.2, -.6);
+const cubeGlow = add(new THREE.TorusGeometry(.52, .02, 6, 40), NEON(0xFFD21F), 0, 3.2, -.6); cubeGlow.castShadow = false;
+
+// ---------- ícones 3D ----------
+const icons = [];
+const mkIcon = f => { const g = grp(); f(g); g.visible = false; icons.push(g); return g; };
+// 1 Congresso Nacional (Brasília)
+mkIcon(g => { const w = MAT(0xF2F2F2, .4); box(1.2, .12, .5, w, 0, .06, 0, g); [-1, 1].forEach(s => box(.14, .9, .12, w, s * .1, .57, -.05, g)); box(.34, .06, .14, w, 0, .82, -.05, g);
+  const bowl = add(new THREE.SphereGeometry(.26, 16, 8, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), w, -.42, .38, .05, g); bowl.material = MAT(0xF2F2F2, .4, { side: THREE.DoubleSide });
+  add(new THREE.SphereGeometry(.2, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2), w, .42, .12, .05, g); });
+// 2 calendário 29 FEV
+const calTex = (top, n, col) => canvasTex(300, 340, c => { c.fillStyle = '#fff'; c.fillRect(0, 0, 300, 340); c.fillStyle = col; c.fillRect(0, 0, 300, 90); c.fillStyle = '#fff'; c.font = '900 60px P'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(top, 150, 48); c.fillStyle = '#111'; c.font = '900 170px P'; c.fillText(n, 150, 220); });
+const mkCal = (top, n, col) => g => { add(new THREE.BoxGeometry(.9, 1.02, .08), new THREE.MeshStandardMaterial({ map: calTex(top, n, col) }), 0, .55, 0, g); [-.22, .22].forEach(x => cyl(.035, .035, .16, 0x777777, x, 1.08, 0, g, 8).rotation.x = Math.PI / 2); };
+mkIcon(mkCal('FEV', '29', '#DC2626'));
+// 3 Júpiter (faixas)
+mkIcon(g => { const t = canvasTex(256, 128, c => { const cols = ['#E8C9A0', '#C98E5A', '#F2DFC2', '#B8743F', '#EBD2AE', '#A8622E', '#F2DFC2', '#C98E5A']; cols.forEach((k, i) => { c.fillStyle = k; c.fillRect(0, i * 16, 256, 16); }); c.fillStyle = '#B5482A'; c.beginPath(); c.ellipse(170, 84, 22, 11, 0, 0, 7); c.fill(); });
+  const p = add(new THREE.SphereGeometry(.55, 24, 16), new THREE.MeshStandardMaterial({ map: t, roughness: .7 }), 0, .6, 0, g); p.rotation.z = .1; g.userData.spin = p; });
+// 4 gota d'água
+mkIcon(g => { const m = MAT(0x38BDF8, .15, { metalness: .1, transparent: true, opacity: .92 }); const s = add(new THREE.SphereGeometry(.38, 20, 14), m, 0, .45, 0, g); add(new THREE.ConeGeometry(.33, .55, 20), m, 0, .9, 0, g); sph(.07, MAT(0xFFFFFF, .1), -.13, .55, .3, g, 8, 6); });
+// 5 bandeira do Brasil (simplificada)
+mkIcon(g => { cyl(.03, .03, 1.5, 0xCCCCCC, -.6, .75, 0, g, 8); const t = canvasTex(400, 280, c => { c.fillStyle = '#009C3B'; c.fillRect(0, 0, 400, 280); c.fillStyle = '#FFDF00'; c.beginPath(); c.moveTo(200, 24); c.lineTo(376, 140); c.lineTo(200, 256); c.lineTo(24, 140); c.closePath(); c.fill(); c.fillStyle = '#002776'; c.beginPath(); c.arc(200, 140, 70, 0, 7); c.fill(); c.strokeStyle = '#fff'; c.lineWidth = 12; c.beginPath(); c.arc(200, 230, 130, -2.1, -1.04); c.stroke(); });
+  const geo = new THREE.PlaneGeometry(1.0, .7, 16, 4); const f = add(geo, new THREE.MeshStandardMaterial({ map: t, side: THREE.DoubleSide, roughness: .6 }), -.08, 1.15, 0, g); g.children.forEach(c => c.position.y -= .35); g.userData.flag = f; g.userData.base = geo.attributes.position.array.slice(); });
+// 6 osso
+mkIcon(g => { const m = MAT(0xF5EEDC, .5); const b = grp(g); b.position.y = .6; b.rotation.z = .5; cyl(.09, .09, .9, m, 0, 0, 0, b, 10); [-1, 1].forEach(s => [-1, 1].forEach(k => sph(.13, m, k * .08, s * .48, 0, b, 10, 8))); });
+// 7 mapa com alfinetes
+mkIcon(g => { const t = canvasTex(320, 320, c => { c.fillStyle = '#A7F3D0'; c.fillRect(0, 0, 320, 320); c.fillStyle = '#34D399'; c.beginPath(); c.moveTo(120, 30); c.lineTo(250, 70); c.lineTo(290, 150); c.lineTo(230, 250); c.lineTo(160, 300); c.lineTo(120, 230); c.lineTo(50, 160); c.lineTo(60, 80); c.closePath(); c.fill(); c.strokeStyle = '#059669'; c.lineWidth = 4; for (let i = 0; i < 5; i++) { c.beginPath(); c.moveTo(60 + i * 45, 60); c.lineTo(90 + i * 35, 280); c.stroke(); } });
+  const m = add(new THREE.BoxGeometry(1.0, 1.0, .04), new THREE.MeshStandardMaterial({ map: t }), 0, .6, 0, g); m.rotation.x = -.35;
+  [[-.2, .8], [.15, .55], [.25, .9], [-.05, .35], [.1, .75]].forEach(([x, y], i) => { const p = grp(g); p.position.set(x, y, .12); cyl(.012, .012, .2, 0x666666, 0, 0, 0, p, 6).rotation.x = Math.PI / 2 - .35; sph(.05, [0xEF4444, 0x3B82F6, 0xF59E0B, 0x8B5CF6, 0xEC4899][i], 0, .03, .1, p, 10, 8); }); });
+// 8 barras de metal (alumínio)
+mkIcon(g => { const m = MAT(0xE5E9F0, .3, { metalness: .35, emissive: 0x444a55, emissiveIntensity: .4 }); const bar = (x, y, z, r) => { const b = add(new THREE.CylinderGeometry(.22, .3, .2, 4), m, x, y, z, g); b.rotation.y = Math.PI / 4 + r; b.scale.set(1.6, 1.9, 1.0); }; bar(-.3, .3, 0, 0); bar(.3, .3, 0, 0); bar(0, .5, 0, 0); g.children.forEach(c => c.scale.multiplyScalar(1.3)); });
+// 9 caveira
+mkIcon(g => { const m = MAT(0xF5EEDC, .5); const s = sph(.42, m, 0, .75, 0, g, 16, 12); s.scale.set(1, .95, 1); box(.4, .25, .32, m, 0, .38, .1, g); const dk = MAT(0x1A1A1A, .6); [-1, 1].forEach(k => { const e = sph(.11, dk, k * .16, .75, .36, g, 10, 8); e.scale.z = .5; }); const n = add(new THREE.ConeGeometry(.05, .1, 3), dk, 0, .58, .4, g); n.rotation.x = Math.PI; for (let i = -2; i <= 2; i++) box(.05, .07, .02, dk, i * .07, .33, .27, g); });
+// 10 calendário 28?
+mkIcon(mkCal('???', '28', '#9333EA'));
+const ICON_Y = 2.45, ICON_Z = .4, ICON_X = .3; const CUBE = V(-.58, 3.05, -.4);
+// cronômetro 3D
+const swT = canvasTex(256, 256, () => {});
+const sw = grp(); sw.visible = false;
+{ const body = cyl(.42, .42, .16, 0xFFD21F, 0, 0, 0, sw, 28); body.rotation.x = Math.PI / 2; cyl(.07, .07, .16, 0xE0A800, 0, .52, 0, sw, 10); box(.18, .06, .1, 0xE0A800, 0, .62, 0, sw);
+  const face = add(new THREE.CircleGeometry(.36, 32), new THREE.MeshBasicMaterial({ map: swT, toneMapped: false }), 0, 0, .085, sw); face.castShadow = false; }
+function paintSW(v, frac) { const g = swT.userData.g; g.clearRect(0, 0, 256, 256); g.fillStyle = '#fff'; g.beginPath(); g.arc(128, 128, 126, 0, 7); g.fill();
+  g.fillStyle = v <= 1 ? '#FF3B5C' : '#7C3AED'; g.beginPath(); g.moveTo(128, 128); g.arc(128, 128, 120, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * frac); g.closePath(); g.globalAlpha = .25; g.fill(); g.globalAlpha = 1;
+  g.fillStyle = '#111'; g.font = '900 150px P'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(String(v), 128, 140); swT.needsUpdate = true; }
+// título 3D (camadas extrudadas)
+const titleG = grp();
+function text3D(lines, w, h, size, col, depth = 10) { const g = grp(titleG); const mk = (fill, stroke) => canvasTex(1024, Math.round(1024 * h / w), c => { c.textAlign = 'center'; c.textBaseline = 'middle'; const lh = c.canvas.height / lines.length; lines.forEach((l, i) => { c.font = `900 ${size}px P`; if (stroke) { c.lineWidth = 26; c.strokeStyle = stroke; c.lineJoin = 'round'; c.strokeText(l[0], 512, lh * (i + .55)); } c.fillStyle = l[1] || fill; c.fillText(l[0], 512, lh * (i + .55)); }); });
+  const front = mk(col, '#111'), back = mk('#2A0F5E', '#2A0F5E');
+  for (let i = depth; i >= 0; i--) { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: i ? back : front, transparent: true, depthWrite: false, toneMapped: false })); m.position.z = -i * .012; m.renderOrder = 10 + depth - i; g.add(m); } return g; }
+const tQuiz = text3D([['QUIZ 3D', '#FFD21F']], 2.6, .75, 230, '#FFD21F', 14); tQuiz.position.set(0, 3.15, .6);
+const tSub = text3D([['PERGUNTAS QUE', '#fff'], ['TODO ADULTO', '#fff'], ['DEVERIA SABER', '#fff']], 2.3, 1.15, 112, '#fff', 8); tSub.position.set(0, 2.25, .6);
+const tOne = text3D([['SÓ 1% ACERTA TODAS', '#3DFF8A']], 2.1, .28, 84, '#3DFF8A', 8); tOne.position.set(0, 1.5, .6);
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s, extra = '') { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)}) ${extra}`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+ev(.05, 'whoosh'); ev(.4, 'clang'); ev(PL.rule, 'pop');
+PL.q.forEach((q, i) => { ev(q.start, 'whoosh'); ev(q.start + .25, 'pop'); ev(q.reveal, 'win'); ev(q.reveal + .02, 'ding'); });
+ev(PL.final, 'whoosh'); ev(PL.final + .3, 'pop'); ev(74.55, 'whoosh');
+// opções HTML
+const optsEl = $('opts'); for (let i = 0; i < 4; i++) { const d = document.createElement('div'); d.className = 'op'; d.innerHTML = `<i>${'ABCD'[i]}</i><span></span><b></b>`; optsEl.appendChild(d); }
+let lastQ = -1;
+function setQ(i) { if (i === lastQ) return; lastQ = i; const [q, o] = QZ[i]; $('qtext').textContent = q; [...optsEl.children].forEach((d, j) => { d.querySelector('span').textContent = o[j]; });
+  $('qn').textContent = `PERGUNTA ${i + 1}/10`; const [lt, lc] = LV(i); $('lvl').textContent = lt; $('lvl').style.background = lc; }
+const TITLE_CAM = t => { const a = .22 - t * .09; return [V(Math.sin(a) * 7.0, 2.5 + t * .05, Math.cos(a) * 7.0), V(0, 2.35, 0)]; };
+
+window.draw = function (t) {
+  // estado
+  const Q = PL.q; let qi = -1; for (let i = 0; i < Q.length; i++) if (t >= Q[i].start) qi = i;
+  const inFinal = t >= PL.final; if (inFinal) qi = -1;
+  const inTitle = t < 3.0, inRule = win(t, 3.0, Q[0].start);
+  // cena 3D
+  cube.rotation.set(t * .6, t * .9, .2); cube.position.copy(CUBE); cube.position.y += Math.sin(t * 2) * .06; cubeGlow.position.copy(cube.position); cubeGlow.rotation.set(Math.PI / 2 + Math.sin(t) * .3, 0, t);
+  neonBars.forEach((b, i) => b.material.emissiveIntensity = 1.0 + .8 * Math.max(0, Math.sin(t * 4 + i)));
+  ring1.material.emissiveIntensity = 1.2 + Math.sin(t * 3) * .4;
+  icons.forEach(g => g.visible = false); sw.visible = false; okL.intensity = 0;
+  titleG.visible = inTitle || t > 74.3; cube.visible = true; cubeGlow.visible = true;
+  let cp, tg;
+  if (titleG.visible) { const tt = t > 74.3 ? (t - 75) : t; const s = t > 74.3 ? ease((t - 74.3) / .7) : 1;
+    [tQuiz, tSub, tOne].forEach((g, j) => { const k = t > 74.3 ? s : 1; g.scale.setScalar(Math.max(.001, k)); g.rotation.y = Math.sin(t * 1.3 + j) * .08; });
+    [cp, tg] = TITLE_CAM(Math.max(0, tt + (t > 74.3 ? 0 : 0))); if (t > 74.3) { const fc = [V(.6, 2.3, 5.4), V(0, 2.1, 0)]; const u = ease((t - 74.3) / .7); [cp, tg] = [fc[0].lerp(TITLE_CAM(0)[0], u), fc[1].lerp(TITLE_CAM(0)[1], u)]; } }
+  else if (inRule) { const k = t - PL.rule; cp = V(Math.sin(t * .2) * 1.2, 2.6, 5.6); tg = V(0, 2.4, 0); }
+  else if (qi >= 0) { const q = Q[qi]; setQ(qi); const k = t - q.start; const ic = icons[qi]; ic.visible = true;
+    const inS = easeOut(clamp(k / .45)); const out = t > q.next - .3 ? ease((t - q.next + .3) / .3) : 0; ic.position.set(lerp(-2.5, ICON_X, inS) + out * 2.5, ICON_Y + Math.sin(t * 2) * .05, ICON_Z); ic.rotation.y = Math.sin(t * 1.4) * .4 + (1 - inS) * 2; ic.scale.setScalar(.85);
+    if (ic.userData.spin) ic.userData.spin.rotation.y = t * .8;
+    if (ic.userData.flag) { const pa = ic.userData.flag.geometry.attributes.position, b = ic.userData.base; for (let v = 0; v < pa.count; v++) { const x = b[v * 3]; pa.array[v * 3 + 2] = Math.sin(x * 6 + t * 5) * .05 * (x + .5); } pa.needsUpdate = true; }
+    const timing = win(t, q.timer, q.reveal); if (timing) { sw.visible = true; const r = q.reveal - t; const v = Math.ceil(r); paintSW(Math.max(1, v), r / 3); sw.position.copy(CUBE); sw.position.z += .5; sw.scale.setScalar(1.05 * pop(t - q.timer, .25) * (1 + Math.max(0, .12 - ((q.reveal - t) % 1)) * 1.5)); cube.visible = false; cubeGlow.visible = false; sw.rotation.set(0, .3, Math.sin(t * 14) * .04); }
+    const rev = t >= q.reveal; if (rev) { okL.intensity = 30 * (1 - clamp((t - q.reveal) / 1.2) * .5); ic.scale.setScalar(.85 * (1 + .15 * pop(t - q.reveal, .3) * (t - q.reveal < .3 ? 1 : 0))); }
+    cp = V(Math.sin(t * .25) * .4, 2.35, rev ? lerp(5.6, 5.2, easeOut(clamp((t - q.reveal) / .5))) : 5.6); tg = V(0, 2.1, 0); }
+  else { const k = t - PL.final; cp = V(Math.sin(t * .3) * .6, 2.4, 5.8 - Math.min(k, 4) * .08); tg = V(0, 2.2, 0); }
+  cam.position.copy(cp); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  sun.position.copy(tg).add(V(2, 6, 4)); sun.target.position.copy(tg);
+  // HTML
+  const showQ = qi >= 0; const q = showQ ? Q[qi] : null;
+  const cardIn = showQ ? easeOut(clamp((t - q.start) / .35)) * (1 - ease(clamp((t - q.next + .3) / .3))) : 0;
+  $('top').style.opacity = showQ ? 1 : 0; $('top').style.transform = 'none';
+  $('qcard').style.opacity = cardIn > 0 ? 1 : 0; $('qcard').style.transform = `translateX(${(1 - cardIn) * -1100}px)`;
+  $('opts').style.opacity = cardIn > 0 ? 1 : 0; $('opts').style.transform = 'none';
+  if (showQ) { [...optsEl.children].forEach((d, j) => { const k = easeOut(clamp((t - q.start - .15 - j * .07) / .3)) * (1 - ease(clamp((t - q.next + .3 - j * .03) / .3))); d.style.transform = `translateX(${(1 - k) * 1100}px)`;
+      const rev = t >= q.reveal, ok = j === QZ[qi][2]; d.className = 'op' + (rev ? (ok ? ' ok' : ' no') : ''); d.querySelector('b').textContent = rev ? (ok ? '✅' : '❌') : ''; if (rev && ok) d.style.transform += ` scale(${1 + .06 * pop(t - q.reveal, .3)})`; }); }
+  { const el = $('ans'); const on = showQ && t >= q.reveal && t < q.next - .2; if (on) { el.textContent = '✅ ' + QZ[qi][3]; place(el, true, 480, 720, pop(t - q.reveal, .3), -3); } else el.style.opacity = 0; }
+  { const el = $('note'); const on = showQ && NOTE[qi] && t >= q.reveal + .1 && t < q.next - .15; el.querySelector('div').textContent = on ? '💡 ' + NOTE[qi] : ''; fixed(el, on ? pop(t - q.reveal - .1, .3) : 0); }
+  fixed($('rule'), inRule ? pop(t - 3.0, .35) * (1 - clamp((t - Q[0].start + .2) / .2)) : 0);
+  fixed($('final'), inFinal && t < 74.3 ? pop(t - PL.final - .1, .4) : 0);
+  $('flash').style.opacity = showQ && win(t, q.reveal, q.reveal + .12) ? .35 * (1 - (t - q.reveal) / .12) : 0; $('flash').style.transform = 'none';
+  $('wm').style.opacity = .85;
+  // legenda: só fora das perguntas (pergunta e alternativas já estão escritas na tela) e na resposta
+  let wTxt = null, wSt = 0;
+  for (const w2 of ALL) if (t >= w2.start - .03 && t < w2.end + .15) { wTxt = w2.w; wSt = w2.start; }
+  const capOn = wTxt && (inRule || inFinal) && t < 74.3;
+  const cap2 = $('cap'); if (capOn) { cap2.textContent = wTxt.toUpperCase().replace(/[.,!?:…"“”]/g, ''); cap2.className = 'o stroke hl'; const k = t - wSt; fixed(cap2, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap2, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>
