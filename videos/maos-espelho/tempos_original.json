@@ -1,0 +1,808 @@
+{
+ "duration": 57.076,
+ "sentences": [
+  {
+   "text": "Vamos descobrir se a sua mão dominante controla tudo!",
+   "start": 0.0,
+   "end": 3.5,
+   "words": [
+    {
+     "w": "Vamos",
+     "start": 0.0,
+     "end": 0.28
+    },
+    {
+     "w": "descobrir",
+     "start": 0.28,
+     "end": 0.76
+    },
+    {
+     "w": "se",
+     "start": 0.76,
+     "end": 1.08
+    },
+    {
+     "w": "a",
+     "start": 1.08,
+     "end": 1.16
+    },
+    {
+     "w": "sua",
+     "start": 1.16,
+     "end": 1.42
+    },
+    {
+     "w": "mão",
+     "start": 1.42,
+     "end": 1.66
+    },
+    {
+     "w": "dominante",
+     "start": 1.66,
+     "end": 2.24
+    },
+    {
+     "w": "controla",
+     "start": 2.24,
+     "end": 3.04
+    },
+    {
+     "w": "tudo!",
+     "start": 3.04,
+     "end": 3.5
+    }
+   ]
+  },
+  {
+   "text": "Coloca as duas mãos na sua frente.",
+   "start": 4.0,
+   "end": 5.76,
+   "words": [
+    {
+     "w": "Coloca",
+     "start": 4.0,
+     "end": 4.3
+    },
+    {
+     "w": "as",
+     "start": 4.3,
+     "end": 4.48
+    },
+    {
+     "w": "duas",
+     "start": 4.48,
+     "end": 4.66
+    },
+    {
+     "w": "mãos",
+     "start": 4.66,
+     "end": 5.1
+    },
+    {
+     "w": "na",
+     "start": 5.1,
+     "end": 5.22
+    },
+    {
+     "w": "sua",
+     "start": 5.22,
+     "end": 5.38
+    },
+    {
+     "w": "frente.",
+     "start": 5.38,
+     "end": 5.76
+    }
+   ]
+  },
+  {
+   "text": "Agora tenta escrever o seu nome no ar com as duas mãos ao mesmo tempo: uma mão escrevendo normal, e a outra fazendo o movimento espelhado, como num espelho.",
+   "start": 6.22,
+   "end": 15.88,
+   "words": [
+    {
+     "w": "Agora",
+     "start": 6.22,
+     "end": 6.4
+    },
+    {
+     "w": "tenta",
+     "start": 6.72,
+     "end": 6.86
+    },
+    {
+     "w": "escrever",
+     "start": 6.86,
+     "end": 7.2
+    },
+    {
+     "w": "o",
+     "start": 7.2,
+     "end": 7.4
+    },
+    {
+     "w": "seu",
+     "start": 7.4,
+     "end": 7.5
+    },
+    {
+     "w": "nome",
+     "start": 7.5,
+     "end": 7.82
+    },
+    {
+     "w": "no",
+     "start": 7.82,
+     "end": 8.04
+    },
+    {
+     "w": "ar",
+     "start": 8.04,
+     "end": 8.26
+    },
+    {
+     "w": "com",
+     "start": 8.26,
+     "end": 8.54
+    },
+    {
+     "w": "as",
+     "start": 8.54,
+     "end": 8.72
+    },
+    {
+     "w": "duas",
+     "start": 8.72,
+     "end": 9.0
+    },
+    {
+     "w": "mãos",
+     "start": 9.0,
+     "end": 9.48
+    },
+    {
+     "w": "ao",
+     "start": 9.48,
+     "end": 9.58
+    },
+    {
+     "w": "mesmo",
+     "start": 9.58,
+     "end": 9.9
+    },
+    {
+     "w": "tempo:",
+     "start": 9.9,
+     "end": 10.36
+    },
+    {
+     "w": "uma",
+     "start": 10.66,
+     "end": 10.86
+    },
+    {
+     "w": "mão",
+     "start": 10.86,
+     "end": 11.12
+    },
+    {
+     "w": "escrevendo",
+     "start": 11.12,
+     "end": 11.58
+    },
+    {
+     "w": "normal,",
+     "start": 11.58,
+     "end": 11.9
+    },
+    {
+     "w": "e",
+     "start": 11.9,
+     "end": 12.48
+    },
+    {
+     "w": "a",
+     "start": 12.48,
+     "end": 12.58
+    },
+    {
+     "w": "outra",
+     "start": 12.58,
+     "end": 12.9
+    },
+    {
+     "w": "fazendo",
+     "start": 12.9,
+     "end": 13.44
+    },
+    {
+     "w": "o",
+     "start": 13.44,
+     "end": 13.58
+    },
+    {
+     "w": "movimento",
+     "start": 13.58,
+     "end": 13.9
+    },
+    {
+     "w": "espelhado,",
+     "start": 13.9,
+     "end": 14.76
+    },
+    {
+     "w": "como",
+     "start": 14.88,
+     "end": 15.2
+    },
+    {
+     "w": "num",
+     "start": 15.2,
+     "end": 15.36
+    },
+    {
+     "w": "espelho.",
+     "start": 15.36,
+     "end": 15.88
+    }
+   ]
+  },
+  {
+   "text": "Valendo!",
+   "start": 16.3,
+   "end": 16.68,
+   "words": [
+    {
+     "w": "Valendo!",
+     "start": 16.3,
+     "end": 16.68
+    }
+   ]
+  },
+  {
+   "text": "Conseguiu? Muita gente se surpreende, porque o espelhado sai mais fácil do que parece.",
+   "start": 17.24,
+   "end": 22.56,
+   "words": [
+    {
+     "w": "Conseguiu?",
+     "start": 17.24,
+     "end": 17.76
+    },
+    {
+     "w": "Muita",
+     "start": 18.22,
+     "end": 18.6
+    },
+    {
+     "w": "gente",
+     "start": 18.6,
+     "end": 18.88
+    },
+    {
+     "w": "se",
+     "start": 18.88,
+     "end": 19.14
+    },
+    {
+     "w": "surpreende,",
+     "start": 19.14,
+     "end": 19.78
+    },
+    {
+     "w": "porque",
+     "start": 19.78,
+     "end": 20.28
+    },
+    {
+     "w": "o",
+     "start": 20.28,
+     "end": 20.36
+    },
+    {
+     "w": "espelhado",
+     "start": 20.36,
+     "end": 20.9
+    },
+    {
+     "w": "sai",
+     "start": 20.9,
+     "end": 21.14
+    },
+    {
+     "w": "mais",
+     "start": 21.14,
+     "end": 21.42
+    },
+    {
+     "w": "fácil",
+     "start": 21.42,
+     "end": 21.9
+    },
+    {
+     "w": "do",
+     "start": 21.9,
+     "end": 22.04
+    },
+    {
+     "w": "que",
+     "start": 22.04,
+     "end": 22.14
+    },
+    {
+     "w": "parece.",
+     "start": 22.14,
+     "end": 22.56
+    }
+   ]
+  },
+  {
+   "text": "Isso acontece porque o seu cérebro tende a mover as duas mãos de forma simétrica. Os dois lados do cérebro conversam o tempo todo por uma ponte de nervos chamada corpo caloso.",
+   "start": 23.0,
+   "end": 34.34,
+   "words": [
+    {
+     "w": "Isso",
+     "start": 23.0,
+     "end": 23.16
+    },
+    {
+     "w": "acontece",
+     "start": 23.16,
+     "end": 23.56
+    },
+    {
+     "w": "porque",
+     "start": 23.56,
+     "end": 24.02
+    },
+    {
+     "w": "o",
+     "start": 24.02,
+     "end": 24.16
+    },
+    {
+     "w": "seu",
+     "start": 24.16,
+     "end": 24.3
+    },
+    {
+     "w": "cérebro",
+     "start": 24.3,
+     "end": 24.88
+    },
+    {
+     "w": "tende",
+     "start": 24.88,
+     "end": 25.32
+    },
+    {
+     "w": "a",
+     "start": 25.32,
+     "end": 25.4
+    },
+    {
+     "w": "mover",
+     "start": 25.4,
+     "end": 25.58
+    },
+    {
+     "w": "as",
+     "start": 25.58,
+     "end": 25.86
+    },
+    {
+     "w": "duas",
+     "start": 25.86,
+     "end": 26.12
+    },
+    {
+     "w": "mãos",
+     "start": 26.12,
+     "end": 26.6
+    },
+    {
+     "w": "de",
+     "start": 26.6,
+     "end": 26.7
+    },
+    {
+     "w": "forma",
+     "start": 26.7,
+     "end": 26.98
+    },
+    {
+     "w": "simétrica.",
+     "start": 26.98,
+     "end": 27.78
+    },
+    {
+     "w": "Os",
+     "start": 27.78,
+     "end": 28.3
+    },
+    {
+     "w": "dois",
+     "start": 28.3,
+     "end": 28.52
+    },
+    {
+     "w": "lados",
+     "start": 28.52,
+     "end": 28.84
+    },
+    {
+     "w": "do",
+     "start": 28.84,
+     "end": 29.04
+    },
+    {
+     "w": "cérebro",
+     "start": 29.04,
+     "end": 29.54
+    },
+    {
+     "w": "conversam",
+     "start": 29.54,
+     "end": 30.28
+    },
+    {
+     "w": "o",
+     "start": 30.28,
+     "end": 30.46
+    },
+    {
+     "w": "tempo",
+     "start": 30.46,
+     "end": 30.72
+    },
+    {
+     "w": "todo",
+     "start": 30.72,
+     "end": 31.12
+    },
+    {
+     "w": "por",
+     "start": 31.12,
+     "end": 31.54
+    },
+    {
+     "w": "uma",
+     "start": 31.54,
+     "end": 31.7
+    },
+    {
+     "w": "ponte",
+     "start": 31.7,
+     "end": 32.1
+    },
+    {
+     "w": "de",
+     "start": 32.1,
+     "end": 32.28
+    },
+    {
+     "w": "nervos",
+     "start": 32.28,
+     "end": 32.7
+    },
+    {
+     "w": "chamada",
+     "start": 32.7,
+     "end": 33.18
+    },
+    {
+     "w": "corpo",
+     "start": 33.18,
+     "end": 33.7
+    },
+    {
+     "w": "caloso.",
+     "start": 33.7,
+     "end": 34.34
+    }
+   ]
+  },
+  {
+   "text": "Agora o nível difícil: escreve o nome com as duas mãos indo pro mesmo lado.",
+   "start": 34.72,
+   "end": 40.1,
+   "words": [
+    {
+     "w": "Agora",
+     "start": 34.72,
+     "end": 35.06
+    },
+    {
+     "w": "o",
+     "start": 35.24,
+     "end": 35.34
+    },
+    {
+     "w": "nível",
+     "start": 35.34,
+     "end": 35.58
+    },
+    {
+     "w": "difícil:",
+     "start": 35.58,
+     "end": 35.98
+    },
+    {
+     "w": "escreve",
+     "start": 36.62,
+     "end": 37.08
+    },
+    {
+     "w": "o",
+     "start": 37.08,
+     "end": 37.18
+    },
+    {
+     "w": "nome",
+     "start": 37.18,
+     "end": 37.44
+    },
+    {
+     "w": "com",
+     "start": 37.44,
+     "end": 37.7
+    },
+    {
+     "w": "as",
+     "start": 37.7,
+     "end": 37.9
+    },
+    {
+     "w": "duas",
+     "start": 37.9,
+     "end": 38.16
+    },
+    {
+     "w": "mãos",
+     "start": 38.16,
+     "end": 38.72
+    },
+    {
+     "w": "indo",
+     "start": 38.72,
+     "end": 39.0
+    },
+    {
+     "w": "pro",
+     "start": 39.0,
+     "end": 39.34
+    },
+    {
+     "w": "mesmo",
+     "start": 39.34,
+     "end": 39.62
+    },
+    {
+     "w": "lado.",
+     "start": 39.62,
+     "end": 40.1
+    }
+   ]
+  },
+  {
+   "text": "Travou, né? Aí o cérebro precisa coordenar dois movimentos diferentes ao mesmo tempo, e a mão dominante quer mandar em tudo.",
+   "start": 40.58,
+   "end": 48.34,
+   "words": [
+    {
+     "w": "Travou,",
+     "start": 40.58,
+     "end": 41.08
+    },
+    {
+     "w": "né?",
+     "start": 41.2,
+     "end": 41.3
+    },
+    {
+     "w": "Aí",
+     "start": 41.74,
+     "end": 42.0
+    },
+    {
+     "w": "o",
+     "start": 42.08,
+     "end": 42.24
+    },
+    {
+     "w": "cérebro",
+     "start": 42.24,
+     "end": 42.66
+    },
+    {
+     "w": "precisa",
+     "start": 42.66,
+     "end": 42.96
+    },
+    {
+     "w": "coordenar",
+     "start": 42.96,
+     "end": 43.62
+    },
+    {
+     "w": "dois",
+     "start": 43.62,
+     "end": 43.96
+    },
+    {
+     "w": "movimentos",
+     "start": 43.96,
+     "end": 44.54
+    },
+    {
+     "w": "diferentes",
+     "start": 44.54,
+     "end": 45.08
+    },
+    {
+     "w": "ao",
+     "start": 45.08,
+     "end": 45.4
+    },
+    {
+     "w": "mesmo",
+     "start": 45.4,
+     "end": 45.6
+    },
+    {
+     "w": "tempo,",
+     "start": 45.6,
+     "end": 46.06
+    },
+    {
+     "w": "e",
+     "start": 46.3,
+     "end": 46.48
+    },
+    {
+     "w": "a",
+     "start": 46.48,
+     "end": 46.56
+    },
+    {
+     "w": "mão",
+     "start": 46.56,
+     "end": 46.74
+    },
+    {
+     "w": "dominante",
+     "start": 46.74,
+     "end": 47.3
+    },
+    {
+     "w": "quer",
+     "start": 47.3,
+     "end": 47.58
+    },
+    {
+     "w": "mandar",
+     "start": 47.58,
+     "end": 47.9
+    },
+    {
+     "w": "em",
+     "start": 47.9,
+     "end": 48.08
+    },
+    {
+     "w": "tudo.",
+     "start": 48.08,
+     "end": 48.34
+    }
+   ]
+  },
+  {
+   "text": "E aí, qual foi mais difícil pra você? Comenta aqui embaixo, e segue o olhaso três dê pra mais desafios!",
+   "start": 48.84,
+   "end": 55.52,
+   "words": [
+    {
+     "w": "E",
+     "start": 48.84,
+     "end": 48.94
+    },
+    {
+     "w": "aí,",
+     "start": 48.94,
+     "end": 49.12
+    },
+    {
+     "w": "qual",
+     "start": 49.46,
+     "end": 49.56
+    },
+    {
+     "w": "foi",
+     "start": 49.56,
+     "end": 49.88
+    },
+    {
+     "w": "mais",
+     "start": 49.88,
+     "end": 50.12
+    },
+    {
+     "w": "difícil",
+     "start": 50.12,
+     "end": 50.56
+    },
+    {
+     "w": "pra",
+     "start": 50.56,
+     "end": 50.76
+    },
+    {
+     "w": "você?",
+     "start": 50.76,
+     "end": 51.08
+    },
+    {
+     "w": "Comenta",
+     "start": 51.46,
+     "end": 51.78
+    },
+    {
+     "w": "aqui",
+     "start": 51.78,
+     "end": 51.94
+    },
+    {
+     "w": "embaixo,",
+     "start": 51.94,
+     "end": 52.26
+    },
+    {
+     "w": "e",
+     "start": 52.26,
+     "end": 52.74
+    },
+    {
+     "w": "segue",
+     "start": 52.74,
+     "end": 53.12
+    },
+    {
+     "w": "o",
+     "start": 53.12,
+     "end": 53.26
+    },
+    {
+     "w": "olhaso",
+     "start": 53.26,
+     "end": 53.58
+    },
+    {
+     "w": "três",
+     "start": 53.58,
+     "end": 53.9
+    },
+    {
+     "w": "dê",
+     "start": 53.9,
+     "end": 54.34
+    },
+    {
+     "w": "pra",
+     "start": 54.34,
+     "end": 54.54
+    },
+    {
+     "w": "mais",
+     "start": 54.54,
+     "end": 54.94
+    },
+    {
+     "w": "desafios!",
+     "start": 54.94,
+     "end": 55.52
+    }
+   ]
+  }
+ ]
+}
