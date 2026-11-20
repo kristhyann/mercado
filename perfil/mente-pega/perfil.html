@@ -1,0 +1,64 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>html,body{margin:0;width:1080px;height:1080px;overflow:hidden;background:#000}canvas{position:absolute;left:0;top:0}</style></head><body>
+<script type="importmap">{"imports":{"three":"/videos/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+const S = 1080;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(S, S); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+// fundo: degradê com raios de sol
+const bgC = document.createElement('canvas'); bgC.width = bgC.height = 1024; const g = bgC.getContext('2d');
+const rg = g.createRadialGradient(512, 470, 40, 512, 512, 720); rg.addColorStop(0, '#FFE066'); rg.addColorStop(.35, '#FF8A3D'); rg.addColorStop(.75, '#E8366F'); rg.addColorStop(1, '#7C3AED'); g.fillStyle = rg; g.fillRect(0, 0, 1024, 1024);
+g.save(); g.translate(512, 470); g.globalAlpha = .13; g.fillStyle = '#fff'; for (let i = 0; i < 18; i++) { g.rotate(Math.PI * 2 / 18); g.beginPath(); g.moveTo(0, 0); g.lineTo(-90, -900); g.lineTo(90, -900); g.closePath(); g.fill(); } g.restore();
+const bgT = new THREE.CanvasTexture(bgC); bgT.colorSpace = THREE.SRGBColorSpace; scene.background = bgT;
+const cam = new THREE.PerspectiveCamera(30, 1, .1, 100); cam.position.set(0, .2, 7.4); cam.lookAt(0, .1, 0);
+scene.add(new THREE.HemisphereLight(0xFFF4FA, 0x6A3A8A, 1.1));
+const key = new THREE.DirectionalLight(0xFFF2E0, 2.4); key.position.set(2.5, 4, 5); key.castShadow = true; key.shadow.mapSize.set(2048, 2048); Object.assign(key.shadow.camera, { left: -3, right: 3, top: 3, bottom: -3 }); key.shadow.bias = -.0005; scene.add(key);
+const rim = new THREE.DirectionalLight(0xFFD0F0, 1.4); rim.position.set(-3, 2, -3); scene.add(rim);
+const M = (c, r = .55, ex = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: r, flatShading: true }, ex));
+const add = (geo, mat, x, y, z, par = scene) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; par.add(m); return m; };
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647; const rr = (a, b) => a + (b - a) * rnd();
+// ---------- cérebro mascote ----------
+const brain = new THREE.Group(); scene.add(brain); brain.rotation.set(.08, -.18, .04);
+const pink = M(0xFF8FB8, .5), pinkD = M(0xF06A9C, .55);
+const core = add(new THREE.IcosahedronGeometry(1, 2), pink, 0, 0, 0, brain); core.scale.set(1.18, .92, .95);
+// dobras (giros)
+for (let i = 0; i < 70; i++) { const a = rr(0, Math.PI * 2), b = rr(-.15, 1); const p = new THREE.Vector3(Math.cos(a) * Math.sqrt(1 - b * b) * 1.12, b * .86, Math.sin(a) * Math.sqrt(1 - b * b) * .9);
+  if (p.z > .35 && p.y < .45 && Math.abs(p.x) < .85) continue; // deixa o rosto liso
+  const s = add(new THREE.CapsuleGeometry(.17, .32, 3, 6), i % 3 ? pink : pinkD, p.x, p.y, p.z, brain); s.lookAt(p.clone().multiplyScalar(2)); s.rotateX(Math.PI / 2); s.rotateZ(rr(0, 3)); }
+// sulco central
+const groove = add(new THREE.BoxGeometry(.06, .5, 1.6), pinkD, 0, .8, -.05, brain); groove.rotation.x = .1;
+// olhos
+const white = M(0xFFFFFF, .25), black = M(0x141018, .2), shine = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
+[-1, 1].forEach(s => { const e = add(new THREE.SphereGeometry(.3, 20, 16), white, s * .36, .12, .86, brain); e.scale.set(1, 1.15, .7);
+  const p = add(new THREE.SphereGeometry(.15, 16, 12), black, s * .36 + s * .03, .08, 1.06, brain); p.scale.set(1, 1.15, .6);
+  add(new THREE.SphereGeometry(.05, 10, 8), shine, s * .36 + .06, .16, 1.13, brain);
+  const br = add(new THREE.BoxGeometry(.3, .06, .06), black, s * .38, .58, .9, brain); br.rotation.z = s * -.1; });
+// boca sorriso aberto
+const mouth = add(new THREE.SphereGeometry(.24, 18, 12, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), M(0x7A1E3A, .5), 0, -.28, .9, brain); mouth.scale.set(1.15, .9, .5); mouth.rotation.x = -.15;
+add(new THREE.SphereGeometry(.12, 12, 8), M(0xFF5A7A, .5), 0, -.44, .95, brain).scale.set(1.2, .5, .5);
+add(new THREE.BoxGeometry(.38, .07, .05), white, 0, -.31, 1.0, brain);
+[-1, 1].forEach(s => add(new THREE.SphereGeometry(.1, 10, 8), M(0xFF5A8A, .6, { transparent: true, opacity: .8 }), s * .62, -.12, .78, brain).scale.set(1.2, .7, .4));
+// bracinhos + luvas
+const glove = M(0xFFFFFF, .4);
+const armR = new THREE.Group(); brain.add(armR); armR.position.set(1.05, -.35, .3); add(new THREE.CylinderGeometry(.07, .07, .55, 8), pinkD, 0, .27, 0, armR); add(new THREE.SphereGeometry(.15, 12, 10), glove, 0, .58, 0, armR); armR.rotation.z = -.55;
+const armL = new THREE.Group(); brain.add(armL); armL.position.set(-1.05, -.35, .3); add(new THREE.CylinderGeometry(.07, .07, .5, 8), pinkD, 0, -.25, 0, armL); add(new THREE.SphereGeometry(.15, 12, 10), glove, 0, -.52, 0, armL); armL.rotation.z = -.5;
+// "?" amarelo 3D
+const qShape = (() => { const c = document.createElement('canvas'); return c; })();
+const qm = new THREE.Group(); scene.add(qm); qm.position.set(.98, .82, .5); qm.rotation.set(0, -.25, .12); qm.scale.setScalar(1.15);
+const yel = M(0xFFD21F, .35, { metalness: .1 }), yelD = M(0xE0A800, .4);
+const qPath = new THREE.CatmullRomCurve3([[-.24, .28], [-.2, .44], [-.05, .54], [.13, .52], [.24, .4], [.22, .26], [.1, .16], [0, .06], [0, -.1]].map(([x, y]) => new THREE.Vector3(x, y, 0)));
+add(new THREE.TubeGeometry(qPath, 48, .085, 12, false), yel, 0, 0, 0, qm); add(new THREE.SphereGeometry(.085, 12, 10), yel, -.24, .28, 0, qm); add(new THREE.SphereGeometry(.085, 12, 10), yel, 0, -.1, 0, qm);
+add(new THREE.SphereGeometry(.11, 14, 10), yel, 0, -.36, 0, qm);
+// faíscas
+const star = (x, y, z, s, c) => { const m = add(new THREE.OctahedronGeometry(.1, 0), M(c, .3, { emissive: c, emissiveIntensity: .35 }), x, y, z); m.scale.set(s, s * 1.6, s * .5); m.rotation.z = rr(-.3, .3); };
+star(-1.3, .95, .2, 1.1, 0xFFFFFF); star(-1.0, 1.3, .1, .6, 0xFFE066); star(1.45, -.3, .3, .7, 0xFFFFFF); star(-1.5, -.15, .2, .55, 0xFFE066);
+// sombra no "chão" invisível
+const sh = new THREE.Mesh(new THREE.CircleGeometry(1.3, 32), new THREE.ShadowMaterial({ opacity: .25 })); sh.rotation.x = -Math.PI / 2; sh.position.y = -1.15; sh.receiveShadow = true; scene.add(sh);
+renderer.render(scene, cam);
+window.ready = true;
+</script></body></html>
