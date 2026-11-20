@@ -5,7 +5,10 @@
 
 ## Quiz (perfil Mente Pega) — princípios fixos
 Quiz prende porque o espectador participa: pensa na resposta, quer saber se acertou e comenta a pontuação → retenção, replays e comentários. O visual 3D (cenário, cronômetro animado, cartas girando) diferencia dos quizzes de slide.
-- **Formato fixo e reconhecível:** mesma vinheta, mesmo cronômetro, mesmas cores (acerto verde, erro vermelho). Base: `videos/quiz-adulto-01/scene.html` (palco neon roxo, cubo "?", cronômetro 3D, contador "Pergunta X/10").
+- **Formato fixo e reconhecível:** mesma estrutura, mesmo cronômetro, mesmas cores de resposta (acerto verde, erro vermelho), mesmo layout (contador "Pergunta X/10", cartão da pergunta, A–D). Base: `videos/quiz-adulto-01/scene.html`.
+- **Fundo/cenário DIFERENTE a cada quiz:** trocar a paleta do palco, das luzes neon e do fundo em todo vídeo novo, para nenhum ficar igual ao anterior. Usar cores vibrantes e atraentes (alto contraste, saturadas, degradês), sem usar verde puro nem vermelho puro no fundo para não confundir com acerto/erro. Registrar a paleta usada abaixo e não repetir a do vídeo anterior.
+  - Paletas sugeridas: 1) roxo + rosa neon · 2) azul elétrico + ciano · 3) laranja pôr do sol + magenta · 4) turquesa + coral · 5) azul-marinho + dourado · 6) lilás + azul-bebê (pastel vibrante) · 7) índigo + amarelo limão · 8) pink + laranja (candy).
+  - Usadas: `quiz-adulto-01` = 1 (roxo + rosa neon) · `quiz-escola-01` = 1 (roxo + rosa neon).
 - **Pausa para pensar:** toda pergunta tem 3 s de cronômetro (5 s nos desafios visuais), sem narração durante a pausa.
 - **Dificuldade crescente:** começa fácil e termina difícil; a última pode ser pegadinha que gere discussão.
 - **Chamada final:** "Quantas você acertou? Comenta aí!" + Segue @mentepega + corte que emenda no começo (loop).
