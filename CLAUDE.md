@@ -2,6 +2,7 @@
 
 - **Marca d'água obrigatória:** todo vídeo (e capa) leva `@olhaso_3D` visível, discreto, sem cobrir o objeto nem a legenda.
 - **Exceção — vídeos de QUIZ:** vão para o perfil **Mente Pega**, então a marca d'água (vídeo, capa e CTA) é `@mentepega`, não `@olhaso_3D`. Foto de perfil/mascote em `perfil/mente-pega/`.
+- **CTA obrigatório em TODO vídeo:** pedir para **seguir** (com o @ do perfil) **e comentar** (com uma pergunta que puxe resposta), no mínimo no cartão final.
 - A pessoa gera a voz em outra plataforma (ElevenLabs). Entregar só o roteiro em texto (`roteiro_voz.txt`) e esperar o mp3; depois montar o vídeo em cima do áudio dela.
 - Formato padrão: vertical 1080x1920, 3D low-poly colorido, legenda palavra por palavra (Poppins), estilo "construa do zero" (skill `construa-do-zero`).
 - Kit reutilizável em `videos/_kit/` (render.js, kit.js, pessoas.js, scripts/).
