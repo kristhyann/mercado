@@ -1,0 +1,931 @@
+{
+ "duration": 66.349,
+ "sentences": [
+  {
+   "text": "Você acerta astronomia nível impossível? Dez perguntas!",
+   "start": 0.0,
+   "end": 4.16,
+   "words": [
+    {
+     "w": "Você",
+     "start": 0.0,
+     "end": 0.26
+    },
+    {
+     "w": "acerta",
+     "start": 0.26,
+     "end": 0.7
+    },
+    {
+     "w": "astronomia",
+     "start": 0.86,
+     "end": 1.44
+    },
+    {
+     "w": "nível",
+     "start": 1.44,
+     "end": 1.84
+    },
+    {
+     "w": "impossível?",
+     "start": 1.84,
+     "end": 2.66
+    },
+    {
+     "w": "Dez",
+     "start": 3.04,
+     "end": 3.48
+    },
+    {
+     "w": "perguntas!",
+     "start": 3.48,
+     "end": 4.16
+    }
+   ]
+  },
+  {
+   "text": "Você tem cinco segundos pra cada pergunta. Conta seus pontos!",
+   "start": 4.46,
+   "end": 8.2,
+   "words": [
+    {
+     "w": "Você",
+     "start": 4.46,
+     "end": 4.72
+    },
+    {
+     "w": "tem",
+     "start": 4.72,
+     "end": 4.9
+    },
+    {
+     "w": "cinco",
+     "start": 4.9,
+     "end": 5.38
+    },
+    {
+     "w": "segundos",
+     "start": 5.38,
+     "end": 5.86
+    },
+    {
+     "w": "pra",
+     "start": 5.86,
+     "end": 6.12
+    },
+    {
+     "w": "cada",
+     "start": 6.12,
+     "end": 6.44
+    },
+    {
+     "w": "pergunta.",
+     "start": 6.44,
+     "end": 6.9
+    },
+    {
+     "w": "Conta",
+     "start": 7.36,
+     "end": 7.68
+    },
+    {
+     "w": "seus",
+     "start": 7.68,
+     "end": 7.84
+    },
+    {
+     "w": "pontos!",
+     "start": 7.84,
+     "end": 8.2
+    }
+   ]
+  },
+  {
+   "text": "Quanto tempo a luz do Sol leva pra chegar até a Terra?",
+   "start": 9.04,
+   "end": 11.94,
+   "words": [
+    {
+     "w": "Quanto",
+     "start": 9.04,
+     "end": 9.22
+    },
+    {
+     "w": "tempo",
+     "start": 9.22,
+     "end": 9.52
+    },
+    {
+     "w": "a",
+     "start": 9.52,
+     "end": 9.72
+    },
+    {
+     "w": "luz",
+     "start": 9.72,
+     "end": 9.84
+    },
+    {
+     "w": "do",
+     "start": 9.84,
+     "end": 10.0
+    },
+    {
+     "w": "Sol",
+     "start": 10.0,
+     "end": 10.32
+    },
+    {
+     "w": "leva",
+     "start": 10.32,
+     "end": 10.68
+    },
+    {
+     "w": "pra",
+     "start": 10.68,
+     "end": 10.9
+    },
+    {
+     "w": "chegar",
+     "start": 10.9,
+     "end": 11.18
+    },
+    {
+     "w": "até",
+     "start": 11.18,
+     "end": 11.54
+    },
+    {
+     "w": "a",
+     "start": 11.54,
+     "end": 11.66
+    },
+    {
+     "w": "Terra?",
+     "start": 11.66,
+     "end": 11.94
+    }
+   ]
+  },
+  {
+   "text": "Cerca de oito minutos!",
+   "start": 12.4,
+   "end": 13.6,
+   "words": [
+    {
+     "w": "Cerca",
+     "start": 12.4,
+     "end": 12.66
+    },
+    {
+     "w": "de",
+     "start": 12.66,
+     "end": 12.86
+    },
+    {
+     "w": "oito",
+     "start": 12.86,
+     "end": 13.24
+    },
+    {
+     "w": "minutos!",
+     "start": 13.24,
+     "end": 13.6
+    }
+   ]
+  },
+  {
+   "text": "Qual é a idade aproximada do Universo?",
+   "start": 14.24,
+   "end": 16.22,
+   "words": [
+    {
+     "w": "Qual",
+     "start": 14.24,
+     "end": 14.38
+    },
+    {
+     "w": "é",
+     "start": 14.38,
+     "end": 14.54
+    },
+    {
+     "w": "a",
+     "start": 14.54,
+     "end": 14.62
+    },
+    {
+     "w": "idade",
+     "start": 14.62,
+     "end": 14.98
+    },
+    {
+     "w": "aproximada",
+     "start": 14.98,
+     "end": 15.68
+    },
+    {
+     "w": "do",
+     "start": 15.68,
+     "end": 15.88
+    },
+    {
+     "w": "Universo?",
+     "start": 15.88,
+     "end": 16.22
+    }
+   ]
+  },
+  {
+   "text": "Treze vírgula oito bilhões de anos!",
+   "start": 16.82,
+   "end": 19.26,
+   "words": [
+    {
+     "w": "Treze",
+     "start": 16.82,
+     "end": 17.18
+    },
+    {
+     "w": "vírgula",
+     "start": 17.18,
+     "end": 17.56
+    },
+    {
+     "w": "oito",
+     "start": 17.56,
+     "end": 17.94
+    },
+    {
+     "w": "bilhões",
+     "start": 17.94,
+     "end": 18.72
+    },
+    {
+     "w": "de",
+     "start": 18.72,
+     "end": 18.98
+    },
+    {
+     "w": "anos!",
+     "start": 18.98,
+     "end": 19.26
+    }
+   ]
+  },
+  {
+   "text": "Qual é o maior vulcão do Sistema Solar?",
+   "start": 19.76,
+   "end": 21.8,
+   "words": [
+    {
+     "w": "Qual",
+     "start": 19.76,
+     "end": 19.92
+    },
+    {
+     "w": "é",
+     "start": 19.92,
+     "end": 20.06
+    },
+    {
+     "w": "o",
+     "start": 20.06,
+     "end": 20.18
+    },
+    {
+     "w": "maior",
+     "start": 20.18,
+     "end": 20.42
+    },
+    {
+     "w": "vulcão",
+     "start": 20.42,
+     "end": 20.98
+    },
+    {
+     "w": "do",
+     "start": 20.98,
+     "end": 21.12
+    },
+    {
+     "w": "Sistema",
+     "start": 21.12,
+     "end": 21.44
+    },
+    {
+     "w": "Solar?",
+     "start": 21.44,
+     "end": 21.8
+    }
+   ]
+  },
+  {
+   "text": "Monte Olimpo, em Marte!",
+   "start": 22.22,
+   "end": 23.88,
+   "words": [
+    {
+     "w": "Monte",
+     "start": 22.22,
+     "end": 22.52
+    },
+    {
+     "w": "Olimpo,",
+     "start": 22.52,
+     "end": 23.04
+    },
+    {
+     "w": "em",
+     "start": 23.2,
+     "end": 23.32
+    },
+    {
+     "w": "Marte!",
+     "start": 23.32,
+     "end": 23.88
+    }
+   ]
+  },
+  {
+   "text": "A quantos anos-luz fica a estrela Próxima Centauri?",
+   "start": 24.14,
+   "end": 27.24,
+   "words": [
+    {
+     "w": "A",
+     "start": 24.14,
+     "end": 24.26
+    },
+    {
+     "w": "quantos",
+     "start": 24.26,
+     "end": 24.7
+    },
+    {
+     "w": "anos-luz",
+     "start": 24.7,
+     "end": 25.18
+    },
+    {
+     "w": "fica",
+     "start": 25.18,
+     "end": 25.56
+    },
+    {
+     "w": "a",
+     "start": 25.56,
+     "end": 25.68
+    },
+    {
+     "w": "estrela",
+     "start": 25.68,
+     "end": 26.08
+    },
+    {
+     "w": "Próxima",
+     "start": 26.08,
+     "end": 26.52
+    },
+    {
+     "w": "Centauri?",
+     "start": 26.52,
+     "end": 27.24
+    }
+   ]
+  },
+  {
+   "text": "Quatro vírgula dois anos-luz!",
+   "start": 27.52,
+   "end": 29.26,
+   "words": [
+    {
+     "w": "Quatro",
+     "start": 27.52,
+     "end": 27.84
+    },
+    {
+     "w": "vírgula",
+     "start": 27.84,
+     "end": 28.28
+    },
+    {
+     "w": "dois",
+     "start": 28.28,
+     "end": 28.7
+    },
+    {
+     "w": "anos-luz!",
+     "start": 28.7,
+     "end": 29.26
+    }
+   ]
+  },
+  {
+   "text": "Verdadeiro ou falso: em Vênus, o Sol nasce no oeste.",
+   "start": 29.26,
+   "end": 33.84,
+   "words": [
+    {
+     "w": "Verdadeiro",
+     "start": 29.26,
+     "end": 30.36
+    },
+    {
+     "w": "ou",
+     "start": 30.36,
+     "end": 30.46
+    },
+    {
+     "w": "falso:",
+     "start": 30.46,
+     "end": 30.98
+    },
+    {
+     "w": "em",
+     "start": 31.18,
+     "end": 31.46
+    },
+    {
+     "w": "Vênus,",
+     "start": 31.46,
+     "end": 31.78
+    },
+    {
+     "w": "o",
+     "start": 32.22,
+     "end": 32.3
+    },
+    {
+     "w": "Sol",
+     "start": 32.3,
+     "end": 32.62
+    },
+    {
+     "w": "nasce",
+     "start": 32.62,
+     "end": 33.16
+    },
+    {
+     "w": "no",
+     "start": 33.16,
+     "end": 33.36
+    },
+    {
+     "w": "oeste.",
+     "start": 33.36,
+     "end": 33.84
+    }
+   ]
+  },
+  {
+   "text": "Verdadeiro!",
+   "start": 34.28,
+   "end": 35.02,
+   "words": [
+    {
+     "w": "Verdadeiro!",
+     "start": 34.28,
+     "end": 35.02
+    }
+   ]
+  },
+  {
+   "text": "Em qual planeta um dia dura mais que um ano?",
+   "start": 35.3,
+   "end": 38.16,
+   "words": [
+    {
+     "w": "Em",
+     "start": 35.3,
+     "end": 35.42
+    },
+    {
+     "w": "qual",
+     "start": 35.42,
+     "end": 35.58
+    },
+    {
+     "w": "planeta",
+     "start": 35.58,
+     "end": 35.98
+    },
+    {
+     "w": "um",
+     "start": 35.98,
+     "end": 36.36
+    },
+    {
+     "w": "dia",
+     "start": 36.36,
+     "end": 36.7
+    },
+    {
+     "w": "dura",
+     "start": 36.7,
+     "end": 37.08
+    },
+    {
+     "w": "mais",
+     "start": 37.08,
+     "end": 37.58
+    },
+    {
+     "w": "que",
+     "start": 37.58,
+     "end": 37.78
+    },
+    {
+     "w": "um",
+     "start": 37.78,
+     "end": 37.92
+    },
+    {
+     "w": "ano?",
+     "start": 37.92,
+     "end": 38.16
+    }
+   ]
+  },
+  {
+   "text": "Vênus!",
+   "start": 38.5,
+   "end": 38.92,
+   "words": [
+    {
+     "w": "Vênus!",
+     "start": 38.5,
+     "end": 38.92
+    }
+   ]
+  },
+  {
+   "text": "Qual planeta tem mais luas confirmadas?",
+   "start": 39.36,
+   "end": 41.62,
+   "words": [
+    {
+     "w": "Qual",
+     "start": 39.36,
+     "end": 39.54
+    },
+    {
+     "w": "planeta",
+     "start": 39.54,
+     "end": 39.92
+    },
+    {
+     "w": "tem",
+     "start": 39.92,
+     "end": 40.24
+    },
+    {
+     "w": "mais",
+     "start": 40.24,
+     "end": 40.64
+    },
+    {
+     "w": "luas",
+     "start": 40.64,
+     "end": 41.02
+    },
+    {
+     "w": "confirmadas?",
+     "start": 41.02,
+     "end": 41.62
+    }
+   ]
+  },
+  {
+   "text": "Saturno!",
+   "start": 42.06,
+   "end": 42.76,
+   "words": [
+    {
+     "w": "Saturno!",
+     "start": 42.06,
+     "end": 42.76
+    }
+   ]
+  },
+  {
+   "text": "Qual planeta tem os ventos mais rápidos do Sistema Solar?",
+   "start": 42.98,
+   "end": 46.28,
+   "words": [
+    {
+     "w": "Qual",
+     "start": 42.98,
+     "end": 43.12
+    },
+    {
+     "w": "planeta",
+     "start": 43.12,
+     "end": 43.52
+    },
+    {
+     "w": "tem",
+     "start": 43.52,
+     "end": 43.88
+    },
+    {
+     "w": "os",
+     "start": 43.88,
+     "end": 44.02
+    },
+    {
+     "w": "ventos",
+     "start": 44.02,
+     "end": 44.4
+    },
+    {
+     "w": "mais",
+     "start": 44.4,
+     "end": 44.8
+    },
+    {
+     "w": "rápidos",
+     "start": 44.8,
+     "end": 45.36
+    },
+    {
+     "w": "do",
+     "start": 45.36,
+     "end": 45.54
+    },
+    {
+     "w": "Sistema",
+     "start": 45.54,
+     "end": 45.9
+    },
+    {
+     "w": "Solar?",
+     "start": 45.9,
+     "end": 46.28
+    }
+   ]
+  },
+  {
+   "text": "Netuno!",
+   "start": 46.66,
+   "end": 47.22,
+   "words": [
+    {
+     "w": "Netuno!",
+     "start": 46.66,
+     "end": 47.22
+    }
+   ]
+  },
+  {
+   "text": "Verdadeiro ou falso: uma colher de chá de estrela de nêutrons pesaria bilhões de toneladas.",
+   "start": 47.58,
+   "end": 53.4,
+   "words": [
+    {
+     "w": "Verdadeiro",
+     "start": 47.58,
+     "end": 48.16
+    },
+    {
+     "w": "ou",
+     "start": 48.16,
+     "end": 48.28
+    },
+    {
+     "w": "falso:",
+     "start": 48.28,
+     "end": 48.72
+    },
+    {
+     "w": "uma",
+     "start": 49.08,
+     "end": 49.18
+    },
+    {
+     "w": "colher",
+     "start": 49.18,
+     "end": 49.54
+    },
+    {
+     "w": "de",
+     "start": 49.54,
+     "end": 49.68
+    },
+    {
+     "w": "chá",
+     "start": 49.68,
+     "end": 49.98
+    },
+    {
+     "w": "de",
+     "start": 49.98,
+     "end": 50.12
+    },
+    {
+     "w": "estrela",
+     "start": 50.12,
+     "end": 50.58
+    },
+    {
+     "w": "de",
+     "start": 50.58,
+     "end": 50.74
+    },
+    {
+     "w": "nêutrons",
+     "start": 50.74,
+     "end": 51.16
+    },
+    {
+     "w": "pesaria",
+     "start": 51.16,
+     "end": 51.9
+    },
+    {
+     "w": "bilhões",
+     "start": 51.9,
+     "end": 52.62
+    },
+    {
+     "w": "de",
+     "start": 52.62,
+     "end": 52.86
+    },
+    {
+     "w": "toneladas.",
+     "start": 52.86,
+     "end": 53.4
+    }
+   ]
+  },
+  {
+   "text": "Verdadeiro!",
+   "start": 54.0,
+   "end": 54.74,
+   "words": [
+    {
+     "w": "Verdadeiro!",
+     "start": 54.0,
+     "end": 54.74
+    }
+   ]
+  },
+  {
+   "text": "Última, e é pegadinha: qual é a estrela mais próxima da Terra?",
+   "start": 54.96,
+   "end": 59.18,
+   "words": [
+    {
+     "w": "Última,",
+     "start": 54.96,
+     "end": 55.44
+    },
+    {
+     "w": "e",
+     "start": 55.44,
+     "end": 55.8
+    },
+    {
+     "w": "é",
+     "start": 55.8,
+     "end": 55.94
+    },
+    {
+     "w": "pegadinha:",
+     "start": 55.94,
+     "end": 56.52
+    },
+    {
+     "w": "qual",
+     "start": 56.52,
+     "end": 57.1
+    },
+    {
+     "w": "é",
+     "start": 57.1,
+     "end": 57.3
+    },
+    {
+     "w": "a",
+     "start": 57.3,
+     "end": 57.36
+    },
+    {
+     "w": "estrela",
+     "start": 57.36,
+     "end": 57.78
+    },
+    {
+     "w": "mais",
+     "start": 57.78,
+     "end": 58.18
+    },
+    {
+     "w": "próxima",
+     "start": 58.18,
+     "end": 58.68
+    },
+    {
+     "w": "da",
+     "start": 58.68,
+     "end": 58.9
+    },
+    {
+     "w": "Terra?",
+     "start": 58.9,
+     "end": 59.18
+    }
+   ]
+  },
+  {
+   "text": "O Sol!",
+   "start": 59.64,
+   "end": 60.06,
+   "words": [
+    {
+     "w": "O",
+     "start": 59.64,
+     "end": 59.72
+    },
+    {
+     "w": "Sol!",
+     "start": 59.72,
+     "end": 60.06
+    }
+   ]
+  },
+  {
+   "text": "Quantas você acertou? Comenta aí! E segue o Mente Pega pra parte dois!",
+   "start": 60.58,
+   "end": 64.84,
+   "words": [
+    {
+     "w": "Quantas",
+     "start": 60.58,
+     "end": 60.94
+    },
+    {
+     "w": "você",
+     "start": 60.94,
+     "end": 61.12
+    },
+    {
+     "w": "acertou?",
+     "start": 61.12,
+     "end": 61.6
+    },
+    {
+     "w": "Comenta",
+     "start": 61.84,
+     "end": 62.18
+    },
+    {
+     "w": "aí!",
+     "start": 62.18,
+     "end": 62.42
+    },
+    {
+     "w": "E",
+     "start": 62.42,
+     "end": 62.9
+    },
+    {
+     "w": "segue",
+     "start": 62.9,
+     "end": 63.2
+    },
+    {
+     "w": "o",
+     "start": 63.2,
+     "end": 63.36
+    },
+    {
+     "w": "Mente",
+     "start": 63.36,
+     "end": 63.56
+    },
+    {
+     "w": "Pega",
+     "start": 63.56,
+     "end": 63.92
+    },
+    {
+     "w": "pra",
+     "start": 63.92,
+     "end": 64.22
+    },
+    {
+     "w": "parte",
+     "start": 64.22,
+     "end": 64.44
+    },
+    {
+     "w": "dois!",
+     "start": 64.44,
+     "end": 64.84
+    }
+   ]
+  }
+ ]
+}
