@@ -8,12 +8,13 @@ Quiz prende porque o espectador participa: pensa na resposta, quer saber se acer
 - **Formato fixo e reconhecível:** mesma estrutura, mesmo cronômetro, mesmas cores de resposta (acerto verde, erro vermelho), mesmo layout (contador "Pergunta X/10", cartão da pergunta, A–D). Base: `videos/quiz-adulto-01/scene.html`.
 - **Fundo/cenário DIFERENTE a cada quiz:** trocar a paleta do palco, das luzes neon e do fundo em todo vídeo novo, para nenhum ficar igual ao anterior. Usar cores vibrantes e atraentes (alto contraste, saturadas, degradês), sem usar verde puro nem vermelho puro no fundo para não confundir com acerto/erro. Registrar a paleta usada abaixo e não repetir a do vídeo anterior.
   - Paletas sugeridas: 1) roxo + rosa neon · 2) azul elétrico + ciano · 3) laranja pôr do sol + magenta · 4) turquesa + coral · 5) azul-marinho + dourado · 6) lilás + azul-bebê (pastel vibrante) · 7) índigo + amarelo limão · 8) pink + laranja (candy).
-  - Usadas: `quiz-adulto-01` = 1 (roxo + rosa neon) · `quiz-escola-01` = 1 (roxo + rosa neon) · `quiz-parnaiba-01` = 3 (laranja pôr do sol + magenta; página Nostalgia Parnaíba, marca "Nostalgia Parnaíba").
+  - Usadas: `quiz-adulto-01` = 1 (roxo + rosa neon) · `quiz-escola-01` = 1 (roxo + rosa neon) · `quiz-parnaiba-01` = 3 (laranja pôr do sol + magenta; página Nostalgia Parnaíba, marca "Nostalgia Parnaíba") · `quiz-astronomia-01` = 5 (azul-marinho + dourado, espaço sideral).
 - **Pausa para pensar:** toda pergunta tem **5 s de cronômetro** (contagem 5-4-3-2-1 com tique-taque), sem narração durante a pausa. No roteiro de voz a regra é "Você tem cinco segundos pra cada pergunta".
 - **Dificuldade crescente:** começa fácil e termina difícil; a última pode ser pegadinha que gere discussão.
 - **Chamada final:** "Quantas você acertou? Comenta aí!" + Segue @mentepega + corte que emenda no começo (loop).
 - **Séries:** tema que performar vira Parte 2, Parte 3… (manter numeração no título e na pasta, ex.: `quiz-adulto-02`).
 - Conferir todas as respostas antes de produzir e mostrar o roteiro com tempos.
+- Em cenário com estrelas (Points), manter todas atrás da câmera: ponto perto da câmera vira um quadrado branco gigante.
 - **CTA obrigatório em TODO vídeo:** pedir para **seguir** (com o @ do perfil) **e comentar** (com uma pergunta que puxe resposta), no mínimo no cartão final.
 - A pessoa gera a voz em outra plataforma (ElevenLabs). Entregar só o roteiro em texto (`roteiro_voz.txt`) e esperar o mp3; depois montar o vídeo em cima do áudio dela.
 - Formato padrão: vertical 1080x1920, 3D low-poly colorido, legenda palavra por palavra (Poppins), estilo "construa do zero" (skill `construa-do-zero`).
