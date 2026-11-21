@@ -3,6 +3,14 @@
 - **Marca d'água obrigatória:** todo vídeo (e capa) leva `@olhaso_3D` visível, discreto, sem cobrir o objeto nem a legenda.
 - **Exceção — vídeos de QUIZ:** vão para o perfil **Mente Pega**, então a marca d'água (vídeo, capa e CTA) é `@mentepega`, não `@olhaso_3D`. Foto de perfil/mascote em `perfil/mente-pega/`.
 
+## Regras de retenção (TODOS os vídeos, a partir de 21/11/2026)
+1. **Gancho imediato (0–3 s):** quebrar expectativa ou lançar desafio direto já no primeiro quadro ("não faça isso", desafio com o corpo, curiosidade do dia a dia). Sem vinheta, sem saudação, sem introdução: o áudio começa direto no ponto central.
+2. **Duração ideal 35–50 s.** Temas perto de 60 s: roteiro mais enxuto e entrega mais rápida para não cair a retenção no meio.
+3. **Ritmo:** cortar pausas e silêncios; renovar o visual a cada 2–4 s (troca de ângulo/zoom 3D, novo objeto ou texto na tela).
+4. **Final rápido:** nunca usar "para finalizar", "concluindo", "por fim" etc. — ir direto ao CTA.
+5. **CTA interativo:** pergunta que faça pausar/comentar ("Você já sabia disso?", "Conseguiu fazer? Deixa nos comentários") + seguir o @ do perfil.
+6. **Texto na tela:** frases curtas e chamativas destacando a pergunta/desafio central, para quem assiste sem som.
+
 ## Quiz (perfil Mente Pega) — princípios fixos
 Quiz prende porque o espectador participa: pensa na resposta, quer saber se acertou e comenta a pontuação → retenção, replays e comentários. O visual 3D (cenário, cronômetro animado, cartas girando) diferencia dos quizzes de slide.
 - **Formato fixo e reconhecível:** mesma estrutura, mesmo cronômetro, mesmas cores de resposta (acerto verde, erro vermelho), mesmo layout (contador "Pergunta X/10", cartão da pergunta, A–D). Base: `videos/quiz-adulto-01/scene.html`.
