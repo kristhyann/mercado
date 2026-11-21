@@ -1,0 +1,14 @@
+# Lucas (protagonista, "ele" na narração)
+- Papel: trabalhador que tenta o concurso da GCM de Parnaíba e decide se preparar de verdade.
+- Idade aproximada: 27 anos.
+- Rosto: oval com maxilar firme, queixo levemente quadrado; barba rala curta no maxilar e no buço.
+- Olhos: castanho-escuros, amendoados, com olheira leve nas cenas de noite; sobrancelhas grossas e retas.
+- Nariz: médio, ponta arredondada. Boca: lábios médios.
+- Pele: #A8714F (sombra #7A4A30, luz #C98E66).
+- Cabelo: crespo curto no topo (volume baixo, contorno em ondinhas), laterais degradê mais escuras. #1E1714.
+- Roupa "trabalho" (cenas 1 a 7): camisa polo verde-petróleo #2F6E73 (sombra #1F4D52), gola com friso claro #CFE3DF, emblema branco retangular no peito esquerdo; calça jeans #33415C.
+- Roupa "treino/dia da prova" (cenas 8 a 11): camiseta cinza #8C96A3 (sombra #646E7C); bermuda preta #22262E no treino, jeans #33415C no dia da prova; tênis branco com faixa laranja #E8743B; mochila azul-escura #23304F no dia da prova.
+- Proporções: 7 cabeças de altura, ombros largos, constituição média (fica um pouco mais firme no fim, só postura).
+- Expressões: neutra cansada (pálpebra 30% caída), abatida (sobrancelha interna erguida, boca para baixo), desejo (olhar para cima, boca entreaberta), determinada (sobrancelha baixa e reta, boca firme), esperança (sobrancelhas soltas, meio sorriso), confiante (sorriso leve, olhar direto).
+- Personalidade visual: ombros caídos no começo, coluna reta e passo firme no fim.
+- Componentes: remotion/src/rigs/LucasBusto.jsx (busto 3/4 articulado) e remotion/src/rigs/LucasPerfil.jsx (corpo inteiro de perfil articulado).
