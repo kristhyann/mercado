@@ -10,3 +10,4 @@ node_modules/
 video-agent/.tmp/
 video-agent/sources/
 video-agent/takes/
+video-agent/storytelling/*/remotion/node_modules/
