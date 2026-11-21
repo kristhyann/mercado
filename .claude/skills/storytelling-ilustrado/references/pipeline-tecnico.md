@@ -30,7 +30,7 @@ video-agent/storytelling/_biblioteca/   (rigs e fichas reutilizados entre episó
 ffprobe -v error -show_entries format=duration -of csv=p=0 audio/narracao.mp3
 ffmpeg -i audio/narracao.mp3 -af silencedetect=noise=-35dB:d=0.35 -f null - 2>&1 | grep silence_
 ```
-Tempos por palavra: whisper.cpp (instalado pelo `short-editing/engine/setup.mjs` em macOS/Windows; no Linux compilar ou usar o binário em `WHISPER_CLI`) ou a API do ElevenLabs se o usuário tiver chave. Sem transcrição disponível: alinhar frases pelo roteiro + silêncios detectados e conferir ouvindo trechos. Salvar em `analise.json` (duração, pausas, frases com início/fim).
+Tempos por palavra (testado e funcionando aqui): `pip install faster-whisper`, modelo `small`, `language="pt"`, `word_timestamps=True`; passe o áudio já decodificado como array float32 16 kHz via ffmpeg (a versão do PyAV instalada quebra a leitura direta do arquivo). Alternativas: whisper.cpp (instalado pelo `short-editing/engine/setup.mjs` em macOS/Windows; no Linux compilar ou usar o binário em `WHISPER_CLI`) ou a API do ElevenLabs se o usuário tiver chave. Sem transcrição disponível: alinhar frases pelo roteiro + silêncios detectados e conferir ouvindo trechos. Salvar em `analise.json` (duração, pausas, frases com início/fim).
 
 ## Animação no Remotion
 - Uma `<Sequence>` por cena, frames vindos de `timing.json` (gerado da análise), nunca digitados à mão.
@@ -50,3 +50,11 @@ ffprobe ... (duração = áudio, 1080x1920, 30 fps, h264/aac)
 ffmpeg -i render/<slug>.mp4 -vf "fps=1/2,scale=270:-1,tile=6x5" -frames:v 1 render/contact-sheet.png
 ```
 Olhar a folha de quadros e quadros-chave de cada cena (Read na imagem) e passar o checklist de `padrao-visual.md`.
+
+## Lições do projeto gcm-phb-2027 (referência)
+- Arte 100% vetorial em código: `remotion/src/rigs/LucasBusto.jsx` (busto 3/4 com expressões, olhos, pálpebras, braços articulados) e `LucasPerfil.jsx` (corpo inteiro de perfil com ciclos de andar, correr e flexão). Reaproveitar como base de novos personagens.
+- `stills.sh <frames...>` renderiza quadros soltos e uma montagem: usar a cada cena antes do render completo (pega texto cortado, espelhado, personagem fora do quadro, câmera indo para o lado errado).
+- Render completo 57 s 1080x1920 a 30 fps: ~7 min com `--concurrency=4`. Não rodar a síntese da trilha ao mesmo tempo (as duas tarefas disputam a CPU).
+- Trilha e efeitos sintetizados em numpy (`trilha.py`), com ducking calculado pelo envelope da voz; música ~15 dB abaixo da voz.
+- Mixagem: narração mono duplicada para estéreo com ganho linear apenas até o pico ~-0,5 dBFS (sem compressor ou limitador, para não alterar o áudio enviado). Resultado ~-18 LUFS; se o usuário quiser -14 LUFS, perguntar antes de usar limitador.
+- O vídeo pode ser mais longo que a estimativa do roteiro (50 s estimados, 56,3 s reais): nunca acelerar a voz, ajustar as cenas.

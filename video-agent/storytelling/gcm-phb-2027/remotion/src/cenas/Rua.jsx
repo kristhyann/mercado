@@ -218,7 +218,7 @@ export const S05 = ({dur}) => {
   const followK = kf(t, [1.7, 3.8], [0, 1], 'io');
   const lookUp = kf(t, [4.15, 4.7], [0, 1]);
   const expr = mixExpr(mixExpr('cansado', 'desejo', kf(t, [1.9, 2.6], [0, 1])), 'esperanca', lookUp * 0.55);
-  const cam = {z: kf(t, [-0.2, 3.4, dur], [1.0, 1.06, 1.42], 'sine'), x: kf(t, [-0.2, dur], [0, 20]), y: kf(t, [-0.2, 3.4, dur], [0, 20, -330], 'sine')};
+  const cam = {z: kf(t, [-0.2, 3.4, dur], [1.0, 1.06, 1.42], 'sine'), x: kf(t, [-0.2, dur], [0, 20]), y: kf(t, [-0.2, 3.4, dur], [0, 20, 190], 'sine')};
   return (
     <Frame bg={C.night0}>
       <Camera {...cam}>
