@@ -1,0 +1,186 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,'Noto Color Emoji',sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:230px;text-align:center;font-weight:900;font-size:86px;line-height:1.06}
+#hook b{color:#FFD21F;display:block;font-size:96px}
+#cap{width:1080px;top:1420px;text-align:center;font-weight:900;font-size:110px}
+#cap.hl{color:#FFD21F}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:58px;padding:8px 30px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.white{background:#fff;color:#111}.tag.orange{background:#F97316;color:#fff}
+.small{font-size:46px;padding:6px 22px;border-radius:18px;border-width:6px;box-shadow:0 6px 0 #111}
+#lbl1,#lbl2{font-weight:900;font-size:50px;color:#111;background:#fff;border:7px solid #111;border-radius:22px;box-shadow:0 7px 0 #111;padding:6px 20px;white-space:nowrap}
+#final{left:50px;width:980px;top:1230px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:56px;line-height:1.14;padding:28px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#F97316}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.85;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">O CÉU NÃO É AZUL<b>POR CAUSA DO MAR 🌊</b></div>
+<div id="lbl1" class="o"></div><div id="lbl2" class="o"></div>
+<div id="t1" class="o tag"></div><div id="t2" class="o tag small"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Você sabia disso? 🤔<br>Comenta aqui 👇<br>e manda pra quem acha<br>que é por causa do mar 🌊<br><em>Segue 👉 @olhaso_3D</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, rr } from '/_kit/kit.js';
+import { buildPerson, PP, poseP, face } from '/_kit/pessoas.js';
+await document.fonts.load('900 60px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; window.DURATION = TP.duration;
+const ALL = SN.flatMap(s => s.words);
+const WA = (re, n = 0, after = 0) => { const ws = ALL.filter(w => w.start >= after && re.test(w.w)); if (!ws[n]) { console.log('WA MISS', re); return after; } return ws[n].start; };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .03, 400);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const MAT = (c, r = .7, ex = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: r, flatShading: true }, ex));
+const BASIC = (c, ex = {}) => new THREE.MeshBasicMaterial(Object.assign({ color: c, toneMapped: false }, ex));
+const add = (geo, mat, x, y, z, par = scene) => { const m = new THREE.Mesh(geo, typeof mat === 'number' ? MAT(mat) : mat); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; par.add(m); return m; };
+const canvasTex = (w, h, paint) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); paint(g, w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; };
+const sprite = (t, s) => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthWrite: false })); sp.scale.setScalar(s); return sp; };
+const emo = (e, px = 110) => canvasTex(160, 160, g => { g.font = `${px}px 'Noto Color Emoji'`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(e, 80, 88); });
+const glowT = (c) => canvasTex(128, 128, g => { const r = g.createRadialGradient(64, 64, 0, 64, 64, 64); r.addColorStop(0, c); r.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = r; g.fillRect(0, 0, 128, 128); });
+
+// ---------- tempos ----------
+const T_QUANDO = WA(/^Quando$/), T_OCEANO = WA(/oceano/), T_A = WA(/^A$/), T_MIST = WA(/mistura/), T_QUANDO2 = WA(/^Quando$/, 1), T_AR = WA(/^ar,$/), T_DESV = WA(/desviam/), T_VERM = WA(/vermelha/), T_ESSE = WA(/^Esse$/), T_DIRE = WA(/direções/), T_NO = WA(/^No$/), T_GROSSA = WA(/grossa/), T_OLHOS = WA(/olhos/), T_CAMINHO = WA(/caminho,/), T_PERDE = WA(/perde/), T_SOBRAM = WA(/sobram/), T_ENTAO = WA(/^Então$/), T_MEIO = WA(/meio-dia/), T_LARANJA2 = WA(/laranja/, 1), T_MESMA = WA(/mesma/), T_VOCE = WA(/^Você$/, 0, 44);
+const HL = /céu|azul|mar|criança|oceano|luz|branca|cores|ar|partículas|azul|vermelha|direções|tarde|grossa|olhos|perde|laranja|vermelho|meio-dia|pôr|mesma|caminhos|comenta|curiosidades/i;
+
+const hemi = new THREE.HemisphereLight(0xFFFFFF, 0x445566, 1.0); scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xFFF2E0, 2.1); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, { left: -6, right: 6, top: 6, bottom: -6, near: .5, far: 40 }); sun.shadow.bias = -.0004; scene.add(sun); scene.add(sun.target);
+
+// ================= PAISAGEM (x=0) =================
+const land = grp();
+const skyTex = (top, mid, bot) => canvasTex(16, 512, g => { const gr = g.createLinearGradient(0, 0, 0, 512); gr.addColorStop(0, top); gr.addColorStop(.55, mid); gr.addColorStop(1, bot); g.fillStyle = gr; g.fillRect(0, 0, 16, 512); });
+const skyB = add(new THREE.SphereGeometry(60, 32, 16), new THREE.MeshBasicMaterial({ map: skyTex('#1E5BD8', '#4FA3F7', '#BFE6FF'), side: THREE.BackSide, fog: false, toneMapped: false }), 0, 0, 0, land); skyB.castShadow = skyB.receiveShadow = false;
+const skyOM = new THREE.MeshBasicMaterial({ map: skyTex('#3B1D6E', '#F2683A', '#FFC56B'), side: THREE.BackSide, fog: false, toneMapped: false, transparent: true, opacity: 0, depthWrite: false });
+const skyO = add(new THREE.SphereGeometry(59, 32, 16), skyOM, 0, 0, 0, land); skyO.castShadow = skyO.receiveShadow = false;
+const seaM = MAT(0x1E88E5, .25, { metalness: .1 }); const sea = add(new THREE.PlaneGeometry(80, 40, 40, 20), seaM, 0, .02, -18, land); sea.rotation.x = -Math.PI / 2; sea.receiveShadow = true;
+const sand = add(new THREE.PlaneGeometry(40, 8), MAT(0xF2D49B, .9), 0, .04, 2, land); sand.rotation.x = -Math.PI / 2;
+for (let i = 0; i < 6; i++) { const h = add(new THREE.ConeGeometry(rr(1.5, 3), rr(1.5, 3), 6), MAT(0x4E9F5B, .9), rr(-14, 14), 0, rr(-40, -34), land); }
+const sunM = new THREE.MeshBasicMaterial({ color: 0xFFF1B0, toneMapped: false, fog: false }); const sunS = add(new THREE.SphereGeometry(1.4, 24, 16), sunM, 0, 10, -45, land); sunS.castShadow = false;
+const sunGlow = sprite(glowT('rgba(255,240,180,.9)'), 9); land.add(sunGlow);
+const palm = grp(land); palm.position.set(-3.2, 0, -3.0); for (let i = 0; i < 6; i++) add(new THREE.CylinderGeometry(.09 - i * .008, .1 - i * .008, .5, 6), MAT(0x8B5A2B), Math.sin(i * .3) * .2, .25 + i * .48, 0, palm).rotation.z = -.08 * i; for (let i = 0; i < 6; i++) { const l = add(new THREE.ConeGeometry(.18, 1.4, 4), MAT(0x2E8B3A), .3, 2.95, 0, palm); l.rotation.set(0, i * 1.05, 1.7); l.position.x += Math.cos(i * 1.05) * .5; l.position.z += Math.sin(i * 1.05) * .5; }
+const kid = buildPerson({ skin: 0xC88A5A, shirt: 0xFFD21F, pants: 0x2563EB, hair: 0x1A1008 }); land.add(kid.root); kid.root.scale.setScalar(.75); kid.root.position.set(0, .04, 1.4); kid.root.rotation.y = Math.PI;
+const bubT = canvasTex(512, 300, g => { g.fillStyle = '#fff'; g.strokeStyle = '#111'; g.lineWidth = 12; g.beginPath(); g.ellipse(256, 140, 240, 125, 0, 0, 7); g.fill(); g.stroke(); g.font = "130px 'Noto Color Emoji'"; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('🌊➡️🌌', 256, 140); });
+const bubble = sprite(bubT, 1.4); bubble.scale.set(1.5, .88, 1); land.add(bubble);
+const xS = sprite(emo('❌'), .9); land.add(xS);
+const blueStreaks = Array.from({ length: 26 }, () => { const m = add(new THREE.CylinderGeometry(.03, .03, .5, 6), BASIC(0x5AB4FF), 0, 0, 0, land); m.castShadow = false; m.userData = { d: V(rr(-1, 1), rr(.1, 1), rr(-1, .4)).normalize(), p: rr(0, 1) }; return m; });
+// ================= LUZ E AR (x=60) =================
+const lab = grp(); lab.position.set(60, 0, 0);
+add(new THREE.SphereGeometry(40, 24, 12), new THREE.MeshBasicMaterial({ color: 0x0B1030, side: THREE.BackSide, toneMapped: false }), 0, 0, 0, lab).castShadow = false;
+const sunL = add(new THREE.SphereGeometry(.45, 24, 16), BASIC(0xFFF4C0), -1.6, 2.6, 0, lab); const sgl = sprite(glowT('rgba(255,240,180,.9)'), 2.5); sgl.position.copy(sunL.position); lab.add(sgl);
+const beamW = add(new THREE.CylinderGeometry(.06, .06, 1, 10), BASIC(0xFFFFFF), 0, 0, 0, lab); beamW.castShadow = false;
+const RB = [0xFF3B30, 0xFF9500, 0xFFD60A, 0x34C759, 0x00C7FF, 0x2F6BFF, 0x8E44FF]; const rays = RB.map(c => { const m = add(new THREE.CylinderGeometry(.03, .03, 1, 8), BASIC(c), 0, 0, 0, lab); m.castShadow = false; return m; });
+const parts = Array.from({ length: 14 }, (_, i) => { const m = add(new THREE.IcosahedronGeometry(.07, 0), MAT(i % 2 ? 0xBFE3FF : 0xE0E7FF, .4, { emissive: 0x334466, emissiveIntensity: .3 }), rr(-.5, .9), rr(1.2, 2.3), rr(-.2, .2), lab); return m; });
+const scat = Array.from({ length: 40 }, () => { const m = add(new THREE.CylinderGeometry(.018, .018, .22, 6), BASIC(0x3D8BFF), 0, 0, 0, lab); m.castShadow = false; m.userData = { d: V(rr(-1, 1), rr(-1, 1), rr(-.4, .4)).normalize(), p: rr(0, 1), k: Math.floor(rr(0, 14)) }; return m; });
+const redBeam = add(new THREE.CylinderGeometry(.04, .04, 1, 8), BASIC(0xFF3B30), 0, 0, 0, lab); redBeam.castShadow = false;
+function segment(m, a, b) { const d = b.clone().sub(a); m.position.copy(a).add(d.clone().multiplyScalar(.5)); m.scale.set(1, Math.max(.001, d.length()), 1); m.quaternion.setFromUnitVectors(V(0, 1, 0), d.normalize()); }
+// ================= TERRA (x=120) =================
+const globe = grp(); globe.position.set(120, 0, 0);
+add(new THREE.SphereGeometry(40, 24, 12), new THREE.MeshBasicMaterial({ color: 0x060A1E, side: THREE.BackSide, toneMapped: false }), 0, 0, 0, globe).castShadow = false;
+const earthT = canvasTex(512, 256, g => { g.fillStyle = '#1E6FD9'; g.fillRect(0, 0, 512, 256); g.fillStyle = '#3FA34D'; for (let i = 0; i < 9; i++) { g.beginPath(); g.ellipse(rr(0, 512), rr(40, 216), rr(30, 80), rr(20, 50), rr(0, 3), 0, 7); g.fill(); } g.fillStyle = 'rgba(255,255,255,.5)'; for (let i = 0; i < 12; i++) { g.beginPath(); g.ellipse(rr(0, 512), rr(0, 256), rr(20, 60), rr(5, 12), 0, 0, 7); g.fill(); } });
+const EC = V(0, 0.2, 0), ER = 1.1;
+const earth = add(new THREE.SphereGeometry(ER, 32, 24), new THREE.MeshStandardMaterial({ map: earthT, roughness: .7 }), EC.x, EC.y, EC.z, globe);
+const atm = add(new THREE.SphereGeometry(ER * 1.32, 32, 24), new THREE.MeshStandardMaterial({ color: 0x7FC8FF, transparent: true, opacity: .22, emissive: 0x3A8BFF, emissiveIntensity: .4, depthWrite: false }), EC.x, EC.y, EC.z, globe); atm.castShadow = false;
+const obsP = EC.clone().add(V(0, ER, 0)); const obs = sprite(emo('🧍'), .5); obs.position.copy(obsP).add(V(0, .15, .3)); globe.add(obs);
+const sunG = add(new THREE.SphereGeometry(.25, 16, 12), BASIC(0xFFF1B0), 0, 0, 0, globe); const sgg = sprite(glowT('rgba(255,230,160,.9)'), 1.4); globe.add(sgg);
+const pathA = add(new THREE.CylinderGeometry(.035, .035, 1, 8), BASIC(0x7FD1FF), 0, 0, 0, globe), pathB = add(new THREE.CylinderGeometry(.035, .035, 1, 8), BASIC(0xFF9A3C), 0, 0, 0, globe); pathA.castShadow = pathB.castShadow = false;
+const drops = Array.from({ length: 22 }, () => { const m = add(new THREE.SphereGeometry(.035, 8, 6), BASIC(0x4AA8FF), 0, 0, 0, globe); m.castShadow = false; m.userData = { u: rr(.05, .95), d: V(rr(-1, 1), rr(-1, 1), rr(-.3, .3)).normalize() }; return m; });
+// ================= COMPARAÇÃO (x=180) =================
+const cmp = grp(); cmp.position.set(180, 0, 0);
+add(new THREE.SphereGeometry(40, 24, 12), new THREE.MeshBasicMaterial({ color: 0x0F172A, side: THREE.BackSide, toneMapped: false }), 0, 0, 0, cmp).castShadow = false;
+function diorama(x, skyCols, sunY, sunCol) { const g = grp(cmp); g.position.set(x, 0, 0); const back = add(new THREE.PlaneGeometry(1.5, 2.2), new THREE.MeshBasicMaterial({ map: skyTex(...skyCols), toneMapped: false }), 0, 1.6, -.4, g); back.castShadow = false;
+  add(new THREE.BoxGeometry(1.5, .2, .9), MAT(0x4E9F5B), 0, .4, 0, g); add(new THREE.BoxGeometry(1.5, .02, .5), MAT(0x1E88E5, .3), 0, .51, -.15, g);
+  const s = add(new THREE.SphereGeometry(.17, 16, 12), BASIC(sunCol), 0, sunY, -.3, g); const p = sprite(emo('🧍'), .3); p.position.set(.05, .65, .2); g.add(p); return { g, s }; }
+const dA = diorama(-.82, ['#1E5BD8', '#4FA3F7', '#BFE6FF'], 2.45, 0xFFF6C8), dB = diorama(.82, ['#3B1D6E', '#F2683A', '#FFC56B'], .72, 0xFFB050);
+const rayA = add(new THREE.CylinderGeometry(.025, .025, 1, 6), BASIC(0xFFFFFF), 0, 0, 0, cmp), rayB = add(new THREE.CylinderGeometry(.025, .025, 1, 6), BASIC(0xFFB050), 0, 0, 0, cmp); rayA.castShadow = rayB.castShadow = false;
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [T_QUANDO, 'whoosh'], [T_OCEANO, 'buzzx'], [T_A, 'whoosh'], [T_MIST, 'ding'], [T_AR, 'pop'], [T_DESV, 'zap'], [T_ESSE, 'whoosh'], [T_NO, 'whoosh'], [T_GROSSA, 'pop'], [T_CAMINHO, 'whoosh'], [T_SOBRAM, 'ding'], [T_ENTAO, 'whoosh'], [T_MESMA, 'ding'], [T_VOCE, 'win']].forEach(([t, k]) => ev(t, k));
+function world(w) { land.visible = w === 'land'; lab.visible = w === 'lab'; globe.visible = w === 'globe'; cmp.visible = w === 'cmp'; }
+function setSky(k) { skyOM.opacity = k; const a = lerp(1.2, -.15, k) ; sunS.position.set(lerp(-2, 4, k), lerp(14, 1.5, k), -45); sunGlow.position.copy(sunS.position); sunM.color.setHex(k > .5 ? 0xFFB050 : 0xFFF1B0);
+  seaM.color.setRGB(lerp(.12, .55, k), lerp(.53, .3, k), lerp(.9, .35, k)); hemi.color.setRGB(1, lerp(1, .8, k), lerp(1, .6, k)); sun.color.setRGB(1, lerp(.95, .6, k), lerp(.88, .35, k)); }
+
+window.draw = function (t) {
+  let cp, tg, off = V(0, 0, 0);
+  [bubble, xS].forEach(o => o.visible = false); blueStreaks.forEach(b => b.visible = false);
+  if (t < T_A - .1 || win(t, T_ESSE - .1, T_NO - .1) || t >= T_VOCE - .1) { world('land');
+    let k = 0; if (t < T_QUANDO - .1) k = (Math.sin(t * 2.2 - 1.57) + 1) / 2; if (t >= T_VOCE - .1) k = ease(clamp((t - T_VOCE + .1) / 2.5));
+    setSky(k); sea.position.y = .02 + Math.sin(t * 2) * .02;
+    poseP(kid, PP.stand, 0, t); face(kid, 'neutral', t);
+    if (t < T_QUANDO - .1) { cp = V(Math.sin(t * .4) * 1.5, 2.2, 7.5 - t * .4); tg = V(0, 3.5, -10); }
+    else if (t < T_A) { // criança olhando o mar, pensando
+      kid.root.rotation.y = Math.PI; poseP(kid, { ...PP.think, hy: .2 }, 0, t); bubble.visible = t > T_QUANDO + .6; bubble.position.set(-.12, 2.05, 1.5); const bs = pop(t - T_QUANDO - .6, .3); bubble.scale.set(.85 * bs, .5 * bs, 1);
+      xS.visible = t > T_OCEANO; xS.position.set(-.12, 2.05, 1.6); xS.scale.setScalar(.5 * pop(t - T_OCEANO, .3));
+      cp = V(.5, 1.6, 5.0); tg = V(-.1, 1.35, -1); }
+    else if (t < T_NO) { // azul vindo de todo lado
+      setSky(0); kid.root.rotation.y = 0; poseP(kid, { ...PP.stand, rx: -2.8, rz: -.4, re: -.3, lx: -2.8, lz: .4, le: -.3, hx: -.3 }, 0, t); face(kid, 'happy', t);
+      const head = V(0, 1.45, 1.4); blueStreaks.forEach(b => { b.visible = t > T_ESSE + .3; const u = ((t * .5 + b.userData.p) % 1); const p = head.clone().add(b.userData.d.clone().multiplyScalar(lerp(4, .3, u))); b.position.copy(p); b.quaternion.setFromUnitVectors(V(0, 1, 0), b.userData.d); });
+      cp = V(Math.sin(t * .3) * .8, 1.8, 5.2); tg = V(0, 1.7, 0); }
+    else { kid.root.rotation.y = Math.PI; poseP(kid, PP.stand, 0, t); cp = V(Math.sin(t * .3) * .6, 2.0, 6.5); tg = V(0, 2.4, -6); } }
+  else if (t < T_ESSE - .1) { world('lab'); off = lab.position;
+    const src = V(-1.6, 2.6, 0), hit = V(-.1, 1.8, 0); const grow = ease(clamp((t - T_A) / .8));
+    const split = t > T_MIST; segment(beamW, src, src.clone().lerp(split ? hit : V(1.4, 1.0, 0), split ? 1 : grow));
+    rays.forEach((r, i) => { r.visible = split && t < T_AR; if (!r.visible) return; const sp = ease(clamp((t - T_MIST) / .6)); const ang = -.35 + (i - 3) * .09 * sp; const e = hit.clone().add(V(Math.cos(ang), Math.sin(ang), 0).multiplyScalar(1.6 * sp)); segment(r, hit, e); });
+    const airOn = t > T_AR - .2; parts.forEach((p, i) => { p.visible = airOn; p.scale.setScalar(pop(t - T_AR + .2 - i * .03, .3)); p.rotation.set(t, t * .7, 0); });
+    if (airOn) { segment(beamW, src, V(.3, 1.75, 0)); }
+    redBeam.visible = t > T_DESV; if (redBeam.visible) segment(redBeam, V(.3, 1.75, 0), V(.3, 1.75, 0).lerp(V(1.9, 1.3, 0), ease(clamp((t - T_DESV) / .7))));
+    scat.forEach(s => { s.visible = t > T_DESV; if (!s.visible) return; const p0 = parts[s.userData.k].position; const u = ((t - T_DESV) * .8 + s.userData.p) % 1; s.position.copy(p0).add(s.userData.d.clone().multiplyScalar(u * 1.1)); s.quaternion.setFromUnitVectors(V(0, 1, 0), s.userData.d); });
+    cp = V(0, 2.0, 5.6); tg = V(0, 1.85, 0); }
+  else if (t < T_ENTAO - .1) { world('globe'); off = globe.position; earth.rotation.y = t * .1;
+    const sunset = t > T_NO + 1.0; const a = sunset ? lerp(Math.PI / 2, .02, ease(clamp((t - T_NO - 1.0) / 1.2))) : Math.PI / 2; const sp = V(EC.x + Math.cos(a) * 1.75, lerp(obsP.y + .05, EC.y + 2.15, Math.sin(a)), 0); sunG.position.copy(sp); sgg.position.copy(sp);
+    // caminho curto (meio-dia) sempre visível como referência; longo no fim da tarde
+    const topA = EC.clone().add(V(0, ER * 1.32, 0)); segment(pathA, topA, obsP);
+    const dir = V(1, 0, 0); const entry = obsP.clone().add(dir.clone().multiplyScalar(Math.sqrt((ER * 1.32) ** 2 - ER ** 2)));
+    pathB.visible = sunset && a < .4; if (pathB.visible) { const g = ease(clamp((t - T_GROSSA + .6) / .8)); segment(pathB, entry, entry.clone().lerp(obsP, g)); pathB.material.color.setHex(t > T_SOBRAM ? 0xFF7A1A : 0xFFF4C0); }
+    drops.forEach(d => { d.visible = t > T_CAMINHO && pathB.visible; if (!d.visible) return; const base = entry.clone().lerp(obsP, d.userData.u); const k = ((t - T_CAMINHO) * .6 + d.userData.u) % 1; d.position.copy(base).add(d.userData.d.clone().multiplyScalar(k * .7)); });
+    cp = V(.35, .9, 9.6); tg = V(.35, .7, 0); }
+  else { world('cmp'); off = cmp.position;
+    const g = ease(clamp((t - T_ENTAO) / .8)); const a0 = dA.s.position.clone().add(dA.g.position), a1 = V(-.77, .7, .2); segment(rayA, a0, a0.clone().lerp(a1, g)); const b0 = dB.s.position.clone().add(dB.g.position), b1 = V(.87, .7, .2); segment(rayB, b0, b0.clone().lerp(b1, g));
+    cp = V(0, 1.4, 5.0); tg = V(0, 1.35, 0); }
+  cp.add(off); tg.add(off); cam.position.copy(cp); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  sun.position.copy(tg).add(V(3, 7, 5)); sun.target.position.copy(tg);
+  // HTML
+  fixed($('hook'), t < T_QUANDO - .1 ? pop(t - .02, .3) * (1 - clamp((t - T_QUANDO + .25) / .15)) : 0);
+  const tg2 = [$('t1'), $('t2')]; tg2.forEach(e => e.style.opacity = 0);
+  const tag = (el, txt, cls, on, x, y, t0, rot = -4) => { if (!on) return; el.textContent = txt; el.className = 'o tag ' + cls; place(el, true, x, y, pop(t - t0, .3), rot); };
+  tag(tg2[0], '🌊 É REFLEXO DO MAR?', 'white small', win(t, T_QUANDO + .6, T_OCEANO), 540, 330, T_QUANDO + .6, -3);
+  tag(tg2[0], '❌ NÃO É!', 'red', win(t, T_OCEANO, T_A - .1), 540, 330, T_OCEANO, 3);
+  tag(tg2[0], '☀️ LUZ BRANCA', 'white', win(t, T_A, T_MIST), 540, 330, T_A, -3);
+  tag(tg2[0], '🌈 = TODAS AS CORES', '', win(t, T_MIST, T_AR - .2), 540, 330, T_MIST, 3);
+  tag(tg2[0], '💨 PARTÍCULAS DO AR', 'white small', win(t, T_AR - .2, T_DESV), 540, 330, T_AR - .2, -3);
+  tag(tg2[0], '🔵 AZUL SE ESPALHA', 'blue', win(t, T_DESV, T_ESSE - .1), 540, 330, T_DESV, -3); tag(tg2[1], '🔴 VERMELHO PASSA', 'red', win(t, T_VERM - .2, T_ESSE - .1), 540, 1230, T_VERM - .2, 3);
+  tag(tg2[0], '🔵 AZUL DE TODO LADO', 'blue', win(t, T_DIRE - .2, T_NO - .1), 540, 330, T_DIRE - .2, 3);
+  tag(tg2[0], '🌅 FIM DA TARDE', 'orange', win(t, T_NO, T_GROSSA - .3), 540, 330, T_NO, -3);
+  tag(tg2[0], '📏 CAMINHO MAIS LONGO', 'white small', win(t, T_GROSSA - .3, T_CAMINHO), 540, 330, T_GROSSA - .3, 3);
+  tag(tg2[0], '🔵 O AZUL SE PERDE', 'blue small', win(t, T_CAMINHO, T_SOBRAM - .1), 540, 330, T_CAMINHO, -3);
+  tag(tg2[0], '🟠 SOBRAM LARANJA E VERMELHO', 'orange small', win(t, T_SOBRAM - .1, T_ENTAO - .1), 540, 330, T_SOBRAM - .1, 3);
+  tag(tg2[0], '☀️ A MESMA LUZ', '', win(t, T_MESMA - .2, T_VOCE - .1), 540, 330, T_MESMA - .2, -3);
+  { const on = win(t, T_MEIO - .2, T_VOCE - .1); const a = $('lbl1'), b = $('lbl2'); a.textContent = '☀️ MEIO-DIA'; b.textContent = '🌅 FIM DE TARDE'; place(a, on, 290, 1240, pop(t - T_MEIO + .2, .3)); place(b, on && t > T_LARANJA2 - .2, 790, 1240, pop(t - T_LARANJA2 + .2, .3)); }
+  fixed($('final'), t >= T_VOCE + .9 ? pop(t - T_VOCE - .9, .35) : 0);
+  $('wm').style.opacity = .85;
+  let wTxt = null, wSt = 0;
+  for (const w2 of ALL) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap2 = $('cap'); const capOff = t < T_QUANDO - .1 || t >= T_VOCE + .9;
+  if (wTxt && !capOff) { cap2.textContent = wTxt.toUpperCase().replace(/[.,!?:…"“”]/g, ''); cap2.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap2, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap2, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>
