@@ -1,0 +1,300 @@
+# -*- coding: utf-8 -*-
+"""Matemática e Raciocínio Lógico — passo a passo."""
+from render import Topico, tab, bl, h3, caixa, fluxo, num
+from qbase import Q, QN, QF
+
+TAB_ATEND = (['Mês', 'Atendimentos'], [['Janeiro', '80'], ['Fevereiro', '100'], ['Março', '120'], ['Abril', '100']])
+
+TOPICOS = [
+    Topico('Operações fundamentais',
+        'As quatro operações — <b>adição, subtração, multiplicação e divisão</b> — são a base de todos os cálculos.',
+        [
+            h3('Ordem das operações'),
+            num(['Resolva primeiro o que está dentro de parênteses ( ), depois colchetes [ ] e chaves { }.', 'Depois, potências e raízes.', 'Em seguida, multiplicações e divisões, na ordem em que aparecem (da esquerda para a direita).', 'Por último, adições e subtrações, na ordem em que aparecem.']),
+            caixa('exemplo', ['<b>Calcule 20 − 3 × 4 + 8 ÷ 2.</b>', 'Passo 1: multiplicação e divisão: 3 × 4 = 12 e 8 ÷ 2 = 4.', 'Passo 2: a expressão fica 20 − 12 + 4.', 'Passo 3: da esquerda para a direita: 20 − 12 = 8; 8 + 4 = 12.', 'Resposta: 12.'], 'EXEMPLO RESOLVIDO'),
+            h3('Regra de sinais (multiplicação e divisão)'),
+            tab(['Sinais', 'Resultado', 'Exemplo'], [['+ com +', '+', '3 × 2 = 6'], ['− com −', '+', '(−3) × (−2) = 6'], ['+ com − ou − com +', '−', '3 × (−2) = −6']], [4.0, 3.0, 10.0], 9.2),
+            'Na adição de números com sinais diferentes, subtraia e mantenha o sinal do maior em valor absoluto: −7 + 3 = −4.',
+            h3('MMC e MDC'),
+            bl(['<b>MMC (mínimo múltiplo comum):</b> menor número que é múltiplo de todos. Útil para somar frações e para problemas de “coincidência” (eventos que se repetem). MMC(4, 6) = 12.', '<b>MDC (máximo divisor comum):</b> maior número que divide todos. Útil para dividir em partes iguais e do maior tamanho possível. MDC(12, 18) = 6.']),
+        ],
+        exemplos=['Duas rondas passam em um ponto a cada 15 e a cada 20 minutos. Se passaram juntas às 8h, voltarão a coincidir após MMC(15, 20) = 60 minutos, ou seja, às 9h.'],
+        erros=['Resolver da esquerda para a direita sem respeitar a prioridade.', 'Esquecer que menos com menos dá mais.'],
+        resumo=['Parênteses → potências → × e ÷ → + e −.', 'MMC para coincidências; MDC para divisões em partes iguais.'],
+        exercicios=[
+            QN('Matemática — Operações', 'O valor de 30 − 2 × (5 + 3) é',
+               '14', ['8', '16', '22', '224'], 'Passo 1: parênteses: 5 + 3 = 8. Passo 2: 2 × 8 = 16. Passo 3: 30 − 16 = 14.', 'Calcular 30 − 2 = 28 e depois × 8 = 224 ignora a prioridade.'),
+            QN('Matemática — Operações', 'Dois ônibus saem de um terminal: um a cada 12 minutos e outro a cada 18 minutos. Se saíram juntos às 7h, sairão juntos novamente às',
+               '7h36', ['7h18', '7h24', '7h30', '7h32'], 'MMC(12, 18) = 36 minutos. 7h + 36 min = 7h36.', 'Somar 12 + 18 = 30 é erro comum.'),
+        ]),
+
+    Topico('Frações',
+        'Fração representa <b>partes de um todo dividido em partes iguais</b>. Na fração a/b, b (denominador) indica em quantas partes o todo foi dividido e a (numerador) quantas partes foram tomadas.',
+        [
+            tab(['Operação', 'Como fazer', 'Exemplo'], [
+                ['Simplificar', 'Divida numerador e denominador pelo mesmo número.', '6/8 = 3/4 (÷ 2)'],
+                ['Somar/subtrair (denominadores iguais)', 'Some/subtraia os numeradores e mantenha o denominador.', '2/7 + 3/7 = 5/7'],
+                ['Somar/subtrair (denominadores diferentes)', 'Iguale os denominadores pelo MMC.', '1/2 + 1/3 = 3/6 + 2/6 = 5/6'],
+                ['Multiplicar', 'Numerador × numerador; denominador × denominador.', '2/3 × 3/5 = 6/15 = 2/5'],
+                ['Dividir', 'Mantenha a primeira e multiplique pelo inverso da segunda.', '3/4 ÷ 1/2 = 3/4 × 2/1 = 6/4 = 3/2'],
+                ['Fração de um número', 'Divida pelo denominador e multiplique pelo numerador.', '3/5 de 40 = 40 ÷ 5 × 3 = 24'],
+            ], [4.8, 6.4, 5.8], 9.0),
+        ],
+        exemplos=['Um percurso de 12 km: o guarda já fez 2/3. 12 ÷ 3 = 4; 4 × 2 = 8 km feitos; faltam 4 km.'],
+        erros=['Somar numeradores e denominadores diretamente: 1/2 + 1/3 ≠ 2/5.', 'Usar MMC na multiplicação (não é necessário).'],
+        resumo=['Soma e subtração: denominadores iguais (MMC).', 'Multiplicação: direto. Divisão: inverte a segunda.', 'Fração de um número: ÷ denominador × numerador.'],
+        exercicios=[
+            QN('Matemática — Frações', 'Em um grupo de 60 candidatos, 2/5 são mulheres. Quantas mulheres há no grupo?',
+               '24', ['26', '30', '36', '40'], '60 ÷ 5 = 12; 12 × 2 = 24.', '36 é o número de homens (3/5).'),
+            QF('Matemática — Frações', 'O resultado de 1/4 + 2/3 é',
+               ['3/7', '1/2', '3/4', '11/12', '7/6'], 'D', 'MMC(4, 3) = 12. 1/4 = 3/12; 2/3 = 8/12. 3/12 + 8/12 = 11/12.', '3/7 resulta de somar numeradores e denominadores, o que é errado.'),
+        ]),
+
+    Topico('Números decimais',
+        'Números decimais representam valores <b>não inteiros</b> usando a vírgula: 0,5 (meio), 2,75, 0,25.',
+        [
+            tab(['Operação', 'Regra', 'Exemplo'], [
+                ['Adição e subtração', 'Alinhe as vírgulas (complete com zeros).', '3,50 + 2,75 = 6,25'],
+                ['Multiplicação', 'Multiplique como inteiros e conte as casas decimais dos fatores.', '1,5 × 0,2 → 15 × 2 = 30; 2 casas → 0,30 = 0,3'],
+                ['Divisão', 'Iguale as casas decimais e divida como inteiros.', '4,5 ÷ 0,5 = 45 ÷ 5 = 9'],
+                ['Multiplicar por 10, 100, 1.000', 'Desloque a vírgula para a direita 1, 2, 3 casas.', '3,47 × 100 = 347'],
+            ], [4.2, 6.6, 6.2], 9.0),
+            tab(['Fração', 'Decimal', 'Porcentagem'], [['1/2', '0,5', '50%'], ['1/4', '0,25', '25%'], ['3/4', '0,75', '75%'], ['1/5', '0,2', '20%'], ['1/10', '0,1', '10%']], [5.6, 5.6, 5.8], 9.2),
+        ],
+        exemplos=['Uma lanterna custa R$ 23,90 e uma pilha, R$ 4,50. Juntas: 23,90 + 4,50 = R$ 28,40.'],
+        erros=['Não alinhar a vírgula na soma.', 'Errar a contagem de casas decimais na multiplicação.'],
+        resumo=['Soma/subtração: alinhe a vírgula.', 'Multiplicação: conte as casas.', 'Divisão: iguale as casas.'],
+        exercicios=[
+            QN('Matemática — Decimais', 'O resultado de 2,4 × 0,5 é',
+               '1,2', ['0,12', '0,24', '1,02', '1,12'], '24 × 5 = 120; 1 + 1 = 2 casas decimais → 1,20 = 1,2.', ''),
+            QN('Matemática — Decimais', 'Um guarda percorreu 4,25 km de manhã e 3,8 km à tarde. No total, percorreu',
+               '8,05 km', ['8,13 km', '8,5 km', '9,05 km', '12,05 km'], 'Alinhando: 4,25 + 3,80 = 8,05.', 'Somar 4,25 + 3,8 sem alinhar pode levar a 4,63 ou 7,13.'),
+        ]),
+
+    Topico('Porcentagem',
+        'Porcentagem é uma <b>razão com denominador 100</b>: 25% = 25/100 = 0,25.',
+        [
+            tab(['Situação', 'Como calcular', 'Exemplo'], [
+                ['x% de um valor', 'Multiplique o valor por x/100.', '15% de 200 = 0,15 × 200 = 30'],
+                ['Cálculo mental', '10% = valor ÷ 10; 1% = valor ÷ 100; some as partes.', '15% de 240: 10% = 24; 5% = 12; total 36'],
+                ['Que porcentagem A é de B', 'A ÷ B × 100.', '12 de 80 → 12 ÷ 80 = 0,15 = 15%'],
+                ['Aumento de x%', 'Multiplique por (1 + x/100).', '200 com aumento de 10% → 200 × 1,10 = 220'],
+                ['Desconto de x%', 'Multiplique por (1 − x/100).', '150 com desconto de 20% → 150 × 0,80 = 120'],
+                ['Aumentos sucessivos', 'Multiplique os fatores.', '+10% e +10% → 1,10 × 1,10 = 1,21 (aumento de 21%)'],
+                ['Variação percentual', '(valor final − inicial) ÷ inicial × 100.', 'De 400 para 500 → 100 ÷ 400 = 25%'],
+            ], [4.4, 6.0, 6.6], 9.0),
+        ],
+        exemplos=['Um produto de R$ 80,00 subiu para R$ 100,00. Aumento: 20 ÷ 80 = 0,25 = 25%.'],
+        erros=['Somar aumentos sucessivos (10% + 10% ≠ 20%).', 'Calcular a variação dividindo pelo valor final.'],
+        resumo=['x% = x/100.', 'Aumento: × (1 + taxa); desconto: × (1 − taxa).', 'Variação: diferença ÷ valor inicial.'],
+        exercicios=[
+            QN('Matemática — Porcentagem', 'Um uniforme de R$ 180,00 teve desconto de 15%. O novo preço é',
+               'R$ 153,00', ['R$ 27,00', 'R$ 135,00', 'R$ 140,00', 'R$ 150,00'], '15% de 180 = 27. 180 − 27 = 153. (Ou 180 × 0,85 = 153.)', 'R$ 27,00 é o desconto.'),
+            QN('Matemática — Porcentagem', 'O número de ocorrências passou de 50 para 60. O aumento percentual foi de',
+               '20%', ['25%', '30%', '50%', '60%'], 'Aumento = 10. 10 ÷ 50 = 0,2 = 20%.', 'Dividir 10 ÷ 60 ≈ 16,7% é erro: divide-se pelo valor inicial.'),
+        ]),
+
+    Topico('Razão',
+        'Razão é a <b>comparação entre duas grandezas por meio de uma divisão</b>: a razão de a para b é a/b (ou a : b).',
+        [
+            tab(['Razões especiais', 'Definição', 'Exemplo'], [
+                ['Velocidade média', 'Distância ÷ tempo.', '120 km em 2 h → 60 km/h'],
+                ['Escala', 'Medida no desenho ÷ medida real.', '1 : 100.000 → 1 cm no mapa = 100.000 cm = 1 km'],
+                ['Densidade demográfica', 'População ÷ área.', '160.000 hab ÷ 400 km² = 400 hab/km²'],
+            ], [4.0, 5.6, 7.4], 9.2),
+            caixa('atencao', 'A ordem importa: a razão entre mulheres e homens (M/H) é diferente da razão entre homens e mulheres (H/M).'),
+        ],
+        exemplos=['Em uma turma com 12 mulheres e 18 homens, a razão mulheres/homens é 12/18 = 2/3.'],
+        erros=['Inverter a ordem dos termos.', 'Não converter unidades antes de comparar.'],
+        resumo=['Razão = divisão entre duas grandezas.', 'Velocidade, escala e densidade são razões.'],
+        exercicios=[
+            QF('Matemática — Razão', 'Em um evento havia 30 adultos e 20 crianças. A razão entre crianças e adultos é',
+               ['1/3', '2/5', '1/2', '2/3', '3/2'], 'D', '20/30 = 2/3.', '3/2 seria adultos/crianças.'),
+            QN('Matemática — Razão', 'Em um mapa na escala 1 : 50.000, uma distância de 6 cm corresponde, na realidade, a',
+               '3 km', ['0,3 km', '30 km', '300 km', '50 km'], '6 × 50.000 = 300.000 cm = 3.000 m = 3 km.', '0,3 km (300 m) seria 30.000 cm, valor 10 vezes menor.'),
+        ]),
+
+    Topico('Proporção',
+        'Proporção é a <b>igualdade entre duas razões</b>: a/b = c/d. Propriedade fundamental: o produto dos meios é igual ao produto dos extremos (a × d = b × c).',
+        [
+            caixa('exemplo', ['<b>Encontre x em x/8 = 3/4.</b>', 'Passo 1: multiplique cruzado: 4 × x = 8 × 3.', 'Passo 2: 4x = 24.', 'Passo 3: x = 24 ÷ 4 = 6.'], 'EXEMPLO RESOLVIDO'),
+            h3('Divisão proporcional'),
+            num(['Some as partes da razão.', 'Divida o total pela soma: você obtém o valor de cada parte.', 'Multiplique pelo número de partes de cada pessoa.']),
+            caixa('exemplo', ['<b>Dividir R$ 1.000,00 entre A e B na razão 2 : 3.</b>', 'Partes: 2 + 3 = 5. Cada parte: 1.000 ÷ 5 = 200.', 'A recebe 2 × 200 = R$ 400,00; B recebe 3 × 200 = R$ 600,00.'], 'EXEMPLO RESOLVIDO'),
+        ],
+        exemplos=['Se 3 está para 5 assim como 9 está para 15, temos 3/5 = 9/15 (3 × 15 = 5 × 9 = 45).'],
+        erros=['Dividir o total pelo número de pessoas, ignorando a razão.'],
+        resumo=['Proporção: a/b = c/d → a × d = b × c.', 'Divisão proporcional: total ÷ soma das partes.'],
+        exercicios=[
+            QN('Matemática — Proporção', 'Na proporção 5/x = 10/14, o valor de x é',
+               '7', ['10', '14', '28', '70'], '10x = 5 × 14 = 70 → x = 7.', ''),
+            QN('Matemática — Proporção', 'Dividindo 700 em partes proporcionais a 3 e 4, a maior parte é',
+               '400', ['100', '300', '350', '375'], '3 + 4 = 7; 700 ÷ 7 = 100; maior parte = 4 × 100 = 400.', '300 é a parte menor.'),
+        ]),
+
+    Topico('Regra de três',
+        'Regra de três é o método para <b>encontrar um valor desconhecido</b> quando há grandezas proporcionais.',
+        [
+            tab(['Tipo de grandeza', 'Comportamento', 'Exemplo'], [
+                ['Diretamente proporcionais', 'Uma aumenta, a outra aumenta na mesma proporção.', 'Mais metros de tecido → maior custo'],
+                ['Inversamente proporcionais', 'Uma aumenta, a outra diminui na mesma proporção.', 'Mais trabalhadores → menos dias'],
+            ], [4.6, 6.4, 6.0], 9.2),
+            caixa('exemplo', ['<b>Direta:</b> 5 kg custam R$ 30,00. Quanto custam 8 kg?', '1 kg = 30 ÷ 5 = 6. 8 kg = 8 × 6 = R$ 48,00.'], 'EXEMPLO — REGRA DE TRÊS DIRETA'),
+            caixa('exemplo', ['<b>Inversa:</b> 4 guardas fazem uma vistoria em 6 horas. Em quanto tempo 8 guardas fariam?', 'Mais guardas → menos tempo (inversa). 4 × 6 = 8 × t → 24 = 8t → t = 3 horas.'], 'EXEMPLO — REGRA DE TRÊS INVERSA'),
+            caixa('exemplo', ['<b>Composta:</b> 3 impressoras imprimem 600 páginas em 2 horas. Quantas páginas 5 impressoras imprimem em 3 horas?', 'Reduza à unidade: 1 impressora em 1 hora = 600 ÷ 3 ÷ 2 = 100 páginas.', '5 impressoras × 3 horas × 100 = 1.500 páginas.'], 'EXEMPLO — REGRA DE TRÊS COMPOSTA'),
+        ],
+        exemplos=['Ver os três exemplos resolvidos acima.'],
+        erros=['Tratar grandezas inversas como diretas.', 'Montar a composta sem analisar cada grandeza.'],
+        resumo=['Identifique se as grandezas são diretas ou inversas.', 'Reduzir à unidade simplifica os cálculos.'],
+        exercicios=[
+            QN('Matemática — Regra de três', 'Se 6 metros de cabo custam R$ 42,00, quanto custam 10 metros?',
+               'R$ 70,00', ['R$ 72,00', 'R$ 74,00', 'R$ 80,00', 'R$ 84,00'], '1 m = 42 ÷ 6 = 7. 10 m = 70.', ''),
+            QN('Matemática — Regra de três', 'Viajando a 60 km/h, um trajeto leva 3 horas. A 90 km/h, o mesmo trajeto levará',
+               '2 horas', ['1 hora', '1,5 hora', '4 horas', '4,5 horas'], 'Inversa: 60 × 3 = 90 × t → t = 180 ÷ 90 = 2 h.', '4,5 h resulta de tratar como direta.'),
+        ]),
+
+    Topico('Resolução de problemas',
+        'Resolver problemas é <b>transformar uma situação descrita em palavras em operações matemáticas</b>.',
+        [
+            fluxo([('Entender', 'o que se pede?'), ('Organizar', 'liste os dados'), ('Planejar', 'qual operação/equação?'), ('Conferir', 'a resposta faz sentido?')]),
+            h3('Equações do 1º grau'),
+            'Equação é uma igualdade com um valor desconhecido (x). Para resolver, isole o x fazendo a mesma operação dos dois lados.',
+            caixa('exemplo', ['<b>Pai e filho somam 46 anos; o pai tem 26 anos a mais. Qual a idade do filho?</b>', 'Filho = x; pai = x + 26.', 'x + (x + 26) = 46 → 2x + 26 = 46 → 2x = 20 → x = 10.', 'Filho: 10 anos; pai: 36 anos. Conferência: 10 + 36 = 46 ✓.'], 'EXEMPLO RESOLVIDO'),
+            h3('Área e perímetro'),
+            tab(['Figura', 'Perímetro (contorno)', 'Área (superfície)'], [['Retângulo (b × h)', '2b + 2h', 'b × h'], ['Quadrado (lado L)', '4L', 'L × L']], [5.0, 6.0, 6.0], 9.2),
+            h3('Média aritmética'),
+            'Soma dos valores ÷ quantidade de valores. Notas 6, 7 e 8 → (6 + 7 + 8) ÷ 3 = 7.',
+        ],
+        exemplos=['Para cercar uma praça de 30 m por 20 m: perímetro = 2 × 30 + 2 × 20 = 100 m.'],
+        erros=['Confundir área com perímetro.', 'Não conferir se a resposta faz sentido.'],
+        resumo=['Entender, organizar, planejar, conferir.', 'Equações: isolar o x.', 'Perímetro = contorno; área = superfície.'],
+        exercicios=[
+            QN('Matemática — Problemas', 'Um terreno retangular mede 25 m por 12 m. Sua área é',
+               '300 m²', ['37 m²', '74 m²', '250 m²', '600 m²'], 'Área = 25 × 12 = 300 m².', '74 m é o perímetro.'),
+            QN('Matemática — Problemas', 'A soma de dois números é 50 e um deles é 14 unidades maior que o outro. O menor número é',
+               '18', ['20', '25', '32', '36'], 'x + (x + 14) = 50 → 2x = 36 → x = 18 (o outro é 32).', '32 é o maior.'),
+        ]),
+
+    Topico('Sequências',
+        'Sequência é uma <b>lista ordenada de elementos que segue um padrão</b>. Descobrir o padrão permite encontrar os próximos termos.',
+        [
+            tab(['Tipo', 'Padrão', 'Exemplo'], [
+                ['Progressão aritmética (PA)', 'Soma-se sempre o mesmo número (razão).', '4, 7, 10, 13, … (razão 3)'],
+                ['Progressão geométrica (PG)', 'Multiplica-se sempre pelo mesmo número.', '3, 6, 12, 24, … (razão 2)'],
+                ['Quadrados', 'n²', '1, 4, 9, 16, 25, …'],
+                ['Fibonacci', 'Cada termo é a soma dos dois anteriores.', '1, 1, 2, 3, 5, 8, 13, …'],
+                ['Letras', 'Posição no alfabeto.', 'A, C, E, G → pula uma letra'],
+                ['Figuras que se repetem', 'Ciclo: use o resto da divisão.', '▲ ● ■ ▲ ● ■ … a 10ª figura: 10 ÷ 3 = 3, resto 1 → ▲'],
+            ], [4.6, 6.0, 6.4], 9.0),
+            caixa('dica', 'Calcule as diferenças entre termos vizinhos. Se forem iguais, é PA. Se as divisões forem iguais, é PG. Se as diferenças aumentarem de forma regular (2, 4, 6...), observe um padrão de segundo nível.'),
+        ],
+        exemplos=['5, 10, 20, 40, … → cada termo é o dobro do anterior; o próximo é 80.'],
+        erros=['Tentar adivinhar sem testar o padrão em todos os termos.'],
+        resumo=['PA: soma constante; PG: multiplicação constante.', 'Ciclos: use o resto da divisão.'],
+        exercicios=[
+            QN('Matemática — Sequências', 'Na sequência 2, 5, 8, 11, …, o 6º termo é',
+               '17', ['11', '12', '14', '15'], 'PA de razão 3: 2, 5, 8, 11, 14 (5º), 17 (6º).', '14 é o 5º termo.'),
+            QN('Matemática — Sequências', 'Na sequência 1, 3, 9, 27, …, o próximo termo é',
+               '81', ['30', '36', '54', '72'], 'PG de razão 3: 27 × 3 = 81.', ''),
+        ]),
+
+    Topico('Raciocínio lógico',
+        'Raciocínio lógico estuda as <b>proposições</b> (frases que podem ser verdadeiras ou falsas) e as regras para tirar conclusões válidas.',
+        [
+            tab(['Conectivo', 'Símbolo', 'É verdadeira quando...'], [
+                ['Conjunção (“e”)', 'p ∧ q', 'as duas são verdadeiras.'],
+                ['Disjunção (“ou”)', 'p ∨ q', 'pelo menos uma é verdadeira (só é falsa se as duas forem falsas).'],
+                ['Condicional (“se… então”)', 'p → q', 'só é falsa quando p é verdadeira e q é falsa.'],
+                ['Bicondicional (“se e somente se”)', 'p ↔ q', 'as duas têm o mesmo valor.'],
+                ['Negação (“não”)', '~p', 'p é falsa.'],
+            ], [5.4, 2.4, 9.2], 9.2),
+            h3('Negações mais cobradas'),
+            tab(['Proposição', 'Negação'], [
+                ['Todos são A', 'Algum não é A (pelo menos um não é)'],
+                ['Nenhum é A', 'Algum é A'],
+                ['p e q', 'não p ou não q (De Morgan)'],
+                ['p ou q', 'não p e não q (De Morgan)'],
+                ['Se p, então q', 'p e não q'],
+            ], [6.0, 11.0], 9.2),
+            h3('Equivalência da condicional'),
+            '“Se p, então q” equivale a “Se não q, então não p” (contrapositiva) e a “Não p ou q”. <b>Não</b> equivale a “Se q, então p”.',
+            caixa('exemplo', ['<b>“Se chover, o evento será transferido.”</b> O evento não foi transferido. Conclusão?', 'Se tivesse chovido, o evento seria transferido. Como não foi, não choveu (modus tollens).', 'Atenção: se o evento tivesse sido transferido, NÃO poderíamos concluir que choveu (poderia haver outro motivo).'], 'EXEMPLO RESOLVIDO'),
+            h3('Problemas de associação'),
+            'Monte uma tabela com as possibilidades e elimine as impossíveis a partir das pistas.',
+        ],
+        exemplos=['Negação de “Todos os candidatos estudaram”: “Algum candidato não estudou”.'],
+        erros=['Negar “todos” com “nenhum”.', 'Negar “p e q” como “não p e não q”.', 'Achar que “se p então q” equivale a “se q então p”.'],
+        resumo=['Condicional só é falsa em V → F.', 'Negação de “todos” = “algum não”.', 'De Morgan: troque “e” por “ou” e negue as partes.'],
+        exercicios=[
+            Q('Raciocínio lógico', 'A negação de “Todos os guardas usam uniforme” é',
+              'Algum guarda não usa uniforme.', ['Nenhum guarda usa uniforme.', 'Todos os guardas não usam uniforme.', 'Algum guarda usa uniforme.', 'Todos usam uniforme e colete.'], 'Para negar “todos”, basta um caso contrário.', '“Nenhum” é exagero.'),
+            Q('Raciocínio lógico', 'Uma proposição equivalente a “Se estudo, então aprendo” é',
+              'Se não aprendo, então não estudo.', ['Se aprendo, então estudo.', 'Se não estudo, então não aprendo.', 'Estudo e não aprendo.', 'Estudo ou aprendo.'], 'Contrapositiva: “se não q, então não p”.', ''),
+        ]),
+
+    Topico('Gráficos',
+        'Gráficos são <b>representações visuais de dados</b>, que facilitam comparar valores e perceber tendências.',
+        [
+            tab(['Tipo', 'Melhor para', 'Exemplo de uso'], [
+                ['Colunas / barras', 'Comparar quantidades entre categorias.', 'Ocorrências por bairro.'],
+                ['Linhas', 'Mostrar evolução ao longo do tempo.', 'Ocorrências mês a mês.'],
+                ['Setores (pizza)', 'Mostrar partes de um todo (100%).', 'Distribuição dos tipos de atendimento.'],
+            ], [4.0, 6.4, 6.6], 9.2),
+            h3('Como ler um gráfico'),
+            num(['Leia o título e a fonte.', 'Veja o que cada eixo representa e a unidade (números absolutos ou porcentagens).', 'Identifique o maior e o menor valor.', 'Responda exatamente o que se pede (diferença, total, variação, média).']),
+            caixa('dica', 'No gráfico de setores, os ângulos são proporcionais às porcentagens: 25% corresponde a 1/4 do círculo (90°); 50%, a meio círculo (180°).'),
+        ],
+        exemplos=['Se um gráfico de linhas mostra 100 ocorrências em janeiro e 125 em fevereiro, o aumento foi de 25%.'],
+        erros=['Não observar a escala do eixo.', 'Confundir valor absoluto com porcentagem.'],
+        resumo=['Colunas comparam; linhas mostram evolução; setores mostram partes do todo.'],
+        exercicios=[
+            Q('Matemática — Gráficos', 'Para mostrar a evolução do número de atendimentos ao longo de 12 meses, o gráfico mais adequado é o de',
+              'linhas.', ['setores.', 'pictograma de uma única figura.', 'dispersão sem tempo.', 'mapa de calor sem rótulos.'], 'Linhas evidenciam tendências no tempo.', ''),
+            QF('Matemática — Gráficos', 'Em um gráfico de setores, uma categoria que representa 25% do total ocupa um ângulo de',
+               ['25°', '45°', '60°', '90°', '180°'], 'D', '25% de 360° = 0,25 × 360 = 90°.', ''),
+        ]),
+
+    Topico('Tabelas',
+        'Tabelas <b>organizam dados em linhas e colunas</b>, permitindo localizar e comparar informações com precisão.',
+        [
+            'Ao ler uma tabela, identifique o título, o significado de cada coluna, as unidades e o total (se houver). Muitas questões pedem somas, diferenças, médias e porcentagens.',
+            tab(['Mês', 'Atendimentos'], [['Janeiro', '80'], ['Fevereiro', '100'], ['Março', '120'], ['Abril', '100']], [8.5, 8.5], 9.6),
+            caixa('exemplo', ['Total: 80 + 100 + 120 + 100 = 400.', 'Média mensal: 400 ÷ 4 = 100.', 'Aumento de janeiro para março: 120 − 80 = 40; 40 ÷ 80 = 50%.', 'Participação de março no total: 120 ÷ 400 = 30%.'], 'EXEMPLO RESOLVIDO (com a tabela acima)'),
+        ],
+        exemplos=['Ver o exemplo resolvido acima.'],
+        erros=['Somar linhas erradas.', 'Calcular variação percentual dividindo pelo valor final.'],
+        resumo=['Leia título, colunas e unidades.', 'Total, média, diferença e porcentagem são os cálculos mais comuns.'],
+        exercicios=[
+            QN('Matemática — Tabelas', 'Com base na tabela, a média mensal de atendimentos de janeiro a abril é',
+               '100', ['80', '95', '110', '400'], 'Total = 400; 400 ÷ 4 = 100.', '400 é o total.', tabela=TAB_ATEND),
+            QN('Matemática — Tabelas', 'Segundo a tabela, o aumento percentual de janeiro para fevereiro foi de',
+               '25%', ['10%', '20%', '30%', '50%'], 'Aumento = 20; 20 ÷ 80 = 0,25 = 25%.', '20 ÷ 100 = 20% é erro (divisão pelo valor final).', tabela=TAB_ATEND),
+        ]),
+]
+
+REVISAO = [
+    QN('Revisão — Matemática', 'Quanto é 12% de 250?', '30', ['32', '35', '40', '42'], '10% = 25; 2% = 5; total = 30.', ''),
+    QN('Revisão — Matemática', 'Se 8 operários constroem um muro em 6 dias, 12 operários construirão o mesmo muro em',
+       '4 dias', ['3 dias', '5 dias', '8 dias', '9 dias'], 'Inversa: 8 × 6 = 12 × d → d = 48 ÷ 12 = 4.', ''),
+    QF('Revisão — Matemática', 'O resultado de 3/4 ÷ 3/8 é', ['9/32', '1/2', '3/4', '2', '4'], 'D', '3/4 × 8/3 = 24/12 = 2.', ''),
+    Q('Revisão — Raciocínio lógico', 'A negação de “O guarda está atento e o rádio está ligado” é',
+      'O guarda não está atento ou o rádio não está ligado.', ['O guarda não está atento e o rádio não está ligado.', 'O guarda está atento ou o rádio está ligado.', 'Se o guarda está atento, o rádio está ligado.', 'O guarda está atento e o rádio não está ligado.'], 'De Morgan.', ''),
+    QN('Revisão — Matemática', 'Na sequência 1, 4, 9, 16, …, o próximo termo é', '25', ['30', '32', '36', '49'], 'Quadrados: 5² = 25.', ''),
+    QN('Revisão — Matemática', 'Um valor de R$ 1.000,00 teve dois aumentos sucessivos de 10%. O valor final é',
+       'R$ 1.210,00', ['R$ 1.020,00', 'R$ 1.100,00', 'R$ 1.200,00', 'R$ 1.201,00'], '1.000 × 1,1 × 1,1 = 1.210.', 'Somar os percentuais dá 1.200, o que está errado.'),
+    QN('Revisão — Matemática', 'O perímetro de um quadrado de lado 9 m é', '36 m', ['18 m', '27 m', '32 m', '34 m'], '4 × 9 = 36 m.', '81 m² é a área.'),
+    Q('Revisão — Raciocínio lógico', '“Se o edital sair, estudarei mais.” O edital saiu. Logo,',
+      'estudarei mais.', ['não estudarei.', 'o edital não saiu.', 'nada se pode concluir.', 'estudarei menos.'], 'Modus ponens: p verdadeira e p → q verdadeira ⇒ q verdadeira.', ''),
+]
+
+RESUMO_CAP = [
+    ['Operações', 'Ordem: parênteses, potências, × e ÷, + e −; regra de sinais; MMC e MDC.'],
+    ['Frações e decimais', 'MMC para somar; inverter na divisão; alinhar a vírgula; contar casas na multiplicação.'],
+    ['Porcentagem', 'x/100; aumento × (1 + taxa); desconto × (1 − taxa); sucessivos se multiplicam; variação ÷ valor inicial.'],
+    ['Razão e proporção', 'a/b; produto dos meios = produto dos extremos; divisão proporcional.'],
+    ['Regra de três', 'Direta ou inversa; composta: reduzir à unidade.'],
+    ['Problemas', 'Entender, organizar, planejar, conferir; equações; área e perímetro; média.'],
+    ['Sequências', 'PA, PG, quadrados, Fibonacci, ciclos com resto da divisão.'],
+    ['Lógica', 'Tabela dos conectivos; negações (todos → algum não; De Morgan); contrapositiva.'],
+    ['Gráficos e tabelas', 'Leia título, eixos e unidades; total, média, diferença e porcentagem.'],
+]
