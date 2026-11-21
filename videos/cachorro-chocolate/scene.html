@@ -1,0 +1,228 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,'Noto Color Emoji',sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:230px;text-align:center;font-weight:900;font-size:84px;line-height:1.06}
+#hook b{color:#FFD21F;display:block;font-size:96px}
+#cap{width:1080px;top:1420px;text-align:center;font-weight:900;font-size:110px}
+#cap.hl{color:#FFD21F}
+#card{left:60px;width:960px;top:200px;text-align:center}
+#card div{background:#fff;color:#111;font-weight:900;font-size:54px;line-height:1.15;padding:20px 26px;border:8px solid #111;border-radius:32px;box-shadow:0 10px 0 #111}
+#card small{display:block;font-size:38px;color:#7C3AED;margin-bottom:6px}
+#stamp{font-weight:900;font-size:120px;padding:6px 40px;border:12px solid #111;border-radius:30px;box-shadow:0 12px 0 #111;color:#fff;white-space:nowrap}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:56px;padding:8px 28px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.white{background:#fff;color:#111}
+.small{font-size:44px;padding:6px 22px;border-radius:18px;border-width:6px;box-shadow:0 6px 0 #111}
+#meter{left:190px;width:700px;top:1210px}
+#meter div{height:64px;border:8px solid #111;border-radius:40px;background:#fff;overflow:hidden;box-shadow:0 8px 0 #111}
+#meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,#FACC15,#EF4444)}
+#meter span{display:block;text-align:center;font-weight:900;font-size:44px;color:#fff;-webkit-text-stroke:8px #111;paint-order:stroke fill;margin-bottom:6px}
+#final{left:50px;width:980px;top:1230px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:58px;line-height:1.14;padding:28px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#7C3AED}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.85;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">CACHORRO PODE<b>COMER CHOCOLATE? 🍫🐶</b></div>
+<div id="card" class="o"><div><small>VERDADEIRO OU FALSO?</small><span id="ctext"></span></div></div>
+<div id="stamp" class="o"></div>
+<div id="meter" class="o"><span>☠️ TEOBROMINA NO CORPO</span><div><i></i></div></div>
+<div id="t1" class="o tag"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Seu cachorro já pegou<br>chocolate escondido? 🍫<br>Comenta aqui 👇<br><em>Segue 👉 @olhaso_3D</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, rr } from '/_kit/kit.js';
+await document.fonts.load('900 60px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; window.DURATION = TP.duration;
+const ALL = SN.flatMap(s => s.words);
+const WA = (re, n = 0, after = 0) => { const ws = ALL.filter(w => w.start >= after && re.test(w.w)); if (!ws[n]) { console.log('WA MISS', re); return after; } return ws[n].start; };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .03, 300);
+scene.background = new THREE.Color(0xFFE4C4); scene.fog = new THREE.Fog(0xFFE4C4, 14, 40);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const MAT = (c, r = .8, ex = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: r }, ex));
+const add = (geo, mat, x, y, z, par = scene) => { const m = new THREE.Mesh(geo, typeof mat === 'number' ? MAT(mat) : mat); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; par.add(m); return m; };
+const box = (w, h, d, c, x, y, z, par = scene) => add(new THREE.BoxGeometry(w, h, d), c, x, y, z, par);
+const cyl = (rt, rb, h, c, x, y, z, par = scene, seg = 16) => add(new THREE.CylinderGeometry(rt, rb, h, seg), c, x, y, z, par);
+const sph = (r, c, x, y, z, par = scene, a = 18, b = 12) => add(new THREE.SphereGeometry(r, a, b), c, x, y, z, par);
+const cap = (r, l, c, x, y, z, par = scene) => add(new THREE.CapsuleGeometry(r, l, 8, 16), c, x, y, z, par);
+const GREEN = 0x2F7A45, ORANGE = 0xE07B2A;
+const canvasTex = (w, h, paint) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); paint(g, w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; };
+const sprite = (t, s) => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthWrite: false, depthTest: false })); sp.scale.setScalar(s); sp.renderOrder = 5; return sp; };
+const emo = (e, px = 110) => canvasTex(160, 160, g => { g.font = `${px}px 'Noto Color Emoji'`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(e, 80, 88); });
+// ---------- cachorro ----------
+function buildDog(o) {
+  const C = Object.assign({ base: 0xC98A4A, belly: 0xF2E2C4, back: null, points: null, muzzle: null, size: 1, leg: .3, body: .42, snout: .11, ear: 'floppy', earC: null, collar: GREEN, socks: false, fluff: false, tailCurl: .9 }, o);
+  const mB = MAT(C.base), mBe = MAT(C.belly), mP = MAT(C.points ?? C.base), mM = MAT(C.muzzle ?? C.points ?? C.belly), mE = MAT(C.earC ?? C.back ?? C.base), mK = C.back != null ? MAT(C.back) : mB;
+  const root = new THREE.Group(); const hipY = C.leg + .13;
+  const body = grp(root); body.position.y = hipY;
+  const torso = cap(.16, C.body, mB, 0, 0, 0, body); torso.rotation.x = Math.PI / 2; torso.scale.set(.92, 1, 1);
+  if (C.back != null) { const s = cap(.163, C.body, mK, 0, .035, -.01, body); s.rotation.x = Math.PI / 2; s.scale.set(.93, 1, .96); }
+  const chest = sph(.135, mBe, 0, -.03, C.body / 2 + .04, body); chest.scale.set(.92, 1.05, .75);
+  const haunch = [-1, 1].map(s => { const h = sph(.1, mK, s * .07, .0, -C.body / 2 + .02, body); h.scale.set(.8, 1.1, 1.1); return h; });
+  if (C.fluff) { for (let i = 0; i < 5; i++) { const f = sph(.07, mB, 0, -.12, C.body / 2 - i * .1, body); f.scale.set(1.2, .7, 1); } const r = sph(.16, mBe, 0, .02, C.body / 2 + .06, body); r.scale.set(1, 1.1, .8); }
+  const neck = cap(.085, .12, mK, 0, .1, C.body / 2 + .08, body); neck.rotation.x = -.7;
+  const headP = grp(body); headP.position.set(0, .23, C.body / 2 + .17);
+  const head = grp(headP);
+  const skull = sph(.125, mK, 0, 0, 0, head); skull.scale.set(1, .93, 1.05);
+  const cheeks = [-1, 1].map(s => { const c = sph(.07, C.points != null ? mP : mB, s * .06, -.045, .06, head); return c; });
+  const muz = cap(.062, C.snout, mM, 0, -.035, .1 + C.snout / 2, head); muz.rotation.x = Math.PI / 2;
+  const nose = sph(.033, MAT(0x1A1614, .3), 0, -.01, .1 + C.snout + .06, head); nose.scale.set(1.2, .85, .9);
+  const tongue = cap(.026, .05, MAT(0xE8788A, .5), 0, -.085, .1 + C.snout + .02, head); tongue.rotation.x = .4; tongue.scale.set(1.1, 1, .5);
+  const eyeM = MAT(0x2A1708, .15);
+  const eyes = [-1, 1].map(s => { const e = sph(.023, eyeM, s * .056, .028, .102, head, 14, 10); const hl = sph(.0065, BASIC(0xFFFFFF), .006, .009, .019, e, 8, 6); return e; });
+  if (C.points != null) [-1, 1].forEach(s => sph(.016, mP, s * .05, .07, .105, head, 10, 8));
+  const ears = [-1, 1].map(s => { const g = grp(head); g.position.set(s * .088, .075, -.015); const L = C.ear === 'long' ? 1.6 : C.ear === 'erect' ? .95 : 1.05; const e = sph(.07, mE, 0, 0, 0, g, 14, 10); e.scale.set(.32, L, .72);
+    if (C.ear === 'erect') { e.position.y = .07; g.rotation.z = -s * .25; } else if (C.ear === 'semi') { e.position.y = .05; g.rotation.z = -s * .2; g.userData.fold = 1; } else { e.position.y = -.06 * L; g.rotation.z = s * .5; g.rotation.x = .15; }
+    g.userData = Object.assign(g.userData || {}, { s, rz: g.rotation.z, rx: g.rotation.x, e }); return g; });
+  const legs = []; const mkLeg = (x, z, front) => { const hip = grp(body); hip.position.set(x, -.03, z); const L = C.leg;
+    cap(front ? .046 : .052, L * .4, front ? mK : mK, 0, -L * .25, 0, hip); const knee = grp(hip); knee.position.y = -L * .5;
+    cap(.037, L * .38, mP, 0, -L * .22, 0, knee); const paw = sph(.046, C.socks ? mBe : mP, 0, -L * .47, .02, knee, 12, 8); paw.scale.set(1, .6, 1.3);
+    legs.push({ hip, knee, front, x, z }); };
+  mkLeg(.085, C.body / 2 - .01, true); mkLeg(-.085, C.body / 2 - .01, true); mkLeg(.085, -C.body / 2 + .03, false); mkLeg(-.085, -C.body / 2 + .03, false);
+  const tail = grp(body); tail.position.set(0, .07, -C.body / 2 - .13); const tsegs = []; let par = tail; for (let i = 0; i < 4; i++) { const g = grp(par); if (i) g.position.y = .075; const c = cap(C.fluff ? .038 - i * .004 : .028 - i * .004, .06, i === 3 && C.socks ? mBe : mK, 0, .04, 0, g); tsegs.push(g); par = g; }
+  tail.rotation.x = -.7;
+  const col = add(new THREE.TorusGeometry(.09, .016, 8, 24), MAT(C.collar, .5), 0, .13, C.body / 2 + .1, body); col.rotation.x = Math.PI / 2 - .7;
+  const tag = add(new THREE.CylinderGeometry(.022, .022, .006, 14), MAT(0xF2C14E, .3, { metalness: .6 }), 0, .065, C.body / 2 + .175, body); tag.rotation.x = Math.PI / 2 - .3;
+  root.scale.setScalar(C.size);
+  return { root, body, head, headP, tongue, eyes, ears, legs, tail, tsegs, hipY, C };
+}
+function poseDog(d, t, o = {}) {
+  const { walk = 0, run = 0, sit = 0, tilt = 0, look = 0, lookUp = 0, wag = 1, pant = 0, eat = 0, ph = 0, lie = 0 } = o;
+  const g = walk + run; const f = run ? 11 : 7; const tt = t * f + ph; const amp = .45 * walk + .8 * run;
+  d.legs.forEach((L, i) => { const p = (i === 0 || i === 3) ? 0 : Math.PI; const s = Math.sin(tt + p);
+    L.hip.rotation.set(s * amp, 0, 0); L.knee.rotation.x = (L.front ? -1 : 1) * Math.max(0, L.front ? s : -s) * amp * 1.1; L.hip.scale.y = 1; });
+  d.body.position.y = d.hipY + Math.abs(Math.sin(tt)) * (.012 * walk + .04 * run); d.body.rotation.x = Math.sin(tt * 2) * .02 * run;
+  if (sit > 0) { const s = ease(sit); d.body.rotation.x = -.52 * s; d.body.position.y = d.hipY - .07 * s;
+    d.legs.forEach(L => { if (L.front) { L.hip.rotation.x = .52 * s; L.hip.scale.y = 1 + .3 * s; } else { L.hip.rotation.x = -1.25 * s + .52 * s; L.knee.rotation.x = 1.9 * s; } }); }
+  if (lie > 0) { const s = ease(lie); d.body.position.y = lerp(d.body.position.y, .16, s); d.legs.forEach(L => { if (L.front) { L.hip.rotation.x = lerp(L.hip.rotation.x, -1.45, s); L.knee.rotation.x = lerp(L.knee.rotation.x, 0, s); } else { L.hip.rotation.x = lerp(L.hip.rotation.x, -1.4, s); L.knee.rotation.x = lerp(L.knee.rotation.x, 2.4, s); } }); }
+  const breathe = 1 + Math.sin(t * (pant ? 9 : 2.2)) * (pant ? .012 : .006);
+  d.body.children[0].scale.set(.92 * breathe, 1, 1 * breathe);
+  d.headP.position.y = .23 - .2 * eat; d.headP.position.z = d.C.body / 2 + .17 + .06 * eat;
+  d.head.rotation.set(-lookUp + .9 * eat + .52 * ease(sit) * (1 - eat) + Math.sin(tt * 2) * .03 * g, look + Math.sin(t * .7 + ph) * .08, tilt);
+  d.tongue.visible = pant > 0; if (pant > 0) d.tongue.scale.set(1.1, 1 + Math.sin(t * 9) * .15, .5);
+  const wg = Math.sin(t * 13 + ph) * .55 * wag; d.tail.rotation.set(-.7 + .25 * ease(sit), wg, 0); d.tsegs.forEach((s, i) => { s.rotation.x = i ? -d.C.tailCurl * .25 : 0; s.rotation.z = wg * .2 * i; });
+  const blink = ((t + ph) % 3.9) > 3.78; d.eyes.forEach(e => e.scale.y = blink ? .15 : 1);
+  d.ears.forEach(e => { e.rotation.z = e.userData.rz + Math.sin(tt * 2) * .06 * g * e.userData.s + tilt * .3; });
+}
+const BREEDS = {
+  caramelo: { base: 0xD39552, belly: 0xF4DEC0, muzzle: 0xE7B47A, ear: 'floppy', earC: 0xC07F40, size: 1.0 },
+  pretoTan: { base: 0xC98A4A, back: 0x1E1A18, points: 0xC98A4A, belly: 0xF2E8DA, muzzle: 0xC98A4A, ear: 'semi', earC: 0x1E1A18, collar: ORANGE },
+  salsicha: { base: 0xB8743A, back: 0x18140F, points: 0xB8743A, belly: 0xB8743A, muzzle: 0xB8743A, earC: 0x18140F, ear: 'long', leg: .17, body: .55, snout: .13, size: .9, collar: 0xD94C6A },
+  salsichaRuivo: { base: 0xC9783A, belly: 0xD99A5A, muzzle: 0xC9783A, earC: 0x9A5426, ear: 'long', leg: .17, body: .55, snout: .13, size: .9, fluff: true, collar: 0x3B82F6 },
+  golden: { base: 0xD9A24E, belly: 0xF0CC8A, muzzle: 0xE5B66A, ear: 'floppy', size: 1.25, fluff: true, collar: 0xD94C6A },
+  collie: { base: 0x1C1A1A, belly: 0xFFFFFF, muzzle: 0xFFFFFF, ear: 'semi', socks: true, size: 1.05, collar: 0xF2C14E },
+};
+
+
+// ---------- tempos ----------
+const SQ = [/Primeira/, /Segunda/, /Terceira/, /Quarta/, /Quinta/].map(r => WA(r));
+const RV = [0, 1, 2, 3, 4].map(i => WA(/^(Verdadeiro|Falso)!?$/, i, SQ[i]));
+const T_TEO = WA(/teobromina,/), T_ACUM = WA(/acumulando/), T_CACAU = WA(/cacau,/), T_PO = WA(/^pó$/), T_POUCA = WA(/pouquíssima/), T_GORD = WA(/gordura/), T_HORAS = WA(/horas:/), T_VOMITO = WA(/vômito/), T_CORACAO = WA(/coração/), T_TREM = WA(/tremores/), T_CONV = WA(/convulsões/), T_VET = WA(/veterinário/), T_QUAL = WA(/^qual$/), T_SEU = WA(/^Seu$/);
+const STMT = ['Cachorro NÃO pode comer chocolate', 'Chocolate AMARGO é o mais perigoso', 'Chocolate BRANCO é tão perigoso quanto o amargo', 'Os sintomas aparecem NA HORA', 'Se ele comeu, é só ESPERAR PASSAR'];
+const ANS = [1, 1, 0, 0, 0];
+const HL = /chocolate|surpreender|verdadeiro|falso|teobromina|eliminar|intoxica|amargo|perigoso|cacau|branco|gordura|açúcar|sintomas|horas|vômito|tremores|convulsões|veterinário|comenta/i;
+
+scene.add(new THREE.HemisphereLight(0xFFF4E6, 0x8A6A5A, 1.05));
+const sun = new THREE.DirectionalLight(0xFFF0DD, 2.0); sun.position.set(3, 7, 5); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, { left: -4, right: 4, top: 4, bottom: -4, near: .5, far: 30 }); sun.shadow.bias = -.0004; scene.add(sun);
+// cozinha simples
+add(new THREE.PlaneGeometry(30, 30), MAT(0xE8C9A0, .9), 0, 0, 0).rotation.x = -Math.PI / 2;
+box(12, 6, .1, 0xFFF1E0, 0, 3, -2.2);
+const table = grp(); table.position.set(.9, 0, -.6); box(1.4, .06, .8, 0xA0673A, 0, .75, 0, table); [[-.62, -.32], [.62, -.32], [-.62, .32], [.62, .32]].forEach(([x, z]) => box(.06, .74, .06, 0x7A4A28, x, .37, z, table));
+const choc = (c, w = .5) => { const g = grp(); box(w, .06, .26, c, 0, .03, 0, g); for (let i = 0; i < 4; i++) for (let j = 0; j < 2; j++) box(w / 4 - .02, .02, .11, c, -w * 3 / 8 + i * w / 4, .07, -.06 + j * .12, g); return g; };
+const bar = choc(0x5A2E14); table.add(bar); bar.position.set(-.2, .79, 0); bar.rotation.y = .3;
+const wrap = box(.3, .07, .28, 0xD62F3A, .1, .82, 0, table); wrap.rotation.y = .3;
+// barras comparativas (x=0, z=1.2) com colunas de perigo
+const bars = grp(); bars.position.set(0, 0, 0); bars.visible = false;
+const kinds = [[0x3B1A0A, 'AMARGO', '#7C2D12'], [0x8B5A2B, 'AO LEITE', '#B45309'], [0xF5EEDC, 'BRANCO', '#A8A29E']];
+const cols = kinds.map(([c, n, lc], i) => { const g = grp(bars); g.position.set(-1.0 + i * 1.0, 0, 0); const b = choc(c, .6); b.rotation.x = -.5; b.position.set(0, .5, .3); g.add(b); const col = box(.4, 1, .4, 0xEF4444, 0, .5, -.4, g); const lbl = add(new THREE.PlaneGeometry(.8, .22), new THREE.MeshBasicMaterial({ map: canvasTex(320, 90, x => { x.fillStyle = '#fff'; x.fillRect(0, 0, 320, 90); x.strokeStyle = '#111'; x.lineWidth = 10; x.strokeRect(5, 5, 310, 80); x.fillStyle = lc; x.font = '900 46px P'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(n, 160, 48); }) }), 0, .18, .75, g); lbl.castShadow = false; return { g, col, lbl }; });
+const LV = [2.4, 1.0, .12];
+const fatS = sprite(emo('🧈'), .4), sugS = sprite(emo('🍬'), .4); scene.add(fatS, sugS);
+// relógio
+const clock = grp(); clock.visible = false; cyl(.5, .5, .1, 0xFFFFFF, 0, 0, 0, clock, 32).rotation.x = Math.PI / 2; const rim = add(new THREE.TorusGeometry(.5, .05, 8, 40), MAT(0x111111), 0, 0, 0, clock);
+const hH = box(.05, .3, .03, 0x111111, 0, .13, .07, clock), hM = box(.035, .42, .03, 0xEF4444, 0, .19, .08, clock); const hHp = grp(clock), hMp = grp(clock); hHp.add(hH); hMp.add(hM); hHp.position.z = 0; hMp.position.z = 0;
+const sym = ['🤮', '⚡', '💓', '🫨', '⚠️'].map(e => { const s = sprite(emo(e), .45); scene.add(s); return s; });
+const molecules = Array.from({ length: 14 }, () => { const s = sprite(emo('☠️'), .18); s.userData = { p: rr(0, 1), x: rr(-.4, .4) }; scene.add(s); return s; });
+const vet = sprite(emo('🏥'), .9); scene.add(vet); const phone = sprite(emo('📞'), .5); scene.add(phone);
+const bone = sprite(emo('🦴'), .5); scene.add(bone); const hearts = Array.from({ length: 6 }, () => { const s = sprite(emo('❤️'), .2); s.userData = { p: rr(0, 1), x: rr(-.5, .5) }; scene.add(s); return s; });
+// cachorro
+const dog = buildDog({ base: 0xD39552, belly: 0xF4DEC0, muzzle: 0xE7B47A, ear: 'floppy', earC: 0xB87538, size: 1.3, collar: 0x3B82F6 });
+scene.add(dog.root);
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+ev(.05, 'whoosh'); ev(.9, 'buzzx'); SQ.forEach((t, i) => ev(t, 'whoosh')); RV.forEach((t, i) => ev(t, ANS[i] ? 'win' : 'buzzx')); [T_TEO, T_CACAU, T_GORD, T_HORAS, T_VOMITO, T_TREM, T_VET].forEach(t => ev(t, 'pop')); ev(T_SEU, 'ding');
+
+window.draw = function (t) {
+  let si = -1; SQ.forEach((s, i) => { if (t >= s - .1) si = i; }); const cta = t >= T_SEU - .1; if (cta) si = -2;
+  [bars, clock].forEach(o => o.visible = false); [fatS, sugS, vet, phone, bone, ...sym, ...molecules, ...hearts].forEach(o => o.visible = false);
+  bar.visible = wrap.visible = true; table.visible = true;
+  let cp, tg; let dpose = { sit: 1, wag: .5, lookUp: .15 }; let dpos = V(-.55, 0, .3), dry = .6;
+  if (si === -1) { // gancho: cachorro de olho no chocolate
+    dpose = { sit: 1, wag: 1.2, lookUp: .35, look: .5, pant: 1 }; cp = V(lerp(-.4, .3, t / 4), 1.25, lerp(3.4, 2.6, easeOut(t / 4))); tg = V(.1, .75, -.2); }
+  else if (si === 0) { // teobromina acumulando
+    dpos = V(0, 0, .4); dry = 0; dpose = { sit: 1, wag: .2, lookUp: 0 }; table.visible = false;
+    if (t > T_TEO) molecules.forEach(m => { m.visible = true; const u = ((t - T_TEO) * .5 + m.userData.p) % 1; m.position.set(m.userData.x, lerp(2.6, 1.0, u), .5); m.scale.setScalar(.18 * Math.sin(u * Math.PI)); });
+    if (t > T_ACUM) dpose = { sit: 1, wag: 0, lookUp: -.15, tilt: Math.sin(t * 3) * .1 };
+    cp = V(Math.sin(t * .4) * .6, 1.3, 3.0); tg = V(0, .85, 0); }
+  else if (si === 1 || si === 2) { // comparação de chocolates
+    bars.visible = true; table.visible = false; dpos = V(1.55, 0, .9); dry = -.6; dpose = { sit: 1, wag: .6, look: -.4 };
+    cols.forEach((c, i) => { const g = ease(clamp((t - SQ[1] - .5 - i * .3) / .8)); const h = Math.max(.02, LV[i] * g); c.col.scale.y = h; c.col.position.y = h / 2; c.col.material.color.setHex(i === 0 ? 0xDC2626 : i === 1 ? 0xF97316 : 0xFACC15);
+      const hi = (si === 1 && i === 0 && t > T_CACAU) || (si === 2 && i === 2); c.g.scale.setScalar(hi ? 1.12 + Math.sin(t * 5) * .03 : 1); });
+    if (si === 2 && t > T_GORD) { fatS.visible = sugS.visible = true; fatS.position.set(.75, 1.15, .2); sugS.position.set(1.25, 1.1, .2); fatS.scale.setScalar(.4 * pop(t - T_GORD, .3)); sugS.scale.setScalar(.4 * pop(t - T_GORD - .2, .3)); }
+    cp = V(si === 2 ? .7 : -.2, 1.7, 4.3); tg = V(si === 2 ? .5 : -.3, .9, 0); }
+  else if (si === 3) { // sintomas demoram
+    table.visible = false; clock.visible = t < T_VOMITO; clock.position.set(.95, 1.55, -.3); hMp.rotation.z = -t * 6; hHp.rotation.z = -t * .5; dpos = V(-.3, 0, .4); dry = .2;
+    const shake = t > T_TREM ? Math.sin(t * 50) * .03 : 0; dpose = { sit: 0, lie: t > T_CONV ? 1 : 0, wag: 0, lookUp: -.1 }; dpos.x += shake;
+    [T_VOMITO, T_VOMITO + .6, T_CORACAO, T_TREM, T_CONV].forEach((tt, i) => { const s = sym[i]; s.visible = t > tt; const a = i * 1.25 + t * .4; s.position.set(dpos.x + Math.cos(a) * .85, 1.2 + Math.sin(a) * .35, .3); s.scale.setScalar(.45 * pop(t - tt, .3)); });
+    cp = V(.3, 1.4, 3.4); tg = V(.1, .9, 0); }
+  else if (si === 4) { // veterinário
+    table.visible = false; dpos = V(-.4, 0, .4); dry = .5; dpose = { sit: 1, wag: .3, lookUp: .2 };
+    vet.visible = t > T_VET - .2; vet.position.set(.85, 1.9, -.6); vet.scale.setScalar(.9 * pop(t - T_VET + .2, .3)); phone.visible = t > T_QUAL - .2; phone.position.set(.9, 1.0, .2); phone.scale.setScalar(.5 * pop(t - T_QUAL + .2, .3));
+    cp = V(.4, 1.5, 3.6); tg = V(.25, 1.0, -.2); }
+  else { // CTA: osso no lugar do chocolate
+    bar.visible = wrap.visible = false; bone.visible = true; bone.position.set(.75, 1.05, -.6); dpose = { sit: 1, wag: 1.5, lookUp: .25, pant: 1 };
+    hearts.forEach(h => { h.visible = true; const u = (t * .5 + h.userData.p) % 1; h.position.set(-.55 + h.userData.x, 1.3 + u * 1.2, .3); h.scale.setScalar(.2 * Math.sin(u * Math.PI)); });
+    cp = V(Math.sin(t * .4) * .5, 1.6, 3.6); tg = V(0, 1.1, 0); }
+  dog.root.position.copy(dpos); dog.root.rotation.y = dry; poseDog(dog, t, dpose);
+  cam.position.copy(cp); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  // HTML
+  fixed($('hook'), si === -1 ? pop(t - .02, .3) : 0);
+  { const el = $('card'); if (si >= 0) { $('ctext').textContent = STMT[si]; place(el, true, 540, 330, pop(t - SQ[si] + .1, .3)); } else el.style.opacity = 0; }
+  { const el = $('stamp'); if (si >= 0 && t >= RV[si]) { const v = ANS[si]; el.textContent = v ? '✅ VERDADEIRO' : '❌ FALSO'; el.style.background = v ? '#16A34A' : '#DC2626'; el.style.fontSize = v ? '96px' : '120px'; place(el, true, 540, 600, pop(t - RV[si], .25) * (t - RV[si] < 1.6 ? 1 : 0), v ? -4 : 4); } else el.style.opacity = 0; }
+  { const el = $('meter'); const on = si === 0 && t > T_TEO; el.style.opacity = on ? 1 : 0; el.style.transform = 'none'; el.querySelector('i').style.width = (on ? clamp((t - T_TEO) / (SQ[1] - T_TEO - .3)) * 100 : 0) + '%'; }
+  const tg1 = $('t1'); tg1.style.opacity = 0;
+  const tag = (txt, cls, on, y, t0, rot = -3) => { if (!on) return; tg1.textContent = txt; tg1.className = 'o tag ' + cls; place(tg1, true, 540, y, pop(t - t0, .3), rot); };
+  tag('🍫 MAIS CACAU = MAIS PERIGO', 'red small', win(t, T_CACAU, SQ[2] - .1), 1240, T_CACAU);
+  tag('🧈 GORDURA + 🍬 AÇÚCAR', 'white small', win(t, T_GORD, SQ[3] - .1), 1240, T_GORD);
+  tag('⏰ PODE LEVAR HORAS', '', win(t, T_HORAS - .2, T_VOMITO), 1240, T_HORAS - .2);
+  tag('🏥 VETERINÁRIO NA HORA', 'green', win(t, T_VET - .2, T_QUAL), 1240, T_VET - .2);
+  tag('📝 QUAL CHOCOLATE + QUANTO', 'white small', win(t, T_QUAL, T_SEU - .1), 1240, T_QUAL);
+  fixed($('final'), cta ? pop(t - T_SEU + .1, .35) : 0);
+  $('wm').style.opacity = .85;
+  let wTxt = null, wSt = 0;
+  for (const w2 of ALL) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap2 = $('cap'); const capOff = si === -1 || cta;
+  if (wTxt && !capOff) { cap2.textContent = wTxt.toUpperCase().replace(/[.,!?:…"“”]/g, ''); cap2.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap2, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap2, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>

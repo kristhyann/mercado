@@ -1,0 +1,841 @@
+{
+ "duration": 71.887,
+ "sentences": [
+  {
+   "text": "Cachorro pode comer chocolate? A resposta e o motivo vão te surpreender.",
+   "start": 0.28,
+   "end": 4.94,
+   "words": [
+    {
+     "w": "Cachorro",
+     "start": 0.28,
+     "end": 0.46
+    },
+    {
+     "w": "pode",
+     "start": 0.46,
+     "end": 0.78
+    },
+    {
+     "w": "comer",
+     "start": 0.78,
+     "end": 1.24
+    },
+    {
+     "w": "chocolate?",
+     "start": 1.24,
+     "end": 1.68
+    },
+    {
+     "w": "A",
+     "start": 2.12,
+     "end": 2.44
+    },
+    {
+     "w": "resposta",
+     "start": 2.44,
+     "end": 2.84
+    },
+    {
+     "w": "e",
+     "start": 2.84,
+     "end": 3.18
+    },
+    {
+     "w": "o",
+     "start": 3.18,
+     "end": 3.26
+    },
+    {
+     "w": "motivo",
+     "start": 3.26,
+     "end": 3.62
+    },
+    {
+     "w": "vão",
+     "start": 3.62,
+     "end": 4.0
+    },
+    {
+     "w": "te",
+     "start": 4.0,
+     "end": 4.18
+    },
+    {
+     "w": "surpreender.",
+     "start": 4.18,
+     "end": 4.94
+    }
+   ]
+  },
+  {
+   "text": "Vamos de verdadeiro ou falso.",
+   "start": 5.42,
+   "end": 7.28,
+   "words": [
+    {
+     "w": "Vamos",
+     "start": 5.42,
+     "end": 5.72
+    },
+    {
+     "w": "de",
+     "start": 5.72,
+     "end": 6.02
+    },
+    {
+     "w": "verdadeiro",
+     "start": 6.02,
+     "end": 6.72
+    },
+    {
+     "w": "ou",
+     "start": 6.72,
+     "end": 6.82
+    },
+    {
+     "w": "falso.",
+     "start": 6.82,
+     "end": 7.28
+    }
+   ]
+  },
+  {
+   "text": "Primeira: cachorro não pode comer chocolate. Verdadeiro! O chocolate tem teobromina, uma substância que o corpo do cachorro demora muito pra eliminar. Ela vai se acumulando e intoxica.",
+   "start": 7.76,
+   "end": 20.46,
+   "words": [
+    {
+     "w": "Primeira:",
+     "start": 7.76,
+     "end": 8.18
+    },
+    {
+     "w": "cachorro",
+     "start": 8.52,
+     "end": 9.02
+    },
+    {
+     "w": "não",
+     "start": 9.02,
+     "end": 9.46
+    },
+    {
+     "w": "pode",
+     "start": 9.46,
+     "end": 9.92
+    },
+    {
+     "w": "comer",
+     "start": 9.92,
+     "end": 10.28
+    },
+    {
+     "w": "chocolate.",
+     "start": 10.28,
+     "end": 10.88
+    },
+    {
+     "w": "Verdadeiro!",
+     "start": 11.58,
+     "end": 12.36
+    },
+    {
+     "w": "O",
+     "start": 12.6,
+     "end": 12.7
+    },
+    {
+     "w": "chocolate",
+     "start": 12.7,
+     "end": 13.18
+    },
+    {
+     "w": "tem",
+     "start": 13.18,
+     "end": 13.48
+    },
+    {
+     "w": "teobromina,",
+     "start": 13.48,
+     "end": 14.34
+    },
+    {
+     "w": "uma",
+     "start": 14.6,
+     "end": 14.76
+    },
+    {
+     "w": "substância",
+     "start": 14.76,
+     "end": 15.32
+    },
+    {
+     "w": "que",
+     "start": 15.32,
+     "end": 15.48
+    },
+    {
+     "w": "o",
+     "start": 15.48,
+     "end": 15.6
+    },
+    {
+     "w": "corpo",
+     "start": 15.6,
+     "end": 15.88
+    },
+    {
+     "w": "do",
+     "start": 15.88,
+     "end": 16.04
+    },
+    {
+     "w": "cachorro",
+     "start": 16.04,
+     "end": 16.44
+    },
+    {
+     "w": "demora",
+     "start": 16.44,
+     "end": 16.84
+    },
+    {
+     "w": "muito",
+     "start": 16.84,
+     "end": 17.3
+    },
+    {
+     "w": "pra",
+     "start": 17.3,
+     "end": 17.52
+    },
+    {
+     "w": "eliminar.",
+     "start": 17.52,
+     "end": 18.08
+    },
+    {
+     "w": "Ela",
+     "start": 18.36,
+     "end": 18.48
+    },
+    {
+     "w": "vai",
+     "start": 18.48,
+     "end": 18.66
+    },
+    {
+     "w": "se",
+     "start": 18.66,
+     "end": 18.76
+    },
+    {
+     "w": "acumulando",
+     "start": 18.76,
+     "end": 19.4
+    },
+    {
+     "w": "e",
+     "start": 19.4,
+     "end": 19.74
+    },
+    {
+     "w": "intoxica.",
+     "start": 19.74,
+     "end": 20.46
+    }
+   ]
+  },
+  {
+   "text": "Segunda: chocolate amargo é o mais perigoso. Verdadeiro! Quanto mais cacau, mais teobromina. Chocolate amargo e cacau em pó são os piores.",
+   "start": 20.98,
+   "end": 31.16,
+   "words": [
+    {
+     "w": "Segunda:",
+     "start": 20.98,
+     "end": 21.48
+    },
+    {
+     "w": "chocolate",
+     "start": 21.88,
+     "end": 22.32
+    },
+    {
+     "w": "amargo",
+     "start": 22.32,
+     "end": 22.96
+    },
+    {
+     "w": "é",
+     "start": 22.96,
+     "end": 23.22
+    },
+    {
+     "w": "o",
+     "start": 23.22,
+     "end": 23.34
+    },
+    {
+     "w": "mais",
+     "start": 23.34,
+     "end": 23.58
+    },
+    {
+     "w": "perigoso.",
+     "start": 23.58,
+     "end": 24.18
+    },
+    {
+     "w": "Verdadeiro!",
+     "start": 24.18,
+     "end": 25.52
+    },
+    {
+     "w": "Quanto",
+     "start": 25.74,
+     "end": 26.04
+    },
+    {
+     "w": "mais",
+     "start": 26.04,
+     "end": 26.4
+    },
+    {
+     "w": "cacau,",
+     "start": 26.4,
+     "end": 26.86
+    },
+    {
+     "w": "mais",
+     "start": 27.12,
+     "end": 27.36
+    },
+    {
+     "w": "teobromina.",
+     "start": 27.36,
+     "end": 28.08
+    },
+    {
+     "w": "Chocolate",
+     "start": 28.36,
+     "end": 28.78
+    },
+    {
+     "w": "amargo",
+     "start": 28.78,
+     "end": 29.34
+    },
+    {
+     "w": "e",
+     "start": 29.34,
+     "end": 29.44
+    },
+    {
+     "w": "cacau",
+     "start": 29.44,
+     "end": 29.76
+    },
+    {
+     "w": "em",
+     "start": 29.76,
+     "end": 29.9
+    },
+    {
+     "w": "pó",
+     "start": 29.9,
+     "end": 30.1
+    },
+    {
+     "w": "são",
+     "start": 30.1,
+     "end": 30.46
+    },
+    {
+     "w": "os",
+     "start": 30.46,
+     "end": 30.64
+    },
+    {
+     "w": "piores.",
+     "start": 30.64,
+     "end": 31.16
+    }
+   ]
+  },
+  {
+   "text": "Terceira: chocolate branco é tão perigoso quanto o amargo. Falso! Ele tem pouquíssima teobromina, mas mesmo assim faz mal por causa da gordura e do açúcar.",
+   "start": 31.82,
+   "end": 41.86,
+   "words": [
+    {
+     "w": "Terceira:",
+     "start": 31.82,
+     "end": 32.38
+    },
+    {
+     "w": "chocolate",
+     "start": 32.7,
+     "end": 33.08
+    },
+    {
+     "w": "branco",
+     "start": 33.08,
+     "end": 33.62
+    },
+    {
+     "w": "é",
+     "start": 33.62,
+     "end": 33.74
+    },
+    {
+     "w": "tão",
+     "start": 33.74,
+     "end": 34.04
+    },
+    {
+     "w": "perigoso",
+     "start": 34.04,
+     "end": 34.6
+    },
+    {
+     "w": "quanto",
+     "start": 34.6,
+     "end": 34.86
+    },
+    {
+     "w": "o",
+     "start": 34.86,
+     "end": 34.86
+    },
+    {
+     "w": "amargo.",
+     "start": 34.86,
+     "end": 35.44
+    },
+    {
+     "w": "Falso!",
+     "start": 35.82,
+     "end": 36.4
+    },
+    {
+     "w": "Ele",
+     "start": 36.68,
+     "end": 36.82
+    },
+    {
+     "w": "tem",
+     "start": 36.82,
+     "end": 36.98
+    },
+    {
+     "w": "pouquíssima",
+     "start": 36.98,
+     "end": 37.8
+    },
+    {
+     "w": "teobromina,",
+     "start": 37.8,
+     "end": 38.48
+    },
+    {
+     "w": "mas",
+     "start": 38.68,
+     "end": 38.88
+    },
+    {
+     "w": "mesmo",
+     "start": 38.88,
+     "end": 39.2
+    },
+    {
+     "w": "assim",
+     "start": 39.2,
+     "end": 39.5
+    },
+    {
+     "w": "faz",
+     "start": 39.5,
+     "end": 39.76
+    },
+    {
+     "w": "mal",
+     "start": 39.76,
+     "end": 40.14
+    },
+    {
+     "w": "por",
+     "start": 40.14,
+     "end": 40.34
+    },
+    {
+     "w": "causa",
+     "start": 40.34,
+     "end": 40.56
+    },
+    {
+     "w": "da",
+     "start": 40.56,
+     "end": 40.74
+    },
+    {
+     "w": "gordura",
+     "start": 40.74,
+     "end": 41.26
+    },
+    {
+     "w": "e",
+     "start": 41.26,
+     "end": 41.38
+    },
+    {
+     "w": "do",
+     "start": 41.38,
+     "end": 41.46
+    },
+    {
+     "w": "açúcar.",
+     "start": 41.46,
+     "end": 41.86
+    }
+   ]
+  },
+  {
+   "text": "Quarta: os sintomas aparecem na hora. Falso! Podem demorar várias horas: vômito, agitação, coração acelerado, tremores e, nos casos graves, convulsões.",
+   "start": 42.3,
+   "end": 54.06,
+   "words": [
+    {
+     "w": "Quarta:",
+     "start": 42.3,
+     "end": 42.64
+    },
+    {
+     "w": "os",
+     "start": 43.14,
+     "end": 43.24
+    },
+    {
+     "w": "sintomas",
+     "start": 43.24,
+     "end": 43.7
+    },
+    {
+     "w": "aparecem",
+     "start": 43.7,
+     "end": 44.36
+    },
+    {
+     "w": "na",
+     "start": 44.36,
+     "end": 44.58
+    },
+    {
+     "w": "hora.",
+     "start": 44.58,
+     "end": 44.9
+    },
+    {
+     "w": "Falso!",
+     "start": 45.26,
+     "end": 45.94
+    },
+    {
+     "w": "Podem",
+     "start": 45.94,
+     "end": 46.44
+    },
+    {
+     "w": "demorar",
+     "start": 46.44,
+     "end": 46.78
+    },
+    {
+     "w": "várias",
+     "start": 46.78,
+     "end": 47.34
+    },
+    {
+     "w": "horas:",
+     "start": 47.34,
+     "end": 47.7
+    },
+    {
+     "w": "vômito,",
+     "start": 48.1,
+     "end": 48.76
+    },
+    {
+     "w": "agitação,",
+     "start": 48.94,
+     "end": 49.62
+    },
+    {
+     "w": "coração",
+     "start": 49.84,
+     "end": 50.16
+    },
+    {
+     "w": "acelerado,",
+     "start": 50.16,
+     "end": 50.92
+    },
+    {
+     "w": "tremores",
+     "start": 50.92,
+     "end": 51.72
+    },
+    {
+     "w": "e,",
+     "start": 51.72,
+     "end": 52.14
+    },
+    {
+     "w": "nos",
+     "start": 52.16,
+     "end": 52.24
+    },
+    {
+     "w": "casos",
+     "start": 52.24,
+     "end": 52.54
+    },
+    {
+     "w": "graves,",
+     "start": 52.54,
+     "end": 52.94
+    },
+    {
+     "w": "convulsões.",
+     "start": 53.34,
+     "end": 54.06
+    }
+   ]
+  },
+  {
+   "text": "Quinta: se ele comeu, é só esperar passar. Falso! Leve ao veterinário na hora, e diga qual chocolate e quanto ele comeu.",
+   "start": 54.68,
+   "end": 63.26,
+   "words": [
+    {
+     "w": "Quinta:",
+     "start": 54.68,
+     "end": 55.0
+    },
+    {
+     "w": "se",
+     "start": 55.44,
+     "end": 55.58
+    },
+    {
+     "w": "ele",
+     "start": 55.58,
+     "end": 55.68
+    },
+    {
+     "w": "comeu,",
+     "start": 55.68,
+     "end": 56.18
+    },
+    {
+     "w": "é",
+     "start": 56.36,
+     "end": 56.42
+    },
+    {
+     "w": "só",
+     "start": 56.42,
+     "end": 56.6
+    },
+    {
+     "w": "esperar",
+     "start": 56.6,
+     "end": 56.94
+    },
+    {
+     "w": "passar.",
+     "start": 56.94,
+     "end": 57.3
+    },
+    {
+     "w": "Falso!",
+     "start": 57.72,
+     "end": 58.4
+    },
+    {
+     "w": "Leve",
+     "start": 58.66,
+     "end": 58.96
+    },
+    {
+     "w": "ao",
+     "start": 58.96,
+     "end": 59.08
+    },
+    {
+     "w": "veterinário",
+     "start": 59.08,
+     "end": 59.7
+    },
+    {
+     "w": "na",
+     "start": 59.7,
+     "end": 59.96
+    },
+    {
+     "w": "hora,",
+     "start": 59.96,
+     "end": 60.32
+    },
+    {
+     "w": "e",
+     "start": 60.32,
+     "end": 60.7
+    },
+    {
+     "w": "diga",
+     "start": 60.7,
+     "end": 60.98
+    },
+    {
+     "w": "qual",
+     "start": 60.98,
+     "end": 61.26
+    },
+    {
+     "w": "chocolate",
+     "start": 61.26,
+     "end": 61.76
+    },
+    {
+     "w": "e",
+     "start": 61.76,
+     "end": 62.22
+    },
+    {
+     "w": "quanto",
+     "start": 62.22,
+     "end": 62.64
+    },
+    {
+     "w": "ele",
+     "start": 62.64,
+     "end": 62.82
+    },
+    {
+     "w": "comeu.",
+     "start": 62.82,
+     "end": 63.26
+    }
+   ]
+  },
+  {
+   "text": "Seu cachorro já pegou chocolate escondido? Comenta aqui embaixo, manda pra quem tem cachorro, e segue o olhaso três dê!",
+   "start": 63.26,
+   "end": 70.62,
+   "words": [
+    {
+     "w": "Seu",
+     "start": 63.26,
+     "end": 63.88
+    },
+    {
+     "w": "cachorro",
+     "start": 63.88,
+     "end": 64.26
+    },
+    {
+     "w": "já",
+     "start": 64.26,
+     "end": 64.54
+    },
+    {
+     "w": "pegou",
+     "start": 64.54,
+     "end": 64.9
+    },
+    {
+     "w": "chocolate",
+     "start": 64.9,
+     "end": 65.26
+    },
+    {
+     "w": "escondido?",
+     "start": 65.26,
+     "end": 65.9
+    },
+    {
+     "w": "Comenta",
+     "start": 66.24,
+     "end": 66.5
+    },
+    {
+     "w": "aqui",
+     "start": 66.5,
+     "end": 66.68
+    },
+    {
+     "w": "embaixo,",
+     "start": 66.68,
+     "end": 67.02
+    },
+    {
+     "w": "manda",
+     "start": 67.34,
+     "end": 67.68
+    },
+    {
+     "w": "pra",
+     "start": 67.68,
+     "end": 67.78
+    },
+    {
+     "w": "quem",
+     "start": 67.78,
+     "end": 67.94
+    },
+    {
+     "w": "tem",
+     "start": 67.94,
+     "end": 68.08
+    },
+    {
+     "w": "cachorro,",
+     "start": 68.08,
+     "end": 68.6
+    },
+    {
+     "w": "e",
+     "start": 68.6,
+     "end": 68.94
+    },
+    {
+     "w": "segue",
+     "start": 68.94,
+     "end": 69.26
+    },
+    {
+     "w": "o",
+     "start": 69.26,
+     "end": 69.42
+    },
+    {
+     "w": "olhaso",
+     "start": 69.42,
+     "end": 69.82
+    },
+    {
+     "w": "três",
+     "start": 69.82,
+     "end": 70.22
+    },
+    {
+     "w": "dê!",
+     "start": 70.22,
+     "end": 70.62
+    }
+   ]
+  }
+ ]
+}
