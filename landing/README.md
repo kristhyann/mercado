@@ -21,8 +21,9 @@ Abra `assets/js/config.js` e cole o link de pagamento:
 checkoutUrl: 'https://pay.sua-plataforma.com/SEU-PRODUTO',
 ```
 
-- Os botões **“Quero acessar o Projeto GCM PHB 2027”** (oferta) e **“Começar minha preparação”** (CTA final) levam ao checkout.
-- O botão do topo da página, o do hero e o da barra fixa levam primeiro à seção de oferta.
+- Checkout atual: **https://payment.ticto.app/OCD9E1D6F** (Ticto).
+- Levam ao checkout os botões do hero, da oferta, do CTA final e da barra fixa no celular. Só o botão “Ver oferta”, no topo, rola até a seção de oferta.
+- O link também está escrito diretamente no `index.html`, então os botões funcionam mesmo se o JavaScript falhar. Se mudar o link, troque no `config.js` e faça buscar e substituir no `index.html`.
 - Os parâmetros de campanha da URL (`utm_*`, `src`, `sck`, `fbclid`, `gclid`) são repassados ao checkout automaticamente. Para desativar, use `forwardUtm: false`.
 - Enquanto `checkoutUrl` estiver vazio, os botões de compra mostram o aviso “O link de pagamento ainda não foi configurado”.
 

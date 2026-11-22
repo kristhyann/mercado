@@ -5,7 +5,7 @@ window.GCM_CONFIG = {
   /* Link do checkout (Hotmart, Kiwify, Eduzz, Mercado Pago, etc.).
      Cole aqui o link de pagamento entre as aspas. Enquanto estiver vazio,
      os botões de compra levam à seção de oferta e mostram um aviso. */
-  checkoutUrl: '',
+  checkoutUrl: 'https://payment.ticto.app/OCD9E1D6F',
 
   /* Repassa ao checkout os parâmetros de campanha da URL (utm_source, utm_campaign...). */
   forwardUtm: true,
