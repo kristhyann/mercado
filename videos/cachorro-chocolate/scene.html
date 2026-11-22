@@ -60,6 +60,7 @@ const cyl = (rt, rb, h, c, x, y, z, par = scene, seg = 16) => add(new THREE.Cyli
 const sph = (r, c, x, y, z, par = scene, a = 18, b = 12) => add(new THREE.SphereGeometry(r, a, b), c, x, y, z, par);
 const cap = (r, l, c, x, y, z, par = scene) => add(new THREE.CapsuleGeometry(r, l, 8, 16), c, x, y, z, par);
 const GREEN = 0x2F7A45, ORANGE = 0xE07B2A;
+const BASIC = c => new THREE.MeshBasicMaterial({ color: c, toneMapped: false });
 const canvasTex = (w, h, paint) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); paint(g, w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; };
 const sprite = (t, s) => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthWrite: false, depthTest: false })); sp.scale.setScalar(s); sp.renderOrder = 5; return sp; };
 const emo = (e, px = 110) => canvasTex(160, 160, g => { g.font = `${px}px 'Noto Color Emoji'`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(e, 80, 88); });
@@ -148,8 +149,8 @@ const wrap = box(.3, .07, .28, 0xD62F3A, .1, .82, 0, table); wrap.rotation.y = .
 // barras comparativas (x=0, z=1.2) com colunas de perigo
 const bars = grp(); bars.position.set(0, 0, 0); bars.visible = false;
 const kinds = [[0x3B1A0A, 'AMARGO', '#7C2D12'], [0x8B5A2B, 'AO LEITE', '#B45309'], [0xF5EEDC, 'BRANCO', '#A8A29E']];
-const cols = kinds.map(([c, n, lc], i) => { const g = grp(bars); g.position.set(-1.0 + i * 1.0, 0, 0); const b = choc(c, .6); b.rotation.x = -.5; b.position.set(0, .5, .3); g.add(b); const col = box(.4, 1, .4, 0xEF4444, 0, .5, -.4, g); const lbl = add(new THREE.PlaneGeometry(.8, .22), new THREE.MeshBasicMaterial({ map: canvasTex(320, 90, x => { x.fillStyle = '#fff'; x.fillRect(0, 0, 320, 90); x.strokeStyle = '#111'; x.lineWidth = 10; x.strokeRect(5, 5, 310, 80); x.fillStyle = lc; x.font = '900 46px P'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(n, 160, 48); }) }), 0, .18, .75, g); lbl.castShadow = false; return { g, col, lbl }; });
-const LV = [2.4, 1.0, .12];
+const cols = kinds.map(([c, n, lc], i) => { const g = grp(bars); g.position.set(-.72 + i * .72, 0, 0); const b = choc(c, .5); b.rotation.x = -.5; b.position.set(0, .5, .3); g.add(b); const col = box(.4, 1, .4, 0xEF4444, 0, .5, -.4, g); const lbl = add(new THREE.PlaneGeometry(.62, .18), new THREE.MeshBasicMaterial({ map: canvasTex(320, 90, x => { x.fillStyle = '#fff'; x.fillRect(0, 0, 320, 90); x.strokeStyle = '#111'; x.lineWidth = 10; x.strokeRect(5, 5, 310, 80); x.fillStyle = lc; x.font = '900 46px P'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(n, 160, 48); }) }), 0, .18, .75, g); lbl.castShadow = false; return { g, col, lbl }; });
+const LV = [1.5, .75, .1];
 const fatS = sprite(emo('🧈'), .4), sugS = sprite(emo('🍬'), .4); scene.add(fatS, sugS);
 // relógio
 const clock = grp(); clock.visible = false; cyl(.5, .5, .1, 0xFFFFFF, 0, 0, 0, clock, 32).rotation.x = Math.PI / 2; const rim = add(new THREE.TorusGeometry(.5, .05, 8, 40), MAT(0x111111), 0, 0, 0, clock);
@@ -159,7 +160,7 @@ const molecules = Array.from({ length: 14 }, () => { const s = sprite(emo('☠�
 const vet = sprite(emo('🏥'), .9); scene.add(vet); const phone = sprite(emo('📞'), .5); scene.add(phone);
 const bone = sprite(emo('🦴'), .5); scene.add(bone); const hearts = Array.from({ length: 6 }, () => { const s = sprite(emo('❤️'), .2); s.userData = { p: rr(0, 1), x: rr(-.5, .5) }; scene.add(s); return s; });
 // cachorro
-const dog = buildDog({ base: 0xD39552, belly: 0xF4DEC0, muzzle: 0xE7B47A, ear: 'floppy', earC: 0xB87538, size: 1.3, collar: 0x3B82F6 });
+const dog = buildDog({ base: 0xD39552, belly: 0xF4DEC0, muzzle: 0xE7B47A, ear: 'floppy', earC: 0xB87538, size: 1.05, collar: 0x3B82F6 });
 scene.add(dog.root);
 
 // ---------- utilidades ----------
@@ -176,31 +177,31 @@ window.draw = function (t) {
   bar.visible = wrap.visible = true; table.visible = true;
   let cp, tg; let dpose = { sit: 1, wag: .5, lookUp: .15 }; let dpos = V(-.55, 0, .3), dry = .6;
   if (si === -1) { // gancho: cachorro de olho no chocolate
-    dpose = { sit: 1, wag: 1.2, lookUp: .35, look: .5, pant: 1 }; cp = V(lerp(-.4, .3, t / 4), 1.25, lerp(3.4, 2.6, easeOut(t / 4))); tg = V(.1, .75, -.2); }
+    dpose = { sit: 1, wag: 1.2, lookUp: .35, look: .5, pant: 1 }; cp = V(lerp(-.2, .4, t / 4), 1.5, lerp(4.8, 4.0, easeOut(t / 4))); tg = V(.15, .85, -.2); }
   else if (si === 0) { // teobromina acumulando
     dpos = V(0, 0, .4); dry = 0; dpose = { sit: 1, wag: .2, lookUp: 0 }; table.visible = false;
     if (t > T_TEO) molecules.forEach(m => { m.visible = true; const u = ((t - T_TEO) * .5 + m.userData.p) % 1; m.position.set(m.userData.x, lerp(2.6, 1.0, u), .5); m.scale.setScalar(.18 * Math.sin(u * Math.PI)); });
     if (t > T_ACUM) dpose = { sit: 1, wag: 0, lookUp: -.15, tilt: Math.sin(t * 3) * .1 };
-    cp = V(Math.sin(t * .4) * .6, 1.3, 3.0); tg = V(0, .85, 0); }
+    cp = V(Math.sin(t * .4) * .5, 1.4, 3.6); tg = V(0, .85, 0); }
   else if (si === 1 || si === 2) { // comparação de chocolates
-    bars.visible = true; table.visible = false; dpos = V(1.55, 0, .9); dry = -.6; dpose = { sit: 1, wag: .6, look: -.4 };
+    bars.visible = true; table.visible = false; dpos = V(1.25, 0, 1.1); dry = -.6; dpose = { sit: 1, wag: .6, look: -.4 };
     cols.forEach((c, i) => { const g = ease(clamp((t - SQ[1] - .5 - i * .3) / .8)); const h = Math.max(.02, LV[i] * g); c.col.scale.y = h; c.col.position.y = h / 2; c.col.material.color.setHex(i === 0 ? 0xDC2626 : i === 1 ? 0xF97316 : 0xFACC15);
       const hi = (si === 1 && i === 0 && t > T_CACAU) || (si === 2 && i === 2); c.g.scale.setScalar(hi ? 1.12 + Math.sin(t * 5) * .03 : 1); });
     if (si === 2 && t > T_GORD) { fatS.visible = sugS.visible = true; fatS.position.set(.75, 1.15, .2); sugS.position.set(1.25, 1.1, .2); fatS.scale.setScalar(.4 * pop(t - T_GORD, .3)); sugS.scale.setScalar(.4 * pop(t - T_GORD - .2, .3)); }
-    cp = V(si === 2 ? .7 : -.2, 1.7, 4.3); tg = V(si === 2 ? .5 : -.3, .9, 0); }
+    cp = V(.15, 2.1, 6.8); tg = V(.15, 1.0, 0); }
   else if (si === 3) { // sintomas demoram
-    table.visible = false; clock.visible = t < T_VOMITO; clock.position.set(.95, 1.55, -.3); hMp.rotation.z = -t * 6; hHp.rotation.z = -t * .5; dpos = V(-.3, 0, .4); dry = .2;
+    table.visible = false; clock.visible = t < T_VOMITO; clock.position.set(.45, 1.5, -.6); clock.scale.setScalar(.6); hMp.rotation.z = -t * 6; hHp.rotation.z = -t * .5; dpos = V(-.3, 0, .4); dry = .2;
     const shake = t > T_TREM ? Math.sin(t * 50) * .03 : 0; dpose = { sit: 0, lie: t > T_CONV ? 1 : 0, wag: 0, lookUp: -.1 }; dpos.x += shake;
     [T_VOMITO, T_VOMITO + .6, T_CORACAO, T_TREM, T_CONV].forEach((tt, i) => { const s = sym[i]; s.visible = t > tt; const a = i * 1.25 + t * .4; s.position.set(dpos.x + Math.cos(a) * .85, 1.2 + Math.sin(a) * .35, .3); s.scale.setScalar(.45 * pop(t - tt, .3)); });
-    cp = V(.3, 1.4, 3.4); tg = V(.1, .9, 0); }
+    cp = V(.25, 1.6, 4.6); tg = V(.15, 1.05, 0); }
   else if (si === 4) { // veterinário
     table.visible = false; dpos = V(-.4, 0, .4); dry = .5; dpose = { sit: 1, wag: .3, lookUp: .2 };
     vet.visible = t > T_VET - .2; vet.position.set(.85, 1.9, -.6); vet.scale.setScalar(.9 * pop(t - T_VET + .2, .3)); phone.visible = t > T_QUAL - .2; phone.position.set(.9, 1.0, .2); phone.scale.setScalar(.5 * pop(t - T_QUAL + .2, .3));
-    cp = V(.4, 1.5, 3.6); tg = V(.25, 1.0, -.2); }
+    cp = V(.3, 1.6, 4.6); tg = V(.25, 1.1, -.2); }
   else { // CTA: osso no lugar do chocolate
     bar.visible = wrap.visible = false; bone.visible = true; bone.position.set(.75, 1.05, -.6); dpose = { sit: 1, wag: 1.5, lookUp: .25, pant: 1 };
     hearts.forEach(h => { h.visible = true; const u = (t * .5 + h.userData.p) % 1; h.position.set(-.55 + h.userData.x, 1.3 + u * 1.2, .3); h.scale.setScalar(.2 * Math.sin(u * Math.PI)); });
-    cp = V(Math.sin(t * .4) * .5, 1.6, 3.6); tg = V(0, 1.1, 0); }
+    cp = V(Math.sin(t * .4) * .4, 1.7, 4.8); tg = V(.1, 1.0, -.2); }
   dog.root.position.copy(dpos); dog.root.rotation.y = dry; poseDog(dog, t, dpose);
   cam.position.copy(cp); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
   // HTML
