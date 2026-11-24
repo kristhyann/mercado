@@ -23,6 +23,7 @@ Route the request to the one skill that owns it, then do the work with that skil
    - Thumbnails, covers, stills, any image: `codex-images`.
    - A photo into a paper-collage animation (Vox style, "anime cette photo"), or a change to one already made: `vox`.
    - An illustrated 2D cartoon storytelling video (história ilustrada, storytelling animado, "vídeo nesse estilo"), its script, or the ElevenLabs narration audio for one: `storytelling-ilustrado`.
+   - A concurso quiz as a narrative scene ("CRIAR QUIZ", quiz, questão narrativa) — script only, no video: `quiz-narrativo`.
    - Publish or schedule a finished video ("post it", "publier", "mets-le en ligne"): `publish`.
    - Still ambiguous: ask one question only.
 3. Load the target: invoke it with the Skill tool, else read `<skills folder>/<skill>/SKILL.md` (the skills installed next to this one) and follow it exactly as if the user had typed `/<skill> <args>`. Pass their words through as that skill's arguments.
