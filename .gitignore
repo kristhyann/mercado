@@ -10,3 +10,6 @@ node_modules/
 video-agent/.tmp/
 video-agent/sources/
 video-agent/takes/
+
+# build intermediário dos cadernos
+CADERNOS/**/fonte/.build/

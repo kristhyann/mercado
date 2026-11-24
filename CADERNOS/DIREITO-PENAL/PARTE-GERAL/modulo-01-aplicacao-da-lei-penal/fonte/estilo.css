@@ -1,0 +1,118 @@
+/* CADERNOS SIMPLIFICADOS — identidade visual Direito Penal
+   Paleta: grafite/azul-noite + laranja + vermelho (pegadinhas) + creme (lei) */
+:root{
+  --ink:#1b2333; --navy:#14305c; --navy2:#1f4a8a; --muted:#5b6475;
+  --orange:#f08a24; --orange-soft:#fde3c6; --orange-deep:#c96410;
+  --red:#d33a2c; --red-soft:#fdeaea;
+  --cream:#f6efe2; --cream-line:#d9c9a8;
+  --green:#2f8f5b; --green-soft:#e3f3ea;
+  --blue-soft:#e7eef9; --line:#dfe3ea; --paper:#ffffff;
+}
+@page{ size:A4; margin:22mm 17mm 20mm 17mm; }
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{ font-family:"Inter",sans-serif; font-size:11pt; line-height:1.55; color:var(--ink); background:var(--paper);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact; hyphens:auto; }
+p{ margin:0 0 9pt; text-align:justify; }
+strong{ color:var(--navy); }
+.marker{ font-size:1px; color:#fff; line-height:1px; height:1px; overflow:hidden; }
+
+/* ---------- abertura de capítulo ---------- */
+.chapter{ break-before:page; }
+.chapter:first-of-type{ break-before:auto; }
+.ch-open{ display:flex; align-items:stretch; gap:14pt; margin:0 0 16pt; border-bottom:3px solid var(--ink); padding-bottom:12pt; }
+.ch-num{ background:var(--orange); color:#fff; font-family:"Inter Display","Inter",sans-serif; font-weight:800; font-size:34pt;
+  line-height:1; padding:10pt 12pt; border-radius:10pt; display:flex; align-items:center; min-width:62pt; justify-content:center; }
+.ch-txt .kicker{ font-size:8.5pt; letter-spacing:2pt; font-weight:700; color:var(--orange-deep); text-transform:uppercase; }
+.ch-txt h1{ font-family:"Inter Display","Inter",sans-serif; font-weight:800; font-size:25pt; line-height:1.08; margin:2pt 0 4pt; color:var(--navy); text-transform:uppercase; }
+.ch-txt .sub{ font-size:10pt; color:var(--muted); }
+
+h2{ font-family:"Inter Display","Inter",sans-serif; font-size:15pt; color:var(--navy); margin:18pt 0 8pt; text-transform:uppercase;
+  break-after:avoid; display:flex; align-items:center; gap:8pt; }
+h2 .tag{ background:var(--ink); color:#fff; font-size:8pt; padding:2pt 7pt; border-radius:4pt; letter-spacing:1pt; }
+h3{ font-size:12pt; color:var(--ink); margin:14pt 0 6pt; break-after:avoid; border-left:4px solid var(--orange); padding-left:8pt; }
+h2 + *, h3 + *{ break-before:avoid; }
+
+/* ---------- boxes didáticos ---------- */
+.box{ border-radius:9pt; padding:11pt 13pt 6pt; margin:10pt 0 12pt; break-inside:avoid; position:relative; }
+.box .lbl{ display:inline-flex; align-items:center; gap:6pt; font-weight:800; font-size:9pt; letter-spacing:1pt; text-transform:uppercase; margin-bottom:6pt; }
+.box .lbl svg{ width:16pt; height:16pt; flex:none; }
+.box p:last-child, .box ul:last-child{ margin-bottom:5pt; }
+.box ul{ margin:0 0 8pt; padding-left:15pt; } .box li{ margin-bottom:3pt; }
+
+.lei{ background:var(--cream); border-left:6px solid var(--orange); border-radius:0 9pt 9pt 0; }
+.lei .lbl{ color:var(--orange-deep); }
+.lei p{ font-family:"DejaVu Serif",Georgia,serif; font-size:10.3pt; line-height:1.55; text-align:left; }
+.lei .ref{ font-family:"Inter",sans-serif; font-size:8pt; color:var(--muted); margin-top:-2pt; }
+
+.oque{ background:var(--blue-soft); border:1.5px solid #bcd0ee; } .oque .lbl{ color:var(--navy2); }
+.traduz{ background:#fff; border:2px solid var(--ink); box-shadow:4pt 4pt 0 var(--orange-soft); } .traduz .lbl{ background:var(--cream); color:var(--ink); padding:3pt 9pt; border-radius:20pt; border:1.5px solid var(--ink); }
+.pratica{ background:var(--green-soft); border:1.5px solid #a8d7bd; } .pratica .lbl{ color:var(--green); }
+.memo{ background:var(--orange); color:#fff; } .memo .lbl{ color:#fff; } .memo strong{ color:#fff; text-decoration:underline; }
+.memo p{ text-align:left; }
+.pega{ background:var(--red-soft); border:2px solid var(--red); } .pega .lbl{ color:var(--red); }
+.prova{ background:var(--ink); color:#eef1f6; } .prova .lbl{ color:var(--orange); } .prova strong{ color:#ffd3a3; }
+.prova p{ text-align:left; }
+.lembre{ background:#fff8ec; border:1.5px dashed var(--orange); } .lembre .lbl{ color:var(--orange-deep); }
+
+.chips{ display:flex; flex-wrap:wrap; gap:5pt; margin:4pt 0 8pt; }
+.chip{ background:#fff; border:1.5px solid var(--navy); color:var(--navy); font-weight:700; font-size:8.8pt; padding:2pt 8pt; border-radius:20pt; }
+.kw .lbl{ color:var(--navy); } .kw{ background:#f4f6fa; border:1.5px solid var(--line); }
+
+/* ---------- tabelas ---------- */
+table{ width:100%; border-collapse:separate; border-spacing:0; margin:8pt 0 14pt; font-size:9.8pt; break-inside:avoid; border-radius:8pt; overflow:hidden; border:1.5px solid var(--navy); }
+th{ background:var(--navy); color:#fff; text-align:left; padding:7pt 8pt; font-size:9.3pt; letter-spacing:.3pt; }
+td{ padding:7pt 8pt; border-top:1px solid var(--line); vertical-align:top; line-height:1.42; }
+tr:nth-child(even) td{ background:#f6f8fb; }
+td.rowh{ font-weight:700; color:var(--navy); width:24%; background:#eef2f8 !important; }
+.cmp-title{ font-weight:800; font-size:10pt; color:var(--navy); text-transform:uppercase; letter-spacing:1pt; margin:12pt 0 0; break-after:avoid; }
+
+/* ---------- figuras ---------- */
+figure{ margin:10pt 0 14pt; break-inside:avoid; text-align:center; }
+figure svg{ max-width:100%; height:auto; }
+figcaption{ font-size:8.5pt; color:var(--muted); margin-top:4pt; font-style:italic; }
+
+/* ---------- resumo visual ---------- */
+.resumo{ border:2px solid var(--navy); border-radius:10pt; overflow:hidden; margin:12pt 0; break-inside:avoid; }
+.resumo .hd{ background:var(--navy); color:#fff; font-weight:800; padding:7pt 12pt; letter-spacing:1pt; font-size:10pt; text-transform:uppercase; display:flex; justify-content:space-between; }
+.resumo .bd{ display:grid; grid-template-columns:1fr 1fr; gap:0; }
+.resumo .cell{ padding:8pt 12pt; border-top:1px solid var(--line); font-size:9.6pt; line-height:1.42; }
+.resumo .cell:nth-child(odd){ border-right:1px solid var(--line); }
+.resumo .cell b{ display:block; color:var(--orange-deep); font-size:8.3pt; letter-spacing:1pt; text-transform:uppercase; }
+
+/* ---------- questões ---------- */
+.q{ border:1.5px solid var(--line); border-radius:9pt; padding:10pt 12pt 6pt; margin:0 0 10pt; break-inside:avoid; }
+.q .qh{ display:flex; justify-content:space-between; align-items:center; margin-bottom:5pt; }
+.q .qn{ background:var(--navy); color:#fff; font-weight:800; font-size:9pt; padding:2pt 9pt; border-radius:20pt; }
+.q .qa{ font-size:7.8pt; color:var(--muted); font-weight:700; letter-spacing:.8pt; text-transform:uppercase; }
+.q ol{ list-style:none; padding:0; margin:4pt 0 4pt; }
+.q li{ margin:0 0 4pt; padding-left:22pt; position:relative; text-align:left; }
+.q li::before{ content:attr(data-l); position:absolute; left:0; top:0; width:15pt; height:15pt; border:1.5px solid var(--navy); color:var(--navy);
+  border-radius:50%; font-weight:800; font-size:8pt; display:flex; align-items:center; justify-content:center; }
+.gab{ border-left:5px solid var(--green); background:#fbfdfc; padding:8pt 12pt 3pt; margin:0 0 10pt; break-inside:avoid; border-radius:0 8pt 8pt 0; }
+.gab .gh{ font-weight:800; color:var(--green); margin-bottom:3pt; }
+.gab .gh span{ background:var(--green); color:#fff; padding:1pt 8pt; border-radius:20pt; margin-left:6pt; }
+.gab p{ font-size:10pt; }
+.gab .mem{ font-size:9.3pt; background:var(--orange-soft); padding:4pt 8pt; border-radius:6pt; display:block; margin-bottom:7pt; }
+
+/* ---------- flashcards ---------- */
+.cards{ display:grid; grid-template-columns:1fr 1fr; gap:9pt; }
+.card{ border:1.5px dashed #9aa6bb; border-radius:9pt; overflow:hidden; break-inside:avoid; }
+.card .f{ background:var(--blue-soft); padding:8pt 10pt; font-weight:700; font-size:9.6pt; color:var(--navy); min-height:42pt; }
+.card .f small{ display:block; color:var(--orange-deep); font-size:7.5pt; letter-spacing:1pt; }
+.card .b{ padding:8pt 10pt; font-size:9.4pt; line-height:1.4; }
+
+/* ---------- sumário ---------- */
+.toc{ list-style:none; padding:0; margin:6pt 0 0; }
+.toc li{ display:flex; align-items:baseline; gap:8pt; padding:7pt 0; border-bottom:1px solid var(--line); font-size:11pt; }
+.toc .n{ background:var(--orange); color:#fff; font-weight:800; border-radius:6pt; min-width:26pt; text-align:center; font-size:10pt; padding:1pt 0; }
+.toc .t{ flex:1; font-weight:600; } .toc .t small{ color:var(--muted); font-weight:400; display:block; font-size:8.8pt; }
+.toc .p{ font-weight:800; color:var(--navy); min-width:22pt; text-align:right; }
+
+.legend{ display:grid; grid-template-columns:1fr 1fr; gap:8pt; margin-top:6pt; }
+.legend .box{ margin:0; padding:8pt 10pt 4pt; } .legend .box p{ font-size:9.2pt; text-align:left; }
+.two{ display:grid; grid-template-columns:1fr 1fr; gap:10pt; }
+.two .box{ margin:4pt 0; }
+.note{ font-size:8.8pt; color:var(--muted); }
+.ending{ text-align:center; padding:30pt 20pt; border:2px solid var(--ink); border-radius:14pt; margin-top:20pt; break-inside:avoid; }
+.ending h2{ justify-content:center; }
