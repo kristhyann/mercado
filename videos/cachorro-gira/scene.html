@@ -1,0 +1,217 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:800;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(/_kit/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:P,'Noto Color Emoji',sans-serif}
+canvas{position:absolute;left:0;top:0}
+.o{position:absolute;left:0;top:0;transform-origin:50% 50%;opacity:0}
+.stroke{color:#fff;-webkit-text-stroke:14px #111;paint-order:stroke fill;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+#hook{width:1080px;top:230px;text-align:center;font-weight:900;font-size:80px;line-height:1.06}
+#hook b{color:#FFD21F;display:block;font-size:92px}
+#cap{width:1080px;top:1420px;text-align:center;font-weight:900;font-size:110px}
+#cap.hl{color:#FFD21F}
+.tag{background:#FFD21F;color:#111;font-weight:900;font-size:56px;padding:8px 28px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
+.tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.white{background:#fff;color:#111}
+.small{font-size:44px;padding:6px 22px;border-radius:18px;border-width:6px;box-shadow:0 6px 0 #111}
+#ctr{font-weight:900;font-size:62px;color:#111;background:#fff;border:8px solid #111;border-radius:28px;box-shadow:0 9px 0 #111;padding:8px 28px;white-space:nowrap}
+#c1,#c2{font-weight:900;font-size:46px;color:#111;background:#fff;border:7px solid #111;border-radius:22px;box-shadow:0 7px 0 #111;padding:6px 18px;white-space:nowrap;text-align:center}
+#final{left:50px;width:980px;top:1240px;text-align:center}
+#final span{display:block;background:#fff;color:#111;font-weight:900;font-size:58px;line-height:1.14;padding:28px;border:9px solid #111;border-radius:40px;box-shadow:0 14px 0 #111}
+#final em{font-style:normal;color:#F97316}
+#wm{left:40px;top:70px;font-weight:900;font-size:40px;color:#fff;opacity:.85;-webkit-text-stroke:6px rgba(0,0,0,.55);paint-order:stroke fill}
+</style></head><body>
+<div id="hook" class="o stroke">POR QUE O CACHORRO<b>GIRA ANTES DE DEITAR? 🐶🔄</b></div>
+<div id="ctr" class="o"></div><div id="c1" class="o"></div><div id="c2" class="o"></div>
+<div id="t1" class="o tag"></div>
+<div id="cap" class="o stroke"></div>
+<div id="final" class="o"><span>Quantas voltas o seu<br>dá antes de deitar? 🔄<br>Comenta aqui 👇<br><em>Segue 👉 @olhaso_3D</em></span></div>
+<div id="wm" class="o">@olhaso_3D</div>
+<script type="importmap">{"imports":{"three":"/_kit/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { clamp, lerp, ease, easeOut, pop, rr } from '/_kit/kit.js';
+import { buildPerson, PP, poseP, face } from '/_kit/pessoas.js';
+await document.fonts.load('900 60px P');
+const TP = await (await fetch('tempos.json?' + Date.now())).json();
+const SN = TP.sentences; window.DURATION = TP.duration;
+const ALL = SN.flatMap(s => s.words);
+const WA = (re, n = 0, after = 0) => { const ws = ALL.filter(w => w.start >= after && re.test(w.w)); if (!ws[n]) { console.log('WA MISS', re); return after; } return ws[n].start; };
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(40, W / H, .03, 300);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const grp = (par = scene) => { const g = new THREE.Group(); par.add(g); return g; };
+const MAT = (c, r = .8, ex = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: r }, ex));
+const add = (geo, mat, x, y, z, par = scene) => { const m = new THREE.Mesh(geo, typeof mat === 'number' ? MAT(mat) : mat); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; par.add(m); return m; };
+const box = (w, h, d, c, x, y, z, par = scene) => add(new THREE.BoxGeometry(w, h, d), c, x, y, z, par);
+const cyl = (rt, rb, h, c, x, y, z, par = scene, seg = 16) => add(new THREE.CylinderGeometry(rt, rb, h, seg), c, x, y, z, par);
+const sph = (r, c, x, y, z, par = scene, a = 18, b = 12) => add(new THREE.SphereGeometry(r, a, b), c, x, y, z, par);
+const cap = (r, l, c, x, y, z, par = scene) => add(new THREE.CapsuleGeometry(r, l, 8, 16), c, x, y, z, par);
+const GREEN = 0x2F7A45, ORANGE = 0xE07B2A;
+const BASIC = c => new THREE.MeshBasicMaterial({ color: c, toneMapped: false });
+const canvasTex = (w, h, paint) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); paint(g, w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; };
+const sprite = (t, s) => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthWrite: false })); sp.scale.setScalar(s); return sp; };
+const emo = (e, px = 110) => canvasTex(160, 160, g => { g.font = `${px}px 'Noto Color Emoji'`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(e, 80, 88); });
+// ---------- cachorro ----------
+function buildDog(o) {
+  const C = Object.assign({ base: 0xC98A4A, belly: 0xF2E2C4, back: null, points: null, muzzle: null, size: 1, leg: .3, body: .42, snout: .11, ear: 'floppy', earC: null, collar: GREEN, socks: false, fluff: false, tailCurl: .9 }, o);
+  const mB = MAT(C.base), mBe = MAT(C.belly), mP = MAT(C.points ?? C.base), mM = MAT(C.muzzle ?? C.points ?? C.belly), mE = MAT(C.earC ?? C.back ?? C.base), mK = C.back != null ? MAT(C.back) : mB;
+  const root = new THREE.Group(); const hipY = C.leg + .13;
+  const body = grp(root); body.position.y = hipY;
+  const torso = cap(.16, C.body, mB, 0, 0, 0, body); torso.rotation.x = Math.PI / 2; torso.scale.set(.92, 1, 1);
+  if (C.back != null) { const s = cap(.163, C.body, mK, 0, .035, -.01, body); s.rotation.x = Math.PI / 2; s.scale.set(.93, 1, .96); }
+  const chest = sph(.135, mBe, 0, -.03, C.body / 2 + .04, body); chest.scale.set(.92, 1.05, .75);
+  const haunch = [-1, 1].map(s => { const h = sph(.1, mK, s * .07, .0, -C.body / 2 + .02, body); h.scale.set(.8, 1.1, 1.1); return h; });
+  if (C.fluff) { for (let i = 0; i < 5; i++) { const f = sph(.07, mB, 0, -.12, C.body / 2 - i * .1, body); f.scale.set(1.2, .7, 1); } const r = sph(.16, mBe, 0, .02, C.body / 2 + .06, body); r.scale.set(1, 1.1, .8); }
+  const neck = cap(.085, .12, mK, 0, .1, C.body / 2 + .08, body); neck.rotation.x = -.7;
+  const headP = grp(body); headP.position.set(0, .23, C.body / 2 + .17);
+  const head = grp(headP);
+  const skull = sph(.125, mK, 0, 0, 0, head); skull.scale.set(1, .93, 1.05);
+  const cheeks = [-1, 1].map(s => { const c = sph(.07, C.points != null ? mP : mB, s * .06, -.045, .06, head); return c; });
+  const muz = cap(.062, C.snout, mM, 0, -.035, .1 + C.snout / 2, head); muz.rotation.x = Math.PI / 2;
+  const nose = sph(.033, MAT(0x1A1614, .3), 0, -.01, .1 + C.snout + .06, head); nose.scale.set(1.2, .85, .9);
+  const tongue = cap(.026, .05, MAT(0xE8788A, .5), 0, -.085, .1 + C.snout + .02, head); tongue.rotation.x = .4; tongue.scale.set(1.1, 1, .5);
+  const eyeM = MAT(0x2A1708, .15);
+  const eyes = [-1, 1].map(s => { const e = sph(.023, eyeM, s * .056, .028, .102, head, 14, 10); const hl = sph(.0065, BASIC(0xFFFFFF), .006, .009, .019, e, 8, 6); return e; });
+  if (C.points != null) [-1, 1].forEach(s => sph(.016, mP, s * .05, .07, .105, head, 10, 8));
+  const ears = [-1, 1].map(s => { const g = grp(head); g.position.set(s * .088, .075, -.015); const L = C.ear === 'long' ? 1.6 : C.ear === 'erect' ? .95 : 1.05; const e = sph(.07, mE, 0, 0, 0, g, 14, 10); e.scale.set(.32, L, .72);
+    if (C.ear === 'erect') { e.position.y = .07; g.rotation.z = -s * .25; } else if (C.ear === 'semi') { e.position.y = .05; g.rotation.z = -s * .2; g.userData.fold = 1; } else { e.position.y = -.06 * L; g.rotation.z = s * .5; g.rotation.x = .15; }
+    g.userData = Object.assign(g.userData || {}, { s, rz: g.rotation.z, rx: g.rotation.x, e }); return g; });
+  const legs = []; const mkLeg = (x, z, front) => { const hip = grp(body); hip.position.set(x, -.03, z); const L = C.leg;
+    cap(front ? .046 : .052, L * .4, front ? mK : mK, 0, -L * .25, 0, hip); const knee = grp(hip); knee.position.y = -L * .5;
+    cap(.037, L * .38, mP, 0, -L * .22, 0, knee); const paw = sph(.046, C.socks ? mBe : mP, 0, -L * .47, .02, knee, 12, 8); paw.scale.set(1, .6, 1.3);
+    legs.push({ hip, knee, front, x, z }); };
+  mkLeg(.085, C.body / 2 - .01, true); mkLeg(-.085, C.body / 2 - .01, true); mkLeg(.085, -C.body / 2 + .03, false); mkLeg(-.085, -C.body / 2 + .03, false);
+  const tail = grp(body); tail.position.set(0, .07, -C.body / 2 - .13); const tsegs = []; let par = tail; for (let i = 0; i < 4; i++) { const g = grp(par); if (i) g.position.y = .075; const c = cap(C.fluff ? .038 - i * .004 : .028 - i * .004, .06, i === 3 && C.socks ? mBe : mK, 0, .04, 0, g); tsegs.push(g); par = g; }
+  tail.rotation.x = -.7;
+  const col = add(new THREE.TorusGeometry(.09, .016, 8, 24), MAT(C.collar, .5), 0, .13, C.body / 2 + .1, body); col.rotation.x = Math.PI / 2 - .7;
+  const tag = add(new THREE.CylinderGeometry(.022, .022, .006, 14), MAT(0xF2C14E, .3, { metalness: .6 }), 0, .065, C.body / 2 + .175, body); tag.rotation.x = Math.PI / 2 - .3;
+  root.scale.setScalar(C.size);
+  return { root, body, head, headP, tongue, eyes, ears, legs, tail, tsegs, hipY, C };
+}
+function poseDog(d, t, o = {}) {
+  const { walk = 0, run = 0, sit = 0, tilt = 0, look = 0, lookUp = 0, wag = 1, pant = 0, eat = 0, ph = 0, lie = 0 } = o;
+  const g = walk + run; const f = run ? 11 : 7; const tt = t * f + ph; const amp = .45 * walk + .8 * run;
+  d.legs.forEach((L, i) => { const p = (i === 0 || i === 3) ? 0 : Math.PI; const s = Math.sin(tt + p);
+    L.hip.rotation.set(s * amp, 0, 0); L.knee.rotation.x = (L.front ? -1 : 1) * Math.max(0, L.front ? s : -s) * amp * 1.1; L.hip.scale.y = 1; });
+  d.body.position.y = d.hipY + Math.abs(Math.sin(tt)) * (.012 * walk + .04 * run); d.body.rotation.x = Math.sin(tt * 2) * .02 * run;
+  if (sit > 0) { const s = ease(sit); d.body.rotation.x = -.52 * s; d.body.position.y = d.hipY - .07 * s;
+    d.legs.forEach(L => { if (L.front) { L.hip.rotation.x = .52 * s; L.hip.scale.y = 1 + .3 * s; } else { L.hip.rotation.x = -1.25 * s + .52 * s; L.knee.rotation.x = 1.9 * s; } }); }
+  if (lie > 0) { const s = ease(lie); d.body.position.y = lerp(d.body.position.y, .16, s); d.legs.forEach(L => { if (L.front) { L.hip.rotation.x = lerp(L.hip.rotation.x, -1.45, s); L.knee.rotation.x = lerp(L.knee.rotation.x, 0, s); } else { L.hip.rotation.x = lerp(L.hip.rotation.x, -1.4, s); L.knee.rotation.x = lerp(L.knee.rotation.x, 2.4, s); } }); }
+  const breathe = 1 + Math.sin(t * (pant ? 9 : 2.2)) * (pant ? .012 : .006);
+  d.body.children[0].scale.set(.92 * breathe, 1, 1 * breathe);
+  d.headP.position.y = .23 - .2 * eat; d.headP.position.z = d.C.body / 2 + .17 + .06 * eat;
+  d.head.rotation.set(-lookUp + .9 * eat + .52 * ease(sit) * (1 - eat) + Math.sin(tt * 2) * .03 * g, look + Math.sin(t * .7 + ph) * .08, tilt);
+  d.tongue.visible = pant > 0; if (pant > 0) d.tongue.scale.set(1.1, 1 + Math.sin(t * 9) * .15, .5);
+  const wg = Math.sin(t * 13 + ph) * .55 * wag; d.tail.rotation.set(-.7 + .25 * ease(sit), wg, 0); d.tsegs.forEach((s, i) => { s.rotation.x = i ? -d.C.tailCurl * .25 : 0; s.rotation.z = wg * .2 * i; });
+  const blink = ((t + ph) % 3.9) > 3.78; d.eyes.forEach(e => e.scale.y = blink ? .15 : 1);
+  d.ears.forEach(e => { e.rotation.z = e.userData.rz + Math.sin(tt * 2) * .06 * g * e.userData.s + tilt * .3; });
+}
+const BREEDS = {
+  caramelo: { base: 0xD39552, belly: 0xF4DEC0, muzzle: 0xE7B47A, ear: 'floppy', earC: 0xC07F40, size: 1.0 },
+  pretoTan: { base: 0xC98A4A, back: 0x1E1A18, points: 0xC98A4A, belly: 0xF2E8DA, muzzle: 0xC98A4A, ear: 'semi', earC: 0x1E1A18, collar: ORANGE },
+  salsicha: { base: 0xB8743A, back: 0x18140F, points: 0xB8743A, belly: 0xB8743A, muzzle: 0xB8743A, earC: 0x18140F, ear: 'long', leg: .17, body: .55, snout: .13, size: .9, collar: 0xD94C6A },
+  salsichaRuivo: { base: 0xC9783A, belly: 0xD99A5A, muzzle: 0xC9783A, earC: 0x9A5426, ear: 'long', leg: .17, body: .55, snout: .13, size: .9, fluff: true, collar: 0x3B82F6 },
+  golden: { base: 0xD9A24E, belly: 0xF0CC8A, muzzle: 0xE5B66A, ear: 'floppy', size: 1.25, fluff: true, collar: 0xD94C6A },
+  collie: { base: 0x1C1A1A, belly: 0xFFFFFF, muzzle: 0xFFFFFF, ear: 'semi', socks: true, size: 1.05, collar: 0xF2C14E },
+};
+
+
+// ---------- tempos ----------
+const T_ELE = WA(/^Ele$/), T_G1 = WA(/^gira,$/), T_G2 = WA(/^gira,$/, 1), T_G3 = WA(/gira…/), T_DEITA = WA(/deita\./), T_NAO = WA(/^Não$/), T_ANTE = WA(/antepassados/), T_NA = WA(/^Na$/), T_AMASSA = WA(/amassava/), T_NEVE = WA(/neve/), T_CAMA = WA(/^cama$/), T_INSET = WA(/insetos/), T_E = WA(/^E$/, 0, 25), T_IRREG = WA(/irregular/), T_LISO = WA(/liso/), T_ARRUM = WA(/arrumando/), T_MESMO = WA(/Mesmo/), T_RITUAL = WA(/ritual/), T_QUANT = WA(/Quantas/);
+const HL = /voltinhas|antigo|gira|deita|antepassados|selvagens|natureza|grama|neve|confortável|insetos|estudo|irregular|liso|arrumando|caminha|ritual|milhares|voltas|comenta/i;
+
+const hemi = new THREE.HemisphereLight(0xFFF4E6, 0x7A6A5A, 1.05); scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xFFF0DD, 2.0); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, { left: -4, right: 4, top: 4, bottom: -4, near: .5, far: 40 }); sun.shadow.bias = -.0004; scene.add(sun); scene.add(sun.target);
+// ===== sala (x=0) =====
+const room = grp();
+add(new THREE.PlaneGeometry(14, 14), MAT(0xC89A6A, .8), 0, 0, 0, room).rotation.x = -Math.PI / 2; box(12, 5, .1, 0xFDE7C8, 0, 2.5, -2.2, room);
+const rug = add(new THREE.CircleGeometry(1.0, 32), MAT(0x60A5FA, .9), 0, .01, 0, room); rug.rotation.x = -Math.PI / 2;
+const sofa = grp(room); sofa.position.set(-1.4, 0, -1.3); box(1.6, .4, .7, 0xF97316, 0, .2, 0, sofa); box(1.6, .5, .2, 0xEA580C, 0, .55, -.25, sofa);
+const bed = grp(room); bed.position.set(0, 0, 0); bed.visible = false; const bedTor = add(new THREE.TorusGeometry(.55, .18, 12, 30), MAT(0xEC4899, .7), 0, .18, 0, bed); bedTor.rotation.x = Math.PI / 2; cyl(.58, .58, .1, 0xFBCFE8, 0, .08, 0, bed, 30);
+const owner = buildPerson({ skin: 0xC88A5A, shirt: 0x22C55E, pants: 0x1E3A8A, hair: 0x1A1008 }); room.add(owner.root); owner.root.position.set(1.4, 0, -.9); owner.root.rotation.y = -.7;
+const laugh = sprite(emo('😂'), .4); room.add(laugh);
+// ===== floresta (x=40) =====
+const forest = grp(); forest.position.set(40, 0, 0);
+add(new THREE.PlaneGeometry(30, 30), MAT(0x4D7C2F, .95), 0, 0, 0, forest).rotation.x = -Math.PI / 2;
+for (let i = 0; i < 16; i++) { const x = rr(-6, 6), z = rr(-8, -2.2); cyl(.1, .14, 1.2, 0x6B4423, x, .6, z, forest, 6); add(new THREE.ConeGeometry(rr(.6, .9), rr(1.6, 2.4), 7), MAT(0x2F6B3A, .9), x, 1.9, z, forest); }
+const grass = []; for (let i = 0; i < 120; i++) { const a = rr(0, 6.28), r = Math.sqrt(rr(0, 1)) * 1.1; const b = add(new THREE.ConeGeometry(.03, rr(.28, .45), 4), MAT(i % 3 ? 0x7CB342 : 0x9CCC65, .9), Math.cos(a) * r, .17, Math.sin(a) * r, forest); b.castShadow = false; b.userData = { r, a, h: b.position.y }; grass.push(b); }
+const bugs = Array.from({ length: 7 }, (_, i) => { const s = sprite(emo(['🦟', '🐛', '🐜', '🕷️'][i % 4]), .22); s.userData = { a: rr(0, 6.28), p: rr(0, 1) }; forest.add(s); return s; });
+const snow = []; for (let i = 0; i < 30; i++) { const s = add(new THREE.SphereGeometry(.03, 6, 4), BASIC(0xFFFFFF), rr(-1.5, 1.5), rr(0, 3), rr(-1, 1), forest); s.castShadow = false; s.userData.p = rr(0, 1); snow.push(s); }
+// ===== estudo (x=80) =====
+const lab = grp(); lab.position.set(80, 0, 0);
+add(new THREE.PlaneGeometry(20, 20), MAT(0xE5E7EB, .7), 0, 0, 0, lab).rotation.x = -Math.PI / 2; box(10, 5, .1, 0xDBEAFE, 0, 2.5, -2.4, lab);
+box(1.5, .05, 1.5, 0xF8FAFC, -.95, .025, 0, lab); const bumpy = grp(lab); bumpy.position.set(.95, 0, 0); box(1.5, .05, 1.5, 0x8D6E63, 0, .025, 0, bumpy);
+for (let i = 0; i < 40; i++) { const r = add(new THREE.DodecahedronGeometry(rr(.05, .12), 0), MAT(0x6D4C41, .9), rr(-.65, .65), .06, rr(-.65, .65), bumpy); r.castShadow = false; }
+// cachorros
+const dog = buildDog({ base: 0xD39552, belly: 0xF4DEC0, muzzle: 0xE7B47A, ear: 'floppy', earC: 0xB87538, size: 1.0, collar: 0x3B82F6 }); scene.add(dog.root);
+const dog2 = buildDog({ base: 0x3F3F46, belly: 0xE5E7EB, muzzle: 0xE5E7EB, ear: 'floppy', earC: 0x27272A, size: .9, collar: 0xEF4444 }); lab.add(dog2.root);
+const wolf = buildDog({ base: 0x8A8F98, belly: 0xD9DCE0, back: 0x5C6068, muzzle: 0xE5E7EB, ear: 'pointy', earC: 0x5C6068, size: 1.15, collar: null, fluff: true, tailCurl: .2 }); forest.add(wolf.root);
+const zz = sprite(emo('💤'), .35); scene.add(zz); const heartS = sprite(emo('🥰'), .4); scene.add(heartS);
+const arrows = sprite(emo('🔄'), .5); scene.add(arrows);
+
+// ---------- utilidades ----------
+const $ = id => document.getElementById(id);
+function place(el, on, x, y, s = 1, rot = 0) { el.style.opacity = on && s > 0 ? 1 : 0; if (!on) return; el.style.transform = `translate(${x - el.offsetWidth / 2}px,${y - el.offsetHeight / 2}px) scale(${s}) rotate(${rot}deg)`; }
+function fixed(el, s) { el.style.opacity = s > 0 ? 1 : 0; el.style.transform = `scale(${Math.max(s, .001)})`; }
+const win = (t, a, b) => t >= a && t < b;
+const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
+[[.05, 'whoosh'], [T_G1, 'pop'], [T_G2, 'pop'], [T_G3, 'pop'], [T_DEITA, 'boing'], [T_NAO, 'whoosh'], [T_ANTE, 'ding'], [T_NA, 'whoosh'], [T_INSET, 'zap'], [T_E, 'whoosh'], [T_IRREG, 'pop'], [T_ARRUM, 'ding'], [T_MESMO, 'whoosh'], [T_QUANT, 'win']].forEach(([t, k]) => ev(t, k));
+function world(w) { room.visible = w === 'room'; forest.visible = w === 'forest'; lab.visible = w === 'lab'; dog.root.visible = w === 'room'; scene.background = new THREE.Color({ room: 0xFDE7C8, forest: 0xA7D3F0, lab: 0xDBEAFE }[w]); }
+// cachorro girando em círculo (raio r) - devolve rotação acumulada
+function spinDog(d, cx, cz, t, t0, t1, turns, r = .18, off = V(0, 0, 0)) { const u = clamp((t - t0) / (t1 - t0)); const a = u * turns * Math.PI * 2; d.root.position.set(cx + Math.cos(a) * r, 0, cz + Math.sin(a) * r).add(off); d.root.rotation.y = -a; poseDog(d, t, { walk: u > 0 && u < 1 ? 1 : 0, wag: .8 }); return u; }
+
+window.draw = function (t) {
+  let cp, tg, off = V(0, 0, 0); zz.visible = heartS.visible = arrows.visible = laugh.visible = false;
+  if (t < T_NAO - .1 || t >= T_MESMO - .1) { world('room');
+    bed.visible = t >= T_MESMO - .1; rug.visible = !bed.visible;
+    if (t < T_ELE - .1) { spinDog(dog, 0, 0, t, 0, T_ELE - .1, 3.2); arrows.visible = true; arrows.position.set(0, 1.3, 0); arrows.material.rotation = -t * 4; cp = V(Math.sin(t * .5) * .8, 2.0, 4.4); tg = V(0, .45, 0); }
+    else if (t < T_NAO - .1) { const u = spinDog(dog, 0, 0, t, T_G1 - .2, T_DEITA, 3); if (u >= 1) { dog.root.position.set(.18, 0, 0); poseDog(dog, t, { lie: ease(clamp((t - T_DEITA) / .5)), wag: .3 }); }
+      poseP(owner, { ...PP.stand, rx: -.5, rz: -.2, re: -1.5, lx: -.5, lz: .2, le: -1.5, hx: -.2 }, 0, t); face(owner, 'happy', t); owner.root.position.y = Math.abs(Math.sin(t * 9)) * .03; laugh.visible = t > T_G2; laugh.position.set(1.4, 2.25, -.9);
+      cp = V(.7, 2.4, 5.8); tg = V(.6, .8, -.4); }
+    else { dog.root.position.set(0, .12, 0); dog.root.rotation.y = .6; poseDog(dog, t, { lie: 1, wag: .2 }); const sl = t > T_QUANT; zz.visible = sl; zz.position.set(.2, .9 + ((t * .5) % 1) * .2, 0); heartS.visible = !sl && t > T_MESMO + .5; heartS.position.set(.3, 1.0, 0);
+      cp = V(Math.sin(t * .4) * .6, 1.6, 2.8); tg = V(0, .3, 0); } }
+  else if (t < T_E - .1) { world('forest'); off = forest.position;
+    const spinning = t > T_AMASSA - .3; const u = spinning ? spinDog(wolf, 0, 0, t, T_AMASSA - .3, T_INSET + .3, 3, .22, V(0, 0, 0)) : 0;
+    if (!spinning) { wolf.root.position.set(lerp(-2.5, 0, ease(clamp((t - T_NAO) / 2.2))), 0, 0); wolf.root.rotation.y = Math.PI / 2; poseDog(wolf, t, { walk: t < T_NAO + 2.2 ? 1 : 0, wag: .3, look: .3 }); }
+    if (u >= 1) { wolf.root.position.set(.22, .08, 0); poseDog(wolf, t, { lie: 1, wag: .1 }); }
+    const flat = spinning ? ease(clamp((t - T_AMASSA + .3) / 2.5)) : 0; grass.forEach(b => { const f = flat * clamp(1.4 - b.userData.r); b.scale.y = Math.max(.15, 1 - f * .85); b.rotation.z = f * .9 * Math.cos(b.userData.a); b.position.y = .17 * b.scale.y; });
+    snow.forEach(s => { s.visible = win(t, T_NEVE - .3, T_CAMA); s.position.y = 3 - ((t * .4 + s.userData.p) % 1) * 3; });
+    bugs.forEach((bg, i) => { const k = clamp((t - T_INSET) / 1.2); bg.visible = t > T_INSET - .6; const r = .3 + k * 2.2; bg.position.set(Math.cos(bg.userData.a) * r, .25 + k * .6, Math.sin(bg.userData.a) * r); });
+    cp = V(Math.sin(t * .2) * 1.0, 2.4, 4.8); tg = V(0, .45, 0); }
+  else { world('lab'); off = lab.position;
+    const n1 = Math.min(2, Math.floor((t - T_E) / 1.6)), n2 = Math.min(5, Math.floor((t - T_E) * 1.0));
+    spinDog(dog2, .95, 0, t, T_E, T_ARRUM, 5.5, .2); dog.root.visible = true; const u1 = clamp((t - T_E) / 3.2); const a1 = u1 * 2 * Math.PI * 2; dog.root.position.set(lab.position.x - .95 + Math.cos(a1) * .18, 0, Math.sin(a1) * .18); dog.root.rotation.y = -a1; poseDog(dog, t, u1 < 1 ? { walk: 1, wag: .6 } : { lie: 1, wag: .2 }); if (u1 >= 1) dog.root.position.y = .1;
+    cp = V(0, 3.4, 6.8); tg = V(0, .2, 0); }
+  cp.add(off); tg.add(off); cam.position.copy(cp); cam.lookAt(tg); cam.updateProjectionMatrix(); cam.updateMatrixWorld(true);
+  sun.position.copy(tg).add(V(3, 7, 5)); sun.target.position.copy(tg);
+  // HTML
+  fixed($('hook'), t < T_ELE - .1 ? pop(t - .02, .3) : 0);
+  { const el = $('ctr'); if (win(t, T_G1 - .1, T_NAO - .1)) { const n = t >= T_G3 ? 3 : t >= T_G2 ? 2 : 1; el.textContent = `🔄 VOLTAS: ${n}`; place(el, true, 540, 330, pop(t - [T_G1, T_G2, T_G3][n - 1], .25)); } else el.style.opacity = 0; }
+  { const on = win(t, T_E, T_MESMO - .1); const a = $('c1'), b = $('c2'); if (on) { const u1 = clamp((t - T_E) / 3.2), v2 = clamp((t - T_E) / (T_ARRUM - T_E)); a.innerHTML = `CHÃO LISO<br>🔄 ${Math.min(2, Math.floor(u1 * 2 + .01))}`; b.innerHTML = `CHÃO IRREGULAR<br>🔄 ${Math.min(5, Math.floor(v2 * 5.5))}`; place(a, true, 300, 1230, 1); place(b, true, 790, 1230, 1); } else { a.style.opacity = 0; b.style.opacity = 0; } }
+  const tg1 = $('t1'); tg1.style.opacity = 0;
+  const tag = (txt, cls, on, t0, rot = -3, y = 330) => { if (!on) return; tg1.textContent = txt; tg1.className = 'o tag ' + cls; place(tg1, true, 540, y, pop(t - t0, .3), rot); };
+  tag('🐺 HERANÇA DOS ANTEPASSADOS', 'white small', win(t, T_ANTE - .2, T_NA - .1), T_ANTE - .2);
+  tag('🌾 AMASSAR A GRAMA', 'green', win(t, T_AMASSA - .1, T_NEVE - .1), T_AMASSA - .1, 3);
+  tag('❄️ OU A NEVE', 'blue', win(t, T_NEVE - .1, T_CAMA - .1), T_NEVE - .1, -3);
+  tag('🛏️ CAMA CONFORTÁVEL', '', win(t, T_CAMA - .1, T_INSET - .2), T_CAMA - .1, 3);
+  tag('🦟 ESPANTAR BICHOS', 'red', win(t, T_INSET - .2, T_E - .1), T_INSET - .2, -3);
+  tag('🔬 UM ESTUDO MOSTROU', 'white', win(t, T_E, T_IRREG - .2), T_E, -3);
+  tag('🪨 CHÃO IRREGULAR = MAIS VOLTAS', 'white small', win(t, T_IRREG - .2, T_ARRUM - .2), T_IRREG - .2, 3);
+  tag('🧹 ELE ESTÁ ARRUMANDO A CAMA', 'green small', win(t, T_ARRUM - .2, T_MESMO - .1), T_ARRUM - .2, -3);
+  tag('🐺➡️🐶 RITUAL DE MILHARES DE ANOS', 'white small', win(t, T_RITUAL - .3, T_QUANT - .1), T_RITUAL - .3, 3);
+  fixed($('final'), t >= T_QUANT - .1 ? pop(t - T_QUANT + .1, .35) : 0);
+  $('wm').style.opacity = .85;
+  let wTxt = null, wSt = 0;
+  for (const w2 of ALL) if (t >= w2.start - .03 && t < w2.end + .2) { wTxt = w2.w; wSt = w2.start; }
+  const cap2 = $('cap'); const capOff = t < T_ELE - .1 || t >= T_QUANT - .1 || win(t, T_E, T_MESMO - .1);
+  if (wTxt && !capOff) { cap2.textContent = wTxt.toUpperCase().replace(/[.,!?:…"“”]/g, ''); cap2.className = 'o stroke' + (HL.test(wTxt) ? ' hl' : ''); const k = t - wSt; fixed(cap2, k < .06 ? lerp(.75, 1.1, clamp(k / .06)) : k < .12 ? lerp(1.1, 1, (k - .06) / .06) : 1); } else fixed(cap2, 0);
+  renderer.render(scene, cam); return 1;
+};
+window.EVENTS = EV;
+window.ready = true;
+</script></body></html>
