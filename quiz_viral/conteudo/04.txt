@@ -1,0 +1,101 @@
+## Ciência e Tecnologia | Do átomo às galáxias, da lâmpada à inteligência artificial.
+@ Laboratório do quiz: ciência na prática | Ciência
+Qual é a fórmula química da água? | H₂O | CO₂ | O₂ | H₂O₂ | H₂O₂ é a água oxigenada.
+A que temperatura a água ferve ao nível do mar? | 100 °C | 90 °C | 80 °C | 120 °C
+Quem formulou a teoria da relatividade? | Albert Einstein | Isaac Newton | Galileu Galilei | Stephen Hawking
+Qual é a menor unidade de um elemento químico que mantém suas propriedades? | Átomo | Molécula | Célula | Elétron
+Qual cientista é associado à lei da gravitação universal e à famosa história da maçã? | Isaac Newton | Albert Einstein | Charles Darwin | Louis Pasteur
+Qual é o elemento químico mais abundante no universo? | Hidrogênio | Hélio | Oxigênio | Carbono
+Qual é a velocidade aproximada da luz no vácuo? | Cerca de 300 mil km/s | Cerca de 300 km/s | Cerca de 30 mil km/s | Cerca de 3 milhões de km/s
+Quem propôs a teoria da evolução por seleção natural? | Charles Darwin | Gregor Mendel | Jean-Baptiste Lamarck | Louis Pasteur
+Qual é o ponto de congelamento da água pura ao nível do mar? | 0 °C | 4 °C | -10 °C | 10 °C
+Uma substância com pH abaixo de 7 é classificada como: | Ácida | Básica | Neutra | Salina
+@ Fora deste mundo: o quiz do espaço | Espaço e astronomia
+Qual é o planeta mais próximo do Sol? | Mercúrio | Vênus | Terra | Marte
+Qual é o planeta mais quente do Sistema Solar? | Vênus | Mercúrio | Marte | Júpiter | Sua atmosfera densa de CO₂ prende o calor.
+Qual planeta é conhecido como "planeta vermelho"? | Marte | Júpiter | Vênus | Saturno
+Quantos planetas tem o Sistema Solar? | 8 | 9 | 7 | 10
+Desde 2006, Plutão é classificado como: | Planeta-anão | Estrela | Cometa | Satélite natural
+Quanto tempo, aproximadamente, a luz do Sol leva para chegar à Terra? | Cerca de 8 minutos | Cerca de 8 segundos | Cerca de 8 horas | Cerca de 8 dias
+Qual é o nome da galáxia onde vivemos? | Via Láctea | Andrômeda | Sombrero | Triângulo
+Qual planeta tem os anéis mais visíveis? | Saturno | Júpiter | Urano | Netuno | Júpiter, Urano e Netuno também têm anéis, mas bem discretos.
+Quem foi o primeiro ser humano a viajar ao espaço, em 1961? | Yuri Gagarin | Neil Armstrong | Buzz Aldrin | John Glenn
+Quem foi o primeiro astronauta brasileiro a ir ao espaço, em 2006? | Marcos Pontes | Cesar Lattes | Oswaldo Cruz | Carlos Chagas
+@ Tech quiz: você é antenado? | Tecnologia
+O que significa a sigla "www"? | World Wide Web | World Web Wide | Wide World Web | Web World Wide
+Quem fundou a Microsoft ao lado de Paul Allen? | Bill Gates | Steve Jobs | Mark Zuckerberg | Elon Musk
+Em que ano foi lançado o primeiro iPhone? | 2007 | 2005 | 2009 | 2010
+O que significa a sigla "USB"? | Universal Serial Bus | United System Board | Universal System Backup | Ultra Speed Bus
+Qual empresa desenvolve o sistema operacional Android? | Google | Apple | Microsoft | Samsung
+Quantos bits tem um byte? | 8 | 4 | 16 | 10
+O que é "phishing"? | Um golpe para roubar dados fingindo ser alguém confiável | Um vírus que apaga o disco | Um tipo de cabo de internet | Uma rede social de pesca
+No Windows, qual é a função do atalho Ctrl + Z? | Desfazer | Copiar | Colar | Salvar
+Para que serve a tecnologia Wi-Fi? | Conectar aparelhos a uma rede sem fio | Carregar a bateria | Imprimir documentos | Gravar DVDs
+Quem fundou a Apple ao lado de Steve Wozniak? | Steve Jobs | Bill Gates | Larry Page | Jeff Bezos | Ronald Wayne também foi cofundador, mas saiu poucos dias depois.
+@ IA: o futuro já chegou? | Inteligência artificial
+O que significa a sigla IA? | Inteligência Artificial | Internet Avançada | Informação Automática | Interface Analógica
+Qual cientista propôs um teste para avaliar se uma máquina consegue se passar por humano em uma conversa? | Alan Turing | Albert Einstein | Nikola Tesla | Bill Gates | É o famoso Teste de Turing, de 1950.
+Em 1997, o computador Deep Blue, da IBM, venceu qual campeão mundial de xadrez? | Garry Kasparov | Magnus Carlsen | Bobby Fischer | Anatoly Karpov
+Como se chama a área da IA em que os sistemas aprendem a partir de dados? | Aprendizado de máquina | Robótica industrial | Computação em nuvem | Realidade virtual | Em inglês, "machine learning".
+Quando uma IA inventa uma informação falsa como se fosse verdade, como isso é chamado? | Alucinação | Phishing | Spam | Bug de tela
+Qual empresa criou o AlphaGo, que venceu um campeão mundial de Go em 2016? | DeepMind | IBM | Microsoft | Apple | A DeepMind pertence ao Google.
+Qual é o nome da assistente de voz da Apple? | Siri | Alexa | Cortana | Bixby
+Qual é o nome da assistente de voz da Amazon? | Alexa | Siri | Cortana | Bixby
+Como se chama o comando escrito que o usuário envia para uma IA generativa? | Prompt | Cookie | Firewall | Pixel
+O que significa o "G" da sigla GPT? | Generative (gerativo) | General (geral) | Global | Graphic (gráfico) | GPT = Generative Pre-trained Transformer.
+@ Quem inventou isso? | Invenções
+Quem os brasileiros consideram o "pai da aviação"? | Santos Dumont | Irmãos Wright | Bartolomeu de Gusmão | Leonardo da Vinci
+Quem registrou a patente do telefone em 1876? | Alexander Graham Bell | Thomas Edison | Nikola Tesla | Guglielmo Marconi
+Quem aperfeiçoou e popularizou a lâmpada incandescente comercial? | Thomas Edison | Graham Bell | Nikola Tesla | Benjamin Franklin
+Quem criou a prensa de tipos móveis na Europa, por volta de 1450? | Johannes Gutenberg | Leonardo da Vinci | Galileu Galilei | Martinho Lutero
+Quem descobriu a penicilina, em 1928? | Alexander Fleming | Louis Pasteur | Marie Curie | Robert Koch
+Qual povo inventou o papel? | Chineses | Egípcios | Gregos | Romanos | Os egípcios usavam o papiro, que é diferente do papel.
+Quem criou a World Wide Web? | Tim Berners-Lee | Bill Gates | Steve Jobs | Mark Zuckerberg
+Quem inventou o para-raios? | Benjamin Franklin | Thomas Edison | Nikola Tesla | Alessandro Volta
+Qual inventor aperfeiçoou a máquina a vapor e deu nome à unidade de potência "watt"? | James Watt | Thomas Newcomen | George Stephenson | Robert Fulton
+Quem desenvolveu a primeira vacina contra a raiva, em 1885? | Louis Pasteur | Alexander Fleming | Edward Jenner | Albert Sabin
+@ Invenções que surgiram por acaso | Invenções curiosas
+O forno de micro-ondas surgiu quando um engenheiro notou que um radar derreteu o que estava no bolso dele. O que era? | Uma barra de chocolate | Um sorvete | Uma vela | Um chiclete | O engenheiro era Percy Spencer, nos anos 1940.
+Qual bloquinho de recados surgiu a partir de uma cola "fraca demais"? | Post-it | Fita adesiva | Super Bonder | Velcro
+O velcro foi inspirado em quê? | Carrapichos grudados no pelo de um cachorro | Patas de lagartixa | Teias de aranha | Tentáculos de polvo
+Segundo uma história famosa, a batata chips surgiu porque um cliente reclamou que as batatas fritas estavam: | Grossas demais | Frias demais | Salgadas demais | Pequenas demais | É uma lenda popular, sem comprovação histórica.
+O picolé foi criado por um menino que esqueceu, numa noite fria, um copo com um palito dentro. O que havia no copo? | Refrigerante | Leite | Suco de laranja | Chocolate quente | Frank Epperson tinha 11 anos, em 1905.
+Qual era a profissão de John Pemberton, criador da Coca-Cola? | Farmacêutico | Cozinheiro | Dentista | Engenheiro
+Santos Dumont ajudou a popularizar qual acessório masculino? | O relógio de pulso | Os óculos de sol | O boné | O guarda-chuva | O relojoeiro Louis Cartier criou um modelo para ele usar enquanto voava.
+A "mola maluca" foi inventada depois que um engenheiro viu qual objeto cair e "andar" sozinho? | Uma mola | Um elástico | Um fio de cobre | Uma corrente
+A massinha de modelar Play-Doh foi criada originalmente para qual função? | Limpar papel de parede | Vedar janelas | Fazer moldes dentários | Substituir argila em escolas
+Para que foi criado originalmente o plástico-bolha? | Para ser papel de parede | Para embalar eletrônicos | Para isolar piscinas | Para ser um brinquedo
+## Números e Lógica | Contas rápidas, sequências e desafios que fazem o público pausar o vídeo para pensar.
+@ Matemática sem calculadora | Matemática
+Quanto é 7 × 8? | 56 | 54 | 48 | 64
+Qual é a raiz quadrada de 144? | 12 | 14 | 11 | 16
+Quanto é 15% de 200? | 30 | 15 | 20 | 35
+Quanto dá a soma dos ângulos internos de um triângulo? | 180° | 90° | 360° | 270°
+Qual é o próximo número primo depois do 7? | 11 | 9 | 13 | 10
+Qual é o valor aproximado de π (pi)? | 3,14 | 2,71 | 1,61 | 3,41
+Quanto é 2 elevado à 10ª potência? | 1.024 | 1.000 | 512 | 2.048
+Quanto é a metade de um terço de 60? | 10 | 20 | 15 | 5
+Qual é a área de um quadrado com 5 cm de lado? | 25 cm² | 20 cm² | 10 cm² | 50 cm²
+Qual número romano representa o 50? | L | C | D | X
+@ Raciocínio lógico: pense antes de responder | Raciocínio lógico
+Qual é o próximo número da sequência 2, 4, 8, 16...? | 32 | 24 | 20 | 18
+Se todos os gatos são mamíferos e Tom é um gato, então: | Tom é um mamífero | Todo mamífero é um gato | Tom não é mamífero | Não dá para concluir nada
+Qual é o próximo número da sequência 1, 1, 2, 3, 5, 8...? | 13 | 11 | 12 | 16 | É a sequência de Fibonacci: cada número é a soma dos dois anteriores.
+Maria é mais alta que Ana, e Ana é mais alta que Bia. Quem é a mais baixa? | Bia | Ana | Maria | Não dá para saber
+Qual é a próxima letra da sequência A, C, E, G...? | I | H | J | K
+Se hoje é segunda-feira, que dia será daqui a 10 dias? | Quinta-feira | Quarta-feira | Sexta-feira | Sábado
+Pedro tem 3 irmãs, e cada irmã tem 1 irmão. Quantos filhos homens há na família? | 1 | 2 | 3 | 4 | O único irmão das três é o próprio Pedro.
+Qual é o próximo número da sequência 3, 6, 11, 18, 27...? | 38 | 36 | 37 | 40 | Somam-se 3, 5, 7, 9 e, depois, 11.
+Um tijolo pesa 1 kg mais meio tijolo. Quanto pesa um tijolo inteiro? | 2 kg | 1,5 kg | 1 kg | 3 kg | Se meio tijolo pesa 1 kg, o tijolo inteiro pesa 2 kg.
+Qual número não pertence ao grupo 2, 3, 5, 9, 11? | 9 | 2 | 5 | 11 | Todos são primos, menos o 9.
+@ Desafio: a maioria erra essa conta | Desafios matemáticos
+Quanto é 6 ÷ 2 × 3? | 9 | 1 | 6 | 3 | Divisão e multiplicação são feitas da esquerda para a direita: 3 × 3 = 9.
+Quanto é 8 + 2 × 5? | 18 | 50 | 20 | 15 | A multiplicação vem antes da soma.
+Um taco e uma bola custam R$ 1,10 juntos. O taco custa R$ 1,00 a mais que a bola. Quanto custa a bola? | R$ 0,05 | R$ 0,10 | R$ 0,01 | R$ 0,15 | Bola R$ 0,05 + taco R$ 1,05 = R$ 1,10.
+Quanto é 10 + 10 × 0? | 10 | 0 | 20 | 1
+Quanto é 2² + 3²? | 13 | 25 | 10 | 12
+Uma planta aquática dobra de tamanho todo dia e cobre um lago inteiro em 48 dias. Em quantos dias ela cobre metade do lago? | 47 | 24 | 46 | 12 | Um dia antes de cobrir tudo, ela cobria a metade.
+Quanto é 50% de 50% de 100? | 25 | 50 | 75 | 10
+Um produto de R$ 100 sobe 10% e depois cai 10%. Quanto ele passa a custar? | R$ 99 | R$ 100 | R$ 101 | R$ 90 | Sobe para R$ 110; 10% de 110 é 11, então cai para R$ 99.
+Quanto é 111 × 111? | 12.321 | 11.111 | 12.221 | 13.321
+Quantos quadradinhos de 1 cm de lado cabem em um quadrado de 3 cm de lado? | 9 | 6 | 3 | 12
