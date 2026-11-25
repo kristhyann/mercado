@@ -46,6 +46,7 @@ Professor de concursos, pesquisador de legislação, especialista em didática e
 ## Catálogo
 | Disciplina | Módulo | Conteúdo | Atualizado em | PDF |
 |---|---|---|---|---|
+| Direito Constitucional | 03 | Administração Pública na Constituição (arts. 37 a 41), com a EC nº 138/2025 | 25/11/2026 | `DIREITO-CONSTITUCIONAL/caderno-03-administracao-publica-arts-37-a-41/pdf/` |
 | Direito Constitucional | 02 | Direitos e garantias fundamentais (art. 5º) | 25/11/2026 | `DIREITO-CONSTITUCIONAL/caderno-02-direitos-e-garantias-fundamentais-art-5/pdf/` |
 | Direito Constitucional | 01 | Fundamentos, princípios (arts. 1º a 4º) e organização do Estado | 25/11/2026 | `DIREITO-CONSTITUCIONAL/caderno-01-fundamentos-principios-organizacao-do-estado/pdf/` |
 | Direito Penal: Parte Geral | 01 | Aplicação da Lei Penal (arts. 1º a 12 do CP) | 24/11/2026 | `DIREITO-PENAL/PARTE-GERAL/modulo-01-aplicacao-da-lei-penal/pdf/` |
