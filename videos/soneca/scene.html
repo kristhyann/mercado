@@ -86,7 +86,7 @@ function wave(g, x0, x1, y, amp, prog, cuts, col) { // cuts: array of x fraction
   g.strokeStyle = '#FF4D6D'; g.lineWidth = 8; g.setLineDash([16, 12]); cuts.forEach(c => { const x = x0 + (x1 - x0) * c; if (x <= end) { g.beginPath(); g.moveTo(x, y - amp - 30); g.lineTo(x, y + 30); g.stroke(); } }); g.setLineDash([]); }
 function drawGraph(t) { const g = gT.userData.g; g.clearRect(0, 0, GW, GH); g.fillStyle = 'rgba(255,255,255,.95)'; g.beginPath(); g.roundRect(10, 10, GW - 20, GH - 20, 50); g.fill(); g.lineWidth = 12; g.strokeStyle = '#111'; g.stroke();
   g.fillStyle = '#111'; g.font = '900 52px P'; g.textAlign = 'left';
-  const p1 = clamp((t - T_NOVO + .5) / 3.5); g.fillText('😴 SONO PICADO', 50, 120); wave(g, 60, GW - 60, 380, 200, p1, [.3, .55, .8], '#8B5CF6');
+  const p1 = clamp((t - T_SO) / 6.5); g.fillText('😴 SONO PICADO', 50, 120); wave(g, 60, GW - 60, 380, 200, p1, [.3, .55, .8], '#8B5CF6');
   if (t > T_ESTUDOS + .5) { const p2 = clamp((t - T_ESTUDOS - .5) / 3); g.fillStyle = '#111'; g.fillText('😌 SONO CONTÍNUO', 50, 560); wave(g, 60, GW - 60, 820, 200, p2, [], '#22C55E'); }
   gT.needsUpdate = true; }
 
@@ -113,10 +113,10 @@ window.draw = function (t) {
     zz.visible = !ringing; zz.position.set(-.6, 1.3 + ((t * .5) % 1) * .2, -1.0);
     cp = V(1.9, 2.3, 2.6); tg = V(-.2, .65, -.9); }
   else if (t < T_SO - .1) { world('room'); blanket.visible = true; me.root.position.set(-.6, .55, -.7); me.root.rotation.set(0, 0, 0); poseP(me, { ...PP.sit, hx: .35, lean: .2, hl: -1.5, kl: 0, hr: -1.5, kr: 0 }, 0, t); face(me, 'sad', t); me.eyes.forEach(e => e.scale.y = .45); me.head.rotation.z = Math.sin(t * 1.5) * .1;
-    const head = me.head.getWorldPosition(V(0, 0, 0)); fogs.forEach((f, i) => { f.visible = t > T_MOLEZA - .3; const a = f.userData.a + t * .8; f.position.copy(head).add(V(Math.cos(a) * .35, .1 + Math.sin(a * 2) * .06, Math.sin(a) * .35)); f.scale.setScalar(.45 * pop(t - T_MOLEZA + .3 - i * .08, .3)); });
+    const head = me.head.getWorldPosition(V(0, 0, 0)); fogs.forEach((f, i) => { f.visible = t > T_MOLEZA - .3; const a = f.userData.a + t * .8; f.position.copy(head).add(V(Math.cos(a) * .42, .32 + Math.sin(a * 2) * .05, Math.sin(a) * .3 - .15)); f.scale.setScalar(.26 * pop(t - T_MOLEZA + .3 - i * .08, .3)); f.material.opacity = .75; });
     cp = V(.6, 1.9, 3.8); tg = V(-.5, 1.05, -.6); }
   else if (t < T_A - .1) { world('mind'); off = mind.position; drawGraph(t);
-    const p1 = clamp((t - T_NOVO + .5) / 3.5); const cuts = [.3, .55, .8]; scis.visible = p1 > .25 && p1 < .95; scis.position.set(-1 + 2 * p1, 1.75 + .55, .1); scis.material.rotation = Math.sin(t * 12) * .3;
+    const p1 = clamp((t - T_SO) / 6.5); const cuts = [.3, .55, .8]; scis.visible = p1 > .25 && p1 < .95; scis.position.set(-1 + 2 * p1, 1.75 + .55, .1); scis.material.rotation = Math.sin(t * 12) * .3;
     brainS.scale.setScalar(.55 * (1 + Math.sin(t * 3) * .05)); cp = V(0, 1.8, 6.0); tg = V(0, 1.7, 0); }
   else { world('room'); blanket.visible = true; const walk = clamp((t - T_A - .3) / 2.5); const atDesk = t > T_LONGE;
     clock.position.set(1.5, .93, .2); if (!atDesk) { clock.rotation.z = Math.sin(t * 60) * .12; }
