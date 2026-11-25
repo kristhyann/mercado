@@ -43,6 +43,10 @@ Professor de concursos, pesquisador de legislação, especialista em didática e
 ## Comandos
 `CRIAR CADERNO DE ...` · `CRIAR CADERNO ... PARA <CONCURSO>` · `CRIAR CADERNO BASEADO NESTE EDITAL` · `CRIAR MAPA MENTAL` · `CRIAR FLASHCARDS` · `CRIAR SIMULADO` · `REVISAR ESTE MATERIAL`
 
+## Marca da coleção
+- Nome comercial: **MAPA DA APROVAÇÃO — Cadernos Simplificados para Concursos** (20 cadernos). Paleta da marca: branco, preto, grafite, laranja e azul-marinho.
+- Material gratuito de amostra: `MAPA-DA-APROVACAO/mini-ebook-gratuito/` (link da página de vendas a inserir no placeholder da última página).
+
 ## Catálogo
 | Disciplina | Módulo | Conteúdo | Atualizado em | PDF |
 |---|---|---|---|---|
@@ -50,3 +54,4 @@ Professor de concursos, pesquisador de legislação, especialista em didática e
 | Direito Constitucional | 02 | Direitos e garantias fundamentais (art. 5º) | 25/11/2026 | `DIREITO-CONSTITUCIONAL/caderno-02-direitos-e-garantias-fundamentais-art-5/pdf/` |
 | Direito Constitucional | 01 | Fundamentos, princípios (arts. 1º a 4º) e organização do Estado | 25/11/2026 | `DIREITO-CONSTITUCIONAL/caderno-01-fundamentos-principios-organizacao-do-estado/pdf/` |
 | Direito Penal: Parte Geral | 01 | Aplicação da Lei Penal (arts. 1º a 12 do CP) | 24/11/2026 | `DIREITO-PENAL/PARTE-GERAL/modulo-01-aplicacao-da-lei-penal/pdf/` |
+| Mapa da Aprovação (amostra gratuita) | — | Mini Guia Gratuito: 5 assuntos simplificados | 25/11/2026 | `MAPA-DA-APROVACAO/mini-ebook-gratuito/pdf/` |

@@ -1,0 +1,80 @@
+/* MAPA DA APROVAÇÃO · Mini Guia Gratuito
+   Paleta: branco, preto, grafite, laranja, azul-marinho. Páginas de layout fixo (A4). */
+:root{
+  --navy:#0f1f3d; --navy2:#1c3366; --orange:#f07c1b; --orange2:#ffb066; --orange-soft:#fff1e3;
+  --graphite:#2b2f36; --graphite2:#4a505b; --gray:#eef0f3; --gray2:#d9dde3; --black:#111317;
+  --white:#fff; --cream:#fbf6ee; --red:#d6332a; --red-soft:#fdecea; --green:#2c8a5a; --green-soft:#e4f4ec;
+}
+@page{ size:A4; margin:0; }
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{ font-family:"Inter",sans-serif; color:var(--graphite); font-size:10.6pt; line-height:1.45;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page{ width:210mm; height:297mm; position:relative; overflow:hidden; break-after:page; background:#fff; }
+.page:last-child{ break-after:auto; }
+.body{ position:absolute; left:16mm; right:16mm; top:20mm; bottom:18mm; overflow:hidden; }
+p{ margin:0 0 7pt; }
+strong, b{ color:var(--black); }
+.hl{ color:var(--orange); }
+.nv{ color:var(--navy); }
+
+/* cabeçalho e rodapé próprios */
+.run{ position:absolute; left:16mm; right:16mm; top:9mm; display:flex; justify-content:space-between; font-size:7.3pt; letter-spacing:1.4pt; text-transform:uppercase; color:var(--graphite2); }
+.run b{ color:var(--navy); }
+.foot{ position:absolute; left:16mm; right:16mm; bottom:8mm; display:flex; justify-content:space-between; align-items:center; font-size:7.3pt; color:var(--graphite2); }
+.foot .n{ background:var(--navy); color:#fff; font-weight:800; border-radius:4px; padding:2px 8px; font-size:8pt; }
+.page.dark .run, .page.dark .foot{ color:#b9c3d6; } .page.dark .run b{ color:#fff; }
+.page.dark .foot .n{ background:var(--orange); color:var(--navy); }
+
+/* selo de demonstração */
+.demo{ position:absolute; right:16mm; top:14.5mm; background:var(--orange); color:#fff; font-size:7pt; font-weight:800; letter-spacing:1pt; text-transform:uppercase; padding:3px 9px; border-radius:20px; }
+
+/* títulos */
+.kicker{ font-size:8.5pt; font-weight:800; letter-spacing:2.5pt; text-transform:uppercase; color:var(--orange); }
+h1{ font-family:"Inter Display","Inter"; font-weight:900; font-size:30pt; line-height:.98; letter-spacing:-.4pt; color:var(--navy); margin:3pt 0 6pt; text-transform:uppercase; hyphens:none; }
+h2{ font-family:"Inter Display","Inter"; font-weight:900; font-size:16pt; line-height:1.05; color:var(--navy); margin:0 0 6pt; text-transform:uppercase; hyphens:none; }
+h3{ font-size:11.5pt; font-weight:900; color:var(--black); margin:0 0 5pt; }
+.lead{ font-size:11.5pt; color:var(--graphite2); margin-bottom:10pt; }
+.rule{ height:3px; background:var(--navy); margin:6pt 0 10pt; }
+.rule.o{ background:var(--orange); width:44mm; }
+
+/* blocos reutilizáveis (usados com moderação) */
+.law{ background:var(--cream); border-left:5px solid var(--orange); border-radius:0 10pt 10pt 0; padding:9pt 12pt 4pt; margin:0 0 10pt; }
+.law .t{ font-size:8pt; font-weight:900; letter-spacing:1pt; color:#b35a0c; text-transform:uppercase; margin-bottom:3pt; }
+.law p{ font-family:"DejaVu Serif",Georgia,serif; font-size:9.6pt; line-height:1.48; }
+.trad{ display:flex; gap:10pt; align-items:flex-end; border:2px solid var(--black); border-radius:12pt; padding:9pt 12pt 3pt; margin:0 0 10pt; box-shadow:4pt 4pt 0 var(--orange-soft); background:#fff; }
+.trad .tag{ display:inline-block; font-weight:900; font-size:8.5pt; letter-spacing:.8pt; text-transform:uppercase; border:1.8px solid var(--black); border-radius:20pt; padding:1pt 9pt; margin-bottom:5pt; background:var(--cream); }
+.trad p{ font-size:10.6pt; }
+.memo{ background:var(--orange); color:#2a1400; border-radius:12pt; padding:9pt 14pt 3pt; margin:0 0 10pt; display:flex; gap:10pt; align-items:center; }
+.memo p{ font-size:10.8pt; font-weight:500; } .memo b{ color:#2a1400; font-weight:900; }
+.trap{ border:2px solid var(--red); border-radius:12pt; overflow:hidden; margin:0 0 10pt; }
+.trap .bar{ background:var(--red); color:#fff; font-weight:900; letter-spacing:.8pt; font-size:9.5pt; padding:5pt 12pt; text-transform:uppercase; }
+.trap .bd{ padding:7pt 12pt 2pt; } .trap li{ margin-bottom:3pt; font-size:9.9pt; } .trap ul{ margin:0 0 5pt; padding-left:14pt; }
+.chips{ display:flex; flex-wrap:wrap; gap:4pt; }
+.chip{ border:1.6px solid var(--navy); color:var(--navy); font-weight:800; font-size:8.3pt; border-radius:20pt; padding:1.5pt 8pt; background:#fff; }
+.chip.o{ border-color:var(--orange); color:#b35a0c; }
+
+table{ width:100%; border-collapse:separate; border-spacing:0; font-size:9.4pt; border:1.8px solid var(--navy); border-radius:9pt; overflow:hidden; margin:0 0 10pt; }
+th{ background:var(--navy); color:#fff; text-align:left; padding:5pt 8pt; font-size:9pt; hyphens:none; }
+td{ padding:5pt 8pt; border-top:1px solid var(--gray2); vertical-align:top; line-height:1.38; }
+tr:nth-child(even) td{ background:#f6f7f9; }
+td.rh{ font-weight:800; color:var(--navy); background:#eef1f7 !important; hyphens:none; }
+
+svg{ display:block; }
+.grid2{ display:grid; grid-template-columns:1fr 1fr; gap:9pt; }
+.grid3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:8pt; }
+.note{ font-size:8.3pt; color:var(--graphite2); }
+
+/* questões */
+.q{ border:1.6px solid var(--gray2); border-radius:10pt; padding:8pt 11pt 3pt; margin:0 0 8pt; break-inside:avoid; }
+.q .qh{ display:flex; justify-content:space-between; align-items:center; margin-bottom:4pt; }
+.q .qn{ background:var(--navy); color:#fff; font-weight:900; font-size:8.5pt; padding:1pt 9pt; border-radius:20pt; }
+.q .qt{ font-size:7.5pt; font-weight:800; letter-spacing:.8pt; text-transform:uppercase; color:var(--orange); }
+.q p{ font-size:9.9pt; margin-bottom:4pt; }
+.q ol{ list-style:none; margin:0 0 4pt; padding:0; }
+.q li{ position:relative; padding-left:20pt; margin-bottom:2.5pt; font-size:9.6pt; }
+.q li::before{ content:attr(data-l); position:absolute; left:0; top:0; width:14pt; height:14pt; border:1.6px solid var(--navy); border-radius:50%; font-size:7.5pt; font-weight:900; color:var(--navy); display:flex; align-items:center; justify-content:center; }
+.g{ border-left:5px solid var(--green); padding:4pt 10pt 1pt; margin:0 0 5.5pt; background:#fbfdfc; border-radius:0 8pt 8pt 0; }
+.g .gh{ font-weight:900; color:var(--green); font-size:9.6pt; margin-bottom:2pt; }
+.g .gh span{ background:var(--green); color:#fff; border-radius:20pt; padding:0 8pt; margin-left:5pt; }
+.g p{ font-size:9.2pt; margin-bottom:3pt; }
