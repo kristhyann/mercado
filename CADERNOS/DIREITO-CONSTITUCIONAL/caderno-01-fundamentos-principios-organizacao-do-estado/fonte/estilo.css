@@ -100,10 +100,10 @@ h3{ font-size:12pt; margin:9pt 0 5pt; color:var(--ink); border-left:5px solid va
 
 /* ---------- tabelas ---------- */
 table{ width:100%; border-collapse:separate; border-spacing:0; margin:3pt 0 9pt; font-size:9.9pt; break-inside:avoid; border-radius:10pt; overflow:hidden; border:2px solid var(--navy); }
-th{ background:var(--navy); color:#fff; text-align:left; padding:6pt 8pt; font-size:10pt; }
+th{ hyphens:none; background:var(--navy); color:#fff; text-align:left; padding:6pt 8pt; font-size:10pt; }
 td{ padding:5.5pt 8pt; border-top:1px solid var(--line); vertical-align:top; line-height:1.4; }
 tr:nth-child(even) td{ background:#f5f8fc; }
-td.rh{ font-weight:800; color:var(--navy); background:#eaf1fb !important; }
+td.rh{ font-weight:800; color:var(--navy); background:#eaf1fb !important; hyphens:none; }
 .yes{ color:var(--green); font-weight:900; } .no{ color:var(--red); font-weight:900; }
 
 figure{ margin:2pt 0 8pt; text-align:center; break-inside:avoid; }
@@ -116,7 +116,7 @@ figcaption{ font-size:8.8pt; color:var(--muted); font-style:italic; margin-top:3
 .opener{ height:240mm; display:flex; flex-direction:column; justify-content:center; padding:0 6mm; }
 .opener .num{ font-family:"Inter Display"; font-weight:900; font-size:120pt; line-height:.85; color:var(--sky2); }
 .opener .k{ font-weight:800; letter-spacing:3pt; color:var(--blue); font-size:11pt; margin-top:6pt; }
-.opener h1{ font-family:"Inter Display"; font-weight:900; font-size:40pt; line-height:.98; color:var(--navy); text-transform:uppercase; margin:6pt 0 12pt; }
+.opener h1{ hyphens:none; font-family:"Inter Display"; font-weight:900; font-size:40pt; line-height:.98; color:var(--navy); text-transform:uppercase; margin:6pt 0 12pt; }
 .opener ul{ list-style:none; padding:0; margin:10pt 0 0; border-top:3px solid var(--navy); }
 .opener li{ padding:8pt 0; border-bottom:1px solid var(--line); font-size:12.5pt; font-weight:600; display:flex; gap:10pt; }
 .opener li span{ color:var(--gold-deep); font-weight:900; min-width:24pt; }

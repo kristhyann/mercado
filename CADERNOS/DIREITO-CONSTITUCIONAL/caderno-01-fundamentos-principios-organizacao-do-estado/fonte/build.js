@@ -35,7 +35,7 @@ import sys,json,re
 from pypdf import PdfReader
 r=PdfReader(sys.argv[1]); out={}
 for i,p in enumerate(r.pages):
-    for m in re.findall(r'§§(M\\d\\d)§§', p.extract_text() or ''):
+    for m in re.findall(r'§§([AUR][A-Z]?\\d+)§§', p.extract_text() or ''):
         out.setdefault(m, str(i+1))
 print(json.dumps(out))`, body]).toString());
   console.log('Sumário:', toc);

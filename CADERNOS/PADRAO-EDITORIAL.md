@@ -36,7 +36,7 @@ Professor de concursos, pesquisador de legislação, especialista em didática e
 - Nunca reduzir a fonte para encaixar o conteúdo: aumentar o número de páginas.
 
 ## Produção e controle de qualidade
-- Fonte HTML/CSS em `fonte/` e PDF final em `pdf/`. Build com `node fonte/build.js` (Playwright + pypdf), que numera o sumário automaticamente.
+- Fonte HTML/CSS em `fonte/` e PDF final em `pdf/`. Marcadores de sumário: `§§A01§§` (assuntos), `§§U1§§` (unidades), `§§R1§§` (revisão); conferir se o sumário saiu com números. Build com `node fonte/build.js` (Playwright + pypdf), que numera o sumário automaticamente.
 - Antes de entregar: renderizar as páginas em imagem e conferir cortes, sobreposições, páginas vazias, legibilidade, português, legislação e referências.
 - Organização: `CADERNOS/<DISCIPLINA>/<SUBÁREA>/modulo-NN-<tema>/`. Não sobrescrever edições anteriores sem autorização (nova edição = nova pasta ou sufixo `-ed2`).
 
@@ -46,5 +46,6 @@ Professor de concursos, pesquisador de legislação, especialista em didática e
 ## Catálogo
 | Disciplina | Módulo | Conteúdo | Atualizado em | PDF |
 |---|---|---|---|---|
+| Direito Constitucional | 02 | Direitos e garantias fundamentais (art. 5º) | 25/11/2026 | `DIREITO-CONSTITUCIONAL/caderno-02-direitos-e-garantias-fundamentais-art-5/pdf/` |
 | Direito Constitucional | 01 | Fundamentos, princípios (arts. 1º a 4º) e organização do Estado | 25/11/2026 | `DIREITO-CONSTITUCIONAL/caderno-01-fundamentos-principios-organizacao-do-estado/pdf/` |
 | Direito Penal: Parte Geral | 01 | Aplicação da Lei Penal (arts. 1º a 12 do CP) | 24/11/2026 | `DIREITO-PENAL/PARTE-GERAL/modulo-01-aplicacao-da-lei-penal/pdf/` |
