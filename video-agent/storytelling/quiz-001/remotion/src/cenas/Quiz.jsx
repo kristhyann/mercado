@@ -17,7 +17,7 @@ export const GAP = 5;
 export const v = (a) => a + CUTS.filter((c) => a >= c).length * GAP;
 
 // ---------------------------------------------------------------- captions (narrative parts only)
-const WINDOWS = [[5.2, 12.4], [32.5, 39.6], [41.2, 46.4], [62.3, 69.95]];
+const WINDOWS = [[5.2, 12.4], [35.9, 39.6], [41.2, 46.4], [65.4, 69.95]];
 const buildChunks = () => {
   const out = [];
   for (const [a, b] of WINDOWS) {
@@ -301,8 +301,8 @@ export const BgMap = ({t}) => (
 // ---------------------------------------------------------------- E1 · fundamento x objetivo
 export const E1 = ({dur}) => {
   const t = useST();
-  const fly = kf(t, [1.3, 2.4], [0, 1], 'io');
-  const sign = kf(t, [3.5, 3.9], [0, 1], 'back');
+  const fly = kf(t, [0.3, 1.2], [0, 1], 'io');
+  const sign = kf(t, [1.5, 1.9], [0, 1], 'back');
   const cx = lerp(540, 600, fly), cy = lerp(560, 1290, fly);
   return (
     <Frame bg={NAVY}>
@@ -334,8 +334,8 @@ export const E1 = ({dur}) => {
 // ---------------------------------------------------------------- E2 · Brasília x Distrito Federal
 export const E2 = ({dur}) => {
   const t = useST();
-  const pin = kf(t, [1.1, 1.4], [-400, 0], 'back');
-  const df = kf(t, [3.9, 4.3], [0, 1], 'o');
+  const pin = kf(t, [0.0, 0.3], [-400, 0], 'back');
+  const df = kf(t, [0.75, 1.1], [0, 1], 'o');
   return (
     <Frame bg={NAVY}>
       <rect width={W} height={H} fill={NAVY} />
@@ -347,7 +347,7 @@ export const E2 = ({dur}) => {
           <rect x="-360" y="-280" width="720" height="560" fill="url(#hatch)" opacity="0.25" />
           <path d="M-300 -120 Q-100 -200 120 -140 Q260 -100 300 40" stroke="#7FB2D9" strokeWidth="34" fill="none" opacity="0.8" />
           {/* plano piloto */}
-          <g transform={`translate(0 ${pin * 0}) rotate(-10)`} opacity={kf(t, [1.1, 1.3], [0, 1])}>
+          <g transform={`translate(0 ${pin * 0}) rotate(-10)`} opacity={kf(t, [0.0, 0.2], [0, 1])}>
             <path d="M-210 20 Q0 -40 210 20" stroke="#8A8F9C" strokeWidth="22" fill="none" />
             <path d="M0 -150 L0 170" stroke="#8A8F9C" strokeWidth="26" />
           </g>
@@ -356,7 +356,7 @@ export const E2 = ({dur}) => {
             <circle cy="-104" r="20" fill={WHITE} />
           </g>
         </g>
-        <g opacity={kf(t, [1.3, 1.6], [0, 1])} transform="translate(540 330)">
+        <g opacity={kf(t, [0.15, 0.45], [0, 1])} transform="translate(540 330)">
           <rect x="-380" y="-70" width="760" height="140" rx="24" fill={GREEN} stroke={INK} strokeWidth="7" />
           <text y="-8" fontFamily={HEAD} fontSize="52" fill={WHITE} textAnchor="middle">BRASÍLIA</text>
           <text y="44" fontFamily={UI} fontWeight="900" fontSize="34" fill={WHITE} textAnchor="middle">= Capital Federal (art. 18, § 1º)</text>
