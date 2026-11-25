@@ -14,7 +14,7 @@ canvas{position:absolute;left:0;top:0}
 .tag{background:#FFD21F;color:#111;font-weight:900;font-size:56px;padding:8px 28px;border-radius:22px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
 .tag.red{background:#FF4D6D;color:#fff}.tag.green{background:#22C55E;color:#fff}.tag.blue{background:#3B82F6;color:#fff}.tag.white{background:#fff;color:#111}.tag.purple{background:#8B5CF6;color:#fff}.tag.cyan{background:#22D3EE;color:#111}
 .small{font-size:44px;padding:6px 22px;border-radius:18px;border-width:6px;box-shadow:0 6px 0 #111}
-.big{font-size:110px;padding:6px 36px;border-radius:34px;border-width:10px;box-shadow:0 12px 0 #111}
+.big{font-size:92px;padding:6px 36px;border-radius:34px;border-width:10px;box-shadow:0 12px 0 #111}
 #msg{background:#DCF8C6;color:#111;font-weight:900;font-size:64px;padding:16px 30px;border-radius:30px 30px 6px 30px;border:7px solid #111;box-shadow:0 8px 0 #111;white-space:nowrap}
 #msg small{font-size:30px;color:#38BDF8;margin-left:16px}
 #final{left:50px;width:980px;top:1180px;text-align:center}
@@ -202,7 +202,7 @@ window.draw = function (t) {
     env.visible = !cta && win(t, T_VOCE + 1.0, T_MAS); { const k = clamp((t - T_VOCE - 1.0) / 1.6); env.position.set(lerp(.35, 2.6, ease(k)), lerp(1.55, 3.3, ease(k)), lerp(.3, -1, k)); env.scale.setScalar(.45 * (1 - k * .5)); }
     qm.visible = !cta && t > T_MAS; qm.position.set(.55, 2.15 + Math.sin(t * 4) * .05, .2); qm.scale.setScalar(.6 * pop(t - T_MAS, .3));
     ctaQ.forEach(s => { s.visible = cta; const u = (t * .45 + s.userData.p) % 1; s.position.set(s.userData.x, 1.0 + u * 1.6, .4); s.scale.setScalar(.35 * Math.sin(u * Math.PI)); });
-    if (cta) { cp = V(0, 1.6, 4.6); tg = V(0, 1.2, 0); }
+    if (cta) { const u = ease(clamp((t - T_CTA) / 8)); cp = V(lerp(-.6, .5, u), lerp(1.7, 1.55, u), lerp(5.0, 3.9, u)); tg = V(0, 1.2, 0); }
     else if (t < T_VOCE + 2.4) { cp = V(lerp(1.0, .6, ease(clamp((t - T_VOCE) / 2.4))), 1.6, lerp(4.4, 3.6, ease(clamp((t - T_VOCE) / 2.4)))); tg = V(.1, 1.3, 0); }
     else if (t < T_MAS - .1) { cp = V(-1.5, 1.9, 3.4); tg = V(.2, 1.35, 0); }
     else { cp = V(.3, 1.7, lerp(3.4, 2.8, ease(clamp((t - T_MAS) / 1.2)))); tg = V(.3, 1.6, 0); } }
@@ -247,7 +247,7 @@ window.draw = function (t) {
     shield.visible = t > aT + .5; shield.position.copy(ap).add(V(-.75, .9, .4)); shield.scale.setScalar(.6 * pop(t - aT - .5, .3));
     net.visible = t > T_REDES - .4; { const u = clamp((t - T_REDES + .4) / 1.5); net.position.set(ap.x + lerp(-3.5, .2, u), .9 + Math.sin(t * 3) * .05, ap.z - .5); net.rotation.set(-.2, .3, Math.sin(t * 2) * .05);
       const a = net.geometry.attributes.position; for (let i = 0; i < a.count; i++) a.setZ(i, Math.sin(a.getX(i) * 2 + t * 3) * .08); a.needsUpdate = true; }
-    shoreFish[0].position.set(-2 + ((t * .4) % 4), 1.2, -1); shoreFish[2].position.set(2 - ((t * .3) % 4), 1.6, -2.5);
+    shoreFish[0].position.set(-2 + ((t * .4) % 4), 2.4, -3.5); shoreFish[2].position.set(2 - ((t * .3) % 4), 1.6, -2.5);
     if (t < T_ANC - .3) { const u = ease(clamp(k / 2.6)); const p = armorCv.getPointAt(lerp(.15, .4, u)); cp = p.clone().add(V(2.0, 1.4, 2.4)); tg = p.clone().add(V(0, .1, -.5)); }
     else { cp = ap.clone().add(V(2.4, 1.9, 3.0)); tg = ap.clone().add(V(0, .6, 0)); } }
   if (shipW.visible && cp.y < 0) { scene.fog = new THREE.Fog(0x0E5A86, 2, 22); scene.background = new THREE.Color(0x0E5A86); }
