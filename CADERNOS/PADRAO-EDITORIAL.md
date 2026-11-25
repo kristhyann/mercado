@@ -21,6 +21,13 @@ Professor de concursos, pesquisador de legislação, especialista em didática e
 - Se houver edital, ele é a fonte prioritária. Sem edital: perguntar ou usar uma matriz de referência declarada como tal.
 - Não prometer aprovação. Não copiar materiais protegidos nem imitar a marca ou o visual de terceiros.
 
+## Estilo de explicação (referência visual enviada pela pessoa usuária)
+- Explicação **simplificada e visual**, com um assunto por vez e, em geral, duas páginas por assunto:
+  - Página A: título grande; quadro creme com o artigo; **Traduzindo o juridiquês** com personagem professor(a); faixa **Memorize**.
+  - Página B: **Entenda na prática** (fluxo de ícones com setas); exemplo curto; **Pegadinha de concurso** (faixa vermelha); palavras-chave.
+- Frases curtas, pouco texto corrido e muito esquema. Um bloco por página: o build acusa transbordo (marcadores `§§Pnnn§§`).
+- As fotos de referência servem só de estilo: nunca copiar layout, marca ou capa de terceiros.
+
 ## Padrão visual
 - Capa editorial, sumário numerado, cabeçalho e rodapé com número de página, referências e encerramento.
 - Boxes fixos: Letra da lei (creme), O que é? (azul claro), Traduzindo (contorno escuro), Na prática (verde), Memorize (laranja), Pegadinha (vermelho), Prioridade de estudo (escuro), Palavras-chave (chips).
@@ -39,4 +46,5 @@ Professor de concursos, pesquisador de legislação, especialista em didática e
 ## Catálogo
 | Disciplina | Módulo | Conteúdo | Atualizado em | PDF |
 |---|---|---|---|---|
+| Direito Constitucional | 01 | Fundamentos, princípios (arts. 1º a 4º) e organização do Estado | 25/11/2026 | `DIREITO-CONSTITUCIONAL/caderno-01-fundamentos-principios-organizacao-do-estado/pdf/` |
 | Direito Penal: Parte Geral | 01 | Aplicação da Lei Penal (arts. 1º a 12 do CP) | 24/11/2026 | `DIREITO-PENAL/PARTE-GERAL/modulo-01-aplicacao-da-lei-penal/pdf/` |

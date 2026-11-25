@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Capa</title>
+<style>
+@page{ size:A4; margin:0; }
+html,body{ margin:0; width:210mm; height:297mm; overflow:hidden; font-family:"Inter",sans-serif; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.c{ position:relative; width:210mm; height:297mm; background:#0b2a5b; color:#fff; overflow:hidden; }
+.dots{ position:absolute; inset:0; background-image:radial-gradient(rgba(255,255,255,.07) 1.2px, transparent 1.3px); background-size:7mm 7mm; }
+.band{ position:absolute; right:0; top:0; bottom:0; width:14mm; background:#f2a516; }
+.band span{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) rotate(90deg); white-space:nowrap; font-weight:900; letter-spacing:4pt; font-size:9.5pt; color:#0b2a5b; }
+.top{ position:absolute; left:16mm; right:26mm; top:18mm; display:flex; justify-content:space-between; align-items:center; }
+.brand{ font-weight:900; letter-spacing:3pt; font-size:10.5pt; } .brand b{ color:#f2a516; }
+.ed{ border:1.5px solid rgba(255,255,255,.5); border-radius:20pt; padding:3pt 10pt; font-size:8.5pt; letter-spacing:1.5pt; }
+.title{ position:absolute; left:16mm; right:26mm; top:38mm; }
+.num{ display:inline-flex; align-items:center; gap:8pt; background:#fff; color:#0b2a5b; font-weight:900; font-size:12pt; letter-spacing:2.5pt; padding:5pt 12pt; border-radius:4pt; }
+.num i{ font-style:normal; background:#f2a516; color:#0b2a5b; padding:0 6pt; border-radius:3pt; }
+h1{ font-family:"Inter Display","Inter"; font-weight:900; font-size:56pt; line-height:.92; margin:12pt 0 0; letter-spacing:-1pt; }
+h1 em{ font-style:normal; color:#7fb2ff; }
+.sub{ margin-top:12pt; font-size:19pt; font-weight:800; line-height:1.15; color:#fff; border-left:5px solid #f2a516; padding-left:12pt; }
+.ill{ position:absolute; left:14mm; right:24mm; top:128mm; }
+.bottom{ position:absolute; left:16mm; right:26mm; bottom:18mm; }
+.tag{ font-size:13pt; line-height:1.4; color:#dfe8f6; }
+.tag b{ color:#fff; }
+.chips{ margin-top:12pt; display:flex; gap:7pt; flex-wrap:wrap; }
+.chips span{ font-size:8.5pt; font-weight:800; letter-spacing:.8pt; border:1.5px solid rgba(255,255,255,.35); border-radius:20pt; padding:3pt 10pt; color:#dfe8f6; }
+.foot{ margin-top:12pt; font-size:8.5pt; color:#9fb4d6; display:flex; justify-content:space-between; }
+</style></head>
+<body><div class="c">
+  <div class="dots"></div>
+  <div class="band"><span>CADERNOS SIMPLIFICADOS · O QUE REALMENTE CAI NA PROVA</span></div>
+  <div class="top"><div class="brand">CADERNO <b>SIMPLIFICADO</b></div><div class="ed">1ª EDIÇÃO · 2026</div></div>
+  <div class="title">
+    <div class="num">CADERNO <i>01</i> · PARA CONCURSOS</div>
+    <h1>DIREITO<br><em>CONSTITU-<br>CIONAL</em></h1>
+    <div class="sub">Fundamentos, Princípios e<br>Organização do Estado</div>
+  </div>
+
+  <svg class="ill" viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter">
+    <ellipse cx="300" cy="286" rx="250" ry="12" fill="#000" opacity=".25"/>
+    <!-- prédio com colunas -->
+    <path d="M150 92 L300 30 L450 92 Z" fill="#f2a516"/>
+    <rect x="150" y="92" width="300" height="16" fill="#d18c0a"/>
+    <g fill="#e8f1fc"><rect x="168" y="112" width="22" height="122" rx="3"/><rect x="214" y="112" width="22" height="122" rx="3"/><rect x="260" y="112" width="22" height="122" rx="3"/><rect x="318" y="112" width="22" height="122" rx="3"/><rect x="364" y="112" width="22" height="122" rx="3"/><rect x="410" y="112" width="22" height="122" rx="3"/></g>
+    <rect x="140" y="234" width="320" height="14" fill="#cfe0f8"/><rect x="128" y="248" width="344" height="14" fill="#a9c6ee"/>
+    <circle cx="300" cy="68" r="12" fill="#0b2a5b"/><path d="M300 60 l2.4 5 5.4.6-4 3.7 1.1 5.3-4.9-2.7-4.9 2.7 1.1-5.3-4-3.7 5.4-.6z" fill="#f2a516"/>
+    <!-- livro CF/88 -->
+    <g transform="translate(24,150)">
+      <rect x="0" y="0" width="118" height="140" rx="8" fill="#1d5fbf" stroke="#0a1f45" stroke-width="3"/>
+      <rect x="10" y="0" width="8" height="140" fill="#163e7d"/>
+      <text x="66" y="52" text-anchor="middle" font-weight="900" font-size="25" fill="#fff">CF</text>
+      <text x="66" y="80" text-anchor="middle" font-weight="900" font-size="21" fill="#f2a516">1988</text>
+      <rect x="32" y="96" width="68" height="4" rx="2" fill="#cfe0f8"/><rect x="32" y="106" width="52" height="4" rx="2" fill="#cfe0f8"/>
+    </g>
+    <!-- mapa de entes -->
+    <g transform="translate(470,140)">
+      <circle cx="40" cy="40" r="40" fill="#e8f1fc"/>
+      <circle cx="40" cy="40" r="11" fill="#0b2a5b"/>
+      <circle cx="12" cy="18" r="7" fill="#2c8a5a"/><circle cx="70" cy="22" r="7" fill="#f2a516"/><circle cx="18" cy="66" r="7" fill="#d6332a"/><circle cx="66" cy="64" r="7" fill="#1d5fbf"/>
+      <path d="M40 40 L12 18 M40 40 L70 22 M40 40 L18 66 M40 40 L66 64" stroke="#0b2a5b" stroke-width="2.5"/>
+      <text x="40" y="104" text-anchor="middle" font-weight="900" font-size="12" fill="#fff">FEDERAÇÃO</text>
+    </g>
+  </svg>
+
+  <div class="bottom">
+    <div class="tag"><b>O que você precisa entender, memorizar e revisar</b> sobre Constituição, princípios fundamentais (arts. 1º a 4º) e organização do Estado brasileiro, em linguagem simples e com esquemas visuais.</div>
+    <div class="chips"><span>20 ASSUNTOS</span><span>ESQUEMAS VISUAIS</span><span>24 FLASHCARDS</span><span>20 QUESTÕES COMENTADAS</span><span>GCM · PM · PC · PP · PRF · PF · TRIBUNAIS</span></div>
+    <div class="foot"><span>Material pesquisado e atualizado em 25/11/2026</span><span>Questões autorais · CF/88 conferida no Planalto</span></div>
+  </div>
+</div></body></html>
