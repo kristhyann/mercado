@@ -165,3 +165,11 @@ FUNDAMENTO LEGAL OU CONCEITO: ADCT, art. 2º.
 ## ENCERRAMENTO
 NARRAÇÃO: Quantas você acertou? Comenta o seu placar. E se você quer chegar pronto, conheça o Projeto GCM PHB 2027.
 CENA: placar "__/10" piscando, cartão final da série (escudo, GCM PHB 2027, CTA).
+
+---
+
+## VERSÃO CURTA (1:20) — vídeo 1 da série
+Questões 1 e 8 (as duas pegadinhas mais fortes), narração enxuta em `quiz-001-curto-voz.txt`.
+Na tela, as alternativas aparecem com o texto original completo do material; na voz, a questão 8 usa forma abreviada ("o Rio de Janeiro", "a cidade-sede do Congresso").
+Estimativa: ~68 s de voz + 2 contagens de 5 s = ~1:18.
+As questões 2, 3, 4, 5, 6, 7, 9 e 10 ficam para os próximos vídeos curtos da série (mesmo formato, 2 por vídeo).
