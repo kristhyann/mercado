@@ -13,3 +13,4 @@ video-agent/takes/
 
 # build intermediário dos cadernos
 CADERNOS/**/fonte/.build/
+__pycache__/
