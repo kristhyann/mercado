@@ -101,7 +101,7 @@ const EV = []; const ev = (t, type) => EV.push({ t: +t.toFixed(3), type });
 RINGS.forEach(t => ev(t, 'buzz')); SLAPS.forEach(t => ev(t, 'clang')); [[T_QUANDO, 'whoosh'], [T_INERCIA, 'pop'], [T_SO, 'whoosh'], [T_INTERR, 'buzzx'], [T_ESSE, 'whoosh'], [T_GROGUE, 'boing'], [T_CONT, 'ding'], [T_A, 'whoosh'], [T_LONGE, 'pop'], [T_QUANT, 'win']].forEach(([t, k]) => ev(t, k));
 function world(w) { room.visible = w === 'room'; mind.visible = w === 'mind'; scene.background = new THREE.Color(w === 'mind' ? 0x1E1B4B : 0xC7D2FE); }
 const LIE = { ...PP.lie, hx: 0 };
-function lieInBed(t, mess = 0) { me.root.position.set(-.6, .62, -.55); me.root.rotation.set(Math.PI / 2, 0, 0); me.root.position.z = -1.35; poseP(me, LIE, 0, t); face(me, 'calm', t); me.eyes.forEach(e => e.scale.y = .12); me.head.rotation.z = Math.sin(t) * .05 + mess * .3; blanket.visible = true; }
+function lieInBed(t, mess = 0) { me.root.position.set(-.6, .62, -.55); me.root.rotation.set(-Math.PI / 2, 0, 0); me.root.position.z = .38; poseP(me, LIE, 0, t); face(me, 'calm', t); me.eyes.forEach(e => e.scale.y = .12); me.head.rotation.z = Math.sin(t) * .05 + mess * .3; blanket.visible = true; }
 
 window.draw = function (t) {
   let cp, tg, off = V(0, 0, 0); [zz, handS, sunS, zap, ...fogs].forEach(o => o.visible = false); scis.visible = false;
