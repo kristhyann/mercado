@@ -12,3 +12,6 @@
 | 01.8 | Dir. Constitucional | Capital Federal (art. 18, §1º) | entregador com envelope e GPS, Diego | qual é a capital | C |
 | 01.9 | Dir. Constitucional | Autonomia dos entes (art. 18) | sessão da Câmara de Parnaíba, vereadora e repórter | afirmação correta | B |
 | 01.10 | Dir. Constitucional | Sistema de governo (plebiscito 1993) | caixa de lembranças do avô, flashback | qual sistema | D |
+| 01v2.1 | Dir. Constitucional | Fundamentos (art. 1º) — EXCETO | canteiro de obras, blocos da fundação, Lucas e mestre de obras | exceto | B |
+| 01v2.2 | Dir. Constitucional | Objetivos (art. 3º) | rodoviária, painel de destinos, Diego | qual é objetivo | D |
+| 01v2.D | Dir. Constitucional | Art. 4º, p.ú. (América Latina) | desafio nos comentários, sem resposta no vídeo | aberta | — |
