@@ -10,3 +10,9 @@ node_modules/
 video-agent/.tmp/
 video-agent/sources/
 video-agent/takes/
+video-agent/storytelling/*/remotion/node_modules/
+# storytelling: intermediates (regenerable)
+video-agent/storytelling/*/render/video-mudo.mp4
+video-agent/storytelling/*/render/render.log
+video-agent/storytelling/*/audio/*.wav
+video-agent/storytelling/quiz-001-v2/render/quiz-001-v2.mp4
