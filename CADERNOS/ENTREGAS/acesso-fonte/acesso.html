@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Mapa da Aprovação — Acesso aos materiais</title>
+<style>
+@page{ size:160mm 260mm; margin:0; }
+:root{ --navy:#0f1f3d; --navy2:#16294f; --navy3:#22386a; --gold:#e0b64a; --gold2:#f5d77e; --ink:#1a2233; --muted:#5b6578; --line:#e3e7ef; --paper:#ffffff; --soft:#f5f7fb; }
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; font-family:"Inter",sans-serif; color:var(--ink); -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.pg{ position:relative; width:160mm; height:260mm; overflow:hidden; page-break-after:always; background:var(--paper); }
+.pg:last-child{ page-break-after:auto; }
+h1,h2{ font-family:"Inter Display","Inter",sans-serif; margin:0; }
+/* faixa de topo das páginas internas */
+.top{ height:30mm; background:var(--navy); color:#fff; padding:0 13mm; display:flex; align-items:center; justify-content:space-between; }
+.top .brand{ font-weight:900; letter-spacing:2.6pt; font-size:9pt; } .top .brand b{ color:var(--gold); }
+.top .num{ font-size:8.5pt; letter-spacing:1.5pt; color:#b9c4dc; font-weight:700; }
+.goldline{ height:2.2mm; background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold)); }
+.body{ padding:11mm 13mm 0; }
+.kicker{ font-size:8.5pt; font-weight:800; letter-spacing:2.4pt; color:var(--gold); text-transform:uppercase; margin-bottom:2mm; }
+.h{ font-size:22pt; line-height:1.05; color:var(--navy); font-weight:900; letter-spacing:-.3pt; }
+.bar{ width:18mm; height:1.6mm; background:var(--gold); border-radius:2mm; margin:4mm 0 6mm; }
+p{ font-size:11pt; line-height:1.55; margin:0 0 3.6mm; }
+.foot{ position:absolute; left:13mm; right:13mm; bottom:8mm; display:flex; justify-content:space-between; font-size:7.5pt; color:var(--muted); letter-spacing:.6pt; border-top:1px solid var(--line); padding-top:3mm; }
+
+/* CAPA */
+.capa{ background:var(--navy); color:#fff; }
+.capa .dots{ position:absolute; inset:0; background-image:radial-gradient(rgba(255,255,255,.07) 1.1px, transparent 1.2px); background-size:6mm 6mm; }
+.capa .glow{ position:absolute; width:150mm; height:150mm; right:-55mm; top:-40mm; border-radius:50%; background:radial-gradient(circle, rgba(224,182,74,.22), rgba(224,182,74,0) 65%); }
+.capa .tag{ position:absolute; left:13mm; top:14mm; border:1.4px solid rgba(224,182,74,.7); color:var(--gold2); border-radius:20pt; padding:1.6mm 4mm; font-size:7.5pt; font-weight:800; letter-spacing:2pt; }
+.capa .title{ position:absolute; left:13mm; right:13mm; top:34mm; }
+.capa .title .small{ font-size:9.5pt; letter-spacing:4pt; font-weight:800; color:var(--gold); }
+.capa .title h1{ font-size:44pt; line-height:.92; font-weight:900; letter-spacing:-1pt; margin-top:3mm; }
+.capa .title h1 em{ font-style:normal; color:var(--gold); }
+.capa .sub{ margin-top:6mm; font-size:14pt; line-height:1.3; font-weight:600; color:#e6ebf6; border-left:1.6mm solid var(--gold); padding-left:4mm; }
+.capa .ill{ position:absolute; left:8mm; right:8mm; top:112mm; }
+.capa .bottom{ position:absolute; left:13mm; right:13mm; bottom:14mm; }
+.capa .chips{ display:flex; gap:2mm; flex-wrap:wrap; }
+.capa .chips span{ font-size:7.6pt; font-weight:800; letter-spacing:1pt; border:1.2px solid rgba(255,255,255,.35); border-radius:20pt; padding:1.4mm 3.4mm; color:#dfe6f4; }
+.capa .line{ margin-top:5mm; font-size:8pt; color:#9fb0cf; letter-spacing:.6pt; }
+
+/* BOAS-VINDAS */
+.welcome p{ font-size:10.6pt; line-height:1.58; margin-bottom:3.2mm; }
+.welcome .lead{ font-size:13pt; font-weight:800; color:var(--navy); line-height:1.35; }
+.quote{ background:var(--soft); border-left:1.6mm solid var(--gold); border-radius:0 3mm 3mm 0; padding:4mm 5mm 1mm; margin:4mm 0; }
+.quote p{ font-weight:600; color:var(--navy2); }
+.sign{ display:flex; align-items:center; gap:3mm; margin-top:4mm; }
+.sign .seal{ width:12mm; height:12mm; border-radius:50%; background:var(--navy); display:flex; align-items:center; justify-content:center; }
+.sign b{ display:block; font-size:10.5pt; color:var(--navy); } .sign span{ font-size:8.5pt; color:var(--muted); }
+
+/* ACESSO */
+.box{ background:linear-gradient(160deg,var(--navy),var(--navy3)); border-radius:6mm; padding:9mm 8mm 8mm; color:#fff; text-align:center; position:relative; overflow:hidden; margin-top:2mm; }
+.box .ico{ width:22mm; height:22mm; margin:0 auto 3mm; }
+.box .t{ font-size:9pt; letter-spacing:2.4pt; font-weight:800; color:var(--gold2); }
+.box .n{ font-family:"Inter Display","Inter"; font-size:30pt; font-weight:900; line-height:1; margin:2mm 0 1mm; }
+.box .d{ font-size:9.5pt; color:#c9d3e8; margin-bottom:6mm; }
+a.btn{ display:flex; align-items:center; justify-content:center; gap:3mm; background:linear-gradient(180deg,var(--gold2),var(--gold)); color:var(--navy); text-decoration:none; font-weight:900; font-size:14pt; letter-spacing:.6pt; border-radius:4mm; padding:5.2mm 4mm; box-shadow:0 1.2mm 0 #a9842b; }
+a.btn svg{ width:8mm; height:8mm; flex:none; }
+.alt{ margin-top:6mm; background:var(--soft); border:1px solid var(--line); border-radius:4mm; padding:4mm 5mm; }
+.alt .l{ font-size:8pt; font-weight:800; letter-spacing:1.6pt; color:var(--muted); text-transform:uppercase; margin-bottom:1.6mm; }
+.alt a{ color:#1d4fb8; font-size:8.6pt; word-break:break-all; font-weight:600; }
+.steps{ display:flex; gap:3mm; margin-top:6mm; }
+.steps div{ flex:1; border:1px solid var(--line); border-radius:3.5mm; padding:3.4mm; }
+.steps b{ display:inline-flex; width:6.5mm; height:6.5mm; border-radius:50%; background:var(--navy); color:var(--gold2); align-items:center; justify-content:center; font-size:9pt; margin-bottom:1.6mm; }
+.steps span{ display:block; font-size:8.6pt; line-height:1.35; color:var(--ink); }
+
+/* DICAS */
+.tip{ display:flex; gap:4mm; align-items:flex-start; border:1px solid var(--line); border-radius:4mm; padding:4mm 4.5mm; margin-bottom:3.4mm; background:#fff; }
+.tip .ic{ flex:none; width:14mm; height:14mm; border-radius:3.5mm; background:var(--navy); display:flex; align-items:center; justify-content:center; position:relative; }
+.tip .ic svg{ width:8mm; height:8mm; }
+.tip .ic i{ position:absolute; right:-1.6mm; top:-1.6mm; width:5.6mm; height:5.6mm; border-radius:50%; background:var(--gold); color:var(--navy); font-style:normal; font-weight:900; font-size:8pt; display:flex; align-items:center; justify-content:center; }
+.tip h3{ margin:0 0 1mm; font-size:11.6pt; color:var(--navy); font-weight:900; }
+.tip p{ margin:0; font-size:9.8pt; line-height:1.45; color:#384156; }
+.motiv{ margin-top:4mm; background:var(--navy); color:#fff; border-radius:4mm; padding:4mm 5mm; display:flex; align-items:center; gap:4mm; }
+.motiv svg{ width:10mm; height:10mm; flex:none; }
+.motiv p{ margin:0; font-size:10pt; font-weight:700; color:#eef2fa; } .motiv b{ color:var(--gold2); }
+
+/* DIREITOS */
+.legal{ border:1.6px solid var(--navy); border-radius:4mm; overflow:hidden; }
+.legal .hd{ background:var(--navy); color:#fff; padding:3.6mm 5mm; display:flex; align-items:center; gap:3mm; font-weight:900; font-size:10pt; letter-spacing:1.4pt; }
+.legal .hd svg{ width:6.5mm; height:6.5mm; }
+.legal .bd{ padding:4.5mm 5.5mm 1.5mm; }
+.legal p{ font-size:9.9pt; line-height:1.55; text-align:left; }
+.legal p.strong{ font-weight:800; color:var(--navy); }
+.respect{ margin-top:4mm; display:flex; gap:3.5mm; align-items:center; background:#fff8e6; border:1.4px solid var(--gold); border-radius:4mm; padding:3.6mm 4.5mm; }
+.respect svg{ width:9mm; height:9mm; flex:none; }
+.respect p{ margin:0; font-size:9.8pt; font-weight:700; color:#5a4410; line-height:1.45; }
+</style></head>
+<body>
+
+<!-- ================= PÁGINA 1 · CAPA ================= -->
+<section class="pg capa">
+  <div class="dots"></div><div class="glow"></div>
+  <div class="tag">COLEÇÃO COMPLETA · 20 PDFs</div>
+  <div class="title">
+    <div class="small">CADERNOS SIMPLIFICADOS</div>
+    <h1>MAPA DA<br><em>APROVAÇÃO</em></h1>
+    <div class="sub">Sua jornada de preparação para concursos começa aqui!</div>
+  </div>
+  <svg class="ill" viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" font-family="Inter">
+    <ellipse cx="260" cy="312" rx="230" ry="9" fill="#000" opacity=".28"/>
+    <!-- pilha de livros -->
+    <rect x="60" y="250" width="250" height="40" rx="6" fill="#22386a"/><rect x="60" y="250" width="16" height="40" fill="#e0b64a"/>
+    <rect x="80" y="210" width="230" height="40" rx="6" fill="#f5f7fb"/><rect x="80" y="210" width="16" height="40" fill="#16294f"/>
+    <rect x="70" y="170" width="220" height="40" rx="6" fill="#e0b64a"/><rect x="70" y="170" width="16" height="40" fill="#0f1f3d"/>
+    <g fill="#0f1f3d" opacity=".25"><rect x="110" y="227" width="150" height="5" rx="2.5"/><rect x="100" y="187" width="140" height="5" rx="2.5"/></g>
+    <g fill="#e0b64a" opacity=".6"><rect x="100" y="267" width="160" height="5" rx="2.5"/></g>
+    <!-- capelo de formatura -->
+    <path d="M180 150 L250 120 L320 150 L250 180 Z" fill="#0b1630" stroke="#e0b64a" stroke-width="3"/>
+    <path d="M210 162 V185 Q250 205 290 185 V162 L250 180 Z" fill="#16294f"/>
+    <path d="M320 150 V182" stroke="#e0b64a" stroke-width="3"/><circle cx="320" cy="186" r="6" fill="#e0b64a"/>
+    <!-- mapa com rota e alvo -->
+    <g transform="translate(340,40)">
+      <rect x="0" y="0" width="150" height="190" rx="12" fill="#16294f" stroke="#3a5288" stroke-width="2"/>
+      <path d="M22 160 C 50 120, 30 100, 70 90 S 110 50, 125 30" fill="none" stroke="#e0b64a" stroke-width="4" stroke-dasharray="8 7" stroke-linecap="round"/>
+      <circle cx="22" cy="160" r="7" fill="#f5f7fb"/>
+      <circle cx="125" cy="30" r="17" fill="none" stroke="#f5d77e" stroke-width="3"/><circle cx="125" cy="30" r="9" fill="none" stroke="#f5d77e" stroke-width="3"/><circle cx="125" cy="30" r="3.5" fill="#f5d77e"/>
+      <text x="75" y="182" text-anchor="middle" font-size="11" font-weight="800" fill="#b9c4dc" letter-spacing="2">SUA ROTA</text>
+    </g>
+    <!-- check de aprovação -->
+    <g transform="translate(30,40)"><circle cx="45" cy="45" r="42" fill="#e0b64a"/><path d="M26 46 l13 13 l27 -29" fill="none" stroke="#0f1f3d" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </svg>
+  <div class="bottom">
+    <div class="chips"><span>DIREITO</span><span>LEGISLAÇÃO</span><span>PORTUGUÊS</span><span>RACIOCÍNIO LÓGICO</span><span>INFORMÁTICA</span><span>QUESTÕES</span></div>
+    <div class="line">Arquivo de boas-vindas e acesso aos materiais</div>
+  </div>
+</section>
+
+<!-- ================= PÁGINA 2 · BOAS-VINDAS ================= -->
+<section class="pg welcome">
+  <div class="top"><div class="brand">MAPA DA <b>APROVAÇÃO</b></div><div class="num">BOAS-VINDAS</div></div><div class="goldline"></div>
+  <div class="body">
+    <div class="kicker">Mensagem da equipe</div>
+    <h2 class="h">Seja muito bem-vindo(a) ao Mapa da Aprovação!</h2>
+    <div class="bar"></div>
+    <p class="lead">É uma alegria ter você conosco nessa jornada rumo aos seus objetivos.</p>
+    <p>Sabemos que estudar para concursos pode ser desafiador. São muitos assuntos, materiais extensos e dúvidas que aparecem pelo caminho.</p>
+    <p>Por isso, reunimos materiais organizados e simplificados para ajudar você a estudar, revisar e compreender os conteúdos com mais clareza.</p>
+    <p>Agora, você tem uma coleção de <b>20 PDFs</b> preparada para acompanhar sua rotina de estudos.</p>
+    <div class="quote">
+      <p>Lembre-se: cada página estudada, cada revisão e cada questão respondida representa mais um passo na sua jornada.</p>
+      <p>Não desista diante das dificuldades. Sua constância será importante durante essa caminhada.</p>
+    </div>
+    <p>Desejamos a você bons estudos, disciplina, foco e muita sorte na sua preparação!</p>
+    <div class="sign">
+      <div class="seal"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 3 2 8l10 5 10-5z" fill="#e0b64a"/><path d="M6 10.5v4c2 2 10 2 12 0v-4l-6 3z" fill="#f5d77e"/></svg></div>
+      <div><b>Equipe Mapa da Aprovação</b><span>Cadernos Simplificados para Concursos</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>MAPA DA APROVAÇÃO</span><span>02</span></div>
+</section>
+
+<!-- ================= PÁGINA 3 · ACESSO ================= -->
+<section class="pg">
+  <div class="top"><div class="brand">MAPA DA <b>APROVAÇÃO</b></div><div class="num">ACESSO</div></div><div class="goldline"></div>
+  <div class="body">
+    <div class="kicker">Como acessar os materiais</div>
+    <h2 class="h">ACESSO AOS SEUS 20 PDFs</h2>
+    <div class="bar"></div>
+    <p>Para acessar sua coleção, basta clicar no botão abaixo.</p>
+    <p>Você será direcionado para a nossa pasta no Google Drive, onde poderá acessar os materiais disponibilizados.</p>
+    <div class="box">
+      <svg class="ico" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#22386a" stroke="#e0b64a" stroke-width="2"/><path d="M14 20c6-3 12-3 18 0v26c-6-3-12-3-18 0zM50 20c-6-3-12-3-18 0v26c6-3 12-3 18 0z" fill="#f5f7fb" stroke="#e0b64a" stroke-width="2" stroke-linejoin="round"/></svg>
+      <div class="t">SUA COLEÇÃO COMPLETA</div>
+      <div class="n">20 PDFs</div>
+      <div class="d">Organizados em uma pasta do Google Drive</div>
+      <a class="btn" href="https://drive.google.com/drive/folders/1gX6Xly9SzVJ7tWfg1rpYMW4tEeRBapMy?usp=sharing">
+        <svg viewBox="0 0 32 32"><rect x="4" y="6" width="7" height="21" rx="1.5" fill="#0f1f3d"/><rect x="12.5" y="4" width="7" height="23" rx="1.5" fill="#22386a"/><rect x="21" y="8" width="7" height="19" rx="1.5" transform="rotate(-12 24.5 17.5)" fill="#0f1f3d"/><rect x="2" y="27" width="28" height="2.5" rx="1" fill="#0f1f3d"/></svg>
+        ACESSAR MEUS 20 PDFs
+      </a>
+    </div>
+    <div class="alt">
+      <div class="l">Se o botão não funcionar no seu leitor de PDF, toque no link:</div>
+      <a href="https://drive.google.com/drive/folders/1gX6Xly9SzVJ7tWfg1rpYMW4tEeRBapMy?usp=sharing">https://drive.google.com/drive/folders/1gX6Xly9SzVJ7tWfg1rpYMW4tEeRBapMy?usp=sharing</a>
+    </div>
+    <div class="steps">
+      <div><b>1</b><span>Toque no botão dourado acima.</span></div>
+      <div><b>2</b><span>A pasta abrirá no Google Drive.</span></div>
+      <div><b>3</b><span>Abra ou baixe os PDFs para estudar.</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>MAPA DA APROVAÇÃO</span><span>03</span></div>
+</section>
+
+<!-- ================= PÁGINA 4 · DICAS ================= -->
+<section class="pg">
+  <div class="top"><div class="brand">MAPA DA <b>APROVAÇÃO</b></div><div class="num">DICAS DE ESTUDO</div></div><div class="goldline"></div>
+  <div class="body">
+    <div class="kicker">Aproveite ao máximo</div>
+    <h2 class="h">COMO APROVEITAR SUA COLEÇÃO</h2>
+    <div class="bar"></div>
+    <div class="tip"><div class="ic"><i>1</i><svg viewBox="0 0 24 24" fill="none" stroke="#e0b64a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h3"/></svg></div>
+      <div><h3>Organize sua rotina</h3><p>Estabeleça horários de estudo que sejam possíveis de manter.</p></div></div>
+    <div class="tip"><div class="ic"><i>2</i><svg viewBox="0 0 24 24" fill="none" stroke="#e0b64a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9.5 2.5h5"/></svg></div>
+      <div><h3>Estude com constância</h3><p>Pequenas sessões de estudo podem ajudar a manter o ritmo.</p></div></div>
+    <div class="tip"><div class="ic"><i>3</i><svg viewBox="0 0 24 24" fill="none" stroke="#e0b64a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"/></svg></div>
+      <div><h3>Faça revisões</h3><p>Volte aos conteúdos estudados para reforçar o aprendizado.</p></div></div>
+    <div class="tip"><div class="ic"><i>4</i><svg viewBox="0 0 24 24" fill="none" stroke="#e0b64a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h10v16H5V8z"/><path d="M9 4v4H5M9 13l2 2 4-4"/></svg></div>
+      <div><h3>Resolva questões</h3><p>Pratique para conhecer melhor o estilo das provas.</p></div></div>
+    <div class="tip"><div class="ic"><i>5</i><svg viewBox="0 0 24 24" fill="none" stroke="#e0b64a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 3.5L16 11H5"/></svg></div>
+      <div><h3>Não desista</h3><p>Respeite seu ritmo, mas continue avançando.</p></div></div>
+    <div class="motiv"><svg viewBox="0 0 24 24" fill="none" stroke="#e0b64a" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="#e0b64a"/></svg>
+      <p>Um passo por dia. <b>Constância</b> constrói o caminho.</p></div>
+  </div>
+  <div class="foot"><span>MAPA DA APROVAÇÃO</span><span>04</span></div>
+</section>
+
+<!-- ================= PÁGINA 5 · DIREITOS AUTORAIS ================= -->
+<section class="pg">
+  <div class="top"><div class="brand">MAPA DA <b>APROVAÇÃO</b></div><div class="num">USO DO MATERIAL</div></div><div class="goldline"></div>
+  <div class="body">
+    <div class="kicker">Leia com atenção</div>
+    <h2 class="h">AVISO IMPORTANTE — DIREITOS AUTORAIS</h2>
+    <div class="bar"></div>
+    <div class="legal">
+      <div class="hd"><svg viewBox="0 0 24 24" fill="none" stroke="#e0b64a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>DIREITOS AUTORAIS E USO DO MATERIAL</div>
+      <div class="bd">
+        <p>Os materiais que compõem o Mapa da Aprovação são protegidos por direitos autorais e pertencem aos seus respectivos autores e titulares, conforme aplicável.</p>
+        <p>A compra deste produto concede ao comprador acesso pessoal aos materiais disponibilizados, não transferindo os direitos autorais ou de propriedade intelectual sobre seu conteúdo.</p>
+        <p class="strong">É proibida a reprodução, distribuição, compartilhamento, publicação, revenda, comercialização, disponibilização pública ou utilização dos materiais para criar ou comercializar outros produtos, integralmente ou parcialmente, sem autorização prévia e expressa dos respectivos titulares dos direitos.</p>
+        <p>O acesso adquirido é destinado ao uso pessoal do comprador.</p>
+      </div>
+    </div>
+    <div class="respect"><svg viewBox="0 0 24 24" fill="none" stroke="#a9842b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.8 9.5a3.6 3.6 0 1 0 0 5"/></svg>
+      <p>Respeite os direitos autorais e a propriedade intelectual. Não utilize, copie ou comercialize conteúdos de terceiros sem autorização.</p></div>
+  </div>
+  <div class="foot"><span>MAPA DA APROVAÇÃO</span><span>05</span></div>
+</section>
+</body></html>
