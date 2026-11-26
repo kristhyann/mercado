@@ -51,6 +51,7 @@ Professor de concursos, pesquisador de legislação, especialista em didática e
 ## Catálogo
 | Disciplina | Módulo | Conteúdo | Atualizado em | PDF |
 |---|---|---|---|---|
+| Direito Administrativo | Caderno 10 | Poderes administrativos: vinculado, discricionário, hierárquico, disciplinar, regulamentar, de polícia, limites e abuso de poder | 26/11/2026 | `DIREITO-ADMINISTRATIVO/caderno-10-poderes-administrativos/pdf/` |
 | Direito Administrativo | Caderno 09 | Fundamentos: conceito, objeto, Administração direta e indireta, autarquias, fundações, estatais, princípios (LIMPE, supremacia e indisponibilidade) e organização administrativa | 26/11/2026 | `DIREITO-ADMINISTRATIVO/caderno-09-direito-administrativo-fundamentos/pdf/` |
 | Direito Constitucional | 04 | Segurança Pública (art. 144), com quadro sobre a PEC 18/2025 (não promulgada) | 25/11/2026 | `DIREITO-CONSTITUCIONAL/caderno-04-seguranca-publica-art-144/pdf/` |
 | Direito Constitucional | 03 | Administração Pública na Constituição (arts. 37 a 41), com a EC nº 138/2025 | 25/11/2026 | `DIREITO-CONSTITUCIONAL/caderno-03-administracao-publica-arts-37-a-41/pdf/` |
