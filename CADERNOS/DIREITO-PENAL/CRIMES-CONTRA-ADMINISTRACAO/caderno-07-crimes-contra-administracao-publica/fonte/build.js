@@ -13,7 +13,7 @@ const TMP = path.join(DIR, '.build'); fs.mkdirSync(TMP, { recursive: true }); fs
 const header = `<div style="width:100%;font-family:Inter,sans-serif;font-size:7.5pt;color:#5b6475;padding:0 16mm;display:flex;justify-content:space-between;letter-spacing:.8pt;">
   <span><b style="color:#1b2333">CADERNO SIMPLIFICADO</b> · DIREITO PENAL</span><span>CADERNO 07 · CRIMES CONTRA A ADMINISTRAÇÃO · 1ª EDIÇÃO</span></div>`;
 const footer = `<div style="width:100%;font-family:Inter,sans-serif;font-size:7.5pt;color:#5b6475;padding:0 16mm;display:flex;justify-content:space-between;align-items:center;">
-  <span>O que realmente cai na prova · Atualizado em 25/11/2026</span>
+  <span>O que realmente cai na prova · Atualizado em 26/11/2026</span>
   <span style="background:#1d2129;color:#fff;font-weight:800;border-radius:4px;padding:2px 8px;font-size:8pt;"><span class="pageNumber"></span></span></div>`;
 
 async function renderBody(page, toc) {
