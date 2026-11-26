@@ -1,0 +1,154 @@
+/* CADERNOS SIMPLIFICADOS — Direito Constitucional
+   Estilo "explicação simplificada": títulos grandes, lei curta, tradução com personagem,
+   faixa MEMORIZE, fluxo de ícones "ENTENDA NA PRÁTICA" e PEGADINHA DE CONCURSO. */
+:root{
+  --ink:#16181d; --navy:#111614; --blue:#1f7a3a; --blue2:#3aa35a; --sky:#e6f3ea; --sky2:#c2e2cc;
+  --gold:#f5c518; --gold-deep:#8a6200; --gold-soft:#fff3c4;
+  --cream:#f7f0e1; --cream-line:#dccaa2;
+  --red:#d6332a; --red-soft:#fdecea; --green:#2c8a5a; --green-soft:#e4f4ec;
+  --muted:#5a6476; --line:#dde3ec;
+}
+@page{ size:A4; margin:21mm 16mm 17mm 16mm; }
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{ font-family:"Inter",sans-serif; font-size:11pt; line-height:1.45; color:var(--ink);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact; hyphens:auto; }
+p{ margin:0 0 8pt; text-align:left; }
+strong{ color:var(--navy); }
+.marker{ font-size:1px; color:#fff; line-height:1px; height:1px; overflow:hidden; }
+
+/* uma página = um bloco; cada .pg começa em página nova */
+.pg{ break-before:page; position:relative; }
+.pg.first{ break-before:auto; }
+
+/* ---------- títulos ---------- */
+.unit{ display:flex; align-items:center; gap:10pt; margin-bottom:6pt; }
+.unit .u{ background:var(--navy); color:#fff; font-weight:800; font-size:8.5pt; letter-spacing:2pt; padding:3pt 9pt; border-radius:3pt; }
+.unit .t{ color:var(--blue); font-weight:700; font-size:8.5pt; letter-spacing:2pt; text-transform:uppercase; }
+h1.big{ font-family:"Inter Display","Inter",sans-serif; font-weight:900; font-size:27pt; line-height:1.0; letter-spacing:-.3pt;
+  color:var(--navy); text-transform:uppercase; margin:0 0 4pt; hyphens:none; }
+h1.big .hl{ color:var(--blue); }
+.lead{ font-size:11.3pt; color:var(--muted); margin:0 0 10pt; padding-bottom:8pt; border-bottom:3px solid var(--navy); }
+h2{ hyphens:none; font-family:"Inter Display","Inter",sans-serif; font-weight:900; font-size:19pt; line-height:1.05; color:var(--navy);
+  text-transform:uppercase; margin:4pt 0 10pt; break-after:avoid; }
+h3{ font-size:12pt; margin:9pt 0 5pt; color:var(--ink); border-left:5px solid var(--gold); padding-left:8pt; break-after:avoid; }
+
+/* ---------- boxes ---------- */
+.box{ border-radius:12pt; padding:9pt 13pt 4pt; margin:0 0 9pt; break-inside:avoid; position:relative; }
+.box .lbl{ display:inline-flex; align-items:center; gap:7pt; font-weight:900; font-size:10pt; letter-spacing:.8pt; text-transform:uppercase; margin-bottom:6pt; }
+.box .lbl svg{ width:18pt; height:18pt; flex:none; }
+.box ul{ margin:0 0 7pt; padding-left:16pt; } .box li{ margin-bottom:3pt; }
+
+/* lei: creme com livro */
+.lei{ background:var(--cream); border:2px solid var(--cream-line); display:flex; gap:12pt; align-items:flex-start; padding:12pt 14pt 6pt; }
+.lei .ic{ flex:none; width:42pt; height:42pt; }
+.lei .tx{ flex:1; }
+.lei .art{ font-weight:900; color:var(--gold-deep); font-size:10pt; letter-spacing:.6pt; text-transform:uppercase; margin-bottom:3pt; }
+.lei p{ font-family:"DejaVu Serif",Georgia,serif; font-size:10.1pt; line-height:1.5; margin-bottom:6pt; }
+.lei .ref{ font-family:"Inter"; font-size:8pt; color:var(--muted); }
+
+/* traduzindo com personagem */
+.traduz{ display:flex; gap:12pt; align-items:flex-end; background:#fff; border:2.5px solid var(--ink); padding:12pt 14pt 6pt; box-shadow:5pt 5pt 0 var(--sky2); }
+.traduz .ch{ flex:none; width:58pt; }
+.traduz .tx{ flex:1; }
+.traduz .tag{ display:inline-block; background:var(--cream); border:2px solid var(--ink); border-radius:20pt; padding:2pt 11pt;
+  font-weight:900; font-size:10pt; letter-spacing:.6pt; text-transform:uppercase; margin-bottom:7pt; }
+.traduz p{ font-size:11.3pt; line-height:1.45; }
+
+/* memorize: faixa âmbar */
+.memo{ background:var(--gold); color:#2a1d00; display:flex; gap:12pt; align-items:center; padding:12pt 16pt 6pt; }
+.memo .ic{ flex:none; width:34pt; height:34pt; margin-bottom:6pt; }
+.memo p{ font-size:11.6pt; line-height:1.4; font-weight:500; }
+.memo b.k{ font-weight:900; text-transform:uppercase; letter-spacing:.5pt; }
+.memo strong{ color:#2a1d00; font-weight:900; }
+
+/* pegadinha: faixa vermelha */
+.pega{ padding:0; border:2.5px solid var(--red); background:#fff; overflow:hidden; }
+.pega .bar{ background:var(--red); color:#fff; font-weight:900; font-size:12pt; letter-spacing:.8pt; padding:7pt 14pt; display:flex; align-items:center; gap:8pt; text-transform:uppercase; }
+.pega .bar svg{ width:18pt; height:18pt; }
+.pega .bd{ padding:10pt 14pt 4pt; }
+.pega .bd p, .pega .bd li{ font-size:10.8pt; }
+.pega ul{ padding-left:16pt; margin:0 0 6pt; }
+
+/* entenda na prática */
+.pratica-title{ font-family:"Inter Display","Inter"; font-weight:900; font-size:21pt; text-transform:uppercase; color:var(--navy); text-align:right;
+  border-top:2px solid var(--ink); padding-top:6pt; margin:0 0 6pt; break-after:avoid; }
+.flow{ margin:2pt 0 8pt; text-align:center; break-inside:avoid; }
+.flow svg{ max-width:100%; height:auto; }
+.ex{ background:var(--sky); border-radius:12pt; padding:9pt 13pt 4pt; margin:0 0 9pt; break-inside:avoid; border-left:6px solid var(--blue); }
+.ex .lbl{ color:var(--blue); }
+.ex p{ font-size:10.9pt; }
+
+.oque{ background:#fff; border:2px solid var(--sky2); } .oque .lbl{ color:var(--blue); }
+.oque p{ font-size:11.2pt; }
+.prio{ background:var(--navy); color:#e9eef7; } .prio .lbl{ color:var(--gold); } .prio strong{ color:#ffd98a; }
+.lembre{ background:#fffaf0; border:2px dashed var(--gold); } .lembre .lbl{ color:var(--gold-deep); }
+.kw{ background:#f4f6fa; border:1.5px solid var(--line); } .kw .lbl{ color:var(--navy); }
+.chips{ display:flex; flex-wrap:wrap; gap:5pt; margin:2pt 0 8pt; }
+.chip{ background:#fff; border:1.8px solid var(--navy); color:var(--navy); font-weight:800; font-size:9.4pt; padding:2pt 9pt; border-radius:20pt; }
+
+/* ---------- cartões de conceito ---------- */
+.cards{ display:grid; gap:8pt; margin:3pt 0 9pt; }
+.cards.c2{ grid-template-columns:1fr 1fr; } .cards.c3{ grid-template-columns:1fr 1fr 1fr; } .cards.c5{ grid-template-columns:repeat(5,1fr); }
+.card{ border:2px solid var(--sky2); border-radius:12pt; padding:10pt 10pt 6pt; break-inside:avoid; background:#fff; }
+.card .ci{ width:34pt; height:34pt; margin-bottom:5pt; }
+.card .letter{ display:inline-block; background:var(--gold); color:#2a1d00; font-weight:900; font-size:15pt; width:28pt; height:28pt; border-radius:7pt; text-align:center; line-height:28pt; margin-bottom:5pt; }
+.card h4{ margin:0 0 4pt; font-size:11.3pt; color:var(--navy); text-transform:uppercase; line-height:1.15; }
+.card p{ font-size:10.2pt; line-height:1.4; margin-bottom:4pt; }
+.cards.c5 .card{ padding:9pt 7pt 5pt; text-align:center; } .cards.c5 .card p{ font-size:9.4pt; }
+.cards.c5 .card .ci{ margin:0 auto 4pt; display:block; }
+
+/* ---------- tabelas ---------- */
+table{ width:100%; border-collapse:separate; border-spacing:0; margin:3pt 0 9pt; font-size:9.9pt; break-inside:avoid; border-radius:10pt; overflow:hidden; border:2px solid var(--navy); }
+th{ hyphens:none; background:var(--navy); color:#fff; text-align:left; padding:6pt 8pt; font-size:10pt; }
+td{ padding:5.5pt 8pt; border-top:1px solid var(--line); vertical-align:top; line-height:1.4; }
+tr:nth-child(even) td{ background:#f5f8fc; }
+td.rh{ font-weight:800; color:var(--navy); background:#eaf1fb !important; hyphens:none; }
+.yes{ color:var(--green); font-weight:900; } .no{ color:var(--red); font-weight:900; }
+
+figure{ margin:2pt 0 8pt; text-align:center; break-inside:avoid; }
+figure svg{ max-width:100%; height:auto; }
+figcaption{ font-size:8.8pt; color:var(--muted); font-style:italic; margin-top:3pt; }
+.two{ display:grid; grid-template-columns:1fr 1fr; gap:10pt; } .two .box{ margin-bottom:8pt; }
+.note{ font-size:9pt; color:var(--muted); }
+
+/* ---------- abertura de unidade ---------- */
+.opener{ height:240mm; display:flex; flex-direction:column; justify-content:center; padding:0 6mm; }
+.opener .num{ font-family:"Inter Display"; font-weight:900; font-size:120pt; line-height:.85; color:var(--sky2); }
+.opener .k{ font-weight:800; letter-spacing:3pt; color:var(--blue); font-size:11pt; margin-top:6pt; }
+.opener h1{ hyphens:none; font-family:"Inter Display"; font-weight:900; font-size:40pt; line-height:.98; color:var(--navy); text-transform:uppercase; margin:6pt 0 12pt; }
+.opener ul{ list-style:none; padding:0; margin:10pt 0 0; border-top:3px solid var(--navy); }
+.opener li{ padding:8pt 0; border-bottom:1px solid var(--line); font-size:12.5pt; font-weight:600; display:flex; gap:10pt; }
+.opener li span{ color:var(--gold-deep); font-weight:900; min-width:24pt; }
+
+/* ---------- sumário ---------- */
+.toc{ list-style:none; padding:0; margin:0; }
+.toc li{ display:flex; align-items:baseline; gap:8pt; padding:1.6pt 0; border-bottom:1px solid var(--line); font-size:9.9pt; }
+.toc li.u{ background:var(--navy); color:#fff; padding:4pt 9pt; border-radius:6pt; margin-top:4pt; border:0; font-weight:800; letter-spacing:1pt; font-size:10pt; }
+.toc li.u .p{ color:#fff; }
+.toc .t{ flex:1; } .toc .p{ font-weight:800; color:var(--navy); min-width:22pt; text-align:right; }
+
+/* ---------- questões ---------- */
+.q{ border:2px solid var(--line); border-radius:11pt; padding:10pt 13pt 5pt; margin:0 0 10pt; break-inside:avoid; }
+.q .qh{ display:flex; justify-content:space-between; align-items:center; margin-bottom:6pt; }
+.q .qn{ background:var(--navy); color:#fff; font-weight:900; font-size:9.5pt; padding:2pt 10pt; border-radius:20pt; }
+.q .qa{ font-size:8pt; color:var(--muted); font-weight:800; letter-spacing:.8pt; text-transform:uppercase; }
+.q p{ font-size:11pt; }
+.q ol{ list-style:none; padding:0; margin:3pt 0 4pt; }
+.q li{ margin:0 0 4pt; padding-left:24pt; position:relative; font-size:10.8pt; }
+.q li::before{ content:attr(data-l); position:absolute; left:0; top:0; width:16pt; height:16pt; border:1.8px solid var(--navy); color:var(--navy);
+  border-radius:50%; font-weight:900; font-size:8.5pt; display:flex; align-items:center; justify-content:center; }
+.gab{ border-left:6px solid var(--green); background:#fbfdfc; padding:8pt 13pt 3pt; margin:0 0 9pt; break-inside:avoid; border-radius:0 9pt 9pt 0; }
+.gab .gh{ font-weight:900; color:var(--green); margin-bottom:3pt; }
+.gab .gh span{ background:var(--green); color:#fff; padding:1pt 9pt; border-radius:20pt; margin-left:6pt; }
+.gab p{ font-size:10.4pt; margin-bottom:5pt; }
+.gab .mem{ font-size:9.8pt; background:var(--gold-soft); padding:4pt 9pt; border-radius:6pt; display:block; margin-bottom:7pt; }
+
+/* ---------- flashcards ---------- */
+.fc{ display:grid; grid-template-columns:1fr 1fr; gap:9pt; }
+.fc .c{ border:1.8px dashed #93a3bd; border-radius:10pt; overflow:hidden; break-inside:avoid; }
+.fc .f{ background:var(--sky); padding:7pt 10pt; font-weight:800; font-size:10pt; color:var(--navy); min-height:38pt; }
+.fc .f small{ display:block; color:var(--gold-deep); font-size:7.8pt; letter-spacing:1pt; }
+.fc .b{ padding:6pt 10pt; font-size:9.8pt; line-height:1.4; }
+
+.ending{ text-align:center; padding:26pt 20pt; border:2.5px solid var(--navy); border-radius:16pt; margin-top:16pt; break-inside:avoid; }
