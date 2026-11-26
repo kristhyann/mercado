@@ -54,6 +54,7 @@ Professor de concursos, pesquisador de legislação, especialista em didática e
 | Direito Constitucional | 03 | Administração Pública na Constituição (arts. 37 a 41), com a EC nº 138/2025 | 25/11/2026 | `DIREITO-CONSTITUCIONAL/caderno-03-administracao-publica-arts-37-a-41/pdf/` |
 | Direito Constitucional | 02 | Direitos e garantias fundamentais (art. 5º) | 25/11/2026 | `DIREITO-CONSTITUCIONAL/caderno-02-direitos-e-garantias-fundamentais-art-5/pdf/` |
 | Direito Constitucional | 01 | Fundamentos, princípios (arts. 1º a 4º) e organização do Estado | 25/11/2026 | `DIREITO-CONSTITUCIONAL/caderno-01-fundamentos-principios-organizacao-do-estado/pdf/` |
+| Direito Penal: Parte Especial | Caderno 06 | Crimes contra a vida, honra, liberdade, patrimônio e Administração Pública (com Leis 14.994/2024 e 15.397/2026) | 26/11/2026 | `DIREITO-PENAL/PARTE-ESPECIAL/caderno-06-direito-penal-parte-especial/pdf/` |
 | Direito Penal: Parte Geral | Caderno 05 | Parte Geral completa: princípios, lei penal, teoria do crime e penas | 25/11/2026 | `DIREITO-PENAL/PARTE-GERAL/caderno-05-direito-penal-parte-geral/pdf/` |
 | Direito Penal: Parte Geral | 01 | Aplicação da Lei Penal (arts. 1º a 12 do CP) | 24/11/2026 | `DIREITO-PENAL/PARTE-GERAL/modulo-01-aplicacao-da-lei-penal/pdf/` |
 | Mapa da Aprovação (amostra gratuita) | — | Mini Guia Gratuito: 5 assuntos simplificados | 25/11/2026 | `MAPA-DA-APROVACAO/mini-ebook-gratuito/pdf/` |
