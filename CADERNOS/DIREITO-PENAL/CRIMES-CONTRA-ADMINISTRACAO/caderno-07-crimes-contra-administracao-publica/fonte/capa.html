@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Capa</title>
+<style>
+@page{ size:A4; margin:0; }
+html,body{ margin:0; width:210mm; height:297mm; overflow:hidden; font-family:"Inter",sans-serif; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.c{ position:relative; width:210mm; height:297mm; background:#1d2129; color:#fff; overflow:hidden; }
+.dots{ position:absolute; inset:0; background-image:radial-gradient(rgba(255,255,255,.07) 1.2px, transparent 1.3px); background-size:7mm 7mm; }
+.band{ position:absolute; right:0; top:0; bottom:0; width:14mm; background:#c8372d; }
+.band span{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) rotate(90deg); white-space:nowrap; font-weight:900; letter-spacing:4pt; font-size:9.5pt; color:#1d2129; }
+.top{ position:absolute; left:16mm; right:26mm; top:18mm; display:flex; justify-content:space-between; align-items:center; }
+.brand{ font-weight:900; letter-spacing:3pt; font-size:10.5pt; } .brand b{ color:#c8372d; }
+.ed{ border:1.5px solid rgba(255,255,255,.5); border-radius:20pt; padding:3pt 10pt; font-size:8.5pt; letter-spacing:1.5pt; }
+.title{ position:absolute; left:16mm; right:26mm; top:38mm; }
+.num{ display:inline-flex; align-items:center; gap:8pt; background:#fff; color:#1d2129; font-weight:900; font-size:12pt; letter-spacing:2.5pt; padding:5pt 12pt; border-radius:4pt; }
+.num i{ font-style:normal; background:#c8372d; color:#1d2129; padding:0 6pt; border-radius:3pt; }
+h1{ font-family:"Inter Display","Inter"; font-weight:900; font-size:46pt; line-height:.92; margin:12pt 0 0; letter-spacing:-1pt; }
+h1 em{ font-style:normal; color:#f08a24; }
+.sub{ margin-top:12pt; font-size:19pt; font-weight:800; line-height:1.15; color:#fff; border-left:5px solid #c8372d; padding-left:12pt; }
+.ill{ position:absolute; left:14mm; right:24mm; top:128mm; }
+.bottom{ position:absolute; left:16mm; right:26mm; bottom:18mm; }
+.tag{ font-size:13pt; line-height:1.4; color:#dfe8f6; }
+.tag b{ color:#fff; }
+.chips{ margin-top:12pt; display:flex; gap:7pt; flex-wrap:wrap; }
+.chips span{ font-size:8.5pt; font-weight:800; letter-spacing:.8pt; border:1.5px solid rgba(255,255,255,.35); border-radius:20pt; padding:3pt 10pt; color:#dfe8f6; }
+.foot{ margin-top:12pt; font-size:8.5pt; color:#9fb4d6; display:flex; justify-content:space-between; }
+</style></head>
+<body><div class="c">
+  <div class="dots"></div>
+  <div class="band"><span>CADERNOS SIMPLIFICADOS · O QUE REALMENTE CAI NA PROVA</span></div>
+  <div class="top"><div class="brand">CADERNO <b>SIMPLIFICADO</b></div><div class="ed">1ª EDIÇÃO · 2026</div></div>
+  <div class="title">
+    <div class="num">CADERNO <i>07</i> · PARA CONCURSOS</div>
+    <h1>CRIMES<br>CONTRA A<br><em>ADMINISTRAÇÃO</em></h1>
+    <div class="sub">Peculato, concussão, corrupção,<br>desacato e outros crimes do Título XI</div>
+  </div>
+
+  <svg class="ill" viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter" style="top:auto">
+    <ellipse cx="290" cy="288" rx="250" ry="11" fill="#000" opacity=".3"/>
+    <!-- prédio público -->
+    <path d="M150 112 L290 52 L430 112 Z" fill="#f08a24"/><rect x="170" y="112" width="240" height="150" fill="#e6e7ea"/>
+    <g fill="#1d2129"><rect x="190" y="132" width="22" height="110" rx="3"/><rect x="238" y="132" width="22" height="110" rx="3"/><rect x="320" y="132" width="22" height="110" rx="3"/><rect x="368" y="132" width="22" height="110" rx="3"/></g>
+    <rect x="276" y="180" width="28" height="82" fill="#c8372d"/><rect x="150" y="262" width="280" height="12" fill="#b9b3ad"/>
+    <!-- envelope de propina e algemas -->
+    <g transform="translate(40,150) rotate(-10)"><rect width="110" height="70" rx="8" fill="#fff"/><path d="M0 4 L55 40 L110 4" fill="none" stroke="#c8372d" stroke-width="5"/><text x="55" y="64" text-anchor="middle" font-weight="900" font-size="18" fill="#c8372d">R$</text></g>
+    <g transform="translate(440,160)" fill="none" stroke="#f08a24" stroke-width="8"><circle cx="20" cy="40" r="20"/><circle cx="80" cy="40" r="20"/><path d="M40 40 h20"/></g>
+  </svg>
+
+  <div class="bottom">
+    <div class="tag"><b>O que você precisa entender, memorizar e revisar</b> sobre os crimes contra a Administração Pública: funcionário público para fins penais, crimes funcionais, crimes de particulares e contra a administração da justiça, com cenas ilustradas e tabelas de diferenciação.</div>
+    <div class="chips"><span>EXIGIR x SOLICITAR x OFERECER</span><span>RESISTÊNCIA x DESOBEDIÊNCIA x DESACATO</span><span>ERROS MAIS COMUNS</span><span>24 QUESTÕES COMENTADAS</span><span>GCM · PM · PC · PP · PRF · PF</span></div>
+    <div class="foot"><span>Material pesquisado e atualizado em 26/11/2026</span><span>Questões autorais · CP conferido no Planalto</span></div>
+  </div>
+</div></body></html>
