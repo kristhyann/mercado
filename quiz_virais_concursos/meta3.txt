@@ -1,0 +1,280 @@
+= Proposições e conectivos lógicos
+tema: Proposições, conectivos, tabela-verdade, tautologia e contradição
+gancho: "Se 2 + 2 = 5, então a Lua é de queijo." Isso é verdadeiro ou falso? A lógica responde.
+video: Lógica proposicional: o quiz dos conectivos
+q11: A frase "x + 2 = 5" é uma proposição lógica? Explique por quê nos comentários!
+tags: #raciociniologico #logica #concursopublico #tabelaverdade
+cena: Circuito elétrico cartoon com lâmpadas que acendem (V) ou apagam (F), interruptores com os símbolos ∧, ∨ e → e um robô professor
+= Negações e equivalências lógicas
+tema: Negação de quantificadores, Leis de De Morgan, contrapositiva e equivalências
+gancho: A negação de "todos são pontuais" não é "nenhum é pontual". Surpreso? Então assista.
+video: Negação e equivalência: o terror do raciocínio lógico
+q11: Qual é a negação de "Todo guarda é pontual e nenhum guarda falta"? Escreva nos comentários!
+tags: #raciociniologico #negacao #equivalencia #concursos
+cena: Espelho mágico cartoon que inverte frases, placas de "sim" e "não" e personagens trocando de lugar a cada negação
+= Sequências e problemas de raciocínio
+tema: Sequências numéricas e de letras, filas, calendário, combinações e casa dos pombos
+gancho: Ana é a 7ª da frente e a 5ª de trás. Quantas pessoas estão na fila? Responda em 5 segundos.
+video: Sequências e enigmas lógicos de concurso
+q11: Qual é o próximo número da sequência 1, 2, 6, 24, 120...? Comente!
+tags: #raciociniologico #sequencias #enigmas #concursopublico
+cena: Trilha de dominós gigantes formando sequências, uma fila de pessoas cartoon, um calendário com folhas voando e pombos em casinhas
+= Argumentos lógicos e verdade ou mentira
+tema: Modus ponens, modus tollens, falácias, silogismos e problemas de verdade e mentira
+gancho: Três pessoas, uma acusação e muitas mentiras. Você descobre quem fala a verdade?
+video: Quem está mentindo? Desafio de lógica de argumentação
+q11: Três caixas estão com os rótulos trocados: "bananas", "maçãs" e "mista", e todos estão errados. Tirando uma única fruta de uma única caixa, como descobrir o conteúdo de todas? Comente!
+tags: #raciociniologico #argumentacao #verdadeoumentira #concursos
+cena: Sala de interrogatório cartoon com três suspeitos, detector de mentiras com ponteiro, balões de fala e um detetive com lupa
+= Problemas de lógica e associação
+tema: Associação lógica, ordenação, contagem, relógios e problemas clássicos
+gancho: Oito moedas, uma mais pesada e uma balança. Quantas pesagens você precisa? Pense rápido!
+video: Problemas de lógica: só os rápidos acertam
+q11: Em um campeonato de pontos corridos com 20 times, em turno e returno, quantos jogos são disputados no total? Comente!
+tags: #raciociniologico #problemas #logica #estudeparaconcurso
+cena: Tabuleiro gigante cartoon com peças de personagens, uma balança de dois pratos com moedas, um relógio de ponteiros e um trem entrando em túnel
+= Art. 37 na ponta da língua
+tema: Princípios da Administração, concurso público e regras gerais do art. 37 da CF
+gancho: Um concurso de 1 ano de validade pode ser prorrogado por 2 anos? Pegadinha clássica do art. 37.
+video: Art. 37 da Constituição: o quiz do concurso público
+q11: Um estrangeiro pode ser nomeado para cargo público no Brasil? Do que isso depende? Comente!
+tags: #administracaopublica #art37 #concursopublico #constituicao
+cena: Prédio de órgão público cartoon com fila de candidatos, edital gigante pendurado, relógio de validade e um selo LIMPE
+= Cargos, funções e remuneração
+tema: Funções de confiança, cargos em comissão, greve, remuneração e teto
+gancho: Função de confiança pode ser dada a quem não é servidor? A Constituição tem a resposta.
+video: Cargo em comissão ou função de confiança? Teste agora
+q11: Qual é a diferença entre "vencimento" e "remuneração" do servidor público? Comente!
+tags: #administracaopublica #servidorpublico #concursos #remuneracao
+cena: Escritório público cartoon com crachás de cargos, uma escada de carreira, um teto de vidro com valor máximo e moedas caindo em parcela única
+= Acumulação de cargos e mandato eletivo
+tema: Hipóteses de acumulação remunerada e servidor no exercício de mandato eletivo
+gancho: Professor e médico ao mesmo tempo? Servidor que vira vereador? Veja o que a Constituição permite.
+video: Pode acumular cargos? O quiz do servidor público
+q11: Um guarda municipal pode acumular o cargo com o de professor da rede municipal, havendo compatibilidade de horários? Defenda sua resposta!
+tags: #administracaopublica #acumulacaodecargos #servidorpublico #concursopublico
+cena: Personagem servidor cartoon equilibrando dois crachás, um relógio dividido em horários, uma urna eletrônica e uma Câmara de Vereadores ao fundo
+= Responsabilidade civil, improbidade e Administração Indireta
+tema: Responsabilidade objetiva do Estado, improbidade, Administração Indireta e licitação
+gancho: A viatura bateu no seu carro. Você processa o Estado ou o motorista? O STF já decidiu.
+video: Quem paga o prejuízo? Responsabilidade civil do Estado
+q11: Uma empresa privada que opera o ônibus municipal atropela um pedestre que não era passageiro. Ela responde de forma objetiva também perante esse pedestre? Comente!
+tags: #administracaopublica #responsabilidadecivil #improbidade #concursos
+cena: Rua cartoon com viatura amassada, carro de cidadão, um martelo de juiz e uma balança pendendo para o lado do Estado
+= Estabilidade, aposentadoria e direitos do servidor
+tema: Estabilidade, perda do cargo, disponibilidade, aposentadoria e direitos sociais do servidor
+gancho: Servidor estável nunca perde o cargo? Isso é mito, e a Constituição mostra por quê.
+video: Estabilidade do servidor: mitos e verdades em 10 perguntas
+q11: Estágio probatório e estabilidade são a mesma coisa? Explique a diferença nos comentários!
+tags: #administracaopublica #estabilidade #servidorpublico #concursopublico
+cena: Prédio público cartoon com um servidor subindo uma escada de três degraus (três anos), um escudo de estabilidade e um calendário de aposentadoria
+= Ética no serviço público: fundamentos
+tema: Ética e moral, primados e regras deontológicas do Decreto nº 1.171/1994
+gancho: O que você faz na vida privada pode afetar sua carreira no serviço público? O Código de Ética diz que sim.
+video: Ética no serviço público: o quiz do Decreto 1.171
+q11: Um servidor educado com os colegas, mas grosseiro com o cidadão no atendimento, viola qual princípio ou regra de ética? Comente com suas palavras!
+tags: #eticanoservicopublico #decreto1171 #concursopublico #servidorpublico
+cena: Balcão de atendimento cartoon com servidor sorridente, cidadãos em fila curta, uma bússola moral gigante e o livro do Código de Ética
+= Deveres e vedações do Código de Ética
+tema: Deveres fundamentais e vedações ao servidor no Decreto nº 1.171/1994
+gancho: Aceitar um "presentinho" do cidadão é falta ética? Descubra o que o Código proíbe.
+video: Pode ou não pode? Deveres e vedações do servidor público
+q11: Aceitar um cafezinho oferecido por um cidadão no balcão já viola o Código de Ética? Onde fica o limite? Defenda nos comentários!
+tags: #eticanoservicopublico #codigodeetica #concursos #servidorpublico
+cena: Repartição cartoon com placas verdes (dever) e vermelhas (proibido), presentes embrulhados com X, relógio de ponto e documentos sendo carimbados
+= Comissões de ética e penalidade ética
+tema: Comissões de ética, censura, Sistema de Gestão da Ética e CEP
+gancho: Qual é a única pena que a Comissão de Ética pode aplicar? Poucos sabem.
+video: Comissão de Ética: o que ela pode fazer com o servidor?
+q11: Quem pode apresentar uma denúncia à Comissão de Ética: apenas servidores ou qualquer cidadão? Comente!
+tags: #eticanoservicopublico #comissaodeetica #concursopublico #decreto6029
+cena: Sala de reuniões cartoon com três membros da comissão, um parecer sendo assinado, um carimbo "censura" e o Palácio do Planalto ao fundo
+= Improbidade administrativa após a Lei nº 14.230/2021
+tema: Dolo, espécies de improbidade, sanções, prescrição e nepotismo
+gancho: Desde 2021, improbidade culposa não existe mais. Você sabe o que mudou?
+video: Nova Lei de Improbidade: o quiz atualizado
+q11: Uma condenação por improbidade administrativa pode levar o agente público à prisão? Comente sua resposta!
+tags: #improbidadeadministrativa #lei14230 #eticanoservicopublico #concursos
+cena: Cofre público cartoon sendo vigiado, um político com mala de dinheiro sendo flagrado por holofotes e uma balança com prazos de 8, 12 e 14 anos
+= Transparência, conflito de interesses e anticorrupção
+tema: Lei de Acesso à Informação, conflito de interesses e Lei Anticorrupção
+gancho: Você precisa explicar por que quer uma informação pública? A LAI diz que não.
+video: Transparência e anticorrupção: teste a LAI e a Lei 12.846
+q11: Qual é o nome da plataforma federal na internet usada para fazer pedidos de acesso à informação e manifestações de ouvidoria? Comente!
+tags: #leideacessoainformacao #transparencia #anticorrupcao #concursopublico
+cena: Prédio público de vidro cartoon (transparência), lupa gigante, documentos com carimbos de sigilo de 5, 15 e 25 anos e uma empresa assinando acordo de leniência
+= Brasil e mundo em 2024 e 2025
+tema: Acontecimentos marcantes de 2023 a 2026 (novo papa, COP30, G20, BRICS, eleições e enchentes)
+gancho: Um papa americano, uma COP na Amazônia e o G20 no Rio. Você acompanhou as notícias?
+video: Atualidades 2025: você está bem informado?
+q11: Para você, qual foi o acontecimento mais importante de 2025 para o Brasil? Comente e explique!
+tags: #atualidades #atualidades2025 #concursopublico #noticias
+cena: Estúdio de telejornal cartoon com globo girando, telão mostrando o Vaticano, a floresta amazônica e o Rio de Janeiro, e manchetes animadas
+= Economia e reforma tributária
+tema: Reforma tributária do consumo (EC 132/2023 e LC 214/2025), Pix e Plano Real
+gancho: IBS, CBS e Imposto Seletivo: a reforma tributária já começou. Você entende o que muda?
+video: Reforma tributária: o quiz de atualidades econômicas
+q11: Na sua opinião, a reforma tributária vai baratear ou encarecer os serviços no seu dia a dia? Comente com argumentos!
+tags: #atualidades #reformatributaria #economia #concursos
+cena: Supermercado cartoon com carrinho de compras, etiquetas de preço mudando, moedas com as siglas IBS e CBS e um celular fazendo Pix
+= Ciência, saúde e tecnologia
+tema: Dengue, emergências da OMS, inteligência artificial, Prêmios Nobel de 2024 e celulares nas escolas
+gancho: A inteligência artificial ganhou dois Prêmios Nobel em 2024. Você sabia?
+video: Ciência e tecnologia nas notícias: teste de atualidades
+q11: Você concorda com a restrição do uso de celulares pelos alunos nas escolas? Por quê? Comente!
+tags: #atualidades #ciencia #tecnologia #inteligenciaartificial
+cena: Laboratório futurista cartoon com robô de IA, mosquito Aedes gigante sendo barrado, medalhas do Nobel e uma sala de aula com celulares guardados
+= Esporte, cultura e sociedade
+tema: Olimpíadas de Paris 2024, Oscar de "Ainda Estou Aqui" e eventos esportivos futuros
+gancho: O Brasil ganhou quantas medalhas em Paris 2024? Arrisque antes de ver as alternativas!
+video: Paris 2024 e o Oscar brasileiro: teste de atualidades
+q11: Qual atleta brasileiro, para você, merece mais reconhecimento depois de Paris 2024? Comente!
+tags: #atualidades #olimpiadas #cultura #concursopublico
+cena: Pódio olímpico cartoon com a Torre Eiffel ao fundo, medalhas brilhando, uma estatueta do Oscar e uma claquete de cinema
+= Leis e políticas públicas recentes
+tema: Decisões e leis recentes (2023 a 2025) sobre educação, segurança, renda e cidadania
+gancho: Saidinha, bullying, Pé-de-Meia e CPF como documento único: o que mudou na lei?
+video: Leis novas que podem cair na sua prova
+q11: Qual dessas leis recentes mais impacta o trabalho de um guarda municipal ou de um policial? Comente e explique!
+tags: #atualidades #leisnovas #concursopublico #guardamunicipal
+cena: Congresso Nacional cartoon com projetos de lei voando, um carimbo "sancionado", estudantes com mochilas e uma carteira de identidade gigante
+= Símbolos e datas nacionais
+tema: Símbolos nacionais, hinos e datas cívicas
+gancho: Você sabe quem compôs a música do Hino Nacional? Muita gente chuta Villa-Lobos.
+video: Símbolos nacionais: o quiz cívico que cai em concurso
+q11: Na bandeira do Brasil, qual é a cor da faixa que atravessa o círculo azul e qual é a cor das letras do lema? Comente!
+tags: #conhecimentosgerais #simbolosnacionais #brasil #concursopublico
+cena: Cerimônia cívica cartoon com bandeira tremulando, banda tocando o hino, céu estrelado com o Cruzeiro do Sul e um calendário de datas cívicas
+= Ciência e saúde no cotidiano
+tema: Química, biologia, física e saúde pública básicas
+gancho: Antibiótico cura gripe? Essa crença é mais comum do que você imagina.
+video: Ciência do dia a dia: conhecimentos gerais
+q11: Por que o céu é azul durante o dia? Explique com suas palavras nos comentários!
+tags: #conhecimentosgerais #ciencia #saude #concursos
+cena: Laboratório escolar cartoon com tubos de ensaio coloridos, um microscópio, uma planta fazendo fotossíntese e um mosquito com placa de "perigo"
+= O mundo e os organismos internacionais
+tema: ONU, OMS, Mercosul, OTAN, OEA, FMI e geografia mundial
+gancho: A sede da ONU fica em Genebra? Se você pensou que sim, assista até o fim.
+video: Organismos internacionais: teste de conhecimentos gerais
+q11: Quais são os cinco membros permanentes do Conselho de Segurança da ONU? Comente!
+tags: #conhecimentosgerais #onu #geopolitica #concursopublico
+cena: Globo terrestre cartoon com bandeiras de vários países, prédios das sedes em miniatura e aviões ligando os continentes
+= Cultura e patrimônio brasileiro
+tema: Modernismo, artes plásticas, arquitetura, música e patrimônio imaterial
+gancho: Quem pintou o "Abaporu"? Se você não sabe, este quiz vai te ensinar em segundos.
+video: Cultura brasileira: o quiz de arte e patrimônio
+q11: Qual escritor brasileiro é o autor de "Grande Sertão: Veredas"? Comente!
+tags: #conhecimentosgerais #culturabrasileira #arte #concursos
+cena: Museu cartoon com quadros brasileiros estilizados, estátuas barrocas, uma roda de capoeira e o Cristo Redentor em miniatura
+= Brasil: instituições e indicadores
+tema: IBGE, Copom, IPCA, TSE, SUS, PIB, IDH e leis importantes
+gancho: Quem define a taxa Selic? O presidente da República? Não. Descubra quem é.
+video: Instituições e indicadores do Brasil: teste agora
+q11: Por quanto tempo dura o mandato de um ministro do TSE escolhido entre os ministros do STF? Comente!
+tags: #conhecimentosgerais #economia #instituicoes #concursopublico
+cena: Painel de indicadores cartoon com gráficos subindo e descendo, prédios do Banco Central e do TSE, e uma urna eletrônica
+= Brasil Colônia: do pau-brasil ao ouro
+tema: Tordesilhas, capitanias, Governo-Geral, ciclos econômicos e chegada da família real
+gancho: Qual foi a primeira capital do Brasil? Se você disse Rio de Janeiro, errou.
+video: Brasil Colônia em 10 perguntas
+q11: Por que a capital da colônia foi transferida de Salvador para o Rio de Janeiro em 1763? Comente!
+tags: #historiadobrasil #brasilcolonia #concursopublico #historia
+cena: Litoral brasileiro cartoon com caravelas, árvores de pau-brasil, engenhos de açúcar e minas de ouro em um mapa antigo animado
+= Brasil Império: da Independência à Lei Áurea
+tema: Independência, Primeiro Reinado, Regências, Segundo Reinado e abolição
+gancho: O Brasil foi o último país das Américas a abolir a escravidão. Você conhece as leis do caminho?
+video: Brasil Império: teste de história do Brasil
+q11: Quem assinou a Lei Áurea e qual era sua função no governo naquele momento? Comente!
+tags: #historiadobrasil #imperio #abolicao #concursos
+cena: Palácio imperial cartoon com Dom Pedro a cavalo, coroa e cetro, uma linha do tempo das leis abolicionistas e correntes se rompendo
+= Brasil República: de 1889 a 1988
+tema: República Velha, Era Vargas, JK, regime militar e redemocratização
+gancho: Do café com leite à Constituição Cidadã: quanto você sabe da República?
+video: Brasil República: de Deodoro à Constituição de 1988
+q11: Quem era o presidente do Brasil quando a Constituição de 1988 foi promulgada? Comente!
+tags: #historiadobrasil #republica #constituicao1988 #concursopublico
+cena: Galeria cartoon com retratos de presidentes, Brasília sendo construída, cartazes das Diretas Já e a Constituição de 1988 sendo erguida
+= Geografia física do Brasil
+tema: Regiões, rios, bacias, aquíferos, biomas, clima e fusos horários
+gancho: O Brasil tem quantos fusos horários? A resposta não é três.
+video: Geografia do Brasil: rios, biomas e regiões
+q11: Qual é o maior estado brasileiro em área e com quantos países ele faz fronteira? Comente!
+tags: #geografiadobrasil #biomas #concursopublico #geografia
+cena: Mapa 3D do Brasil em relevo com rios animados, florestas, cerrado, pantanal e relógios mostrando os fusos horários
+= População, economia e território
+tema: Censo 2022, distribuição da população, energia, agronegócio e urbanização
+gancho: O Censo de 2022 surpreendeu: somos menos do que se imaginava. Quantos brasileiros existem?
+video: Censo 2022 e economia: geografia do Brasil
+q11: Qual região brasileira é hoje a maior produtora de soja do país? Comente!
+tags: #geografiadobrasil #censo2022 #ibge #concursos
+cena: Gráficos populacionais cartoon sobre o mapa do Brasil, hidrelétricas com turbinas girando, plantações de soja e uma cidade grande iluminada
+= Art. 144: os órgãos da segurança pública
+tema: Órgãos de segurança pública do art. 144 da CF e suas atribuições
+gancho: Quantos órgãos de segurança pública a Constituição lista? E qual foi o último a entrar?
+video: Art. 144: o quiz da segurança pública
+q11: A Força Nacional de Segurança Pública está prevista no art. 144 da Constituição? Comente!
+tags: #segurancapublica #art144 #concursopolicial #guardamunicipal
+cena: Desfile cartoon com viaturas da PF, PRF, Polícia Civil, PM, Bombeiros, Polícia Penal e Guarda Municipal, cada uma com seu emblema
+= Polícia Federal: atribuições constitucionais
+tema: Atribuições da Polícia Federal e da Polícia Rodoviária Federal
+gancho: A Polícia Federal patrulha rodovias federais? Pegadinha clássica de prova.
+video: O que faz a Polícia Federal? Teste de segurança pública
+q11: Quem investiga o furto de computadores dentro de uma agência dos Correios: a Polícia Federal ou a Polícia Civil? Comente!
+tags: #segurancapublica #policiafederal #concursopolicial #art144
+cena: Aeroporto e fronteira em cartoon com agentes da PF, cães farejadores, uma rodovia com a PRF ao lado e um mapa do Brasil com fronteiras destacadas
+= Polícias estaduais e polícias penais
+tema: Polícia Civil, Polícia Militar, Corpo de Bombeiros e polícias penais
+gancho: A polícia civil investiga crime militar? E quem cuida dos presídios? Teste agora.
+video: Polícias estaduais e penais: teste de segurança pública
+q11: Quem nomeia o comandante-geral da Polícia Militar do seu Estado? Comente!
+tags: #segurancapublica #policiamilitar #policiapenal #concursopolicial
+cena: Quartel cartoon da PM, delegacia da Polícia Civil, caminhão de bombeiros e um presídio com policiais penais, todos em uma mesma avenida
+= Guardas municipais, trânsito e jurisprudência
+tema: Segurança viária, decisões do STF sobre guardas municipais e greve na segurança pública
+gancho: O STF decidiu em 2025 o que a guarda municipal pode fazer. Você está atualizado?
+video: STF e guardas municipais: o quiz atualizado
+q11: Na sua opinião, a guarda municipal deveria fazer policiamento ostensivo em todo o Município? Por quê? Comente!
+tags: #guardamunicipal #stf #segurancapublica #concursoguardamunicipal
+cena: Plenário do STF cartoon com ministros, um martelo batendo e guardas municipais patrulhando uma cidade com agentes de trânsito ao lado
+= SUSP e conceitos de segurança pública
+tema: Sistema Único de Segurança Pública (Lei nº 13.675/2018) e conceitos básicos
+gancho: A guarda municipal faz parte do SUSP? A lei responde, e muita gente erra.
+video: SUSP: o sistema que integra a segurança pública
+q11: Quais são os números de telefone de emergência da Polícia Militar e da Guarda Municipal? Comente os dois!
+tags: #segurancapublica #susp #guardamunicipal #concursopublico
+cena: Central integrada de monitoramento cartoon com telões, câmeras da cidade, operadores de vários órgãos e um mapa com viaturas conectadas
+= Criminologia: conceito, objeto e método
+tema: Conceito, objetos, método, controle social e cifras da criminalidade
+gancho: Criminologia e Direito Penal são a mesma coisa? Não. E essa diferença cai na prova.
+video: Criminologia para iniciantes: o quiz essencial
+q11: Por que muitos crimes, como pequenos furtos, nunca chegam a ser registrados na delegacia? Comente os motivos!
+tags: #criminologia #concursopolicial #direitopenal #concursopublico
+cena: Biblioteca de investigação cartoon com lupa gigante sobre a cidade, estatísticas criminais em quadro e uma parte "escura" do gráfico representando a cifra negra
+= Escolas Clássica e Positiva
+tema: Beccaria, Lombroso, Ferri, Garofalo e Bentham
+gancho: Um médico italiano acreditava que dava para reconhecer criminosos pelo formato do crânio. Quem foi ele?
+video: Beccaria x Lombroso: as escolas da criminologia
+q11: Para você, o que reduz mais a criminalidade: a certeza da punição ou a severidade da pena? Defenda sua posição!
+tags: #criminologia #beccaria #lombroso #concursopolicial
+cena: Duelo cartoon em um teatro antigo entre Beccaria (com livro e pena de escrever) e Lombroso (com crânio e régua), e um panóptico ao fundo
+= Teorias sociológicas do crime
+tema: Escola de Chicago, anomia, associação diferencial, etiquetamento, subculturas e controle
+gancho: O crime é aprendido? Uma teoria famosa diz que sim. Você sabe quem a criou?
+video: Teorias sociológicas do crime: nível difícil
+q11: Quais são as cinco formas de adaptação individual descritas por Robert Merton? Cite pelo menos três nos comentários!
+tags: #criminologia #sociologia #teoriasdocrime #concursopolicial
+cena: Cidade cartoon vista de cima em círculos concêntricos coloridos, rótulos sendo colados em personagens e grupos de jovens em esquinas
+= Vitimologia e prevenção do crime
+tema: Vitimologia, tipos de vitimização e prevenção primária, secundária, terciária e situacional
+gancho: A vítima pode sofrer de novo na delegacia? Esse fenômeno tem nome. Descubra.
+video: Vitimologia e prevenção: o quiz da criminologia
+q11: Cite um exemplo prático de prevenção situacional que a guarda municipal pode aplicar em uma praça da sua cidade!
+tags: #criminologia #vitimologia #prevencao #guardamunicipal
+cena: Praça cartoon sendo transformada: postes de luz sendo acesos, câmeras instaladas, um guarda municipal presente e uma vítima sendo acolhida
+= Teorias modernas e política criminal
+tema: Janelas quebradas, tolerância zero, Direito Penal do inimigo, abolicionismo e policiamento comunitário
+gancho: Uma janela quebrada pode levar a crimes graves? Uma teoria famosa diz que sim.
+video: Janelas quebradas e outras teorias: criminologia nível difícil
+q11: A teoria das janelas quebradas reduz o crime ou apenas aumenta a repressão contra os mais pobres? Defenda sua posição nos comentários!
+tags: #criminologia #politicacriminal #segurancapublica #concursopolicial
+cena: Rua cartoon com um prédio de janelas quebradas sendo consertado, guardas conversando com moradores e um quadro com teorias e seus autores

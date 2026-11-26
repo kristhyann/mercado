@@ -1,0 +1,280 @@
+= Inquérito policial sem segredos
+tema: Características, instauração e prazos do inquérito policial
+gancho: O delegado pode arquivar um inquérito? Se você respondeu sim, precisa ver este quiz.
+video: Inquérito policial: as 10 perguntas que mais caem
+q11: Se a vítima pede a abertura de inquérito e o delegado indefere, para quem ela pode recorrer, segundo o CPP? Comente!
+tags: #processopenal #inqueritopolicial #concursopolicial #guardamunicipal
+cena: Delegacia em estilo cartoon, com mesa do delegado, pastas de inquérito empilhadas, carimbo de "sigiloso" e um relógio contando prazos
+= Ação penal: quem acusa e como
+tema: Ação penal pública e privada, princípios, prazos e acordo de não persecução penal
+gancho: A vítima pode desistir do processo? Depende do tipo de ação penal. Teste agora.
+video: Quem acusa no processo penal? Desafio da ação penal
+q11: O que é perempção na ação penal privada? Dê um exemplo nos comentários!
+tags: #processopenal #acaopenal #concursos #direito
+cena: Fórum cartoon com promotor, advogado e vítima em lados de uma mesa, um martelo de juiz e placas "pública" e "privada"
+= Prisão em flagrante: o que todo agente precisa saber
+tema: Espécies de flagrante, nota de culpa e audiência de custódia
+gancho: Qualquer pessoa pode prender em flagrante? E o agente de segurança, pode deixar de prender?
+video: Flagrante próprio, impróprio ou presumido? Teste para agentes de segurança
+q11: Em um crime de ação penal privada, a autoridade pode lavrar o auto de prisão em flagrante sem qualquer manifestação da vítima? Comente!
+tags: #prisaoemflagrante #processopenal #concursopolicial #guardamunicipal
+cena: Perseguição cartoon em rua da cidade, com viatura, agente correndo atrás de suspeito, algemas brilhando e um cronômetro de 24 horas
+= Prisão preventiva, temporária e liberdade provisória
+tema: Prisão preventiva, temporária, fiança, cautelares diversas e algemas
+gancho: O juiz pode decretar prisão preventiva por conta própria? A lei mudou em 2019.
+video: Preventiva ou temporária? O quiz das prisões cautelares
+q11: A fiança pode ser paga com bens, como joias ou títulos, em vez de dinheiro? Comente sua resposta!
+tags: #processopenal #prisaopreventiva #pacoteanticrime #concursos
+cena: Corredor de fórum cartoon com portas de celas, um juiz com balança, tornozeleira eletrônica animada e moedas representando a fiança
+= Provas no processo penal
+tema: Provas ilícitas, exame de corpo de delito, cadeia de custódia e testemunhas
+gancho: Confissão basta para condenar? A resposta do CPP pode te surpreender.
+video: Provas no processo penal: o que vale e o que não vale
+q11: Uma prova obtida por meio ilícito pode ser usada para absolver o réu? Comente o que diz a doutrina!
+tags: #processopenal #provas #cadeiadecustodia #concursopolicial
+cena: Cena de crime cartoon isolada com fita, perito com lupa, sacos de evidência numerados e um painel mostrando a cadeia de custódia
+= Direitos humanos: conceitos e características
+tema: Universalidade, indivisibilidade, inalienabilidade e demais características
+gancho: Direitos humanos podem ser vendidos ou renunciados? Descubra as características que caem na prova.
+video: Características dos direitos humanos: teste rápido
+q11: O que significa dizer que os direitos fundamentais têm "eficácia horizontal"? Explique com suas palavras!
+tags: #direitoshumanos #concursopublico #cidadania #concursopolicial
+cena: Globo terrestre cartoon cercado por pessoas de várias culturas de mãos dadas, com ícones de direitos aparecendo em balões coloridos
+= Dimensões dos direitos e documentos históricos
+tema: Gerações de direitos, Magna Carta, Declaração de 1789 e Declaração Universal de 1948
+gancho: Liberdade, igualdade e fraternidade viraram gerações de direitos. Você sabe a ordem?
+video: As gerações dos direitos humanos em 10 perguntas
+q11: Alguns autores falam em direitos de quarta dimensão. Que tipo de direito estaria nessa dimensão? Comente!
+tags: #direitoshumanos #historia #concursos #declaracaouniversal
+cena: Linha do tempo 3D com pergaminhos antigos (1215, 1789, 1948) que se desenrolam, castelo medieval, Revolução Francesa e sede da ONU em cartoon
+= Sistema global e a Constituição brasileira
+tema: Tratados de direitos humanos, status constitucional, TPI e incidente de deslocamento
+gancho: Um tratado internacional pode valer como emenda à Constituição? Pode, mas só de um jeito.
+video: Tratados de direitos humanos na Constituição: teste agora
+q11: O Brasil pode entregar um brasileiro nato ao Tribunal Penal Internacional, mesmo sendo proibida a extradição de natos? Defenda sua opinião!
+tags: #direitoshumanos #tratadosinternacionais #direitoconstitucional #concursopublico
+cena: Salão da ONU em cartoon com bandeiras, um martelo do Tribunal Penal Internacional e a Constituição brasileira recebendo um selo de "emenda"
+= Sistema interamericano de direitos humanos
+tema: Pacto de San José, Comissão e Corte Interamericana e casos contra o Brasil
+gancho: Onde fica a Corte Interamericana? E a Comissão? Quase todo mundo inverte.
+video: Pacto de San José: o quiz do sistema interamericano
+q11: Qual documento interamericano de 1948, aprovado na mesma conferência que criou a OEA, antecedeu a Convenção Americana? Comente o nome!
+tags: #direitoshumanos #pactodesanjose #concursos #direitointernacional
+cena: Mapa das Américas em 3D com pinos em San José e Washington, um tribunal com juízes cartoon e um pacto assinado com pena
+= Direitos humanos e atuação policial
+tema: Uso da força, Código de Conduta da ONU, Lei nº 13.060/2014 e tratamento de presos
+gancho: Atirar em suspeito desarmado em fuga é legal? A Lei 13.060 responde.
+video: Uso da força: o que a lei permite ao agente de segurança?
+q11: Qual é a diferença entre "uso progressivo da força" e "uso diferenciado da força"? Explique nos comentários!
+tags: #usodaforca #direitoshumanos #segurancapublica #guardamunicipal
+cena: Treinamento policial cartoon com cones, escada do uso progressivo da força, instrumentos de menor potencial ofensivo e agentes conversando com cidadãos
+= Estatuto Geral: princípios e disposições gerais
+tema: Natureza, função, princípios, competência geral e subordinação das guardas municipais
+gancho: Guarda municipal é instituição civil ou militar? Errar isso na prova da guarda é imperdoável.
+video: Lei 13.022: o quiz obrigatório para quem vai prestar Guarda Municipal
+q11: A Lei nº 13.022/2014 entrou em vigor na data de sua publicação ou depois de um período de vacância? Comente!
+tags: #guardamunicipal #lei13022 #concursoguardamunicipal #segurancapublica
+cena: Praça central de uma cidade em cartoon, com guardas municipais de uniforme azul-marinho patrulhando, prefeitura ao fundo e escudo da guarda brilhando
+= Competências específicas das guardas municipais
+tema: Competências do art. 5º da Lei nº 13.022/2014
+gancho: Flagrante na frente do guarda municipal: o que a lei manda fazer? Teste agora.
+video: O que a guarda municipal pode fazer? Desafio do art. 5º
+q11: Em quantos incisos o art. 5º da Lei nº 13.022/2014 lista as competências específicas da guarda municipal? Arrisque o número!
+tags: #guardamunicipal #lei13022 #concursopublico #segurancaescolar
+cena: Viatura da guarda municipal cartoon percorrendo escola, parque, prédio público e evento, com ícones de cada competência surgindo no caminho
+= Efetivo, requisitos de ingresso e capacitação
+tema: Limites de efetivo, requisitos de investidura, carreira e formação
+gancho: Sua cidade tem 100 mil habitantes. Quantos guardas, no máximo, a lei permite? Faça a conta!
+video: Requisitos para ser guarda municipal: você passaria?
+q11: Segundo a Lei nº 13.022/2014, o órgão de formação da guarda municipal pode ser o mesmo usado para formar forças militares? Comente!
+tags: #guardamunicipal #concursoguardamunicipal #lei13022 #requisitos
+cena: Academia de formação cartoon com candidatos fazendo teste físico, sala de aula com quadro de requisitos e uma calculadora de efetivo
+= Controle, prerrogativas e vedações
+tema: Corregedoria, ouvidoria, código de conduta, porte de arma e prerrogativas
+gancho: Quem fiscaliza a guarda municipal? A lei criou dois órgãos diferentes para isso.
+video: Corregedoria ou ouvidoria? O quiz de controle da guarda
+q11: Que tipo de órgão a Lei nº 13.022/2014 permite que o Poder Executivo municipal crie para exercer o controle social sobre a guarda? Comente!
+tags: #guardamunicipal #lei13022 #corregedoria #concursopublico
+cena: Sala de corregedoria cartoon com lupa, balança e arquivo; ao lado, guichê de ouvidoria recebendo cartas e um telefone com o número 153
+= Lei 13.022 nos detalhes: o que quase ninguém lê
+tema: Incisos menos cobrados do art. 5º, participação feminina e representatividade das guardas
+gancho: Os incisos que ninguém estuda são os que derrubam na prova. Encare este desafio.
+video: Lei 13.022 nível difícil: só os preparados acertam tudo
+q11: Dos 18 incisos de competências específicas da Lei nº 13.022/2014, qual você considera o mais importante para a segurança da sua cidade? Defenda nos comentários!
+tags: #guardamunicipal #lei13022 #questoesdificeis #concursoguardamunicipal
+cena: Biblioteca cartoon com a Lei 13.022 em um livro gigante, lupa revelando incisos escondidos e guardas municipais estudando
+= O Município na Constituição Federal
+tema: Autonomia municipal, lei orgânica, eleições, Vereadores e criação de Municípios
+gancho: Prefeito de cidade pequena pode ter segundo turno? Depende de um número que pouca gente sabe.
+video: O Município na Constituição: o quiz da legislação municipal
+q11: Quantos vereadores tem a Câmara da sua cidade? Pesquise na lei orgânica e comente com o nome do Município!
+tags: #legislacaomunicipal #municipio #concursopublico #camaramunicipal
+cena: Prefeitura e Câmara Municipal em cartoon lado a lado, urna eletrônica, Vereadores discutindo e uma lei orgânica em destaque
+= Competências e tributos municipais
+tema: Competências municipais, impostos e súmulas vinculantes sobre o Município
+gancho: IPTU, ISS e IPVA: um desses não é do Município. Você sabe qual?
+video: O que é do Município? Teste de competências e tributos
+q11: Taxa e imposto são a mesma coisa? Explique a diferença usando como exemplo a taxa de lixo e o IPTU!
+tags: #legislacaomunicipal #tributos #iptu #concursos
+cena: Cidade cartoon com casas, comércios e ônibus; moedas voando para o cofre da prefeitura com etiquetas IPTU, ISS e ITBI
+= Plano diretor e Estatuto da Cidade
+tema: Plano diretor, função social da propriedade urbana, usucapião urbana e Estatuto da Cidade
+gancho: Cidade com 25 mil habitantes é obrigada a ter plano diretor? A Constituição responde.
+video: Plano diretor e Estatuto da Cidade em 10 perguntas
+q11: A sua cidade tem plano diretor? Em que ano ele foi aprovado ou revisado pela última vez? Conte nos comentários!
+tags: #legislacaomunicipal #planodiretor #estatutodacidade #concursopublico
+cena: Maquete 3D de uma cidade com zonas coloridas, guindastes, terrenos vazios piscando e um urbanista cartoon com prancheta
+= Câmara, Prefeito e responsabilidade fiscal
+tema: Crimes de responsabilidade, julgamento de contas, subsídios e Lei de Responsabilidade Fiscal
+gancho: Quem julga as contas do Prefeito: o Tribunal de Contas ou a Câmara? A resposta derruba muita gente.
+video: Prefeito, Câmara e LRF: o quiz que poucos gabaritam
+q11: Vereador tem foro especial no Tribunal de Justiça, como o Prefeito? Comente sua resposta!
+tags: #legislacaomunicipal #lrf #prefeito #concursos
+cena: Plenário da Câmara Municipal em cartoon com Vereadores votando, painel de contas públicas e uma balança fiscal equilibrando receitas e despesas
+= Legislação municipal: o que vale para todas as cidades
+tema: Hierarquia das normas, processo legislativo e estatutos municipais (conteúdo geral; cada Município tem leis próprias)
+gancho: A lei do seu Município pode contrariar a Constituição? E o estatuto dos servidores é igual em todo lugar?
+video: Legislação municipal: regras que valem em qualquer cidade
+q11: Na sua cidade, a guarda municipal tem estatuto próprio ou segue o estatuto geral dos servidores municipais? Conte nos comentários!
+tags: #legislacaomunicipal #concursomunicipal #leiorganica #guardamunicipal
+cena: Pirâmide 3D das normas (Constituição no topo, lei orgânica, leis municipais e decretos), com uma prefeitura cartoon na base
+= Normas gerais de circulação e conduta
+tema: Velocidades máximas, preferência de passagem, ultrapassagem e transporte de crianças
+gancho: Rotatória sem placa: quem tem a preferência? Metade dos motoristas erra.
+video: Regras de circulação do CTB: você passaria no teste?
+q11: Na faixa de pedestres sem semáforo, quem tem prioridade? E se o pedestre já estava atravessando quando o sinal abriu para os carros? Comente!
+tags: #ctb #transito #concursoguardamunicipal #legislacaodetransito
+cena: Cruzamento urbano em cartoon com carros, rotatória, faixa de pedestres, placas de velocidade e um agente de trânsito orientando
+= Sinalização de trânsito
+tema: Tipos de sinalização, placas, marcas viárias, gestos e apitos do agente
+gancho: Dois silvos breves do apito: siga ou pare? Teste sua leitura da sinalização.
+video: Placas, faixas e apitos: o quiz da sinalização de trânsito
+q11: Qual é o significado do gesto do agente de trânsito com o braço estendido horizontalmente, palma da mão para a frente? Comente!
+tags: #ctb #sinalizacao #transito #concursopublico
+cena: Avenida cartoon cheia de placas animadas, faixas amarelas e brancas, semáforos e um agente de trânsito apitando com balões sonoros
+= Habilitação e categorias da CNH
+tema: Requisitos, categorias da CNH, Permissão para Dirigir e exames
+gancho: Sua CNH B permite dirigir uma van com 9 passageiros? Teste seus conhecimentos.
+video: Categorias da CNH: A, B, C, D ou E?
+q11: Com quanto tempo de habilitação na categoria B o condutor pode se habilitar na categoria D? Comente!
+tags: #cnh #ctb #habilitacao #transito
+cena: Autoescola cartoon com moto, carro, caminhão, ônibus e carreta alinhados, cada um com a letra da categoria piscando
+= Infrações, penalidades e medidas administrativas
+tema: Pontuação, valores de multa, suspensão, lei seca e infrações gravíssimas
+gancho: Quantos pontos tira uma infração gravíssima? E com quantos pontos a CNH é suspensa?
+video: Multas e pontos na CNH: o quiz das infrações
+q11: Estacionar em vaga reservada a pessoa com deficiência, sem credencial, é infração de qual natureza? Comente!
+tags: #ctb #multas #transito #leiseca
+cena: Painel cartoon de pontuação da CNH com números subindo, bafômetro, guincho levando um carro e um celular riscado ao volante
+= Crimes de trânsito
+tema: Homicídio culposo, embriaguez ao volante, racha, fuga do local e direção sem habilitação
+gancho: Socorreu a vítima depois do acidente: pode ser preso em flagrante? O CTB tem uma regra especial.
+video: Crimes de trânsito: o que dá cadeia no CTB?
+q11: Dirigir com a CNH vencida há mais de 30 dias é crime ou infração administrativa? Comente!
+tags: #crimesdetransito #ctb #leiseca #concursopolicial
+cena: Rodovia noturna cartoon com sirenes, bafômetro gigante, carros de racha e uma ambulância chegando ao local de um acidente
+= Ortografia e acentuação após o Novo Acordo
+tema: Acentuação, hífen, porquês, mal/mau e há/a
+gancho: "Ideia" tem acento? E "heroico"? O Novo Acordo ainda engana muita gente.
+video: Ortografia do Novo Acordo: acerte as 10 se for capaz
+q11: O verbo "parar" na forma "para" ainda tem acento depois do Novo Acordo? Escreva uma frase de exemplo nos comentários!
+tags: #portugues #ortografia #concursopublico #novoacordo
+cena: Sala de aula cartoon com quadro-negro, letras gigantes e acentos que voam e caem nas palavras certas
+= Concordância verbal e nominal
+tema: Concordância com haver, voz passiva, sujeito composto, meio, anexo e bastante
+gancho: "Houveram problemas" ou "Houve problemas"? Erro clássico de redação oficial.
+video: Concordância: o quiz que corrige seu português
+q11: Qual frase está correta: "Faltam dois dias para a prova" ou "Falta dois dias para a prova"? Justifique nos comentários!
+tags: #portugues #concordancia #gramatica #concursos
+cena: Engrenagens 3D com palavras que se encaixam (sujeito e verbo), lâmpadas acendendo quando a concordância está certa
+= Regência e crase
+tema: Regência verbal e uso do acento grave
+gancho: "Assistir o jogo" ou "assistir ao jogo"? Na prova, só uma está certa.
+video: Crase e regência: pare de errar agora
+q11: Existe crase em "Fui a uma reunião importante"? Por quê? Comente!
+tags: #portugues #crase #regencia #concursopublico
+cena: Estrada cartoon com placas de palavras, um acento grave animado que salta sobre os "as" certos e uma bússola da regência
+= Pontuação e classes de palavras
+tema: Vírgula, vocativo, aposto, orações adjetivas, conjunções e colocação pronominal
+gancho: Uma vírgula muda todo o sentido da frase. Teste se você domina a pontuação.
+video: Vírgula, aposto e conjunções: o quiz da pontuação
+q11: Encontre e explique o erro de pontuação nesta frase: "O candidato que estudou muito, foi aprovado." Comente!
+tags: #portugues #pontuacao #virgula #concursos
+cena: Laboratório de gramática cartoon com vírgulas gigantes, pontos e frases em esteiras sendo montadas por robôs
+= Semântica, sentido e interpretação
+tema: Parônimos, figuras de linguagem, antônimos e interpretação
+gancho: Mandado ou mandato? Iminente ou eminente? Uma letra muda tudo.
+video: Palavras parecidas, sentidos diferentes: teste de semântica
+q11: Qual é a diferença entre "cessão", "sessão" e "seção"? Monte uma frase usando as três nos comentários!
+tags: #portugues #interpretacao #semantica #concursopublico
+cena: Dicionário gigante cartoon se abrindo, palavras gêmeas com significados diferentes em balões e um detetive com lupa
+= Hardware e software: o básico que cai sempre
+tema: CPU, memórias, armazenamento, periféricos, unidades de medida e tipos de software
+gancho: Memória RAM guarda seus arquivos quando o computador desliga? Teste o básico que cai sempre.
+video: Hardware e software: o quiz de informática para iniciantes
+q11: O que é mais rápido: a memória cache ou a memória RAM? Comente!
+tags: #informatica #hardware #concursopublico #informaticaparaconcursos
+cena: Interior de um computador em 3D cartoon, com processador, pentes de memória e SSD iluminados como uma cidade tecnológica
+= Windows e Linux: atalhos e comandos
+tema: Atalhos do Windows, extensões de arquivos e comandos básicos do Linux
+gancho: Qual atalho bloqueia o computador em um segundo? Quem trabalha em repartição precisa saber.
+video: Atalhos do Windows que caem em concurso
+q11: Qual atalho do Windows abre rapidamente a janela de Configurações? Escreva nos comentários!
+tags: #informatica #windows #atalhos #concursos
+cena: Tela de computador cartoon com teclado gigante, teclas que afundam ao serem citadas, janelas abrindo e um pinguim do Linux acenando
+= Internet, e-mail e redes
+tema: Protocolos, DNS, e-mail, tipos de rede, navegação anônima e intranet
+gancho: O cadeado do navegador garante que o site é confiável? Muita gente cai nessa.
+video: Internet e redes: teste seus conhecimentos de informática
+q11: Qual é a principal diferença entre um endereço IPv4 e um endereço IPv6? Comente!
+tags: #informatica #internet #redes #concursopublico
+cena: Planeta conectado por cabos luminosos em 3D, envelopes de e-mail voando, roteador central e servidores em forma de prédios
+= Segurança da informação e golpes digitais
+tema: Vírus, worm, trojan, ransomware, phishing, firewall, backup e autenticação
+gancho: Você clicaria neste link? O golpe digital mais comum do Brasil está neste quiz.
+video: Golpes digitais: teste se você está protegido
+q11: Você recebe um SMS dizendo que sua conta será bloqueada e pedindo para clicar em um link. Qual é o nome desse golpe aplicado por SMS? Comente!
+tags: #segurancadigital #informatica #golpes #concursos
+cena: Cidade digital cartoon com hackers mascarados, escudos de firewall, cadeados gigantes e um alerta vermelho piscando
+= Word, Excel e LibreOffice
+tema: Atalhos do Word, fórmulas do Excel e formatos do LibreOffice
+gancho: Ctrl + N no Word em português aplica negrito ou cria um novo documento? Pegadinha clássica!
+video: Word e Excel: os atalhos e fórmulas que mais caem
+q11: No Excel, qual função conta quantas células de um intervalo atendem a um critério, como "quantos alunos foram aprovados"? Comente!
+tags: #excel #word #informatica #concursopublico
+cena: Planilha gigante em 3D com células que se acendem, documento de texto com letras em negrito animadas e uma calculadora cartoon
+= Frações, potências e operações básicas
+tema: Frações, decimais, MMC, MDC, potências e raízes
+gancho: Matemática básica derruba mais candidatos do que conteúdo difícil. Prove que você domina.
+video: Matemática básica para concurso: sem calculadora!
+q11: Quanto é 2 elevado a zero? Explique o porquê nos comentários!
+tags: #matematica #concursopublico #matematicabasica #estudos
+cena: Lousa mágica cartoon com números saltitantes, pizzas divididas em frações e uma calculadora proibida com um X vermelho
+= Equações e problemas do dia a dia
+tema: Equações de 1º e 2º grau, sistemas, razão e problemas práticos
+gancho: Um problema de idade e uma torneira: os clássicos que toda banca adora.
+video: Problemas de matemática que caem em concurso
+q11: Que número, multiplicado por ele mesmo e somado a 4, resulta em 85? Comente!
+tags: #matematica #equacoes #concursos #raciocinio
+cena: Cozinha e garagem cartoon com torneiras enchendo tanques, viatura em uma estrada com velocímetro e balões com equações
+= Geometria e unidades de medida
+tema: Áreas, perímetros, volume, Pitágoras e conversão de unidades
+gancho: Pitágoras ainda cai em concurso, e muita gente esquece a fórmula. Vamos testar?
+video: Geometria para concurso: áreas, volumes e Pitágoras
+q11: Uma pizza de 30 cm de diâmetro tem o dobro da área de uma pizza de 15 cm? Comente sua resposta!
+tags: #matematica #geometria #concursopublico #estudos
+cena: Terreno cartoon sendo medido com trena gigante, cubos e triângulos flutuando e um caixa d'água mostrando litros
+= Estatística, probabilidade e juros compostos
+tema: Média, mediana, moda, probabilidade, análise combinatória e juros compostos
+gancho: Mediana não é a mesma coisa que média. Você sabe a diferença?
+video: Estatística e probabilidade: o quiz difícil de matemática
+q11: Ao lançar um dado comum, qual é a probabilidade de sair um número maior que 4? Comente!
+tags: #matematica #probabilidade #estatistica #concursos
+cena: Cassino cartoon do conhecimento com dados gigantes rolando, moedas girando, gráficos de barras e uma urna com bolas coloridas
+= Porcentagem e matemática para concursos
+tema: Porcentagem, descontos sucessivos, regra de três, juros simples e razões
+gancho: Dois descontos de 10% e 20% dão 30%? Se você acha que sim, assista até o fim.
+video: Porcentagem: a pegadinha dos descontos que derruba candidatos
+q11: Um produto subiu 50% e depois caiu 50%. Ele voltou ao preço original? Comente sua resposta!
+tags: #matematica #porcentagem #concursopublico #matematicafinanceira
+cena: Loja cartoon com etiquetas de desconto piscando, carrinho de compras, gráfico de porcentagem em pizza e guardas fazendo ronda em um parque

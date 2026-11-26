@@ -1,0 +1,140 @@
+= Os alicerces da República: fundamentos e objetivos
+tema: Fundamentos, objetivos e princípios da República (arts. 1º a 4º da CF)
+gancho: 9 em cada 10 candidatos confundem fundamento com objetivo da República. Você é do grupo que erra?
+video: Fundamento ou objetivo? O teste da Constituição que derruba candidatos
+q11: Sem olhar a Constituição: o que o parágrafo único do art. 4º determina sobre a relação do Brasil com os povos da América Latina? Escreva com suas palavras nos comentários!
+tags: #direitoconstitucional #concursopublico #guardamunicipal #constituicaofederal
+cena: Plenário do Congresso Nacional em estilo cartoon, com a bandeira do Brasil ao fundo e um livro gigante da Constituição que se abre a cada pergunta
+= Competências: quem faz o quê na Federação?
+tema: Competências da União, dos Estados e dos Municípios (arts. 21 a 30 da CF)
+gancho: União, Estado ou Município? Quem manda em quê é a pegadinha preferida das bancas.
+video: Quem manda em quê? Desafio das competências na Constituição
+q11: Legislar sobre proteção e defesa da saúde é competência privativa da União, comum ou concorrente? Comente sua resposta!
+tags: #direitoconstitucional #concursos #competencias #estudeparaconcurso
+cena: Mapa do Brasil em 3D dividido em peças de quebra-cabeça (União, Estados e Municípios) que se encaixam conforme as respostas
+= Poder Legislativo e processo legislativo
+tema: Congresso Nacional, emendas, leis complementares, medidas provisórias e veto
+gancho: Quantos senadores tem cada Estado? Se você hesitou, este quiz é para você.
+video: Congresso Nacional: o quiz que separa quem estudou de quem chutou
+q11: Qual é o quórum exigido para o Congresso Nacional derrubar um veto do Presidente da República? Responda sem consultar e comente!
+tags: #direitoconstitucional #processolegislativo #concursopublico #questoesdeconcurso
+cena: Cúpulas do Congresso Nacional em cartoon, com placares de votação luminosos e uma caneta gigante de veto que aparece na última questão
+= Art. 5º: as liberdades que todo candidato precisa dominar
+tema: Liberdades individuais e inviolabilidades do art. 5º da CF
+gancho: Um policial pode entrar na sua casa à noite? A resposta da Constituição surpreende muita gente.
+video: Art. 5º: pode ou não pode? Teste suas liberdades constitucionais
+q11: Em qual única situação a Constituição admite a pena de morte no Brasil? Responda nos comentários sem pesquisar!
+tags: #art5 #direitoconstitucional #concursopolicial #guardamunicipal
+cena: Rua residencial à noite em cartoon, com casas iluminadas, uma porta com cadeado gigante e balões de fala representando as liberdades
+= Remédios constitucionais sem mistério
+tema: Habeas corpus, mandado de segurança, habeas data, mandado de injunção e ação popular
+gancho: Habeas corpus ou mandado de segurança? Escolher o remédio errado reprova na prova e na vida real.
+video: Remédios constitucionais: escolha o certo antes do tempo acabar
+q11: Uma pessoa jurídica pode ser paciente (beneficiária) de habeas corpus? Diga sim ou não e explique nos comentários!
+tags: #remediosconstitucionais #habeascorpus #direitoconstitucional #concursopublico
+cena: Farmácia cartoon com frascos rotulados HC, MS, HD, MI e AP; um farmacêutico de toga entrega o remédio certo a cada resposta
+= Princípios do Direito Administrativo
+tema: Legalidade, impessoalidade, moralidade, publicidade, eficiência e princípios implícitos
+gancho: O servidor pode fazer tudo o que a lei não proíbe? Se você disse sim, já perdeu ponto.
+video: Princípios da Administração: o quiz que mais derruba concurseiro
+q11: Qual é o nome do princípio implícito que obriga a Administração a respeitar as expectativas legítimas criadas no cidadão de boa-fé? Comente!
+tags: #direitoadministrativo #limpe #concursopublico #servidorpublico
+cena: Prédio público cartoon com cinco colunas gregas gravadas L, I, M, P e E, que se iluminam conforme as perguntas
+= Organização administrativa: concentrar ou distribuir?
+tema: Centralização, descentralização, desconcentração, órgãos e entidades
+gancho: Descentralização e desconcentração parecem iguais, mas trocar uma pela outra custa a sua vaga.
+video: Descentralizar ou desconcentrar? Desafio da organização administrativa
+q11: Uma secretaria municipal criada dentro da Prefeitura é exemplo de descentralização ou de desconcentração? Responda nos comentários!
+tags: #direitoadministrativo #administracaopublica #concursos #estudos
+cena: Organograma 3D com caixas que se dividem e se multiplicam, um prédio da Prefeitura no centro e setas animadas mostrando a distribuição de tarefas
+= Poder de polícia na prática
+tema: Conceito, atributos, ciclo e limites do poder de polícia
+gancho: Interditar um restaurante sem ordem judicial é legal? Descubra o poder que a Administração tem.
+video: Poder de polícia: até onde o Estado pode ir?
+q11: Um guarda municipal que aplica multa de trânsito está exercendo poder de polícia originário ou delegado? Defenda sua resposta nos comentários!
+tags: #poderdepolicia #direitoadministrativo #guardamunicipal #concursopublico
+cena: Rua comercial cartoon com fiscal uniformizado, placas de interdição, carimbo gigante de multa e um restaurante com fita zebrada
+= Anulação, revogação e outras formas de extinção
+tema: Extinção dos atos administrativos: anulação, revogação, cassação, caducidade e contraposição
+gancho: Anular ou revogar? Essa dúvida derruba até candidato experiente.
+video: Anulação x revogação: o duelo dos atos administrativos
+q11: Um ato praticado por servidor incompetente pode ser convalidado (corrigido) pela Administração? Em que condição? Comente!
+tags: #atosadministrativos #direitoadministrativo #concursos #questoes
+cena: Mesa de escritório público cartoon com documentos que se rasgam (anulação) ou são guardados em gaveta (revogação), relógio gigante marcando os efeitos
+= Deveres, proibições e penalidades
+tema: Deveres, proibições e penalidades disciplinares dos servidores (Lei nº 8.112/1990)
+gancho: Faltar 30 dias seguidos ou 60 dias alternados? Uma dessas situações gera demissão por motivo diferente.
+video: Servidor pode isso? Teste deveres e penalidades do serviço público
+q11: Um servidor estável que recebe propina pode sofrer demissão e também responder a processo criminal pelo mesmo fato? Explique nos comentários!
+tags: #lei8112 #servidorpublico #direitoadministrativo #concursopublico
+cena: Repartição pública cartoon com relógio de ponto, mesa do chefe, carimbo de advertência e uma balança da disciplina
+= Fato típico: consumação, tentativa e causalidade
+tema: Iter criminis, tentativa, desistência voluntária, arrependimento e nexo causal
+gancho: O ladrão desistiu no meio do crime. Ele responde por tentativa? A resposta não é a que você imagina.
+video: Desistiu do crime: e agora? Teste de Direito Penal
+q11: Existe tentativa de crime culposo? Responda sim ou não e explique nos comentários!
+tags: #direitopenal #concursopolicial #tentativa #guardamunicipal
+cena: Linha do tempo 3D do crime com etapas (cogitação, preparação, execução, consumação), um personagem ladrão cartoon e semáforos indicando cada fase
+= Dolo, culpa e erro: separe os conceitos
+tema: Dolo direto e eventual, culpa, crime preterdoloso, erro de tipo e erro de proibição
+gancho: Dolo eventual ou culpa consciente? Até juízes discutem. Será que você acerta?
+video: Dolo ou culpa? O quiz que confunde até advogado
+q11: O que a doutrina chama de "culpa imprópria" e em que situação ela acontece? Explique nos comentários!
+tags: #direitopenal #dolo #culpa #concursopublico
+cena: Laboratório cartoon de ideias com balões de pensamento, um cérebro iluminado e personagens que mudam de expressão conforme a intenção
+= Excludentes de ilicitude na prática policial
+tema: Legítima defesa, estado de necessidade, estrito cumprimento do dever legal e exercício regular de direito
+gancho: Agiu em legítima defesa ou cometeu crime? Na rua, a resposta precisa vir em segundos.
+video: Legítima defesa ou crime? Teste de excludentes para agentes de segurança
+q11: Quem mata um cachorro bravo, sem dono por perto, que avança para morder, age em legítima defesa ou em estado de necessidade? Defenda sua resposta!
+tags: #legitimadefesa #direitopenal #concursopolicial #segurancapublica
+cena: Praça urbana cartoon com agentes de segurança, escudos luminosos de legítima defesa e uma balança da justiça que pende conforme a resposta
+= Culpabilidade: imputabilidade, embriaguez e coação
+tema: Imputabilidade, menoridade, embriaguez, coação irresistível e obediência hierárquica
+gancho: Estava bêbado, então não responde? Descubra o que o Código Penal realmente diz.
+video: Bêbado responde por crime? Teste de culpabilidade
+q11: Quem bebe de propósito para tomar coragem e cometer um crime planejado pode alegar embriaguez para se livrar da pena? Qual é o nome dessa situação? Comente!
+tags: #direitopenal #culpabilidade #concursos #questoesdeconcurso
+cena: Tribunal cartoon com um réu em dúvida, balões de pensamento, copo de bebida riscado e uma placa de "imputável ou inimputável"
+= Concurso de pessoas e espécies de pena
+tema: Concurso de pessoas, participação, regimes prisionais e penas restritivas de direitos
+gancho: Quem só deu a ideia do crime responde igual a quem executou? A resposta vale pontos na sua prova.
+video: Quem ajudou também responde? Desafio de concurso de pessoas
+q11: Se a pena aplicada for de exatamente 4 anos, para um réu não reincidente, qual é o regime inicial cabível segundo o art. 33 do Código Penal? Comente!
+tags: #direitopenal #concursopublico #penas #guardamunicipal
+cena: Quadro de investigação cartoon com fotos de suspeitos ligadas por fios vermelhos, e portas de celas com placas de regime fechado, semiaberto e aberto
+= Crimes contra a vida
+tema: Homicídio, feminicídio, infanticídio, aborto e induzimento ao suicídio
+gancho: Desde 2024 o feminicídio mudou no Código Penal. Você sabe o que aconteceu?
+video: Crimes contra a vida: o quiz atualizado com o Pacote Antifeminicídio
+q11: Matar alguém para garantir a ocultação ou a impunidade de outro crime é homicídio qualificado? Qual é o nome dessa qualificadora? Comente!
+tags: #direitopenal #crimescontraavida #concursopolicial #codigopenal
+cena: Sala de júri em estilo cartoon sóbrio, com cadeiras dos jurados, um código penal gigante e um painel com os artigos 121 a 128
+= Lesões, omissão de socorro e crimes contra a honra
+tema: Lesão corporal, omissão de socorro, rixa, calúnia, difamação e injúria
+gancho: Xingar é calúnia, difamação ou injúria? Quase todo mundo erra a primeira.
+video: Calúnia, difamação ou injúria? Teste os crimes contra a honra
+q11: Para existir o crime de rixa, quantas pessoas, no mínimo, precisam participar da briga, segundo a doutrina? Comente!
+tags: #direitopenal #crimescontraahonra #concursos #codigopenal
+cena: Rede social cartoon com balões de mensagem, um megafone gigante, rostos ofendidos e uma ambulância representando a omissão de socorro
+= Furto e roubo sem confusão
+tema: Furto simples, qualificado e privilegiado; roubo próprio e impróprio; latrocínio
+gancho: Pegou a bolsa e depois empurrou a vítima para fugir: furto ou roubo? A prova adora essa pegadinha.
+video: Furto ou roubo? O desafio que todo agente de segurança precisa acertar
+q11: Um ladrão finge estar armado, com a mão por baixo da camisa, e leva o celular da vítima. Isso é furto ou roubo? Por quê? Comente!
+tags: #furto #roubo #direitopenal #guardamunicipal
+cena: Calçada movimentada cartoon com um personagem ladrão, uma bolsa voando, uma viatura chegando e placas de "furto" e "roubo" que se acendem
+= Funcionário público e peculato
+tema: Conceito penal de funcionário público, peculato e suas modalidades
+gancho: Estagiário pode cometer peculato? O conceito penal de funcionário público é bem mais amplo do que parece.
+video: Peculato: quem é funcionário público para o Código Penal?
+q11: O servidor que usa o carro oficial para passear no fim de semana e devolve no domingo comete peculato? Defenda sua opinião nos comentários!
+tags: #crimescontraaadministracao #peculato #concursopublico #direitopenal
+cena: Repartição cartoon com cofre aberto, notebook oficial, carimbo do governo e um personagem servidor levando objetos escondidos
+= Crimes praticados por particular contra a Administração
+tema: Usurpação de função, resistência, desobediência, desacato, tráfico de influência e corrupção ativa
+gancho: Resistência, desobediência ou desacato? Essa diferença aparece na prova e na abordagem de rua.
+video: Desacato ou desobediência? Teste os crimes contra a Administração
+q11: Se alguém oferece propina ao guarda municipal e o guarda recusa na hora, o crime de corrupção ativa já se consumou? Comente sua resposta!
+tags: #desacato #crimescontraaadministracao #guardamunicipal #concursopolicial
+cena: Abordagem de trânsito cartoon com guarda municipal, cidadão nervoso, balões de diálogo e placas indicando resistência, desobediência e desacato
