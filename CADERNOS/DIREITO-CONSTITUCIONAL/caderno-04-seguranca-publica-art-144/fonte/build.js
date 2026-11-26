@@ -11,7 +11,7 @@ const FINAL = path.join(OUT, 'Caderno-Simplificado_Direito-Constitucional_Cadern
 const TMP = path.join(DIR, '.build'); fs.mkdirSync(TMP, { recursive: true }); fs.mkdirSync(OUT, { recursive: true });
 
 const header = `<div style="width:100%;font-family:Inter,sans-serif;font-size:7.5pt;color:#5b6475;padding:0 16mm;display:flex;justify-content:space-between;letter-spacing:.8pt;">
-  <span><b style="color:#1b2333">CADERNO SIMPLIFICADO</b> · DIREITO CONSTITUCIONAL</span><span>CADERNO 04 · ART. 144 · 1ª EDIÇÃO</span></div>`;
+  <span><b style="color:#1b2333">MAPA DA APROVAÇÃO</b> · DIREITO CONSTITUCIONAL</span><span>CADERNO 04 · ART. 144 · 1ª EDIÇÃO</span></div>`;
 const footer = `<div style="width:100%;font-family:Inter,sans-serif;font-size:7.5pt;color:#5b6475;padding:0 16mm;display:flex;justify-content:space-between;align-items:center;">
   <span>O que realmente cai na prova · Atualizado em 25/11/2026</span>
   <span style="background:#0b2a5b;color:#fff;font-weight:800;border-radius:4px;padding:2px 8px;font-size:8pt;"><span class="pageNumber"></span></span></div>`;
@@ -59,7 +59,7 @@ import sys
 from pypdf import PdfWriter
 w=PdfWriter()
 for f in sys.argv[2:]: w.append(f)
-w.add_metadata({'/Title':'Caderno Simplificado — Direito Constitucional — Caderno 04: Segurança Pública (Art. 144)','/Subject':'Segurança pública e órgãos do art. 144 da CF/88 para concursos públicos','/Keywords':'direito constitucional, concursos, CF/88, segurança pública, art. 144, polícia federal, polícia militar, polícia civil, guarda municipal'})
+w.add_metadata({'/Title':'Mapa da Aprovação — Caderno Simplificado — Direito Constitucional — Caderno 04: Segurança Pública (Art. 144)','/Subject':'Segurança pública e órgãos do art. 144 da CF/88 para concursos públicos','/Keywords':'direito constitucional, concursos, CF/88, segurança pública, art. 144, polícia federal, polícia militar, polícia civil, guarda municipal'})
 w.write(sys.argv[1])`, FINAL, capa, body]);
   console.log('OK ->', FINAL);
 })();

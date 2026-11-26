@@ -392,8 +392,7 @@ page(f'''<div style="position:absolute;inset:0;background:{NAVY}"></div>
 </div>
 <div style="background:#fff;border-radius:16pt;padding:16pt 18pt;color:{NAVY};text-align:center">
 <div style="font-weight:900;letter-spacing:1.5pt;font-size:10pt;color:#b35a0c">CONHEÇA A COLEÇÃO COMPLETA</div>
-<div style="margin:9pt auto 6pt;border:2.5px dashed {OR};border-radius:10pt;padding:12pt;font-weight:800;font-size:12pt;color:{GR2}">[ INSERIR AQUI O LINK DA PÁGINA DE VENDAS ]</div>
-<div style="font-size:9pt;color:{GR2}">Acesse a página para ver a lista completa dos cadernos.</div></div>
+<div style="margin:8pt auto 2pt;font-weight:800;font-size:12.5pt;line-height:1.4;color:{NAVY}">20 cadernos simplificados para concursos, com leis conferidas, cenas ilustradas e questões autorais comentadas.</div></div>
 </div>
 <div style="position:absolute;left:24mm;right:20mm;bottom:16mm;font-size:8pt;color:#9fb0cc;line-height:1.5">
 Material gratuito e autoral, de caráter introdutório. Os trechos de lei foram conferidos no portal da legislação federal (Planalto) em {DATA}; confira sempre se houve alterações posteriores e consulte o edital do seu concurso. As questões são autorais e não foram aplicadas por banca. Este material não garante aprovação: ele foi feito para ajudar você a estudar com mais clareza.</div>''', full=True)

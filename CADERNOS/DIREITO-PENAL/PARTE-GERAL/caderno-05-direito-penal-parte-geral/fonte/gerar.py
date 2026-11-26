@@ -549,7 +549,7 @@ add(f'''<div class="unit"><span class="u">ENCERRAMENTO</span></div><h1 class="bi
 <h3>Jurisprudência citada</h3>
 <ul><li>STF: Súmulas 611 e 711; vetores do princípio da insignificância (HC 84.412).</li></ul>''' + lembre("{{VERIF}}", "Verificação e limitações"))
 add('''<div class="ending"><h2>Fim do Caderno 05</h2><p style="text-align:center">Próximo passo sugerido na coleção: <strong>Direito Penal: Parte Especial (crimes em espécie)</strong>.</p>
-<p class="note" style="text-align:center">Caderno Simplificado · Direito Penal · Caderno 05 · 1ª edição · novembro de 2026<br>Material de estudo independente. Não substitui a leitura da lei e do edital do seu concurso.</p></div>''')
+<p class="note" style="text-align:center">Mapa da Aprovação · Caderno Simplificado · Direito Penal · Caderno 05 · 1ª edição · novembro de 2026<br>Material de estudo independente. Não substitui a leitura da lei e do edital do seu concurso.</p></div>''')
 
 VERIF = open(os.path.join(HERE, "verificacao.html")).read() if os.path.exists(os.path.join(HERE, "verificacao.html")) else "<p>(pendente)</p>"
 doc = f'''<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Caderno Simplificado — Caderno 05 — Direito Penal: Parte Geral</title>

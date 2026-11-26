@@ -622,7 +622,7 @@ add(f'''<div class="marker">§§R5§§</div><div class="unit"><span class="u">EN
 add(f'''<div class="unit"><span class="u">ENCERRAMENTO</span></div><h3>Plano de revisão sugerido</h3>
 {table(["Quando","O que fazer","Tempo"],[["Dia 1","Unidade 1 completa","1h30"],["Dia 2","Unidade 2 + quadro comparativo","1h30"],["Dia 3","Unidade 3","2h"],["Dia 4","Questões sem consulta + gabarito comentado","1h"],["Dias 7, 15 e 30","Mapa conceitual, resumo visual e flashcards","30 min"]],["24%",None,"16%"])}
 <div class="ending"><h2>Fim do Caderno 01</h2><p style="text-align:center">Próximo caderno da coleção: <strong>Direitos e Garantias Fundamentais (arts. 5º a 17)</strong>.</p>
-<p class="note" style="text-align:center">Caderno Simplificado · Direito Constitucional · Caderno 01 · 1ª edição · novembro de 2026<br>Material de estudo independente. Não substitui a leitura da Constituição e do edital do seu concurso.</p></div>''')
+<p class="note" style="text-align:center">Mapa da Aprovação · Caderno Simplificado · Direito Constitucional · Caderno 01 · 1ª edição · novembro de 2026<br>Material de estudo independente. Não substitui a leitura da Constituição e do edital do seu concurso.</p></div>''')
 
 doc = f'''<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Caderno Simplificado — Direito Constitucional — Caderno 01</title>
 <link rel="stylesheet" href="estilo.css"></head><body>{symbols()}{"".join(P)}</body></html>'''

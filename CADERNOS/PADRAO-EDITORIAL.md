@@ -45,7 +45,8 @@ Professor de concursos, pesquisador de legislação, especialista em didática e
 
 ## Marca da coleção
 - Nome comercial: **MAPA DA APROVAÇÃO — Cadernos Simplificados para Concursos** (20 cadernos). Paleta da marca: branco, preto, grafite, laranja e azul-marinho.
-- Material gratuito de amostra: `MAPA-DA-APROVACAO/mini-ebook-gratuito/` (link da página de vendas a inserir no placeholder da última página).
+- A marca está aplicada em todos os cadernos: na capa ("MAPA DA APROVAÇÃO" no topo), no cabeçalho das páginas, nos metadados do PDF e na página final. A faixa lateral da capa mantém "Cadernos Simplificados · O que realmente cai na prova".
+- Material gratuito de amostra: `MAPA-DA-APROVACAO/mini-ebook-gratuito/`. Não leva link de vendas: os eBooks são entregues aos leads depois da compra.
 
 ## Catálogo
 | Disciplina | Módulo | Conteúdo | Atualizado em | PDF |
@@ -57,5 +58,5 @@ Professor de concursos, pesquisador de legislação, especialista em didática e
 | Direito Penal: Crimes contra a Administração Pública | Caderno 07 | Título XI do CP: funcionário público, crimes funcionais, crimes de particular (desacato e ADPF 496), Administração da Justiça (com o art. 338-A, Lei 15.280/2025) e noções de licitações | 26/11/2026 | `DIREITO-PENAL/CRIMES-CONTRA-ADMINISTRACAO/caderno-07-crimes-contra-administracao-publica/pdf/` |
 | Direito Penal: Parte Especial | Caderno 06 | Crimes contra a vida, honra, liberdade, patrimônio e Administração Pública (com Leis 14.994/2024 e 15.397/2026) | 26/11/2026 | `DIREITO-PENAL/PARTE-ESPECIAL/caderno-06-direito-penal-parte-especial/pdf/` |
 | Direito Penal: Parte Geral | Caderno 05 | Parte Geral completa: princípios, lei penal, teoria do crime e penas | 25/11/2026 | `DIREITO-PENAL/PARTE-GERAL/caderno-05-direito-penal-parte-geral/pdf/` |
-| Direito Penal: Parte Geral | 01 | Aplicação da Lei Penal (arts. 1º a 12 do CP) | 24/11/2026 | `DIREITO-PENAL/PARTE-GERAL/modulo-01-aplicacao-da-lei-penal/pdf/` |
+| Direito Penal: Parte Geral | 01 | Aplicação da Lei Penal (arts. 1º a 12 do CP). Mantido: aprofunda arts. 8º a 12 e extraterritorialidade, não detalhados no Caderno 05 | 24/11/2026 | `DIREITO-PENAL/PARTE-GERAL/modulo-01-aplicacao-da-lei-penal/pdf/` |
 | Mapa da Aprovação (amostra gratuita) | — | Mini Guia Gratuito: 5 assuntos simplificados | 25/11/2026 | `MAPA-DA-APROVACAO/mini-ebook-gratuito/pdf/` |

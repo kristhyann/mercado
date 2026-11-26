@@ -653,7 +653,7 @@ add(f'''<div class="marker">§§R5§§</div><div class="unit"><span class="u">EN
 {lembre(f"""<p><strong>Material pesquisado e atualizado em: {DATA}.</strong> O texto do art. 5º foi conferido no Planalto: nenhum inciso novo depois do LXXIX, e a emenda mais recente no artigo é a EC nº 115/2022 (proteção de dados). <strong>Limitação:</strong> os portais de súmulas do STF e do STJ e a página do Tema 280 não puderam ser lidos pela ferramenta de pesquisa (o conteúdo é carregado por script). Por isso as súmulas e os precedentes citados reproduzem entendimentos consolidados, mas <strong>não foram reconferidos nas fontes oficiais nesta edição</strong>. Confira antes da prova e consulte o edital do seu concurso.</p>""", "Verificação e limitações")}
 ''')
 add(f'''<div class="ending"><h2>Fim do Caderno 02</h2><p style="text-align:center">Próximo caderno da coleção: <strong>Direitos Sociais, Nacionalidade e Direitos Políticos (arts. 6º a 17)</strong>.</p>
-<p class="note" style="text-align:center">Caderno Simplificado · Direito Constitucional · Caderno 02 · 1ª edição · novembro de 2026<br>Material de estudo independente. Não substitui a leitura da Constituição e do edital do seu concurso.</p></div>''')
+<p class="note" style="text-align:center">Mapa da Aprovação · Caderno Simplificado · Direito Constitucional · Caderno 02 · 1ª edição · novembro de 2026<br>Material de estudo independente. Não substitui a leitura da Constituição e do edital do seu concurso.</p></div>''')
 
 doc = f'''<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Caderno Simplificado — Direito Constitucional — Caderno 02</title>
 <link rel="stylesheet" href="estilo.css"></head><body>{symbols()}{"".join(P)}</body></html>'''

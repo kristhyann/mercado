@@ -517,7 +517,7 @@ add(f'''<div class="unit"><span class="u">ENCERRAMENTO</span></div><h1 class="bi
 <h3>Jurisprudência citada</h3>
 <ul><li>STF, ADPF 995 (2023): guardas municipais integram o Sistema de Segurança Pública.</li><li>STF, RE 608.588, Tema 656 (2025): ações de segurança urbana e policiamento ostensivo comunitário pelas guardas municipais.</li></ul>''' + lembre("{{VERIF}}", "Verificação e limitações"))
 add('''<div class="ending"><h2>Fim do Caderno 04</h2><p style="text-align:center">Próximo caderno da coleção: <strong>Organização dos Poderes (arts. 44 a 135)</strong>.</p>
-<p class="note" style="text-align:center">Caderno Simplificado · Direito Constitucional · Caderno 04 · 1ª edição · novembro de 2026<br>Material de estudo independente. Não substitui a leitura da Constituição e do edital do seu concurso.</p></div>''')
+<p class="note" style="text-align:center">Mapa da Aprovação · Caderno Simplificado · Direito Constitucional · Caderno 04 · 1ª edição · novembro de 2026<br>Material de estudo independente. Não substitui a leitura da Constituição e do edital do seu concurso.</p></div>''')
 
 PEC_HTML = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "pec.html")).read() if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "pec.html")) else "<p>(pendente)</p>"
 VERIF = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "verificacao.html")).read() if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "verificacao.html")) else "<p>(pendente)</p>"
