@@ -23,3 +23,25 @@
 - 257 MP privativamente ação pública e fiscaliza; 261 nenhum acusado sem defensor; 268 assistente.
 - 302 flagrante I a IV (próprio, impróprio, presumido); 304; 310 audiência de custódia até 24h (caput Lei 15.358/2026); 311-313 preventiva (312 §§3-4 Lei 15.272/2025).
 - 394 comum ou especial; ordinário pena máx >= 4 anos; sumário < 4; sumaríssimo menor potencial; 396 resposta 10 dias; 400 audiência em até 60 dias, ordem: ofendido, testemunhas acusação, defesa, peritos, acareações, reconhecimento, interrogatório.
+
+## Caderno 12 (complemento)
+- 8.112 art. 117 I–XIX verificados (VIII: sob chefia imediata, em cargo ou função de confiança, cônjuge, companheiro ou parente até 2º grau civil; X gerência de sociedade privada, exceções par. único; XI procurador ou intermediário; XII propina; XV desídia; XVI recursos da repartição em serviço particular; XIX atualizar dados).
+- 8.112 art. 118 acumulação vedada salvo CF; 119 um só cargo em comissão; 120.
+- 8.429 art. 23: 8 anos (do fato ou da cessação da permanência); suspensão 180 dias; interrupção (ajuizamento, sentença etc.); recomeça pela metade (Vide ADIs 7236, 7156).
+- CF 37 I-V, XVI (b: EC 138/2025 "de qualquer natureza"), XVII; 38 (mandato eletivo); 39 §3º; 40 §1º II compulsória 70 ou 75 na forma de LC (LC 152/2015); 41 caput e §§1º-4º.
+
+## Caderno 14 (Direitos Humanos)
+- CF 1º III; 4º II; 5º §1º aplicação imediata; §2º; §3º tratados DH 2 turnos 3/5 = emendas (EC 45/2004); §4º TPI; 5º III, XLIX, LVII, LXII, LXIII, LXIV; 6º direitos sociais (educação, saúde, alimentação, trabalho, moradia, transporte, lazer, segurança, previdência social, proteção à maternidade e à infância, assistência aos desamparados); 14 sufrágio universal, voto direto e secreto, plebiscito, referendo, iniciativa popular; 109 V-A e §5º IDC (PGR ao STJ).
+- Decreto 678/1992 (Pacto de São José, 22/11/1969): 4.1 vida, em geral desde a concepção; 5.2 tortura; 7.5 sem demora à presença de juiz; 7.7 ninguém detido por dívida, salvo alimentos; 8.2 g não depor contra si.
+- Decreto 592/1992 PIDCP (art. 7 tortura); Decreto 591/1992 PIDESC (2.1 progressividade, máximo dos recursos disponíveis). Datas de adoção: 16/12/1966 (divergência em decreto 591: 19/12) — usar só "1966".
+- Lei 13.060/2014: priorizar instrumentos de menor potencial ofensivo; princípios legalidade, necessidade, razoabilidade e proporcionalidade; não é legítimo arma de fogo contra pessoa em fuga desarmada ou sem risco imediato, nem contra veículo que desrespeite bloqueio, salvo risco; art. 6º socorro e comunicação à família; Regulamento Decreto 12.341/2024 (não lido).
+- DUDH: Res. 217 A (III), 10/12/1948, 30 artigos; art.1, 3, 5, 9, 11.1, 19, 21, 23, 25, 26 (fonte UNICEF Brasil).
+
+## Caderno 15 (CTB)
+- art. 1º caput e §§1º-3º; 5º; 7º composição (CONTRAN; CETRAN e CONTRANDIFE; executivos; rodoviários; PRF; PMs; JARI); 12; 20 PRF; 21; 22 Detrans; 23 PM só III (fiscalização mediante convênio); 24 municipais, §2º integração ao SNT, §4º (Lei 14.599/2023) competência exclusiva municipal (arts. 95, 181, 182, 183, 218, 219, 231 V e X, 245, 246, 279-A); 280 §4º agente: servidor civil estatutário ou celetista ou PM designado.
+- 26, 27, 28; 29 I direita, II distância, III preferência (rodovia; rotatória; direita), VII emergência, X ultrapassagem; §2º maior porte responsável pelos menores, motorizados pelos não motorizados, todos pelos pedestres.
+- 40 I farol baixo à noite, túneis, chuva, neblina; §2º sem DRL: farol em rodovias de pista simples fora do perímetro urbano, de dia (Lei 14.071/2020).
+- 58 bicicletas (bordos, mesmo sentido, preferência sobre automotores); 59 passeios só se autorizado e sinalizado; 68 §1º ciclista desmontado = pedestre; 69 faixa até 50 m; 70 prioridade na faixa (salvo semáforo); 61 §1º: urbanas 80/60/40/30; rurais pista dupla 110 (autos, camionetas, caminhonetes, motos) e 90 demais; pista simples 100 e 90; estradas 60 (Lei 14.440/2022).
+- 87 sinais: verticais, horizontais, auxiliares, luminosos, sonoros, gestos; 89 prevalência: agente > semáforo > sinais > normas.
+- 140 requisitos (imputável, ler e escrever, identidade); 143 categorias A-E (B até 3.500 kg e 8 lugares; §2º-A Lei 15.503/2026: B pode elétrico/híbrido até 4.250 kg conforme Contran); 147 §2º exames: 10 anos <50; 5 anos 50-70; 3 anos >=70 (Lei 14.071/2020); 148 §2º permissão 1 ano; §3º CNH se sem grave/gravíssima e não reincidente em média; 148-A toxicológico C, D, E (e §10 Lei 15.153/2025 A e B primeira habilitação); 159 CNH física ou digital (Lei 15.428/2026); 159 §10 validade ligada ao exame.
+- 162 I sem habilitação gravíssima x3 + retenção; 165 álcool gravíssima x10 suspensão 12 meses; 165-A recusa idem; 252 V par. único celular segurando/manuseando gravíssima (VI fones = média); 258 R$ 293,47/195,23/130,16/88,38; 259 pontos 7/5/4/3; 261 I 20/30/40 pontos; 302 homicídio culposo detenção 2-4 (§3º álcool reclusão 5-8); 303 lesão culposa 6m-2a; 306 embriaguez 6m-3a (6 dg/L sangue ou 0,3 mg/L ar).
