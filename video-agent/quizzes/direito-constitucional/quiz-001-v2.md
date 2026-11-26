@@ -2,7 +2,7 @@
 
 Material: nova versão do Quiz 01 (alternativas reembaralhadas, gancho, título e desafio final).
 Título do vídeo: Fundamento ou objetivo? O teste da Constituição que derruba candidatos
-Formato: vídeo de ~1:20 com as questões 1 e 2 (as duas tratam exatamente da confusão do gancho) + desafio final nos comentários.
+Formato: TODAS as 10 questões + desafio final (pedido do usuário). Narração compacta por questão: situação em 1 frase, pergunta, 4 alternativas, contagem de 5 s, resposta e explicação curta. Duração estimada ~5 min. Questões 3 a 10 usam as situações de quiz-001.md, exceto a 8 (agora: turista no aeroporto pergunta a capital a Lucas, para não repetir o entregador já produzido).
 Contagem: 5 s silenciosos inseridos na edição entre "Letra D" e "Resposta". Nenhuma palavra cortada.
 
 ## GANCHO
@@ -47,3 +47,14 @@ Resposta para fixar nos comentários depois (texto da CF, art. 4º, parágrafo �
 
 ## ENCERRAMENTO
 Cartão da série: escudo, GCM PHB 2027, "Conheça o Projeto GCM PHB 2027".
+
+## QUESTÕES 3 A 10 (ordem de alternativas da v2)
+3 · Relações internacionais (art. 4º): conferência entre países. Correta C (repúdio ao terrorismo e ao racismo, art. 4º, VIII).
+4 · Poderes (art. 2º): Praça dos Três Poderes, menino pergunta. Correta A (Legislativo, Executivo e Judiciário).
+5 · Soberania popular (art. 1º, p.ú.): Dona Célia vota e assina projeto de iniciativa popular. Correta B (representantes eleitos ou diretamente). Art. 14, I a III.
+6 · União indissolúvel (art. 1º): quebra-cabeça do mapa. Correta C (Estados, Municípios e Distrito Federal).
+7 · Forma de governo/Estado: museu, coroa e mapa federativo. Correta A (República e Federação).
+8 · Capital (art. 18, §1º): turista no aeroporto pergunta a Lucas. Correta C (Brasília).
+9 · Autonomia (art. 18): Câmara de Parnaíba e repórter. Correta A (todos autônomos; Territórios integram a União, §2º).
+10 · Sistema de governo (plebiscito de 1993, ADCT art. 2º): Seu Antônio e o comprovante. Correta D (presidencialismo).
+Desafio final (11): art. 4º, parágrafo único — resposta só nos comentários fixados.

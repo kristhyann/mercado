@@ -14,4 +14,5 @@
 | 01.10 | Dir. Constitucional | Sistema de governo (plebiscito 1993) | caixa de lembranças do avô, flashback | qual sistema | D |
 | 01v2.1 | Dir. Constitucional | Fundamentos (art. 1º) — EXCETO | canteiro de obras, blocos da fundação, Lucas e mestre de obras | exceto | B |
 | 01v2.2 | Dir. Constitucional | Objetivos (art. 3º) | rodoviária, painel de destinos, Diego | qual é objetivo | D |
+| 01v2.3–10 | Dir. Constitucional | arts. 1º a 4º e 18, plebiscito 1993 | conferência, Praça dos Três Poderes, Dona Célia, quebra-cabeça, museu, turista no aeroporto, Câmara de Parnaíba, avô | variados | C A B C A C A D |
 | 01v2.D | Dir. Constitucional | Art. 4º, p.ú. (América Latina) | desafio nos comentários, sem resposta no vídeo | aberta | — |
