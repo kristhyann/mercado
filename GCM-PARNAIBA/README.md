@@ -9,6 +9,7 @@ Materiais de estudo produzidos com a Skill `professor-gcm-parnaiba` (`.claude/sk
 | Nº | Material | Arquivo | Data | Observações |
 |---|---|---|---|---|
 | 01 | Código Penal (parte geral; crimes contra a pessoa, o patrimônio e a Administração Pública; 30 questões; revisão completa) | `apostilas/01_Codigo_Penal_GCM_Parnaiba.pdf` (100 p.) | 28/11/2026 | Conteúdo ESTIMADO (edital não confirmado); artigos conferidos no Planalto, inclusive Leis 14.994/2024 e 15.397/2026 |
+| 02 | Conhecimentos Profissionais (Lei 13.022/2014, Lei Municipal 1.989/2003, CF, segurança pública, direitos humanos e uso da força, abuso de autoridade, ECA, trânsito; 30 questões; revisão) | `apostilas/02_Conhecimentos_Profissionais_GCM_Parnaiba.pdf` (74 p.) | 28/11/2026 | Conteúdo ESTIMADO, com mapa de pertinência; normas conferidas no Planalto |
 
 ## Pastas
 - `apostilas/` PDFs finais · `apostilas/fonte/` código-fonte de cada apostila
