@@ -152,3 +152,10 @@ figcaption{ font-size:8.8pt; color:var(--muted); font-style:italic; margin-top:3
 .fc .b{ padding:6pt 10pt; font-size:9.8pt; line-height:1.4; }
 
 .ending{ text-align:center; padding:26pt 20pt; border:2.5px solid var(--navy); border-radius:16pt; margin-top:16pt; break-inside:avoid; }
+
+/* páginas de tópico (7 passos): espaçamento compacto para caber em uma página */
+.topico h1.big{ font-size:24pt; margin-bottom:2pt; } .topico .lead{ margin-bottom:7pt; padding-bottom:6pt; font-size:10.6pt; }
+.topico .box{ margin-bottom:6pt; padding-top:7pt; } .topico p{ margin-bottom:5pt; font-size:10.5pt; line-height:1.4; }
+.topico .traduz{ padding:9pt 12pt 4pt; } .topico .traduz p{ font-size:10.6pt; } .topico .traduz .ch{ width:46pt; }
+.topico .lei{ padding:9pt 12pt 3pt; } .topico .lei .ic{ width:32pt; height:32pt; } .topico .lei p{ font-size:9.6pt; line-height:1.42; }
+.topico .memo{ padding:9pt 14pt 4pt; } .topico .memo p{ font-size:10.8pt; } .topico .pega .bd{ padding:7pt 13pt 2pt; } .topico .box li{ font-size:10.2pt; margin-bottom:2pt; }

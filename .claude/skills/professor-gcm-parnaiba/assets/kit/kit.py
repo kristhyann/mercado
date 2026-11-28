@@ -124,10 +124,10 @@ def NAO_CONFUNDA(col_a, col_b, linhas, titulo="Não confunda"):
 
 def topico(titulo, lead, marker, oque_html, simples_html, conceito_html, exemplo_html, prova_html, pegadinha_html, memorize_html, u, extra=""):
     """Página no formato de 7 passos: O que é? · Linguagem simples · Conceito jurídico · Exemplo · Como cai · Pegadinha · Memorize."""
-    return (H(u, titulo, lead, marker) + oque(oque_html) + traduz(simples_html, tag="Em linguagem simples")
+    return ('<div class="topico">' + H(u, titulo, lead, marker) + oque(oque_html) + traduz(simples_html, tag="Em linguagem simples")
             + lei_ou_texto(conceito_html) + EXEMPLO(exemplo_html) + extra
             + f'<p style="margin:6pt 0 4pt"><b style="color:{C["navy"]}">Como pode cair na prova:</b> {prova_html}</p>'
-            + PEGADINHA(pegadinha_html) + MEMORIZE(memorize_html))
+            + PEGADINHA(pegadinha_html) + MEMORIZE(memorize_html) + '</div>')
 
 def lei_ou_texto(html):
     """Conceito jurídico: se vier tupla (referência, texto da lei), usa o quadro de lei; senão, parágrafo."""
@@ -151,7 +151,7 @@ def revisoes_espacadas(assunto):
         ["D+30", "30 dias depois", "Mapa mental de memória + perguntas rápidas + simulado curto", "☐"]], ["14%", "20%", None, "10%"])
 
 def caderno_erros(linhas=8):
-    return table(["Questão / assunto", "Por que errei?", "Regra correta", "Revisar em"], [["", "", "", ""] for _ in range(linhas)], ["26%", "26%", "30%", None])
+    return table(["Questão / assunto", "Por que errei?", "Regra correta", "Revisar em"], [['<span style="display:inline-block;height:24pt"></span>', "", "", ""] for _ in range(linhas)], ["26%", "26%", "30%", None])
 
 def mapa_textual(raiz, ramos):
     """ramos: [(ramo, [folhas])]. Mapa mental em texto, indentado."""
