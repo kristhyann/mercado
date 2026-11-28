@@ -1,0 +1,18 @@
+{
+  "arquivo": "00_Exemplo_Minimo_GCM_Parnaiba.pdf",
+  "saida": ".",
+  "cab_esq": "EXEMPLO DE USO DA SKILL",
+  "cab_dir": "APOSTILA 00 · DEMONSTRAÇÃO",
+  "rodape": "Preparação GCM Parnaíba · Exemplo gerado em 28/11/2026",
+  "capa": {
+    "numero": "00",
+    "titulo1": "EXEMPLO",
+    "titulo2": "MÍNIMO",
+    "sub": "Demonstração do kit de apostilas do Professor GCM Parnaíba",
+    "descricao": "Mini-apostila de teste: um tópico no formato de 7 passos, quadros didáticos, 3 questões autorais com gabarito comentado e blocos de revisão.",
+    "chips": ["DEMONSTRAÇÃO", "LEI MUNICIPAL Nº 1.989/2003", "3 QUESTÕES"],
+    "data": "28/11/2026",
+    "aviso": "Distribuição de questões provisória: confirme no edital oficial."
+  },
+  "meta": {"title": "Apostila 00 — Exemplo mínimo — GCM Parnaíba", "subject": "Demonstração do kit da Skill professor-gcm-parnaiba", "keywords": "guarda municipal, Parnaíba, exemplo"}
+}

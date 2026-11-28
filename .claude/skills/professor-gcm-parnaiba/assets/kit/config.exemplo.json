@@ -1,0 +1,18 @@
+{
+  "arquivo": "01_Codigo_Penal_GCM_Parnaiba.pdf",
+  "saida": "../..",
+  "cab_esq": "CÓDIGO PENAL",
+  "cab_dir": "APOSTILA 01 · 1ª EDIÇÃO",
+  "rodape": "Preparação GCM Parnaíba · Atualizado em DD/MM/AAAA",
+  "capa": {
+    "numero": "01",
+    "titulo1": "CÓDIGO",
+    "titulo2": "PENAL",
+    "sub": "Do zero à prova objetiva da Guarda Municipal",
+    "descricao": "O que você precisa entender, memorizar e revisar ...",
+    "chips": ["PARA INICIANTES", "30 QUESTÕES COMENTADAS", "REVISÃO D+1 · D+7 · D+30"],
+    "data": "DD/MM/AAAA",
+    "aviso": "Distribuição de questões provisória: confirme no edital oficial."
+  },
+  "meta": {"title": "Apostila 01 — Código Penal — GCM Parnaíba", "subject": "...", "keywords": "código penal, guarda municipal, Parnaíba, concurso"}
+}
